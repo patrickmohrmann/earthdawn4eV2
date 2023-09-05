@@ -2,7 +2,7 @@
 name: Story
 about: Suggest an idea for this project
 title: ''
-labels: ''
+labels: Story
 assignees: ''
 
 ---
