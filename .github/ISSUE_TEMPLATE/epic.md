@@ -7,8 +7,6 @@ assignees: ''
 
 ---
 
-### Epic
-
 ## Reason
 
 ## Proposed Solution
