@@ -1,2 +1,17 @@
+# mockup Files
+*.kra# IDE
 
-*.kra
+.idea/
+.vs/
+.vscode/
+
+# Node Modules
+app/module/
+node_modules/
+
+# Single Files
+foundry.js
+package-lock.json
+signature.json
+earthdawn4e.lock
+
