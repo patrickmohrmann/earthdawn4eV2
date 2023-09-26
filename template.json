@@ -1,1 +1,17 @@
-{}
+{
+  "Actor": {
+    "types": [
+      "creature",
+      "dragon",
+      "group",
+      "horror",
+      "loot",
+      "npc",
+      "character",
+      "spirit",
+      "trap",
+      "vehicle"
+    ],
+    "creature": {}
+  }
+}
