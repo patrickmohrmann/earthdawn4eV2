@@ -70,6 +70,10 @@
         }
       }
     ]
+  },
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "hbs", "json"]
+    }
   }
-
 }
