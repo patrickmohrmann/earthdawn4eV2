@@ -1,5 +1,4 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
-import WeaponData from "./weapon.mjs";
 
 /**
  * Data model template with information on equipment items.

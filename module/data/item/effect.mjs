@@ -1,5 +1,4 @@
 import SystemDataModel from "../abstract.mjs";
-import WeaponData from "./weapon.mjs";
 
 /**
  * Data model template with information on items that are used to represent custom active effects.
