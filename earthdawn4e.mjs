@@ -12,6 +12,7 @@
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
+
 Hooks.once("init", function () {
     console.log("ED4e | Initializing the ED4e Game System");
 })
