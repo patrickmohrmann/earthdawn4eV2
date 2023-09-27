@@ -11,6 +11,19 @@
             "spirit": "Geist",
             "trap": "Falle",
             "vehicle": "Transportmittel"
+        },
+        "Item": {
+            "armor": "Rüstung",
+            "discipline": "Disziplin",
+            "activeEffect": "Effekt",
+            "equipment": "Ausrüstung",
+            "mask": "Maske",
+            "namegiver": "Namensgebende",
+            "path": "Pfad",
+            "questor": "Questor",
+            "shield": "Schild",
+            "patternThread": "Strukturfaden",
+            "weapon": "Waffe"
         }
     },
     "ED": {}

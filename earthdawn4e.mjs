@@ -31,7 +31,9 @@ Hooks.once("init", function () {
 
     // record configuration values
     CONFIG.Actor.documentClass = documents.ActorEd;
+    CONFIG.Item.documentClass = documents.ItemEd;
 
     // Hook up system data types
     CONFIG.Actor.dataModels = dataModels.actor.config;
+    CONFIG.Item.dataModels = dataModels.item.config;
 });

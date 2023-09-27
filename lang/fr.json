@@ -11,6 +11,19 @@
             "spirit": "Spirit",
             "trap": "Trap",
             "vehicle": "Vehicle"
+        },
+        "Item": {
+            "armor": "Armor",
+            "discipline": "Discipline",
+            "activeEffect": "Active Effect",
+            "equipment": "Equipment",
+            "mask": "Mask",
+            "namegiver": "Namegiver",
+            "path": "Path",
+            "questor": "Questor",
+            "shield": "Shield",
+            "patternThread": "Pattern Thread",
+            "weapon": "Weapon"
         }
     },
     "ED": {}

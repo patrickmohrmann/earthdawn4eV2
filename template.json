@@ -12,5 +12,20 @@
       "trap",
       "vehicle"
     ]
+  },
+  "Item": {
+    "types": [
+      "armor",
+      "discipline",
+      "activeEffect",
+      "equipment",
+      "mask",
+      "namegiver",
+      "path",
+      "questor",
+      "shield",
+      "patternThread",
+      "weapon"
+    ]
   }
 }
