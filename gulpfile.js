@@ -6,8 +6,9 @@ const less = require("gulp-less");
 /********************/
 
 function buildStyles() {
-  return gulp.src(`styles/less/styles.less`)
+  return gulp.src(`styles/less/earthdawn4e.less`)
       .pipe(less())
+      //.pipe(gulp.dest(`./styles`));
       .pipe(gulp.dest(`./styles`));
 }
 

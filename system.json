@@ -24,8 +24,13 @@
     "earthdawn4e.mjs"
   ],
   "styles": [
-    "earthdawn4e.css"
+    "styles/earthdawn4e.css"
   ],
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "hbs", "json"]
+    }
+  },
   "languages": [
     {
       "lang": "en",
