@@ -1,19 +1,31 @@
+#logo {
+  content: url('../assets/foundry/earthdawn-logo.png');
+  width: 120px;
+  height: auto;
+  padding-right: 10px;
+}
 #pause img {
-  content: url('./assets/foundry/pause.png');
+  content: url('../assets/foundry/pause.png');
   width: 128px;
   height: auto;
   opacity: 0.5;
   position: absolute;
   left: calc(50% - 64px);
 }
-#logo {
-  content: url('./assets/foundry/earthdawn-logo.png');
-  width: 120px;
-  height: auto;
-  padding-right: 10px;
+.journal-sheet .window-header {
+  background-image: url('../assets/foundry/background-vasgothia2.png');
+  background-size: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100px;
+  background-repeat: no-repeat;
+  padding: -1px;
+  margin-top: -35px;
+  margin-left: -8px;
+  z-index: 5;
+  position: absolute;
 }
-.journal-sheet {
-  background-color: #c7d31b;
-  padding: 5;
-  margin: 3;
+.journal-sheet-container {
+  z-index: -2;
+  top: 0;
 }

@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "gulp buildAll",
+    "build:css": "gulp buildCSS",
+    "build:watch": "gulp"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-less": "^5.0.0"
+  },
+  "overrides": {
+    "glob-parent": "6.0.2"
+  }
+}
