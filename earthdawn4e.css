@@ -1,11 +1,11 @@
 #logo {
-  content: url('../assets/foundry/earthdawn-logo.png');
+  content: url('assets/foundry/earthdawn-logo.png');
   width: 120px;
   height: auto;
   padding-right: 10px;
 }
 #pause img {
-  content: url('../assets/foundry/pause.png');
+  content: url('assets/foundry/pause.png');
   width: 128px;
   height: auto;
   opacity: 0.5;
@@ -13,7 +13,7 @@
   left: calc(50% - 64px);
 }
 .journal-sheet .window-header {
-  background-image: url('../assets/foundry/background-vasgothia2.png');
+  background-image: url('assets/foundry/background-vasgothia-top-frame.png');
   background-size: 100%;
   object-fit: cover;
   width: 100%;

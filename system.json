@@ -24,7 +24,7 @@
     "earthdawn4e.mjs"
   ],
   "styles": [
-    "styles/earthdawn4e.css"
+    "earthdawn4e.css"
   ],
   "flags": {
     "hotReload": {
