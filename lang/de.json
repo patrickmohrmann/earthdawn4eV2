@@ -1,30 +1,30 @@
 {
-    "ed": {
-        "a": {},
-        "b": {},
-        "c": {},
-        "d": {},
-        "e": {},
-        "f": {},
-        "g": {},
-        "h": {},
-        "i": {},
-        "j": {},
-        "k": {},
-        "l": {},
-        "m": {},
-        "n": {},
-        "o": {},
-        "p": {},
-        "q": {},
-        "r": {},
-        "s": {},
-        "t": {},
-        "u": {},
-        "v": {},
-        "w": {},
-        "x": {},
-        "y": {},
-        "z": {}
-    }
+    "TYPES": {
+        "Actor": {
+            "creature": "Kreatur",
+            "dragon": "Drache",
+            "group": "Gruppe",
+            "horror": "Dämon",
+            "loot": "Loot",
+            "npc": "NSC",
+            "character": "Charakter",
+            "spirit": "Geist",
+            "trap": "Falle",
+            "vehicle": "Transportmittel"
+        },
+        "Item": {
+            "armor": "Rüstung",
+            "discipline": "Disziplin",
+            "activeEffect": "Effekt",
+            "equipment": "Ausrüstung",
+            "mask": "Maske",
+            "namegiver": "Namensgebende",
+            "path": "Pfad",
+            "questor": "Questor",
+            "shield": "Schild",
+            "patternThread": "Strukturfaden",
+            "weapon": "Waffe"
+        }
+    },
+    "ED": {}
 }
