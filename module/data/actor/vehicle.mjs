@@ -6,7 +6,7 @@ import CommonTemplate from "./templates/common.mjs";
 export default class VehicleData extends CommonTemplate {
 
     /** @inheritDoc */
-    static _systemType = "loot";
+    static _systemType = "Vehicle";
 
     /* -------------------------------------------- */
 
