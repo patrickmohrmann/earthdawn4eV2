@@ -14,7 +14,7 @@ export default gulp.series(
 export const buildCSS = gulp.series(css.compile);
 
 // javascript linting
-// export const lint = gulp.series(javascript.lint);
+export const lint = gulp.series(javascript.lint);
 
 // build all artifacts
 export const buildAll = gulp.parallel(
