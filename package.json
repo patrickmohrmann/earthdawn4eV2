@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "gulp buildAll",
+    "build:css": "gulp buildCSS",
+    "build:watch": "gulp",
+    "lint": "gulp lint",
+    "lint:fix": "gulp lint --fix"
+  },
+  "devDependencies": {
+    "eslint-plugin-jsdoc": "^46.8.2",
+    "gulp": "^4.0.2",
+    "gulp-eslint-new": "^1.8.3",
+    "gulp-if": "^3.0.0",
+    "gulp-less": "^5.0.0",
+    "merge-stream": "^2.0.0",
+    "prettier": "^3.0.3",
+    "yargs": "^17.7.2"
+  },
+  "overrides": {
+    "glob-parent": "6.0.2"
+  }
+}
