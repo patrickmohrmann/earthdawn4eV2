@@ -13,7 +13,15 @@
     "game": false,
     "actors": false,
     "items": false,
-    "packs": false
+    "packs": false,
+    "CONFIG": false,
+    "Actors": false,
+    "ActorSheet": false,
+    "ItemSheet": false,
+    "Items": false
+  },
+  "parserOptions": {
+    "sourceType": "module"
   },
   "extends": [
     "eslint:recommended",
