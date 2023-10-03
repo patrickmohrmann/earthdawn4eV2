@@ -1,0 +1,68 @@
+.bookmarks-combat-modifier {
+    top: 0;
+    margin-top: 37px;
+    align-items: flex-end;
+    border-block-end: none;
+    flex: 0;
+    flex-direction: column;
+    right: 0;
+    padding: 0;
+    position: absolute;
+    transform: translateX(100%);
+    .combat-modifier {
+      // color: red;
+      // font-weight: bolder;
+      font-size: large;
+      text-align: center;
+      width: 30px;
+      height: 30px;
+      padding-top: 6px;
+    }
+    .bookmark-ed-single {
+      background-image: url('../assets/background1.png');
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+    .aggressive-attack-bookmark  {
+      background-image: url('../assets/enrage.png');
+      background-size: cover;
+    }
+    .defensive-stance-bookmark {
+      background-image: url('../assets/round-shield.png');
+      background-size: cover;
+    }
+    .harried-bookmark {
+      background-image: url('../assets/minions.png');
+      background-size: cover;
+    }
+    .knocked-down-bookmark {
+      background-image: url('../assets/falling.png');
+      background-size: cover;
+    }
+  }
+
+  //tooltips for easy access Bonuses
+.tooltip-quick-access {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.tooltip-quick-access .tooltip-quick-access-text {
+  visibility: hidden;
+  width: 190px;
+  background-color: rgb(255, 255, 255);
+  margin-left: 32px;
+  text-align: center;
+  position: absolute;
+}
+
+.tooltip-quick-access:hover .tooltip-quick-access-text {
+  visibility: visible;
+}
+
+.minimal-space {
+  width: 25px;
+  border: none;
+  font-weight: bold;
+}
