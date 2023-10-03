@@ -74,11 +74,12 @@
           "verified": "1.0.13"
         }
       }
-    ]
-  },
-  "flags": {
-    "hotReload": {
-      "extensions": ["css", "hbs", "json"]
-    }
+    ],
+      "recommends": [
+        {
+          "id": "token-action-hud-ed4e",
+          "type": "module"
+        }
+      ]
   }
 }
