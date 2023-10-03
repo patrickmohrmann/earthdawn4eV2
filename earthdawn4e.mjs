@@ -12,6 +12,11 @@
 import * as dataModels from "./module/data/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 
+import {ActorSheetED} from "./module/sheets/actor-sheet.mjs";
+import { ItemSheetED } from "./module/sheets/item-sheet.mjs";
+
+import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
+
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
 /* -------------------------------------------- */
@@ -26,7 +31,7 @@ globalThis.ed4e = {
 /* -------------------------------------------- */
 
 
-Hooks.once("init", function () {
+Hooks.once("init", () => {
     globalThis.ed4e = game.ed4e = Object.assign(game.system, globalThis.ed4e);
     console.log("ED4e | Initializing the ED4e Game System");
 
@@ -37,4 +42,14 @@ Hooks.once("init", function () {
     // Hook up system data types
     CONFIG.Actor.dataModels = dataModels.actor.config;
     CONFIG.Item.dataModels = dataModels.item.config;
+
+    // Register sheet application classes
+    Actors.unregisterSheet("core", ActorSheet);
+    Actors.registerSheet("earthdawn4e", ActorSheetED, { makeDefault: true});
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("earthdawn4e", ItemSheetED, { makeDefault: true});
+
+    // Preload Handlebars templates.
+  return preloadHandlebarsTemplates();
+
 });
