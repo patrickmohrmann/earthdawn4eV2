@@ -37,5 +37,22 @@
             "weapon":                                           "Weapon"
         }
     },
-    "ED": {}
+    "ED": {
+        "Attributes": {
+            "attribute":                                        "Attribute",
+            "attributes":                                       "Attributes",
+            "CHA":                                              "CHA",
+            "charisma":                                         "Charisma",
+            "CON":                                              "CON",
+            "constitution":                                     "Constitution",
+            "DEX":                                              "DEX",
+            "dexterity":                                        "Dexterity",
+            "PER":                                              "PER", 
+            "perception":                                       "Perception",
+            "STR":                                              "STR",
+            "strength":                                         "Strength",
+            "WIL":                                              "WIL",
+            "willpower":                                        "Willpower"
+        }
+    }
 }
