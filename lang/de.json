@@ -1,16 +1,16 @@
 {
     "TYPES": {
         "Actor": {
-            "character":                                        "Charakter",
-            "creature":                                         "Kreatur",
-            "dragon":                                           "Drache",
-            "group":                                            "Gruppe",
-            "horror":                                           "Dämon",
-            "loot":                                             "Loot",
-            "npc":                                              "NSC",
-            "spirit":                                           "Geist",
-            "trap":                                             "Falle",
-            "vehicle":                                          "Transportmittel"
+            "character":                                            "Charakter",
+            "creature":                                             "Kreatur",
+            "dragon":                                               "Drache",
+            "group":                                                "Gruppe",
+            "horror":                                               "Dämon",
+            "loot":                                                 "Loot",
+            "npc":                                                  "NSC",
+            "spirit":                                               "Geist",
+            "trap":                                                 "Falle",
+            "vehicle":                                              "Transportmittel"
         },
         "Item": {
             "armor":                                            "Rüstung",
@@ -37,5 +37,89 @@
             "weapon":                                           "Waffe"
         }
     },
-    "ED": {}
+    "ED": {
+        "Attributes": {
+            "attribute":                                            "Attribut",
+            "attributes":                                           "Attribute",
+            "CHA":                                                  "CHA",
+            "charisma":                                             "Charisma",
+            "CON":                                                  "KON",
+            "constitution":                                         "Konstitution",
+            "DEX":                                                  "GES",
+            "dexterity":                                            "Geschicklichkeit",
+            "PER":                                                  "WAH",  
+            "perception":                                           "Wahrnehmung", 
+            "rollAttribute":                                        "Klicke um eine Attributsprobe abzulegen",
+            "STR":                                                  "STÄ",
+            "strength":                                             "Stärke",
+            "WIL":                                                  "WIL",
+            "willpower":                                            "Willenskraft"
+        },
+        "General": {
+            "A":                                                "A",
+
+            "B":                                                "B",
+
+            "C":                                                "C",
+                "current":                                          "Aktuell",
+
+            "D":                                                "D",
+                "dice":                                             "Würfel",
+                "die":                                              "Würfel",
+
+            "E":                                                "E",
+
+            "F":                                                "F",
+
+            "G":                                                "G",
+
+            "H":                                                "H",
+
+            "I":                                                "I",
+
+            "J":                                                "J",
+
+            "K":                                                "K",
+                "karma":                                            "Karma",
+                "karmaAlways":                                      "Benutze Karma bei jedem Wurf?",
+                "karmaRitualTooltip":                               "Karmaritual",
+
+            "L":                                                "L",
+
+            "M":                                                "M",
+                "maximum":                                          "Maximum",
+                "max":                                              "Max",
+
+            "N":                                                "N",
+
+            "O":                                                "O",
+
+            "P":                                                "P",
+
+            "Q":                                                "Q",
+
+            "R":                                                "R",
+
+            "S":                                                "S",
+                "step":                                             "Stufe",
+
+            "T":                                                "T",
+
+            "U":                                                "U",
+
+            "V":                                                "V",
+                "value":                                            "Wert",
+
+            "W":                                                "W",
+
+            "X":                                                "X",
+
+            "Y":                                                "Y",
+
+            "Z":                                                "Z"
+        },
+        "LpTracking": {
+            "attributeImprovement":                                 "Attribute erhöhen"
+        }
+    }
 }

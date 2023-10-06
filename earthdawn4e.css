@@ -130,6 +130,18 @@ h6 {
   width: 40%;
   margin-right: 50px;
 }
+.icon__position--right {
+  float: right;
+}
+.image__border--none {
+  border: none;
+}
+.text__alignment--left {
+  text-align: left;
+}
+.text__alignment--center {
+  text-align: center;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -554,4 +566,146 @@ h6 {
 }
 .main-section h3 {
   border-bottom: none;
+}
+.main-section .table__attribute .roll__step--hover {
+  padding-top: 6px;
+  margin-top: 4px;
+  vertical-align: bottom;
+}
+.main-section .table__attribute .roll__step--hover:hover + .roll__icon {
+  height: 13px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.main-section .table__attribute .roll__icon {
+  height: 15px;
+  position: relative;
+  z-index: 4;
+  display: none;
+  margin-top: -3px;
+}
+.main-section .table__attribute tbody {
+  height: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+  vertical-align: bottom;
+  background: none;
+}
+.main-section .table__attribute .fa-star {
+  font-size: 5px;
+}
+.main-section .table__attribute .enhancemente-1 {
+  position: absolute;
+  padding-left: 2px;
+}
+.main-section .table__attribute .enhancemente-2 {
+  position: absolute;
+  padding-top: 7px;
+  padding-left: 2px;
+}
+.main-section .table__attribute .enhancemente-3 {
+  position: absolute;
+  padding-left: 7px;
+  padding-top: 3px;
+}
+.main-section .table__attribute .attribute__name--content {
+  width: 60px;
+}
+.main-section .table__attribute .attribute__value--content,
+.main-section .table__attribute .attribute__step--content {
+  width: 40px;
+}
+.main-section .table__attribute .attribute__value--content {
+  text-align: left;
+}
+.main-section .table__attribute .attribute__step--content,
+.main-section .table__attribute .attribute__dice--content {
+  text-align: center;
+}
+.main-section .table__attribute table,
+.main-section .table__attribute td,
+.main-section .table__attribute th,
+.main-section .table__attribute td,
+.main-section .table__attribute tr {
+  background: none;
+}
+.main-section .table__attribute tr {
+  background: transparent;
+}
+.main-section .table__attribute {
+  background: none;
+  border-top: none;
+  border-bottom: none;
+}
+.main-section .table__attribute table,
+.main-section .table__attribute td,
+.main-section .table__attribute th,
+.main-section .table__attribute td,
+.main-section .table__attribute tr {
+  background: none;
+}
+.main-section .table__attribute tr {
+  background: transparent;
+}
+.main-section .character-karma .icon__position--right input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin-top: 0px;
+  vertical-align: middle;
+}
+.main-section .character-karma .karma__current--content {
+  width: 60px;
+  padding-left: 2px;
+}
+.main-section .character-karma .karma__value--content,
+.main-section .character-karma .karma__step--content {
+  width: 40px;
+}
+.main-section .character-karma .karma__value--content {
+  text-align: left;
+}
+.main-section .character-karma .karma__step--content,
+.main-section .character-karma .karma__dice--content {
+  text-align: center;
+}
+.main-section .character-karma .karma__ritual--icon {
+  height: 15px;
+  width: 15px;
+}
+.main-section .table__karma,
+.main-section .table__devotion {
+  background: none;
+  border-top: none;
+  border-bottom: none;
+}
+.main-section .table__karma table,
+.main-section .table__devotion table,
+.main-section .table__karma td,
+.main-section .table__devotion td,
+.main-section .table__karma th,
+.main-section .table__devotion th,
+.main-section .table__karma td,
+.main-section .table__devotion td,
+.main-section .table__karma tr,
+.main-section .table__devotion tr {
+  background: none;
+}
+.main-section .table__karma tr,
+.main-section .table__devotion tr {
+  background: transparent;
+}
+.main-section .table__devotion .devotion__current--content {
+  width: 60px;
+  padding-left: 2px;
+}
+.main-section .table__devotion .devotion__value--content,
+.main-section .table__devotion .devotion__step--content {
+  width: 40px;
+}
+.main-section .table__devotion .devotion__value--content {
+  text-align: left;
+}
+.main-section .table__devotion .devotion__step--content,
+.main-section .table__devotion .devotion__dice--content {
+  text-align: center;
 }
