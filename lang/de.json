@@ -25,7 +25,7 @@
             "mask":                                             "Maske",
             "namegiver":                                        "Namensgeber",
             "path":                                             "Pfad",
-            "poisondisease":                                    "Gift / Krankheit",
+            "poisonDisease":                                    "Gift / Krankheit",
             "power":                                            "Kraft",
             "questor":                                          "Questor",
             "shield":                                           "Schild",
