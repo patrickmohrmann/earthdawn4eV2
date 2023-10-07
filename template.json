@@ -16,15 +16,26 @@
   "Item": {
     "types": [
       "armor",
+      "attack",
+      "cursemark",
+      "devotion",
       "discipline",
-      "activeEffect",
+      "effect",
       "equipment",
+      "knack",
+      "maneuver",
       "mask",
       "namegiver",
       "path",
+      "poisonDisease",
+      "power",
       "questor",
       "shield",
-      "patternThread",
+      "skill",
+      "specialAbility",
+      "spell",
+      "talent",
+      "thread",
       "weapon"
     ]
   }

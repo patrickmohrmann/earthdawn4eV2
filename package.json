@@ -8,6 +8,7 @@
     "lint:fix": "gulp lint --fix"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
     "eslint-plugin-jsdoc": "^46.8.2",
     "gulp": "^4.0.2",
     "gulp-eslint-new": "^1.8.3",
