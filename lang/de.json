@@ -30,7 +30,7 @@
             "questor":                                          "Questor",
             "shield":                                           "Schild",
             "skill":                                            "Fertigkeit",
-            "special":                                          "Sonstige Fähigkeit",
+            "specialAbility":                                   "Sonstige Fähigkeit",
             "spell":                                            "Zauberspruch",
             "talent":                                           "Talent",
             "thread":                                           "Permanenter Faden",
