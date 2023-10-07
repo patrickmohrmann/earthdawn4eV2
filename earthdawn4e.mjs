@@ -12,8 +12,8 @@
 import * as dataModels from "./module/data/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 
-import {ActorSheetED} from "./module/sheets/actor-sheet.mjs";
-import { ItemSheetED } from "./module/sheets/item-sheet.mjs";
+import {ActorSheetED} from "./module/applications/actor/actor-sheet.mjs";
+import { ItemSheetED } from "./module/applications/item/item-sheet.mjs";
 
 import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
 
