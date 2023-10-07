@@ -11,11 +11,12 @@
 // Import submodules
 import * as dataModels from "./module/data/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
+import * as utils from "./module/utils.mjs";
 
 import {ActorSheetED} from "./module/applications/actor/actor-sheet.mjs";
 import { ItemSheetED } from "./module/applications/item/item-sheet.mjs";
 
-import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
+//import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -23,7 +24,8 @@ import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
 
 globalThis.ed4e = {
     dataModels,
-    documents
+    documents,
+    utils
 };
 
 /* -------------------------------------------- */
@@ -50,6 +52,6 @@ Hooks.once("init", () => {
     Items.registerSheet("earthdawn4e", ItemSheetED, { makeDefault: true});
 
     // Preload Handlebars templates.
-  preloadHandlebarsTemplates();
+  utils.preloadHandlebarsTemplates();
 
 });

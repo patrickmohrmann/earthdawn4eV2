@@ -32,6 +32,7 @@ export async function preloadHandlebarsTemplates() {
   for (const path of partials) {
     paths[path.replace(".hbs", ".html")] = path;
     paths[`ed4e.${path.split("/").pop().replace(".hbs", "")}`] = path;
+    paths[path] = path;
   }
 
   return loadTemplates(paths);
