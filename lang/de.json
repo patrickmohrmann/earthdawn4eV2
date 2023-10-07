@@ -1,16 +1,16 @@
 {
     "TYPES": {
         "Actor": {
-            "character":                                        "Charakter",
-            "creature":                                         "Kreatur",
-            "dragon":                                           "Drache",
-            "group":                                            "Gruppe",
-            "horror":                                           "Dämon",
-            "loot":                                             "Loot",
-            "npc":                                              "NSC",
-            "spirit":                                           "Geist",
-            "trap":                                             "Falle",
-            "vehicle":                                          "Transportmittel"
+            "character":                                            "Charakter",
+            "creature":                                             "Kreatur",
+            "dragon":                                               "Drache",
+            "group":                                                "Gruppe",
+            "horror":                                               "Dämon",
+            "loot":                                                 "Loot",
+            "npc":                                                  "NSC",
+            "spirit":                                               "Geist",
+            "trap":                                                 "Falle",
+            "vehicle":                                              "Transportmittel"
         },
         "Item": {
             "armor":                                            "Rüstung",
