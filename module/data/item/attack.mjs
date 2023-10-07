@@ -1,4 +1,4 @@
-import AbilityTemplateTemplate from "./templates/ability.mjs";
+import AbilityTemplate from "./templates/ability.mjs";
 
 /**
  * Data model template with information on Attack items.
