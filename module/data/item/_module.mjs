@@ -15,7 +15,7 @@ import PowerData from "./power.mjs";
 import QuestorData from "./questor.mjs";
 import ShieldData from "./shield.mjs";
 import SkillData from "./skill.mjs";
-import SpecialData from "./special.mjs";
+import SpecialAbilityData from "./special-ability.mjs";
 import SpellData from "./spell.mjs";
 import TalentData from "./talent.mjs";
 import ThreadData from "./thread.mjs";
@@ -39,7 +39,7 @@ export {
     QuestorData,
     ShieldData,
     SkillData,
-    SpecialData,
+    SpecialAbilityData,
     SpellData,
     TalentData,
     ThreadData,
@@ -67,7 +67,7 @@ export const config = {
     questor: QuestorData,
     shield: ShieldData,
     skill: SkillData,
-    special: SpecialData,
+    specialAbility: SpecialAbilityData,
     spell: SpellData,
     talent: TalentData,
     thread: ThreadData,
