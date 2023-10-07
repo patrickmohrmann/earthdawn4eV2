@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import AbilityTemplate from "./templates/ability.mjs";
 
 /**
  * Data model template with information on Power items.
  */
-export default class PowerData extends PhysicalItemTemplate{
+export default class PowerData extends AbilityTemplate {
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import AbilityTemplate from "./templates/ability.mjs";
 
 /**
  * Data model template with information on Knack items.
  */
-export default class KnackData extends PhysicalItemTemplate{
+export default class KnackData extends AbilityTemplate {
 
     /** @inheritDoc */
     static defineSchema() {

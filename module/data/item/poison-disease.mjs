@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import SystemDataModel from "../abstract.mjs";
 
 /**
  * Data model template with information on Poison and Disease items.
  */
-export default class PoisonDiseaseData extends PhysicalItemTemplate{
+export default class PoisonDiseaseData extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,9 +1,9 @@
-import SystemDataModel from "../abstract.mjs";
+import SystemDataModel from "../../abstract.mjs";
 
 /**
- * Data model template with information on Maneuver items.
+ * Data model template with information on Ability items.
  */
-export default class ManeuverData extends SystemDataModel{
+export default class AbilityTemplate extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {

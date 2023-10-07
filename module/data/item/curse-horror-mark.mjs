@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import SystemDataModel from "../abstract.mjs";
 
 /**
  * Data model template with information on Curse and Horror Mark items.
  */
-export default class CurseHorrorMarkData extends PhysicalItemTemplate{
+export default class CurseHorrorMarkData extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {

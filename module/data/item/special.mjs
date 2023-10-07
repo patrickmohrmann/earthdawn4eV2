@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import SystemDataModel from "../abstract.mjs";
 
 /**
  * Data model template with information on Special items.
  */
-export default class SpecialData extends PhysicalItemTemplate{
+export default class SpecialAbilityData extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import SystemDataModel from "../abstract.mjs";
 
 /**
  * Data model template with information on Spell items.
  */
-export default class SpellData extends PhysicalItemTemplate{
+export default class SpellData extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {

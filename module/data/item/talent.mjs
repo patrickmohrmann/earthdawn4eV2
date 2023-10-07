@@ -1,9 +1,9 @@
-import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import AbilityTemplate from "./templates/ability.mjs";
 
 /**
  * Data model template with information on talent items.
  */
-export default class TalentData extends PhysicalItemTemplate{
+export default class TalentData extends AbilityTemplate {
 
     /** @inheritDoc */
     static defineSchema() {

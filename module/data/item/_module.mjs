@@ -47,6 +47,7 @@ export {
 };
 export {default as ClassTemplate} from "./templates/class.mjs";
 export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
+export {default as AbilityTemplate} from "./templates/ability.mjs";
 
 export const config = {
     armor: ArmorData,
