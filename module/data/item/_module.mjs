@@ -61,7 +61,7 @@ export const config = {
     mask: MaskData,
     namegiver: NamegiverData,
     path: PathData,
-    poisondisease: PoisonDiseaseData,
+    poisonDisease: PoisonDiseaseData,
     power: PowerData,
     questor: QuestorData,
     shield: ShieldData,
