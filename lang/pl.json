@@ -30,7 +30,7 @@
             "questor":                                          "Questor",
             "shield":                                           "Shield",
             "skill":                                            "Skill",
-            "special":                                          "Special Power",
+            "specialAbility":                                   "Special Ability",
             "spell":                                            "Spell",
             "talent":                                           "Talent",
             "thread":                                           "Permanent Thread",
