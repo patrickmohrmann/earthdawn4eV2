@@ -50,6 +50,6 @@ Hooks.once("init", () => {
     Items.registerSheet("earthdawn4e", ItemSheetED, { makeDefault: true});
 
     // Preload Handlebars templates.
-  return preloadHandlebarsTemplates();
+  preloadHandlebarsTemplates();
 
 });
