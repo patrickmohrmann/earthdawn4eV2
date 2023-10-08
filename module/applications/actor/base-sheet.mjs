@@ -2,15 +2,14 @@
  * Extend the basic ActorSheet with modifications
  * @extends {ActorSheet}
  */
-export class ActorSheetED extends ActorSheet {
+export default class ActorSheetEd extends ActorSheet {
 
-    /** 
-     * @override 
+    /**
+     * @override
      */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["earthdawn4e", "sheet", "actor", "character-sheet"],
-            template: "systems/ed4e/templates/actor/namegiver-sheet.hbs",
             width: 800,
             height: 800,
             tabs: [{

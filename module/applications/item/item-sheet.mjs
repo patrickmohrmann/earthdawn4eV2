@@ -2,9 +2,11 @@
  * Extend the basic ActorSheet with modifications
  * @extends {ItemSheet}
  */
-export class ItemSheetED extends ItemSheet {
+export default class ItemSheetEd extends ItemSheet {
 
-    /**@override */
+    /**
+     * @override
+     */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["earthdawn4e", "sheet", "item", "item-sheet"],
