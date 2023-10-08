@@ -8,6 +8,10 @@
  * Issue Tracker: https://github.com/patrickmohrmann/earthdawn4eV2/issues
  */
 
+// Import configuration
+import ED4E from './module/config.js';
+import registerSystemSettings from './module/settings.mjs';
+
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
@@ -39,8 +43,12 @@ Hooks.once("init", () => {
     console.log("ED4e | Initializing the ED4e Game System");
 
     // record configuration values
+    CONFIG.ED4E = ED4E;
     CONFIG.Actor.documentClass = documents.ActorEd;
     CONFIG.Item.documentClass = documents.ItemEd;
+
+    // Register System Settings
+    registerSystemSettings();
 
     // Hook up system data types
     CONFIG.Actor.dataModels = dataModels.actor.config;
