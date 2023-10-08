@@ -9,21 +9,24 @@
  */
 
 // Import submodules
+import * as applications from "./module/applications/_module.mjs";
+import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
+import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
-
-import {ActorSheetED} from "./module/sheets/actor-sheet.mjs";
-import { ItemSheetED } from "./module/sheets/item-sheet.mjs";
-
-import { preloadHandlebarsTemplates } from "./module/helpers/templates.mjs";
+import * as utils from "./module/utils.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
 /* -------------------------------------------- */
 
 globalThis.ed4e = {
+    applications,
+    canvas,
     dataModels,
-    documents
+    dice,
+    documents,
+    utils
 };
 
 /* -------------------------------------------- */
@@ -45,11 +48,16 @@ Hooks.once("init", () => {
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("earthdawn4e", ActorSheetED, { makeDefault: true});
+    Actors.registerSheet("earthdawn4e", applications.actor.ActorSheetEdCharacter, {
+        types: ["character"],
+        makeDefault: true
+    });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("earthdawn4e", ItemSheetED, { makeDefault: true});
+    Items.registerSheet("earthdawn4e", applications.item.ItemSheetEd, {
+        makeDefault: true
+    });
 
     // Preload Handlebars templates.
-  preloadHandlebarsTemplates();
+  utils.preloadHandlebarsTemplates();
 
 });
