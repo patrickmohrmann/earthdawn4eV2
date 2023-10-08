@@ -120,6 +120,16 @@
         },
         "LpTracking": {
             "attributeImprovement":                                 "Attribute erhöhen"
+        },
+        "Settings": {
+            "StepTable": {
+                "editionClassic":                                   "Klassik Edition",
+                "editionfirst":                                     "Erste Edition",
+                "editionFourth":                                    "Vierte Edition",
+                "editionThird":                                     "Dritte Edition",
+                "hint":                                             "Wähle die Stufentabelle zur Konvertierung der Stufen in Würfel",
+                "stepTable":                                        "Stufen-Tabelle"
+            }
         }
     }
 }
