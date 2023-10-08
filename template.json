@@ -1,16 +1,16 @@
 {
   "Actor": {
     "types": [
+      "character",
+      "npc",
       "creature",
+      "spirit",
+      "horror",
       "dragon",
       "group",
-      "horror",
-      "loot",
-      "npc",
-      "character",
-      "spirit",
+      "vehicle",
       "trap",
-      "vehicle"
+      "loot"
     ]
   },
   "Item": {

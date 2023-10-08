@@ -10,7 +10,9 @@
 
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";
+import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
+import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as utils from "./module/utils.mjs";
 
@@ -20,7 +22,9 @@ import * as utils from "./module/utils.mjs";
 
 globalThis.ed4e = {
     applications,
+    canvas,
     dataModels,
+    dice,
     documents,
     utils
 };

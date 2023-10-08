@@ -1,3 +1,6 @@
+// Namespace Configuration Values
+const ED4E = {};
+
 // Since Foundry does not support hot reloading object notation templates...
 Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path } = {}) => {
 	if (extension === 'hbs') {
