@@ -9,16 +9,17 @@
     "jsdoc"
   ],
   "globals": {
-    "Hooks": false,
-    "game": false,
-    "actors": false,
-    "items": false,
-    "packs": false,
-    "CONFIG": false,
-    "Actors": false,
     "ActorSheet": false,
+    "Actors": false,
+    "CONFIG": false,
+    "Hooks": false,
     "ItemSheet": false,
-    "Items": false
+    "Items": false,
+    "actors": false,
+    "foundry": false,
+    "game": false,
+    "items": false,
+    "packs": false
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
