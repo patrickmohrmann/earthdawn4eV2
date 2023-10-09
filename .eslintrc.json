@@ -309,6 +309,7 @@
         }
       }
     ],
+    "space-in-parens": ["error", "always"],
     "strict": ["error", "never"],
     "symbol-description": "error",
     "use-isnan": "error",
