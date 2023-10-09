@@ -15,6 +15,7 @@ import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as utils from "./module/utils.mjs";
+import * as registerSystemSettings from "./module/settings.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -26,7 +27,8 @@ globalThis.ed4e = {
     dataModels,
     dice,
     documents,
-    utils
+    utils,
+    registerSystemSettings
 };
 
 /* -------------------------------------------- */
@@ -60,4 +62,8 @@ Hooks.once("init", () => {
     // Preload Handlebars templates.
   utils.preloadHandlebarsTemplates();
 
+  registerSystemSettings.registerSystemSettings()
+
 });
+
+
