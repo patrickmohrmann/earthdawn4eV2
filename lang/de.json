@@ -41,19 +41,19 @@
         "Attributes": {
             "attribute":                                            "Attribut",
             "attributes":                                           "Attribute",
-            "CHA":                                                  "CHA",
             "charisma":                                             "Charisma",
-            "CON":                                                  "KON",
-            "constitution":                                         "Konstitution",
-            "DEX":                                                  "GES",
+            "charismaAbbr":                                         "CHA",
             "dexterity":                                            "Geschicklichkeit",
-            "PER":                                                  "WAH",  
-            "perception":                                           "Wahrnehmung", 
+            "dexterityAbbr":                                        "GES",
+            "perception":                                           "Wahrnehmung",
+            "perceptionAbbr":                                       "WAH",
             "rollAttribute":                                        "Klicke um eine Attributsprobe abzulegen",
-            "STR":                                                  "STÄ",
             "strength":                                             "Stärke",
-            "WIL":                                                  "WIL",
-            "willpower":                                            "Willenskraft"
+            "strengthAbbr":                                         "STÄ",
+            "toughness":                                            "Zähigkeit",
+            "toughnessAbbr":                                        "ZÄH",
+            "willpower":                                            "Willenskraft",
+            "willpowerAbbr":                                        "WIL"
         },
         "General": {
             "A":                                                "A",

@@ -3,7 +3,6 @@ const ED4E = {};
 
 /**
  * Configuration data for abilities.
- *
  * @typedef {object} AttributeConfiguration
  * @property {string} label                               Localized label.
  * @property {string} abbreviation                        Localized abbreviation.
@@ -43,6 +42,7 @@ ED4E.attributes = {
 	}
 }
 
+/* eslint-disable */
 // Since Foundry does not support hot reloading object notation templates...
 Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path } = {}) => {
 	if (extension === 'hbs') {
@@ -60,3 +60,8 @@ Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path 
 		Object.values(ui.windows).forEach(app => app.render(true));
 	}
 });
+/* eslint-enable */
+
+/* -------------------------------------------- */
+
+export default ED4E;

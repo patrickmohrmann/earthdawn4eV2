@@ -9,7 +9,7 @@
  */
 
 // Import configuration
-import ED4E from './module/config.js';
+import ED4E from './module/config.mjs';
 import registerSystemSettings from './module/settings.mjs';
 
 // Import submodules
@@ -27,6 +27,7 @@ import * as utils from "./module/utils.mjs";
 globalThis.ed4e = {
     applications,
     canvas,
+    config: ED4E,
     dataModels,
     dice,
     documents,
@@ -38,9 +39,9 @@ globalThis.ed4e = {
 /* -------------------------------------------- */
 
 
-Hooks.once("init", () => {
-    globalThis.ed4e = game.ed4e = Object.assign(game.system, globalThis.ed4e);
-    console.log("ED4e | Initializing the ED4e Game System");
+Hooks.once( "init", () => {
+    globalThis.ed4e = game.ed4e = Object.assign( game.system, globalThis.ed4e );
+    console.log( "ED4e | Initializing the ED4e Game System" );
 
     // record configuration values
     CONFIG.ED4E = ED4E;
@@ -55,17 +56,17 @@ Hooks.once("init", () => {
     CONFIG.Item.dataModels = dataModels.item.config;
 
     // Register sheet application classes
-    Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("earthdawn4e", applications.actor.ActorSheetEdCharacter, {
+    Actors.unregisterSheet( "core", ActorSheet );
+    Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
         types: ["character"],
         makeDefault: true
-    });
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("earthdawn4e", applications.item.ItemSheetEd, {
+    } );
+    Items.unregisterSheet( "core", ItemSheet );
+    Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
         makeDefault: true
-    });
+    } );
 
     // Preload Handlebars templates.
   utils.preloadHandlebarsTemplates();
 
-});
+} );
