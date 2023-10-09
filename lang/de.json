@@ -129,6 +129,10 @@
                 "editionThird":                                     "Dritte Edition",
                 "hint":                                             "Wähle die Stufentabelle zur Konvertierung der Stufen in Würfel",
                 "stepTable":                                        "Stufen-Tabelle"
+            },
+            "DarkMode": {
+                "darkMode":                                         "Anzeige Modus",
+                "hint":                                             "Benutzte den Schieber um das Farbschema anzupassen"     
             }
         }
     }
