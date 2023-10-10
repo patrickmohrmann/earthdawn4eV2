@@ -1,7 +1,7 @@
 /**
- * Define a set of template paths to pre-load.
- * Pre-loaded templates are compiled and cached for fast access when rendering
- * @return {Promise}
+ * Define a set of template paths to preload.
+ * Preloaded templates are compiled and cached for fast access when rendering
+ * @returns {Promise}
  */
 export async function preloadHandlebarsTemplates() {
   const partials = [
@@ -29,15 +29,18 @@ export async function preloadHandlebarsTemplates() {
   ];
 
   const paths = {};
-  for (const path of partials) {
-    paths[path.replace(".hbs", ".html")] = path;
-    paths[`ed4e.${path.split("/").pop().replace(".hbs", "")}`] = path;
+  for ( const path of partials ) {
+    paths[path.replace( ".hbs", ".html" )] = path;
+    paths[`ed4e.${path.split( "/" ).pop().replace( ".hbs", "" )}`] = path;
     paths[path] = path;
   }
 
-  return loadTemplates(paths);
+  return loadTemplates( paths );
 }
 
+/**
+ * Register custom Handlebars helpers used by the ed4e system.
+ */
 export function registerHandlebarHelpers() {
 
 }

@@ -19,6 +19,7 @@
     "foundry": false,
     "game": false,
     "items": false,
+    "loadTemplates": false,
     "packs": false
   },
   "parser": "@babel/eslint-parser",
