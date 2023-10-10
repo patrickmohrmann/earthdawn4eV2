@@ -60,10 +60,30 @@ Hooks.once("init", () => {
     });
 
     // Preload Handlebars templates.
-  utils.preloadHandlebarsTemplates();
+    utils.preloadHandlebarsTemplates();
 
-  registerSystemSettings.registerSystemSettings()
+    /* -------------------------------------------- */
+    /*  Foundry VTT System Setting Initialization   */
+    /* -------------------------------------------- */
 
+    registerSystemSettings.registerSystemSettings()
+
+    /**
+     * @summary Dark theme gradient calculation
+     * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
+     * @param {number} darkValue percentage value in 5% steps
+     */
+
+    const darkValue = game.settings.get("ed4e", "darkMode") * 5 + 50;
+    const bgValue = 255 - (darkValue * 2.55);
+    const textValue = darkValue * 2.55;
+    document.documentElement.style.setProperty("--bg-color", `rgb(${bgValue}, ${bgValue}, ${bgValue})`);
+    document.documentElement.style.setProperty("--text-color", `rgb(${textValue}, ${textValue}, ${textValue})`);
+    if (darkValue > 55) {
+        $(':root').addClass('dark-theme');
+    } else {
+        $(':root').removeClass('dark-theme');
+    }
 });
 
 

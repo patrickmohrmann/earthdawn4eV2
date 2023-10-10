@@ -17,22 +17,28 @@ export async function registerSystemSettings() {
             fourth: "ED.Settings.StepTable.editionFourth"
           }
     });
-
-    // dark mode for sheets
+    // dark mode. Css adjustements are located in the dark-theme.less file.
     game.settings.register("ed4e", "darkMode", {
         name: "ED.Settings.DarkMode.darkMode",
         hint: "ED.Settings.DarkMode.hint",
         scope: "client",
         config: true,
-        default: 50,
+        default: 1,
         type: Number,
         range: {
-            min: 0,
-            max: 100,
-            step: 5
+            min: 1,
+            max: 10,
+            step: 1
         },
         onChange: async(val) => {
-            // change the darkness level to = val
-        }
-    });
+            if (val > 1) {
+                $(':root').addClass('dark-theme');
+            } else {
+                $(':root').removeClass('dark-theme');
+            }
+        } 
+    });   
 }
+
+
+
