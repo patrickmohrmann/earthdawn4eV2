@@ -133,6 +133,22 @@
             "DarkMode": {
                 "darkMode":                                         "Anzeige Modus (pro Client)",
                 "hint":                                             "Benutzte den Schieber um das Farbschema anzupassen. Die Anpassung erfordert ein Neuladen des Browsers (F5)."     
+            },
+            "LpTracking": {
+                "allTalents":                                       "Alle Talente",
+                "automaticSilverReduction":                         "Silber wird automatisch verrechnet",
+                "disciplineTalents":                                "Nur Disciplin Talente",
+                "freePerCircle":                                    "Eine kostenlose Steigerung pro Kreis.",
+                "hintAttributesOption":                             "Welche option soll für die Steigerung von Attributen gewählt werden?",
+                "hintAllTalentsOption":                             "Sollen alle Talente für den Kreisaufstieg gewertet werden, oder nur die Disciplintalente?",
+                "hintAutomaticSilverOption":                        "Soll Silber automatische beim erhöhen abgezogen werden?",
+                "lpTrackingAllTalentsOption":                       "Alle Talente für den Kreisaufstieg",
+                "lpTrackingAttributesOptions":                      "Attribut Steigerung (Global)",
+                "lpTrackingHeader":                                 "Legendenpunkte Optionen",
+                "lpTrackingRemoveSilverOption":                     "Automatische Silber Reduzierung",
+                "notAutomaticSilverReduction":                      "Silber wird nicht automatische Verrechnet",
+                "spendLp":                                          "Kostenpflichtige Steigerung (Standard)",
+                "spendLpPerCircle":                                 "Eine kostenpflichtige Steigerung pro Kreis."
             }
         }
     }

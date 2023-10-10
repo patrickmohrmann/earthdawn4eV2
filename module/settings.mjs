@@ -38,6 +38,49 @@ export async function registerSystemSettings() {
             }
         } 
     });   
+        // Legend point settings
+        game.settings.register("ed4e", "lpTrackingHeader", {
+            name: "ED.Settings.LpTracking.lpTrackingHeader",
+            config: true,
+        });
+    // Legend point settings
+    game.settings.register("ed4e", "lpTrackingAttributes", {
+        name: "ED.Settings.LpTracking.lpTrackingAttributesOptions",
+        hint: "ED.Settings.LpTracking.hintAttributesOption",
+        scope: "world",
+        config: true,
+        default: "spendLp",
+        type: String,
+        choices: {
+            spendLp: "ED.Settings.LpTracking.spendLp",
+            spendLpPerCircle: "ED.Settings.LpTracking.spendLpPerCircle",
+            freePerCircle: "ED.Settings.LpTracking.freePerCircle"
+          }
+    });
+    game.settings.register("ed4e", "lpTrackingAllTalents", {
+        name: "ED.Settings.LpTracking.lpTrackingAllTalentsOption",
+        hint: "ED.Settings.LpTracking.hintAllTalentsOption",
+        scope: "world",
+        config: true,
+        default: "disciplineTalents",
+        type: String,
+        choices: {
+            disciplineTalents: "ED.Settings.LpTracking.disciplineTalents",
+            allTalents: "ED.Settings.LpTracking.allTalents"
+          }
+    });
+    game.settings.register("ed4e", "lpTrackingRemoveSilver", {
+        name: "ED.Settings.LpTracking.lpTrackingRemoveSilverOption",
+        hint: "ED.Settings.LpTracking.hintAutomaticSilverOption",
+        scope: "world",
+        config: true,
+        default: "automatic",
+        type: String,
+        choices: {
+            automatic: "ED.Settings.LpTracking.automaticSilverReduction",
+            notAutomatic: "ED.Settings.LpTracking.notAutomaticSilverReduction",
+          }
+    });
 }
 
 

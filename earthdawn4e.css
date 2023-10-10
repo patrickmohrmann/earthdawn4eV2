@@ -199,6 +199,24 @@ h6 {
 .dark-theme .character-sheet .body button {
   color: var(--text-color);
 }
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
+  border-top: 1px solid black;
+}
+label,
+.form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] p {
+  display: none;
+}
 .earthdawn.sheet.namegiver .headerLine {
   display: flex;
   flex-direction: row;
