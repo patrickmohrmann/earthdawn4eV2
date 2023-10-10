@@ -1,7 +1,28 @@
+/* -------------------------------------------- */
+/*  Validators                                  */
+/* -------------------------------------------- */
+
+/**
+ * Ensure the provided string contains only the characters allowed in identifiers.
+ * @param {string} identifier
+ * @returns {boolean}
+ */
+function isValidIdentifier( identifier ){
+  return /^([a-z0-9_-]+)$/i.test( identifier );
+}
+
+export const validators = {
+  isValidIdentifier: isValidIdentifier
+}
+
+/* -------------------------------------------- */
+/*  Handlebars Template Helpers                 */
+/* -------------------------------------------- */
+
 /**
  * Define a set of template paths to preload.
  * Preloaded templates are compiled and cached for fast access when rendering
- * @returns {Promise}
+ * @returns {Promise} The promise returned by the Foundry API's `loadTemplates`.
  */
 export async function preloadHandlebarsTemplates() {
   const partials = [

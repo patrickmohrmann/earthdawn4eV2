@@ -1,3 +1,23 @@
+/*
+* Field implementations are taken from the [DnD5e system]{@link https://github.com/foundryvtt/dnd5e}
+*/
+
+/**
+ * Special case StringField that includes automatic validation for identifiers.
+ */
+export class IdentifierField extends foundry.data.fields.StringField {
+  /**
+   * @override
+   */
+  _validateTyp( value ) {
+    if ( ed4e.utils.validators.isValidIdentifier( value ) ) {
+      throw new Error( game.i18n.localize( "ED.Errors.IdentifierError" ) );
+    }
+  }
+}
+
+/* -------------------------------------------- */
+
 /**
  * @callback MappingFieldInitialValueBuilder
  * @param {string} key       The key within the object where this new value is being generated.

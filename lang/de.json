@@ -55,6 +55,9 @@
             "willpower":                                            "Willenskraft",
             "willpowerAbbr":                                        "WIL"
         },
+        "Errors": {
+            "IdentifierError":                                      "Identifier can only contain letters (a-z), numbers (0-9), dashes (-), and underscores (_). Identifier können nur Kleinbuchstaben (a-b), Zahlen (0-9), Bindestriche (-) und Unterstriche (_) enthalten."
+        },
         "General": {
             "A":                                                "A",
 
