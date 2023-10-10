@@ -128,11 +128,11 @@
                 "editionFourth":                                    "Vierte Edition",
                 "editionThird":                                     "Dritte Edition",
                 "hint":                                             "Wähle die Stufentabelle zur Konvertierung der Stufen in Würfel",
-                "stepTable":                                        "Stufen-Tabelle"
+                "stepTable":                                        "Stufen-Tabelle (Global)"
             },
             "DarkMode": {
-                "darkMode":                                         "Anzeige Modus",
-                "hint":                                             "Benutzte den Schieber um das Farbschema anzupassen"     
+                "darkMode":                                         "Anzeige Modus (pro Client)",
+                "hint":                                             "Benutzte den Schieber um das Farbschema anzupassen. Die Anpassung erfordert ein Neuladen des Browsers (F5)."     
             }
         }
     }
