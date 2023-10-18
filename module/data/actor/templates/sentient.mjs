@@ -19,6 +19,15 @@ export default class SentientTemplate extends CommonTemplate {
                     initial: 1,
                     integer: true,
                     positive: true
+                } ),
+                step: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    step: 1,
+                    initial: 1,
+                    integer: true,
+                    positive: true
                 } )
             } ), {
                 initialKeys: CONFIG.ED4E.attributes,
