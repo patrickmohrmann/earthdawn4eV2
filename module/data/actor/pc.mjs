@@ -1,5 +1,4 @@
 import NamegiverTemplate from "./templates/namegiver.mjs";
-import { MappingField } from '../fields.mjs';
 
 /**
  * System data definition for PCs.
