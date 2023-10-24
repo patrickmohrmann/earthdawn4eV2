@@ -21,7 +21,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     min: 0,
                     initial: 0,
                     positive: true,
-                    label: "ED.Item.value"
+                    label: "ED.Item.General.value"
                 } ),
                 coinage: foundry.data.fields.StringField( {
                     required: true,
@@ -29,11 +29,11 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     min: 0,
                     initial: 0,
                     positive: true,
-                    label: "ED.Item.coinage"
+                    label: "ED.Item.General.coinage"
                 } )
             },
             {
-                label: "ED.Item.price"
+                label: "ED.Item.General.price"
             } ),
 
 
@@ -43,14 +43,14 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 min: 0,
                 initial: 0,
                 positive: true,
-                label: "ED.Item.weight"
+                label: "ED.Item.General.weight"
             } ),
             // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
             availability: new foundry.data.fields.StringField( {
                 required: true,
                 blank: false,
                 initial: "average",
-                label:  "ED.Item.availability"
+                label:  "ED.Item.General.availability"
 
             } ),
             amount: new foundry.data.fields.NumberField( {
@@ -59,7 +59,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 min: 0,
                 initial: 0,
                 positive: true,
-                label: "ED.Item.amount"
+                label: "ED.Item.General.amount"
             } ),
             bloodMagicDamage: new foundry.data.fields.NumberField( {
                 required: true,
@@ -67,7 +67,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 min: 0,
                 initial: 0,
                 positive: true,
-                label: "ED.Item.bloodMagicDamage"
+                label: "ED.Item.General.bloodMagicDamage"
             } ),
         } );
     }

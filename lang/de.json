@@ -130,6 +130,15 @@
                 "price":                                        "Kosten",   
                 "value":                                        "Wert",
                 "weight":                                       "Gewicht"   
+            },
+            "Armor": {
+                "initiativePenalty":                            "Initiative Malus",
+                "forgeBonusMystical":                           "Mystischer Schmiede Bonus",
+                "forgeBonusPhysical":                           "Physischer Schmiede Bonus",
+                "mysticalArmor":                                "Mystische Rüstung",
+                "physicalArmor":                                "Physische Rüstung",
+                "piecemealArmorSize":                           "Größe",
+                "piecemealArmor":                               "Zusammengesetzte Rüstung"
             }
         },
         "LpTracking": {
