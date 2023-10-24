@@ -138,6 +138,12 @@
                 "piecemealArmorSize":                           "Größe",
                 "piecemealArmor":                               "Zusammengesetzte Rüstung"
             },
+            "Curse": {
+                "curseActive":                                  "Aktive",
+                "curseDetected":                                "Entdeckt",
+                "curseStep":                                    "Stufe",
+                "curseType":                                    "Typ"
+            },
             "Equipment": {
                 "consumable":                                   "Verbrauchsgut"
             },
