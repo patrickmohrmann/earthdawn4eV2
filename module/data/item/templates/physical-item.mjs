@@ -121,4 +121,20 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         super.migrateData( source );
         // specific migration functions
     }
+
+    /* -------------------------------------------- */
+    /*  Getters                                     */
+    /* -------------------------------------------- */
+
+    /**
+     * Properties displayed in chat.
+     * @type {string[]}
+     */
+    get chatProperties() {
+        return [
+            this.parent.usableItem.labels.arbitraryStep,
+            this.parent.usableItem.labels.action,
+            this.parent.usableItem.labels.recoveryPropertyValue
+        ];
+    }
 }
