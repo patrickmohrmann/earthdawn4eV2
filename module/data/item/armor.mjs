@@ -8,7 +8,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {number} forgeBonusMystical                          Forge Bonus for Mystical Armor
  * @property {number} initiativePenalty                           Initiative Penalty
  * @property {object} piecemealArmor                              piecemeal armor Object
- * @property {boolean} piecemealArmor.piecemealArmorSelector       selector if armor is piecemeal or not
+ * @property {boolean} piecemealArmor.piecemealArmorSelector      selector if armor is piecemeal or not
  * @property {number} piecemealArmor.piecemealArmorSize           piecemeal Armor size value can be 1, 2 or 3
  */
 export default class ArmorData extends PhysicalItemTemplate{
