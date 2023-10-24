@@ -2,12 +2,27 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
 /**
  * Data model template with information on equipment items.
+ * @property {boolean} consumable check if item will be consumed on usage
+ * @property {string} ammoType which type of ammo it is.
  */
 export default class EquipmentData extends PhysicalItemTemplate{
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            consumable: new foundry.data.fields.BooleanField( {
+                required: true,
+                label: "ED.Item.Equipment.consumable"
+            } ),
+            // different ammo types are availabel see issue #
+            ammoType: new foundry.data.fields.StringField( {
+                    required: true,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
+                label: "ED.Item.Equipment.ammoType"
+            } ),
+        } );
     }
 
     /* -------------------------------------------- */
@@ -15,8 +30,8 @@ export default class EquipmentData extends PhysicalItemTemplate{
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    static migrateData(source) {
-        super.migrateData(source);
+    static migrateData( source ) {
+        super.migrateData( source );
         // specific migration functions
     }
 }
