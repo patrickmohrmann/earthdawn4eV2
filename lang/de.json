@@ -153,6 +153,13 @@
                 "value":                                        "Wert",
                 "weight":                                       "Gewicht"   
             },
+            "Power": {
+                "action":                                       "Aktion",
+                "strain":                                       "Überanstrengung",
+                "attackStep":                                   "Angriffsstufe",
+                "powerStep":                                    "Kraftstufe",
+                "damageStep":                                   "Schadensstufe"
+            },
             "Shield": {
                 "Label": {
                     "defenseBonusPhysical":                     "Phy. Verteidigung",

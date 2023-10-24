@@ -2,8 +2,10 @@ import SystemDataModel from "../../abstract.mjs";
 
 /**
  * Data model template with information on Attack items.
- * @property {number} attackStep
- * @property {number} damageStep
+ * @property {number} powerStep    attack step
+ * @property {number} damageStep    damage step
+ * @property {number} strain        strain
+ * @property {string} action        action type
  */
 export default class NoneNamegiverPowerData extends SystemDataModel {
 
@@ -15,28 +17,28 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 nullable: false,
                 blank: false,
                 initial: "standard",
-                label: "ED.Item.Attack.action"
+                label: "ED.Item.Power.action"
             } ), 
             strain: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
-                label: "ED.Item.Attack.strain"
+                label: "ED.Item.Power.strain"
             } ),
-            attackStep: new foundry.data.fields.NumberField( {
+            powerStep: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
-                label: "ED.Item.Attack.attackStep"
+                label: "ED.Item.Power.powerStep"
             } ),
             damageStep: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
-                label: "ED.Item.Attack.damageStep"
+                label: "ED.Item.Power.damageStep"
             } ),
         } );
     }
