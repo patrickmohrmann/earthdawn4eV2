@@ -159,7 +159,32 @@
                     "defenseBonusMystical":                     "Mystische Verteidigungs Bonus",
                     "initiativePenalty":                        "Initiative Malus",
                     "shatterThreshold":                         "Bruchschwelle"
-                    }
+                }
+            },
+            "Weapon": {
+                "hint": {
+                    "damageAttribute":                          "Schadensattribut",
+                    "damageBaseStep":                           "Schadensstufe",
+                    "dexterityMinimum":                         "Minimale Geschicklichkeit",
+                    "forgeBonus":                               "Schmiedebonus",
+                    "rangeLong":                                "Lange Reichweite",
+                    "rangeShort":                               "Kurze Reichweite",
+                    "size":                                     "Waffengröße",
+                    "strengthMinimum":                          "Minimale Stärke",
+                    "weaponType":                               "Waffenkategorie"
+                },
+                "Label": {
+                    "ammunition":                               "Munition",
+                    "damageAttribute":                          "Attribute",
+                    "damageBaseStep":                           "Schaden",
+                    "dexterityMinimum":                         "Min Ges",
+                    "forgeBonus":                               "Geschmiedet",
+                    "rangeLong":                                "L. Reichweite",
+                    "rangeShort":                               "K. Reichweite",
+                    "size":                                     "Größe",
+                    "strengthMinimum":                          "Min Str",
+                    "weaponType":                               "Kategorie"
+                }
             }
         },
         "LpTracking": {
