@@ -16,6 +16,19 @@ export default class AbilityTemplate extends SystemDataModel {
                 initial: "standard",
                 label: "ED.Item.ability.action"
             } ), 
+            attribute: new foundry.data.fields.StringField( {
+                required: true,
+                nullable: true,
+                blank: true,
+                label: "ED.Item.ability.attribute"
+            } ), 
+            tier: new foundry.data.fields.StringField( {
+                required: true,
+                nullable: false,
+                blank: false,
+                initial: "novice",
+                label: "ED.Item.ability.tier"
+            } ), 
             strain: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
@@ -23,6 +36,13 @@ export default class AbilityTemplate extends SystemDataModel {
                 initial: 0,
                 label: "ED.Item.ability.strain"
             } ), 
+            rank: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                initial: 0,
+                label: "ED.Item.ability.rank"
+            } ),
         } );
     }
 
