@@ -122,12 +122,15 @@
             "Z":                                                "Z"
         },
         "Item": {
-            "General": {        
+            "General": {       
+                "action":                                       "Aktion", 
                 "amount":                                       "Menge",
+                "arbitraryStep":                                "Basisstufe",
                 "availability":                                 "Verfügbarkeit",
                 "bloodMagicDamage":                             "Blutmagie Schaden", 
                 "coinage":                                      "Münzen",
                 "price":                                        "Kosten",   
+                "usableItem":                                   "Benutzbar --- TBD",
                 "value":                                        "Wert",
                 "weight":                                       "Gewicht"   
             },

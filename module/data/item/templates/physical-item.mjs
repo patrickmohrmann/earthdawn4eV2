@@ -69,6 +69,30 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 positive: true,
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
+            usableItem: new foundry.data.fields.SchemaField( {
+                usableItem: new foundry.data.fields.StringField( {
+                    required: true,
+                    nullable: false,
+                    blank: false,
+                    initial: "no",
+                    label: "ED.Item.General.usableItem"
+                } ),
+                arbitraryStep: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    positive: true,
+                    label: "ED.Item.General.arbitraryStep"
+                } ),
+                action: new foundry.data.fields.StringField( {
+                    required: true,
+                    nullable: false,
+                    blank: false,
+                    initial: "standard",
+                    label: "ED.Item.General.action"
+                } ),
+            } )
         } );
     }
 
