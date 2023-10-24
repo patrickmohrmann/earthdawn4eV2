@@ -2,6 +2,11 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
 /**
  * Data model template with information on shield items.
+ * @property {number} defenseBonusPhysical      physical defense bonus
+ * @property {number} defenseBonusMystical      mystical defense bonus
+ * @property {number} initiativePenalty         initiative penalty
+ * @property {number} shatterThreshold          shatter threshold
+ * @property {boolean} broken                   broken condition
  */
 export default class ShieldData extends PhysicalItemTemplate{
 
