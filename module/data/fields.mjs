@@ -124,9 +124,15 @@ export class MappingField extends foundry.data.fields.ObjectField {
    * @override
    */
   _validateType( value, options = {} ) {
-    if ( foundry.utils.getType( value ) !== "Object" ) throw new Error( "Must be an Object" );
+    if ( foundry.utils.getType( value ) !== 'Object' ) throw new Error( 'Must be an Object' );
     const errors = this._validateValues( value, options );
-    if ( !foundry.utils.isEmpty( errors ) ) throw new foundry.data.fields.ModelValidationError( errors );
+    if ( !foundry.utils.isEmpty( errors ) ) {
+      throw new foundry.data.validation.DataModelValidationError(
+        Object.entries( errors ).map(
+          ( [k, v] ) => `\n${k}: ${errors[k].toString()}`
+        ).join( '' )
+      );
+    }
   }
 
   /* -------------------------------------------- */
