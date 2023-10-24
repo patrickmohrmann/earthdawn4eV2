@@ -151,7 +151,8 @@
                     "defenseBonusPhysical":                     "Phy. Verteidigung",
                     "defenseBonusMystical":                     "Myst. Verteidigung",
                     "initiativePenalty":                        "Ini Malus",
-                    "shatterThreshold":                         "Bruch"
+                    "shatterThreshold":                         "Bruch",
+                    "broken":                                   "Unbrauchbar"
                 },
                 "hint": {
                     "defenseBonusPhysical":                     "Physische Verteidigungs Bonus",

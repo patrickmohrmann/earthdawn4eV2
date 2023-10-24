@@ -13,7 +13,6 @@ export default class ShieldData extends PhysicalItemTemplate{
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 hint: "ED.Item.Shield.Label.defenseBonusPhysical",
                 label: "ED.Item.Shield.Hint.defenseBonusPhysical"
             } ),
@@ -22,7 +21,6 @@ export default class ShieldData extends PhysicalItemTemplate{
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 hint: "ED.Item.Shield.Label.defenseBonusMystical",
                 label: "ED.Item.Shield.Hint.defenseBonusMystical"
             } ),
@@ -31,7 +29,6 @@ export default class ShieldData extends PhysicalItemTemplate{
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 hint: "ED.Item.Shield.Label.initiativePenalty",
                 label: "ED.Item.Shield.Hint.initiativePenalty"
             } ),
@@ -40,24 +37,16 @@ export default class ShieldData extends PhysicalItemTemplate{
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 hint: "ED.Item.Shield.Label.shatterThreshold",
                 label: "ED.Item.Shield.Hint.shatterThreshold"
             } ),
+            broken: new foundry.data.fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Item.Shield.Hint.broken"
+            } ),
     } );
     }
-
-    // "templatesItem": [
-    //     "itemBasics",
-    //     "equipmentBasics",
-    //     "detailsEquipment",
-    //     "detailsGeneral"
-    // ],
-    // "defenseBonusPhysical": 0,
-    // "defenseBonusMystical": 0,
-    // "initiativePenalty": 0,
-    // "shatterThreshold": 0
-
     /* -------------------------------------------- */
     /*  Migrations                                  */
     /* -------------------------------------------- */
