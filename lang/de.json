@@ -121,8 +121,19 @@
 
             "Z":                                                "Z"
         },
+        "Item": {
+            "General": {        
+                "amount":                                       "Menge",
+                "availability":                                 "Verfügbarkeit",
+                "bloodMagicDamage":                             "Blutmagie Schaden", 
+                "coinage":                                      "Münzen",
+                "price":                                        "Kosten",   
+                "value":                                        "Wert",
+                "weight":                                       "Gewicht"   
+            }
+        },
         "LpTracking": {
-            "attributeImprovement":                                 "Attribute erhöhen"
+            "attributeImprovement":                             "Attribute erhöhen"
         }
     }
 }
