@@ -1,11 +1,12 @@
 import SystemDataModel from "../../abstract.mjs";
 
 /**
- * Data model template with information on Ability items.
- * @property {string} action action type 
- * @property {number} strain strain 
+ * Data model template with information on Attack items.
+ * @property {number} attackStep
+ * @property {number} damageStep
  */
-export default class AbilityTemplate extends SystemDataModel {
+export default class NoneNamegiverPowerData extends SystemDataModel {
+
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
@@ -14,34 +15,28 @@ export default class AbilityTemplate extends SystemDataModel {
                 nullable: false,
                 blank: false,
                 initial: "standard",
-                label: "ED.Item.Ability.action"
-            } ), 
-            attribute: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: true,
-                blank: true,
-                label: "ED.Item.Ability.attribute"
-            } ), 
-            tier: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: false,
-                blank: false,
-                initial: "novice",
-                label: "ED.Item.Ability.tier"
+                label: "ED.Item.Attack.action"
             } ), 
             strain: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
-                label: "ED.Item.Ability.strain"
-            } ), 
-            rank: new foundry.data.fields.NumberField( {
+                label: "ED.Item.Attack.strain"
+            } ),
+            attackStep: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
-                label: "ED.Item.Ability.rank"
+                label: "ED.Item.Attack.attackStep"
+            } ),
+            damageStep: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                initial: 0,
+                label: "ED.Item.Attack.damageStep"
             } ),
         } );
     }

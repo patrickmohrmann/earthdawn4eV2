@@ -122,6 +122,13 @@
             "Z":                                                "Z"
         },
         "Item": {
+            "Ability": {
+                "action":                                       "Aktion",
+                "attribute":                                    "Attribute",
+                "rank":                                         "Rang",
+                "strain":                                       "Überanstrengung",
+                "tier":                                         "Stufe"
+            },
             "Armor": {
                 "initiativePenalty":                            "Initiative Malus",
                 "forgeBonusMystical":                           "Mystischer Schmiede Bonus",
