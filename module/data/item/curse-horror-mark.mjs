@@ -2,10 +2,10 @@ import SystemDataModel from "../abstract.mjs";
 
 /**
  * Data model template with information on Curse and Horror Mark items.
- * @property {} curseStep           curse step
- * @property {} curseType           type of the curse
- * @property {} curseActive         is the curse active
- * @property {} curseDetected       is the curse known
+ * @property {number} curseStep           curse step
+ * @property {string} curseType           type of the curse
+ * @property {boolean} curseActive         is the curse active
+ * @property {boolean} curseDetected       is the curse known
  */
 export default class CurseHorrorMarkData extends SystemDataModel {
 
@@ -22,7 +22,7 @@ export default class CurseHorrorMarkData extends SystemDataModel {
             curseType: new foundry.data.fields.StringField( {
                 required: true,
                 blank: false,
-                initial: "Silver",
+                initial: "weak",
                 label: "ED.Item.Curse.curseType"
             } ),
             curseActive: new foundry.data.fields.BooleanField( {
