@@ -21,8 +21,7 @@ export default class WeaponData extends PhysicalItemTemplate{
             weaponType: new foundry.data.fields.StringField( {
                 required: true,
                 nullable: false,
-                min: 0,
-                initial: 0,
+                initial: "melee",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
             } ), 
