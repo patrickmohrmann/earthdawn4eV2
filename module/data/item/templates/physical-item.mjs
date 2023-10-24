@@ -25,15 +25,12 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     nullable: false,
                     min: 0,
                     initial: 0,
-                    positive: true,
                     label: "ED.Item.General.value"
                 } ),
-                coinage: foundry.data.fields.StringField( {
+                coinage: new foundry.data.fields.StringField( {
                     required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    positive: true,
+                    blank: false,
+                    initial: "Silver",
                     label: "ED.Item.General.coinage"
                 } )
             },
@@ -45,7 +42,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 label: "ED.Item.General.weight"
             } ),
             // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
@@ -61,7 +57,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 label: "ED.Item.General.amount"
             } ),
             bloodMagicDamage: new foundry.data.fields.NumberField( {
@@ -69,7 +64,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
-                positive: true,
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
             usableItem: new foundry.data.fields.SchemaField( {
@@ -85,7 +79,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     nullable: false,
                     min: 0,
                     initial: 0,
-                    positive: true,
                     label: "ED.Item.General.arbitraryStep"
                 } ),
                 action: new foundry.data.fields.StringField( {
@@ -102,7 +95,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     min: 0,
                     max: 5,
                     initial: 0,
-                    positive: true,
                     label: "ED.Item.General.recoveryPropertyValue"
                 } ),
             },
