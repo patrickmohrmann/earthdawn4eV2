@@ -201,6 +201,21 @@
                 "willpowerStep":                                "Willenskraftstufe Modifikation",
                 "woundThreshold":                               "Wundschwelle Modifikation"
             },
+            "Namegiver": {
+                "burrow":                                       "Graben",
+                "charismaValue":                                "Charismawert",
+                "climb":                                        "Klettern",
+                "constitutionValue":                            "Zähigkeitswert",
+                "dexterityValue":                               "Geschicklichkeitswert",
+                "fly":                                          "Fliegen",
+                "karmamodifier":                                "Karmamodifikator",
+                "movement":                                     "Bewegung",
+                "perceptionValue":                              "Wahrnehmungswert",
+                "strengthValue":                                "Stärkewert",
+                "swim":                                         "Schwimmen",
+                "walk":                                         "Gehen",
+                "willpowerValue":                               "Willenskraftwert"
+            },
             "Power": {
                 "action":                                       "Aktion",
                 "strain":                                       "Überanstrengung",
