@@ -2,6 +2,7 @@ import ClassTemplate from "./templates/class.mjs";
 
 /**
  * Data model template with information on discipline items.
+ * @property {number} durability durability value
  */
 export default class DisciplineData extends ClassTemplate{
 
