@@ -89,7 +89,6 @@ export default class MaskData extends SystemDataModel{
                     required: true,
                     nullable: false,
                     min: 0,
-                    max: 5,
                     initial: 0,
                     label: "ED.Item.Masks.walk"
                 } ),
@@ -97,7 +96,6 @@ export default class MaskData extends SystemDataModel{
                     required: true,
                     nullable: false,
                     min: 0,
-                    max: 5,
                     initial: 0,
                     label: "ED.Item.Masks.fly"
                 } ),
@@ -105,7 +103,6 @@ export default class MaskData extends SystemDataModel{
                     required: true,
                     nullable: false,
                     min: 0,
-                    max: 5,
                     initial: 0,
                     label: "ED.Item.Masks.swim"
                 } ),
@@ -113,7 +110,6 @@ export default class MaskData extends SystemDataModel{
                     required: true,
                     nullable: false,
                     min: 0,
-                    max: 5,
                     initial: 0,
                     label: "ED.Item.Masks.burrow"
                 } ),
@@ -121,7 +117,6 @@ export default class MaskData extends SystemDataModel{
                     required: true,
                     nullable: false,
                     min: 0,
-                    max: 5,
                     initial: 0,
                     label: "ED.Item.Masks.climb"
                 } ),
