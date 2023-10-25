@@ -138,6 +138,9 @@
                 "piecemealArmorSize":                           "Größe",
                 "piecemealArmor":                               "Zusammengesetzte Rüstung"
             },
+            "Class": {
+                "durability":                                   "Unempfindlichkeit"
+            },
             "Curse": {
                 "curseActive":                                  "Aktive",
                 "curseDetected":                                "Entdeckt",
