@@ -2,6 +2,7 @@ import ClassTemplate from "./templates/class.mjs";
 
 /**
  * Data model template with information on path items.
+ * @property {string} sourceDiscipline source discipline related to the path
  */
 export default class PathData extends ClassTemplate{
 
