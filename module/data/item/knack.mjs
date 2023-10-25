@@ -7,6 +7,7 @@ import AbilityTemplate from "./templates/ability.mjs";
  * @property {object} requirements          requirement of the knack
  * @property {boolean} standardEffect       standard effect used
  * @property {boolean} maneuver             maneuver knack
+ * @property {number} extraSuccesses        extra successes to trigger the maneuver
  */
 export default class KnackData extends AbilityTemplate {
 
@@ -32,8 +33,14 @@ export default class KnackData extends AbilityTemplate {
                 initial: false,
                 label: "ED.Item.Knack.maneuver"
             } ),
+            extraSuccesses: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                initial: 0,
+                label: "ED.Item.Knack.extraSuccesses"
+            } ),
         } );
-        
     }
 
     /* -------------------------------------------- */

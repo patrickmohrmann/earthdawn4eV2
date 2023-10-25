@@ -164,6 +164,7 @@
                 "weight":                                       "Gewicht"   
             },
             "Knack": {
+                "extraSuccesses":                               "Nötige Extra Erfolge",
                 "maneuver":                                     "Manöver",
                 "requirements":                                 "Voraussetzungen",
                 "restrictions":                                 "Ristriktionen",
