@@ -14,6 +14,7 @@ import PoisonDiseaseData from "./poison-disease.mjs";
 import PowerData from "./power.mjs";
 import QuestorData from "./questor.mjs";
 import ShieldData from "./shield.mjs";
+import ShipWeaponData from "./ship-weapon.mjs";
 import SkillData from "./skill.mjs";
 import SpecialAbilityData from "./special-ability.mjs";
 import SpellData from "./spell.mjs";
@@ -38,6 +39,7 @@ export {
     PowerData,
     QuestorData,
     ShieldData,
+    ShipWeaponData,
     SkillData,
     SpecialAbilityData,
     SpellData,
@@ -68,6 +70,7 @@ export const config = {
     power: PowerData,
     questor: QuestorData,
     shield: ShieldData,
+    shipWeapon: ShipWeaponData,
     skill: SkillData,
     specialAbility: SpecialAbilityData,
     spell: SpellData,

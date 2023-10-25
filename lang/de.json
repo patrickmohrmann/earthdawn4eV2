@@ -223,6 +223,14 @@
                     "shatterThreshold":                         "Bruchschwelle"
                 }
             },
+            "ShipWeapon": {
+                "charakterDamage":                              "Schaden für Lebewesen",
+                "crewWeapon":                                   "Benötigte Mannschaft",
+                "firePowerPoints":                              "Feuerkraft",
+                "rangeLong":                                    "Lange Reichweite",
+                "rangeShort":                                   "Kurze Reichweite",
+                "salvoCost":                                    "Salven Kosten"
+            },
             "Weapon": {
                 "hint": {
                     "damageAttribute":                          "Schadensattribut",
