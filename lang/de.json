@@ -163,6 +163,13 @@
                 "value":                                        "Wert",
                 "weight":                                       "Gewicht"   
             },
+            "Knack": {
+                "maneuver":                                     "Manöver",
+                "requirements":                                 "Voraussetzungen",
+                "restrictions":                                 "Ristriktionen",
+                "sourceTalent":                                 "Talent",
+                "standardEffect":                               "Standardeffekt"
+            },
             "Power": {
                 "action":                                       "Aktion",
                 "strain":                                       "Überanstrengung",
