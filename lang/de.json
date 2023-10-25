@@ -139,7 +139,8 @@
                 "piecemealArmor":                               "Zusammengesetzte Rüstung"
             },
             "Class": {
-                "durability":                                   "Unempfindlichkeit"
+                "durability":                                   "Unempfindlichkeit",
+                "sourceDiscipline":                             "Disziplin"
             },
             "Curse": {
                 "curseActive":                                  "Aktive",

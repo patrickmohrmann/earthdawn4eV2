@@ -7,7 +7,13 @@ export default class PathData extends ClassTemplate{
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            sourceDiscipline: new foundry.data.fields.StringField( {
+                required: true,
+                blank: true,
+                label: "ED.Item.Class.sourceDiscipline"
+            } ),
+        } );
     }
 
     /* -------------------------------------------- */
@@ -15,8 +21,8 @@ export default class PathData extends ClassTemplate{
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    static migrateData(source) {
-        super.migrateData(source);
+    static migrateData( source ) {
+        super.migrateData( source );
         // specific migration functions
     }
 }
