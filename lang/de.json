@@ -216,6 +216,19 @@
                 "walk":                                         "Gehen",
                 "willpowerValue":                               "Willenskraftwert"
             },
+            "PoisonDisease": {
+                "activation":                                   "Aktivierung",
+                "damageStep":                                   "Schadensstufe",
+                "death":                                        "Tödlich",
+                "debilitationStep":                             "Schwächungsstufe",
+                "duration":                                     "Wirkungsdauer",
+                "effect":                                       "Wirkung",
+                "interval":                                     "Intervall",
+                "paralysisStep":                                "Lähmungsstufe",
+                "onsetTime":                                    "Verzögerung",
+                "timeInBetween":                                "Zeit zwischen den Wirkungen",
+                "totalEffects":                                 "Maximale Wirkungen"
+            },
             "Power": {
                 "action":                                       "Aktion",
                 "strain":                                       "Überanstrengung",
