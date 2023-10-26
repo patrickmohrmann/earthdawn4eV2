@@ -187,6 +187,115 @@ h6 {
   position: absolute;
   left: calc(50% - 64px);
 }
+.item-sheet .window-content {
+  padding: 0px;
+}
+.item-sheet .window-header,
+.item-sheet .window-content {
+  padding: 0px 0px 0px 0px;
+  border: none;
+}
+.item-sheet .window-header {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  padding-top: 6px;
+}
+.item-sheet .window-header .window-title,
+.item-sheet .window-header .window-title i {
+  position: relative;
+  font-size: large;
+  z-index: 2;
+  left: 60px;
+}
+.item-sheet .window-header a {
+  position: relative;
+  z-index: 2;
+  right: 60px;
+}
+.item-sheet .body {
+  position: relative;
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  margin-top: -60px;
+  padding: 60px 10px 75px 10px;
+  color: black;
+  background-repeat: no-repeat;
+}
+.item-sheet .app {
+  box-shadow: 0px 20px 18px #000000;
+  background: transparent;
+}
+.item-sheet .header-item__frame {
+  height: 50px;
+  margin-top: -60px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.9;
+}
+.item-sheet .header-item__frame .app {
+  background: transparent;
+}
+.item-sheet .header-item__frame img {
+  border: none;
+}
+.item-sheet .window-resizable-handle {
+  z-index: 2;
+}
+.item-sheet .item__top {
+  height: 140px;
+  margin-top: 2px;
+  padding-top: 10px;
+}
+.item-sheet .item__top .item__left--top {
+  float: left;
+  width: 140px;
+  height: 140px;
+}
+.item-sheet .item__top .item__left--top img {
+  margin: 6px;
+  border: none;
+}
+.item-sheet .item__top .item__right--top {
+  float: left;
+  width: calc(100% - 140px);
+  height: 140px;
+  padding: 5px;
+}
+.item-sheet .item__navigator {
+  height: 70px;
+  padding-top: 5px;
+}
+.item-sheet .item__main {
+  height: 550px;
+  margin-bottom: 2px;
+}
+.item-sheet .item__main .item__left--main {
+  float: left;
+  width: 25%;
+  height: 550px;
+  padding: 5px;
+}
+.item-sheet .item__main .item__right--main {
+  float: left;
+  width: 75%;
+  height: 550px;
+  padding: 5px;
+}
+.item-sheet .footer-item__frame {
+  position: absolute;
+  bottom: -55px;
+  border: none;
+  z-index: 1;
+  opacity: 0.9;
+  transform: rotate(180deg);
+}
+.item-sheet .footer-item__frame .app {
+  background: transparent;
+}
+.item-sheet .footer-item__frame img {
+  border: none;
+}
 .earthdawn.sheet.namegiver .headerLine {
   display: flex;
   flex-direction: row;
