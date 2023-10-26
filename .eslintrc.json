@@ -21,7 +21,8 @@
     "game": false,
     "items": false,
     "loadTemplates": false,
-    "packs": false
+    "packs": false,
+    "Handlebars": false
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
