@@ -11,6 +11,8 @@
 // Import configuration
 import ED4E from './module/config.mjs';
 import registerSystemSettings from './module/settings.mjs';
+import { registerHandlebarHelpers } from './module/handlebar-helpers.mjs'
+
 
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -50,6 +52,9 @@ Hooks.once( "init", () => {
 
     // Register System Settings
     registerSystemSettings();
+
+    // Register Handlebars Helper
+    registerHandlebarHelpers();
 
     // Hook up system data types
     CONFIG.Actor.dataModels = dataModels.actor.config;
