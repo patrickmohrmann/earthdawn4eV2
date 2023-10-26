@@ -21,8 +21,8 @@ export default class KnackData extends AbilityTemplate {
                 label: "ED.Item.Knack.sourceTalent"
             } ),
             // @Chris how do we do this
-            restrictions: [], // there will be several options possible see issue #212
-            requirements: [], // there will be several options possible see issue #212 
+            // restrictions: [], // there will be several options possible see issue #212
+            // requirements: [], // there will be several options possible see issue #212 
             standardEffect: new foundry.data.fields.BooleanField( {
                 required: true,
                 initial: false,

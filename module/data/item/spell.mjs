@@ -194,8 +194,9 @@ export default class SpellData extends SystemDataModel {
             {
                 label: "ED.Item.Spell.spellElement"
             } ),
-            extraSuccessesList: [],
-            extraThreadsList: [],
+            // @chriss its not working like this
+            // extraSuccessesList: [],
+            // extraThreadsList: [],
         } );
     }
 

@@ -225,7 +225,7 @@ export default class MaskData extends SystemDataModel{
             // @chris das ist eher ein Array oder machen wir das ganz anders?
             powers: new foundry.data.fields.StringField( {
                 required: true,
-                blank: false,
+                blank: true,
                 initial: "",
                 label: "ED.Item.Masks.powers"
             } ),
