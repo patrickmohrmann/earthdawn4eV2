@@ -34,7 +34,8 @@
             "spell":                                            "Zauberspruch",
             "talent":                                           "Talent",
             "thread":                                           "Permanenter Faden",
-            "weapon":                                           "Waffe"
+            "weapon":                                           "Waffe",
+            "ShipWeapon":                                       "Schiffswaffe"
         }
     },
     "ED": {

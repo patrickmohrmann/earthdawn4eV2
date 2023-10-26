@@ -34,7 +34,8 @@
             "spell":                                            "Spell",
             "talent":                                           "Talent",
             "thread":                                           "Permanent Thread",
-            "weapon":                                           "Weapon"
+            "weapon":                                           "Weapon",
+            "shipWeapon":                                       "Ship Weapon"
         }
     },
     "ED": {

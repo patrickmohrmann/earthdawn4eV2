@@ -36,7 +36,8 @@
       "spell",
       "talent",
       "thread",
-      "weapon"
+      "weapon",
+      "shipWeapon"
     ]
   }
 }
