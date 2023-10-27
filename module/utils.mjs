@@ -26,6 +26,11 @@ export const validators = {
  */
 export async function preloadHandlebarsTemplates() {
   const partials = [
+    // Global Templates
+    "systems/ed4e/templates/global-templates/attribute-selector.hbs",
+    "systems/ed4e/templates/global-templates/action-selector.hbs",
+    "systems/ed4e/templates/global-templates/tier-selector.hbs",
+
     // Character partials.
     "systems/ed4e/templates/actor/character-partials/header-section.hbs",
     "systems/ed4e/templates/actor/character-partials/image-characteristics-section.hbs",
