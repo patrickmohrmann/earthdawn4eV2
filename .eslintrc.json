@@ -22,7 +22,10 @@
     "items": false,
     "loadTemplates": false,
     "packs": false,
-    "Handlebars": false
+    "Handlebars": false,
+    "TextEditor": false,
+    "expandObject": false,
+    "mergeObject": false
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
