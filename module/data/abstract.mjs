@@ -1,5 +1,5 @@
 /**
- * Taken from DnD5e (https://github.com/foundryvtt/dnd5e)
+ * Taken from DnD5e ( https://github.com/foundryvtt/dnd5e )
  *
  * Data Model variant with some extra methods to support template mix-ins.
  *
@@ -20,7 +20,7 @@
 export default class SystemDataModel extends foundry.abstract.DataModel {
 
     /**
-     * System type that this system data model represents (e.g. "character", "npc", "vehicle").
+     * System type that this system data model represents ( e.g. "character", "npc", "vehicle" ).
      * @type {string}
      */
     static _systemType;
@@ -41,18 +41,18 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
      * @type {Set<string>}
      * @private
      */
-    static _immiscible = new Set(["length", "mixed", "name", "prototype", "migrateData", "defineSchema"]);
+    static _immiscible = new Set( ["length", "mixed", "name", "prototype", "migrateData", "defineSchema"] );
 
     /* -------------------------------------------- */
 
     /** @inheritdoc */
-    static defineSchema() {
+    static defineSchema(  ) {
         const schema = {};
-        for (const template of this._schemaTemplates) {
-            if ( !template.defineSchema() ) {
-                throw new Error(`Invalid ed4e template mixin ${template} defined on class ${this.constructor}`);
+        for ( const template of this._schemaTemplates ) {
+            if (  !template.defineSchema(  )  ) {
+                throw new Error( `Invalid ed4e template mixin ${template} defined on class ${this.constructor}` );
             }
-            this.mergeSchema(schema, template.defineSchema());
+            this.mergeSchema( schema, template.defineSchema(  ) );
         }
         return schema;
     }
@@ -65,19 +65,19 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
      * @param {DataSchema} b  Second schema that will be merged in, overwriting any non-mergeable properties.
      * @returns {DataSchema}  Fully merged schema.
      */
-    static mergeSchema(a, b) {
-        Object.assign(a, b);
+    static mergeSchema( a, b ) {
+        Object.assign( a, b );
         return a;
     }
 
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    static migrateData(source) {
-        for (const template of this._schemaTemplates) {
-            template.migrateData?.(source);
+    static migrateData( source ) {
+        for ( const template of this._schemaTemplates ) {
+            template.migrateData?.( source );
         }
-        return super.migrateData(source);
+        return super.migrateData( source );
     }
 
     /* -------------------------------------------- */
@@ -87,28 +87,28 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
      * @param {...*} templates            Template classes to mix.
      * @returns {typeof SystemDataModel}  Final prepared type.
      */
-    static mixin(...templates) {
+    static mixin( ...templates ) {
         // create a new empty base class to mix in all templates
         const Base = class extends this {};
 
         // add the immutable information which templates the new class is made of
-        Object.defineProperty(Base, "_schemaTemplates", {
-            value: Object.seal([...this._schemaTemplates, ...templates]),
+        Object.defineProperty( Base, "_schemaTemplates", {
+            value: Object.seal( [...this._schemaTemplates, ...templates] ),
             writable: false,
             configurable: false
-        });
+        } );
 
-        for (const template of templates) {
+        for ( const template of templates ) {
             // take all static methods and fields from template and mix in to base class
-            for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template))) {
-                if ( this._immiscible.has(key) ) continue;
-                Object.defineProperty(Base, key, descriptor);
+            for ( const [key, descriptor] of Object.entries( Object.getOwnPropertyDescriptors( template ) ) ) {
+                if (  this._immiscible.has( key )  ) continue;
+                Object.defineProperty( Base, key, descriptor );
             }
 
             // take all instance methods and fields from template and mix in to base class
-            for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template.prototype))) {
-                if ( ["constructor"].includes(key) ) continue;
-                Object.defineProperty(Base.prototype, key, descriptor);
+            for ( const [key, descriptor] of Object.entries( Object.getOwnPropertyDescriptors( template.prototype ) ) ) {
+                if (  ["constructor"].includes( key )  ) continue;
+                Object.defineProperty( Base.prototype, key, descriptor );
             }
         }
 
@@ -119,16 +119,16 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 /* -------------------------------------------- */
 
 /**
- * Data Model variant that does not export fields with an `undefined` value during `toObject(true)`.
+ * Data Model variant that does not export fields with an `undefined` value during `toObject( true )`.
  */
 export class SparseDataModel extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
-    toObject(source = true) {
-        if ( !source ) return super.toObject(source);
-        const clone = foundry.utils.flattenObject(this._source);
+    toObject( source = true ) {
+        if (  !source  ) return super.toObject( source );
+        const clone = foundry.utils.flattenObject( this._source );
         // remove any undefined keys from the source data
-        Object.keys(clone).filter(k => clone[k] === undefined).forEach(k => delete clone[k]);
-        return foundry.utils.expandObject(clone);
+        Object.keys( clone ).filter( k => clone[k] === undefined ).forEach( k => delete clone[k] );
+        return foundry.utils.expandObject( clone );
     }
 }
