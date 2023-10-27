@@ -39,6 +39,13 @@
         }
     },
     "ED": {
+        "Action": {
+            "action":                                               "Aktion",      
+            "free":                                                 "Frei",
+            "simple":                                               "Einfach",
+            "standard":                                             "Standard",
+            "sustained":                                            "Aufrechterhaltend"
+        },
         "Attributes": {
             "attribute":                                            "Attribut",
             "attributes":                                           "Attribute",
@@ -66,6 +73,7 @@
 
             "C":                                                "C",
                 "current":                                          "Aktuell",
+                "coreData":                                         "Basis Informationen",
 
             "D":                                                "D",
                 "dice":                                             "Würfel",
@@ -95,6 +103,7 @@
                 "max":                                              "Max",
 
             "N":                                                "N",
+                "none":                                             "NA",
 
             "O":                                                "O",
 
@@ -103,10 +112,12 @@
             "Q":                                                "Q",
 
             "R":                                                "R",
+                "rank":                                             "Rang",          
 
             "S":                                                "S",
                 "step":                                             "Stufe",
-
+                "strain":                                           "Überanstrengung",
+                "strainShort":                                      "Anstrengung",
             "T":                                                "T",
 
             "U":                                                "U",
@@ -316,6 +327,14 @@
         },
         "LpTracking": {
             "attributeImprovement":                             "Attribute erhöhen"
+        },
+        "Tier": {
+            "journeyman":                                           "Geselle",
+            "master":                                               "Meister",
+            "novice":                                               "Novize",
+            "tier":                                                 "Stufe",     
+            "warden":                                               "Hüter"
+            
         }
     }
 }

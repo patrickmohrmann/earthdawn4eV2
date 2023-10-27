@@ -75,21 +75,6 @@ h6 {
 .partial__twenty-five-percent--padding {
   padding-right: 8px;
 }
-.item-sheet__editor {
-  min-height: 300px;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.item-sheet__editor .editor,
-.item-sheet__editor .prosemirror,
-.item-sheet__editor .editor-container,
-.item-sheet__editor .editor-content {
-  min-height: 200px;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
 .editor--hint {
   margin-bottom: 0;
   margin-left: 5px;
@@ -142,6 +127,10 @@ h6 {
 .text__alignment--center {
   text-align: center;
 }
+.field__background-none {
+  background: none;
+  border: none;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -189,6 +178,12 @@ h6 {
 }
 .item-sheet .window-content {
   padding: 0px;
+}
+.item-sheet .window-content .item {
+  height: 700px;
+}
+.item-sheet .window-content .item .body {
+  height: 600px;
 }
 .item-sheet .window-header,
 .item-sheet .window-content {
@@ -272,13 +267,13 @@ h6 {
 }
 .item-sheet .item__main .item__left--main {
   float: left;
-  width: 25%;
+  width: 30%;
   height: 550px;
   padding: 5px;
 }
 .item-sheet .item__main .item__right--main {
   float: left;
-  width: 75%;
+  width: 70%;
   height: 550px;
   padding: 5px;
 }
@@ -295,6 +290,38 @@ h6 {
 }
 .item-sheet .footer-item__frame img {
   border: none;
+}
+.item-sheet .input__circle-input {
+  border: 1px solid;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding-top: 5px;
+  background: none;
+}
+.item-sheet .label__left {
+  float: left;
+  width: 40%;
+}
+.item-sheet .item-data__input--line {
+  line-height: 40px;
+  vertical-align: middle;
+}
+.item-sheet .item-sheet__editor {
+  min-height: 500px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.item-sheet .item-sheet__editor .editor,
+.item-sheet .item-sheet__editor .prosemirror,
+.item-sheet .item-sheet__editor .editor-container,
+.item-sheet .item-sheet__editor .editor-content {
+  min-height: 400px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .earthdawn.sheet.namegiver .headerLine {
   display: flex;
