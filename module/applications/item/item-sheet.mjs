@@ -32,7 +32,7 @@ export default class ItemSheetEd extends ItemSheet {
     enrichment["system.description"] = await TextEditor.enrichHTML( this.item.system.description, {async: true, secrets: this.item.isOwner} );
      return expandObject( enrichment );
   }
-
+ 
   async getData() {
     const systemData = super.getData();
     systemData.enrichment =  await this._enableHTMLEnrichment();
