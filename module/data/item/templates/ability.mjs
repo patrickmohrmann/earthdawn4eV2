@@ -3,7 +3,10 @@ import SystemDataModel from "../../abstract.mjs";
 /**
  * Data model template with information on Ability items.
  * @property {string} action action type 
+ * @property {string} attribute attribute
+ * @property {string} tier talent tier
  * @property {number} strain strain 
+ * @property {number} rank rank 
  */
 export default class AbilityTemplate extends SystemDataModel {
     /** @inheritDoc */
