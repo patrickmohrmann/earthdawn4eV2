@@ -7,7 +7,13 @@ export default class TalentData extends AbilityTemplate {
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            description: new foundry.data.fields.HTMLField( {
+                required: true, 
+                nullable: true, 
+                label: "ED.Description"
+            } ),
+        } );
     }
 
     /* -------------------------------------------- */
