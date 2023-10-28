@@ -1,7 +1,32 @@
 <div class="item__left--main">
-                <h3>item-data</h3>
-
-            </div>
-            <div class="item__right--main">
-                <h3>item Description</h3>item Description
-            </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- price --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
+        <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
+            data-dtype="Number">
+        {{> "systems/ed4e/templates/global-templates/coinage-selector.hbs"}}
+    </div>
+    {{!-- Weight --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.weight"}}:</label>
+        <input class="input__number-input" name="system.weight" type="text" value="{{item.system.weight}}"
+            data-dtype="Number">
+    </div>
+        {{!-- Amount --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.amount"}}:</label>
+        <input class="input__number-input" name="system.amount" type="text" value="{{item.system.amount}}"
+            data-dtype="Number">
+    </div>
+    {{!-- availability --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Availability.availability"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/availability-selector.hbs"}}
+    </div>
+</div>
+{{!-- Editor --}}
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>
