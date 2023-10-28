@@ -1,3 +1,24 @@
 <div>
     <h3>item-details</h3>
+    {{!-- bloodMagicDamage --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.General.bloodMagicDamage"}}:</label>
+        <input class="input__number-input" name="system.bloodMagicDamage" type="text"
+            value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
+    </div>
+    {{!-- usable Item --}}
+    <div>
+        <label>{{localize "ED.Item.General.recoveryPropertyValue"}}:</label>
+        <select class="input__select-input" name="system.recoveryPropertyValue" value="{{item.system.usableItem.recoveryPropertyValue}}" {{#select
+            item.system.usableItem.recoveryPropertyValue}}>
+            <option value="0">{{localize "ED.Item.RecoveryPropertyValue.0"}}</option>
+            <option value="1">{{localize "ED.Item.RecoveryPropertyValue.1"}}</option>
+            <option value="2">{{localize "ED.Item.RecoveryPropertyValue.2"}}</option>
+            <option value="3">{{localize "ED.Item.RecoveryPropertyValue.3"}}</option>
+            <option value="4">{{localize "ED.Item.RecoveryPropertyValue.4"}}</option>
+            <option value="5">{{localize "ED.Item.RecoveryPropertyValue.5"}}</option>
+            <option value="6">{{localize "ED.Item.RecoveryPropertyValue.6"}}</option>
+            {{/select}}
+        </select>
+    </div>
 </div>
