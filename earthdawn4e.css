@@ -267,13 +267,13 @@ h6 {
 }
 .item-sheet .item__main .item__left--main {
   float: left;
-  width: 30%;
+  width: 35%;
   height: 550px;
   padding: 5px;
 }
 .item-sheet .item__main .item__right--main {
   float: left;
-  width: 70%;
+  width: 65%;
   height: 550px;
   padding: 5px;
 }
@@ -300,12 +300,24 @@ h6 {
   padding-top: 5px;
   background: none;
 }
+.item-sheet .input__number-input {
+  width: 45px;
+  padding-top: 5px;
+  height: 20px;
+}
+.item-sheet .input__select-input {
+  padding-top: 3px;
+  height: 20px;
+}
 .item-sheet .label__left {
   float: left;
-  width: 40%;
+  width: 50%;
 }
 .item-sheet .item-data__input--line {
-  line-height: 40px;
+  line-height: 35px;
+  vertical-align: middle;
+}
+.item-sheet .item-data__checkbox--line {
   vertical-align: middle;
 }
 .item-sheet .item-sheet__editor {

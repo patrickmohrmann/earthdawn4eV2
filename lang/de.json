@@ -63,6 +63,11 @@
             "willpower":                                            "Willenskraft",
             "willpowerAbbr":                                        "WIL"
         },
+        "Coinage": {
+            "copper":                                               "Kupfer",
+            "gold":                                                 "Gold",
+            "silver":                                               "Silber"
+        },
         "Errors": {
             "IdentifierError":                                      "Identifier can only contain letters (a-z), numbers (0-9), dashes (-), and underscores (_). Identifier können nur Kleinbuchstaben (a-b), Zahlen (0-9), Bindestriche (-) und Unterstriche (_) enthalten."
         },
@@ -118,6 +123,7 @@
                 "step":                                             "Stufe",
                 "strain":                                           "Überanstrengung",
                 "strainShort":                                      "Anstrengung",
+                "size":                                             "Größe",             
             "T":                                                "T",
 
             "U":                                                "U",
@@ -133,6 +139,7 @@
 
             "Z":                                                "Z"
         },
+       
         "Item": {
             "Ability": {
                 "action":                                       "Aktion",
@@ -141,14 +148,31 @@
                 "strain":                                       "Überanstrengung",
                 "tier":                                         "Stufe"
             },
+            "AmmunitionType": {
+                "arrow":                                            "Pfeile",
+                "bolt":                                             "Bolzen",
+                "needle":                                           "Nadeln",
+                "stone":                                            "Steine"
+            },
             "Armor": {
                 "initiativePenalty":                            "Initiative Malus",
                 "forgeBonusMystical":                           "Mystischer Schmiede Bonus",
+                "forgeBonusMysticalShort":                      "Myst. Schmiede Bonus",
                 "forgeBonusPhysical":                           "Physischer Schmiede Bonus",
+                "forgeBonusPhysicalShort":                      "Phy. Schmiede Bonus",
                 "mysticalArmor":                                "Mystische Rüstung",
                 "physicalArmor":                                "Physische Rüstung",
                 "piecemealArmorSize":                           "Größe",
                 "piecemealArmor":                               "Zusammengesetzte Rüstung"
+            },
+            "Availability": {
+                "availability":                                     "Verfügbarkeit",
+                "average":                                          "Gewöhnlich",
+                "everyday":                                         "Alltäglich",
+                "rare":                                             "Selten",
+                "unique":                                           "Einzigartig",
+                "unusual":                                          "Ungewöhnlich",
+                "veryRare":                                         "Sehr Selten"
             },
             "Class": {
                 "durability":                                   "Unempfindlichkeit",
@@ -161,7 +185,8 @@
                 "curseType":                                    "Typ"
             },
             "Equipment": {
-                "consumable":                                   "Verbrauchsgut"
+                "consumable":                                   "Verbrauchsgut",
+                "ammoType":                                     "Munitionstyp"
             },
             "General": {       
                 "action":                                       "Aktion", 
@@ -173,7 +198,17 @@
                 "price":                                        "Kosten",   
                 "usableItem":                                   "Benutzbar --- TBD",
                 "value":                                        "Wert",
-                "weight":                                       "Gewicht"   
+                "weight":                                       "Gewicht",
+                "recoveryPropertyValue":                        "Erholungs-Typ"
+            },
+            "RecoveryPropertyValue": {
+                "0":"0",
+                "1":"1",
+                "2":"2",
+                "3":"3",
+                "4":"4",
+                "5":"5",
+                "6":"6"
             },
             "Knack": {
                 "extraSuccesses":                               "Nötige Extra Erfolge",
@@ -300,7 +335,7 @@
                 "weavingdifficulty":                            "Webschwierigkeit"
             },
             "Weapon": {
-                "hint": {
+                "Hint": {
                     "damageAttribute":                          "Schadensattribut",
                     "damageBaseStep":                           "Schadensstufe",
                     "dexterityMinimum":                         "Minimale Geschicklichkeit",
@@ -315,7 +350,7 @@
                     "ammunition":                               "Munition",
                     "damageAttribute":                          "Attribute",
                     "damageBaseStep":                           "Schaden",
-                    "dexterityMinimum":                         "Min Ges",
+                    "dexterityMinimum":                         "Min. Geschick",
                     "forgeBonus":                               "Geschmiedet",
                     "rangeLong":                                "L. Reichweite",
                     "rangeShort":                               "K. Reichweite",
@@ -335,6 +370,11 @@
             "tier":                                                 "Stufe",     
             "warden":                                               "Hüter"
             
+        }, "WeaponCategory":{
+            "melee": "Nahkampfwaffe",
+            "missle": "Projektilwaffe",
+            "thrown": "Wurfwaffe",
+            "unarmed": "Waffenlos"
         }
     }
 }
