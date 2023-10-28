@@ -1,18 +1,17 @@
 import AbilityTemplate from "./templates/ability.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on talent items.
  */
-export default class TalentData extends AbilityTemplate {
+export default class TalentData extends AbilityTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            description: new foundry.data.fields.HTMLField( {
-                required: true, 
-                nullable: true, 
-                label: "ED.Description"
-            } ),
+            
         } );
     }
 
