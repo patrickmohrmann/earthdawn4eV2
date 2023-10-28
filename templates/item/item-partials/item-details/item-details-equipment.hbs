@@ -9,7 +9,7 @@
     {{!-- usable Item --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.General.usableItem"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector" >
+        <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector">
         {{#if (eq item.system.usableItem.usableItemSelector true)}}
         <label>{{localize "ED.Item.General.arbitraryStep"}}:</label>
         <input class="input__number-input" name="system.arbitraryStep" type="text" value="{{item.system.arbitraryStep}}"
