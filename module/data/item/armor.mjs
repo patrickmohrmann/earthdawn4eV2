@@ -1,4 +1,5 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on "class"-like items: paths, disciplines, and questors.
@@ -11,7 +12,9 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {boolean} piecemealArmor.piecemealArmorSelector      selector if armor is piecemeal or not
  * @property {number} piecemealArmor.piecemealArmorSize           piecemeal Armor size value can be 1, 2 or 3
  */
-export default class ArmorData extends PhysicalItemTemplate{
+export default class ArmorData extends PhysicalItemTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {
@@ -55,7 +58,7 @@ export default class ArmorData extends PhysicalItemTemplate{
                 // should be false by default @chris how is that set?
                 piecemealArmorSelector: new foundry.data.fields.BooleanField( {
                     required: true,
-                    label: "ED.Item.Armor.initiativePenalty"
+                    label: "ED.Item.Armor.piecemealArmor"
                 } ),
                 piecemealArmorSize: new foundry.data.fields.NumberField( {
                     required: true,
@@ -63,7 +66,7 @@ export default class ArmorData extends PhysicalItemTemplate{
                     min: 0,
                     max: 3,
                     initial: 0,
-                    label: "ED.Item.Armor.initiativePenalty"
+                    label: "ED.Item.Armor.piecemealArmorSize"
                 } ),
             } ),
         } );
