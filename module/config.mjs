@@ -1,6 +1,15 @@
 // Namespace Configuration Values
 const ED4E = {};
 
+ED4E.ASCII = `_______________________________
+________  _____       _____ _______
+|  _____| |    \     / _  | |  ____|
+|  |____  | |\  \   / / | | |  |___
+|  _____| | | |  | |  |_| | |   ___|
+|  |____  | |/  /  |___   | |  |___
+|_______| |___/        |  | |______|
+_______________________________`;
+
 /**
  * Configuration data for abilities.
  * @typedef {object} AttributeConfiguration
@@ -40,6 +49,15 @@ ED4E.attributes = {
 		label: "ED.Attributes.charisma",
 		abbreviation: "ED.Attributes.charismaAbbr"
 	}
+}
+
+/**
+ * ??? Coinage options
+ */
+ED4E.coinage = {
+	copper: "ED.Coinage.copper",
+	silver: "ED.Coinage.silver",
+	gold: "ED.Coinage.gold"
 }
 
 /* eslint-disable */
