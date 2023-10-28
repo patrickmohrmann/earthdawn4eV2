@@ -1,13 +1,18 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Special items.
  */
-export default class SpecialAbilityData extends SystemDataModel {
+export default class SpecialAbilityData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            
+        } );
     }
 
     /* -------------------------------------------- */

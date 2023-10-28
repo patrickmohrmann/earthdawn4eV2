@@ -1,4 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Poison and Disease items.
@@ -14,7 +15,9 @@ import SystemDataModel from "../abstract.mjs";
  * @property {string} activation            how the poison will be activated
  * @property {boolean} death                deadly poison
  */
-export default class PoisonDiseaseData extends SystemDataModel {
+export default class PoisonDiseaseData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,9 +1,12 @@
 import AbilityTemplate from "./templates/ability.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Devotion items.
  */
-export default class DevotionData extends AbilityTemplate {
+export default class DevotionData extends AbilityTemplate.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {

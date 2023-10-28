@@ -1,13 +1,18 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on items that are used to represent custom active effects.
  */
-export default class EffectData extends SystemDataModel{
+export default class EffectData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            
+        } );
     }
 
     /* -------------------------------------------- */

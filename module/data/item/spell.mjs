@@ -1,4 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Spell items.
@@ -32,7 +33,9 @@ import SystemDataModel from "../abstract.mjs";
  * @property {object} extraSuccessesList                    extra Successes
  * @property {object} extraThreadsList                      extra Threads   
  */
-export default class SpellData extends SystemDataModel {
+export default class SpellData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {

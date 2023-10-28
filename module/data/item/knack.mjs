@@ -1,4 +1,5 @@
 import AbilityTemplate from "./templates/ability.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Knack items.
@@ -9,7 +10,9 @@ import AbilityTemplate from "./templates/ability.mjs";
  * @property {boolean} maneuver             maneuver knack
  * @property {number} extraSuccesses        extra successes to trigger the maneuver
  */
-export default class KnackData extends AbilityTemplate {
+export default class KnackData extends AbilityTemplate.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {

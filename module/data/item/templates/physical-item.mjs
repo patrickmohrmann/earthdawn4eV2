@@ -30,7 +30,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 coinage: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
-                    initial: "Silver",
+                    initial: "silver",
                     label: "ED.Item.General.coinage"
                 } )
             },
@@ -67,11 +67,8 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
             usableItem: new foundry.data.fields.SchemaField( {
-                usableItemSelector: new foundry.data.fields.StringField( {
+                usableItemSelector: new foundry.data.fields.BooleanField( {
                     required: true,
-                    nullable: false,
-                    blank: false,
-                    initial: "no",
                     label: "ED.Item.General.usableItem"
                 } ),
                 arbitraryStep: new foundry.data.fields.NumberField( {

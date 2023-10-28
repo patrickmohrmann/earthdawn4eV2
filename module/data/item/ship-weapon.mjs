@@ -1,4 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on namegiver items.
@@ -9,7 +10,9 @@ import SystemDataModel from "../abstract.mjs";
  * @property {number} salvoCost         cost per salvo
  * @property {number} charakterDamage   weapon damage on a sentient being
  */
-export default class ShipWeaponData extends SystemDataModel{
+export default class ShipWeaponData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

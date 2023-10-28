@@ -1,4 +1,6 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
+
 
 /**
  * Data model template with information on Curse and Horror Mark items.
@@ -7,7 +9,9 @@ import SystemDataModel from "../abstract.mjs";
  * @property {boolean} curseActive         is the curse active
  * @property {boolean} curseDetected       is the curse known
  */
-export default class CurseHorrorMarkData extends SystemDataModel {
+export default class CurseHorrorMarkData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {

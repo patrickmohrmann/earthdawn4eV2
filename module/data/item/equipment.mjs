@@ -1,11 +1,14 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on equipment items.
  * @property {boolean} consumable check if item will be consumed on usage
  * @property {string} ammoType which type of ammo it is.
  */
-export default class EquipmentData extends PhysicalItemTemplate{
+export default class EquipmentData extends PhysicalItemTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

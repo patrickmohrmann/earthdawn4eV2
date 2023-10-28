@@ -1,9 +1,12 @@
 import ClassTemplate from "./templates/class.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on the questor path items.
  */
-export default class QuestorData extends ClassTemplate{
+export default class QuestorData extends ClassTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

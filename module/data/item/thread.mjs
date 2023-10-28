@@ -1,13 +1,18 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on items that represents threads weaved to patterns.
  */
-export default class ThreadData extends SystemDataModel {
+export default class ThreadData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            
+        } );
     }
 
     /* -------------------------------------------- */

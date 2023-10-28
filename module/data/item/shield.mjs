@@ -1,4 +1,5 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on shield items.
@@ -8,7 +9,9 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {number} shatterThreshold          shatter threshold
  * @property {boolean} broken                   broken condition
  */
-export default class ShieldData extends PhysicalItemTemplate{
+export default class ShieldData extends PhysicalItemTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

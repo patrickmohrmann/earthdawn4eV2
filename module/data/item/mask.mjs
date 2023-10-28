@@ -1,4 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on mask items.
@@ -30,7 +31,9 @@ import SystemDataModel from "../abstract.mjs";
  * @property {number} challengingRate           changes to the challengingrate
  * @property {object} powers                    array of powers
  */
-export default class MaskData extends SystemDataModel{
+export default class MaskData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,10 +1,13 @@
 import ClassTemplate from "./templates/class.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on path items.
  * @property {string} sourceDiscipline source discipline related to the path
  */
-export default class PathData extends ClassTemplate{
+export default class PathData extends ClassTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

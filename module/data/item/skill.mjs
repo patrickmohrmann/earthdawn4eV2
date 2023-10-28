@@ -1,13 +1,18 @@
 import AbilityTemplate from "./templates/ability.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Skill items.
  */
-export default class SkillData extends AbilityTemplate {
+export default class SkillData extends AbilityTemplate.mixin(
+    ItemDescriptionTemplate
+)  {
 
     /** @inheritDoc */
     static defineSchema() {
-        return {};
+        return this.mergeSchema( super.defineSchema(), {
+            
+        } );
     }
 
     /* -------------------------------------------- */

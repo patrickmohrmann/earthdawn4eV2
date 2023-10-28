@@ -1,4 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on namegiver items.
@@ -16,7 +17,9 @@ import SystemDataModel from "../abstract.mjs";
  * @property {number} movement.burrow           movement type burrow modifications
  * @property {number} movement.climb            movement type climb modifications
  */
-export default class NamegiverData extends SystemDataModel{
+export default class NamegiverData extends SystemDataModel.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {
