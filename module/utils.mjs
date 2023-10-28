@@ -30,6 +30,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global-templates/attribute-selector.hbs",
     "systems/ed4e/templates/global-templates/action-selector.hbs",
     "systems/ed4e/templates/global-templates/tier-selector.hbs",
+    "systems/ed4e/templates/global-templates/editor.hbs",
+    "systems/ed4e/templates/global-templates/coinage-selector.hbs",
+    "systems/ed4e/templates/global-templates/availability-selector.hbs",
 
     // Character partials.
     "systems/ed4e/templates/actor/character-partials/header-section.hbs",
