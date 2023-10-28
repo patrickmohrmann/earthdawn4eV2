@@ -291,7 +291,7 @@
                     "shatterThreshold":                         "Bruch",
                     "broken":                                   "Unbrauchbar"
                 },
-                "hint": {
+                "Hint": {
                     "defenseBonusPhysical":                     "Physische Verteidigungs Bonus",
                     "defenseBonusMystical":                     "Mystische Verteidigungs Bonus",
                     "initiativePenalty":                        "Initiative Malus",

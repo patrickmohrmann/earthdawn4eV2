@@ -51,7 +51,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
             broken: new foundry.data.fields.BooleanField( {
                 required: true,
                 initial: false,
-                label: "ED.Item.Shield.Hint.broken"
+                label: "ED.Item.Shield.Label.broken"
             } ),
     } );
     }
