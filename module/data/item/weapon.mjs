@@ -1,4 +1,5 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on weapon items.
@@ -13,7 +14,9 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {number} ammunition            ammunition amount
  * @property {number} forgeBonus            forged damage bonus
  */
-export default class WeaponData extends PhysicalItemTemplate{
+export default class WeaponData extends PhysicalItemTemplate.mixin(
+    ItemDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {
