@@ -265,7 +265,6 @@
                 "burrow":                                       "Graben",
                 "charismaValue":                                "Charismawert",
                 "climb":                                        "Klettern",
-                "constitutionValue":                            "Zähigkeitswert",
                 "dexterityValue":                               "Geschicklichkeitswert",
                 "fly":                                          "Fliegen",
                 "karmamodifier":                                "Karmamodifikator",
@@ -273,6 +272,7 @@
                 "perceptionValue":                              "Wahrnehmungswert",
                 "strengthValue":                                "Stärkewert",
                 "swim":                                         "Schwimmen",
+                "toughnessValue":                               "Zähigkeitswert",
                 "walk":                                         "Gehen",
                 "willpowerValue":                               "Willenskraftwert"
             },

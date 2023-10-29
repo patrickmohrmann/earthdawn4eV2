@@ -38,12 +38,12 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 initial: 10,
                 label: "ED.Item.Namegiver.strengthValue"
             } ), 
-            constitutionValue: new foundry.data.fields.NumberField( {
+            toughnessValue: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
                 initial: 10,
-                label: "ED.Item.Namegiver.constitutionValue"
+                label: "ED.Item.Namegiver.toughnessValue"
             } ), 
             perceptionValue: new foundry.data.fields.NumberField( {
                 required: true,
