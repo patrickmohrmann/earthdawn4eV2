@@ -115,7 +115,7 @@ export default class SpellData extends SystemDataModel.mixin(
                 value: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
-                    initial: "circle",
+                    initial: "0",
                     label: "ED.Item.Spell.value"
                 } ),
                 uom: new foundry.data.fields.StringField( {
@@ -132,7 +132,7 @@ export default class SpellData extends SystemDataModel.mixin(
                 value: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
-                    initial: "circle",
+                    initial: "0",
                     label: "ED.Item.Spell.shape"
                 } ),
                 uom: new foundry.data.fields.StringField( {
@@ -149,7 +149,7 @@ export default class SpellData extends SystemDataModel.mixin(
                 shape: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
-                    initial: "circle",
+                    initial: "0",
                     label: "ED.Item.Spell.shape"
                 } ),
                 uom: new foundry.data.fields.StringField( {

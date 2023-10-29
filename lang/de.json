@@ -337,6 +337,7 @@
                 "illusionType":                                 "Illusions Typ",                                                  
                 "range":                                        "Reichweite",                                 
                 "reattunedifficulty":                           "Neuabstimmungs Schwierigkeit",                           
+                "reattunedifficultyShort":                      "Neuabstimmung",
                 "resist":                                       "Widerstehen",                                         
                 "sensingDifficulty":                            "Durchschauen Schwierigkeit", 
                 "shape":                                        "Wirkungsform",     
