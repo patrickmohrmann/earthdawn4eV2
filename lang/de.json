@@ -182,7 +182,10 @@
                 "curseActive":                                  "Aktive",
                 "curseDetected":                                "Entdeckt",
                 "curseStep":                                    "Stufe",
-                "curseType":                                    "Typ"
+                "curseType":                                    "Typ",
+                "minor":                                        "Schwach",
+                "major":                                        "Stark",
+                "horror":                                       "Dämonenfluch"            
             },
             "Devotion":
             {

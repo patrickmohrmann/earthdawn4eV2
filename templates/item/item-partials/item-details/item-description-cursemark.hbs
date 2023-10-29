@@ -1,7 +1,34 @@
 <div class="item__left--main">
-                <h3>item-data</h3>
-
-            </div>
-            <div class="item__right--main">
-                <h3>item Description</h3>item Description
-            </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Curse Step --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Curse.curseStep"}}:</label>
+        <input class="input__circle-input" name="system.curseStep" type="text" value="{{item.system.curseStep}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Curse Type --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Curse.curseType"}}:</label>
+            <select class="input__select-input" name="system.curseType" value="{{item.system.price.coinage}}" 
+    {{#select item.system.curseType}}>
+        <option value="minor">{{localize "ED.Item.Curse.minor"}}</option>
+        <option value="major">{{localize "ED.Item.Curse.major"}}</option>
+        <option value="horror">{{localize "ED.Item.Curse.horror"}}</option>
+    {{/select}}
+</select>
+    </div>
+    {{!-- active --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Curse.curseActive"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.curseActive">
+    </div>
+    {{!-- detected --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Curse.curseDetected"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.curseDetected">
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>

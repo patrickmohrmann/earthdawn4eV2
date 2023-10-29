@@ -26,7 +26,7 @@ export default class CurseHorrorMarkData extends SystemDataModel.mixin(
             curseType: new foundry.data.fields.StringField( {
                 required: true,
                 blank: false,
-                initial: "weak",
+                initial: "minor",
                 label: "ED.Item.Curse.curseType"
             } ),
             curseActive: new foundry.data.fields.BooleanField( {
