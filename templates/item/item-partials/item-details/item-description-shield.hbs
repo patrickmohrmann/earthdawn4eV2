@@ -1,7 +1,55 @@
 <div class="item__left--main">
-                <h3>item-data</h3>
-
-            </div>
-            <div class="item__right--main">
-                <h3>item Description</h3>item Description
-            </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Physical Defense Bonus --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Shield.Label.defenseBonusPhysical"}}:</label>
+        <input class="input__circle-input" name="system.defenseBonusPhysical" type="text" value="{{item.system.defenseBonusPhysical}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Mystische Defense Bonus --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Shield.Label.defenseBonusMystical"}}:</label>
+        <input class="input__circle-input" name="system.defenseBonusMystical" type="text" value="{{item.system.defenseBonusMystical}}"
+            data-dtype="Number">
+    </div>
+    {{!-- SHatter Threshold --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Shield.Hint.shatterThreshold"}}:</label>
+        <input class="input__circle-input" name="system.shatterThreshold" type="text" value="{{item.system.shatterThreshold}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Initiative Penalty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Shield.Hint.initiativePenalty"}}:</label>
+        <input class="input__circle-input" name="system.initiativePenalty" type="text" value="{{item.system.initiativePenalty}}"
+            data-dtype="Number">
+    </div>
+    {{!-- price --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
+        <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
+            data-dtype="Number">
+        {{> "systems/ed4e/templates/global-templates/coinage-selector.hbs"}}
+    </div>
+    {{!-- Weight --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.weight"}}:</label>
+        <input class="input__number-input" name="system.weight" type="text" value="{{item.system.weight}}"
+            data-dtype="Number">
+    </div>
+    {{!-- availability --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Availability.availability"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/availability-selector.hbs"}}
+    </div>
+    {{!-- Broken --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Shield.Label.broken"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.broken">
+    </div>
+</div>
+{{!-- Editor --}}
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>
