@@ -1,7 +1,79 @@
 <div class="item__left--main">
-                <h3>item-data</h3>
-
-            </div>
-            <div class="item__right--main">
-                <h3>item Description</h3>item Description
-            </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Dexterity Value --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.dexterityValue"}}:</label>
+        <input class="input__circle-input" name="system.dexterityValue" type="text" value="{{item.system.dexterityValue}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Strength Value --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.strengthValue"}}:</label>
+        <input class="input__circle-input" name="system.strengthValue" type="text" value="{{item.system.strengthValue}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Toughness Value --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.toughnessValue"}}:</label>
+        <input class="input__circle-input" name="system.toughnessValue" type="text" value="{{item.system.toughnessValue}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Perception Value --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.perceptionValue"}}:</label>
+        <input class="input__circle-input" name="system.perceptionValue" type="text" value="{{item.system.perceptionValue}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Willpower Value --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.willpowerValue"}}:</label>
+        <input class="input__circle-input" name="system.willpowerValue" type="text" value="{{item.system.willpowerValue}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Charisma Value --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.charismaValue"}}:</label>
+        <input class="input__circle-input" name="system.charismaValue" type="text" value="{{item.system.charismaValue}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Karma Modifier --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.karmamodifier"}}:</label>
+        <input class="input__circle-input" name="system.karmamodifier" type="text" value="{{item.system.karmamodifier}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Walk Movement --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.walk"}}:</label>
+        <input class="input__circle-input" name="system.movement.walk" type="text" value="{{item.system.movement.walk}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Fly Movement --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.fly"}}:</label>
+        <input class="input__circle-input" name="system.movement.fly" type="text" value="{{item.system.movement.fly}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Swim Movement --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.swim"}}:</label>
+        <input class="input__circle-input" name="system.movement.swim" type="text" value="{{item.system.movement.swim}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Burrow Movement --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.burrow"}}:</label>
+        <input class="input__circle-input" name="system.movement.burrow" type="text" value="{{item.system.movement.burrow}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Climb Movement --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Namegiver.climb"}}:</label>
+        <input class="input__circle-input" name="system.movement.climb" type="text" value="{{item.system.movement.climb}}"
+            data-dtype="Number">
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>
