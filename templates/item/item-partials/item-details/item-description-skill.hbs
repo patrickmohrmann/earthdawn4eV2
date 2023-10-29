@@ -1,7 +1,29 @@
 <div class="item__left--main">
-                <h3>item-data</h3>
-
-            </div>
-            <div class="item__right--main">
-                <h3>item Description</h3>item Description
-            </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.rank"}}:</label>
+        <input class="input__circle-input" name="system.rank" type="text" value="{{item.system.rank}}"
+            data-dtype="Number">
+    </div>
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
+        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
+            data-dtype="Number">
+    </div>
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}}
+    </div>
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Action.action"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/action-selector.hbs"}}
+    </div>
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/tier-selector.hbs"}}
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>
