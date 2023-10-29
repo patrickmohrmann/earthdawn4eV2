@@ -35,7 +35,7 @@
             "talent":                                           "Talent",
             "thread":                                           "Permanenter Faden",
             "weapon":                                           "Waffe",
-            "ShipWeapon":                                       "Schiffswaffe"
+            "shipWeapon":                                       "Schiffswaffe"
         }
     },
     "ED": {
