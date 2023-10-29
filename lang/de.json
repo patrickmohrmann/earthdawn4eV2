@@ -290,6 +290,7 @@
                 "paralysisStep":                                "Lähmungsstufe",
                 "onsetTime":                                    "Verzögerung",
                 "timeInBetween":                                "Zeit zwischen den Wirkungen",
+                "timeInBetweenShort":                           "Wirkungsintervall",
                 "totalEffects":                                 "Maximale Wirkungen"
             },
             "Power": {
