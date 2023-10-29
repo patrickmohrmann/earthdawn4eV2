@@ -184,6 +184,10 @@
                 "curseStep":                                    "Stufe",
                 "curseType":                                    "Typ"
             },
+            "Devotion":
+            {
+                "devotionRequired":                                     "Erfordert Weihepunkt"
+            },
             "Equipment": {
                 "consumable":                                   "Verbrauchsgut",
                 "ammoType":                                     "Munitionstyp"
@@ -215,7 +219,7 @@
                 "maneuver":                                     "Manöver",
                 "requirements":                                 "Voraussetzungen",
                 "restrictions":                                 "Ristriktionen",
-                "sourceTalent":                                 "Talent",
+                "sourceTalent":                                 "Ursprungs Talent??",
                 "standardEffect":                               "Standardeffekt"
             },
             "Masks": {

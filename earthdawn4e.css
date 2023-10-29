@@ -320,6 +320,10 @@ h6 {
 .item-sheet .item-data__checkbox--line {
   vertical-align: middle;
 }
+.item-sheet .input__text-input {
+  width: 120px;
+  height: 20px;
+}
 .item-sheet .item-sheet__editor {
   min-height: 500px;
   max-height: 100%;

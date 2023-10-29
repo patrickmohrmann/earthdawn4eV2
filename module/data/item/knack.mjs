@@ -19,8 +19,8 @@ export default class KnackData extends AbilityTemplate.mixin(
         return this.mergeSchema( super.defineSchema(), {
             sourceTalent: new foundry.data.fields.StringField( {
                 required: true,
-                blank: false,
-                initial: "weak",
+                blank: true,
+                initial: "",
                 label: "ED.Item.Knack.sourceTalent"
             } ),
             // @Chris how do we do this
