@@ -1,7 +1,19 @@
 <div class="item__left--main">
-                <h3>item-data</h3>
-
-            </div>
-            <div class="item__right--main">
-                <h3>item Description</h3>item Description
-            </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Circle / Rank --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.circle"}}:</label>
+        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
+            data-dtype="Number">
+    </div>
+    {{!-- durability --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.durability"}}:</label>
+        <input class="input__circle-input" name="system.durability" type="text" value="{{item.system.durability}}"
+            data-dtype="Number">
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>

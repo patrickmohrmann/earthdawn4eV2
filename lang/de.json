@@ -77,12 +77,15 @@
             "B":                                                "B",
 
             "C":                                                "C",
+                "circle":                                           "Kreis",
                 "current":                                          "Aktuell",
                 "coreData":                                         "Basis Informationen",
 
             "D":                                                "D",
                 "dice":                                             "Würfel",
+                "discipline":                                       "Disziplin",
                 "die":                                              "Würfel",
+                "durability":                                       "Unempfindlichkeit",
 
             "E":                                                "E",
 
@@ -113,8 +116,10 @@
             "O":                                                "O",
 
             "P":                                                "P",
+                "path":                                             "Pfad",  
 
             "Q":                                                "Q",
+                "questor":                                          "Questor",
 
             "R":                                                "R",
                 "rank":                                             "Rang",          
@@ -125,6 +130,7 @@
                 "strainShort":                                      "Anstrengung",
                 "size":                                             "Größe",             
             "T":                                                "T",
+                "type":                                             "Typ",
 
             "U":                                                "U",
 
@@ -269,6 +275,9 @@
                 "swim":                                         "Schwimmen",
                 "walk":                                         "Gehen",
                 "willpowerValue":                               "Willenskraftwert"
+            },
+            "Path": {
+                "sourceDiscipline":                             "Herkunfts Disziplin"              
             },
             "PoisonDisease": {
                 "activation":                                   "Aktivierung",

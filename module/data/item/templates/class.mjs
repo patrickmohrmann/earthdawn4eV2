@@ -17,11 +17,6 @@ export default class ClassTemplate extends SystemDataModel{
                 initial: 1,
                 positive: true,
             } ), 
-            identifier: new foundry.data.fields.StringField( {
-                required: true,
-                blank: false,
-                initial: "discipline",
-            } ), 
         } );
     }
 
