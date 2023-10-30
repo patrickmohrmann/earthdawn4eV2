@@ -1,3 +1,5 @@
+import ED4E from "../../config.mjs";
+
 /**
  * Extend the basic ActorSheet with modifications
  * @extends {ItemSheet} extends Itemsheet
@@ -37,6 +39,9 @@ export default class ItemSheetEd extends ItemSheet {
     const systemData = super.getData();
     systemData.enrichment =  await this._enableHTMLEnrichment();
     console.log( '[EARTHDAWN] Item data: ', systemData );
+
+    systemData.config = ED4E;
+    
     return systemData;
   }
 }

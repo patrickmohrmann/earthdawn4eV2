@@ -31,6 +31,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     required: true,
                     blank: false,
                     initial: "silver",
+                    // choices: game.i18n.localize( [ED4E.coinage] ),
                     label: "ED.Item.General.coinage"
                 } )
             },
