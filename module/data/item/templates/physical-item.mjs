@@ -4,7 +4,7 @@ import SystemDataModel from "../../abstract.mjs";
  * Data model template with information on physical items.
  * @property {object} price                                 price group object
  * @property {number} price.value                           item cost 
- * @property {string} price.coinage                         coinage type of the cost
+ * @property {string} price.denomination                         denomination type of the cost
  * @property {number} weight                                item weight
  * @property {number} amount                                amount of the item
  * @property {number} bloodMagicDamage                      number of Bloodmagic damage the actor is receiving
@@ -27,12 +27,12 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     initial: 0,
                     label: "ED.Item.General.value"
                 } ),
-                coinage: new foundry.data.fields.StringField( {
+                denomination: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "silver",
-                    // choices: game.i18n.localize( [ED4E.coinage] ),
-                    label: "ED.Item.General.coinage"
+                    // choices: game.i18n.localize( [ED4E.denomination] ),
+                    label: "ED.Item.General.denomination"
                 } )
             },
             {

@@ -63,7 +63,7 @@
             "willpower":                                            "Willenskraft",
             "willpowerAbbr":                                        "WIL"
         },
-        "Coinage": {
+        "Denomination": {
             "copper":                                               "Kupfer",
             "gold":                                                 "Gold",
             "silver":                                               "Silber"
@@ -207,7 +207,7 @@
                 "arbitraryStep":                                "Basisstufe",
                 "availability":                                 "Verfügbarkeit",
                 "bloodMagicDamage":                             "Blutmagie Schaden", 
-                "coinage":                                      "Münzen",
+                "denomination":                                      "Münzen",
                 "price":                                        "Kosten",   
                 "usableItem":                                   "Benutzbar --- TBD",
                 "value":                                        "Wert",

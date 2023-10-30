@@ -35,11 +35,11 @@
         <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
         <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
             data-dtype="Number">
-            <select name="system.price.coinage">
-                {{selectOptions config.coinage selected=item.system.price.coinage localize=true }}
+            <select name="system.price.denomination">
+                {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
             </select>
             
-        {{!-- {{> "systems/ed4e/templates/global-templates/coinage-selector.hbs"}} --}}
+        {{!-- {{> "systems/ed4e/templates/global-templates/denomination-selector.hbs"}} --}}
     </div>
     {{!-- Weight --}}
     <div class="item-data__input--line">

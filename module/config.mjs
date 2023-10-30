@@ -52,12 +52,12 @@ ED4E.attributes = {
 }
 
 /**
- * ??? Coinage options
+ * ??? Denomination options
  */
-ED4E.coinage = {
-	copper: "ED.Coinage.copper",
-	silver: "ED.Coinage.silver",
-	gold: "ED.Coinage.gold"
+ED4E.denomination = {
+	copper: "ED.Denomination.copper",
+	silver: "ED.Denomination.silver",
+	gold: "ED.Denomination.gold"
 }
 
 /* eslint-disable */
