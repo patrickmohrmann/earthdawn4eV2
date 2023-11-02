@@ -33,6 +33,87 @@ export default class SentientTemplate extends CommonTemplate {
                 initialKeys: CONFIG.ED4E.attributes,
                 initialKeysOnly: true,
                 label: "ED.Attributes.attributes"
+            } ),
+            condition: new foundry.data.fields.SchemaField( {
+                aggressiveAttack: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.aggressiveAttack"
+                } ),
+                defensiveStance: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.defensiveStance"
+                } ),
+                blindsided: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.XXXXXX"
+                } ),
+                cover: new foundry.data.fields.SchemaField( {
+                    partial: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.coverPartial"
+                    } ),
+                    full: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.coverFull"
+                    } ),
+                } ),
+                darkness: new foundry.data.fields.SchemaField( {
+                    partial: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.darknessPartial"
+                    } ),
+                    full: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.darknessFull"
+                    } ),
+                } ),
+                impairedMovement: new foundry.data.fields.SchemaField( {
+                    partial: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.impairedMovementPartial"
+                    } ),
+                    full: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.impairedMovementFull"
+                    } ),
+                } ),
+                harried: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.harried"
+                } ),
+                overwhelmed: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.Actor.Condition.overwhelmed"
+                } ),
+                knockedDown: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.knockedDown"
+                } ),
+                surprised: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.surprised"
+                } ),
+                fury: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.fury"
+                } )
             } )
         } );
     }
@@ -46,4 +127,18 @@ export default class SentientTemplate extends CommonTemplate {
         super.migrateData( source );
         // specific migration functions
     }
+
+    derivedData( actorData ) {
+        const systemData = actorData.system;
+        systemData.dexterityStep = this.getStep( systemData.attributes.dex.value );
+    }
+
+    getStep( value ) {
+        if ( !value > 0 ) {
+            return 0;
+          } else {
+            return Number( [Math.ceil( value / 3 ) + 1] );
+          }
+        }
+      
 }

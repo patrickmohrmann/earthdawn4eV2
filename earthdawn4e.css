@@ -131,6 +131,11 @@ h6 {
   background: none;
   border: none;
 }
+input.input__number-input {
+  width: 30px;
+  padding-top: 5px;
+  height: 20px;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -535,6 +540,9 @@ h6 {
 }
 .character-sheet .action-button-section button {
   width: 100px;
+}
+.character-sheet .details__section {
+  padding-right: 20px;
 }
 .bookmarks-combat-modifier {
   top: 0;

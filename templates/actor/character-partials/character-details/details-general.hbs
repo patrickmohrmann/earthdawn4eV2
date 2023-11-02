@@ -1,4 +1,4 @@
-<div>
+<div class="details__area">
     {{!-- Attribute --}}
     <div>
         <h4>
@@ -10,13 +10,37 @@
                 <th class="text__alignment--left">{{localize "ED.Attributes.attribute"}}</th>
                 <th class="text__alignment--left">{{localize "ED.General.value"}}</th>
                 <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.die"}}</th>
+            </tr>
+            <tr>
+                <td class="attribute__name--content">
+                    <a  title="{{localize "ED.Attributes.rollAttribute"}}">
+                        <label class="roll__step--hover">{{localize "ED.Attributes.DEX"}}</label>
+                        <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
+                    </a>
+                </td>
+                <td class="attribute__value--content">
+                    <div>
+                        <span class="attribute__value">
+                            <input class="input__number-input" type="number" name="system.attributes.dex.value" value="{{actor.system.attributes.dex.value}}">
+                        </span>
+                        <i class="enhancemente-1 fa fa-star"></i>
+                        <i class="enhancemente-2 fa fa-star"></i>
+                        <i class="enhancemente-3 fa fa-star"></i>
+                    </div>
+                </td>
+                <td class="attribute__step--content">
+                    <div>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.dex.step" value="{{actor.system.attributes.dex.step}}" readonly>
+                            </span>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td class="attribute__name--content">
                     <a  title="{{localize "ED.Attributes.rollAttribute"}}">
                         <label class="roll__step--hover">{{localize "ED.Attributes.STR"}}</label>
-                        <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
+                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
                     </a>
                 </td>
                 <td class="attribute__value--content">
@@ -31,33 +55,9 @@
                 </td>
                 <td class="attribute__step--content">
                     <div>
-                        <span class="attribute__step">{{system.attribute.str.step}}</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="attribute__name--content">
-                    <a  title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.DEX"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">10{{system.attributes.cha.value}}</span>
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">5{{attribute.dexterity.step}}</span>
-                    </div>
-                </td>
-                <td class="attribute__dice--content">
-                    <div>
-                        <span class="attribute__dice">w20{{attribute.dexterity.dice}}</span>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.str.step" value="{{actor.system.attributes.str.step}}" readonly>
+                            </span>
                     </div>
                 </td>
             </tr>
@@ -70,7 +70,9 @@
                 </td>
                 <td class="attribute__value--content">
                     <div>
-                        <span class="attribute__value">10{{attribute.constitution.value}}</span>
+                        <span class="attribute__value">
+                            <input class="input__number-input" type="number" name="system.attributes.tou.value" value="{{actor.system.attributes.tou.value}}">
+                        </span>
                         <i class="enhancemente-1 fa fa-star"></i>
                         <i class="enhancemente-2 fa fa-star"></i>
                         <i class="enhancemente-3 fa fa-star"></i>
@@ -78,12 +80,9 @@
                 </td>
                 <td class="attribute__step--content">
                     <div>
-                        <span class="attribute__step">5{{attribute.constitution.step}}</span>
-                    </div>
-                </td>
-                <td class="attribute__dice--content">
-                    <div>
-                        <span class="attribute__dice">w8{{attribute.constitution.dice}}</span>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.tou.step" value="{{actor.system.attributes.tou.step}}" readonly>
+                            </span>
                     </div>
                 </td>
             </tr>
@@ -96,7 +95,9 @@
                 </td>
                 <td class="attribute__value--content">
                     <div>
-                        <span class="attribute__value">10{{attribute.perception.value}}</span>
+                        <span class="attribute__value">
+                            <input class="input__number-input" type="number" name="system.attributes.per.value" value="{{actor.system.attributes.per.value}}">
+                        </span>
                         <i class="enhancemente-1 fa fa-star"></i>
                         <i class="enhancemente-2 fa fa-star"></i>
                         <i class="enhancemente-3 fa fa-star"></i>
@@ -104,12 +105,9 @@
                 </td>
                 <td class="attribute__step--content">
                     <div>
-                        <span class="attribute__step">5{{attribute.perception.step}}</span>
-                    </div>
-                </td>
-                <td class="attribute__dice--content">
-                    <div>
-                        <span class="attribute__dice">w8{{attribute.perception.dice}}</span>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.per.step" value="{{actor.system.attributes.per.step}}" readonly>
+                            </span>
                     </div>
                 </td>
             </tr>
@@ -122,7 +120,9 @@
                 </td>
                 <td class="attribute__value--content">
                     <div>
-                        <span class="attribute__value">10{{attribute.willpower.value}}</span>
+                        <span class="attribute__value">
+                            <input class="input__number-input" type="number" name="system.attributes.wil.value" value="{{actor.system.attributes.wil.value}}">
+                        </span>
                         <i class="enhancemente-1 fa fa-star"></i>
                         <i class="enhancemente-2 fa fa-star"></i>
                         <i class="enhancemente-3 fa fa-star"></i>
@@ -130,12 +130,9 @@
                 </td>
                 <td class="attribute__step--content">
                     <div>
-                        <span class="attribute__step">5{{attribute.willpower.step}}</span>
-                    </div>
-                </td>
-                <td class="attribute__dice--content">
-                    <div>
-                        <span class="attribute__dice">w8{{attribute.willpower.dice}}</span>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.wil.step" value="{{actor.system.attributes.wil.step}}" readonly>
+                            </span>
                     </div>
                 </td>
             </tr>
@@ -148,7 +145,9 @@
                 </td>
                 <td class="attribute__value--content">
                     <div>
-                        <span class="attribute__value">10{{attribute.charisma.value}}</span>
+                        <span class="attribute__value">
+                            <input class="input__number-input" type="number" name="system.attributes.cha.value" value="{{actor.system.attributes.cha.value}}">
+                        </span>
                         <i class="enhancemente-1 fa fa-star"></i>
                         <i class="enhancemente-2 fa fa-star"></i>
                         <i class="enhancemente-3 fa fa-star"></i>
@@ -156,12 +155,9 @@
                 </td>
                 <td class="attribute__step--content">
                     <div>
-                        <span class="attribute__step">5{{attribute.charisma.step}}</span>
-                    </div>
-                </td>
-                <td class="attribute__dice--content">
-                    <div>
-                        <span class="attribute__dice">w8{{attribute.charisma.dice}}</span>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.cha.step" value="{{actor.system.attributes.cha.step}}" readonly>
+                            </span>
                     </div>
                 </td>
             </tr>
@@ -183,7 +179,6 @@
                 <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
                 <th class="text__alignment--left">{{localize "ED.General.max"}}</th>
                 <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.dice"}}</th>
             </tr>
             <tr>
                 <td class="karma__current--content">
@@ -201,11 +196,6 @@
                         <span class="karma__step">5{{karma.step}}</span>
                     </div>
                 </td>
-                <td class="karma__dice--content">
-                    <div>
-                        <span class="karma__dice">w8{{karma.dice}}</span>
-                    </div>
-                </td>
             </tr>
         </table>
     </div>
@@ -217,7 +207,6 @@
                 <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
                 <th class="text__alignment--left">{{localize "ED.General.max"}}</th>
                 <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.dice"}}</th>
             </tr>
             <tr>
                 <td class="devotion__current--content">
@@ -233,11 +222,6 @@
                 <td class="devotion__step--content">
                     <div>
                         <span class="devotion__step">5{{devotion.step}}</span>
-                    </div>
-                </td>
-                <td class="devotion__dice--content">
-                    <div>
-                        <span class="devotion__dice">w8{{devotion.dice}}</span>
                     </div>
                 </td>
             </tr>
