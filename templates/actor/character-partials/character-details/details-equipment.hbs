@@ -1,0 +1,24 @@
+Equipment
+<div>
+    {{#each actor.itemTypes.equipment}}
+    {{> "systems/ed4e/templates/item/cards/equipment-card.hbs"}}
+    {{/each}}
+</div>
+weapons
+<div>
+    {{#each actor.itemTypes.weapon}}
+    {{> "systems/ed4e/templates/item/cards/weapon-card.hbs"}}
+    {{/each}}
+</div>
+armor
+<div>
+    {{#each actor.itemTypes.armor}}
+    {{> "systems/ed4e/templates/item/cards/armor-card.hbs"}}
+    {{/each}}
+</div>
+shields
+<div>
+    {{#each actor.itemTypes.shield}}
+    {{> "systems/ed4e/templates/item/cards/shield-card.hbs"}}
+    {{/each}}
+</div>

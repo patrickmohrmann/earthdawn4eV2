@@ -8,6 +8,8 @@ export default class ActorEd extends Actor {
     prepareData() {
         const actorData = this;
         this.derivedData( actorData )
+        console.log( "ACTOR", actorData )
+        
     }
     
     derivedData( actorData ) {
@@ -35,7 +37,7 @@ export default class ActorEd extends Actor {
         systemData.cha.baseStep = this.getStep( systemData.cha.value );
         
     }
-
+    
     getStep( value ) {
         if ( !value > 0 ) {
             return 0;

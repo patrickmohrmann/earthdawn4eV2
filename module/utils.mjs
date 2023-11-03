@@ -115,7 +115,24 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-shipWeapon.hbs",
 
     // cards
-    "systems/ed4e/templates/item/cards/effects-card.hbs",
+    "systems/ed4e/templates/item/cards/armor-card.hbs",
+    "systems/ed4e/templates/item/cards/attack-card.hbs",
+    "systems/ed4e/templates/item/cards/curse-card.hbs",
+    "systems/ed4e/templates/item/cards/devotion-card.hbs",
+    "systems/ed4e/templates/item/cards/discipline-card.hbs",
+    "systems/ed4e/templates/item/cards/effect-card.hbs",
+    "systems/ed4e/templates/item/cards/equipment-card.hbs",
+    "systems/ed4e/templates/item/cards/knack-card.hbs",
+    "systems/ed4e/templates/item/cards/maneuver-card.hbs",
+    "systems/ed4e/templates/item/cards/poison-card.hbs",
+    "systems/ed4e/templates/item/cards/power-card.hbs",
+    "systems/ed4e/templates/item/cards/shield-card.hbs",
+    "systems/ed4e/templates/item/cards/ship-weapon-card.hbs",
+    "systems/ed4e/templates/item/cards/skill-card.hbs",
+    "systems/ed4e/templates/item/cards/special-ability-card.hbs",
+    "systems/ed4e/templates/item/cards/spell-card.hbs",
+    "systems/ed4e/templates/item/cards/talent-card.hbs",
+    "systems/ed4e/templates/item/cards/weapon-card.hbs",
 
   ];
 
