@@ -8,7 +8,7 @@ export default class ActorSheetEd extends ActorSheet {
      * @override
      */
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return mergeObject( super.defaultOptions, {
             classes: ["earthdawn4e", "sheet", "actor", "character-sheet"],
             width: 800,
             height: 800,
@@ -17,7 +17,7 @@ export default class ActorSheetEd extends ActorSheet {
                 contentSelector: '.actor-sheet-body',
                 initial: 'main',
               },]
-        });
+        } );
     }
 
     /** @override */

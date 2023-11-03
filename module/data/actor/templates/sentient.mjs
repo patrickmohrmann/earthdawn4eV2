@@ -114,7 +114,12 @@ export default class SentientTemplate extends CommonTemplate {
                     initial: false,
                     label: "ED.Actor.Condition.fury"
                 } )
-            } )
+            } ),
+            useKarmaAlways: new foundry.data.fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.General.Karma.karmaAlways"
+            } ),
         } );
     }
 
@@ -126,19 +131,5 @@ export default class SentientTemplate extends CommonTemplate {
     static migrateData( source ) {
         super.migrateData( source );
         // specific migration functions
-    }
-
-    derivedData( actorData ) {
-        const systemData = actorData.system;
-        systemData.dexterityStep = this.getStep( systemData.attributes.dex.value );
-    }
-
-    getStep( value ) {
-        if ( !value > 0 ) {
-            return 0;
-          } else {
-            return Number( [Math.ceil( value / 3 ) + 1] );
-          }
-        }
-      
+    }      
 }

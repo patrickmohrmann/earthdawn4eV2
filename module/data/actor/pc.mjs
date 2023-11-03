@@ -3,6 +3,10 @@ import NamegiverTemplate from "./templates/namegiver.mjs";
 /**
  * System data definition for PCs.
  * @mixin
+ * @property {number} initialValue      initial Value will only be affected by charactergeneration
+ * @property {number} baseValue         unmodified value calculated from times increased and initial value
+ * @property {number} value             value is the one shown. baseValue + modifications
+ * @property {number} timesIncreased    attribute increases
  */
 export default class PcData extends NamegiverTemplate {
 
@@ -20,7 +24,7 @@ export default class PcData extends NamegiverTemplate {
                 nullable: false,
                 min: 1,
                 step: 1,
-                initial: 1,
+                initial: 10,
                 integer: true,
                 positive: true
             } ),
@@ -47,7 +51,7 @@ export default class PcData extends NamegiverTemplate {
                 nullable: false,
                 min: 0,
                 max: 3,
-                step: 1,
+                // step: 1,
                 initial: 0,
                 integer: true
             } ),
