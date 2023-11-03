@@ -52,6 +52,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-partials/character-details/details-familiars-mounts.hbs",
     "systems/ed4e/templates/actor/character-partials/character-details/details-reputation.hbs",
     "systems/ed4e/templates/actor/character-partials/character-details/details-general.hbs",
+    "systems/ed4e/templates/actor/character-partials/character-details/details-specials.hbs",
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs",
