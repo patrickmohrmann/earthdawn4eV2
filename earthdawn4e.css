@@ -514,14 +514,14 @@ input.input__number-input {
 }
 .character-sheet .main-section .left-part {
   position: inherit;
-  width: 195px;
+  width: 250px;
   left: 0px;
   height: 100%;
 }
 .character-sheet .main-section .right-part {
   position: inherit;
   left: 200px;
-  width: calc(100% - 220px);
+  width: calc(100% - 270px);
   height: 100%;
 }
 .character-sheet .main-section div.right-part {
@@ -769,7 +769,7 @@ input.input__number-input {
   padding-top: 3px;
 }
 .main-section .table__attribute .attribute__name--content {
-  width: 60px;
+  width: 120px;
 }
 .main-section .table__attribute .attribute__value--content,
 .main-section .table__attribute .attribute__step--content {
