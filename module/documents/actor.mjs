@@ -13,36 +13,111 @@ export default class ActorEd extends Actor {
     }
     
     derivedData( actorData ) {
-        const systemData = actorData.system.attributes;
+        const systemData = actorData.system;
+        // **************************** Attributes ******************************* */
         // Attribute Base values = InitialValue + Increases
-        systemData.dex.baseValue = systemData.dex.initialValue + systemData.dex.timesIncreased;
-        systemData.str.baseValue = systemData.str.initialValue + systemData.str.timesIncreased;
-        systemData.tou.baseValue = systemData.tou.initialValue + systemData.tou.timesIncreased;
-        systemData.per.baseValue = systemData.per.initialValue + systemData.per.timesIncreased;
-        systemData.wil.baseValue = systemData.wil.initialValue + systemData.wil.timesIncreased;
-        systemData.cha.baseValue = systemData.cha.initialValue + systemData.cha.timesIncreased;
+        systemData.attributes.dex.baseValue = systemData.attributes.dex.initialValue + systemData.attributes.dex.timesIncreased;
+        systemData.attributes.str.baseValue = systemData.attributes.str.initialValue + systemData.attributes.str.timesIncreased;
+        systemData.attributes.tou.baseValue = systemData.attributes.tou.initialValue + systemData.attributes.tou.timesIncreased;
+        systemData.attributes.per.baseValue = systemData.attributes.per.initialValue + systemData.attributes.per.timesIncreased;
+        systemData.attributes.wil.baseValue = systemData.attributes.wil.initialValue + systemData.attributes.wil.timesIncreased;
+        systemData.attributes.cha.baseValue = systemData.attributes.cha.initialValue + systemData.attributes.cha.timesIncreased;
         // Attribute Values = BaseValue + Modifications
-        systemData.dex.value = systemData.dex.baseValue
-        systemData.str.value = systemData.str.baseValue
-        systemData.tou.value = systemData.tou.baseValue
-        systemData.per.value = systemData.per.baseValue
-        systemData.wil.value = systemData.wil.baseValue
-        systemData.cha.value = systemData.cha.baseValue
+        systemData.attributes.dex.value = systemData.attributes.dex.baseValue
+        systemData.attributes.str.value = systemData.attributes.str.baseValue
+        systemData.attributes.tou.value = systemData.attributes.tou.baseValue
+        systemData.attributes.per.value = systemData.attributes.per.baseValue
+        systemData.attributes.wil.value = systemData.attributes.wil.baseValue
+        systemData.attributes.cha.value = systemData.attributes.cha.baseValue
+        // Attribute Base Steps
+        systemData.attributes.dex.baseStep = this.getStep( systemData.attributes.dex.value );
+        systemData.attributes.str.baseStep = this.getStep( systemData.attributes.str.value );
+        systemData.attributes.tou.baseStep = this.getStep( systemData.attributes.tou.value );
+        systemData.attributes.per.baseStep = this.getStep( systemData.attributes.per.value );
+        systemData.attributes.wil.baseStep = this.getStep( systemData.attributes.wil.value );
+        systemData.attributes.cha.baseStep = this.getStep( systemData.attributes.cha.value );
         // Attribute Steps
-        systemData.dex.baseStep = this.getStep( systemData.dex.value );
-        systemData.str.baseStep = this.getStep( systemData.str.value );
-        systemData.tou.baseStep = this.getStep( systemData.tou.value );
-        systemData.per.baseStep = this.getStep( systemData.per.value );
-        systemData.wil.baseStep = this.getStep( systemData.wil.value );
-        systemData.cha.baseStep = this.getStep( systemData.cha.value );
-        
+        systemData.attributes.dex.step = systemData.attributes.dex.baseStep;
+        systemData.attributes.str.step = systemData.attributes.str.baseStep;
+        systemData.attributes.tou.step = systemData.attributes.tou.baseStep;
+        systemData.attributes.per.step = systemData.attributes.per.baseStep;
+        systemData.attributes.wil.step = systemData.attributes.wil.baseStep;
+        systemData.attributes.cha.step = systemData.attributes.cha.baseStep;
+
+
+        // *******************************characteristics **************************** */
+        // Defenses
+        systemData.characteristics.defenses.physical = this.getDefense( systemData.attributes.dex.value );
+        systemData.characteristics.defenses.mystical = this.getDefense( systemData.attributes.per.value );
+        systemData.characteristics.defenses.social = this.getDefense( systemData.attributes.cha.value );
+        // Armor
+        systemData.characteristics.armor.physical = this.getArmor( "physical" );
+        systemData.characteristics.armor.mystical = this.getArmor( "mystical", systemData.attributes.wil.value );
+        // Health
+        systemData.characteristics.health.death = this.getHealth( "death", systemData.attributes.tou.value, systemData.attributes.tou.step );
+        systemData.characteristics.health.unconscious = this.getHealth( "unconscious", systemData.attributes.tou.value,systemData.attributes.tou.step );
+        systemData.characteristics.health.woundThreshold = this.getHealth( "woundThreshold", systemData.attributes.tou.value, systemData.attributes.tou.step );
+        systemData.characteristics.health.damage = systemData.characteristics.health.damageStun + systemData.characteristics.health.damageLethal;
+        // Recovery
+        systemData.characteristics.recoveryTests.daily = this.getRecovery( systemData.attributes.tou.value,systemData.attributes.tou.step );
     }
     
-    getStep( value ) {
-        if ( !value > 0 ) {
-            return 0;
-          } else {
-            return Number( [Math.ceil( value / 3 ) + 1] );
-          }
-        }
+  getStep( value ) {
+    if ( !value > 0 ) {
+      return 0;
+    } else {
+      return Number( [Math.ceil( value / 3 ) + 1] );
+    }
+  }
+
+  getDefense( value ) {
+    if ( !value > 0 ) {
+      return 0;
+    } else {
+      return Number( [Math.ceil( value / 2 ) + 1] );
+    } 
+  }
+  getArmor( type, value ) {
+    if ( type === "physical" ) {
+      return Number( this.getCalculateArmor( "physical" ) ) ;
+    } else if ( type === "mystical" ) {
+      return Number( this.getCalculateArmor( "mystical" ) + [Math.floor( value / 5 )] ) ;
+    } else {
+      console.log( "ERROR MESSAGE: Armor Calculation broken!" )
+    }
+  }
+
+  getCalculateArmor( type ) {
+    // get all items and sum up the armor differenciation by type
+    if ( type === "physical" ) {
+      return Number( 0 )
+    } else if ( type === "mystical" ) {
+      return Number( 0 )
+    } else {
+      console.log( "ERROR MESSAGE: Armor Calculation broken!" )
+    }
+  }
+
+  getHealth( type, value, toughnessStep ) {
+    if ( type === "death" ) {
+      return Number( value * 2 + toughnessStep );
+    } else if ( type === "unconscious" ) {
+      return Number( value * 2 );
+    } else if ( type === "woundThreshold" ) {
+      return Number( [Math.ceil( value / 2 ) + 2 ] );
+    } else if ( type === "recoveryTests" ) {
+      return Number( [Math.ceil( value / 6 )] );
+    } else {
+      console.log( "ERROR MESSAGE: Health Calculation broken!" )
+    }
+  }
+
+  getRecovery( value ) {
+    if ( !value > 0 ) {
+      return 0;
+    } else {
+      return Number( [Math.ceil( value / 6 )] );
+    }
+  }
+    
 }

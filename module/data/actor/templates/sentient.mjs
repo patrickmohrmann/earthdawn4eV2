@@ -120,6 +120,128 @@ export default class SentientTemplate extends CommonTemplate {
                 initial: false,
                 label: "ED.General.Karma.karmaAlways"
             } ),
+            characteristics: new foundry.data.fields.SchemaField( {
+                defenses: new foundry.data.fields.SchemaField( {
+                    physical: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.defensePhysical"
+                    } ),
+                    mystical: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.defenseMystical"
+                    } ),
+                    social: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.defenseSocial"
+                    } ),
+                } ),
+                armor: new foundry.data.fields.SchemaField( {
+                    physical: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.armorPhysical"
+                    } ),
+                    mystical: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.armorMystical"
+                    } ),
+                } ),
+                health: new foundry.data.fields.SchemaField( {
+                    death: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.deathRate"
+                    } ),
+                    unconscious: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.unconsciousRate"
+                    } ),
+                    woundThreshold: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.woundThreshold"
+                    } ),
+                    damage: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.damage"
+                    } ),
+                    damageLethal: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.damageLethal"
+                    } ),
+                    damageStun: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.damageStun"
+                    } ),
+                    wounds: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.wounds"
+                    } ),
+                } ),
+                recoveryTests: new foundry.data.fields.SchemaField( {
+                    daily: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.recoveryTestsDaily"
+                    } ),
+                    current: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        label: "ED.Actor.Characteristics.recoveryTestsCurrent"
+                    } ),
+                } ),
+            } ),
         } );
     }
 
