@@ -63,6 +63,21 @@
             "willpower":                                            "Willenskraft",
             "willpowerAbbr":                                        "WIL"
         },
+        "Conditions": {
+            "aggressiveAttack":                                     "Aggressiver Angriff",
+            "coverPartial":                                         "Teilweise Deckung",
+            "coverFull":                                            "Volle Deckung",
+            "darknessPartial":                                      "Teilweise Dunkelheit",
+            "darknessFull":                                         "Volle Dunkelheit",
+            "defensiveStance":                                      "Verteidigungshaltung",
+            "fury":                                                 "Zorn",
+            "harried":                                              "Bedrängt",
+            "impairedMovementPartial":                              "Teilweise Eingeschränkte Bewegung",
+            "impairedMovementFull":                                 "Eingeschränkte Bewegung",
+            "knockedDown":                                          "Niedergeschlagen",
+            "overwhelmed":                                          "Überwältigt",
+            "surprised":                                            "Überrascht"
+        },
         "Denomination": {
             "copper":                                               "Kupfer",
             "gold":                                                 "Gold",

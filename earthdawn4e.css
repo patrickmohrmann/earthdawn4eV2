@@ -513,12 +513,14 @@ input.input__number-input {
   height: 380px;
 }
 .character-sheet .main-section .left-part {
+  float: left;
   position: inherit;
   width: 250px;
   left: 0px;
   height: 100%;
 }
 .character-sheet .main-section .right-part {
+  float: right;
   position: inherit;
   left: 200px;
   width: calc(100% - 270px);

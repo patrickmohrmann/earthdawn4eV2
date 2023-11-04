@@ -51,7 +51,7 @@ export default class PcData extends NamegiverTemplate {
                 nullable: false,
                 min: 0,
                 max: 3,
-                // step: 1,
+                step: 1,
                 initial: 0,
                 integer: true
             } ),

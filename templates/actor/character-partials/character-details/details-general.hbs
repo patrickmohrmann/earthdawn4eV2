@@ -324,7 +324,84 @@
 </div>
 
 <div class="right-part">
-    {{#each actor.itemTypes.specialAbility}}
-    {{> "systems/ed4e/templates/item/cards/special-abiity-card.hbs"}}
-    {{/each}}
+    <div class="partial__two">
+    <h3>conditions</h3>
+    <div>
+        <div>
+            <label>{{localize "ED.Conditions.aggressiveAttack"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.aggressiveAttack" {{checked
+                actor.system.condition.aggressiveAttack}}>
+        </div>
+        <div>
+            <label>{{localize "ED.Conditions.coverPartial"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.cover.partial" {{checked
+                actor.system.condition.cover.partial}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.coverFull"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.cover.full" {{checked
+                actor.system.condition.cover.full}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.darknessPartial"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.darkness.partial" {{checked
+                actor.system.condition.darkness.partial}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.darknessFull"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.darkness.full" {{checked
+                actor.system.condition.darkness.full}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.defensiveStance"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.defensiveStance" {{checked
+                actor.system.condition.defensiveStance}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.fury"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.fury" {{checked
+                actor.system.condition.fury}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.harried"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.harried" {{checked
+                actor.system.condition.harried}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.impairedMovementPartial"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.impairedMovement.partial" {{checked
+                actor.system.condition.impairedMovement.partial}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.impairedMovementFull"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.impairedMovement.full" {{checked
+                actor.system.condition.impairedMovement.full}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.knockedDown"}}</label>
+             <input type="checkbox" class="input__checkbox" name="system.condition.knockedDown" {{checked
+                actor.system.condition.knockedDown}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.surprised"}}</label>
+            <input type="checkbox" class="input__checkbox" name="system.condition.surprised" {{checked
+                actor.system.condition.surprised}}>
+                </div>
+        <div>
+            <label>{{localize "ED.Conditions.overwhelmed"}}</label>
+            <input type="Number" class="input__checkbox" name="system.condition.overwhelmed"
+                value="{{actor.system.condition.overwhelmed}}">
+        </div>
+    </div>
+    </div>
+    <div class="partial__two">
+<h3>special abilities</h3>
+    <div class="partial__two">
+        {{#each actor.itemTypes.specialAbility}}
+        {{> "systems/ed4e/templates/item/cards/special-ability-card.hbs"}}
+        {{/each}}
+    </div>
+    </div>
+    
+
 </div>
