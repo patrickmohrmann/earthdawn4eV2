@@ -242,6 +242,14 @@ export default class SentientTemplate extends CommonTemplate {
                     } ),
                 } ),
             } ),
+            initiative: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                step: 1,
+                initial: 0,
+                label: "ED.Actor.Characteristics.defensePhysical"
+            } )
         } );
     }
 

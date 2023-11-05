@@ -44,8 +44,7 @@ export default class ActorEd extends Actor {
         systemData.attributes.wil.step = systemData.attributes.wil.baseStep;
         systemData.attributes.cha.step = systemData.attributes.cha.baseStep;
 
-
-        // *******************************characteristics **************************** */
+        // ******************************* Characteristics **************************** */
         // Defenses
         systemData.characteristics.defenses.physical = this.getDefense( systemData.attributes.dex.value );
         systemData.characteristics.defenses.mystical = this.getDefense( systemData.attributes.per.value );
@@ -59,7 +58,11 @@ export default class ActorEd extends Actor {
         systemData.characteristics.health.woundThreshold = this.getHealth( "woundThreshold", systemData.attributes.tou.value, systemData.attributes.tou.step );
         systemData.characteristics.health.damage = systemData.characteristics.health.damageStun + systemData.characteristics.health.damageLethal;
         // Recovery
-        systemData.characteristics.recoveryTests.daily = this.getRecovery( systemData.attributes.tou.value,systemData.attributes.tou.step );
+        systemData.characteristics.recoveryTests.daily = this.getRecovery( systemData.attributes.tou.value, systemData.attributes.tou.step );
+
+        // ******************************* Initiative **************************** */
+        // Initiative
+        systemData.initiative = this.getInitiative( systemData.attributes.dex.step );
     }
     
   getStep( value ) {
@@ -119,5 +122,24 @@ export default class ActorEd extends Actor {
       return Number( [Math.ceil( value / 6 )] );
     }
   }
-    
+
+  getInitiative( value ) {
+    if ( !value > 0 ) {
+      return 0;
+    } else {
+      // additional modifiere will be added later during encounter epics
+      return Number( value - this.getArmorPenalty() );
+    }
+  }
+
+  getArmorPenalty() {
+    // find all armor items which are worn and summarize the armor penalty value
+    let armorPenalty = 0;
+    for ( const item of this.items ) {
+      if ( item.type === "armor" || item.type === "shield" ) {
+        armorPenalty += item.system.initiativePenalty;
+      }
+    }
+    return Number( armorPenalty );
+  }
 }
