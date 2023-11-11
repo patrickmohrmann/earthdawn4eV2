@@ -5,12 +5,78 @@
  * @extends {Actor} extends Actor ED    
  */
 export default class ActorEd extends Actor {
+
+  
+  activateListeners( html ) {
+    super.activateListeners( html );
+
+    $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
+
+    html.find( '.item-delete' ).click( async ( ev ) => {
+      let li = $( ev.currentTarget ).parents( '.item-name' )
+      let itemId = li.attr( 'data-item-id' );
+      let confirmationResult = await this.confirmationBox();
+      if ( confirmationResult.result === false ) {
+        return false;
+      } else {
+        this.actor.deleteEmbeddedDocuments( 'Item', [itemId] );
+      }
+    } );
+
+    html.find( '.item-edit' ).click( ( ev ) => {
+      const li = $( ev.currentTarget ).parents( '.item-name' );
+      const item = this.actor.items.get( li.data( 'itemId' ) );
+      item.sheet.render( true );
+    } );
+
+    html.find( '.link-checkbox-effect' ).click( async ( ev ) => {
+      ev.preventDefault();
+
+      const li = $( ev.currentTarget ).parents( '.item-name' );
+      const item = this.actor.effects.get( li.data( 'itemId' ) );
+      let visibleState = ev.target.checked;
+      let disabledState = !visibleState;
+
+      await item.update( { disabled: disabledState } );
+    } );
+
+    html.find( '.effect-delete' ).click( async ( ev ) => {
+      let li = $( ev.currentTarget ).parents( '.item-name' )
+      let itemId = li.attr( 'data-item-id' );
+      let confirmationResult = await this.confirmationBox();
+      if ( confirmationResult.result === false ) {
+        return false;
+      } else {
+        this.actor.deleteEmbeddedDocuments( 'ActiveEffect', [itemId] );
+      }
+    } );
+
+    html.find( '.effect-add' ).click( () => {
+      let itemNumber = this.actor.effects.size;
+      let itemData = {
+        label: `New Effect ` + itemNumber,
+        icon: 'systems/earthdawn4e/assets/effect.png',
+        duration: { rounds: 1 },
+        origin: this.actor.id,
+      };
+
+      this.actor.createEmbeddedDocuments( 'ActiveEffect', [itemData] );
+    } );
+
+    html.find( '.effect-edit' ).click( ( ev ) => {
+      const li = $( ev.currentTarget ).parents( '.item-name' );
+      const item = this.actor.effects.get( li.data( 'itemId' ) );
+      item.sheet.render( true );
+    } );
+
+  }
     prepareData() {
         const actorData = this;
         this.derivedData( actorData )
         console.log( "ACTOR", actorData )
         
     }
+
     
     derivedData( actorData ) {
         const systemData = actorData.system;

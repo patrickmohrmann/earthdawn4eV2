@@ -72,8 +72,8 @@
             "defensiveStance":                                      "Verteidigungshaltung",
             "fury":                                                 "Zorn",
             "harried":                                              "Bedrängt",
-            "impairedMovementPartial":                              "Teilweise Eingeschränkte Bewegung",
-            "impairedMovementFull":                                 "Eingeschränkte Bewegung",
+            "impairedMovementPartial":                              "Teil. Bewegung",
+            "impairedMovementFull":                                 "Beschränkte Bewegung",
             "knockedDown":                                          "Niedergeschlagen",
             "overwhelmed":                                          "Überwältigt",
             "surprised":                                            "Überrascht"
@@ -111,6 +111,7 @@
             "H":                                                "H",
 
             "I":                                                "I",
+                "initiative":                                      "Initiative",
 
             "J":                                                "J",
 
