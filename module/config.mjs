@@ -15,7 +15,7 @@ _______________________________`;
  * @typedef {object} AttributeConfiguration
  * @property {string} label                               Localized label.
  * @property {string} abbreviation                        Localized abbreviation.
- * @property {Object<string, number|string>}  [defaults]  Default values for this Attribute based on actor type.
+ * @property {{[key: string]: number|string}}  [defaults]  Default values for this Attribute based on actor type.
  *                                                        If a string is used, the system will attempt to fetch.
  *                                                        the value of the specified Attribute.
  */

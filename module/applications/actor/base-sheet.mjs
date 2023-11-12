@@ -1,6 +1,6 @@
 /**
  * Extend the basic ActorSheet with modifications
- * @extends {ActorSheet}
+ * @augments {ActorSheet}
  */
 export default class ActorSheetEd extends ActorSheet {
 
@@ -9,7 +9,7 @@ export default class ActorSheetEd extends ActorSheet {
         super.activateListeners( html );
   
 
-        $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
+        $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
   
         html.find( '.item-delete' ).click( async ( ev ) => {
           let li = $( ev.currentTarget ).parents( '.item-name' )

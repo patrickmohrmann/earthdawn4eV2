@@ -2,7 +2,7 @@
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
- * @extends {Actor} extends Actor ED    
+ * @augments {Actor} extends Actor
  */
 export default class ActorEd extends Actor {
 
@@ -10,8 +10,9 @@ export default class ActorEd extends Actor {
   activateListeners( html ) {
     super.activateListeners( html );
 
-    $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
+    $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
 
+    // TODO: create own functions for each listener, no anonymous functions
     html.find( '.item-delete' ).click( async ( ev ) => {
       let li = $( ev.currentTarget ).parents( '.item-name' )
       let itemId = li.attr( 'data-item-id' );
