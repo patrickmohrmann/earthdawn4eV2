@@ -6,6 +6,10 @@ import SentientTemplate from "./sentient.mjs";
  */
 export default class NamegiverTemplate extends SentientTemplate {
 
+    applyActiveEffects() {
+        return;
+      }
+
     /** @inheritDoc */
     static defineSchema() {
         return super.defineSchema();

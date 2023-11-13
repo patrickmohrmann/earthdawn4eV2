@@ -11,6 +11,9 @@ export default class ActorSheetEd extends ActorSheet {
 
         $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
   
+        /**
+         * @description Delete items from Actor
+         */
         html.find( '.item-delete' ).click( async ( ev ) => {
           let li = $( ev.currentTarget ).parents( '.item-name' )
           let itemId = li.attr( 'data-item-id' );
@@ -22,12 +25,18 @@ export default class ActorSheetEd extends ActorSheet {
           }
         } );
   
+        /**
+         * @description Edit item 
+         */
         html.find( '.item-edit' ).click( ( ev ) => {
           const li = $( ev.currentTarget ).parents( '.item-name' );
           const item = this.actor.items.get( li.data( 'itemId' ) );
           item.sheet.render( true );
         } );
   
+        /**
+         * @description show Earthdawn Active Effect on Token
+         */
         html.find( '.link-checkbox-effect' ).click( async ( ev ) => {
           ev.preventDefault();
     
@@ -39,6 +48,9 @@ export default class ActorSheetEd extends ActorSheet {
           await item.update( { disabled: disabledState } );
         } );
     
+        /**
+         * @description Delete Earthdawn Active Effect from the Actor
+         */
         html.find( '.effect-delete' ).click( async ( ev ) => {
           let li = $( ev.currentTarget ).parents( '.item-name' )
           let itemId = li.attr( 'data-item-id' );
@@ -50,6 +62,9 @@ export default class ActorSheetEd extends ActorSheet {
           }
         } );
     
+        /**
+         * @description add Earthdawn Active Effect to the Actor
+         */
         html.find( '.effect-add' ).click( () => {
           let itemNumber = this.actor.effects.size;
           let itemData = {
@@ -62,6 +77,9 @@ export default class ActorSheetEd extends ActorSheet {
           this.actor.createEmbeddedDocuments( 'ActiveEffect', [itemData] );
         } );
     
+        /**
+         * @description Edit Effects on the Actor
+         */
         html.find( '.effect-edit' ).click( ( ev ) => {
           const li = $( ev.currentTarget ).parents( '.item-name' );
           const item = this.actor.effects.get( li.data( 'itemId' ) );

@@ -37,6 +37,11 @@ export default class PcData extends NamegiverTemplate {
                 integer: true,
                 positive: true
             } ),
+            valueModifier: new foundry.data.fields.NumberField( {
+                required: true,
+                step: 1,
+                initial: 0,
+            } ),
             value: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,

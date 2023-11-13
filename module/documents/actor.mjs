@@ -71,10 +71,58 @@ export default class ActorEd extends Actor {
 
   }
     prepareData() {
+      this.prepareBaseData();
+      const baseCharacteristics = [
+        "system.attributes.dex.valueModifier",
+        "system.attributes.str.valueModifier",
+        "system.attributes.tou.valueModifier",
+        "system.attributes.per.valueModifier",
+        "system.attributes.wil.valueModifier",
+        "system.attributes.cha.valueModifier",
+      ];
+
         const actorData = this;
+        this._applyBaseEffects( baseCharacteristics );
         this.derivedData( actorData )
+        this.applyDerivedEffects()
         console.log( "ACTOR", actorData )
+
         
+    }
+
+    _applyBaseEffects( baseCharacteristics ) {
+      let overrides = {};
+  
+      // Organize non-disabled effects by their application priority
+      // baseCharacteristics is list of attributes that need to have Effects applied before Derived Characteristics are calculated
+      const changes = this.effects.reduce( ( changes, e ) => {
+        if ( e.changes.length < 1 ) {
+          return changes;
+        }
+        if ( e.disabled || e.isSuppressed || !baseCharacteristics.includes( e.changes[0].key ) ) {
+          return changes;
+        }
+  
+        return changes.concat(
+          e.changes.map( ( c ) => {
+            c = foundry.utils.duplicate( c );
+            c.effect = e;
+            c.priority = c.priority ?? c.mode * 10;
+            return c;
+          } ),
+        );
+      }, [] );
+  
+      changes.sort( ( a, b ) => a.priority - b.priority );
+  
+      // Apply all changes
+      for ( let change of changes ) {
+        const result = change.effect.apply( this, change );
+        if ( result !== null ) overrides[change.key] = result[change.key];
+      }
+  
+      // Expand the set of final overrides
+      this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
     }
 
     
@@ -89,12 +137,12 @@ export default class ActorEd extends Actor {
         systemData.attributes.wil.baseValue = systemData.attributes.wil.initialValue + systemData.attributes.wil.timesIncreased;
         systemData.attributes.cha.baseValue = systemData.attributes.cha.initialValue + systemData.attributes.cha.timesIncreased;
         // Attribute Values = BaseValue + Modifications
-        systemData.attributes.dex.value = systemData.attributes.dex.baseValue
-        systemData.attributes.str.value = systemData.attributes.str.baseValue
-        systemData.attributes.tou.value = systemData.attributes.tou.baseValue
-        systemData.attributes.per.value = systemData.attributes.per.baseValue
-        systemData.attributes.wil.value = systemData.attributes.wil.baseValue
-        systemData.attributes.cha.value = systemData.attributes.cha.baseValue
+        systemData.attributes.dex.value = systemData.attributes.dex.baseValue + systemData.attributes.dex.valueModifier;
+        systemData.attributes.str.value = systemData.attributes.str.baseValue + systemData.attributes.str.valueModifier;
+        systemData.attributes.tou.value = systemData.attributes.tou.baseValue + systemData.attributes.tou.valueModifier;
+        systemData.attributes.per.value = systemData.attributes.per.baseValue + systemData.attributes.per.valueModifier;
+        systemData.attributes.wil.value = systemData.attributes.wil.baseValue + systemData.attributes.wil.valueModifier;
+        systemData.attributes.cha.value = systemData.attributes.cha.baseValue + systemData.attributes.cha.valueModifier;
         // Attribute Base Steps
         systemData.attributes.dex.baseStep = this.getStep( systemData.attributes.dex.value );
         systemData.attributes.str.baseStep = this.getStep( systemData.attributes.str.value );
@@ -129,6 +177,43 @@ export default class ActorEd extends Actor {
         // ******************************* Initiative **************************** */
         // Initiative
         systemData.initiative = this.getInitiative( systemData.attributes.dex.step );
+
+        // **************************** Karma & Devotion ************************** */
+        // Karma
+        // systemData.karma.maximum = this.getKarma( );
+        // Devotion
+        // systemData.devotion.maximum = this.getdevotion( );
+    }
+
+    applyDerivedEffects() {
+      const overrides = {};
+  
+      // Organize non-disabled effects by their application priority
+      const changes = this.effects.reduce( ( changes, e ) => {
+        if ( e.changes.length < 1 ) {
+          return changes;
+        }
+  
+        return changes.concat(
+          e.changes.map( ( c ) => {
+            c = foundry.utils.duplicate( c );
+            c.effect = e;
+            c.priority = c.priority ?? c.mode * 10;
+            return c;
+          } ),
+        );
+      }, [] );
+  
+      changes.sort( ( a, b ) => a.priority - b.priority );
+  
+      // Apply all changes
+      for ( let change of changes ) {
+        const result = change.effect.apply( this, change );
+        if ( result !== null ) overrides[change.key] = result[change.key];
+      }
+  
+      // Expand the set of final overrides
+      this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
     }
     
   getStep( value ) {
@@ -169,15 +254,42 @@ export default class ActorEd extends Actor {
 
   getHealth( type, value, toughnessStep ) {
     if ( type === "death" ) {
-      return Number( value * 2 + toughnessStep );
+      return Number( value * 2 + toughnessStep + this.getDurability( "death" ));
     } else if ( type === "unconscious" ) {
-      return Number( value * 2 );
+      return Number( value * 2  + this.getDurability( "unconscious" ));
     } else if ( type === "woundThreshold" ) {
       return Number( [Math.ceil( value / 2 ) + 2 ] );
     } else if ( type === "recoveryTests" ) {
       return Number( [Math.ceil( value / 6 )] );
     } else {
       console.log( "ERROR MESSAGE: Health Calculation broken!" )
+    }
+  }
+
+  getDurability( type ) {
+    let durability = 0;
+    let durabilityDeath = 0;
+    let durabilityUnconscious = 0;
+    // check all itemTypes of discipline or Devotion with durability > 0
+    // check the hghest rank/Circle of all items of the same types
+    // for each of the highest number (rank/circle) look for the highest value in all of those items.
+    // add it to duravility
+    // For death, add the highest Number in addition
+
+    for ( const item of this.items ) {
+      if ( item.type === "discipline" || item.type === "devotion" ) {
+        for ( let i = 0; i < item.system.level; i++ )
+        durability += item.system.durability
+      durabilityUnconscious = durability
+      durabilityDeath = durability + item.system.level
+      }
+    }
+    if ( type === "death" ) {
+      return durabilityDeath
+    } else if ( type === "unconscious" ) {
+      return durabilityUnconscious
+    } else { 
+      return
     }
   }
 
@@ -208,4 +320,28 @@ export default class ActorEd extends Actor {
     }
     return Number( armorPenalty );
   }
+
+  // getKarma() {
+  //   let namegiverKarmaValue = 0;
+  //   let highestDiscipline = 0;
+  //   for ( const item of this.items ) {
+  //     if ( item.type === "namegiver" ) {
+  //       namegiverKarmaValue = item.karma
+  //     } else if ( item.type === "discipline" ) {
+  //       highestDiscipline = Math.max( ...item.map( item => item.system.level ) );
+  //     }
+  //   }
+  //    return namegiverKarmaValue * highestDiscipline
+  //   }
+
+  //   getdevotion() {
+  //     let highestQuestor = 0;
+  //     for ( const item of this.items ) {
+  //       if ( item.type === "questor" ) {
+  //         highestQuestor = Math.max( ...item.map( item => item.system.level ) );
+  //       }
+  //     }
+  //      return highestQuestor * 10
+  //     }
+
 }

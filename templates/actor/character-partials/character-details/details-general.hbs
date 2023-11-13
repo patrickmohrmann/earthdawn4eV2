@@ -48,10 +48,10 @@
                         </span>
                     </div>
                 </td>
-                <td>
+                {{!-- <td>
                     <input class="input__number-input" type="text" name="system.attributes.dex.timesIncreased"
                         value="{{actor.system.attributes.dex.timesIncreased}}">
-                </td>
+                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -88,10 +88,10 @@
                         </span>
                     </div>
                 </td>
-                <td>
+                {{!-- <td>
                     <input class="input__number-input" type="text" name="system.attributes.str.timesIncreased"
                         value="{{actor.system.attributes.str.timesIncreased}}">
-                </td>
+                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -128,10 +128,10 @@
                         </span>
                     </div>
                 </td>
-                <td>
+                {{!-- <td>
                     <input class="input__number-input" type="text" name="system.attributes.tou.timesIncreased"
                         value="{{actor.system.attributes.tou.timesIncreased}}">
-                </td>
+                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -168,10 +168,10 @@
                         </span>
                     </div>
                 </td>
-                <td>
+                {{!-- <td>
                     <input class="input__number-input" type="text" name="system.attributes.per.timesIncreased"
                         value="{{actor.system.attributes.per.timesIncreased}}">
-                </td>
+                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -208,10 +208,10 @@
                         </span>
                     </div>
                 </td>
-                <td>
+                {{!-- <td>
                     <input class="input__number-input" type="text" name="system.attributes.wil.timesIncreased"
                         value="{{actor.system.attributes.wil.timesIncreased}}">
-                </td>
+                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -248,10 +248,10 @@
                         </span>
                     </div>
                 </td>
-                <td>
+                {{!-- <td>
                     <input class="input__number-input" type="text" name="system.attributes.cha.timesIncreased"
                         value="{{actor.system.attributes.cha.timesIncreased}}">
-                </td>
+                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -278,7 +278,7 @@
             <label>{{localize "ED.General.karma"}}</label>
             <span class="icon__position--right">
                 <input type="checkbox" class="input__checkbox karma__usage--always" name="system.useKarmaAlways"
-                    {{checked actor.system.useKarmaAlways}} title="{{localize " ED.General.karmaAlways"}}">
+                    {{checked actor.system.karma.useKarmaAlways}} title="{{localize " ED.General.karmaAlways"}}">
                 <a class="karma__ritual">
                     <img class="karma__ritual--icon image__border--none" src="systems/ED4E/assets/icons/meditation.svg"
                         title="{{localize " ED.General.karmaRitualTooltip"}}">
@@ -294,17 +294,20 @@
             <tr>
                 <td class="karma__current--content">
                     <div>
-                        <span class="karma__step">5{{karma.current}}</span>
+                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
+                                value="{{actor.system.karma.current}}" readonly>
                     </div>
                 </td>
                 <td class="karma__maximum--content">
                     <div>
-                        <span class="karma__dice">10{{karma.maximum}}</span>
+                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
+                                value="{{actor.system.karma.maximum}}" readonly>
                     </div>
                 </td>
                 <td class="karma__step--content">
                     <div>
-                        <span class="karma__step">5{{karma.step}}</span>
+                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
+                                value="{{actor.system.karma.step}}" readonly>
                     </div>
                 </td>
             </tr>
@@ -322,17 +325,20 @@
             <tr>
                 <td class="devotion__current--content">
                     <div>
-                        <span class="devotion__step">5{{devotion.current}}</span>
+                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
+                                value="{{actor.system.devotion.current}}" readonly>
                     </div>
                 </td>
                 <td class="devotion__maximum--content">
                     <div>
-                        <span class="devotion__dice">10{{devotion.maximum}}</span>
+                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
+                                value="{{actor.system.devotion.maximum}}" readonly>
                     </div>
                 </td>
                 <td class="devotion__step--content">
                     <div>
-                        <span class="devotion__step">5{{devotion.step}}</span>
+                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
+                                value="{{actor.system.devotion.step}}" readonly>
                     </div>
                 </td>
             </tr>
@@ -469,6 +475,27 @@
             {{#each actor.itemTypes.specialAbility}}
             {{>
             "systems/ed4e/templates/item/cards/special-ability-card.hbs"}}
+            {{/each}}
+        </div>
+        <h3>Disciplines</h3>
+        <div class="partial__two">
+            {{#each actor.itemTypes.discipline}}
+            {{>
+            "systems/ed4e/templates/item/cards/discipline-card.hbs"}}
+            {{/each}}
+        </div>
+        <h3>Paths</h3>
+        <div class="partial__two">
+            {{#each actor.itemTypes.path}}
+            {{>
+            "systems/ed4e/templates/item/cards/path-card.hbs"}}
+            {{/each}}
+        </div>
+        <h3>Questor</h3>
+        <div class="partial__two">
+            {{#each actor.itemTypes.questor}}
+            {{>
+            "systems/ed4e/templates/item/cards/questor-card.hbs"}}
             {{/each}}
         </div>
     </div>

@@ -34,6 +34,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global-templates/denomination-selector.hbs",
     "systems/ed4e/templates/global-templates/availability-selector.hbs",
     "systems/ed4e/templates/global-templates/card-options.hbs",
+    "systems/ed4e/templates/global-templates/card-effect-options.hbs",
 
     // Character partials.
     "systems/ed4e/templates/actor/character-partials/header-section.hbs",
@@ -54,6 +55,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-partials/character-details/details-reputation.hbs",
     "systems/ed4e/templates/actor/character-partials/character-details/details-general.hbs",
     "systems/ed4e/templates/actor/character-partials/character-details/details-specials.hbs",
+    "systems/ed4e/templates/actor/character-partials/character-details/details-legend.hbs",
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs",
@@ -125,8 +127,10 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/cards/equipment-card.hbs",
     "systems/ed4e/templates/item/cards/knack-card.hbs",
     "systems/ed4e/templates/item/cards/maneuver-card.hbs",
+    "systems/ed4e/templates/item/cards/path-card.hbs",
     "systems/ed4e/templates/item/cards/poison-card.hbs",
     "systems/ed4e/templates/item/cards/power-card.hbs",
+    "systems/ed4e/templates/item/cards/questor-card.hbs",
     "systems/ed4e/templates/item/cards/shield-card.hbs",
     "systems/ed4e/templates/item/cards/ship-weapon-card.hbs",
     "systems/ed4e/templates/item/cards/skill-card.hbs",
@@ -134,6 +138,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/cards/spell-card.hbs",
     "systems/ed4e/templates/item/cards/talent-card.hbs",
     "systems/ed4e/templates/item/cards/weapon-card.hbs",
+    "systems/ed4e/templates/item/cards/effect-item-card.hbs",
 
   ];
 

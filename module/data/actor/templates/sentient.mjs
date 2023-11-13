@@ -115,10 +115,62 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.Actor.Condition.fury"
                 } )
             } ),
-            useKarmaAlways: new foundry.data.fields.BooleanField( {
-                required: true,
-                initial: false,
-                label: "ED.General.Karma.karmaAlways"
+            karma: new foundry.data.fields.SchemaField( {
+                useKarmaAlways: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.General.Karma.karmaAlways"
+                } ),
+                karmaCurrent: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.karma.current"
+                } ),
+                karmaMaximum: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.karma.maximum"
+                } ),
+                karmaStep: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 4,
+                    label: "ED.General.karma.step"
+                } ),
+            } ),
+            devotion: new foundry.data.fields.SchemaField( {
+                devotionCurrent: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.devotion.current"
+                } ),
+                devotionMaximum: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.devotion.maximum"
+                } ),
+                devotionStep: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 3,
+                    label: "ED.General.devotion.step"
+                } ),
             } ),
             characteristics: new foundry.data.fields.SchemaField( {
                 defenses: new foundry.data.fields.SchemaField( {
