@@ -21,8 +21,8 @@ export default class NpcData extends NamegiverTemplate {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    static migrateData(source) {
-        super.migrateData(source);
+    static migrateData( source ) {
+        super.migrateData( source );
         // specific migration functions
     }
 }

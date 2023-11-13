@@ -4,8 +4,8 @@
 
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
- * @param {string} identifier
- * @returns {boolean}
+ * @param {string} identifier The string to be checked for validity
+ * @returns {boolean} True, if the input string is a valid Foundry identifier, false otherwise.
  */
 function isValidIdentifier( identifier ){
   return /^([a-z0-9_-]+)$/i.test( identifier );

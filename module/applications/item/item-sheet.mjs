@@ -1,8 +1,8 @@
 import ED4E from "../../config.mjs";
 
 /**
- * Extend the basic ItemSheet with modifications
- * @extends { ItemSheet } extends Itemsheet
+ * Extend the basic ActorSheet with modifications
+ * @augments {ItemSheet} extends ItemSheet
  */
 export default class ItemSheetEd extends ItemSheet {
 

@@ -27,6 +27,7 @@ export class IdentifierField extends foundry.data.fields.StringField {
  */
 
 /**
+ * @template DataFieldOptions
  * @typedef {DataFieldOptions} MappingFieldOptions
  * @property {string[]} [initialKeys]       Keys that will be created if no data is provided.
  * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
@@ -141,7 +142,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
    * Validate each value of the object.
    * @param {object} value    The object to validate.
    * @param {object} options  Validation options.
-   * @returns {Object<Error>} An object of value-specific errors by key.
+   * @returns {{key: Error}} An object of value-specific errors by key.
    */
   _validateValues( value, options ) {
     const errors = {};

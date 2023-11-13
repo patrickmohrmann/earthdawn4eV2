@@ -9,23 +9,28 @@
     "jsdoc"
   ],
   "globals": {
+    "Actor": false,
     "ActorSheet": false,
     "Actors": false,
     "CONFIG": false,
+    "DataField": false,
+    "DataModel": false,
+    "Dialog": false,
+    "Handlebars": false,
     "Hooks": false,
+    "Item": false,
     "ItemSheet": false,
     "Items": false,
+    "TextEditor": false,
     "actors": false,
     "ed4e": true,
+    "expandObject": false,
     "foundry": false,
     "game": false,
     "items": false,
     "loadTemplates": false,
-    "packs": false,
-    "Handlebars": false,
-    "TextEditor": false,
-    "expandObject": false,
-    "mergeObject": false
+    "mergeObject": false,
+    "packs": false
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
