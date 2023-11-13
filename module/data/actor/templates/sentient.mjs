@@ -34,6 +34,7 @@ export default class SentientTemplate extends CommonTemplate {
                 initialKeysOnly: true,
                 label: "ED.Attributes.attributes"
             } ),
+            // TODO: write setter functions for condition to account for mutually exclusive conditions, e.g. you can only have partial OR full cover, can't be aggressive while unconscious, etc.
             condition: new foundry.data.fields.SchemaField( {
                 aggressiveAttack: new foundry.data.fields.BooleanField( {
                     required: true,
@@ -115,6 +116,7 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.Actor.Condition.fury"
                 } )
             } ),
+          // TODO: put in extra field "options", for eventual extension?
             karma: new foundry.data.fields.SchemaField( {
                 useKarmaAlways: new foundry.data.fields.BooleanField( {
                     required: true,
@@ -182,6 +184,7 @@ export default class SentientTemplate extends CommonTemplate {
                         initial: 0,
                         label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
+                    // TODO: "mystic" or "mystical" -> same everywhere, in all instances in code
                     mystical: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,

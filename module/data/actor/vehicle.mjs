@@ -13,5 +13,6 @@ export default class VehicleData extends CommonTemplate {
     /** @inheritDoc */
     static defineSchema() {
         return super.defineSchema();
+        // TODO
     }
 }

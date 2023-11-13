@@ -18,7 +18,8 @@ export default class AbilityTemplate extends SystemDataModel {
                 blank: false,
                 initial: "standard",
                 label: "ED.Item.Ability.action"
-            } ), 
+            } ),
+            // TODO: do all actions have an attribute?
             attribute: new foundry.data.fields.StringField( {
                 required: true,
                 nullable: true,
