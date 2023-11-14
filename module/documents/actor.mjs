@@ -170,7 +170,7 @@ export default class ActorEd extends Actor {
         // Health
         systemData.characteristics.health.death = this.getHealth( "death", systemData.attributes.tou.value, systemData.attributes.tou.step );
         systemData.characteristics.health.unconscious = this.getHealth( "unconscious", systemData.attributes.tou.value,systemData.attributes.tou.step );
-        systemData.characteristics.health.woundThreshold = this.getWoundThreshold( "woundThreshold", systemData.attributes.tou.value, systemData.attributes.tou.step );
+        systemData.characteristics.health.woundThreshold = this.getHealth( "woundThreshold", systemData.attributes.tou.value, systemData.attributes.tou.step );
         systemData.characteristics.health.damage = systemData.characteristics.health.damageStun + systemData.characteristics.health.damageLethal;
         // Recovery
         systemData.characteristics.recoveryTests.daily = this.getRecovery( systemData.attributes.tou.value, systemData.attributes.tou.step );
@@ -181,14 +181,16 @@ export default class ActorEd extends Actor {
 
         // **************************** Karma & Devotion ************************** */
         // Karma
-        systemData.karma.maximum = this.getKarma( );
+        systemData.karma.karmaMaximum = this.getKarma( systemData.freeAttributePoints );
         // Devotion
-        // systemData.devotion.maximum = this.getdevotion( );
+        systemData.devotion.devotionMaximum = this.getDevotion( );
     }
 
+    /**
+     * TODO Code from old system
+     */
     applyDerivedEffects() {
       const overrides = {};
-  
       // Organize non-disabled effects by their application priority
       const changes = this.effects.reduce( ( changes, e ) => {
         if ( e.changes.length < 1 ) {
@@ -217,7 +219,11 @@ export default class ActorEd extends Actor {
       this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
     }
     
-  getStep( value ) {
+    /**
+     * @param { number } value attribute value 
+     * @returns { number } reutrns step
+     */
+    getStep( value ) {
     if ( !value > 0 ) {
       return 0;
     } else {
@@ -225,6 +231,10 @@ export default class ActorEd extends Actor {
     }
   }
 
+  /**
+   * @param { number } value dexterity-, perception- or charisma value
+   * @returns { number } returns the respective defense value
+   */
   getDefense( value ) {
     if ( !value > 0 ) {
       return 0;
@@ -232,25 +242,32 @@ export default class ActorEd extends Actor {
       return Number( [Math.ceil( value / 2 ) + 1] );
     } 
   }
-  getArmor( type, value ) {
-    if ( type === "physical" ) {
-      return Number( this.getCalculateArmor( "physical" ) ) ;
-    } else if ( type === "mystical" ) {
-      return Number( this.getCalculateArmor( "mystical" ) + [Math.floor( value / 5 )] ) ;
-    } else {
-      console.log( "ERROR MESSAGE: Armor Calculation broken!" )
-    }
-  }
 
-  getCalculateArmor( type ) {
-    // get all items and sum up the armor differenciation by type
-    if ( type === "physical" ) {
-      return Number( 0 )
-    } else if ( type === "mystical" ) {
-      return Number( 0 )
-    } else {
-      console.log( "ERROR MESSAGE: Armor Calculation broken!" )
+
+  /**
+   * @param { string } type for differentiation of pyhsical or mystical armor
+   * @param { number } value for mystic armor bonus
+   * @returns { number } returns either mystical or physical armor
+   */
+  getArmor( type, value ) {
+    let armorItemList = this.items.filter( ( item ) => { return item.type === 'armor' } );
+    let mystical = 0;
+    let physical = 0;
+    let armor = 0;
+    for ( const element of armorItemList ) {
+      if ( element.system.physicalArmor > 0 ) {
+        physical += element.system.physicalArmor + element.system.forgeBonusPhysical
+      } 
+      if ( element.system.mysticalArmor > 0 ) {
+        mystical += element.system.mysticalArmor + element.system.forgeBonusMystical
+      }
     }
+    if ( type === "physical" ) {
+      armor = physical;
+    } else if ( type === "mystical" ) {
+      armor = Number( mystical ) + Number( [Math.floor( value / 5 ) ] );
+    }
+    return armor
   }
 
   getHealth( type, value, toughnessStep ) {
@@ -310,6 +327,9 @@ export default class ActorEd extends Actor {
     return highest;
   }
 
+  /**
+   * @returns { number } Returns the highest Discipline Circle of all Disciplines
+   */
   getHighestDiscipline() {
     let disciplineList = this.items.filter( ( item ) => { return item.type === 'discipline' } );
     disciplineList.sort( ( a, b ) => ( a.system.level > b.system.level ? -1 : 1 ) );
@@ -317,12 +337,12 @@ export default class ActorEd extends Actor {
     return disciplineList[0].system.level
   }
 
+  /**
+   * @returns { object } returns the calculated bonus of all durability items multiplied with the according circles/ranks and the highest level/rank
+   */
   getDurability() {
     let durabilityItem = this.getDurabilityItems();
     let highest = this.getHighestDiscipline();
-
-    console.log( "DEBUG: DISCIPLINES", durabilityItem )
-    console.log( "DEBUG: HIGHEST", highest )
     durabilityItem.sort( ( a, b ) => ( a.system.durability > b.system.durability ? -1 : 1 ) );
     let runningtotal = 0;
     let runningDiscLevel = 0;
@@ -337,17 +357,16 @@ export default class ActorEd extends Actor {
       } else {
         discDura = 0;
       }
-
       let total = discDura * discLevel;
-      
       runningtotal += total;
     }
     return { healthRating: runningtotal, highestLevel: highest.level };
   }
 
-  
-
-
+  /**
+   * @param { number } value toughness value
+   * @returns { number } returns the number of recovery tests per day
+   */
   getRecovery( value ) {
     if ( !value > 0 ) {
       return 0;
@@ -356,6 +375,10 @@ export default class ActorEd extends Actor {
     }
   }
 
+  /**
+   * @param { number } value dexterity value
+   * @returns { number } returns the current inititative step
+   */
   getInitiative( value ) {
     if ( !value > 0 ) {
       return 0;
@@ -365,38 +388,44 @@ export default class ActorEd extends Actor {
     }
   }
 
+  /**
+   * @returns { number } returns the combined initiative penalty of all shields and armor items.
+   */
   getArmorPenalty() {
     // find all armor items which are worn and summarize the armor penalty value
     let armorPenalty = 0;
     for ( const item of this.items ) {
       if ( item.type === "armor" || item.type === "shield" ) {
+        if ( item.system.equipped ) {
         armorPenalty += item.system.initiativePenalty;
+        }
       }
     }
     return Number( armorPenalty );
   }
 
-  // getKarma() {
-  //   let namegiverKarmaValue = 0;
-  //   let highestDiscipline = 0;
-  //   for ( const item of this.items ) {
-  //     if ( item.type === "namegiver" ) {
-  //       namegiverKarmaValue = item.karma
-  //     } else if ( item.type === "discipline" ) {
-  //       highestDiscipline = Math.max( ...item.map( item => item.system.level ) );
-  //     }
-  //   }
-  //    return namegiverKarmaValue * highestDiscipline
-  //   }
+  /**
+   * @param { number } karmaBonus karmabonus comming e.g from char generation
+   * @returns { number } returns the maximum karma number
+   */
+  getKarma( karmaBonus ) {
+    // karmaBonus from char generation is still missing
+    let HighestDisciplineCircle = this.getHighestDiscipline();
+    let namegiverItem = this.items.filter( ( item ) => { return item.type === 'namegiver' } );
+    let karma = 0;
+    if ( namegiverItem.length === 1 && HighestDisciplineCircle > 0 ) {
+      karma = namegiverItem[0].system.karmamodifier * HighestDisciplineCircle + karmaBonus;
+    }
+    return karma
+  }
 
-  //   getdevotion() {
-  //     let highestQuestor = 0;
-  //     for ( const item of this.items ) {
-  //       if ( item.type === "questor" ) {
-  //         highestQuestor = Math.max( ...item.map( item => item.system.level ) );
-  //       }
-  //     }
-  //      return highestQuestor * 10
-  //     }
+  getDevotion() {
+    let questor = this.items.filter( ( item ) => { return item.type === 'questor' } );
+    let devotion = 0;
+    if ( questor.length === 1 ) {
+      devotion = questor[0].system.level * 10;
+    }
+    return devotion;
+  }
 
 }

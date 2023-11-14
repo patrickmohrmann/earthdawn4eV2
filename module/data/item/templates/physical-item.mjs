@@ -98,7 +98,12 @@ export default class PhysicalItemTemplate extends SystemDataModel {
             },
             {
                 label: "ED.Item.General.usableItem"
-            } )
+            } ),
+            equipped: new foundry.data.fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Item.General.usableItem"
+            } ),
         } );
     }
 

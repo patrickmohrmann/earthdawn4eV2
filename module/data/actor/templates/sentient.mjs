@@ -303,13 +303,22 @@ export default class SentientTemplate extends CommonTemplate {
                 min: 0,
                 step: 1,
                 initial: 0,
-                label: "ED.Actor.Characteristics.defensePhysical"
+                label: "ED.General.Initiative"
+            } ),
+            freeAttributePoints: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                step: 1,
+                initial: 0,
+                label: "ED.General.freeAttributePoints"
             } ),
             durabilityBonus: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 step: 1,
                 initial: 0,
+                label: "ED.General.durabilityBonus"
             } )
         } );
     }

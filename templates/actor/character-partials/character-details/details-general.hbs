@@ -265,7 +265,7 @@
                     <div>
                         <span class="attribute__value">
                             <input class="input__number-input" type="number" name="system.initiative"
-                                value="{{actor.system.initiative}}">
+                                value="{{actor.system.initiative}}" readonly>
                         </span>
                     </div>
                 </td>
@@ -294,20 +294,20 @@
             <tr>
                 <td class="karma__current--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
-                                value="{{actor.system.karma.current}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.karmaCurrent"
+                                value="{{actor.system.karma.karmaCurrent}}" readonly>
                     </div>
                 </td>
                 <td class="karma__maximum--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
-                                value="{{actor.system.karma.maximum}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.karmaMaximum"
+                                value="{{actor.system.karma.karmaMaximum}}" readonly>
                     </div>
                 </td>
                 <td class="karma__step--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
-                                value="{{actor.system.karma.step}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.step"
+                                value="{{actor.system.karma.karmaStep}}">
                     </div>
                 </td>
             </tr>
@@ -325,20 +325,20 @@
             <tr>
                 <td class="devotion__current--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
-                                value="{{actor.system.devotion.current}}" readonly>
+                        <input class="input__number-input" type="number" name="system.devotion.devotionCurrent"
+                                value="{{actor.system.devotion.devotionCurrent}}">
                     </div>
                 </td>
                 <td class="devotion__maximum--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
-                                value="{{actor.system.devotion.maximum}}" readonly>
+                        <input class="input__number-input" type="number" name="system.devotion.devotionMaximum"
+                                value="{{actor.system.devotion.devotionMaximum}}" readonly>
                     </div>
                 </td>
                 <td class="devotion__step--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.XXXXX"
-                                value="{{actor.system.devotion.step}}" readonly>
+                        <input class="input__number-input" type="number" name="system.devotion.devotionStep"
+                                value="{{actor.system.devotion.devotionStep}}">
                     </div>
                 </td>
             </tr>
@@ -496,6 +496,13 @@
             {{#each actor.itemTypes.questor}}
             {{>
             "systems/ed4e/templates/item/cards/questor-card.hbs"}}
+            {{/each}}
+        </div>
+        <h3>Namegiver</h3>
+        <div class="partial__two">
+            {{#each actor.itemTypes.namegiver}}
+            {{>
+            "systems/ed4e/templates/item/cards/namegiver-card.hbs"}}
             {{/each}}
         </div>
     </div>

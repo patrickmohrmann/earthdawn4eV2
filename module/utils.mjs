@@ -139,6 +139,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/cards/talent-card.hbs",
     "systems/ed4e/templates/item/cards/weapon-card.hbs",
     "systems/ed4e/templates/item/cards/effect-item-card.hbs",
+    "systems/ed4e/templates/item/cards/namegiver-card.hbs",
 
   ];
 
