@@ -17,6 +17,13 @@ export default class DevotionData extends AbilityTemplate.mixin(
                 label: "ED.Item.Devotion.label.devotionRequired",
                 hint: "ED.Item.Devotion.hint.devotionRequired"
             } ),
+            durability: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                initial: 0,
+                label: "ED.Item.Class.durability"
+            } ),
         } );
     }
 

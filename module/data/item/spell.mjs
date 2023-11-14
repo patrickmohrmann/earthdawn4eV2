@@ -3,7 +3,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Spell items.
- * @property {number} circle                                circle
+ * @property {number} level                                 circle
  * @property {number} threadsrequired                       required threads to cast the sepll
  * @property {number} weavingdifficulty                     weaving difficulty
  * @property {number} reattunedifficulty                    difficulty to re attune the spell
@@ -40,7 +40,7 @@ export default class SpellData extends SystemDataModel.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            circle: new foundry.data.fields.NumberField( {
+            level: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

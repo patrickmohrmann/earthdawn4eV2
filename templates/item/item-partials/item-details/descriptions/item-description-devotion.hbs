@@ -3,7 +3,7 @@
     {{!-- Rank --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.General.rank"}}:</label>
-        <input class="input__circle-input" name="system.rank" type="text" value="{{item.system.rank}}"
+        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
             data-dtype="Number">
     </div>
     {{!-- Strain --}}
@@ -31,6 +31,12 @@
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Devotion.devotionRequired"}}:</label>
         <input class="item-data__checkbox--line" type="checkbox" name="system.devotionRequired">
+    </div>
+    {{!-- durability --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.durability"}}:</label>
+        <input class="input__circle-input" name="system.durability" type="text" value="{{item.system.durability}}"
+            data-dtype="Number">
     </div>
 </div>
 <div class="item__right--main item-sheet__editor">

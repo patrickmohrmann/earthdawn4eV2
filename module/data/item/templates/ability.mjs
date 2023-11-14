@@ -6,7 +6,7 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {string} attribute attribute
  * @property {string} tier talent tier
  * @property {number} strain strain 
- * @property {number} rank rank 
+ * @property {number} level rank 
  */
 export default class AbilityTemplate extends SystemDataModel {
     /** @inheritDoc */
@@ -40,7 +40,7 @@ export default class AbilityTemplate extends SystemDataModel {
                 initial: 0,
                 label: "ED.Item.Ability.strain"
             } ), 
-            rank: new foundry.data.fields.NumberField( {
+            level: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

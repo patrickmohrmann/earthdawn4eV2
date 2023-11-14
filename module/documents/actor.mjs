@@ -79,6 +79,7 @@ export default class ActorEd extends Actor {
         "system.attributes.per.valueModifier",
         "system.attributes.wil.valueModifier",
         "system.attributes.cha.valueModifier",
+        "system.durabilityBonus",
       ];
 
         const actorData = this;
@@ -169,7 +170,7 @@ export default class ActorEd extends Actor {
         // Health
         systemData.characteristics.health.death = this.getHealth( "death", systemData.attributes.tou.value, systemData.attributes.tou.step );
         systemData.characteristics.health.unconscious = this.getHealth( "unconscious", systemData.attributes.tou.value,systemData.attributes.tou.step );
-        systemData.characteristics.health.woundThreshold = this.getHealth( "woundThreshold", systemData.attributes.tou.value, systemData.attributes.tou.step );
+        systemData.characteristics.health.woundThreshold = this.getWoundThreshold( "woundThreshold", systemData.attributes.tou.value, systemData.attributes.tou.step );
         systemData.characteristics.health.damage = systemData.characteristics.health.damageStun + systemData.characteristics.health.damageLethal;
         // Recovery
         systemData.characteristics.recoveryTests.daily = this.getRecovery( systemData.attributes.tou.value, systemData.attributes.tou.step );
@@ -253,10 +254,12 @@ export default class ActorEd extends Actor {
   }
 
   getHealth( type, value, toughnessStep ) {
+    let durability = this.getDurability()
+    let highestLevel = this.getHighestDurabilityItems()
     if ( type === "death" ) {
-      return Number( value * 2 + toughnessStep + this.getDurability( "death" ));
+      return Number( value * 2 + toughnessStep + durability.healthRating + highestLevel.level * ( 1 + this.system.durabilityBonus ) );
     } else if ( type === "unconscious" ) {
-      return Number( value * 2  + this.getDurability( "unconscious" ));
+      return Number( value * 2  + durability.healthRating + ( highestLevel.level * this.system.durabilityBonus ) );
     } else if ( type === "woundThreshold" ) {
       return Number( [Math.ceil( value / 2 ) + 2 ] );
     } else if ( type === "recoveryTests" ) {
@@ -266,32 +269,84 @@ export default class ActorEd extends Actor {
     }
   }
 
-  getDurability( type ) {
-    let durability = 0;
-    let durabilityDeath = 0;
-    let durabilityUnconscious = 0;
-    // check all itemTypes of discipline or Devotion with durability > 0
-    // check the hghest rank/Circle of all items of the same types
-    // for each of the highest number (rank/circle) look for the highest value in all of those items.
-    // add it to duravility
-    // For death, add the highest Number in addition
 
+  /**
+   * TODO
+   * @returns 
+   */
+  getDurabilityItems() {
+    let durabilityItem = [];
     for ( const item of this.items ) {
-      if ( item.type === "discipline" || item.type === "devotion" ) {
-        for ( let i = 0; i < item.system.level; i++ )
-        durability += item.system.durability
-      durabilityUnconscious = durability
-      durabilityDeath = durability + item.system.level
+      if ( item.type === "discipline" ) {
+        durabilityItem.push( item )
+      } else if ( item.type === "devotion" && item.system.durability > 0 ) {
+        durabilityItem.push( item )
       }
     }
-    if ( type === "death" ) {
-      return durabilityDeath
-    } else if ( type === "unconscious" ) {
-      return durabilityUnconscious
-    } else { 
-      return
-    }
+    return durabilityItem;
   }
+
+    
+    
+    
+  /**
+   * @returns { object } returns the highest Durability item, containing id, level and durability value
+   */
+  getHighestDurabilityItems() {
+    let durabilityItem = this.getDurabilityItems()
+    let highest = { id: '', level: 0, durability: 0 };
+        for ( let i = 0; i < durabilityItem.length ; i++ ) {
+          let level = Number( durabilityItem[i].system.level );
+          let durability = Number( durabilityItem[i].system.durability );
+            if ( level > highest.level ) {
+              highest.id = durabilityItem[i]._id;
+              highest.level = level;
+              highest.durability = durability;
+            } else if ( level === highest.level && durability > highest.durability ) {
+              highest.id = durabilityItem[i]._id;
+              highest.durability = durability;
+            }
+          }      
+    return highest;
+  }
+
+  getHighestDiscipline() {
+    let disciplineList = this.items.filter( ( item ) => { return item.type === 'discipline' } );
+    disciplineList.sort( ( a, b ) => ( a.system.level > b.system.level ? -1 : 1 ) );
+    
+    return disciplineList[0].system.level
+  }
+
+  getDurability() {
+    let durabilityItem = this.getDurabilityItems();
+    let highest = this.getHighestDiscipline();
+
+    console.log( "DEBUG: DISCIPLINES", durabilityItem )
+    console.log( "DEBUG: HIGHEST", highest )
+    durabilityItem.sort( ( a, b ) => ( a.system.durability > b.system.durability ? -1 : 1 ) );
+    let runningtotal = 0;
+    let runningDiscLevel = 0;
+    let discLevel = 0;
+    let discDura = 0;
+    for ( const element of durabilityItem ) {
+      let level = Number( element.system.level );
+      if ( level - runningDiscLevel > 0 ) {
+        discLevel = level - runningDiscLevel;
+        discDura = Number( element.system.durability );
+        runningDiscLevel += discLevel;
+      } else {
+        discDura = 0;
+      }
+
+      let total = discDura * discLevel;
+      
+      runningtotal += total;
+    }
+    return { healthRating: runningtotal, highestLevel: highest.level };
+  }
+
+  
+
 
   getRecovery( value ) {
     if ( !value > 0 ) {
