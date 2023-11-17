@@ -54,10 +54,17 @@
             <option value="stone">{{localize "ED.Item.AmmunitionType.stone"}}</option>
             {{/select}}
         </select>
+        <label>{{localize "ED.General.bundleSize"}}:</label>
+       <input class="input__number-input" name="system.bundleSize" type="number" value="{{item.system.bundleSize}}">
     </div>
         {{!-- equipped --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.General.equipped"}}:</label>
        <input name="system.equipped" type="checkbox" {{checked item.system.equipped}}>
+    </div>
+    {{!-- automatic Weight Calculation --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.General.autoCalculateWeight"}}:</label>
+       <input name="system.autoCalculateWeight" type="checkbox" {{checked item.system.autoCalculateWeight}}>
     </div>
 </div>

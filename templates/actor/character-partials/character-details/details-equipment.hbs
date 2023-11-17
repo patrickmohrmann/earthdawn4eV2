@@ -1,4 +1,12 @@
 Equipment
+Carrying capacity  
+<div>
+    <input type="number" name="system.encumbrance.carryingCapacity" value="{{actor.system.encumbrance.carryingCapacity}}">
+</div>
+encumbrance 
+<div>
+    <input type="number" name="system.encumbrance.encumbrance" value="{{actor.system.encumbrance.encumbrance}}">
+</div>
 <div>
     {{#each actor.itemTypes.equipment}}
     {{> "systems/ed4e/templates/item/cards/equipment-card.hbs"}}

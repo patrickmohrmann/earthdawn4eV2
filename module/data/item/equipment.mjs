@@ -25,6 +25,13 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
                     initial: "",
                 label: "ED.Item.Equipment.ammoType"
             } ),
+            bundleSize: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                initial: 0,
+                label: "ED.Item.General.bundleSize"
+            } ),
         } );
     }
 

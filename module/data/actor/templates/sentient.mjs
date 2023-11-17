@@ -297,6 +297,31 @@ export default class SentientTemplate extends CommonTemplate {
                     } ),
                 } ),
             } ),
+            encumbrance: new foundry.data.fields.SchemaField( {
+                encumbrance: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.encumbrance"
+                } ),
+                carryingCapacity: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.carryingCapacity"
+                } ),
+                carryingCapacityBonus: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.carryingCapacityBonus"
+                } )
+            } ),
             initiative: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,

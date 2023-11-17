@@ -10,7 +10,7 @@ export default class ActorEd extends Actor {
   activateListeners( html ) {
     super.activateListeners( html );
 
-    $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
+    $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
 
     html.find( '.item-delete' ).click( async ( ev ) => {
       let li = $( ev.currentTarget ).parents( '.item-name' )
@@ -70,30 +70,25 @@ export default class ActorEd extends Actor {
     } );
 
   }
-    prepareData() {
-      this.prepareBaseData();
-      const baseCharacteristics = [
-        "system.attributes.dex.valueModifier",
-        "system.attributes.str.valueModifier",
-        "system.attributes.tou.valueModifier",
-        "system.attributes.per.valueModifier",
-        "system.attributes.wil.valueModifier",
-        "system.attributes.cha.valueModifier",
-        "system.durabilityBonus",
-      ];
-
-        const actorData = this;
-        this._applyBaseEffects( baseCharacteristics );
-        this.derivedData( actorData )
-        this.applyDerivedEffects()
-        console.log( "ACTOR", actorData )
-
-        
-    }
+  prepareData() {
+    this.prepareBaseData();
+    const baseCharacteristics = [
+      "system.attributes.dex.valueModifier",
+      "system.attributes.str.valueModifier",
+      "system.attributes.tou.valueModifier",
+      "system.attributes.per.valueModifier",
+      "system.attributes.wil.valueModifier",
+      "system.attributes.cha.valueModifier",
+      "system.durabilityBonus",
+    ];
+      const actorData = this;
+      this._applyBaseEffects( baseCharacteristics );
+      this.derivedData( actorData )
+      this.applyDerivedEffects()  
+  }
 
     _applyBaseEffects( baseCharacteristics ) {
       let overrides = {};
-  
       // Organize non-disabled effects by their application priority
       // baseCharacteristics is list of attributes that need to have Effects applied before Derived Characteristics are calculated
       const changes = this.effects.reduce( ( changes, e ) => {
@@ -103,8 +98,9 @@ export default class ActorEd extends Actor {
         if ( e.disabled || e.isSuppressed || !baseCharacteristics.includes( e.changes[0].key ) ) {
           return changes;
         }
-  
+        
         return changes.concat(
+          
           e.changes.map( ( c ) => {
             c = foundry.utils.duplicate( c );
             c.effect = e;
@@ -184,6 +180,14 @@ export default class ActorEd extends Actor {
         systemData.karma.karmaMaximum = this.getKarma( systemData.freeAttributePoints );
         // Devotion
         systemData.devotion.devotionMaximum = this.getDevotion( );
+
+        // ********************* Carrying Capacity & Encumbrance ******************* */
+        // Carrying Capacity
+        systemData.encumbrance.carryingCapacity = this.getCarryingCapacity( systemData.attributes.tou.value )
+        // Encumbrance
+        systemData.encumbrance.encumbrance = this.getEncumbrance( systemData.attributes.tou.value )
+        // overloaded
+        systemData.initiative = this.getOverloaded( systemData.encumbrance.encumbrance, systemData.encumbrance.carryingCapacity );
     }
 
     /**
@@ -219,6 +223,9 @@ export default class ActorEd extends Actor {
       this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
     }
     
+    // *********************************************************************** */
+    // ************************* Attributes Step ***************************** */
+    // *********************************************************************** */
     /**
      * @param { number } value attribute value 
      * @returns { number } reutrns step
@@ -231,6 +238,9 @@ export default class ActorEd extends Actor {
     }
   }
 
+  // *********************************************************************** */
+  // ***************************** Defenses ******************************** */
+  // *********************************************************************** */
   /**
    * @param { number } value dexterity-, perception- or charisma value
    * @returns { number } returns the respective defense value
@@ -243,7 +253,9 @@ export default class ActorEd extends Actor {
     } 
   }
 
-
+  // *********************************************************************** */
+  // ******************************* Armor ********************************* */
+  // *********************************************************************** */
   /**
    * @param { string } type for differentiation of pyhsical or mystical armor
    * @param { number } value for mystic armor bonus
@@ -270,6 +282,18 @@ export default class ActorEd extends Actor {
     return armor
   }
 
+  // *********************************************************************** */
+  // ****************************** Healt ********************************** */
+  // *********************************************************************** */
+
+  // eslint-disable-next-line jsdoc/require-returns-check
+  /**
+   * 
+   * @param { string } type healt characteristic type
+   * @param { number } value attribute value (toughness)
+   * @param { number } toughnessStep attribute Step
+   * @returns { number } returns a characteristic value
+   */
   getHealth( type, value, toughnessStep ) {
     let durability = this.getDurability()
     let highestLevel = this.getHighestDurabilityItems()
@@ -285,11 +309,10 @@ export default class ActorEd extends Actor {
       console.log( "ERROR MESSAGE: Health Calculation broken!" )
     }
   }
-
-
+  
   /**
-   * TODO
-   * @returns 
+   * @description this function searches all items of the actor to find the ones with a durabilty value
+   * @returns { Array } returns an array containing all items with a durability value
    */
   getDurabilityItems() {
     let durabilityItem = [];
@@ -303,10 +326,8 @@ export default class ActorEd extends Actor {
     return durabilityItem;
   }
 
-    
-    
-    
   /**
+   * @description this function helps to determine the highest item level with durabilty 
    * @returns { object } returns the highest Durability item, containing id, level and durability value
    */
   getHighestDurabilityItems() {
@@ -328,16 +349,17 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @description this function checks for the highest discipline
    * @returns { number } Returns the highest Discipline Circle of all Disciplines
    */
   getHighestDiscipline() {
     let disciplineList = this.items.filter( ( item ) => { return item.type === 'discipline' } );
     disciplineList.sort( ( a, b ) => ( a.system.level > b.system.level ? -1 : 1 ) );
-    
     return disciplineList[0].system.level
   }
 
   /**
+   * @description calculation of health ratings (death and unconsciousness)
    * @returns { object } returns the calculated bonus of all durability items multiplied with the according circles/ranks and the highest level/rank
    */
   getDurability() {
@@ -364,6 +386,7 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @description calculation of recovery tests per day
    * @param { number } value toughness value
    * @returns { number } returns the number of recovery tests per day
    */
@@ -375,6 +398,9 @@ export default class ActorEd extends Actor {
     }
   }
 
+  // *********************************************************************** */
+  // **************************** Initiative ******************************* */
+  // *********************************************************************** */
   /**
    * @param { number } value dexterity value
    * @returns { number } returns the current inititative step
@@ -389,6 +415,7 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @description calculates all Armor Penalties of equipped items
    * @returns { number } returns the combined initiative penalty of all shields and armor items.
    */
   getArmorPenalty() {
@@ -404,6 +431,9 @@ export default class ActorEd extends Actor {
     return Number( armorPenalty );
   }
 
+  // *********************************************************************** */
+  // ******************************* Karma ********************************* */
+  // *********************************************************************** */
   /**
    * @param { number } karmaBonus karmabonus comming e.g from char generation
    * @returns { number } returns the maximum karma number
@@ -419,6 +449,13 @@ export default class ActorEd extends Actor {
     return karma
   }
 
+  // *********************************************************************** */
+  // ****************************** Devotion ******************************* */
+  // *********************************************************************** */
+  /**
+   * @description calculation of maximum devotion points. Questor Rank * 10
+   * @returns { number } maximum devotion
+   */
   getDevotion() {
     let questor = this.items.filter( ( item ) => { return item.type === 'questor' } );
     let devotion = 0;
@@ -426,6 +463,77 @@ export default class ActorEd extends Actor {
       devotion = questor[0].system.level * 10;
     }
     return devotion;
+  }
+
+  // *********************************************************************** */
+  // ***************** Encumbrance & Carrying Capacity ********************* */
+  // *********************************************************************** */
+  /**
+   * @param { number } value strenght value
+   * @returns { number } carrying capacity
+   */
+  getCarryingCapacity( value ) {
+    let carryingCapacityBonus = this.system.encumbrance.carryingCapacityBonus;
+    let strengthValue = value + carryingCapacityBonus;
+    let StrengthFifthValue  = Math.ceil( value/5 );
+
+    let carryingCapacity = -12.5 * StrengthFifthValue ** 2 + 5 * StrengthFifthValue * strengthValue + 12.5 * StrengthFifthValue + 5;
+
+    return carryingCapacity;
+  }
+
+  /**
+   * @description the item weight will be calculated based on the equipped / worn status and based on the Namegiver Size input
+   * @description the weight will be influenced by the amount of items. in case of Ammunition, the bundle size will devide the amount 
+   * @returns { number } current encumbrance
+   */
+  getEncumbrance( ) { 
+    let encumbrance = 0;
+    let namegiver = this.items.filter( ( item ) => { return item.type === 'namegiver' } );
+    // check every item for one of the following types
+    for ( const item of this.items ) {
+      if ( item.type === "weapon" || item.type === "armor" || item.type === "shield" || item.type === "equipment" ) {
+        let amount = 1;
+        // weapons and equipments can have an amount
+        if ( item.type === "weapon" || item.type === "equpiment" ) {
+          amount = item.system.amount;
+        } 
+        // check for worn or equipped state to factor Namegiver Weight Multiplier
+        if ( item.system.equipped || item.system.worn ) {
+          if ( item.system.autoCalculateWeight ) {
+            let sizeWeight = item.system.weight * namegiver[0].system.weightMultiplier
+            // check for ammunition and Bundle size
+            if ( item.type === "equipment" && item.system.ammoType !== "none" ) {
+              encumbrance += sizeWeight * ( amount / item.system.bundleSize )
+            } else {
+            encumbrance += sizeWeight * amount
+            }
+          } else {
+            // check for ammunition and Bundle size
+            if ( item.type === "equipment" && item.system.ammoType !== "none" ) {
+              encumbrance += item.system.weight * ( amount / item.system.bundleSize )
+            } else {
+            encumbrance += item.system.weight * amount
+            }
+          }  
+        }
+      }
+    }
+    return Number( encumbrance );
+  } 
+
+  getOverloaded( encumbrance, carryingCapacity ) {
+    if ( encumbrance > carryingCapacity ) {
+      let percentageOverload = encumbrance / carryingCapacity *100 
+      if ( percentageOverload < 150 ) {
+        // create effect -2 auf Movement, -2 auf P-def und M-def
+        console.error( "work in progress. An effect shall be created with -2 to movement & -2 to Physical and Mystical defense" )
+      } else if ( percentageOverload > 150 ) {
+        console.error( game.i18n.localize( "ED.Notifications.Warnings.Overloaded" ) )
+      }
+    } else if ( encumbrance < carryingCapacity ) {
+      return 
+    }
   }
 
 }

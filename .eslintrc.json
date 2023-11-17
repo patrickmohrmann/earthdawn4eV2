@@ -18,6 +18,7 @@
     "Dialog": false,
     "Handlebars": false,
     "Hooks": false,
+    "isOwned": false,
     "Item": false,
     "ItemSheet": false,
     "Items": false,
@@ -30,7 +31,8 @@
     "items": false,
     "loadTemplates": false,
     "mergeObject": false,
-    "packs": false
+    "packs": false,
+    "ui": false
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {

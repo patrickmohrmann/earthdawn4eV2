@@ -113,6 +113,12 @@ export default class NamegiverData extends SystemDataModel.mixin(
             {
                 label: "ED.Item.Namegiver.movement"
             } ),
+            weightMultiplier: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                initial: 1,
+                label: "ED.Item.Namegiver.weightMultiplier"
+            } ), 
         } );
     }
 
