@@ -296,6 +296,46 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
                 } ),
+                movement: new foundry.data.fields.SchemaField( {
+                    walk: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        initial: 0,
+                        label: "ED.Item.Namegiver.walk"
+                    } ),
+                    fly: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        initial: 0,
+                        label: "ED.Item.Namegiver.fly"
+                    } ),
+                    swim: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        initial: 0,
+                        label: "ED.Item.Namegiver.swim"
+                    } ),
+                    burrow: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        initial: 0,
+                        label: "ED.Item.Namegiver.burrow"
+                    } ),
+                    climb: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        initial: 0,
+                        label: "ED.Item.Namegiver.climb"
+                    } ),
+                },
+                {
+                    label: "ED.Item.Namegiver.movement"
+                } ),
             } ),
             encumbrance: new foundry.data.fields.SchemaField( {
                 encumbrance: new foundry.data.fields.NumberField( {

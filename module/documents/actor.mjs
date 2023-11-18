@@ -188,6 +188,14 @@ export default class ActorEd extends Actor {
         systemData.encumbrance.encumbrance = this.getEncumbrance( systemData.attributes.tou.value )
         // overloaded
         systemData.initiative = this.getOverloaded( systemData.encumbrance.encumbrance, systemData.encumbrance.carryingCapacity );
+
+        // ********************************* Movement ****************************** */
+        // Movement
+        systemData.characteristics.movement.walk = this.getMovement( "walk" );
+        systemData.characteristics.movement.climb = this.getMovement( "climb" );
+        systemData.characteristics.movement.swim = this.getMovement( "swim" );
+        systemData.characteristics.movement.burrow = this.getMovement( "burrow" );
+        systemData.characteristics.movement.fly = this.getMovement( "fly" );
     }
 
     /**
@@ -534,6 +542,25 @@ export default class ActorEd extends Actor {
     } else if ( encumbrance < carryingCapacity ) {
       return 
     }
+  }
+
+  getMovement( type ) {
+    let namegiver = this.items.filter( ( item ) => { return item.type === 'namegiver' } );
+    let movement = 0;
+    if ( type === "walk" ) {
+      movement = namegiver[0].system.movement.walk
+    } else if ( type === "swim" ) {
+      movement = namegiver[0].system.movement.swim
+    } else if ( type === "burrow" ) {
+      movement = namegiver[0].system.movement.burrow
+    } else if ( type === "fly" ) {
+      movement = namegiver[0].system.movement.fly
+    } else if ( type === "climb" ) {
+      movement = namegiver[0].system.movement.climb
+    } 
+
+    return Number(movement)
+    
   }
 
 }
