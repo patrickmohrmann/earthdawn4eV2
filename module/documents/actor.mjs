@@ -306,9 +306,9 @@ export default class ActorEd extends Actor {
     let durability = this.getDurability()
     let highestLevel = this.getHighestDurabilityItems()
     if ( type === "death" ) {
-      return Number( value * 2 + toughnessStep + durability.healthRating + highestLevel.level * ( 1 + this.system.durabilityBonus ) );
+      return Number( value * 2 + toughnessStep + durability.healthRating + highestLevel.level + ( this.system.durabilityBonus * highestLevel.durability ) );
     } else if ( type === "unconscious" ) {
-      return Number( value * 2  + durability.healthRating + ( highestLevel.level * this.system.durabilityBonus ) );
+      return Number( value * 2  + durability.healthRating + ( highestLevel.durability * this.system.durabilityBonus ) );
     } else if ( type === "woundThreshold" ) {
       return Number( [Math.ceil( value / 2 ) + 2 ] );
     } else if ( type === "recoveryTests" ) {
@@ -558,9 +558,9 @@ export default class ActorEd extends Actor {
     } else if ( type === "climb" ) {
       movement = namegiver[0].system.movement.climb
     } 
-
-    return Number(movement)
-    
+    return Number( movement )
   }
+
+  getGlobalBonus
 
 }
