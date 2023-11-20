@@ -65,6 +65,7 @@
         },
         "Conditions": {
             "aggressiveAttack":                                     "Aggressiver Angriff",
+            "blindsided":                                           "Angriff aus dem Toten Winkel",
             "coverPartial":                                         "Teilweise Deckung",
             "coverFull":                                            "Volle Deckung",
             "darknessPartial":                                      "Teilweise Dunkelheit",

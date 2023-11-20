@@ -49,7 +49,7 @@ export default class SentientTemplate extends CommonTemplate {
                 blindsided: new foundry.data.fields.BooleanField( {
                     required: true,
                     initial: false,
-                    label: "ED.Actor.Condition.XXXXXX"
+                    label: "ED.Actor.Condition.blindsided"
                 } ),
                 cover: new foundry.data.fields.SchemaField( {
                     partial: new foundry.data.fields.BooleanField( {
