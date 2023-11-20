@@ -100,7 +100,6 @@ export default class ItemSheetEd extends ItemSheet {
     static get defaultOptions() {
         return mergeObject( super.defaultOptions, {
             classes: ["earthdawn4e", "sheet", "item", "item-sheet"],
-            template: "systems/ed4e/templates/item/talent-sheet.hbs",
             width: 800,
             height: 800,
             tabs: [{
