@@ -4,7 +4,7 @@
  */
 export default class ActorSheetEd extends ActorSheet {
 
-    
+    // TODO: Review - copied class from old system
     baseListeners( html ) {
         super.activateListeners( html );
   
