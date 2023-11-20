@@ -200,6 +200,7 @@
             },
             "Class": {
                 "durability":                                   "Unempfindlichkeit",
+                "source":                                       "Ursprung der Fähigkeit",
                 "sourceDiscipline":                             "Disziplin"
             },
             "Curse": {
