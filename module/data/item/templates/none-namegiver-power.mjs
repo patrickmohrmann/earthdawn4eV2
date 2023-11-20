@@ -34,7 +34,7 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 label: "ED.Item.Power.powerStep"
             } ),
             damageStep: new foundry.data.fields.NumberField( {
-                required: true,
+                required: false,
                 nullable: false,
                 min: 0,
                 initial: 0,
