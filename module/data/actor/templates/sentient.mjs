@@ -198,7 +198,6 @@ export default class SentientTemplate extends CommonTemplate {
                       label: "ED.Item.Namegiver.movement"
                   } ),
             } ),
-            // TODO: put in extra field "options", for eventual extension?
             condition: new foundry.data.fields.SchemaField( {
                 aggressiveAttack: new foundry.data.fields.BooleanField( {
                     required: true,
