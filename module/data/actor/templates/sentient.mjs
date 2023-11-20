@@ -305,13 +305,6 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.General.devotion.step"
                 } ),
             } ),
-            durabilityBonus: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                step: 1,
-                initial: 0,
-                label: "ED.General.durabilityBonus"
-            } ),
             encumbrance: new foundry.data.fields.SchemaField( {
                 // current load / weight carried -> rename
                 encumbrance: new foundry.data.fields.NumberField( {
@@ -339,14 +332,6 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.General.carryingCapacityBonus"
                 } )
                 // encumbrance / overload status
-            } ),
-            freeAttributePoints: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                step: 1,
-                initial: 0,
-                label: "ED.General.freeAttributePoints"
             } ),
             initiative: new foundry.data.fields.NumberField( {
                 required: true,

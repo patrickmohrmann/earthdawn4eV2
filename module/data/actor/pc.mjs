@@ -61,6 +61,23 @@ export default class PcData extends NamegiverTemplate {
                 integer: true
             } ),
         } );
+        this.mergeSchema( superSchema, {
+            durabilityBonus: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                step: 1,
+                initial: 0,
+                label: "ED.General.durabilityBonus"
+            } ),
+            freeAttributePoints: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                step: 1,
+                initial: 0,
+                label: "ED.General.freeAttributePoints"
+            } ),
+        } );
         return superSchema;
     }
 
