@@ -13,71 +13,81 @@ export default class CommonTemplate extends SystemDataModel {
                 allAttacks: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allAttacks"
                 } ),
                 allEffects: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allEffects"
                 } ),
                 allActions: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allActions"
                 } ),
                 allRangedAttacks: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allRangedAttacks"
                 } ),
                 allCloseAttacks: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allCloseAttacks"
                 } ),
                 allSpellcasting: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allSpellcasting"
                 } ),
                 allDamage: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allDamage"
                 } ),
                 allMeleeDamage: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allMeleeDamage"
                 } ),
                 allRangedDamage: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allRangedDamage"
                 } ),
                 allSpellEffects: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
                     initial: 0,
+                    step: 1,
+                    integer: true,
                     label: "ED.Actor.GlobalBonus.allSpellEffects"
                 } ),
             } ),
