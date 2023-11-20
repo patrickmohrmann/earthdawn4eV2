@@ -35,145 +35,6 @@ export default class SentientTemplate extends CommonTemplate {
                 label: "ED.Attributes.attributes"
             } ),
             // TODO: write setter functions for condition to account for mutually exclusive conditions, e.g. you can only have partial OR full cover, can't be aggressive while unconscious, etc.
-            condition: new foundry.data.fields.SchemaField( {
-                aggressiveAttack: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.aggressiveAttack"
-                } ),
-                defensiveStance: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.defensiveStance"
-                } ),
-                blindsided: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.blindsided"
-                } ),
-                cover: new foundry.data.fields.SchemaField( {
-                    partial: new foundry.data.fields.BooleanField( {
-                        required: true,
-                        initial: false,
-                        label: "ED.Actor.Condition.coverPartial"
-                    } ),
-                    full: new foundry.data.fields.BooleanField( {
-                        required: true,
-                        initial: false,
-                        label: "ED.Actor.Condition.coverFull"
-                    } ),
-                } ),
-                darkness: new foundry.data.fields.SchemaField( {
-                    partial: new foundry.data.fields.BooleanField( {
-                        required: true,
-                        initial: false,
-                        label: "ED.Actor.Condition.darknessPartial"
-                    } ),
-                    full: new foundry.data.fields.BooleanField( {
-                        required: true,
-                        initial: false,
-                        label: "ED.Actor.Condition.darknessFull"
-                    } ),
-                } ),
-                impairedMovement: new foundry.data.fields.SchemaField( {
-                    partial: new foundry.data.fields.BooleanField( {
-                        required: true,
-                        initial: false,
-                        label: "ED.Actor.Condition.impairedMovementPartial"
-                    } ),
-                    full: new foundry.data.fields.BooleanField( {
-                        required: true,
-                        initial: false,
-                        label: "ED.Actor.Condition.impairedMovementFull"
-                    } ),
-                } ),
-                harried: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.harried"
-                } ),
-                overwhelmed: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 0,
-                    label: "ED.Actor.Condition.overwhelmed"
-                } ),
-                knockedDown: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.knockedDown"
-                } ),
-                surprised: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.surprised"
-                } ),
-                fury: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Actor.Condition.fury"
-                } )
-            } ),
-          // TODO: put in extra field "options", for eventual extension?
-            karma: new foundry.data.fields.SchemaField( {
-                useKarmaAlways: new foundry.data.fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.General.Karma.karmaAlways"
-                } ),
-                karmaCurrent: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 0,
-                    label: "ED.General.karma.current"
-                } ),
-                karmaMaximum: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 0,
-                    label: "ED.General.karma.maximum"
-                } ),
-                karmaStep: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 4,
-                    label: "ED.General.karma.step"
-                } ),
-            } ),
-            devotion: new foundry.data.fields.SchemaField( {
-                devotionCurrent: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 0,
-                    label: "ED.General.devotion.current"
-                } ),
-                devotionMaximum: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 0,
-                    label: "ED.General.devotion.maximum"
-                } ),
-                devotionStep: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    step: 1,
-                    initial: 3,
-                    label: "ED.General.devotion.step"
-                } ),
-            } ),
             characteristics: new foundry.data.fields.SchemaField( {
                 defenses: new foundry.data.fields.SchemaField( {
                     physical: new foundry.data.fields.NumberField( {
@@ -297,45 +158,160 @@ export default class SentientTemplate extends CommonTemplate {
                     } ),
                 } ),
                 movement: new foundry.data.fields.SchemaField( {
-                    walk: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        initial: 0,
-                        label: "ED.Item.Namegiver.walk"
-                    } ),
-                    fly: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        initial: 0,
-                        label: "ED.Item.Namegiver.fly"
-                    } ),
-                    swim: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        initial: 0,
-                        label: "ED.Item.Namegiver.swim"
-                    } ),
-                    burrow: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        initial: 0,
-                        label: "ED.Item.Namegiver.burrow"
-                    } ),
-                    climb: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        initial: 0,
-                        label: "ED.Item.Namegiver.climb"
-                    } ),
-                },
-                {
-                    label: "ED.Item.Namegiver.movement"
+                      walk: new foundry.data.fields.NumberField( {
+                          required: true,
+                          nullable: false,
+                          min: 0,
+                          initial: 0,
+                          label: "ED.Item.Namegiver.walk"
+                      } ),
+                      fly: new foundry.data.fields.NumberField( {
+                          required: true,
+                          nullable: false,
+                          min: 0,
+                          initial: 0,
+                          label: "ED.Item.Namegiver.fly"
+                      } ),
+                      swim: new foundry.data.fields.NumberField( {
+                          required: true,
+                          nullable: false,
+                          min: 0,
+                          initial: 0,
+                          label: "ED.Item.Namegiver.swim"
+                      } ),
+                      burrow: new foundry.data.fields.NumberField( {
+                          required: true,
+                          nullable: false,
+                          min: 0,
+                          initial: 0,
+                          label: "ED.Item.Namegiver.burrow"
+                      } ),
+                      climb: new foundry.data.fields.NumberField( {
+                          required: true,
+                          nullable: false,
+                          min: 0,
+                          initial: 0,
+                          label: "ED.Item.Namegiver.climb"
+                      } ),
+                  },
+                  {
+                      label: "ED.Item.Namegiver.movement"
+                  } ),
+            } ),
+            // TODO: put in extra field "options", for eventual extension?
+            condition: new foundry.data.fields.SchemaField( {
+                aggressiveAttack: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.aggressiveAttack"
                 } ),
+                blindsided: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.blindsided"
+                } ),
+                cover: new foundry.data.fields.SchemaField( {
+                    partial: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.coverPartial"
+                    } ),
+                    full: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.coverFull"
+                    } ),
+                } ),
+                darkness: new foundry.data.fields.SchemaField( {
+                    partial: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.darknessPartial"
+                    } ),
+                    full: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.darknessFull"
+                    } ),
+                } ),
+                defensiveStance: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.defensiveStance"
+                } ),
+                fury: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.fury"
+                } ),
+                harried: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.harried"
+                } ),
+                impairedMovement: new foundry.data.fields.SchemaField( {
+                    partial: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.impairedMovementPartial"
+                    } ),
+                    full: new foundry.data.fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Condition.impairedMovementFull"
+                    } ),
+                } ),
+                knockedDown: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.knockedDown"
+                } ),
+                overwhelmed: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.Actor.Condition.overwhelmed"
+                } ),
+                surprised: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Actor.Condition.surprised"
+                } )
+            } ),
+            devotion: new foundry.data.fields.SchemaField( {
+                devotionCurrent: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.devotion.current"
+                } ),
+                devotionMaximum: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.devotion.maximum"
+                } ),
+                devotionStep: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 3,
+                    label: "ED.General.devotion.step"
+                } ),
+            } ),
+            durabilityBonus: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                step: 1,
+                initial: 0,
+                label: "ED.General.durabilityBonus"
             } ),
             encumbrance: new foundry.data.fields.SchemaField( {
                 encumbrance: new foundry.data.fields.NumberField( {
@@ -362,14 +338,6 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.General.carryingCapacityBonus"
                 } )
             } ),
-            initiative: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                step: 1,
-                initial: 0,
-                label: "ED.General.Initiative"
-            } ),
             freeAttributePoints: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
@@ -378,12 +346,44 @@ export default class SentientTemplate extends CommonTemplate {
                 initial: 0,
                 label: "ED.General.freeAttributePoints"
             } ),
-            durabilityBonus: new foundry.data.fields.NumberField( {
+            initiative: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
+                min: 0,
                 step: 1,
                 initial: 0,
-                label: "ED.General.durabilityBonus"
+                label: "ED.General.Initiative"
+            } ),
+            karma: new foundry.data.fields.SchemaField( {
+                useKarmaAlways: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.General.Karma.karmaAlways"
+                } ),
+                karmaCurrent: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.karma.current"
+                } ),
+                karmaMaximum: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    label: "ED.General.karma.maximum"
+                } ),
+                karmaStep: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 4,
+                    label: "ED.General.karma.step"
+                } ),
             } )
         } );
     }
