@@ -52,6 +52,50 @@ ED4E.attributes = {
 }
 
 /**
+ * configuration data for Global Bonuses
+ * @typedef {object} GlobalBonusConfiguration
+ * @property {string} label                               Localized label.
+ * @property {{[key: string]: number|string}} [defaults]  Default values for this Attribute based on actor type.
+ */
+
+/**
+ * @description the global bonus configurations
+ * @enum { GlobalBonusConfiguration }
+ */
+ED4E.globalBonuses = {
+	allAttacks: {
+		label: "ED.Actor.GlobalBonus.allAttacks"
+	},
+	allEffects: {
+		label: "ED.Actor.GlobalBonus.allEffects"
+	},
+	allActions: {
+		label: "ED.Actor.GlobalBonus.allActions"
+	},
+	allRangedAttacks: {
+		label: "ED.Actor.GlobalBonus.allRangedAttacks"
+	},
+	allCloseAttacks: {
+		label: "ED.Actor.GlobalBonus.allCloseAttacks"
+	},
+	allSpellcasting: {
+		label: "ED.Actor.GlobalBonus.allSpellcasting"
+	},
+	allDamage: {
+		label: "ED.Actor.GlobalBonus.allDamage"
+	},
+	allMeleeDamage: {
+		label: "ED.Actor.GlobalBonus.allMeleeDamage"
+	},
+	allRangedDamage: {
+		label: "ED.Actor.GlobalBonus.allRangedDamage"
+	},
+	allSpellEffects: {
+		label: "ED.Actor.GlobalBonus.allSpellEffects"
+	}
+}
+
+/**
  * ??? Denomination options
  */
 ED4E.denomination = {

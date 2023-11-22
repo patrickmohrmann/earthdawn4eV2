@@ -1,4 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
+import { MappingField } from "../../fields.mjs";
 
 /**
  * A template for all actors that share the common template.
@@ -9,88 +10,19 @@ export default class CommonTemplate extends SystemDataModel {
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            globalBonuses: new foundry.data.fields.SchemaField( {
-                allAttacks: new foundry.data.fields.NumberField( {
+            globalBonuses: new MappingField( new foundry.data.fields.SchemaField( {
+                value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    initial: 0,
                     step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allAttacks"
-                } ),
-                allEffects: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
                     initial: 0,
-                    step: 1,
                     integer: true,
-                    label: "ED.Actor.GlobalBonus.allEffects"
-                } ),
-                allActions: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allActions"
-                } ),
-                allRangedAttacks: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allRangedAttacks"
-                } ),
-                allCloseAttacks: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allCloseAttacks"
-                } ),
-                allSpellcasting: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allSpellcasting"
-                } ),
-                allDamage: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allDamage"
-                } ),
-                allMeleeDamage: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allMeleeDamage"
-                } ),
-                allRangedDamage: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allRangedDamage"
-                } ),
-                allSpellEffects: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    initial: 0,
-                    step: 1,
-                    integer: true,
-                    label: "ED.Actor.GlobalBonus.allSpellEffects"
-                } ),
-            } ),
+                } )
+            } ), {
+                initialKeys: CONFIG.ED4E.globalBonuses,
+                initialKeysOnly: true,
+                label: "ED.Attributes.globalBonuses"
+            } )
         } );
     }
 

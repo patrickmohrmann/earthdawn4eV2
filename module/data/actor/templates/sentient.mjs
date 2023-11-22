@@ -1,5 +1,5 @@
 import CommonTemplate from "./common.mjs";
-import { MappingField } from '../../fields.mjs';
+import { MappingField } from "../../fields.mjs";
 
 /**
  * A template for all actors that represent sentient beings and have such stats.
