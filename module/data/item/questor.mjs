@@ -11,13 +11,7 @@ export default class QuestorData extends ClassTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            durability: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                label: "ED.Item.Class.durability"
-            } ), 
+            
         } );
     }
 
