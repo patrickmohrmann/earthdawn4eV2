@@ -278,7 +278,7 @@
             <label>{{localize "ED.General.karma"}}</label>
             <span class="icon__position--right">
                 <input type="checkbox" class="input__checkbox karma__usage--always" name="system.useKarmaAlways"
-                    {{checked actor.system.karma.useKarmaAlways}} title="{{localize " ED.General.karmaAlways"}}">
+                    {{checked actor.system.karma.useAlways}} title="{{localize " ED.General.karmaAlways"}}">
                 <a class="karma__ritual">
                     <img class="karma__ritual--icon image__border--none" src="systems/ED4E/assets/icons/meditation.svg"
                         title="{{localize " ED.General.karmaRitualTooltip"}}">
@@ -294,20 +294,20 @@
             <tr>
                 <td class="karma__current--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.karmaCurrent"
-                                value="{{actor.system.karma.karmaCurrent}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.current"
+                                value="{{actor.system.karma.current}}" readonly>
                     </div>
                 </td>
                 <td class="karma__maximum--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.karmaMaximum"
-                                value="{{actor.system.karma.karmaMaximum}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.maximum"
+                                value="{{actor.system.karma.maximum}}" readonly>
                     </div>
                 </td>
                 <td class="karma__step--content">
                     <div>
                         <input class="input__number-input" type="number" name="system.karma.step"
-                                value="{{actor.system.karma.karmaStep}}">
+                                value="{{actor.system.karma.step}}">
                     </div>
                 </td>
             </tr>
@@ -325,20 +325,20 @@
             <tr>
                 <td class="devotion__current--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.devotion.devotionCurrent"
-                                value="{{actor.system.devotion.devotionCurrent}}">
+                        <input class="input__number-input" type="number" name="system.devotion.current"
+                                value="{{actor.system.devotion.current}}">
                     </div>
                 </td>
                 <td class="devotion__maximum--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.devotion.devotionMaximum"
-                                value="{{actor.system.devotion.devotionMaximum}}" readonly>
+                        <input class="input__number-input" type="number" name="system.devotion.maximum"
+                                value="{{actor.system.devotion.maximum}}" readonly>
                     </div>
                 </td>
                 <td class="devotion__step--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.devotion.devotionStep"
-                                value="{{actor.system.devotion.devotionStep}}">
+                        <input class="input__number-input" type="number" name="system.devotion.step"
+                                value="{{actor.system.devotion.step}}">
                     </div>
                 </td>
             </tr>
