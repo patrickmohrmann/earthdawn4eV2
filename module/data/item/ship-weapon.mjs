@@ -22,6 +22,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.ShipWeapon.firePowerPoints"
             } ), 
             crewWeapon: new foundry.data.fields.NumberField( {
@@ -29,6 +30,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.ShipWeapon.crewWeapon"
             } ), 
             rangeShort: new foundry.data.fields.NumberField( {
@@ -36,6 +38,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.ShipWeapon.rangeShort"
             } ), 
             rangeLong: new foundry.data.fields.NumberField( {
@@ -43,6 +46,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.ShipWeapon.rangeLong"
             } ), 
             salvoCost: new foundry.data.fields.NumberField( {
@@ -50,6 +54,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.ShipWeapon.salvoCost"
             } ), 
             charakterDamage: new foundry.data.fields.NumberField( {
@@ -57,6 +62,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.ShipWeapon.charakterDamage"
             } ), 
         } );

@@ -29,6 +29,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 1,
                 initial: 10,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.dexterityValue"
             } ), 
             strengthValue: new foundry.data.fields.NumberField( {
@@ -36,6 +38,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 1,
                 initial: 10,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.strengthValue"
             } ), 
             toughnessValue: new foundry.data.fields.NumberField( {
@@ -43,6 +47,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 1,
                 initial: 10,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.toughnessValue"
             } ), 
             perceptionValue: new foundry.data.fields.NumberField( {
@@ -50,6 +56,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 1,
                 initial: 10,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.perceptionValue"
             } ), 
             willpowerValue: new foundry.data.fields.NumberField( {
@@ -57,6 +65,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 1,
                 initial: 10,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.willpowerValue"
             } ), 
             charismaValue: new foundry.data.fields.NumberField( {
@@ -64,6 +74,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 1,
                 initial: 10,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.charismaValue"
             } ), 
             karmamodifier: new foundry.data.fields.NumberField( {
@@ -71,6 +83,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Namegiver.karmamodifier"
             } ), 
             movement: new foundry.data.fields.SchemaField( {
@@ -79,6 +92,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Namegiver.walk"
                 } ),
                 fly: new foundry.data.fields.NumberField( {
@@ -86,6 +100,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Namegiver.fly"
                 } ),
                 swim: new foundry.data.fields.NumberField( {
@@ -93,6 +108,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Namegiver.swim"
                 } ),
                 burrow: new foundry.data.fields.NumberField( {
@@ -100,6 +116,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Namegiver.burrow"
                 } ),
                 climb: new foundry.data.fields.NumberField( {
@@ -107,6 +124,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Namegiver.climb"
                 } ),
             },
@@ -117,6 +135,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 required: true,
                 nullable: false,
                 initial: 1,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Namegiver.weightMultiplier"
             } ), 
         } );

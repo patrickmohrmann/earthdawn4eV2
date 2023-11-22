@@ -43,6 +43,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.dexterityStep"
             } ), 
             strengthStep: new foundry.data.fields.NumberField( {
@@ -50,6 +51,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.strengthStep"
             } ),
             toughnessStep: new foundry.data.fields.NumberField( {
@@ -57,6 +59,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.toughnessStep"
             } ),
             perceptionStep: new foundry.data.fields.NumberField( {
@@ -64,6 +67,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.perceptionStep"
             } ),
             willpowerStep: new foundry.data.fields.NumberField( {
@@ -71,6 +75,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.willpowerStep"
             } ),
             charismaStep: new foundry.data.fields.NumberField( {
@@ -78,6 +83,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.charismaStep"
             } ),
             initiativeStep: new foundry.data.fields.NumberField( {
@@ -85,6 +91,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.initiativeStep"
             } ),
             movement: new foundry.data.fields.SchemaField( {
@@ -93,6 +100,7 @@ export default class MaskData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Masks.walk"
                 } ),
                 fly: new foundry.data.fields.NumberField( {
@@ -100,6 +108,7 @@ export default class MaskData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Masks.fly"
                 } ),
                 swim: new foundry.data.fields.NumberField( {
@@ -107,6 +116,7 @@ export default class MaskData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Masks.swim"
                 } ),
                 burrow: new foundry.data.fields.NumberField( {
@@ -114,6 +124,7 @@ export default class MaskData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Masks.burrow"
                 } ),
                 climb: new foundry.data.fields.NumberField( {
@@ -121,6 +132,7 @@ export default class MaskData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Masks.climb"
                 } ),
             },
@@ -132,6 +144,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.physicaldefense"
             } ),
             mysticdefense: new foundry.data.fields.NumberField( {
@@ -139,6 +152,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.mysticdefense"
             } ),
             socialdefense: new foundry.data.fields.NumberField( {
@@ -146,6 +160,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.socialdefense"
             } ),
             physicalarmor: new foundry.data.fields.NumberField( {
@@ -153,6 +168,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.physicalarmor"
             } ),
             mysticarmor: new foundry.data.fields.NumberField( {
@@ -160,6 +176,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.mysticarmor"
             } ),
             knockDownStep: new foundry.data.fields.NumberField( {
@@ -167,6 +184,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.knockDownStep"
             } ),
             recoverytests: new foundry.data.fields.NumberField( {
@@ -174,6 +192,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.recoverytests"
             } ),
             deathThreshold: new foundry.data.fields.NumberField( {
@@ -181,6 +200,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.deathThreshold"
             } ),
             unconsciousThreshold: new foundry.data.fields.NumberField( {
@@ -188,6 +208,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.unconsciousThreshold"
             } ),
             woundThreshold: new foundry.data.fields.NumberField( {
@@ -195,6 +216,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.woundThreshold"
             } ),
             attacks: new foundry.data.fields.NumberField( {
@@ -202,6 +224,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.attacks"
             } ),
             attackStepsBonus: new foundry.data.fields.NumberField( {
@@ -209,6 +232,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.attackStepsBonus"
             } ),
             damageStepsBonus: new foundry.data.fields.NumberField( {
@@ -216,6 +240,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.damageStepsBonus"
             } ),
             challengingRate: new foundry.data.fields.NumberField( {
@@ -223,6 +248,7 @@ export default class MaskData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Masks.challengingRate"
             } ),
             // @chris das ist eher ein Array oder machen wir das ganz anders?

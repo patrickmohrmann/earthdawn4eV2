@@ -30,6 +30,7 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.General.bundleSize"
             } ),
         } );

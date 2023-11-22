@@ -43,8 +43,10 @@ export default class SpellData extends SystemDataModel.mixin(
             level: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
-                min: 0,
-                initial: 0,
+                min: 1,
+                initial: 1,
+                integer: true,
+                positive: true,
                 label: "ED.Item.Spell.circle"
             } ), 
             threadsrequired: new foundry.data.fields.NumberField( {
@@ -52,6 +54,7 @@ export default class SpellData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Spell.threadsrequired"
             } ),
             weavingdifficulty: new foundry.data.fields.NumberField( {
@@ -59,6 +62,7 @@ export default class SpellData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Spell.weavingdifficulty"
             } ),
             reattunedifficulty: new foundry.data.fields.NumberField( {
@@ -66,6 +70,7 @@ export default class SpellData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Spell.threadsrreattunedifficultyequired"
             } ),
             castingdifficulty: new foundry.data.fields.StringField( {
@@ -174,6 +179,7 @@ export default class SpellData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Spell.sensingDifficulty"
                 } )
             },

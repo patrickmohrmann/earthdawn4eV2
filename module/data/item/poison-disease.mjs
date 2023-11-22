@@ -27,7 +27,8 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                     required: true,
                     nullable: false,
                     min: 0,
-                    initial: 0,
+                    initial: 0,   
+                    integer: true,
                     label: "ED.Item.PoisonDisease.damageStep"
                 } ), 
                 paralysisStep: new foundry.data.fields.NumberField( {
@@ -35,6 +36,7 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.PoisonDisease.paralysisStep"
                 } ), 
                 debilitationStep: new foundry.data.fields.NumberField( {
@@ -42,6 +44,7 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.PoisonDisease.debilitationStep"
                 } ), 
             },
@@ -54,6 +57,7 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.PoisonDisease.totalEffects"
                 } ), 
                 timeInBetween: new foundry.data.fields.NumberField( {
@@ -61,6 +65,7 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.PoisonDisease.timeInBetween"
                 } ), 
             },
@@ -72,6 +77,7 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.PoisonDisease.onsetTime"
             } ), 
             duration: new foundry.data.fields.NumberField( {
@@ -79,6 +85,7 @@ export default class PoisonDiseaseData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.PoisonDisease.duration"
             } ), 
             activation: new foundry.data.fields.StringField( {

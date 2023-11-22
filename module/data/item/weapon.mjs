@@ -42,7 +42,6 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 min: 0,
                 initial: 0,
                 integer: true,
-                positive: true,
                 label: "ED.Item.Weapon.Label.damageBaseStep",
                 hint: "ED.Item.Weapon.Hint.damageBaseStep"
             } ),
@@ -63,7 +62,6 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 min: 3,
                 initial: 3,
                 integer: true,
-                positive: true,
                 label: "ED.Item.Weapon.Label.strengthMinimum",
                 hint: "ED.Item.Weapon.Hint.strengthMinimum"
             } ),
@@ -72,7 +70,6 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 nullable: true,
                 min: 0,
                 integer: true,
-                positive: true,
                 label: "ED.Item.Weapon.Label.dexterityMinimum",
                 hint: "ED.Item.Weapon.Hint.dexterityMinimum"
             } ),
@@ -93,7 +90,6 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 nullable: true,
                 min: 0,
                 integer: true,
-                positive: true,
                 label: "ED.Item.Weapon.Label.ammunition"
             } ),
             forgeBonus: new foundry.data.fields.NumberField( {
@@ -102,7 +98,6 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 min: 0,
                 initial: 0,
                 integer: true,
-                positive: true,
                 label: "ED.Item.Weapon.Label.forgeBonus",
                 hint: "ED.Item.Weapon.Hint.forgeBonus"
             } ),

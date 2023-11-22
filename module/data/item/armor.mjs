@@ -24,6 +24,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Armor.physicalArmor"
             } ), 
             mysticalArmor: new foundry.data.fields.NumberField( {
@@ -31,6 +32,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Armor.mysticalArmor"
             } ),
             forgeBonusPhysical: new foundry.data.fields.NumberField( {
@@ -38,6 +40,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Armor.forgeBonusPhysical"
             } ),
             forgeBonusMystical: new foundry.data.fields.NumberField( {
@@ -45,6 +48,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Armor.forgeBonusMystical"
             } ),
             initiativePenalty: new foundry.data.fields.NumberField( {
@@ -52,6 +56,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Armor.initiativePenalty"
             } ),
             piecemealArmor: new foundry.data.fields.SchemaField( {
@@ -66,6 +71,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                     min: 0,
                     max: 3,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.Armor.piecemealArmorSize"
                 } ),
             } ),

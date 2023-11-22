@@ -43,6 +43,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
                     // TODO: "mystic" or "mystical" -> same everywhere, in all instances in code
@@ -52,6 +53,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.defenseMystical"
                     } ),
                     social: new foundry.data.fields.NumberField( {
@@ -60,6 +62,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.defenseSocial"
                     } ),
                 } ),
@@ -70,6 +73,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.armorPhysical"
                     } ),
                     mystical: new foundry.data.fields.NumberField( {
@@ -78,6 +82,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.armorMystical"
                     } ),
                 } ),
@@ -88,6 +93,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.deathRate"
                     } ),
                     unconscious: new foundry.data.fields.NumberField( {
@@ -96,6 +102,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.unconsciousRate"
                     } ),
                     woundThreshold: new foundry.data.fields.NumberField( {
@@ -104,6 +111,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.woundThreshold"
                     } ),
                     damage: new foundry.data.fields.NumberField( {
@@ -112,6 +120,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.damage"
                     } ),
                     damageLethal: new foundry.data.fields.NumberField( {
@@ -120,6 +129,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.damageLethal"
                     } ),
                     damageStun: new foundry.data.fields.NumberField( {
@@ -128,6 +138,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.damageStun"
                     } ),
                     wounds: new foundry.data.fields.NumberField( {
@@ -136,6 +147,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.wounds"
                     } ),
                 } ),
@@ -146,6 +158,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsDaily"
                     } ),
                     current: new foundry.data.fields.NumberField( {
@@ -154,6 +167,7 @@ export default class SentientTemplate extends CommonTemplate {
                         min: 0,
                         step: 1,
                         initial: 0,
+                        integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
                 } ),
@@ -163,6 +177,7 @@ export default class SentientTemplate extends CommonTemplate {
                           nullable: false,
                           min: 0,
                           initial: 0,
+                          integer: true,
                           label: "ED.Item.Namegiver.walk"
                       } ),
                       fly: new foundry.data.fields.NumberField( {
@@ -170,6 +185,7 @@ export default class SentientTemplate extends CommonTemplate {
                           nullable: false,
                           min: 0,
                           initial: 0,
+                          integer: true,
                           label: "ED.Item.Namegiver.fly"
                       } ),
                       swim: new foundry.data.fields.NumberField( {
@@ -177,6 +193,7 @@ export default class SentientTemplate extends CommonTemplate {
                           nullable: false,
                           min: 0,
                           initial: 0,
+                          integer: true,
                           label: "ED.Item.Namegiver.swim"
                       } ),
                       burrow: new foundry.data.fields.NumberField( {
@@ -184,6 +201,7 @@ export default class SentientTemplate extends CommonTemplate {
                           nullable: false,
                           min: 0,
                           initial: 0,
+                          integer: true,
                           label: "ED.Item.Namegiver.burrow"
                       } ),
                       climb: new foundry.data.fields.NumberField( {
@@ -191,6 +209,7 @@ export default class SentientTemplate extends CommonTemplate {
                           nullable: false,
                           min: 0,
                           initial: 0,
+                          integer: true,
                           label: "ED.Item.Namegiver.climb"
                       } ),
                   },
@@ -271,6 +290,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 0,
+                    integer: true,
                     label: "ED.Actor.Condition.overwhelmed"
                 } ),
                 surprised: new foundry.data.fields.BooleanField( {
@@ -286,6 +306,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 0,
+                    integer: true,
                     label: "ED.General.devotion.current"
                 } ),
                 maximum: new foundry.data.fields.NumberField( {
@@ -294,6 +315,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 0,
+                    integer: true,
                     label: "ED.General.devotion.maximum"
                 } ),
                 step: new foundry.data.fields.NumberField( {
@@ -302,6 +324,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 3,
+                    integer: true,
                     label: "ED.General.devotion.step"
                 } ),
             } ),
@@ -329,6 +352,7 @@ export default class SentientTemplate extends CommonTemplate {
                     nullable: false,
                     step: 1,
                     initial: 0,
+                    integer: true,
                     label: "ED.General.carryingCapacityBonus"
                 } )
                 // encumbrance / overload status
@@ -339,6 +363,7 @@ export default class SentientTemplate extends CommonTemplate {
                 min: 0,
                 step: 1,
                 initial: 0,
+                integer: true,
                 label: "ED.General.Initiative"
             } ),
             karma: new foundry.data.fields.SchemaField( {
@@ -353,6 +378,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 0,
+                    integer: true,
                     label: "ED.General.karma.current"
                 } ),
                 maximum: new foundry.data.fields.NumberField( {
@@ -361,6 +387,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 0,
+                    integer: true,
                     label: "ED.General.karma.maximum"
                 } ),
                 step: new foundry.data.fields.NumberField( {
@@ -369,6 +396,7 @@ export default class SentientTemplate extends CommonTemplate {
                     min: 0,
                     step: 1,
                     initial: 4,
+                    integer: true,
                     label: "ED.General.karma.step"
                 } ),
             } )

@@ -65,6 +65,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.General.amount"
             } ),
             bloodMagicDamage: new foundry.data.fields.NumberField( {
@@ -72,6 +73,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
             usableItem: new foundry.data.fields.SchemaField( {
@@ -84,6 +86,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     nullable: false,
                     min: 0,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.General.arbitraryStep"
                 } ),
                 action: new foundry.data.fields.StringField( {
@@ -100,6 +103,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     min: 0,
                     max: 5,
                     initial: 0,
+                    integer: true,
                     label: "ED.Item.General.recoveryPropertyValue"
                 } ),
             },

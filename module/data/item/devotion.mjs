@@ -22,6 +22,7 @@ export default class DevotionData extends AbilityTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Class.durability"
             } ),
         } );

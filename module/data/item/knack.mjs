@@ -41,6 +41,7 @@ export default class KnackData extends AbilityTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Knack.extraSuccesses"
             } ),
         } );

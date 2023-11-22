@@ -21,6 +21,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 hint: "ED.Item.Shield.Label.defenseBonusPhysical",
                 label: "ED.Item.Shield.Hint.defenseBonusPhysical"
             } ),
@@ -29,6 +30,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 hint: "ED.Item.Shield.Label.defenseBonusMystical",
                 label: "ED.Item.Shield.Hint.defenseBonusMystical"
             } ),
@@ -37,6 +39,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 hint: "ED.Item.Shield.Label.initiativePenalty",
                 label: "ED.Item.Shield.Hint.initiativePenalty"
             } ),
@@ -45,6 +48,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 hint: "ED.Item.Shield.Label.shatterThreshold",
                 label: "ED.Item.Shield.Hint.shatterThreshold"
             } ),

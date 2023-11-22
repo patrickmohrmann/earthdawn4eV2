@@ -48,6 +48,7 @@ export default class AbilityTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Ability.rank"
             } ),
             strain: new foundry.data.fields.NumberField( {
@@ -55,6 +56,7 @@ export default class AbilityTemplate extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Ability.strain"
             } ),
         } );

@@ -21,6 +21,7 @@ export default class CurseHorrorMarkData extends SystemDataModel.mixin(
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Curse.curseStep"
             } ), 
             curseType: new foundry.data.fields.StringField( {

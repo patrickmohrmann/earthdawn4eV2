@@ -16,6 +16,7 @@ export default class ClassTemplate extends SystemDataModel{
                 min: 1,
                 initial: 1,
                 positive: true,
+                integer: true
             } ), 
         } );
     }

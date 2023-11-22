@@ -24,6 +24,7 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Power.strain"
             } ),
             powerStep: new foundry.data.fields.NumberField( {
@@ -31,6 +32,7 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Power.powerStep"
             } ),
             damageStep: new foundry.data.fields.NumberField( {
@@ -38,6 +40,7 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 nullable: false,
                 min: 0,
                 initial: 0,
+                integer: true,
                 label: "ED.Item.Power.damageStep"
             } ),
         } );
