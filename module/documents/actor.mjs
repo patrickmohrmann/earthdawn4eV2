@@ -185,9 +185,9 @@ export default class ActorEd extends Actor {
         // Carrying Capacity
         systemData.encumbrance.carryingCapacity = this.getCarryingCapacity( systemData.attributes.tou.value )
         // Encumbrance
-        systemData.encumbrance.encumbrance = this.getEncumbrance( systemData.attributes.tou.value )
+        systemData.encumbrance.carriedLoad = this.getEncumbrance( systemData.attributes.tou.value )
         // overloaded
-        systemData.initiative = this.getOverloaded( systemData.encumbrance.encumbrance, systemData.encumbrance.carryingCapacity );
+        systemData.initiative = this.getOverloaded( systemData.encumbrance.carriedLoad, systemData.encumbrance.carryingCapacity );
 
         // ********************************* Movement ****************************** */
         // Movement

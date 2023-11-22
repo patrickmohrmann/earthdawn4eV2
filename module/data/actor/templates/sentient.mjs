@@ -307,12 +307,12 @@ export default class SentientTemplate extends CommonTemplate {
             } ),
             encumbrance: new foundry.data.fields.SchemaField( {
                 // current load / weight carried -> rename
-                encumbrance: new foundry.data.fields.NumberField( {
+                carriedLoad: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
-                    label: "ED.General.encumbrance"
+                    label: "ED.General.carriedLoad"
                 } ),
                 // maximum carriable weight
                 carryingCapacity: new foundry.data.fields.NumberField( {
