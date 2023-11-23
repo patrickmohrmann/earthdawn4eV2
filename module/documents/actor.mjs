@@ -187,7 +187,7 @@ export default class ActorEd extends Actor {
         // Encumbrance
         systemData.encumbrance.carriedLoad = this.getEncumbrance( systemData.attributes.tou.value )
         // overloaded
-        systemData.initiative = this.getOverloaded( systemData.encumbrance.carriedLoad, systemData.encumbrance.carryingCapacity );
+        // systemData.initiative = this.getOverloaded( systemData.encumbrance.carriedLoad, systemData.encumbrance.carryingCapacity );
 
         // ********************************* Movement ****************************** */
         // Movement
@@ -341,9 +341,9 @@ export default class ActorEd extends Actor {
   getHighestDurabilityItems() {
     let durabilityItem = this.getDurabilityItems()
     let highest = { id: '', level: 0, durability: 0 };
-        for ( let i = 0; i < durabilityItem.length ; i++ ) {
-          let level = Number( durabilityItem[i].system.level );
-          let durability = Number( durabilityItem[i].system.durability );
+          for ( let i = 0; i < durabilityItem.length ; i++ ) {
+            let level = Number( durabilityItem[i].system.level );
+            let durability = Number( durabilityItem[i].system.durability );
             if ( level > highest.level ) {
               highest.id = durabilityItem[i]._id;
               highest.level = level;
@@ -352,7 +352,7 @@ export default class ActorEd extends Actor {
               highest.id = durabilityItem[i]._id;
               highest.durability = durability;
             }
-          }      
+          } 
     return highest;
   }
 
@@ -362,8 +362,12 @@ export default class ActorEd extends Actor {
    */
   getHighestDiscipline() {
     let disciplineList = this.items.filter( ( item ) => { return item.type === 'discipline' } );
-    disciplineList.sort( ( a, b ) => ( a.system.level > b.system.level ? -1 : 1 ) );
-    return disciplineList[0].system.level
+    let circle = 0;
+    if ( disciplineList.length > 0 ) {
+      disciplineList.sort( ( a, b ) => ( a.system.level > b.system.level ? -1 : 1 ) );
+      circle = disciplineList[0].system.level
+    }
+    return circle
   }
 
   /**
@@ -372,8 +376,15 @@ export default class ActorEd extends Actor {
    */
   getDurability() {
     let durabilityItem = this.getDurabilityItems();
-    let highest = this.getHighestDiscipline();
+    let highest; 
+    let highestLevel = 0
+    if ( durabilityItem.length > 0 ) {
+      
+      highest = this.getHighestDiscipline();
+      highestLevel = highest.level
+    } 
     durabilityItem.sort( ( a, b ) => ( a.system.durability > b.system.durability ? -1 : 1 ) );
+  
     let runningtotal = 0;
     let runningDiscLevel = 0;
     let discLevel = 0;
@@ -390,7 +401,10 @@ export default class ActorEd extends Actor {
       let total = discDura * discLevel;
       runningtotal += total;
     }
-    return { healthRating: runningtotal, highestLevel: highest.level };
+
+
+    return { healthRating: runningtotal, highestLevel: highestLevel };
+    
   }
 
   /**
@@ -547,20 +561,20 @@ export default class ActorEd extends Actor {
   getMovement( type ) {
     let namegiver = this.items.filter( ( item ) => { return item.type === 'namegiver' } );
     let movement = 0;
-    if ( type === "walk" ) {
-      movement = namegiver[0].system.movement.walk
-    } else if ( type === "swim" ) {
-      movement = namegiver[0].system.movement.swim
-    } else if ( type === "burrow" ) {
-      movement = namegiver[0].system.movement.burrow
-    } else if ( type === "fly" ) {
-      movement = namegiver[0].system.movement.fly
-    } else if ( type === "climb" ) {
-      movement = namegiver[0].system.movement.climb
-    } 
+    if ( namegiver.length > 0 ) {
+      if ( type === "walk" ) {
+        movement = namegiver[0].system.movement.walk
+      } else if ( type === "swim" ) {
+        movement = namegiver[0].system.movement.swim
+      } else if ( type === "burrow" ) {
+        movement = namegiver[0].system.movement.burrow
+      } else if ( type === "fly" ) {
+        movement = namegiver[0].system.movement.fly
+      } else if ( type === "climb" ) {
+        movement = namegiver[0].system.movement.climb
+      } 
+    }
     return Number( movement )
   }
-
-  getGlobalBonus
 
 }
