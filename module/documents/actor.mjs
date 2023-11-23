@@ -431,7 +431,7 @@ export default class ActorEd extends Actor {
     let armorPenalty = 0;
     for ( const item of this.items ) {
       if ( item.type === "armor" || item.type === "shield" ) {
-        if ( item.system.equipped ) {
+        if ( item.system.itemStatus.equipped ) {
         armorPenalty += item.system.initiativePenalty;
         }
       }
@@ -507,7 +507,7 @@ export default class ActorEd extends Actor {
           amount = item.system.amount;
         } 
         // check for worn or equipped state to factor Namegiver Weight Multiplier
-        if ( item.system.equipped || item.system.worn ) {
+        if ( item.system.itemStatus.equipped || item.system.worn ) {
           if ( item.system.autoCalculateWeight ) {
             let sizeWeight = item.system.weight * namegiver[0].system.weightMultiplier
             // check for ammunition and Bundle size

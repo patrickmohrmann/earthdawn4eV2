@@ -110,15 +110,26 @@ export default class PhysicalItemTemplate extends SystemDataModel {
             {
                 label: "ED.Item.General.usableItem"
             } ),
-            equipped: new foundry.data.fields.BooleanField( {
-                required: true,
-                initial: false,
-                label: "ED.Item.General.equipped"
-            } ),
-            worn: new foundry.data.fields.BooleanField( {
-                required: true,
-                initial: false,
-                label: "ED.Item.General.worn"
+            // item status is for differentiation each item. 
+            // a toggle shall be show either equipped, carried or owned.
+            // all equipped and carried items count as owned as well
+            // all equipped items count as carried as well
+            itemStatus: new foundry.data.fields.SchemaField( {
+                equipped: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Item.General.equipped"
+                } ),
+                carried: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Item.General.carried"
+                } ),
+                owned: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Item.General.owned"
+                } ),
             } ),
             autoCalculateWeight: new foundry.data.fields.BooleanField( {
                 required: true,
