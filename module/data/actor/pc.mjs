@@ -69,16 +69,7 @@ export default class PcData extends NamegiverTemplate {
                 initial: 0,
                 integer: true,
                 label: "ED.General.durabilityBonus"
-            } ),
-            freeAttributePoints: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                step: 1,
-                initial: 0,
-                integer: true,
-                label: "ED.General.freeAttributePoints"
-            } ),
+            } )
         } );
         return superSchema;
     }

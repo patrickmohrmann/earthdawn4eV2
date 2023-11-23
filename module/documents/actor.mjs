@@ -177,7 +177,7 @@ export default class ActorEd extends Actor {
 
         // **************************** Karma & Devotion ************************** */
         // Karma
-        systemData.karma.maximum = this.getKarma( systemData.freeAttributePoints );
+        systemData.karma.maximum = this.getKarma( systemData.karma.freeAttributePoints );
         // Devotion
         systemData.devotion.maximum = this.getDevotion( );
 

@@ -399,6 +399,15 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.karma.step"
                 } ),
+                freeAttributePoints: new foundry.data.fields.NumberField( {
+                    required: false,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.General.freeAttributePoints"
+                } ),
             } )
         } );
     }
