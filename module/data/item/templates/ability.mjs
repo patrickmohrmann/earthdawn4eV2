@@ -1,5 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
-// import ClassTemplate from './class.mjs';
+import ClassTemplate from './class.mjs';
 
 /**
  * Data model template with information on Ability items.
@@ -27,11 +27,10 @@ export default class AbilityTemplate extends SystemDataModel {
                 label: "ED.Item.Ability.attribute"
             } ),
             source: new foundry.data.fields.SchemaField( {
-                    // TODO: figure out how ForeignDocumentFields work
-                    /* class: new foundry.data.fields.ForeignDocumentField( ClassTemplate, {
-                        initial: null,
+                    class: new foundry.data.fields.ForeignDocumentField( ClassTemplate, {
+                        idOnly: true,
                         label: "ED.Item.Class.source"
-                    } ), */
+                    } ),
                     tier: new foundry.data.fields.StringField( {
                         nullable: false,
                         blank: false,
