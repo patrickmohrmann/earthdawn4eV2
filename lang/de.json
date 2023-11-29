@@ -398,7 +398,10 @@
             }
         },
         "LpTracking": {
-            "attributeImprovement":                             "Attribute erhöhen"
+            "advancementCustomIcon":                            "Dein eigenes Bildchen",
+            "advancementCustomTitle":                           "Dein eigener Titel",
+            "attributeImprovement":                             "Attribute erhöhen",
+            "level":                                            "Level"
         },
         "Tier": {
             "journeyman":                                           "Geselle",
