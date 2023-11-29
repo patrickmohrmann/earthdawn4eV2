@@ -1,3 +1,121 @@
+/**
+ * Data field that selects the appropriate advancement data model if available, otherwise defaults to generic
+ * `ObjectField` to prevent issues with custom advancement types that aren't currently loaded.
+ */
+export class AdvancementField extends foundry.data.fields.ObjectField {
+
+  /**
+   * Get the BaseAdvancement definition for the specified advancement type.
+   * @param {string} type                   The Advancement type.
+   * @returns {typeof BaseAdvancement|null}  The BaseAdvancement class, or null.
+   */
+  getModelForType( type ) {
+    return CONFIG.ED4E.advancementTypes[type] ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _cleanType( value, options ) {
+    if ( !( typeof value === "object" ) ) {
+      // eslint-disable-next-line no-param-reassign
+      value = {};
+    }
+    const cls = this.getModelForType( value.type );
+    if ( cls ) {
+      return cls.cleanData( value, options );
+    }
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  initialize( value, model, options={} ) {
+    const Cls = this.getModelForType( value.type );
+    if ( Cls ) {
+      return new Cls( value, {parent: model, ...options} );
+    }
+    return foundry.utils.deepClone( value );
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Data field that automatically selects the Advancement-specific configuration or value data models.
+ */
+export class AdvancementDataField extends foundry.data.fields.ObjectField {
+
+  constructor( advancementType, options={} ) {
+    super( options );
+    this.advancementType = advancementType;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject( super._defaults, {required: true} );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the DataModel definition for the specified field as defined in metadata.
+   * @returns {typeof DataModel|null} The DataModel class, or null.
+   */
+  getModel() {
+    return this.advancementType.metadata?.dataModels?.[this.name];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the defaults object for the specified field as defined in metadata.
+   * @returns { object }  The default object, or an empty object.
+   */
+  getDefaults() {
+    return this.advancementType.metadata?.defaults?.[this.name] ?? {};
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _cleanType( value, options ) {
+    if ( !( typeof value === "object" ) ) {
+      // eslint-disable-next-line no-param-reassign
+      value = {};
+    }
+
+    // Use a defined DataModel
+    const Cls = this.getModel();
+    if ( Cls ) {
+      return Cls.cleanData( value, options );
+    }
+    if ( options.partial ) {
+      return value;
+    }
+
+    // Use the defined defaults
+    const defaults = this.getDefaults();
+    return foundry.utils.mergeObject( defaults, value, {inplace: false} );
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  initialize( value, model, options={} ) {
+    const Cls = this.getModel();
+    if ( Cls ) {
+      return new Cls( value, {parent: model, ...options} );
+    }
+    return foundry.utils.deepClone( value );
+  }
+}
+
+/* -------------------------------------------- */
+
 /*
 * Field implementations are taken from the [DnD5e system]{@link https://github.com/foundryvtt/dnd5e}
 */
