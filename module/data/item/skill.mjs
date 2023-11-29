@@ -11,7 +11,11 @@ export default class SkillData extends AbilityTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            
+            skillType: new foundry.data.fields.StringField( {
+                required: true,
+                initial: "General",
+                label: "ED.Item.Skill.skillType"
+            } ),
         } );
     }
 
