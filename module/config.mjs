@@ -104,6 +104,19 @@ ED4E.denomination = {
 	gold: "ED.Denomination.gold"
 }
 
+/* -------------------------------------------- */
+
+/**
+ * Advancement types that can be added to items.
+ * @enum {*}
+ */
+ED4E.advancementTypes = {
+	// TODO
+	// ItemChoice: advancement.ItemChoiceAdvancement
+}
+
+/* -------------------------------------------- */
+
 /* eslint-disable */
 // Since Foundry does not support hot reloading object notation templates...
 Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path } = {}) => {
