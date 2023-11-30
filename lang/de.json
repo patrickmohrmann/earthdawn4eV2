@@ -163,7 +163,6 @@
 
             "Z":                                                "Z"
         },
-       
         "Item": {
             "Ability": {
                 "action":                                       "Aktion",
@@ -398,7 +397,11 @@
             }
         },
         "LpTracking": {
-            "attributeImprovement":                             "Attribute erhöhen"
+            "attributeImprovement":                                 "Attribute erhöhen"
+        },
+        "Relations": {
+            "relation":                                             "Beziehung",
+            "relations":                                            "Beziehungen"
         },
         "Tier": {
             "journeyman":                                           "Geselle",
@@ -407,7 +410,8 @@
             "tier":                                                 "Stufe",     
             "warden":                                               "Hüter"
             
-        }, "WeaponCategory":{
+        },
+        "WeaponCategory":{
             "melee": "Nahkampfwaffe",
             "missle": "Projektilwaffe",
             "thrown": "Wurfwaffe",

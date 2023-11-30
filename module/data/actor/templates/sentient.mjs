@@ -408,6 +408,33 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.freeAttributePoints"
                 } ),
+            } ),
+            relations: new MappingField( new foundry.data.fields.SchemaField( {
+                attitude: new foundry.data.fields.StringField( {
+                    choices: ['config stuff']
+                } ),
+                favors:
+                  new MappingField( new foundry.data.fields.SchemaField( {
+                      // TODO: do we really need the time of the favor? it's an official rule in the gm guide
+                      owingThem: new foundry.data.fields.NumberField( {
+                          min: 0,
+                          step: 1,
+                          integer: true,
+                          initial: 0
+                      } ),
+                      owingMe: new foundry.data.fields.NumberField( {
+                          min: 0,
+                          step: 1,
+                          integer: true,
+                          initial: 0
+                      } )
+                  } ), {
+                      initialKeys: ['small', 'large'],
+                      initialKeysOnly: true
+                  } )
+            } ), {
+                initialKeysOnly: false,
+                label: "ED.Relations.relations"
             } )
         } );
     }
@@ -420,5 +447,5 @@ export default class SentientTemplate extends CommonTemplate {
     static migrateData( source ) {
         super.migrateData( source );
         // specific migration functions
-    }      
+    }
 }
