@@ -1,4 +1,5 @@
 import NamegiverTemplate from "./templates/namegiver.mjs";
+import { getArmorFromAttribute, getAttributeStep, getDefenseValue } from '../../utils.mjs';
 
 /**
  * System data definition for PCs.
@@ -75,6 +76,73 @@ export default class PcData extends NamegiverTemplate {
     }
 
     /* -------------------------------------------- */
+    /*  Data Preparation                            */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    prepareBaseData() {
+        this.#prepareAttributes();
+        this.#prepareCharacteristics();
+    }
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+        console.log( "ED4E | In PC data model's prepareDerivedData" );
+    }
+
+    /**
+     * Prepare calculated attribute values and corresponding steps.
+     * @private
+     */
+    #prepareAttributes() {
+        for ( const attributeData of Object.values( this.attributes ) ) {
+            attributeData.baseValue = attributeData.initialValue + attributeData.timesIncreased;
+            attributeData.value = attributeData.baseValue + attributeData.valueModifier;
+            attributeData.baseStep = getAttributeStep( attributeData.value );
+            attributeData.step = attributeData.baseStep;
+        }
+    }
+
+    /**
+     * Prepare characteristic values based on attributes: defenses, armor, health ratings, recovery tests.
+     * @private
+     */
+    #prepareCharacteristics() {
+        this.#prepareDefenses();
+        this.#prepareBaseArmor();
+        // this.#prepareHealth();
+        // this.#prepareRecoveryTests();
+        // this.#prepareMovement();
+    }
+
+    /**
+     * Prepare the defense values based on attribute values.
+     * @private
+     */
+    #prepareDefenses() {
+        // TODO: not nice, it's a bit overkill, but also there is for sure an elegant way for this
+        const defenseAttributeMapping = {
+            physical: "dex",
+            mystical: "per",
+            social: "cha"
+        }
+        for ( const defenseType of Object.keys( this.characteristics.defenses ) ) {
+            this.characteristics.defenses[defenseType] = getDefenseValue(
+              this.attributes[defenseAttributeMapping[defenseType]].value
+            );
+        }
+    }
+
+    /**
+     * Prepare the base armor values based on attributes values.
+     * @private
+     */
+    #prepareBaseArmor() {
+        this.characteristics.armor.physical.baseValue = 0;
+        this.characteristics.armor.mystical.baseValue = getArmorFromAttribute( this.attributes.wil.value );
+    }
+
+    /* -------------------------------------------- */
     /*  Migrations                                  */
     /* -------------------------------------------- */
 
@@ -83,4 +151,5 @@ export default class PcData extends NamegiverTemplate {
         super.migrateData( source );
         // specific migration functions
     }
+
 }

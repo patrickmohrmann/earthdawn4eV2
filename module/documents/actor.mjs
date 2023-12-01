@@ -70,7 +70,7 @@ export default class ActorEd extends Actor {
     } );
 
   }
-  prepareData() {
+  /* prepareData() {
     this.prepareBaseData();
     const baseCharacteristics = [
       "system.attributes.dex.valueModifier",
@@ -85,7 +85,7 @@ export default class ActorEd extends Actor {
       this._applyBaseEffects( baseCharacteristics );
       this.derivedData( actorData )
       this.applyDerivedEffects()  
-  }
+  } */
 
     _applyBaseEffects( baseCharacteristics ) {
       let overrides = {};

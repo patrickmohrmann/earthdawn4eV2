@@ -66,26 +66,29 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.defenseSocial"
                     } ),
                 } ),
-                armor: new foundry.data.fields.SchemaField( {
-                    physical: new foundry.data.fields.NumberField( {
+                armor: new MappingField( new foundry.data.fields.SchemaField( {
+                    baseValue: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
                         step: 1,
                         initial: 0,
                         integer: true,
-                        label: "ED.Actor.Characteristics.armorPhysical"
                     } ),
-                    mystical: new foundry.data.fields.NumberField( {
+                    value: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
                         step: 1,
                         initial: 0,
                         integer: true,
-                        label: "ED.Actor.Characteristics.armorMystical"
-                    } ),
-                } ),
+                    } ) ,
+                } ), {
+                    initialKeys: ['physical', 'mystical'],
+                    initialKeysOnly: true,
+                    label: "ED.Actor.Characteristics.armor"
+                  }
+                ),
                 health: new foundry.data.fields.SchemaField( {
                     death: new foundry.data.fields.NumberField( {
                         required: true,
