@@ -81,8 +81,11 @@ export default class PcData extends NamegiverTemplate {
 
     /** @inheritDoc */
     prepareBaseData() {
+        super.prepareBaseData();
         this.#prepareAttributes();
         this.#prepareCharacteristics();
+        super._prepareInitiative();     // Call again, since PC's attribute steps are calculated here
+        this.#prepareCarryingCapacity();
     }
 
     /** @inheritDoc */
@@ -110,9 +113,9 @@ export default class PcData extends NamegiverTemplate {
     #prepareCharacteristics() {
         this.#prepareDefenses();
         this.#prepareBaseArmor();
-        // this.#prepareHealth();
-        // this.#prepareRecoveryTests();
-        // this.#prepareMovement();
+        this.#prepareBaseHealth();
+        this.#prepareRecoveryTests();
+        // this.#prepareMovement(); TODO: only relevant in derivedData since all based on namegiver/creature/etc items
     }
 
     /**
@@ -140,6 +143,38 @@ export default class PcData extends NamegiverTemplate {
     #prepareBaseArmor() {
         this.characteristics.armor.physical.baseValue = 0;
         this.characteristics.armor.mystical.baseValue = getArmorFromAttribute( this.attributes.wil.value );
+    }
+
+    /**
+     * Prepare the base health ratings based on attribute values.
+     * @private
+     */
+    #prepareBaseHealth() {
+        this.characteristics.health.unconscious = this.attributes.tou.value * 2;
+        this.characteristics.health.death = this.characteristics.health.unconscious + this.attributes.tou.step;
+        this.characteristics.health.woundThreshold = Math.ceil( this.attributes.tou.value / 2 ) + 2;
+    }
+
+    /**
+     * Prepare the available recovery tests based on attribute values.
+     * @private
+     */
+    #prepareRecoveryTests() {
+        this.characteristics.recoveryTests.max = Math.ceil( this.attributes.tou.value / 6 );
+    }
+
+    /**
+     * Prepare the base carrying capacity based on attribute values.
+     */
+    #prepareCarryingCapacity() {
+        // TODO: add bonus to strength value
+        const strengthValue = this.attributes.str.value + this.encumbrance.bonus;
+        const strengthFifth = Math.ceil( strengthValue / 5 );
+
+        this.encumbrance.max = -12.5 * strengthFifth ** 2
+          + 5 * strengthFifth * strengthValue
+          + 12.5 * strengthFifth
+          + 5;
     }
 
     /* -------------------------------------------- */

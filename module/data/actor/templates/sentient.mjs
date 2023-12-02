@@ -117,32 +117,39 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.woundThreshold"
                     } ),
-                    damage: new foundry.data.fields.NumberField( {
+                    damage: new foundry.data.fields.SchemaField( {
+                        standard: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.damageLethal"
+                        } ),
+                        stun: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.damageStun"
+                        } ),
+                        total: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.damage"
+                        } )
+                      },
+                      {
                         required: true,
                         nullable: false,
-                        min: 0,
-                        step: 1,
-                        initial: 0,
-                        integer: true,
                         label: "ED.Actor.Characteristics.damage"
-                    } ),
-                    damageLethal: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        step: 1,
-                        initial: 0,
-                        integer: true,
-                        label: "ED.Actor.Characteristics.damageLethal"
-                    } ),
-                    damageStun: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        step: 1,
-                        initial: 0,
-                        integer: true,
-                        label: "ED.Actor.Characteristics.damageStun"
                     } ),
                     wounds: new foundry.data.fields.NumberField( {
                         required: true,
@@ -155,7 +162,7 @@ export default class SentientTemplate extends CommonTemplate {
                     } ),
                 } ),
                 recoveryTests: new foundry.data.fields.SchemaField( {
-                    daily: new foundry.data.fields.NumberField( {
+                    max: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
@@ -164,7 +171,7 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsDaily"
                     } ),
-                    current: new foundry.data.fields.NumberField( {
+                    value: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
@@ -333,7 +340,7 @@ export default class SentientTemplate extends CommonTemplate {
             } ),
             encumbrance: new foundry.data.fields.SchemaField( {
                 // current load / weight carried -> rename
-                carriedLoad: new foundry.data.fields.NumberField( {
+                value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -341,7 +348,7 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.General.carriedLoad"
                 } ),
                 // maximum carriable weight
-                carryingCapacity: new foundry.data.fields.NumberField( {
+                max: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -350,7 +357,7 @@ export default class SentientTemplate extends CommonTemplate {
                     label: "ED.General.carryingCapacity"
                 } ),
                 // bonus value to strength value for determining max capacity
-                carryingCapacityBonus: new foundry.data.fields.NumberField( {
+                bonus: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     step: 1,
@@ -440,6 +447,33 @@ export default class SentientTemplate extends CommonTemplate {
                 label: "ED.Relations.relations"
             } )
         } );
+    }
+
+    /* -------------------------------------------- */
+    /*  Data Preparation                            */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    prepareBaseData() {
+        this._prepareDamage();
+        this._prepareInitiative();
+    }
+
+    /**
+     * Prepare the current total damage.
+     * @protected
+     */
+    _prepareDamage() {
+        this.characteristics.health.damage.total =
+          this.characteristics.health.damage.stun + this.characteristics.health.damage.standard;
+    }
+
+    /**
+     * Prepare the initiative value based on attribute values.
+     * @protected
+     */
+    _prepareInitiative() {
+        this.initiative = this.attributes.dex.step;
     }
 
     /* -------------------------------------------- */
