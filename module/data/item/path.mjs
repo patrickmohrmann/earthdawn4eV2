@@ -17,6 +17,14 @@ export default class PathData extends ClassTemplate.mixin(
                 blank: true,
                 label: "ED.Item.Class.sourceDiscipline"
             } ),
+            bloodMagicDamage: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 0,
+                initial: 2,
+                integer: true,
+                label: "ED.Item.Class.bloodMagicDamage"
+            } ),
         } );
     }
 
