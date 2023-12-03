@@ -9,6 +9,7 @@ export default class SentientTemplate extends CommonTemplate {
 
     /** @inheritDoc */
     static defineSchema() {
+        // TODO: replace all with "value" and "max" to identify them as "Ressources" for later use in Token Bars
         return this.mergeSchema( super.defineSchema(), {
             attributes: new MappingField( new foundry.data.fields.SchemaField( {
                 baseStep: new foundry.data.fields.NumberField( {
@@ -87,8 +88,7 @@ export default class SentientTemplate extends CommonTemplate {
                     initialKeys: ['physical', 'mystical'],
                     initialKeysOnly: true,
                     label: "ED.Actor.Characteristics.armor"
-                  }
-                ),
+                  } ),
                 health: new foundry.data.fields.SchemaField( {
                     death: new foundry.data.fields.NumberField( {
                         required: true,
@@ -145,8 +145,7 @@ export default class SentientTemplate extends CommonTemplate {
                             integer: true,
                             label: "ED.Actor.Characteristics.damage"
                         } )
-                      },
-                      {
+                      }, {
                         required: true,
                         nullable: false,
                         label: "ED.Actor.Characteristics.damage"
@@ -181,6 +180,7 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
                 } ),
+                // TODO: duplicated with Item "Namegiver" create class to get this field
                 movement: new foundry.data.fields.SchemaField( {
                       walk: new foundry.data.fields.NumberField( {
                           required: true,
