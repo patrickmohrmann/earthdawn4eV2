@@ -6,7 +6,7 @@
  */
 export default class ActorEd extends Actor {
 
-  
+  // TODO check code 
   activateListeners( html ) {
     super.activateListeners( html );
 

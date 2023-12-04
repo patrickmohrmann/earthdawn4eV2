@@ -19,6 +19,7 @@ export default class ItemEd extends Item {
     // *********************************************************************** */
     // ************************ Weight Calculation *************************** */
     // *********************************************************************** */
+    // TODO autocaclculateWeight option has to be checkd for this.
     getSizeWeight( weight ) {
         let originalWeight = weight;
         let sizeWeight1 = weight;
