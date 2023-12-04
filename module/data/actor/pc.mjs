@@ -208,7 +208,7 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedArmor() {
-        const armorItems = this.items.filter( item => item.type === 'armor' && item.system.itemStatus.equipped );
+        const armorItems = this.parent.items.filter( item => item.type === 'armor' && item.system.itemStatus.equipped );
         if ( armorItems ) {
             for ( const armor of armorItems ) {
                 this.characteristics.armor.physical.value = this.characteristics.armor.physical.baseValue
@@ -226,7 +226,7 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedHealth() {
-        const durabilityItems = this.items.filter(
+        const durabilityItems = this.parent.items.filter(
           item => ["discipline", "devotion"].includes( item.type ) && item.system.durability > 0
         );
         if ( !durabilityItems?.length ) return;
@@ -260,7 +260,7 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedInitiative() {
-        const armors = this.items.filter( item =>
+        const armors = this.parent.items.filter( item =>
           ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
         );
         this.initiative -= Math.sum( armors.map( item => item.system.initiativePenalty ) );
@@ -278,7 +278,7 @@ export default class PcData extends NamegiverTemplate {
      * Prepare the derived movement values based on namegiver items.
      */
     #prepareDerivedMovement() {
-        const namegiver = this.items.filter( item => item.type === "namegiver" )[0];
+        const namegiver = this.parent.items.filter( item => item.type === "namegiver" )[0];
         if ( namegiver ) {
             for ( const movementType of namegiver.system.movement ) {
                 this.characteristics.movement[movementType] = namegiver.system.movement[movementType];
@@ -292,7 +292,7 @@ export default class PcData extends NamegiverTemplate {
      */
     #prepareDerivedKarma() {
         const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
-        const karmaModifier = this.items.filter( item => item.type === "namegiver" )[0]?.system.karmamodifier ?? 0;
+        const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmamodifier ?? 0;
 
         this.karma.maximum = karmaModifier * highestCircle + this.karma.freeAttributePoints;
     }
@@ -302,7 +302,7 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedDevotion() {
-        const questor = this.items.filter( item => item.type === "questor" )[0];
+        const questor = this.parent.items.filter( item => item.type === "questor" )[0];
         if ( questor ) {
             this.devotion.maximum = questor.system.level * 10;
         }
@@ -318,7 +318,7 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #getHighestClass( type ) {
-        return this.items.filter(
+        return this.parent.items.filter(
           item => item.type === type
         ).sort(     // sort descending by circle/rank
           ( a, b ) => a.system.level > b.system.level ? -1 : 1
