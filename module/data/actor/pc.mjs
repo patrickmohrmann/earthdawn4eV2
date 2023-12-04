@@ -94,8 +94,8 @@ export default class PcData extends NamegiverTemplate {
         this.#prepareDerivedCharacteristics();
         this.#prepareDerivedInitiative();
         // this.#prepareDerivedCarryingCapacity();
-        // this.#prepareDerivedKarma();
-        // this.#prepareDerivedDevotion();
+        this.#prepareDerivedKarma();
+        this.#prepareDerivedDevotion();
     }
 
     /* -------------------------------------------- */
@@ -271,10 +271,51 @@ export default class PcData extends NamegiverTemplate {
      * Prepare the derived movement values based on namegiver items.
      */
     #prepareDerivedMovement() {
-        const namegiver = this.items.filter( item => item.type === "namegiver" );
-        for ( const movementType of namegiver.system.movement ) {
-            this.characteristics.movement[movementType] = namegiver.system.movement[movementType];
+        const namegiver = this.items.filter( item => item.type === "namegiver" )[0];
+        if ( namegiver ) {
+            for ( const movementType of namegiver.system.movement ) {
+                this.characteristics.movement[movementType] = namegiver.system.movement[movementType];
+            }
         }
+    }
+
+    /**
+     * Prepare the derived karma values based on namegiver items and free attribute points.
+     * @private
+     */
+    #prepareDerivedKarma() {
+        const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
+        const karmaModifier = this.items.filter( item => item.type === "namegiver" )[0]?.system.karmamodifier ?? 0;
+
+        this.karma.maximum = karmaModifier * highestCircle + this.karma.freeAttributePoints;
+    }
+
+    /**
+     * Prepare the derived devotion values based on questor items.
+     * @private
+     */
+    #prepareDerivedDevotion() {
+        const questor = this.items.filter( item => item.type === "questor" )[0];
+        if ( questor ) {
+            this.devotion.maximum = questor.system.level * 10;
+        }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Finds and returns this PC's class of the given type with the highest circle.
+     * If multiple, only the first found will be returned.
+     * @param {string} type The type of class to be searched for. One of discipline, path, questor.
+     * @returns {Item} A discipline item with the highest circle.
+     * @private
+     */
+    #getHighestClass( type ) {
+        return this.items.filter(
+          item => item.type === type
+        ).sort(     // sort descending by circle/rank
+          ( a, b ) => a.system.level > b.system.level ? -1 : 1
+        )[0];
     }
 
     /* -------------------------------------------- */
