@@ -3,10 +3,10 @@
     {{!-- Physical Armor --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.Armor.piecemealArmor"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.piecemealArmor" {{ checked system.piecemealArmor }}>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.piecemealArmor.selector" {{ checked system.piecemealArmor.selector }}>
         <label>{{localize "ED.General.size"}}:</label>
-        <input class="input__number-input" name="system.piecemealArmorSize" type="text"
-            value="{{item.system.piecemealArmorSize}}" data-dtype="Number">
+        <input class="input__number-input" name="system.piecemealArmor.size" type="text"
+            value="{{item.system.piecemealArmor.size}}" data-dtype="Number">
     </div>
     {{!-- bloodMagicDamage --}}
     <div class="item-data__input--line">

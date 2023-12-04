@@ -19,37 +19,41 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            physicalArmor: new foundry.data.fields.NumberField( {
+            physical: new foundry.data.fields.SchemaField( {
+                armor: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
                 integer: true,
                 label: "ED.Item.Armor.physicalArmor"
-            } ), 
-            mysticalArmor: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Armor.mysticalArmor"
+                } ), 
+                forgeBonus: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.Armor.forgeBonusPhysical"
+                } ),
             } ),
-            forgeBonusPhysical: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Armor.forgeBonusPhysical"
-            } ),
-            forgeBonusMystical: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Armor.forgeBonusMystical"
+            mystical: new foundry.data.fields.SchemaField( {
+                armor: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.Armor.mysticalArmor"
+                } ),
+                forgeBonus: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.Armor.forgeBonusMystical"
+                } ),
             } ),
             initiativePenalty: new foundry.data.fields.NumberField( {
                 required: true,
@@ -60,12 +64,12 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Armor.initiativePenalty"
             } ),
             piecemealArmor: new foundry.data.fields.SchemaField( {
-                // should be false by default @chris how is that set?
-                piecemealArmorSelector: new foundry.data.fields.BooleanField( {
+                selector: new foundry.data.fields.BooleanField( {
                     required: true,
+                    initial: false,
                     label: "ED.Item.Armor.piecemealArmor"
                 } ),
-                piecemealArmorSize: new foundry.data.fields.NumberField( {
+                size: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
