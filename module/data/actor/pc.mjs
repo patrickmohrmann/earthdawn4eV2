@@ -215,7 +215,7 @@ export default class PcData extends NamegiverTemplate {
               + armor.system.forgeBonusPhysical;
             this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue
               + armor.system.mysticalArmor
-              + armor.system.forgeBonusmystical;
+              + armor.system.forgeBonusMystical;
         }
     }
 
