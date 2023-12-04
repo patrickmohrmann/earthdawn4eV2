@@ -1,0 +1,34 @@
+<div class="item__left--main">
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Rank --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.rank"}}:</label>
+        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Strain --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
+        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Attribute --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}}
+    </div>
+    {{!-- Action --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Action.action"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/action-selector.hbs"}}
+    </div>
+    {{!-- Tier --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/tier-selector.hbs"}}
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>

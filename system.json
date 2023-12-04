@@ -1,0 +1,85 @@
+{
+  "id": "ed4e",
+  "title": "Earthdawn - Fourth Edition System",
+  "description": "A system for playing the 4th edition of Earthdawn in the Foundry Virtual Tabletop environment.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "url": "https://github.com/patrickmohrmann/earthdawn4eV2",
+  "manifest": "this will be replaced",
+  "download": "this will be replaced",
+  "authors": [
+    {
+      "name": "Patrick Mohrmann",
+      "discord": "patrickmohrmann"
+    },
+    {
+      "name": "Chris",
+      "discord": "qrizzl"
+    }
+  ],
+  "esmodules": [
+    "earthdawn4e.mjs"
+  ],
+  "styles": [
+    "earthdawn4e.css"
+  ],
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "hbs", "json"]
+    }
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "German",
+      "path": "lang/de.json"
+    },
+    {
+      "lang": "pl",
+      "name": "Polish",
+      "path": "lang/pl.json"
+    },
+    {
+      "lang": "fr",
+      "name": "French",
+      "path": "lang/fr.json"
+    }
+  ],
+  "media": [
+    {
+      "type": "cover",
+      "url": "systems/earthdawn4e/assets/foundry/earthdawn-logo.png",
+      "loop": false
+    }
+  ],
+  "gridDistance": 2,
+  "gridUnits": "yd",
+  "socket": true,
+  "relationships": {
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json",
+        "compatibility": {
+          "minimum": "1.0.13",
+          "verified": "1.0.13"
+        }
+      }
+    ],
+      "recommends": [
+        {
+          "id": "token-action-hud-ed4e",
+          "type": "module"
+        }
+      ]
+  }
+}

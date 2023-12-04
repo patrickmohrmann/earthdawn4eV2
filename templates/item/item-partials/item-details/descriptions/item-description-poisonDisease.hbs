@@ -1,0 +1,60 @@
+<div class="item__left--main">
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Damage Step --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.damageStep"}}:</label>
+        <input class="input__circle-input" name="system.effect.damageStep" type="text" value="{{item.system.effect.damageStep}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Paralyse Step --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.paralysisStep"}}:</label>
+        <input class="input__circle-input" name="system.effect.paralysisStep" type="text" value="{{item.system.effect.paralysisStep}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Debilitation Step --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.debilitationStep"}}:</label>
+        <input class="input__circle-input" name="system.effect.debilitationStep" type="text" value="{{item.system.effect.debilitationStep}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Interval Total effects --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.totalEffects"}}:</label>
+        <input class="input__circle-input" name="system.interval.totalEffects" type="text" value="{{item.system.interval.totalEffects}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Innterval time in between --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.timeInBetweenShort"}}:</label>
+        <input class="input__circle-input" name="system.interval.timeInBetween" type="text" value="{{item.system.interval.timeInBetween}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Onset time --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.onsetTime"}}:</label>
+        <input class="input__circle-input" name="system.onsetTime" type="text" value="{{item.system.onsetTime}}"
+            data-dtype="Number">
+    </div>
+    {{!-- duration --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.duration"}}:</label>
+        <input class="input__circle-input" name="system.duration" type="text" value="{{item.system.duration}}"
+            data-dtype="Number">
+    </div>
+    {{!-- activation --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.activation"}}:</label>
+        <input class="input__text-input" name="system.activation" type="text" value="{{item.system.activation}}"
+            data-dtype="String">
+    </div>
+        {{!-- death --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.PoisonDisease.death"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.death">
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>

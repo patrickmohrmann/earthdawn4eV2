@@ -1,0 +1,43 @@
+<div class="item__left--main">
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Fire Power Points --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.ShipWeapon.firePowerPoints"}}:</label>
+        <input class="input__circle-input" name="system.firePowerPoints" type="text" value="{{item.system.firePowerPoints}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Crew required to fire the weapon --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.ShipWeapon.crewWeapon"}}:</label>
+        <input class="input__circle-input" name="system.crewWeapon" type="text" value="{{item.system.crewWeapon}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Short Range --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.ShipWeapon.rangeShort"}}:</label>
+        <input class="input__number-input" name="system.rangeShort" type="text" value="{{item.system.rangeShort}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Long Range --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.ShipWeapon.rangeLong"}}:</label>
+        <input class="input__number-input" name="system.rangeLong" type="text" value="{{item.system.rangeLong}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Salvo Cost --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.ShipWeapon.salvoCost"}}:</label>
+        <input class="input__circle-input" name="system.salvoCost" type="text" value="{{item.system.salvoCost}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Weapon Damage against single Namegivers --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.ShipWeapon.characterDamage"}}:</label>
+        <input class="input__circle-input" name="system.characterDamage" type="text" value="{{item.system.characterDamage}}"
+            data-dtype="Number">
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>

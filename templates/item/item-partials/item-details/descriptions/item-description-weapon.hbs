@@ -1,0 +1,91 @@
+<div class="item__left--main">
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Weapon Type --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.weaponType"}}:</label>
+        <select class="input__select-input" name="system.weaponType" value="{{item.system.weaponType}}" 
+        {{#select item.system.weaponType}}>
+            <option value="0">{{localize "ED.WeaponCategory.melee"}}</option>
+            <option value="1">{{localize "ED.WeaponCategory.unarmed"}}</option>
+            <option value="2">{{localize "ED.WeaponCategory.missle"}}</option>
+            <option value="3">{{localize "ED.WeaponCategory.thrown"}}</option>
+            {{/select}}
+        </select>
+    </div>
+    {{!-- Damage Attribute --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageAttribute"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}}
+    </div>
+    {{!-- Mystische Armor --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageBaseStep"}}:</label>
+        <input class="input__circle-input" name="system.damageBaseStep" type="text" value="{{item.system.damageBaseStep}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Forged Physical Armor --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.size"}}:</label>
+        <input class="input__circle-input" name="system.size" type="text" value="{{item.system.size}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Forged Mystische Armor --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Label.dexterityMinimum"}}:</label>
+        <input class="input__circle-input" name="system.dexterityMinimum" type="text" value="{{item.system.dexterityMinimum}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Initiative Penalty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeShort"}}:</label>
+        <input class="input__circle-input" name="system.rangeShort" type="text" value="{{item.system.rangeShort}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Initiative Penalty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeLong"}}:</label>
+        <input class="input__circle-input" name="system.rangeLong" type="text" value="{{item.system.rangeLong}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Initiative Penalty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Label.ammunition"}}:</label>
+        <input class="input__circle-input" name="system.ammunition" type="text" value="{{item.system.ammunition}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Initiative Penalty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.forgeBonus"}}:</label>
+        <input class="input__circle-input" name="system.forgeBonus" type="text" value="{{item.system.forgeBonus}}"
+            data-dtype="Number">
+    </div>
+    {{!-- price --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
+        <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
+            data-dtype="Number">
+        {{> "systems/ed4e/templates/global-templates/denomination-selector.hbs"}}
+    </div>
+    {{!-- Weight --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.weight"}}:</label>
+        <input class="input__number-input" name="system.weight" type="text" value="{{item.system.weight}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Amount --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.General.amount"}}:</label>
+        <input class="input__number-input" name="system.amount" type="text" value="{{item.system.amount}}"
+            data-dtype="Number">
+    </div>
+    {{!-- availability --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Availability.availability"}}:</label>
+        {{> "systems/ed4e/templates/global-templates/availability-selector.hbs"}}
+    </div>
+</div>
+{{!-- Editor --}}
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>

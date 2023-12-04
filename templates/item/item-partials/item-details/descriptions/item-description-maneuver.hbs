@@ -1,0 +1,25 @@
+<div class="item__left--main">
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Extra Successes --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Power.powerStep"}}:</label>
+        <input class="input__circle-input" name="system.powerStep" type="text" value="{{item.system.powerStep}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Damage Step --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Knack.extraSuccesses"}}:</label>
+        <input class="input__circle-input" name="system.extraSuccesses" type="text" value="{{item.system.extraSuccesses}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Strain --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
+        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
+            data-dtype="Number">
+    </div>
+</div>
+<div class="item__right--main item-sheet__editor">
+    <h3>item Description</h3>
+    {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
+</div>
