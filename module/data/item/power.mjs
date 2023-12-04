@@ -1,10 +1,10 @@
-import AbilityTemplate from "./templates/ability.mjs";
+import NoneNamegiverPowerData from "./templates/none-namegiver-power.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Power items.
  */
-export default class PowerData extends AbilityTemplate.mixin(
+export default class PowerData extends NoneNamegiverPowerData.mixin(
     ItemDescriptionTemplate
 )  {
 

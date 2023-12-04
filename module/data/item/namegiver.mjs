@@ -20,7 +20,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class NamegiverData extends SystemDataModel.mixin(
     ItemDescriptionTemplate
 ) {
-
+    // TODO attributes as Schemefield
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {

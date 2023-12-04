@@ -13,7 +13,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class ShipWeaponData extends SystemDataModel.mixin(
     ItemDescriptionTemplate
 ) {
-
+    // TODO extend schemafields
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
@@ -57,13 +57,13 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.ShipWeapon.salvoCost"
             } ), 
-            charakterDamage: new foundry.data.fields.NumberField( {
+            characterDamage: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
                 integer: true,
-                label: "ED.Item.ShipWeapon.charakterDamage"
+                label: "ED.Item.ShipWeapon.characterDamage"
             } ), 
         } );
     }

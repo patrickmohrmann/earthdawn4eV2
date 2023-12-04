@@ -1,5 +1,6 @@
 import ClassTemplate from "./templates/class.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import DisciplineData from "./discipline.mjs";
 
 /**
  * Data model template with information on path items.
@@ -12,9 +13,8 @@ export default class PathData extends ClassTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            sourceDiscipline: new foundry.data.fields.StringField( {
-                required: true,
-                blank: true,
+            sourceDiscipline: new foundry.data.fields.ForeignDocument( DisciplineData, {
+                idOnly: true,
                 label: "ED.Item.Class.sourceDiscipline"
             } ),
             bloodMagicDamage: new foundry.data.fields.NumberField( {

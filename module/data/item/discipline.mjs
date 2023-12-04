@@ -20,6 +20,11 @@ export default class DisciplineData extends ClassTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Class.durability"
             } ), 
+            spellcasting: new foundry.data.fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Item.Class.spellcasting"
+            } ),
         } );
     }
 

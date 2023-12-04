@@ -34,7 +34,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class MaskData extends SystemDataModel.mixin(
     ItemDescriptionTemplate
 ) {
-
+    // TODO to check when mask function will be done.
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {

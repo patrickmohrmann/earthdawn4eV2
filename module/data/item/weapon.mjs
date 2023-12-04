@@ -17,7 +17,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class WeaponData extends PhysicalItemTemplate.mixin(
     ItemDescriptionTemplate
 ) {
-
+    // TODO extend schemafields
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {

@@ -36,7 +36,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class SpellData extends SystemDataModel.mixin(
     ItemDescriptionTemplate
 )  {
-
+    // TODO check when doing spellcasting
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
@@ -152,6 +152,12 @@ export default class SpellData extends SystemDataModel.mixin(
             } ),
             spellArea: new foundry.data.fields.SchemaField( {
                 shape: new foundry.data.fields.StringField( {
+                    required: true,
+                    blank: false,
+                    initial: "0",
+                    label: "ED.Item.Spell.shape"
+                } ),
+                value: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "0",
