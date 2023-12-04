@@ -209,13 +209,15 @@ export default class PcData extends NamegiverTemplate {
      */
     #prepareDerivedArmor() {
         const armorItems = this.items.filter( item => item.type === 'armor' && item.system.itemStatus.equipped );
-        for ( const armor of armorItems ) {
-            this.characteristics.armor.physical.value = this.characteristics.armor.physical.baseValue
-              + armor.system.physicalArmor
-              + armor.system.forgeBonusPhysical;
-            this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue
-              + armor.system.mysticalArmor
-              + armor.system.forgeBonusMystical;
+        if ( armorItems ) {
+            for ( const armor of armorItems ) {
+                this.characteristics.armor.physical.value = this.characteristics.armor.physical.baseValue
+                  + armor.system.physicalArmor
+                  + armor.system.forgeBonusPhysical;
+                this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue
+                  + armor.system.mysticalArmor
+                  + armor.system.forgeBonusMystical;
+            }
         }
     }
 
