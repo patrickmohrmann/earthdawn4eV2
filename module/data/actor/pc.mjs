@@ -229,6 +229,8 @@ export default class PcData extends NamegiverTemplate {
         );
         if ( !durabilityItems?.length ) return;
 
+        // TODO: only takes the highest, e.g., when only one discipline only on entry with highest circle
+        // TODO: it's the ability "devotion" not the class "questor"
         const durabilityByCircle = durabilityItems.reduce( ( accumulator, currentValue ) => (
             {
                 ...accumulator,
