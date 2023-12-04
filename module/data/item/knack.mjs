@@ -1,5 +1,6 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import TalentData from "./talent.mjs";
 
 /**
  * Data model template with information on Knack items.
@@ -17,13 +18,11 @@ export default class KnackData extends AbilityTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            sourceTalent: new foundry.data.fields.StringField( {
-                required: true,
-                blank: true,
-                initial: "",
+            sourceTalent: new foundry.data.fields.ForeignDocumentField( TalentData, {
+                idOnly: true,
                 label: "ED.Item.Knack.sourceTalent"
             } ),
-            // @Chris how do we do this
+            // TODO @Chris how do we do this
             // restrictions: [], // there will be several options possible see issue #212
             // requirements: [], // there will be several options possible see issue #212 
             standardEffect: new foundry.data.fields.BooleanField( {
