@@ -93,7 +93,12 @@ export default class PcData extends NamegiverTemplate {
         super.prepareDerivedData();
         this.#prepareDerivedCharacteristics();
         this.#prepareDerivedInitiative();
+        // this.#prepareDerivedCarryingCapacity();
+        // this.#prepareDerivedKarma();
+        // this.#prepareDerivedDevotion();
     }
+
+    /* -------------------------------------------- */
 
     /**
      * Prepare calculated attribute values and corresponding steps.
@@ -117,7 +122,6 @@ export default class PcData extends NamegiverTemplate {
         this.#prepareBaseArmor();
         this.#prepareBaseHealth();
         this.#prepareBaseRecoveryTests();
-        // this.#prepareMovement(); TODO: only relevant in derivedData since all based on namegiver/creature/etc items
     }
 
     /**
@@ -188,6 +192,8 @@ export default class PcData extends NamegiverTemplate {
           + 5;
     }
 
+    /* -------------------------------------------- */
+
     /**
      * Prepare characteristic values based on items: defenses, armor, health ratings, recovery tests.
      * @private
@@ -197,7 +203,7 @@ export default class PcData extends NamegiverTemplate {
         this.#prepareDerivedArmor();
         this.#prepareDerivedHealth();
         // this.#prepareBaseRecoveryTests();
-        // this.#prepareMovement(); TODO: only relevant in derivedData since all based on namegiver/creature/etc items
+        this.#prepareDerivedMovement();
     }
 
     /**
@@ -255,7 +261,20 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedInitiative() {
-        this.initiative = this.attributes.dex.step;
+        const armors = this.items.filter( item =>
+          ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
+        );
+        this.initiative -= Math.sum( armors.map( item => item.system.initiativePenalty ) );
+    }
+
+    /**
+     * Prepare the derived movement values based on namegiver items.
+     */
+    #prepareDerivedMovement() {
+        const namegiver = this.items.filter( item => item.type === "namegiver" );
+        for ( const movementType of namegiver.system.movement ) {
+            this.characteristics.movement[movementType] = namegiver.system.movement[movementType];
+        }
     }
 
     /* -------------------------------------------- */
