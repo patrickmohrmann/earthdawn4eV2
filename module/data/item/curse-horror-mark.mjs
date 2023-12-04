@@ -1,10 +1,11 @@
+import ActorEd from "../../documents/actor.mjs";
 import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 
 /**
  * Data model template with information on Curse and Horror Mark items.
- * @property {number} curseStep           curse step
+ * @property {number} step           curse step
  * @property {string} curseType           type of the curse
  * @property {boolean} curseActive         is the curse active
  * @property {boolean} curseDetected       is the curse known
@@ -16,28 +17,34 @@ export default class CurseHorrorMarkData extends SystemDataModel.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            curseStep: new foundry.data.fields.NumberField( {
+            step: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
                 integer: true,
-                label: "ED.Item.Curse.curseStep"
+                label: "ED.Item.Curse.step"
             } ), 
-            curseType: new foundry.data.fields.StringField( {
+            type: new foundry.data.fields.StringField( {
                 required: true,
                 blank: false,
                 initial: "minor",
                 label: "ED.Item.Curse.curseType"
             } ),
-            curseActive: new foundry.data.fields.BooleanField( {
+            active: new foundry.data.fields.BooleanField( {
                 required: true,
                 label: "ED.Item.Curse.curseActive"
             } ),
-            curseDetected: new foundry.data.fields.BooleanField( {
+            detected: new foundry.data.fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Curse.curseDetected"
+            } ),
+            source: new foundry.data.fields.ForeignDocumentField( SystemDataModel, {
+                idOnly: true,
+            } ),
+            target: new foundry.data.fields.ForeignDocumentField( ActorEd, {
+                idOnly: true,
             } ),
         } );
     }

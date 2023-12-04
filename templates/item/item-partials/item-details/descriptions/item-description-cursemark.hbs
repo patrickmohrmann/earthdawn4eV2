@@ -2,15 +2,15 @@
     <h3>{{localize "ED.General.coreData"}}</h3>
     {{!-- Curse Step --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Curse.curseStep"}}:</label>
-        <input class="input__circle-input" name="system.curseStep" type="text" value="{{item.system.curseStep}}"
+        <label class="label__left">{{localize "ED.Item.Curse.step"}}:</label>
+        <input class="input__circle-input" name="system.step" type="text" value="{{item.system.step}}"
             data-dtype="Number">
     </div>
     {{!-- Curse Type --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Curse.curseType"}}:</label>
-        <select class="input__select-input" name="system.curseType" value="{{item.system.curseType}}" {{#select
-            item.system.curseType}}>
+        <select class="input__select-input" name="system.type" value="{{item.system.type}}" {{#select
+            item.system.type}}>
             <option value="minor">{{localize "ED.Item.Curse.minor"}}</option>
             <option value="major">{{localize "ED.Item.Curse.major"}}</option>
             <option value="horror">{{localize "ED.Item.Curse.horror"}}</option>
@@ -20,12 +20,12 @@
     {{!-- active --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Curse.curseActive"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.curseActive">
+        <input class="item-data__checkbox--line" type="checkbox" name="system.active">
     </div>
     {{!-- detected --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Curse.curseDetected"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.curseDetected">
+        <input class="item-data__checkbox--line" type="checkbox" name="system.detected">
     </div>
 </div>
 <div class="item__right--main item-sheet__editor">
