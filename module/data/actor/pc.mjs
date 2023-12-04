@@ -93,7 +93,7 @@ export default class PcData extends NamegiverTemplate {
         super.prepareDerivedData();
         this.#prepareDerivedCharacteristics();
         this.#prepareDerivedInitiative();
-        // this.#prepareDerivedCarryingCapacity();
+        this.#prepareDerivedCarryingCapacity();
         this.#prepareDerivedKarma();
         this.#prepareDerivedDevotion();
     }
@@ -182,7 +182,6 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareBaseCarryingCapacity() {
-        // TODO: add bonus to strength value
         const strengthValue = this.attributes.str.value + this.encumbrance.bonus;
         const strengthFifth = Math.ceil( strengthValue / 5 );
 
@@ -199,10 +198,8 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedCharacteristics() {
-        // this.#prepareBaseDefenses();
         this.#prepareDerivedArmor();
         this.#prepareDerivedHealth();
-        // this.#prepareBaseRecoveryTests();
         this.#prepareDerivedMovement();
     }
 
@@ -265,6 +262,14 @@ export default class PcData extends NamegiverTemplate {
           ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
         );
         this.initiative -= Math.sum( armors.map( item => item.system.initiativePenalty ) );
+    }
+
+    /**
+     * Prepare the derived load carried based on items.
+     * @private
+     */
+    #prepareDerivedCarryingCapacity() {
+        // TODO
     }
 
     /**
