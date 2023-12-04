@@ -1,5 +1,5 @@
 import NamegiverTemplate from "./templates/namegiver.mjs";
-import { getArmorFromAttribute, getAttributeStep, getDefenseValue } from '../../utils.mjs';
+import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum } from '../../utils.mjs';
 
 /**
  * System data definition for PCs.
@@ -238,10 +238,12 @@ export default class PcData extends NamegiverTemplate {
             }
           ),
           {}
-        ).forEach( ( items, circle ) => {
-            durabilityByCircle[circle] = Math.max( ...items.map( item => item.system.durability ) );
-        } );
-        const maxDurability = Math.sum( Object.values( durabilityByCircle ) );
+        )
+        for ( const [circle, items] of Object.entries( durabilityByCircle ) ) {
+            durabilityByCircle[circle] = Math.max( ...items.map( item => item.system.durability ) )
+        }
+          
+        const maxDurability = sum( Object.values( durabilityByCircle ) );
 
         const maxCircle = Math.max(
           ...durabilityItems.filter(
@@ -263,7 +265,7 @@ export default class PcData extends NamegiverTemplate {
         const armors = this.parent.items.filter( item =>
           ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
         );
-        this.initiative -= Math.sum( armors.map( item => item.system.initiativePenalty ) );
+        this.initiative -= sum( armors.map( item => item.system.initiativePenalty ) );
     }
 
     /**

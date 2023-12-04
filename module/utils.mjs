@@ -30,6 +30,19 @@ export function getDefenseValue( attributeValue ) {
 }
 
 /* -------------------------------------------- */
+/*  Maths                                       */
+/* -------------------------------------------- */
+
+/**
+ * Computes the sum of the values in array.
+ * @param {Array} arr An array of numbers.
+ * @returns {number} The sum of the values in the array.
+ */
+export function sum( arr ) {
+  return arr.reduce( ( partialSum, a ) => partialSum + a, 0 );
+}
+
+/* -------------------------------------------- */
 /*  Validators                                  */
 /* -------------------------------------------- */
 
@@ -97,7 +110,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/main-section.hbs",
     "systems/ed4e/templates/item/item-partials/item-description.hbs",
     "systems/ed4e/templates/item/item-partials/item-details.hbs",
-    
+
     // Item details
     "systems/ed4e/templates/item/item-partials/item-details/item-effects.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-armor.hbs",
