@@ -455,8 +455,13 @@ export default class SentientTemplate extends CommonTemplate {
 
     /** @inheritDoc */
     prepareBaseData() {
+        super.prepareBaseData();
         this._prepareDamage();
-        this._prepareInitiative();
+    }
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+        console.log( "ED4E | In Sentient data model's prepareDerivedData" );
     }
 
     /**
@@ -466,14 +471,6 @@ export default class SentientTemplate extends CommonTemplate {
     _prepareDamage() {
         this.characteristics.health.damage.total =
           this.characteristics.health.damage.stun + this.characteristics.health.damage.standard;
-    }
-
-    /**
-     * Prepare the initiative value based on attribute values.
-     * @protected
-     */
-    _prepareInitiative() {
-        this.initiative = this.attributes.dex.step;
     }
 
     /* -------------------------------------------- */

@@ -82,22 +82,24 @@ export default class PcData extends NamegiverTemplate {
     /** @inheritDoc */
     prepareBaseData() {
         super.prepareBaseData();
-        this.#prepareAttributes();
-        this.#prepareCharacteristics();
-        super._prepareInitiative();     // Call again, since PC's attribute steps are calculated here
-        this.#prepareCarryingCapacity();
+        this.#prepareBaseAttributes();
+        this.#prepareBaseCharacteristics();
+        this.#prepareBaseInitiative();
+        this.#prepareBaseCarryingCapacity();
     }
 
     /** @inheritDoc */
     prepareDerivedData() {
-        console.log( "ED4E | In PC data model's prepareDerivedData" );
+        super.prepareDerivedData();
+        this.#prepareDerivedCharacteristics();
+        this.#prepareDerivedInitiative();
     }
 
     /**
      * Prepare calculated attribute values and corresponding steps.
      * @private
      */
-    #prepareAttributes() {
+    #prepareBaseAttributes() {
         for ( const attributeData of Object.values( this.attributes ) ) {
             attributeData.baseValue = attributeData.initialValue + attributeData.timesIncreased;
             attributeData.value = attributeData.baseValue + attributeData.valueModifier;
@@ -110,11 +112,11 @@ export default class PcData extends NamegiverTemplate {
      * Prepare characteristic values based on attributes: defenses, armor, health ratings, recovery tests.
      * @private
      */
-    #prepareCharacteristics() {
-        this.#prepareDefenses();
+    #prepareBaseCharacteristics() {
+        this.#prepareBaseDefenses();
         this.#prepareBaseArmor();
         this.#prepareBaseHealth();
-        this.#prepareRecoveryTests();
+        this.#prepareBaseRecoveryTests();
         // this.#prepareMovement(); TODO: only relevant in derivedData since all based on namegiver/creature/etc items
     }
 
@@ -122,7 +124,7 @@ export default class PcData extends NamegiverTemplate {
      * Prepare the defense values based on attribute values.
      * @private
      */
-    #prepareDefenses() {
+    #prepareBaseDefenses() {
         // TODO: not nice, it's a bit overkill, but also there is for sure an elegant way for this
         const defenseAttributeMapping = {
             physical: "dex",
@@ -156,17 +158,26 @@ export default class PcData extends NamegiverTemplate {
     }
 
     /**
+     * Prepare the base initiative value based on attribute values.
+     * @private
+     */
+    #prepareBaseInitiative() {
+        this.initiative = this.attributes.dex.step;
+    }
+
+    /**
      * Prepare the available recovery tests based on attribute values.
      * @private
      */
-    #prepareRecoveryTests() {
+    #prepareBaseRecoveryTests() {
         this.characteristics.recoveryTests.max = Math.ceil( this.attributes.tou.value / 6 );
     }
 
     /**
      * Prepare the base carrying capacity based on attribute values.
+     * @private
      */
-    #prepareCarryingCapacity() {
+    #prepareBaseCarryingCapacity() {
         // TODO: add bonus to strength value
         const strengthValue = this.attributes.str.value + this.encumbrance.bonus;
         const strengthFifth = Math.ceil( strengthValue / 5 );
@@ -175,6 +186,76 @@ export default class PcData extends NamegiverTemplate {
           + 5 * strengthFifth * strengthValue
           + 12.5 * strengthFifth
           + 5;
+    }
+
+    /**
+     * Prepare characteristic values based on items: defenses, armor, health ratings, recovery tests.
+     * @private
+     */
+    #prepareDerivedCharacteristics() {
+        // this.#prepareBaseDefenses();
+        this.#prepareDerivedArmor();
+        this.#prepareDerivedHealth();
+        // this.#prepareBaseRecoveryTests();
+        // this.#prepareMovement(); TODO: only relevant in derivedData since all based on namegiver/creature/etc items
+    }
+
+    /**
+     * Prepare the derived armor values based on items.
+     * @private
+     */
+    #prepareDerivedArmor() {
+        const armorItems = this.items.filter( item => item.type === 'armor' && item.system.itemStatus.equipped );
+        for ( const armor of armorItems ) {
+            this.characteristics.armor.physical.value = this.characteristics.armor.physical.baseValue
+              + armor.system.physicalArmor
+              + armor.system.forgeBonusPhysical;
+            this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue
+              + armor.system.mysticalArmor
+              + armor.system.forgeBonusmystical;
+        }
+    }
+
+    /**
+     * Prepare the base health ratings based on items.
+     * @private
+     */
+    #prepareDerivedHealth() {
+        const durabilityItems = this.items.filter(
+          item => ["discipline", "devotion"].includes( item.type ) && item.system.durability > 0
+        );
+        if ( !durabilityItems?.length ) return;
+
+        const durabilityByCircle = durabilityItems.reduce( ( accumulator, currentValue ) => (
+            {
+                ...accumulator,
+                [currentValue.system.level]: [...( accumulator[currentValue.system.level] ?? [] ), currentValue]
+            }
+          ),
+          {}
+        ).forEach( ( items, circle ) => {
+            durabilityByCircle[circle] = Math.max( ...items.map( item => item.system.durability ) );
+        } );
+        const maxDurability = Math.sum( Object.values( durabilityByCircle ) );
+
+        const maxCircle = Math.max(
+          ...durabilityItems.filter(
+            item => item.type === "discipline"
+          ).map(
+            item => item.system.level
+          )
+        );
+
+        this.characteristics.health.unconscious += maxDurability;
+        this.characteristics.health.death += maxDurability + maxCircle;
+    }
+
+    /**
+     * Prepare the derived initiative value based on items.
+     * @private
+     */
+    #prepareDerivedInitiative() {
+        this.initiative = this.attributes.dex.step;
     }
 
     /* -------------------------------------------- */
