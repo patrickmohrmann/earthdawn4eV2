@@ -282,7 +282,7 @@ export default class PcData extends NamegiverTemplate {
     #prepareDerivedMovement() {
         const namegiver = this.parent.items.filter( item => item.type === "namegiver" )[0];
         if ( namegiver ) {
-            for ( const movementType of namegiver.system.movement ) {
+            for ( const movementType of Object.keys( namegiver.system.movement ) ) {
                 this.characteristics.movement[movementType] = namegiver.system.movement[movementType];
             }
         }
