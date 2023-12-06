@@ -4,15 +4,15 @@
     </div>
     <div class="body">
         <section class="item__top">
-            <div class="item__left--top">
-                <img src="{{item.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
-            </div>
-            <div class="item__right--top">
-                {{> "systems/ed4e/templates/item/item-partials/top-section.hbs"}}
-            </div>
+             {{> "systems/ed4e/templates/item/item-partials/top-section.hbs"}}
         </section>
         <section class="item__navigator">
-            {{> "systems/ed4e/templates/item/item-partials/navigator-section.hbs"}}
+            <div class="item__left--top">
+                <img src="{{item.img}}" data-edit="img" height="128" width="128" />
+            </div>
+            <div class="item__right--top">
+               {{> "systems/ed4e/templates/item/item-partials/navigator-section.hbs"}}
+            </div>
         </section>
         <section class="item__main">
             {{> "systems/ed4e/templates/item/item-partials/main-section.hbs"}}
