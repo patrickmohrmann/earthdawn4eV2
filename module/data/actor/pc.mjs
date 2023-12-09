@@ -213,8 +213,8 @@ export default class PcData extends NamegiverTemplate {
         this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue;
         if ( armorItems ) {
             for ( const armor of armorItems ) {
-                this.characteristics.armor.physical.value += armor.system.physicalArmor + armor.system.forgeBonusPhysical;
-                this.characteristics.armor.mystical.value += armor.system.mysticalArmor + armor.system.forgeBonusMystical;
+                this.characteristics.armor.physical.value += armor.system.physical.armor + armor.system.physical.forgeBonus;
+                this.characteristics.armor.mystical.value += armor.system.mystical.armor + armor.system.mystical.forgeBonus;
             }
         }
     }
