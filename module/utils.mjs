@@ -75,8 +75,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global-templates/action-selector.hbs",
     "systems/ed4e/templates/global-templates/tier-selector.hbs",
     "systems/ed4e/templates/global-templates/editor.hbs",
-    "systems/ed4e/templates/global-templates/denomination-selector.hbs",
-    "systems/ed4e/templates/global-templates/availability-selector.hbs",
     "systems/ed4e/templates/global-templates/card-options.hbs",
     "systems/ed4e/templates/global-templates/card-effect-options.hbs",
 
