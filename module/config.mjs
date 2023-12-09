@@ -104,6 +104,18 @@ ED4E.denomination = {
 	gold: "ED.Denomination.gold"
 }
 
+/**
+ * Availability
+ */
+ED4E.availability = {
+	everyday: 			"ED.Item.Availability.everyday",
+	average: 			"ED.Item.Availability.average",
+	unusual: 			"ED.Item.Availability.unusual",
+	rare: 				"ED.Item.Availability.rare",
+	veryRare: 			"ED.Item.Availability.veryRare",
+	unique: 			"ED.Item.Availability.unique"
+}
+
 /* eslint-disable */
 // Since Foundry does not support hot reloading object notation templates...
 Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path } = {}) => {

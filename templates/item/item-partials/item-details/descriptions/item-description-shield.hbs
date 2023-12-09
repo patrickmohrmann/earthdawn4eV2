@@ -40,7 +40,10 @@
     {{!-- availability --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Availability.availability"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/availability-selector.hbs"}}
+        {{!-- {{> "systems/ed4e/templates/global-templates/availability-selector.hbs"}} --}}
+        <select name="system.availability">
+            {{selectOptions config.availability selected=item.system.availability localize=true }}
+        </select>
     </div>
     {{!-- Broken --}}
     <div class="item-data__input--line">
