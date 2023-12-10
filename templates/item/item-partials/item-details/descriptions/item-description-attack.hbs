@@ -20,8 +20,10 @@
     </div>
     {{!-- Action --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Power.action"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/action-selector.hbs"}}
+        <label class="label__left">{{localize "ED.Action.action"}}:</label>
+        <select name="system.action">
+            {{selectOptions config.action selected=item.system.action localize=true }}
+        </select>
     </div>
 </div>
 <div class="item__right--main item-sheet__editor">

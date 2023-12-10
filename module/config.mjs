@@ -26,28 +26,28 @@ _______________________________`;
  */
 ED4E.attributes = {
 	str: {
-		label: "ED.Attributes.strength",
-		abbreviation: "ED.Attribute.strengthAbbr"
+		label: 			"ED.Attributes.strength",
+		abbreviation: 	"ED.Attribute.strengthAbbr"
 	},
 	dex: {
-		label: "ED.Attributes.dexterity",
-		abbreviation: "ED.Attributes.dexterityAbbr"
+		label: 			"ED.Attributes.dexterity",
+		abbreviation: 	"ED.Attributes.dexterityAbbr"
 	},
 	tou: {
-		label: "ED.Attributes.toughness",
-		abbreviation: "ED.Attributes.toughnessAbbr"
+		label: 			"ED.Attributes.toughness",
+		abbreviation: 	"ED.Attributes.toughnessAbbr"
 	},
 	per: {
-		label: "ED.Attributes.perception",
-		abbreviation: "ED.Attributes.perceptionAbbr"
+		label: 			"ED.Attributes.perception",
+		abbreviation: 	"ED.Attributes.perceptionAbbr"
 	},
 	wil: {
-		label: "ED.Attributes.willpower",
-		abbreviation: "ED.Attributes.willpowerAbbr"
+		label: 			"ED.Attributes.willpower",
+		abbreviation: 	"ED.Attributes.willpowerAbbr"
 	},
 	cha: {
-		label: "ED.Attributes.charisma",
-		abbreviation: "ED.Attributes.charismaAbbr"
+		label: 			"ED.Attributes.charisma",
+		abbreviation: 	"ED.Attributes.charismaAbbr"
 	}
 }
 
@@ -64,34 +64,34 @@ ED4E.attributes = {
  */
 ED4E.globalBonuses = {
 	allAttacks: {
-		label: "ED.Actor.GlobalBonus.allAttacks"
+		label: 			"ED.Actor.GlobalBonus.allAttacks"
 	},
 	allEffects: {
-		label: "ED.Actor.GlobalBonus.allEffects"
+		label: 			"ED.Actor.GlobalBonus.allEffects"
 	},
 	allActions: {
-		label: "ED.Actor.GlobalBonus.allActions"
+		label: 			"ED.Actor.GlobalBonus.allActions"
 	},
 	allRangedAttacks: {
-		label: "ED.Actor.GlobalBonus.allRangedAttacks"
+		label: 			"ED.Actor.GlobalBonus.allRangedAttacks"
 	},
 	allCloseAttacks: {
-		label: "ED.Actor.GlobalBonus.allCloseAttacks"
+		label: 			"ED.Actor.GlobalBonus.allCloseAttacks"
 	},
 	allSpellcasting: {
-		label: "ED.Actor.GlobalBonus.allSpellcasting"
+		label: 			"ED.Actor.GlobalBonus.allSpellcasting"
 	},
 	allDamage: {
-		label: "ED.Actor.GlobalBonus.allDamage"
+		label: 			"ED.Actor.GlobalBonus.allDamage"
 	},
 	allMeleeDamage: {
-		label: "ED.Actor.GlobalBonus.allMeleeDamage"
+		label: 			"ED.Actor.GlobalBonus.allMeleeDamage"
 	},
 	allRangedDamage: {
-		label: "ED.Actor.GlobalBonus.allRangedDamage"
+		label: 			"ED.Actor.GlobalBonus.allRangedDamage"
 	},
 	allSpellEffects: {
-		label: "ED.Actor.GlobalBonus.allSpellEffects"
+		label: 			"ED.Actor.GlobalBonus.allSpellEffects"
 	}
 }
 
@@ -99,9 +99,9 @@ ED4E.globalBonuses = {
  * ??? Denomination options
  */
 ED4E.denomination = {
-	copper: "ED.Denomination.copper",
-	silver: "ED.Denomination.silver",
-	gold: "ED.Denomination.gold"
+	copper: 			"ED.Denomination.copper",
+	silver: 			"ED.Denomination.silver",
+	gold: 				"ED.Denomination.gold"
 }
 
 /**
@@ -114,6 +114,17 @@ ED4E.availability = {
 	rare: 				"ED.Item.Availability.rare",
 	veryRare: 			"ED.Item.Availability.veryRare",
 	unique: 			"ED.Item.Availability.unique"
+}
+
+/**
+ * Actions
+ */
+ED4E.action = {
+	none: 				"ED.General.none",
+    free: 				"ED.Action.free",
+    simple: 			"ED.Action.simple",
+    standard: 			"ED.Action.standard",
+    sustained: 			"ED.Action.sustained"
 }
 
 /* eslint-disable */

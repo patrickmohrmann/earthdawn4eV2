@@ -72,7 +72,6 @@ export async function preloadHandlebarsTemplates() {
   const partials = [
     // Global Templates
     "systems/ed4e/templates/global-templates/attribute-selector.hbs",
-    "systems/ed4e/templates/global-templates/action-selector.hbs",
     "systems/ed4e/templates/global-templates/tier-selector.hbs",
     "systems/ed4e/templates/global-templates/editor.hbs",
     "systems/ed4e/templates/global-templates/card-options.hbs",
