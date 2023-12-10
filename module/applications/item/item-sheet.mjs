@@ -38,7 +38,7 @@ export default class ItemSheetEd extends ItemSheet {
     html.find( '.effect-add' ).click( () => {
       let itemNumber = this.item.effects.size;
       let itemData = {name: `New Effect ` + itemNumber,
-                      icon: "systems/earthdawn4e/assets/effect.png",
+                      icon: "systems/ed4e/assets/icons/effect.png",
                       duration: {rounds: 1},
                       origin: this.item.id
                     }
