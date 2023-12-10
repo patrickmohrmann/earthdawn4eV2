@@ -27,7 +27,9 @@
     {{!-- Tier --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/tier-selector.hbs"}}
+        <select name="system.tier">
+            {{selectOptions config.tier selected=item.system.tier localize=true }}
+        </select>
     </div>
     {{!-- Devotion Required --}}
     <div class="item-data__input--line">

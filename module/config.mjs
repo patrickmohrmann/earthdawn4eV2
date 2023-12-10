@@ -127,6 +127,17 @@ ED4E.action = {
     sustained: 			"ED.Action.sustained"
 }
 
+/**
+ * Tier
+ */
+ED4E.tier = {
+	none: 				"ED.General.none",
+	novice: 			"ED.Tier.novice",
+	journeyman: 		"ED.Tier.journeyman",
+	warden: 			"ED.Tier.warden",
+	master: 			"ED.Tier.master"
+}
+
 /* eslint-disable */
 // Since Foundry does not support hot reloading object notation templates...
 Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path } = {}) => {
