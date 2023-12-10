@@ -53,10 +53,11 @@
       "path": "lang/fr.json"
     }
   ],
+  "background": "systems/ed4e/assets/wallpaper/heroes-legends-and-foes-wallpaper.jpg",
   "media": [
     {
       "type": "cover",
-      "url": "systems/ed4e/assets/foundry/earthdawn-logo.png",
+      "url": "systems/ed4e/assets/wallpaper/heroes-legends-and-foes-wallpaper.jpg",
       "loop": false
     }
   ],
