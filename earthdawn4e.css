@@ -288,6 +288,7 @@ input.input__number-input {
 .item-sheet .item__main {
   height: 550px;
   margin-bottom: 2px;
+  margin-top: 125px;
 }
 .item-sheet .item__main .item__left--main {
   float: left;

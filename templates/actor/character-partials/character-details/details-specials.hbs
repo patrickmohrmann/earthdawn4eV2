@@ -1,6 +1,6 @@
 <div>
     {{#each actor.itemTypes.effect}}
-    {{> "systems/ed4e/templates/item/cards/effect-item-card.hbs"}}
+    {{> "systems/ed4e/templates/item/cards/item-card.hbs"}}
     {{/each}}
 </div>
 <div class="effects space-smaller">  
@@ -16,7 +16,7 @@
                 <tr>
                     <div class="item-list effects-list">
                         {{#each actor.effects as |effects id|}}
-                        {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
+                        {{> "systems/ed4e/templates/item/cards/item-card.hbs" effects }}
                         {{/each}}
                     </div>
                 </tr>

@@ -112,7 +112,8 @@ export default class ItemSheetEd extends ItemSheet {
 
     /** @override */
     get template() {
-        return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
+       // return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
+        return `systems/ed4e/templates/item/item-sheet.hbs`
     }
 
       // HTML enrichment
