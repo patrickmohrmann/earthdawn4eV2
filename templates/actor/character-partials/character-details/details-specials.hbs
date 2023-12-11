@@ -1,6 +1,14 @@
 <div>
     {{#each actor.itemTypes.effect}}
-    {{> "systems/ed4e/templates/item/cards/item-card.hbs"}}
+    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+        <div class="partial__two one-line__vertical-align">
+            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+            {{name}}
+        </div>
+        <div class="partial__two one-line__vertical-align">
+            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+        </div>
+    </div>
     {{/each}}
 </div>
 <div class="effects space-smaller">  
@@ -16,7 +24,7 @@
                 <tr>
                     <div class="item-list effects-list">
                         {{#each actor.effects as |effects id|}}
-                        {{> "systems/ed4e/templates/item/cards/item-card.hbs" effects }}
+                        {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
                         {{/each}}
                     </div>
                 </tr>
