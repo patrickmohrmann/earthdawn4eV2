@@ -6,7 +6,6 @@
  */
 export default class ActorEd extends Actor {
 
-  // TODO check code 
   activateListeners( html ) {
     super.activateListeners( html );
 
@@ -70,22 +69,6 @@ export default class ActorEd extends Actor {
     } );
 
   }
-  /* prepareData() {
-    this.prepareBaseData();
-    const baseCharacteristics = [
-      "system.attributes.dex.valueModifier",
-      "system.attributes.str.valueModifier",
-      "system.attributes.tou.valueModifier",
-      "system.attributes.per.valueModifier",
-      "system.attributes.wil.valueModifier",
-      "system.attributes.cha.valueModifier",
-      "system.durabilityBonus",
-    ];
-      const actorData = this;
-      this._applyBaseEffects( baseCharacteristics );
-      this.derivedData( actorData )
-      this.applyDerivedEffects()  
-  } */
 
     _applyBaseEffects( baseCharacteristics ) {
       let overrides = {};
@@ -122,7 +105,7 @@ export default class ActorEd extends Actor {
       this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
     }
 
-    
+    // TODO: delete unused stuff when done with PC data model
     derivedData( actorData ) {
         const systemData = actorData.system;
         // **************************** Attributes ******************************* */
