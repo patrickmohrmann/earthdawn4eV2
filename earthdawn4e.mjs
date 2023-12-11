@@ -72,6 +72,61 @@ Hooks.once( "init", () => {
     } );
 
     // Preload Handlebars templates.
-  utils.preloadHandlebarsTemplates();
+    utils.preloadHandlebarsTemplates();
 
+} );
+
+Hooks.once( 'ready', async () => {
+    // Debug stuff
+
+    game.folders.forEach( ( value, key, map ) => {
+        if ( value.flags.deleteOnStartup ) value.delete();
+    } );
+    game.items.forEach( ( value, key, map ) => {
+        if ( value.flags.deleteOnStartup ) value.delete();
+    } );
+    game.actors.forEach( ( value, key, map ) => {
+        if ( value.flags.deleteOnStartup ) value.delete();
+    } );
+
+    const actorFolder = await Folder.create(
+      {
+          "name": "DebugActors",
+          "type": "Actor",
+          "description": "<p>Contains data created for debugging purposes</p>",
+          "color": "#efdaca",
+          "flags": { deleteOnStartup: true }
+      } );
+    const itemFolder = await Folder.create(
+      {
+          "name": "DebugItems",
+          "type": "Item",
+          "description": "<p>Contains data created for debugging purposes</p>",
+          "color": "#efdaca",
+          "flags": { deleteOnStartup: true }
+      } );
+
+
+    const createdActors = [];
+    const createdItems = [];
+    for ( const actorType of Object.keys( CONFIG.Actor.dataModels ) ) {
+        createdActors.push(
+          ed4e.documents.ActorEd.create( {
+              name: actorType,
+              type: actorType,
+              folder: actorFolder.id,
+              flags: { deleteOnStartup: true }
+          } ),
+        );
+    }
+    for ( const itemType of Object.keys( CONFIG.Item.dataModels ) ) {
+        createdItems.push(
+          ed4e.documents.ItemEd.create( {
+              name: itemType,
+              type: itemType,
+              folder: itemFolder.id,
+              flags: { deleteOnStartup: true }
+          } ),
+        );
+    }
 } );
