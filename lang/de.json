@@ -71,6 +71,12 @@
             "darknessPartial":                                      "Teilweise Dunkelheit",
             "darknessFull":                                         "Volle Dunkelheit",
             "defensiveStance":                                      "Verteidigungshaltung",
+            "Encumbrance": {
+                "notEncumbered":                                    "Nicht Überlastet",
+                "light":                                            "Wenig überlastet",
+                "heavy":                                            "Stark überlastet",
+                "tooHeavy":                                         "Du kannst das nicht alles tragen!"
+            },
             "fury":                                                 "Zorn",
             "harried":                                              "Bedrängt",
             "impairedMovementPartial":                              "Teil. Bewegung",
