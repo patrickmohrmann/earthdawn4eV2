@@ -5,10 +5,10 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on Curse and Horror Mark items.
- * @property {number} step           curse step
- * @property {string} curseType           type of the curse
- * @property {boolean} curseActive         is the curse active
- * @property {boolean} curseDetected       is the curse known
+ * @property {number} step                  curse step
+ * @property {string} curseType             type of the curse
+ * @property {boolean} curseActive          is the curse active
+ * @property {boolean} curseDetected        is the curse known
  */
 export default class CurseHorrorMarkData extends SystemDataModel.mixin(
     ItemDescriptionTemplate

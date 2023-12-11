@@ -64,7 +64,9 @@
         <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
         <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
             data-dtype="Number">
-        {{> "systems/ed4e/templates/global-templates/denomination-selector.hbs"}}
+            <select name="system.price.denomination">
+                {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
+            </select>
     </div>
     {{!-- Weight --}}
     <div class="item-data__input--line">
@@ -81,11 +83,13 @@
     {{!-- availability --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Availability.availability"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/availability-selector.hbs"}}
+        <select name="system.availability">
+            {{selectOptions config.availability selected=item.system.availability localize=true }}
+        </select>
     </div>
 </div>
 {{!-- Editor --}}
 <div class="item__right--main item-sheet__editor">
-    <h3>item Description</h3>
+    <h3>{{localize "ED.Item.General.description"}}</h3>
     {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
 </div>

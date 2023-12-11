@@ -13,7 +13,7 @@ export default class PathData extends ClassTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            sourceDiscipline: new foundry.data.fields.ForeignDocument( DisciplineData, {
+            sourceDiscipline: new foundry.data.fields.ForeignDocumentField( DisciplineData, {
                 idOnly: true,
                 label: "ED.Item.Class.sourceDiscipline"
             } ),
