@@ -158,9 +158,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-shipWeapon.hbs",
 
     // cards
-    "systems/ed4e/templates/item/cards/item-card.hbs",
-
-
     "systems/ed4e/templates/item/cards/effect-card.hbs",
 
   ];
