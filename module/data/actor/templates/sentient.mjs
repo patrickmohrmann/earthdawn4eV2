@@ -9,7 +9,6 @@ export default class SentientTemplate extends CommonTemplate {
 
     /** @inheritDoc */
     static defineSchema() {
-        // TODO: replace all with "value" and "max" to identify them as "Ressources" for later use in Token Bars
         return this.mergeSchema( super.defineSchema(), {
             attributes: new MappingField( new foundry.data.fields.SchemaField( {
                 baseStep: new foundry.data.fields.NumberField( {
@@ -35,7 +34,6 @@ export default class SentientTemplate extends CommonTemplate {
                 initialKeysOnly: true,
                 label: "ED.Attributes.attributes"
             } ),
-            // TODO: write setter functions for condition to account for mutually exclusive conditions, e.g. you can only have partial OR full cover, can't be aggressive while unconscious, etc.
             characteristics: new foundry.data.fields.SchemaField( {
                 defenses: new foundry.data.fields.SchemaField( {
                     physical: new foundry.data.fields.NumberField( {
@@ -47,7 +45,6 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
-                    // TODO: "mystic" or "mystical" -> same everywhere, in all instances in code
                     mystical: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
@@ -180,7 +177,6 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
                 } ),
-                // TODO: duplicated with Item "Namegiver" create class to get this field
                 movement: new foundry.data.fields.SchemaField( {
                       walk: new foundry.data.fields.NumberField( {
                           required: true,
@@ -431,7 +427,6 @@ export default class SentientTemplate extends CommonTemplate {
                 } ),
                 favors:
                   new MappingField( new foundry.data.fields.SchemaField( {
-                      // TODO: do we really need the time of the favor? it's an official rule in the gm guide
                       owingThem: new foundry.data.fields.NumberField( {
                           min: 0,
                           step: 1,
