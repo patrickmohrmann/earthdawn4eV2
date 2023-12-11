@@ -13,6 +13,5 @@ export default class TrapData extends CommonTemplate {
     /** @inheritDoc */
     static defineSchema() {
         return super.defineSchema();
-        // TODO
     }
 }
