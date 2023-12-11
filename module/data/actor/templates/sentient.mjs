@@ -456,7 +456,6 @@ export default class SentientTemplate extends CommonTemplate {
 
     /** @inheritDoc */
     prepareDerivedData() {
-        console.log( "ED4E | In Sentient data model's prepareDerivedData" );
     }
 
     /**
