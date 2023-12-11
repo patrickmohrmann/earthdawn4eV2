@@ -160,6 +160,9 @@ export async function preloadHandlebarsTemplates() {
     // cards
     "systems/ed4e/templates/item/cards/item-card.hbs",
 
+
+    "systems/ed4e/templates/item/cards/effect-card.hbs",
+
   ];
 
   const paths = {};

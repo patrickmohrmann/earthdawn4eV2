@@ -10,7 +10,7 @@ export default class ItemSheetEd extends ItemSheet {
   activateListeners( html ) {
     super.activateListeners( html );
 
-    $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
+    $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
 
      /**
          * @description Delete item from Item
