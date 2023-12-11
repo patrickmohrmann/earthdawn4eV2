@@ -26,8 +26,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 initial: "melee",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
-            } ), 
-            // @Chris kann ich hier bei initial auf die Config verweisen?
+            } ),
             damageAttribute: new foundry.data.fields.StringField( {
                 required: true,
                 nullable: false,
