@@ -149,6 +149,13 @@ ED4E.tier = {
 	master: 			"ED.Tier.master"
 }
 
+ED4E.encumbranceStatus = {
+	notEncumbered: "ED.Conditions.Encumbrance.notEncumbered",
+	light: "ED.Conditions.Encumbrance.light",
+	heavy: "ED.Conditions.Encumbrance.heavy",
+	tooHeavy: "ED.Conditions.Encumbrance.tooHeavy"
+}
+
 /* eslint-disable */
 // Since Foundry does not support hot reloading object notation templates...
 Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path } = {}) => {

@@ -364,6 +364,12 @@ export default class SentientTemplate extends CommonTemplate {
                     initial: 0,
                     integer: true,
                     label: "ED.General.carryingCapacityBonus"
+                } ),
+                status: new foundry.data.fields.StringField( {
+                    required: true,
+                    blank: false,
+                    nullable: false,
+                    initial: "notEncumbered"
                 } )
                 // encumbrance / overload status
             } ),
