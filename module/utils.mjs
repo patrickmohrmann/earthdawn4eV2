@@ -71,7 +71,6 @@ export const validators = {
 export async function preloadHandlebarsTemplates() {
   const partials = [
     // Global Templates
-    "systems/ed4e/templates/global-templates/attribute-selector.hbs",
     "systems/ed4e/templates/global-templates/editor.hbs",
     "systems/ed4e/templates/global-templates/card-options-chat.hbs",
     "systems/ed4e/templates/global-templates/card-options-enhance.hbs",
@@ -84,7 +83,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-details/details-equipment.hbs",
     "systems/ed4e/templates/actor/character-details/details-notes.hbs",
     "systems/ed4e/templates/actor/character-details/details-familiars-mounts.hbs",
-    "systems/ed4e/templates/actor/character-details/details-reputation.hbs",
     "systems/ed4e/templates/actor/character-details/details-general.hbs",
     "systems/ed4e/templates/actor/character-details/details-specials.hbs",
     "systems/ed4e/templates/actor/character-details/details-legend.hbs",

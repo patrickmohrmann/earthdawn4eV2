@@ -738,7 +738,7 @@ input.input__number-input {
   background: transparent;
   border: none;
   color: red;
-  width: 50%;
+  width: 49%;
   text-align: center;
 }
 .character-sheet .header-section .header-section__name .namegiver__item {
@@ -747,8 +747,9 @@ input.input__number-input {
   background: transparent;
   border: none;
   color: red;
-  width: 50%;
+  width: 49%;
   text-align: right;
+  margin-left: 5px;
   margin-top: -5px;
 }
 .character-sheet .header-section .header-section__name .namegiver__item .align__Namegiver-options {

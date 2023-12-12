@@ -15,7 +15,6 @@
     {{!-- Attribute --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
-        {{!-- {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}} --}}
         <select name="system.attribute">
             {{selectOptions config.attributes selected=item.system.attribute labelAttr="label" localize=true }}
         </select>
