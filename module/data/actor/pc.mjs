@@ -129,7 +129,6 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareBaseDefenses() {
-        // TODO: not nice, it's a bit overkill, but also there is for sure an elegant way for this
         const defenseAttributeMapping = {
             physical: "dex",
             mystical: "per",
@@ -229,21 +228,18 @@ export default class PcData extends NamegiverTemplate {
         );
         if ( !durabilityItems?.length ) return;
 
-        // TODO: only takes the highest, e.g., when only one discipline only on entry with highest circle
-        // TODO: it's the ability "devotion" not the class "questor"
-        const durabilityByCircle = durabilityItems.reduce( ( accumulator, currentValue ) => (
-            {
-                ...accumulator,
-                [currentValue.system.level]: [...( accumulator[currentValue.system.level] ?? [] ), currentValue]
-            }
-          ),
-          {}
-        )
-        for ( const [circle, items] of Object.entries( durabilityByCircle ) ) {
-            durabilityByCircle[circle] = Math.max( ...items.map( item => item.system.durability ) )
+        const durabilityByCircle = {};
+        const maxLevel = Math.max( ...durabilityItems.map( item => item.system.level ) );
+
+        // Iterate through levels from 1 to the maximum level
+        for ( let currentLevel = 1; currentLevel <= maxLevel; currentLevel++ ) {
+            // Find the maximum durability for the current level
+            durabilityByCircle[currentLevel] = durabilityItems.reduce( ( max, item ) => {
+                return ( currentLevel <= item.system.level && item.system.durability > max )
+                  ? item.system.durability
+                  : max;
+            }, 0 );
         }
-          
-        const maxDurability = sum( Object.values( durabilityByCircle ) );
 
         const maxCircle = Math.max(
           ...durabilityItems.filter(
@@ -252,6 +248,8 @@ export default class PcData extends NamegiverTemplate {
             item => item.system.level
           )
         );
+
+        const maxDurability = sum( Object.values( durabilityByCircle ) );
 
         this.characteristics.health.unconscious += maxDurability;
         this.characteristics.health.death += maxDurability + maxCircle;
