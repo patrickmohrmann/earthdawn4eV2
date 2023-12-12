@@ -139,4 +139,18 @@ export default class ActorSheetEd extends ActorSheet {
     get template() {
         return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`
     }
+
+    // HTML enrichment
+  async _enableHTMLEnrichment() {
+    let enrichment = {};
+    enrichment["system.description.value"] = await TextEditor.enrichHTML( this.actor.system.description.value, {async: true, secrets: this.actor.isOwner} );
+     return expandObject( enrichment );
+  }
+
+  async getData() {
+    const systemData = super.getData();
+    systemData.enrichment =  await this._enableHTMLEnrichment();
+    console.log( '[EARTHDAWN] Actor data: ', systemData );
+    return systemData;
+  }
 }

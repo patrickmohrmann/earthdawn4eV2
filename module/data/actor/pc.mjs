@@ -11,7 +11,8 @@ import ActorDescriptionTemplate from "./templates/description.mjs";
  * @property {number} timesIncreased    attribute increases
  */
 export default class PcData extends NamegiverTemplate.mixin(
-    ActorDescriptionTemplate ) {
+    ActorDescriptionTemplate 
+) {
 
     /** @inheritDoc */
     static _systemType = "character";

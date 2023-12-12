@@ -140,6 +140,21 @@ input.input__number-input {
   line-height: 35px;
   vertical-align: middle;
 }
+.sheet__editor {
+  min-height: 500px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.sheet__editor .editor,
+.sheet__editor .prosemirror,
+.sheet__editor .editor-container,
+.sheet__editor .editor-content {
+  min-height: 400px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
