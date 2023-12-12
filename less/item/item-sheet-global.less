@@ -1,15 +1,17 @@
 .item-sheet {
-    
 
-    
+
+
     .window-content {
         padding: 0px;
+
         .item {
             height: 700px;
-        .body {
-            height: 600px;
+
+            .body {
+                height: 600px;
+            }
         }
-    }
     }
 
     .window-header,
@@ -75,28 +77,47 @@
     }
 
     .item__top {
-        height: 140px;
+        position: absolute;
+        height: 50px;
         margin-top: 2px;
         padding-top: 10px;
+        z-index: 6;
+        width: 100%;
+    }
 
-        .item__left--top {
-            float: left;
-            width: 140px;
-            height: 140px;
+    .header__no-border {
+        border-bottom: none;
+    }
 
-            img {
-                margin: 6px;
+    .item__name {
+        background: transparent;
                 border: none;
-            }
-        }
+                color: red;
+                width: 100%;
+                text-align: center;
+    }
 
-        .item__right--top {
-            float: left;
-            width: calc(100% - 140px);
-            height: 140px;
-            padding: 5px;
+    .item__left--top {
+        margin-top: 40px;
+        float: left;
+        width: 140px;
+        height: 140px;
+
+        img {
+            margin: 6px;
+            border: none;
         }
     }
+
+    .item__right--top {
+        margin-top: 70px;
+        float: left;
+        width: calc(100% - 140px);
+        height: 120px;
+        padding: 5px;
+
+    }
+
 
     .item__navigator {
         height: 70px;
@@ -106,7 +127,8 @@
     .item__main {
         height: 550px;
         margin-bottom: 2px;
-        
+        margin-top: 125px;
+
 
         .item__left--main {
             float: left;
@@ -172,6 +194,7 @@
         line-height: 35px;
         vertical-align: middle;
     }
+
     .item-data__checkbox--line {
         vertical-align: middle;
     }
@@ -187,13 +210,17 @@
         max-height: 100%;
         display: flex;
         flex-direction: column;
-        .editor, .prosemirror, .editor-container, .editor-content {
+
+        .editor,
+        .prosemirror,
+        .editor-container,
+        .editor-content {
             min-height: 400px;
             max-height: 100%;
             display: flex;
             flex-direction: column;
-        } 
+        }
     }
-    
+
 
 }

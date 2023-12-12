@@ -225,11 +225,14 @@
                 "arbitraryStep":                                "Basisstufe",
                 "availability":                                 "Verfügbarkeit",
                 "bloodMagicDamage":                             "Blutmagie Schaden", 
-                "denomination":                                      "Münzen",
+                "denomination":                                 "Münzen",
+                "description":                                  "Beschreibung",
+                "details":                                      "Details",
                 "price":                                        "Kosten",   
                 "usableItem":                                   "Benutzbar --- TBD",
                 "value":                                        "Wert",
                 "weight":                                       "Gewicht",
+                "weightMultiplier":                             "Gewichtsfaktor",
                 "recoveryPropertyValue":                        "Erholungs-Typ"
             },
             "RecoveryPropertyValue": {

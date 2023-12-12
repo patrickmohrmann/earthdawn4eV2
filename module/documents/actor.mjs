@@ -55,7 +55,7 @@ export default class ActorEd extends Actor {
       let itemNumber = this.actor.effects.size;
       let itemData = {
         label: `New Effect ` + itemNumber,
-        icon: 'systems/earthdawn4e/assets/effect.png',
+        icon: 'systems/ed4e/assets/icons/effect.png',
         duration: { rounds: 1 },
         origin: this.actor.id,
       };

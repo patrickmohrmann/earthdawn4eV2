@@ -72,13 +72,9 @@ export async function preloadHandlebarsTemplates() {
   const partials = [
     // Global Templates
     "systems/ed4e/templates/global-templates/attribute-selector.hbs",
-    "systems/ed4e/templates/global-templates/action-selector.hbs",
-    "systems/ed4e/templates/global-templates/tier-selector.hbs",
     "systems/ed4e/templates/global-templates/editor.hbs",
-    "systems/ed4e/templates/global-templates/denomination-selector.hbs",
-    "systems/ed4e/templates/global-templates/availability-selector.hbs",
-    "systems/ed4e/templates/global-templates/card-options.hbs",
-    "systems/ed4e/templates/global-templates/card-effect-options.hbs",
+    "systems/ed4e/templates/global-templates/card-options-chat.hbs",
+    "systems/ed4e/templates/global-templates/card-options-enhance.hbs",
 
     // Character partials.
     "systems/ed4e/templates/actor/character-partials/header-section.hbs",
@@ -162,28 +158,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-shipWeapon.hbs",
 
     // cards
-    "systems/ed4e/templates/item/cards/armor-card.hbs",
-    "systems/ed4e/templates/item/cards/attack-card.hbs",
-    "systems/ed4e/templates/item/cards/curse-card.hbs",
-    "systems/ed4e/templates/item/cards/devotion-card.hbs",
-    "systems/ed4e/templates/item/cards/discipline-card.hbs",
     "systems/ed4e/templates/item/cards/effect-card.hbs",
-    "systems/ed4e/templates/item/cards/equipment-card.hbs",
-    "systems/ed4e/templates/item/cards/knack-card.hbs",
-    "systems/ed4e/templates/item/cards/maneuver-card.hbs",
-    "systems/ed4e/templates/item/cards/path-card.hbs",
-    "systems/ed4e/templates/item/cards/poison-card.hbs",
-    "systems/ed4e/templates/item/cards/power-card.hbs",
-    "systems/ed4e/templates/item/cards/questor-card.hbs",
-    "systems/ed4e/templates/item/cards/shield-card.hbs",
-    "systems/ed4e/templates/item/cards/ship-weapon-card.hbs",
-    "systems/ed4e/templates/item/cards/skill-card.hbs",
-    "systems/ed4e/templates/item/cards/special-ability-card.hbs",
-    "systems/ed4e/templates/item/cards/spell-card.hbs",
-    "systems/ed4e/templates/item/cards/talent-card.hbs",
-    "systems/ed4e/templates/item/cards/weapon-card.hbs",
-    "systems/ed4e/templates/item/cards/effect-item-card.hbs",
-    "systems/ed4e/templates/item/cards/namegiver-card.hbs",
 
   ];
 

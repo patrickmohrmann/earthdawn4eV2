@@ -10,7 +10,7 @@ export default class ItemSheetEd extends ItemSheet {
   activateListeners( html ) {
     super.activateListeners( html );
 
-    $( document ).on( 'keydown', 'form', function ( ev ) { return ev.key !== 'Enter'; } );
+    $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
 
      /**
          * @description Delete item from Item
@@ -38,7 +38,7 @@ export default class ItemSheetEd extends ItemSheet {
     html.find( '.effect-add' ).click( () => {
       let itemNumber = this.item.effects.size;
       let itemData = {name: `New Effect ` + itemNumber,
-                      icon: "systems/earthdawn4e/assets/effect.png",
+                      icon: "systems/ed4e/assets/icons/effect.png",
                       duration: {rounds: 1},
                       origin: this.item.id
                     }
@@ -112,7 +112,8 @@ export default class ItemSheetEd extends ItemSheet {
 
     /** @override */
     get template() {
-        return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
+       // return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
+        return `systems/ed4e/templates/item/item-sheet.hbs`
     }
 
   // HTML enrichment

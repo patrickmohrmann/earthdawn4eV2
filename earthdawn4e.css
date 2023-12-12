@@ -136,6 +136,10 @@ input.input__number-input {
   padding-top: 5px;
   height: 20px;
 }
+.one-line__vertical-align > * {
+  line-height: 35px;
+  vertical-align: middle;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -243,23 +247,38 @@ input.input__number-input {
   z-index: 2;
 }
 .item-sheet .item__top {
-  height: 140px;
+  position: absolute;
+  height: 50px;
   margin-top: 2px;
   padding-top: 10px;
+  z-index: 6;
+  width: 100%;
 }
-.item-sheet .item__top .item__left--top {
+.item-sheet .header__no-border {
+  border-bottom: none;
+}
+.item-sheet .item__name {
+  background: transparent;
+  border: none;
+  color: red;
+  width: 100%;
+  text-align: center;
+}
+.item-sheet .item__left--top {
+  margin-top: 40px;
   float: left;
   width: 140px;
   height: 140px;
 }
-.item-sheet .item__top .item__left--top img {
+.item-sheet .item__left--top img {
   margin: 6px;
   border: none;
 }
-.item-sheet .item__top .item__right--top {
+.item-sheet .item__right--top {
+  margin-top: 70px;
   float: left;
   width: calc(100% - 140px);
-  height: 140px;
+  height: 120px;
   padding: 5px;
 }
 .item-sheet .item__navigator {
@@ -269,6 +288,7 @@ input.input__number-input {
 .item-sheet .item__main {
   height: 550px;
   margin-bottom: 2px;
+  margin-top: 125px;
 }
 .item-sheet .item__main .item__left--main {
   float: left;
@@ -525,6 +545,10 @@ input.input__number-input {
   left: 200px;
   width: calc(100% - 270px);
   height: 100%;
+}
+.character-sheet .main-section .right-part .item-data__input--line {
+  line-height: 35px;
+  vertical-align: middle;
 }
 .character-sheet .main-section div.right-part {
   margin: 4px, 4px;
