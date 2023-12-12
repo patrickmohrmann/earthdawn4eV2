@@ -115,7 +115,7 @@ export default class ItemSheetEd extends ItemSheet {
         return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
     }
 
-      // HTML enrichment
+  // HTML enrichment
   async _enableHTMLEnrichment() {
     let enrichment = {};
     enrichment["system.description.value"] = await TextEditor.enrichHTML( this.item.system.description.value, {async: true, secrets: this.item.isOwner} );

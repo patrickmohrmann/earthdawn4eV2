@@ -1,5 +1,6 @@
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum } from '../../utils.mjs';
+import ActorDescriptionTemplate from "./templates/description.mjs";
 
 /**
  * System data definition for PCs.
@@ -9,7 +10,8 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum } from '.
  * @property {number} value             value is the one shown. baseValue + modifications
  * @property {number} timesIncreased    attribute increases
  */
-export default class PcData extends NamegiverTemplate {
+export default class PcData extends NamegiverTemplate.mixin(
+    ActorDescriptionTemplate ) {
 
     /** @inheritDoc */
     static _systemType = "character";

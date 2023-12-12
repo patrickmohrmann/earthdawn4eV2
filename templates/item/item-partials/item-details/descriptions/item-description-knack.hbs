@@ -15,17 +15,24 @@
     {{!-- Attribute --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}}
+        {{!-- {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}} --}}
+        <select name="system.attribute">
+            {{selectOptions config.attributes selected=item.system.attribute labelAttr="label" localize=true }}
+        </select>
     </div>
     {{!-- Action --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Action.action"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/action-selector.hbs"}}
+        <select name="system.action">
+            {{selectOptions config.action selected=item.system.action localize=true }}
+        </select>
     </div>
     {{!-- Tier --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/tier-selector.hbs"}}
+        <select name="system.tier">
+            {{selectOptions config.tier selected=item.system.tier localize=true }}
+        </select>
     </div>
     {{!-- Source Talent --}}
     <div class="item-data__input--line">
