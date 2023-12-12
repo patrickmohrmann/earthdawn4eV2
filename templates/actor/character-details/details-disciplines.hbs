@@ -1,0 +1,58 @@
+<div>
+    <h3>Disciplines</h3>
+    <div>
+        {{#each actor.itemTypes.discipline}}
+        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+            <div class="partial__two one-line__vertical-align">
+                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                {{name}}
+            </div>
+            <div class="partial__two one-line__vertical-align">
+                {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <h3>Paths</h3>
+    <div>
+        {{#each actor.itemTypes.path}}
+        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+            <div class="partial__two one-line__vertical-align">
+                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                {{name}}
+            </div>
+            <div class="partial__two one-line__vertical-align">
+                {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <h3>Questor</h3>
+    <div>
+        {{#each actor.itemTypes.questor}}
+        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+            <div class="partial__two one-line__vertical-align">
+                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                {{name}}
+            </div>
+            <div class="partial__two one-line__vertical-align">
+                {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <h3>Namegiver</h3>
+    <div>
+        {{#each actor.itemTypes.namegiver}}
+        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+            <div class="partial__two one-line__vertical-align">
+                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                {{name}}
+            </div>
+            <div class="partial__two one-line__vertical-align">
+                {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

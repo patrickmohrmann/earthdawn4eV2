@@ -76,30 +76,26 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global-templates/card-options-chat.hbs",
     "systems/ed4e/templates/global-templates/card-options-enhance.hbs",
 
-    // Character partials.
-    "systems/ed4e/templates/actor/character-partials/header-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/image-characteristics-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/disciplines-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/attribute-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/details-section.hbs",
-    
-
     // Character details section partials
-    "systems/ed4e/templates/actor/character-partials/character-details/details-talents.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-skills.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-devotions.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-spells.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-equipment.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-notes.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-familiars-mounts.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-reputation.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-general.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-specials.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-legend.hbs",
+    "systems/ed4e/templates/actor/character-details/details-talents.hbs",
+    "systems/ed4e/templates/actor/character-details/details-skills.hbs",
+    "systems/ed4e/templates/actor/character-details/details-devotions.hbs",
+    "systems/ed4e/templates/actor/character-details/details-spells.hbs",
+    "systems/ed4e/templates/actor/character-details/details-equipment.hbs",
+    "systems/ed4e/templates/actor/character-details/details-notes.hbs",
+    "systems/ed4e/templates/actor/character-details/details-familiars-mounts.hbs",
+    "systems/ed4e/templates/actor/character-details/details-reputation.hbs",
+    "systems/ed4e/templates/actor/character-details/details-general.hbs",
+    "systems/ed4e/templates/actor/character-details/details-specials.hbs",
+    "systems/ed4e/templates/actor/character-details/details-legend.hbs",
+    "systems/ed4e/templates/actor/character-details/details-disciplines.hbs",
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs",
     "systems/ed4e/templates/actor/actor-partials/action-button-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/header-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/image-characteristics-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/details-section.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",
