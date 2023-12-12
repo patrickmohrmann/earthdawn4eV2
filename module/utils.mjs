@@ -82,7 +82,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-partials/disciplines-section.hbs",
     "systems/ed4e/templates/actor/character-partials/attribute-section.hbs",
     "systems/ed4e/templates/actor/character-partials/details-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/action-button-section.hbs",
+    
 
     // Character details section partials
     "systems/ed4e/templates/actor/character-partials/character-details/details-talents.hbs",
@@ -99,6 +99,7 @@ export async function preloadHandlebarsTemplates() {
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/action-button-section.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",
