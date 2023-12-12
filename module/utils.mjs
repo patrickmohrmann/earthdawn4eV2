@@ -82,7 +82,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-details/details-spells.hbs",
     "systems/ed4e/templates/actor/character-details/details-equipment.hbs",
     "systems/ed4e/templates/actor/character-details/details-notes.hbs",
-    "systems/ed4e/templates/actor/character-details/details-familiars-mounts.hbs",
+    "systems/ed4e/templates/actor/character-details/details-familiars-reputation.hbs",
     "systems/ed4e/templates/actor/character-details/details-general.hbs",
     "systems/ed4e/templates/actor/character-details/details-specials.hbs",
     "systems/ed4e/templates/actor/character-details/details-legend.hbs",

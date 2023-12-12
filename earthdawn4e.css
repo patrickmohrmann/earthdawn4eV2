@@ -155,6 +155,9 @@ input.input__number-input {
   display: flex;
   flex-direction: column;
 }
+.itemControlGroup {
+  float: right;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
