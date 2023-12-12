@@ -730,8 +730,7 @@ input.input__number-input {
 .character-sheet .header-section .header-section__name {
   position: absolute;
   color: red;
-  width: 40%;
-  left: 5%;
+  width: 45%;
 }
 .character-sheet .header-section .header-section__name input {
   position: absolute;
@@ -739,8 +738,21 @@ input.input__number-input {
   background: transparent;
   border: none;
   color: red;
-  width: 100%;
+  width: 50%;
   text-align: center;
+}
+.character-sheet .header-section .header-section__name .namegiver__item {
+  position: absolute;
+  z-index: 6;
+  background: transparent;
+  border: none;
+  color: red;
+  width: 50%;
+  text-align: right;
+  margin-top: -5px;
+}
+.character-sheet .header-section .header-section__name .namegiver__item .align__Namegiver-options {
+  margin-top: -19px;
 }
 .character-sheet .header-section .header-section__characteristics {
   position: absolute;
@@ -749,6 +761,7 @@ input.input__number-input {
   width: 40%;
   text-align: center;
   z-index: 6;
+  margin-top: 3px;
 }
 .character-sheet .image-characteristics-section {
   margin-top: 40px;
