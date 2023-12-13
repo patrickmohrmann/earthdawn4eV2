@@ -1,11 +1,11 @@
 <div class="details__area left-part">
     {{!-- Attribute --}}
     <div>
-        <h4>
-            <label class="character__attribute">{{localize "ED.Attributes.attributes"}}</label>
+        <h3>
+            <label class="character__attribute">{{localize "ED.Sheet.Header.attributes"}}</label>
             <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
                 ED.LpTracking.attributeImprovement"}}"></a>
-        </h4>
+        </h3>
         <table class="table__attribute">
             <tr>
                 <th class="text__alignment--left">{{localize "ED.Attributes.attribute"}}</th>
@@ -227,10 +227,6 @@
                         </span>
                     </div>
                 </td>
-                {{!-- <td>
-                    <input class="input__number-input" type="text" name="system.attributes.cha.timesIncreased"
-                        value="{{actor.system.attributes.cha.timesIncreased}}">
-                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -294,7 +290,7 @@
     </div>
     {{!-- Devotion --}}
     <div>
-        <h4>Devotions</h4>
+        <h4>{{localize "ED.Sheet.Header.devotionPoints"}}</h4>
         <table class="table__devotion">
             <tr>
                 <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
@@ -327,7 +323,7 @@
 {{!-- Conditions --}}
 <div class="right-part">
     <div class="partial__two">
-        <h3>conditions</h3>
+        <h3>{{localize "ED.Sheet.Header.conditions"}}</h3>
         <div>
             <div>
                 <div class="partial__two">
@@ -442,14 +438,14 @@
                     <label>{{localize "ED.Conditions.overwhelmed"}}</label>
                 </div>
                 <div class="partial__two">
-                    <input type="Number" class="input__checkbox" name="system.condition.overwhelmed"
+                    <input type="Number" class="input__number-input" name="system.condition.overwhelmed"
                         value="{{actor.system.condition.overwhelmed}}">
                 </div>
             </div>
         </div>
     </div>
     <div class="partial__two">
-        <h3>special abilities</h3>
+        <h3>{{localize "ED.specialAbility"}}</h3>
         <div>
             {{#each actor.itemTypes.specialAbility}}
             <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">

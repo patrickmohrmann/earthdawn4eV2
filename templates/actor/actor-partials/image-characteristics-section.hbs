@@ -9,11 +9,11 @@
 
 
                 <div id="characteristics-defenses" class="partial__two">
-                    <h4 class="header header--centered">Defenses</h4>
+                    <h4 class="header header--centered">{{localize "ED.Sheet.Header.defenses"}}</h4>
                     <div class="input--centered">
-                        <label class="partial__three">Physical</label>
-                        <label class="partial__three">Mystical</label>
-                        <label class="partial__three">Social</label>
+                        <label class="partial__three">{{localize "ED.Sheet.Descriptions.physical"}}</label>
+                        <label class="partial__three">{{localize "ED.Sheet.Descriptions.mystical"}}</label>
+                        <label class="partial__three">{{localize "ED.Sheet.Descriptions.social"}}</label>
                     </div>
                     <div class="input--centered partial__three">
                         <input id="characteristic-defense-physcial" class="input__circle-input--centered" name="system.characteristics.defenses.physical" value="{{actor.system.characteristics.defenses.physical}}">
@@ -26,14 +26,14 @@
                     </div>
                 </div>
                 <div id="characteristics-health-rating" class="partial__two">
-                    <h4 class="header header--centered">Health Rating</h4>
+                    <h4 class="header header--centered">{{localize "ED.Sheet.Header.healthRating"}}</h4>
                     <div class="input--centered">
-                        <label class="partial__three">Wounds</label>
-                        <label class="partial__three">Unconscious</label>
-                        <label class="partial__three">Death</label>
+                        <label class="partial__three">{{localize "ED.Sheet.Descriptions.woundsThreshold"}}</label>
+                        <label class="partial__three">{{localize "ED.Sheet.Descriptions.unconsciousThresholdShort"}}</label>
+                        <label class="partial__three">{{localize "ED.Sheet.Descriptions.deathThesholdShort"}}</label>
                     </div>
                     <div class="input--centered partial__three">
-                        <input id="characteristic-defense-physcial" class="input__circle-input--centered" name="system.characteristics.health.woundThreshold" value="{{actor.system.characteristics.health.woundThreshold}}">
+                        <input id="characteristic-health-rating-wounds" class="input__circle-input--centered" name="system.characteristics.health.woundThreshold" value="{{actor.system.characteristics.health.woundThreshold}}">
                     </div>
                     <div class="input--centered partial__three">
                         <input id="characteristic-health-rating-unconscious" class="input__circle-input--centered" name="system.characteristics.health.unconscious" value="{{actor.system.characteristics.health.unconscious}}">
@@ -46,10 +46,10 @@
 
             <div class="characteristics--padding1">
                 <div id="characteristics-armor" class="partial__four">
-                    <h4 class="header header--centered">Armor</h4>
+                    <h4 class="header header--centered">{{localize "ED.Sheet.Header.armor"}}</h4>
                     <div class="input--centered">
-                        <label class="partial__two">Physical</label>
-                        <label class="partial__two">Mystic</label>
+                        <label class="partial__two">{{localize "ED.Sheet.Descriptions.physical"}}</label>
+                        <label class="partial__two">{{localize "ED.Sheet.Descriptions.mystical"}}</label>
                     </div>
                     <div class="input--centered partial__two">
                         <input id="characteristic-armor-physical" class="input__circle-input--centered" name="system.characteristics.armor.physical.value" value="{{actor.system.characteristics.armor.physical.value}}">
@@ -60,12 +60,12 @@
                 </div>
 
                 <div id="characteristics-damage" class="partial__four">
-                    <h4 class="header header--centered">Movement
+                    <h4 class="header header--centered">{{localize "ED.Sheet.Header.movement"}}
                         <a class="fas fa-cogs" title="other movement types inside a pop up"></a>
                     </h4>
                     <div class="input--centered">
-                        <label>walk</label>
-                        {{!-- <label class="partial__four">Run</label>
+                        <label>{{localize "ED.Sheet.Descriptions.walk"}}</label>
+                        {{!-- <label class="partial__four">climb</label>
                         <label class="partial__four">Mount</label>
                         <label class="partial__four">Fly</label> --}}
                     </div>
@@ -73,7 +73,9 @@
                         <input id="characteristic-movement-run" class="input__circle-input--centered" name="system.characteristics.movement.walk" value="{{actor.system.characteristics.movement.walk}}">
                     </div>
 
-                    {{!-- <div class="input--centered partial__four">
+                    {{!-- 
+                    the movement types shall be configurable by pressing the cogs button
+                    <div class="input--centered partial__four">
                         <input id="characteristic-movement-run" class="input__circle-input--centered">
                     </div>
                     <div class="input--centered partial__four">
@@ -88,12 +90,12 @@
 
 
                 <div id="characteristics-damage" class="partial__four">
-                    <h4 class="header header--centered">Damage
+                    <h4 class="header header--centered">{{localize "ED.Sheet.Header.damage"}}
                         <a class="fas fa-cogs" title="a prompt will show option for Blood magic"></a>
                     </h4>
                     <div class="input--centered">
-                        <label class="partial__two">Current</label>
-                        <label class="partial__two">Wounds</label>
+                        <label class="partial__two">{{localize "ED.Sheet.Descriptions.current"}}</label>
+                        <label class="partial__two">{{localize "ED.Sheet.Descriptions.wounds"}}</label>
                     </div>
                     <div class="input--centered partial__two">
                         <input id="characteristic-damage" class="input__circle-input--centered" name="system.characteristics.health.damage.total" value="{{actor.system.characteristics.health.damage.total}}">
@@ -103,13 +105,13 @@
                     </div>
                 </div>
                 <div id="characteristics-damage" class="partial__four">
-                    <h4 class="header header--centered">recovery
+                    <h4 class="header header--centered">{{localize "ED.Sheet.Header.recoveryTest"}}
                         <a class="fas fa-medkit" title="take a rest"></a>
                     </h4>
                     <div class="input--centered">
-                        <label class="partial__two">Current
+                        <label class="partial__two">{{localize "ED.Sheet.Descriptions.current"}}
                         </label>
-                        <label class="partial__two">daily</label>
+                        <label class="partial__two">{{localize "ED.Sheet.Descriptions.daily"}}</label>
                     </div>
                     <div class="input--centered partial__two">
                         <input id="characteristic-recovery-current" class="input__circle-input--centered" name="system.characteristics.recoveryTests.value" value="{{actor.system.characteristics.recoveryTests.value}}">
