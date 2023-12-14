@@ -16,23 +16,25 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            defenseBonusPhysical: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                hint: "ED.Item.Shield.Label.defenseBonusPhysical",
-                label: "ED.Item.Shield.Hint.defenseBonusPhysical"
-            } ),
-            defenseBonusMystical: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                hint: "ED.Item.Shield.Label.defenseBonusMystical",
-                label: "ED.Item.Shield.Hint.defenseBonusMystical"
+            defenseBonus: new foundry.data.fields.SchemaField( {
+                physical: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    hint: "ED.Item.Shield.Label.defenseBonusPhysical",
+                    label: "ED.Item.Shield.Hint.defenseBonusPhysical"
+                } ),
+                mystical: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    hint: "ED.Item.Shield.Label.defenseBonusMystical",
+                    label: "ED.Item.Shield.Hint.defenseBonusMystical"
+                } ),
             } ),
             initiativePenalty: new foundry.data.fields.NumberField( {
                 required: true,

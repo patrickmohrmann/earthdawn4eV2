@@ -329,8 +329,8 @@
             },
             "Shield": {
                 "Label": {
-                    "defenseBonusPhysical":                     "Phy. Verteidigung",
-                    "defenseBonusMystical":                     "Myst. Verteidigung",
+                    "defenseBonusPhysical":                     "Phy. Verteidigung Bonus",
+                    "defenseBonusMystical":                     "Myst. Verteidigung Bonus",
                     "initiativePenalty":                        "Ini Malus",
                     "shatterThreshold":                         "Bruch",
                     "broken":                                   "Unbrauchbar"

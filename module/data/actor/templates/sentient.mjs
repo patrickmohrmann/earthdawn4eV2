@@ -47,7 +47,6 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
-                    // TODO: "mystic" or "mystical" -> same everywhere, in all instances in code
                     mystical: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
