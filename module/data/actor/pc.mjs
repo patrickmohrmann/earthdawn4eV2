@@ -139,7 +139,7 @@ export default class PcData extends NamegiverTemplate.mixin(
             social: "cha"
         }
         for ( const defenseType of Object.keys( this.characteristics.defenses ) ) {
-            this.characteristics.defenses[defenseType] = getDefenseValue(
+            this.characteristics.defenses[defenseType].baseValue = getDefenseValue(
               this.attributes[defenseAttributeMapping[defenseType]].value
             );
         }
@@ -204,6 +204,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         this.#prepareDerivedArmor();
         this.#prepareDerivedHealth();
         this.#prepareDerivedMovement();
+        this.#prepareDerivedDefense();
     }
 
     /**
@@ -218,6 +219,22 @@ export default class PcData extends NamegiverTemplate.mixin(
             for ( const armor of armorItems ) {
                 this.characteristics.armor.physical.value += armor.system.physical.armor + armor.system.physical.forgeBonus;
                 this.characteristics.armor.mystical.value += armor.system.mystical.armor + armor.system.mystical.forgeBonus;
+            }
+        }
+    }
+
+    /**
+     * prepare the derived defense values based on items.
+     * @private
+     */
+    #prepareDerivedDefense() {
+        const shieldItems = this.parent.items.filter ( item => item.type === 'shield' && item.system.itemStatus.equipped );
+        this.characteristics.defenses.physical.value = this.characteristics.defenses.physical.baseValue;
+        this.characteristics.defenses.mystical.value = this.characteristics.defenses.mystical.baseValue;
+        if ( shieldItems ) {
+            for ( const shield of shieldItems ) {
+                this.characteristics.defenses.physical.value += shield.system.defenseBonus.physical;
+                this.characteristics.defenses.mystical.value += shield.system.defenseBonus.mystical;
             }
         }
     }

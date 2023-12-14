@@ -37,34 +37,27 @@ export default class SentientTemplate extends CommonTemplate {
             } ),
             // TODO: write setter functions for condition to account for mutually exclusive conditions, e.g. you can only have partial OR full cover, can't be aggressive while unconscious, etc.
             characteristics: new foundry.data.fields.SchemaField( {
-                defenses: new foundry.data.fields.SchemaField( {
-                    physical: new foundry.data.fields.NumberField( {
+                defenses: new MappingField( new foundry.data.fields.SchemaField( {
+                    baseValue: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
                         step: 1,
                         initial: 0,
                         integer: true,
-                        label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
-                    mystical: new foundry.data.fields.NumberField( {
+                    value: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
                         step: 1,
                         initial: 0,
                         integer: true,
-                        label: "ED.Actor.Characteristics.defenseMystical"
                     } ),
-                    social: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        step: 1,
-                        initial: 0,
-                        integer: true,
-                        label: "ED.Actor.Characteristics.defenseSocial"
-                    } ),
+                } ), {
+                    initialKeys: ['physical', 'mystical', 'social'],
+                    initialKeysOnly: true,
+                    label: "ED.Actor.Characteristics.defenses"
                 } ),
                 armor: new MappingField( new foundry.data.fields.SchemaField( {
                     baseValue: new foundry.data.fields.NumberField( {
