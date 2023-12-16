@@ -73,17 +73,23 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Weapon.Label.dexterityMinimum",
                 hint: "ED.Item.Weapon.Hint.dexterityMinimum"
             } ),
-            rangeShort: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: true,
-                label: "ED.Item.Weapon.Label.rangeShort",
-                hint: "ED.Item.Weapon.Hint.rangeShort"
-            } ),
-            rangeLong: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: true,
-                label: "ED.Item.Weapon.Label.rangeLong",
-                hint: "ED.Item.Weapon.Hint.rangeLong"
+            range: new foundry.data.fields.SchemaField( {
+                short: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeShort"
+                } ), 
+                long: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeLong"
+                } ), 
             } ),
             ammunition: new foundry.data.fields.NumberField( {
                 required: true,

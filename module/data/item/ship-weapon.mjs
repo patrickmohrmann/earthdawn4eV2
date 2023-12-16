@@ -33,22 +33,24 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.ShipWeapon.crewWeapon"
             } ), 
-            rangeShort: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.ShipWeapon.rangeShort"
-            } ), 
-            rangeLong: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.ShipWeapon.rangeLong"
-            } ), 
+            range: new foundry.data.fields.SchemaField( {
+                short: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeShort"
+                } ), 
+                long: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeLong"
+                } ), 
+            } ),
             salvoCost: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
