@@ -109,6 +109,26 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.woundThreshold"
                     } ),
+                    bloodMagic: new foundry.data.fields.SchemaField( {
+                        damage: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.unconsciousRate"
+                        } ),
+                        wounds: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.unconsciousRate"
+                        } ),
+                    } ),
                     damage: new foundry.data.fields.SchemaField( {
                         standard: new foundry.data.fields.NumberField( {
                             required: true,

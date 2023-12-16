@@ -202,9 +202,10 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedCharacteristics() {
         this.#prepareDerivedArmor();
+        this.#prepareDericedBloodMagicDamage();
+        this.#prepareDerivedDefense();
         this.#prepareDerivedHealth();
         this.#prepareDerivedMovement();
-        this.#prepareDerivedDefense();
     }
 
     /**
@@ -219,6 +220,21 @@ export default class PcData extends NamegiverTemplate.mixin(
             for ( const armor of armorItems ) {
                 this.characteristics.armor.physical.value += armor.system.physical.armor + armor.system.physical.forgeBonus;
                 this.characteristics.armor.mystical.value += armor.system.mystical.armor + armor.system.mystical.forgeBonus;
+            }
+        }
+    }
+
+    /**
+     * Prepare the derived blood magic damage based on items.
+     * @private
+     */
+    #prepareDericedBloodMagicDamage() {
+        const physicalItems = this.parent.items.filter( item =>
+            ["armor", "shield", "equipment", "weapon"].includes( item.type ) 
+            && item.system.itemStatus.equipped );
+        if ( physicalItems ) {
+            for ( const item of physicalItems ) {
+                this.characteristics.health.bloodMagic.damage += item.system.bloodMagicDamage;
             }
         }
     }
@@ -273,8 +289,8 @@ export default class PcData extends NamegiverTemplate.mixin(
           )
         );
 
-        this.characteristics.health.unconscious += maxDurability;
-        this.characteristics.health.death += maxDurability + maxCircle;
+        this.characteristics.health.unconscious += maxDurability - this.characteristics.health.bloodMagic.damage;
+        this.characteristics.health.death += maxDurability + maxCircle - this.characteristics.health.bloodMagic.damage;
     }
 
     /**
