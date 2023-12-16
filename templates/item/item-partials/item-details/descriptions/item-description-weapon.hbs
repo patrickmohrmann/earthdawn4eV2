@@ -15,14 +15,14 @@
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageAttribute"}}:</label>
-        <select name="system.attribute">
-            {{selectOptions config.attributes selected=item.system.attribute labelAttr="label" localize=true }}
+        <select name="system.damage.attribute">
+            {{selectOptions config.attributes selected=item.system.damage.attribute labelAttr="label" localize=true }}
         </select>
     </div>
     {{!-- Mystische Armor --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageBaseStep"}}:</label>
-        <input class="input__circle-input" name="system.damageBaseStep" type="text" value="{{item.system.damageBaseStep}}"
+        <input class="input__circle-input" name="system.damage.baseStep" type="text" value="{{item.system.damage.baseStep}}"
             data-dtype="Number">
     </div>
     {{!-- Forged Physical Armor --}}
