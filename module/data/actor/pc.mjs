@@ -316,7 +316,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
         const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmamodifier ?? 0;
 
-        this.karma.maximum = karmaModifier * highestCircle + this.karma.freeAttributePoints;
+        this.karma.max = karmaModifier * highestCircle + this.karma.freeAttributePoints;
     }
 
     /**
@@ -326,7 +326,7 @@ export default class PcData extends NamegiverTemplate.mixin(
     #prepareDerivedDevotion() {
         const questor = this.parent.items.filter( item => item.type === "questor" )[0];
         if ( questor ) {
-            this.devotion.maximum = questor.system.level * 10;
+            this.devotion.max = questor.system.level * 10;
         }
     }
 

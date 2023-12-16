@@ -302,7 +302,7 @@ export default class SentientTemplate extends CommonTemplate {
                 } )
             } ),
             devotion: new foundry.data.fields.SchemaField( {
-                current: new foundry.data.fields.NumberField( {
+                value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -311,7 +311,7 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.devotion.current"
                 } ),
-                maximum: new foundry.data.fields.NumberField( {
+                max: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -374,7 +374,7 @@ export default class SentientTemplate extends CommonTemplate {
                     initial: false,
                     label: "ED.General.Karma.karmaAlways"
                 } ),
-                current: new foundry.data.fields.NumberField( {
+                value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -383,7 +383,7 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.karma.current"
                 } ),
-                maximum: new foundry.data.fields.NumberField( {
+                max: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
