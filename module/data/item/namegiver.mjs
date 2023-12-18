@@ -137,7 +137,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 required: true,
                 nullable: false,
                 initial: 1,
-                integer: true,
+                integer: false,
                 positive: true,
                 label: "ED.Item.Namegiver.weightMultiplier"
             } ), 
