@@ -3,81 +3,83 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data model template with information on namegiver items.
- * @property {number} dexterityValue            dexterity value
- * @property {number} strengthValue             strength value
- * @property {number} constitutionValue         constitution value
- * @property {number} perceptionValue           perception value
- * @property {number} willpowerValue            willpower value
- * @property {number} charismaValue             charisma value
- * @property {number} karmamodifier             initiative value
- * @property {object} movement                  movement group object
- * @property {number} movement.walk             movement type walk modifications
- * @property {number} movement.fly              movement type fly modifications
- * @property {number} movement.swim             movement type swim modifications
- * @property {number} movement.burrow           movement type burrow modifications
- * @property {number} movement.climb            movement type climb modifications
+ * @property {object} attributeValues                           Attribute Schema Object
+ * @property {number} attributeValues.dexterityValue            dexterity value
+ * @property {number} attributeValues.strengthValue             strength value
+ * @property {number} attributeValues.constitutionValue         constitution value
+ * @property {number} attributeValues.perceptionValue           perception value
+ * @property {number} attributeValues.willpowerValue            willpower value
+ * @property {number} attributeValues.charismaValue             charisma value
+ * @property {number} karmamodifier                             initiative value
+ * @property {object} movement                                  movement Schema Object
+ * @property {number} movement.walk                             movement type walk modifications
+ * @property {number} movement.fly                              movement type fly modifications
+ * @property {number} movement.swim                             movement type swim modifications
+ * @property {number} movement.burrow                           movement type burrow modifications
+ * @property {number} movement.climb                            movement type climb modifications
  */
 export default class NamegiverData extends SystemDataModel.mixin(
     ItemDescriptionTemplate
 ) {
-    // TODO attributes as Schemefield
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            dexterityValue: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 1,
-                initial: 10,
-                integer: true,
-                positive: true,
-                label: "ED.Item.Namegiver.dexterityValue"
-            } ), 
-            strengthValue: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 1,
-                initial: 10,
-                integer: true,
-                positive: true,
-                label: "ED.Item.Namegiver.strengthValue"
-            } ), 
-            toughnessValue: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 1,
-                initial: 10,
-                integer: true,
-                positive: true,
-                label: "ED.Item.Namegiver.toughnessValue"
-            } ), 
-            perceptionValue: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 1,
-                initial: 10,
-                integer: true,
-                positive: true,
-                label: "ED.Item.Namegiver.perceptionValue"
-            } ), 
-            willpowerValue: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 1,
-                initial: 10,
-                integer: true,
-                positive: true,
-                label: "ED.Item.Namegiver.willpowerValue"
-            } ), 
-            charismaValue: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 1,
-                initial: 10,
-                integer: true,
-                positive: true,
-                label: "ED.Item.Namegiver.charismaValue"
-            } ), 
+            attributeValues: new foundry.data.fields.SchemaField( {
+                dexterity: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 10,
+                    integer: true,
+                    positive: true,
+                    label: "ED.Item.Namegiver.dexterityValue"
+                } ), 
+                strength: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 10,
+                    integer: true,
+                    positive: true,
+                    label: "ED.Item.Namegiver.strengthValue"
+                } ), 
+                toughness: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 10,
+                    integer: true,
+                    positive: true,
+                    label: "ED.Item.Namegiver.toughnessValue"
+                } ), 
+                perception: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 10,
+                    integer: true,
+                    positive: true,
+                    label: "ED.Item.Namegiver.perceptionValue"
+                } ), 
+                willpower: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 10,
+                    integer: true,
+                    positive: true,
+                    label: "ED.Item.Namegiver.willpowerValue"
+                } ), 
+                charisma: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 10,
+                    integer: true,
+                    positive: true,
+                    label: "ED.Item.Namegiver.charismaValue"
+                } ), 
+            } ),
             karmamodifier: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,

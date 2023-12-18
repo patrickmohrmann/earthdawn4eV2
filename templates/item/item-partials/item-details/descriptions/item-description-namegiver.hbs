@@ -3,37 +3,37 @@
     {{!-- Dexterity Value --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Namegiver.dexterityValue"}}:</label>
-        <input class="input__circle-input" name="system.dexterityValue" type="text" value="{{item.system.dexterityValue}}"
+        <input class="input__circle-input" name="system.attributeValues.dexterity" type="text" value="{{item.system.attributeValues.dexterity}}"
             data-dtype="Number">
     </div>
     {{!-- Strength Value --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Namegiver.strengthValue"}}:</label>
-        <input class="input__circle-input" name="system.strengthValue" type="text" value="{{item.system.strengthValue}}"
+        <input class="input__circle-input" name="system.attributeValues.strength" type="text" value="{{item.system.attributeValues.strength}}"
             data-dtype="Number">
     </div>
     {{!-- Toughness Value --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Namegiver.toughnessValue"}}:</label>
-        <input class="input__circle-input" name="system.toughnessValue" type="text" value="{{item.system.toughnessValue}}"
+        <input class="input__circle-input" name="system.attributeValues.toughness" type="text" value="{{item.system.attributeValues.toughness}}"
             data-dtype="Number">
     </div>
     {{!-- Perception Value --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Namegiver.perceptionValue"}}:</label>
-        <input class="input__circle-input" name="system.perceptionValue" type="text" value="{{item.system.perceptionValue}}"
+        <input class="input__circle-input" name="system.attributeValues.perception" type="text" value="{{item.system.attributeValues.perception}}"
             data-dtype="Number">
     </div>
     {{!-- Willpower Value --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Namegiver.willpowerValue"}}:</label>
-        <input class="input__circle-input" name="system.willpowerValue" type="text" value="{{item.system.willpowerValue}}"
+        <input class="input__circle-input" name="system.attributeValues.willpower" type="text" value="{{item.system.attributeValues.willpower}}"
             data-dtype="Number">
     </div>
     {{!-- Charisma Value --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Namegiver.charismaValue"}}:</label>
-        <input class="input__circle-input" name="system.charismaValue" type="text" value="{{item.system.charismaValue}}"
+        <input class="input__circle-input" name="system.attributeValues.charisma" type="text" value="{{item.system.attributeValues.charisma}}"
             data-dtype="Number">
     </div>
     {{!-- Karma Modifier --}}
@@ -74,6 +74,6 @@
     </div>
 </div>
 <div class="item__right--main item-sheet__editor">
-    <h3>item Description</h3>
+    <h3>{{localize "ED.Item.General.description"}}</h3>
     {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
 </div>

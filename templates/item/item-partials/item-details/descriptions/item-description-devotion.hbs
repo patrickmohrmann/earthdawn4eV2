@@ -20,12 +20,16 @@
     {{!-- Action --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Action.action"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/action-selector.hbs"}}
+        <select name="system.action">
+            {{selectOptions config.action selected=item.system.action localize=true }}
+        </select>
     </div>
     {{!-- Tier --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/tier-selector.hbs"}}
+        <select name="system.tier">
+            {{selectOptions config.tier selected=item.system.tier localize=true }}
+        </select>
     </div>
     {{!-- Devotion Required --}}
     <div class="item-data__input--line">
@@ -40,6 +44,6 @@
     </div>
 </div>
 <div class="item__right--main item-sheet__editor">
-    <h3>item Description</h3>
+    <h3>{{localize "ED.Item.General.description"}}</h3>
     {{> "systems/ed4e/templates/global-templates/editor.hbs"}}
 </div>

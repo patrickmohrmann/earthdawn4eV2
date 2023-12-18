@@ -9,24 +9,56 @@ encumbrance
 </div>
 <div>
     {{#each actor.itemTypes.equipment}}
-    {{> "systems/ed4e/templates/item/cards/equipment-card.hbs"}}
+    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+        <div class="partial__two one-line__vertical-align">
+            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+            {{name}}
+        </div>
+        <div class="partial__two one-line__vertical-align">
+            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+        </div>
+    </div>
     {{/each}}
 </div>
 weapons
 <div>
     {{#each actor.itemTypes.weapon}}
-    {{> "systems/ed4e/templates/item/cards/weapon-card.hbs"}}
+    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+        <div class="partial__two one-line__vertical-align">
+            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+            {{name}}
+        </div>
+        <div class="partial__two one-line__vertical-align">
+            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+        </div>
+    </div>
     {{/each}}
 </div>
 armor
 <div>
     {{#each actor.itemTypes.armor}}
-    {{> "systems/ed4e/templates/item/cards/armor-card.hbs"}}
+    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+        <div class="partial__two one-line__vertical-align">
+            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+            {{name}}
+        </div>
+        <div class="partial__two one-line__vertical-align">
+            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+        </div>
+    </div>
     {{/each}}
 </div>
 shields
 <div>
     {{#each actor.itemTypes.shield}}
-    {{> "systems/ed4e/templates/item/cards/shield-card.hbs"}}
+    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+        <div class="partial__two one-line__vertical-align">
+            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+            {{name}}
+        </div>
+        <div class="partial__two one-line__vertical-align">
+            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+        </div>
+    </div>
     {{/each}}
 </div>
