@@ -208,7 +208,8 @@ input.input__number-input {
   color: var(--text-color);
   background-image: none;
 }
-.dark-theme .character-sheet .body .input__circle-input--centered {
+.dark-theme .character-sheet .body .input__circle-input--centered,
+.dark-theme .character-sheet .body .input__number-input {
   border: 1px solid var(--text-color);
   color: var(--text-color);
 }
