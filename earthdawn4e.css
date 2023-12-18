@@ -203,6 +203,18 @@ input.input__number-input {
   position: absolute;
   left: calc(50% - 64px);
 }
+.dark-theme .character-sheet .body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: none;
+}
+.dark-theme .character-sheet .body .input__circle-input--centered {
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body button {
+  color: var(--text-color);
+}
 .item-sheet .window-content {
   padding: 0px;
 }
