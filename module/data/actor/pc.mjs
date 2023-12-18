@@ -93,7 +93,7 @@ export default class PcData extends NamegiverTemplate {
         super.prepareDerivedData();
         this.#prepareDerivedCharacteristics();
         this.#prepareDerivedInitiative();
-        this.#prepareDerivedCarryingCapacity();
+        this.#prepareDerivedEncumbrance();
         this.#prepareDerivedKarma();
         this.#prepareDerivedDevotion();
     }
@@ -267,18 +267,52 @@ export default class PcData extends NamegiverTemplate {
     }
 
     /**
-     * Prepare the derived load carried based on items.
+     * Prepare the derived load carried based on relevant physical items on this actor. An item is relevant if it is
+     * either equipped or carried but not owned, i.e. on the person. In this case, the  namegiver size weight multiplier
+     * will be applied as well.
      * @private
      */
-    #prepareDerivedCarryingCapacity() {
-        // TODO
+    #prepareDerivedEncumbrance() {
+        const weightMultiplier = this.#getNamegiver()?.system.weightMultiplier ?? 1;
+
+        // relevant items are those with a weight property and are either equipped or carried
+        const relevantItems = this.parent.items.filter( item =>
+          item.system.hasOwnProperty( 'weight' )
+          && ( item.system.itemStatus.equipped || item.system.itemStatus.carried )
+        );
+
+        const carriedWeight = relevantItems.reduce( ( accumulator, currentItem ) => {
+            return accumulator
+              + (
+                currentItem.system.weight
+                * ( currentItem.system.autoCalculateWeight ? weightMultiplier : 1 )
+                * (
+                  ( currentItem.system.amount ?? 1 )
+                  / ( currentItem.system.bundleSize > 1 ? currentItem.system.bundleSize : 1 )
+                )
+              )
+        }, 0 );
+
+        this.encumbrance.value = carriedWeight;
+
+        // calculate encumbrance status
+        const encumbrancePercentage = carriedWeight / this.encumbrance.max;
+        if ( encumbrancePercentage <= 1.0 ) {
+            this.encumbrance.status = 'notEncumbered';
+        } else if ( encumbrancePercentage < 1.5 ) {
+            this.encumbrance.status = 'light';
+        } else if ( encumbrancePercentage <= 2.0 ) {
+            this.encumbrance.status = 'heavy';
+        } else if ( encumbrancePercentage > 2.0 ) {
+            this.encumbrance.status = 'tooHeavy';
+        }
     }
 
     /**
      * Prepare the derived movement values based on namegiver items.
      */
     #prepareDerivedMovement() {
-        const namegiver = this.parent.items.filter( item => item.type === "namegiver" )[0];
+        const namegiver = this.#getNamegiver();
         if ( namegiver ) {
             for ( const movementType of Object.keys( namegiver.system.movement ) ) {
                 this.characteristics.movement[movementType] = namegiver.system.movement[movementType];
@@ -323,6 +357,23 @@ export default class PcData extends NamegiverTemplate {
         ).sort(     // sort descending by circle/rank
           ( a, b ) => a.system.level > b.system.level ? -1 : 1
         )[0];
+    }
+
+    /**
+     * Returns the items of the given type on this PC.
+     * @param {string} type The item type.
+     * @returns {Item|undefined} The items of the given type, if available, `undefined` otherwise.
+     */
+    #getItemsByType( type ) {
+        return this.parent.items.filter( ( item ) => item.type === type );
+    }
+
+    /**
+     * Returns the namegiver of this PC, which should always be unique, i.e. only one namegiver item is available.
+     * @returns {Item|undefined} The namegiver item, if available, `undefined` otherwise.
+     */
+    #getNamegiver() {
+        return this.#getItemsByType( 'namegiver' )[0];
     }
 
     /* -------------------------------------------- */

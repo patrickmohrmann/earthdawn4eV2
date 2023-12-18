@@ -138,6 +138,10 @@ ED4E.tier = {
 	master: 			"ED.Tier.master"
 }
 
+/* -------------------------------------------- */
+/*  Encumbrance                                 */
+/* -------------------------------------------- */
+
 ED4E.encumbranceStatus = {
 	notEncumbered: "ED.Conditions.Encumbrance.notEncumbered",
 	light: "ED.Conditions.Encumbrance.light",

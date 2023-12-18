@@ -335,7 +335,7 @@ export default class SentientTemplate extends CommonTemplate {
                 } ),
             } ),
             encumbrance: new foundry.data.fields.SchemaField( {
-                // current load / weight carried -> rename
+                // current load / weight carried
                 value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
@@ -361,13 +361,13 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.carryingCapacityBonus"
                 } ),
+                // encumbrance / overload status
                 status: new foundry.data.fields.StringField( {
                     required: true,
                     blank: false,
                     nullable: false,
                     initial: "notEncumbered"
                 } )
-                // encumbrance / overload status
             } ),
             initiative: new foundry.data.fields.NumberField( {
                 required: true,
