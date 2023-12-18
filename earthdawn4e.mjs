@@ -10,7 +10,7 @@
 
 // Import configuration
 import ED4E from './module/config.mjs';
-import registerSystemSettings from './module/settings.mjs';
+// import registerSystemSettings from './module/settings.mjs';
 import { registerHandlebarHelpers } from './module/handlebar-helpers.mjs'
 
 
@@ -21,6 +21,7 @@ import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as utils from "./module/utils.mjs";
+import * as registerSystemSettings from './module/settings.mjs';
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -51,7 +52,7 @@ Hooks.once( "init", () => {
     CONFIG.Item.documentClass = documents.ItemEd;
 
     // Register System Settings
-    registerSystemSettings();
+   // registerSystemSettings();
 
     // Register Handlebars Helper
     registerHandlebarHelpers();
@@ -72,6 +73,28 @@ Hooks.once( "init", () => {
     } );
 
     // Preload Handlebars templates.
-  utils.preloadHandlebarsTemplates();
+    utils.preloadHandlebarsTemplates();
 
+    /* -------------------------------------------- */
+    /*  Foundry VTT System Setting Initialization   */
+    /* -------------------------------------------- */
+
+    registerSystemSettings.registerSystemSettings()
+
+    // /**
+    //  * @summary Dark theme gradient calculation
+    //  * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
+    //  * @param {number} darkValue percentage value in 5% steps
+    //  */
+
+    // const darkValue = game.settings.get( "ed4e", "darkMode" ) * 5 + 50;
+    // const bgValue = 255 - ( darkValue * 2.55 );
+    // const textValue = darkValue * 2.55;
+    // document.documentElement.style.setProperty( "--bg-color", `rgb(${bgValue}, ${bgValue}, ${bgValue})` );
+    // document.documentElement.style.setProperty( "--text-color", `rgb(${textValue}, ${textValue}, ${textValue})` );
+    // if ( darkValue > 55 ) {
+    //     $( ':root' ).addClass( 'dark-theme' );
+    // } else {
+    //     $( ':root' ).removeClass( 'dark-theme' );
+    // }
 } );
