@@ -64,7 +64,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 required: true,
                 nullable: false,
                 min: 0,
-                initial: 0,
+                initial: 1,
                 integer: true,
                 label: "ED.Item.General.amount"
             } ),
@@ -122,7 +122,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 } ),
                 carried: new foundry.data.fields.BooleanField( {
                     required: true,
-                    initial: false,
+                    initial: true,
                     label: "ED.Item.General.carried"
                 } ),
                 owned: new foundry.data.fields.BooleanField( {
