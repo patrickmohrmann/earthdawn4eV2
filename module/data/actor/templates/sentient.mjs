@@ -1,5 +1,6 @@
 import CommonTemplate from "./common.mjs";
 import { MappingField } from "../../fields.mjs";
+import MovementFields from './movement.mjs';
 
 /**
  * A template for all actors that represent sentient beings and have such stats.
@@ -9,7 +10,6 @@ export default class SentientTemplate extends CommonTemplate {
 
     /** @inheritDoc */
     static defineSchema() {
-        // TODO: replace all with "value" and "max" to identify them as "Ressources" for later use in Token Bars
         return this.mergeSchema( super.defineSchema(), {
             attributes: new MappingField( new foundry.data.fields.SchemaField( {
                 baseStep: new foundry.data.fields.NumberField( {
@@ -35,7 +35,6 @@ export default class SentientTemplate extends CommonTemplate {
                 initialKeysOnly: true,
                 label: "ED.Attributes.attributes"
             } ),
-            // TODO: write setter functions for condition to account for mutually exclusive conditions, e.g. you can only have partial OR full cover, can't be aggressive while unconscious, etc.
             characteristics: new foundry.data.fields.SchemaField( {
                 defenses: new foundry.data.fields.SchemaField( {
                     physical: new foundry.data.fields.NumberField( {
@@ -47,7 +46,6 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
-                    // TODO: "mystic" or "mystical" -> same everywhere, in all instances in code
                     mystical: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
@@ -180,52 +178,7 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
                 } ),
-                // TODO: duplicated with Item "Namegiver" create class to get this field
-                movement: new foundry.data.fields.SchemaField( {
-                      walk: new foundry.data.fields.NumberField( {
-                          required: true,
-                          nullable: false,
-                          min: 0,
-                          initial: 0,
-                          integer: true,
-                          label: "ED.Item.Namegiver.walk"
-                      } ),
-                      fly: new foundry.data.fields.NumberField( {
-                          required: true,
-                          nullable: false,
-                          min: 0,
-                          initial: 0,
-                          integer: true,
-                          label: "ED.Item.Namegiver.fly"
-                      } ),
-                      swim: new foundry.data.fields.NumberField( {
-                          required: true,
-                          nullable: false,
-                          min: 0,
-                          initial: 0,
-                          integer: true,
-                          label: "ED.Item.Namegiver.swim"
-                      } ),
-                      burrow: new foundry.data.fields.NumberField( {
-                          required: true,
-                          nullable: false,
-                          min: 0,
-                          initial: 0,
-                          integer: true,
-                          label: "ED.Item.Namegiver.burrow"
-                      } ),
-                      climb: new foundry.data.fields.NumberField( {
-                          required: true,
-                          nullable: false,
-                          min: 0,
-                          initial: 0,
-                          integer: true,
-                          label: "ED.Item.Namegiver.climb"
-                      } ),
-                  },
-                  {
-                      label: "ED.Item.Namegiver.movement"
-                  } ),
+                ...MovementFields.movement
             } ),
             condition: new foundry.data.fields.SchemaField( {
                 aggressiveAttack: new foundry.data.fields.BooleanField( {
@@ -339,7 +292,7 @@ export default class SentientTemplate extends CommonTemplate {
                 } ),
             } ),
             encumbrance: new foundry.data.fields.SchemaField( {
-                // current load / weight carried -> rename
+                // current load / weight carried
                 value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
@@ -364,8 +317,14 @@ export default class SentientTemplate extends CommonTemplate {
                     initial: 0,
                     integer: true,
                     label: "ED.General.carryingCapacityBonus"
-                } )
+                } ),
                 // encumbrance / overload status
+                status: new foundry.data.fields.StringField( {
+                    required: true,
+                    blank: false,
+                    nullable: false,
+                    initial: "notEncumbered"
+                } )
             } ),
             initiative: new foundry.data.fields.NumberField( {
                 required: true,
@@ -425,7 +384,6 @@ export default class SentientTemplate extends CommonTemplate {
                 } ),
                 favors:
                   new MappingField( new foundry.data.fields.SchemaField( {
-                      // TODO: do we really need the time of the favor? it's an official rule in the gm guide
                       owingThem: new foundry.data.fields.NumberField( {
                           min: 0,
                           step: 1,
@@ -461,7 +419,6 @@ export default class SentientTemplate extends CommonTemplate {
 
     /** @inheritDoc */
     prepareDerivedData() {
-        console.log( "ED4E | In Sentient data model's prepareDerivedData" );
     }
 
     /**

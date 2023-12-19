@@ -4,139 +4,120 @@
  */
 export default class ActorSheetEd extends ActorSheet {
 
-    // TODO: Review - copied class from old system
-    baseListeners( html ) {
-        super.activateListeners( html );
-  
-
-        $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
-  
-        /**
-         * @description Delete items from Actor
-         */
-        html.find( '.item-delete' ).click( async ( ev ) => {
-          let li = $( ev.currentTarget ).parents( '.item-name' )
-          let itemId = li.attr( 'data-item-id' );
-          let confirmationResult = await this.confirmationBox();
-          if ( confirmationResult.result === false ) {
-            return false;
-          } else {
-            this.actor.deleteEmbeddedDocuments( 'Item', [itemId] );
-          }
-        } );
-  
-        /**
-         * @description Edit item 
-         */
-        html.find( '.item-edit' ).click( ( ev ) => {
-          const li = $( ev.currentTarget ).parents( '.item-name' );
-          const item = this.actor.items.get( li.data( 'itemId' ) );
-          item.sheet.render( true );
-        } );
-  
-        /**
-         * @description show Earthdawn Active Effect on Token
-         */
-        html.find( '.link-checkbox-effect' ).click( async ( ev ) => {
-          ev.preventDefault();
-    
-          const li = $( ev.currentTarget ).parents( '.item-name' );
-          const item = this.actor.effects.get( li.data( 'itemId' ) );
-          let visibleState = ev.target.checked;
-          let disabledState = !visibleState;
-    
-          await item.update( { disabled: disabledState } );
-        } );
-    
-        /**
-         * @description Delete Earthdawn Active Effect from the Actor
-         */
-        html.find( '.effect-delete' ).click( async ( ev ) => {
-          let li = $( ev.currentTarget ).parents( '.item-name' )
-          let itemId = li.attr( 'data-item-id' );
-          let confirmationResult = await this.confirmationBox();
-          if ( confirmationResult.result === false ) {
-            return false;
-          } else {
-            this.actor.deleteEmbeddedDocuments( 'ActiveEffect', [itemId] );
-          }
-        } );
-    
-        /**
-         * @description add Earthdawn Active Effect to the Actor
-         */
-        html.find( '.effect-add' ).click( () => {
-          let itemNumber = this.actor.effects.size;
-          let itemData = {
-            label: `New Effect ` + itemNumber,
-            icon: 'systems/earthdawn4e/assets/effect.png',
-            duration: { rounds: 1 },
-            origin: this.actor.id,
-          };
-    
-          this.actor.createEmbeddedDocuments( 'ActiveEffect', [itemData] );
-        } );
-    
-        /**
-         * @description Edit Effects on the Actor
-         */
-        html.find( '.effect-edit' ).click( ( ev ) => {
-          const li = $( ev.currentTarget ).parents( '.item-name' );
-          const item = this.actor.effects.get( li.data( 'itemId' ) );
-          item.sheet.render( true );
-        } );
-    
-      }
-
-
-    async confirmationBox() {
-    return await new Promise( ( resolve ) => {
-        new Dialog( {
-        title: `Confirm Delete`,
-        content: `Are You Sure?
-
-                `,
-        buttons: {
-            ok: {
-            label: game.i18n.localize( 'earthdawn.o.ok' ),
-            callback: ( html ) => {
-                resolve( {
-                result: true,
-                } );
-            },
-            },
-            cancel: {
-            label: game.i18n.localize( 'earthdawn.c.cancel' ),
-            callback: ( html ) => {
-                resolve( {
-                result: false,
-                } );
-            },
-            },
+  /**
+   * @override
+   */
+  static get defaultOptions() {
+    return mergeObject( super.defaultOptions, {
+      classes: ['earthdawn4e', 'sheet', 'actor', 'character-sheet'],
+      width: 800,
+      height: 800,
+      tabs: [
+        {
+          navSelector: '.actor-sheet-tabs',
+          contentSelector: '.actor-sheet-body',
+          initial: 'main',
         },
-        default: 'ok',
-        } ).render( true );
+      ],
     } );
-    }
+  }
 
-    /**
-     * @override
-     */
-    static get defaultOptions() {
-        return mergeObject( super.defaultOptions, {
-            classes: ["earthdawn4e", "sheet", "actor", "character-sheet"],
-            width: 800,
-            height: 800,
-            tabs: [{
-                navSelector: '.actor-sheet-tabs',
-                contentSelector: '.actor-sheet-body',
-                initial: 'main',
-              },]
-        } );
-    }
+  /** @override */
+  get template() {
+    return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
+  }
 
-    /** @override */
-    get template() {
-        return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`
-    }
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners( html ) {
+    super.activateListeners( html );
+
+    // View Item Sheets
+    html.find( ".item-edit" ).click( this._onItemEdit.bind( this ) );
+
+    // All listeners below are only needed if the sheet is editable
+    if ( !this.isEditable ) return;
+
+    // Owned Item management
+    html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
+
+    // Effect Management
+    html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
+    html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
+    html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+  }
+
+  /**
+   * Handle creating an owned ActiveEffect for the Actor.
+   * @param {Event} event     The originating click event.
+   * @returns {Promise|null}  Promise that resolves when the changes are complete.
+   * @private
+   */
+  _onEffectAdd( event ) {
+    event.preventDefault();
+    return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
+      label: `New Effect`,
+      icon: 'systems/earthdawn4e/assets/effect.png',
+      duration: { rounds: 1 },
+      origin: this.actor.uuid
+    }] );
+  }
+
+  /**
+   * Handle deleting an existing Owned ActiveEffect for the Actor.
+   * @param {Event} event                       The originating click event.
+   * @returns {Promise<ActiveEffect>|undefined} The deleted item if something was deleted.
+   * @private
+   */
+  _onEffectDelete( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-name" );
+    const effect = this.actor.effects.get( li.dataset.itemId );
+    if ( !effect ) return;
+    return effect.deleteDialog();
+  }
+
+  /**
+   * Handle editing an existing Owned ActiveEffect for the Actor.
+   * @param {Event}event    The originating click event.
+   * @returns {any}         The rendered item sheet.
+   * @private
+   */
+
+  _onEffectEdit( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-name" );
+    const effect = this.actor.effects.get( li.dataset.itemId );
+    return effect.sheet?.render( true );
+  }
+
+  /**
+   * Handle deleting an existing Owned Item for the Actor.
+   * @param {Event} event                 The originating click event.
+   * @returns {Promise<ItemEd>|undefined} The deleted item if something was deleted.
+   * @private
+   */
+  async _onItemDelete( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-name" );
+    const item = this.actor.items.get( li.dataset.itemId );
+    if ( !item ) return;
+    return item.deleteDialog();
+  }
+
+  /**
+   * Handle editing an existing Owned Item for the Actor.
+   * @param {Event}event    The originating click event.
+   * @returns {ItemSheetEd} The rendered item sheet.
+   * @private
+   */
+  _onItemEdit( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-name" );
+    const item = this.actor.items.get( li.dataset.itemId );
+    return item.sheet?.render( true );
+  }
 }
