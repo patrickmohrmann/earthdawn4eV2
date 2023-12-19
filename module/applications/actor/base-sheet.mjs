@@ -57,6 +57,7 @@ export default class ActorSheetEd extends ActorSheet {
    * @private
    */
   _onEffectAdd( event ) {
+    event.preventDefault();
     return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
       label: `New Effect`,
       icon: 'systems/earthdawn4e/assets/effect.png',
@@ -72,6 +73,7 @@ export default class ActorSheetEd extends ActorSheet {
    * @private
    */
   _onEffectDelete( event ) {
+    event.preventDefault();
     const li = event.currentTarget.closest( ".item-name" );
     const effect = this.actor.effects.get( li.dataset.itemId );
     if ( !effect ) return;
@@ -84,7 +86,9 @@ export default class ActorSheetEd extends ActorSheet {
    * @returns {any}         The rendered item sheet.
    * @private
    */
+
   _onEffectEdit( event ) {
+    event.preventDefault();
     const li = event.currentTarget.closest( ".item-name" );
     const effect = this.actor.effects.get( li.dataset.itemId );
     return effect.sheet?.render( true );
