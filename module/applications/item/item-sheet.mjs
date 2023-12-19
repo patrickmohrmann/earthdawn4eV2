@@ -6,130 +6,104 @@ import ED4E from "../../config.mjs";
  */
 export default class ItemSheetEd extends ItemSheet {
 
-  
-  activateListeners( html ) {
-    super.activateListeners( html );
-
-    $( document ).on( 'keydown', 'form', ( ev ) => { return ev.key !== 'Enter'; } );
-
-     /**
-         * @description Delete item from Item
-         */
-     html.find( '.item-delete' ).click( async ( ev ) => {
-      let li = $( ev.currentTarget ).parents( '.item-name' )
-      let itemId = li.attr( 'data-item-id' );
-      let confirmationResult = await this.confirmationBox();
-      if ( confirmationResult.result === false ) {
-        return false;
-      } else {
-        this.item.deleteEmbeddedDocuments( 'Item', [itemId] );
-      }
-    } );
-
-    /**
-     * @description Edit item 
-     */
-    html.find( '.item-edit' ).click( ( ev ) => {
-      const li = $( ev.currentTarget ).parents( '.item-name' );
-      const item = this.item.get( li.data( 'itemId' ) );
-      item.sheet.render( true );
-    } );
-
-    html.find( '.effect-add' ).click( () => {
-      let itemNumber = this.item.effects.size;
-      let itemData = {name: `New Effect ` + itemNumber,
-                      icon: "systems/ed4e/assets/icons/effect.png",
-                      duration: {rounds: 1},
-                      origin: this.item.id
-                    }
-      this.item.createEmbeddedDocuments( "ActiveEffect", [itemData] )
-    } );
-
-    html.find( '.effect-edit' ).click( ( ev ) => {
-      const li = $( ev.currentTarget ).parents( '.item-name' );
-      const item = this.item.effects.get( li.data( 'itemId' ) );
-      item.sheet.render( true );
-    } );
-    html.find( '.effect-delete' ).click( async ( ev ) => {
-      let li = $( ev.currentTarget ).parents( '.item-name' )
-      let itemId = li.attr( 'data-item-id' );
-      let confirmationResult = await this.confirmationBox();
-      if ( confirmationResult.result === false ){
-        return false
-      }
-      else{
-        this.item.deleteEmbeddedDocuments( 'ActiveEffect', [itemId] );
-      }
-    });
-  }
-
-  async confirmationBox(){
-    return await new Promise( ( resolve ) => {
-      new Dialog( {
-        title: `Confirm Delete`,
-        content: `Are You Sure?
-          
-              `,
-        buttons: {
-          ok: {
-            label: game.i18n.localize( 'earthdawn.o.ok' ),
-            callback: ( html ) => {
-              resolve( {
-                result: true,
-              } );
-            },
-          },
-          cancel: {
-            label: game.i18n.localize( 'earthdawn.c.cancel' ),
-            callback: ( html )  =>{
-              resolve( {
-                result: false,
-              } );
-            }
-          }
+  /**
+   * @override
+   */
+  static get defaultOptions() {
+    return mergeObject( super.defaultOptions, {
+      classes: ['earthdawn4e', 'sheet', 'item', 'item-sheet'],
+      width: 800,
+      height: 800,
+      tabs: [
+        {
+          navSelector: '.item-sheet-tabs',
+          contentSelector: '.item-sheet-body',
+          initial: 'main',
         },
-        default: 'ok',
-      } ).render( true );
+      ],
     } );
-
-
   }
-    /**
-     * @override
-     */
-    static get defaultOptions() {
-        return mergeObject( super.defaultOptions, {
-            classes: ["earthdawn4e", "sheet", "item", "item-sheet"],
-            width: 800,
-            height: 800,
-            tabs: [{
-                navSelector: '.item-sheet-tabs',
-                contentSelector: '.item-sheet-body',
-                initial: 'main',
-            }]
-        } );
-    }
 
-    /** @override */
-    get template() {
-       // return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
-        return `systems/ed4e/templates/item/item-sheet.hbs`
-    }
+  /** @override */
+  get template() {
+    // return `systems/ed4e/templates/item/${this.item.type}-sheet.hbs`
+    return `systems/ed4e/templates/item/item-sheet.hbs`;
+  }
 
-      // HTML enrichment
+  // HTML enrichment
   async _enableHTMLEnrichment() {
     let enrichment = {};
-    enrichment["system.description.value"] = await TextEditor.enrichHTML( this.item.system.description.value, {async: true, secrets: this.item.isOwner} );
-     return expandObject( enrichment );
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.item.system.description.value, {
+      async: true,
+      secrets: this.item.isOwner,
+    } );
+    return expandObject( enrichment );
   }
- 
+
   async getData() {
     const systemData = super.getData();
-    systemData.enrichment =  await this._enableHTMLEnrichment();
+    systemData.enrichment = await this._enableHTMLEnrichment();
     // console.log( '[EARTHDAWN] Item data: ', systemData );
 
     systemData.config = ED4E;
-    
+
     return systemData;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners( html ) {
+    super.activateListeners( html );
+
+    // All listeners below are only needed if the sheet is editable
+    if ( !this.isEditable ) return;
+
+    // Effect Management
+    html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
+    html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
+    html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+  }
+
+  /**
+   * Handle creating an owned ActiveEffect for the Actor.
+   * @param {Event} event     The originating click event.
+   * @returns {Promise|null}  Promise that resolves when the changes are complete.
+   * @private
+   */
+  _onEffectAdd( event ) {
+    return this.item.createEmbeddedDocuments( 'ActiveEffect', [{
+      label: `New Effect`,
+      icon: 'systems/earthdawn4e/assets/effect.png',
+      duration: { rounds: 1 },
+      origin: this.item.uuid
+    }] );
+  }
+
+  /**
+   * Handle deleting an existing Owned ActiveEffect for the Actor.
+   * @param {Event} event                       The originating click event.
+   * @returns {Promise<ActiveEffect>|undefined} The deleted item if something was deleted.
+   * @private
+   */
+  _onEffectDelete( event ) {
+    const li = event.currentTarget.closest( ".item-name" );
+    const effect = this.item.effects.get( li.dataset.itemId );
+    if ( !effect ) return;
+    return effect.deleteDialog();
+  }
+
+  /**
+   * Handle editing an existing Owned ActiveEffect for the Actor.
+   * @param {Event}event    The originating click event.
+   * @returns {any}         The rendered item sheet.
+   * @private
+   */
+  _onEffectEdit( event ) {
+    const li = event.currentTarget.closest( ".item-name" );
+    const effect = this.item.effects.get( li.dataset.itemId );
+    return effect.sheet?.render( true );
   }
 }
