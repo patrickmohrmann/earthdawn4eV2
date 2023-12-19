@@ -1,5 +1,6 @@
 import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import MovementFields from '../actor/templates/movement.mjs';
 
 /**
  * Data model template with information on namegiver items.
@@ -87,52 +88,8 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 initial: 0,
                 integer: true,
                 label: "ED.Item.Namegiver.karmamodifier"
-            } ), 
-            movement: new foundry.data.fields.SchemaField( {
-                walk: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.Namegiver.walk"
-                } ),
-                fly: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.Namegiver.fly"
-                } ),
-                swim: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.Namegiver.swim"
-                } ),
-                burrow: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.Namegiver.burrow"
-                } ),
-                climb: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.Namegiver.climb"
-                } ),
-            },
-            {
-                label: "ED.Item.Namegiver.movement"
             } ),
+            ...MovementFields.movement,
             weightMultiplier: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
