@@ -273,8 +273,6 @@ export default class PcData extends NamegiverTemplate {
      * @private
      */
     #prepareDerivedEncumbrance() {
-        const weightMultiplier = this.#getNamegiver()?.system.weightMultiplier ?? 1;
-
         // relevant items are those with a weight property and are either equipped or carried
         const relevantItems = this.parent.items.filter( item =>
           item.system.hasOwnProperty( 'weight' )
@@ -285,7 +283,6 @@ export default class PcData extends NamegiverTemplate {
             return accumulator
               + (
                 currentItem.system.weight
-                * ( currentItem.system.autoCalculateWeight ? weightMultiplier : 1 )
                 * (
                   ( currentItem.system.amount ?? 1 )
                   / ( currentItem.system.bundleSize > 1 ? currentItem.system.bundleSize : 1 )

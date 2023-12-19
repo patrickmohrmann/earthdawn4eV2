@@ -126,7 +126,7 @@ export default class ItemSheetEd extends ItemSheet {
   async getData() {
     const systemData = super.getData();
     systemData.enrichment =  await this._enableHTMLEnrichment();
-    console.log( '[EARTHDAWN] Item data: ', systemData );
+    // console.log( '[EARTHDAWN] Item data: ', systemData );
 
     systemData.config = ED4E;
     
