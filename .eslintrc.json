@@ -9,6 +9,7 @@
     "jsdoc"
   ],
   "globals": {
+    "ActiveEffect": false,
     "Actor": false,
     "ActorSheet": false,
     "Actors": false,
@@ -22,7 +23,9 @@
     "Hooks": false,
     "isOwned": false,
     "Item": false,
+    "ItemEd": true,
     "ItemSheet": false,
+    "ItemSheetEd": true,
     "Items": false,
     "TextEditor": false,
     "actors": false,
