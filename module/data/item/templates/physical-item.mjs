@@ -45,13 +45,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 initial: 0,
                 label: "ED.Item.General.weight"
             } ),
-            sizeWeight: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                label: "ED.Item.General.weightSize"
-            } ),
             // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
             availability: new foundry.data.fields.StringField( {
                 required: true,
@@ -64,7 +57,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 required: true,
                 nullable: false,
                 min: 0,
-                initial: 0,
+                initial: 1,
                 integer: true,
                 label: "ED.Item.General.amount"
             } ),
@@ -122,7 +115,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 } ),
                 carried: new foundry.data.fields.BooleanField( {
                     required: true,
-                    initial: false,
+                    initial: true,
                     label: "ED.Item.General.carried"
                 } ),
                 owned: new foundry.data.fields.BooleanField( {
@@ -130,11 +123,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     initial: false,
                     label: "ED.Item.General.owned"
                 } ),
-            } ),
-            autoCalculateWeight: new foundry.data.fields.BooleanField( {
-                required: true,
-                initial: false,
-                label: "ED.Item.General.autoCalculateWeight"
             } ),
         } );
     }
