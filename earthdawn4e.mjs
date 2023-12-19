@@ -135,8 +135,6 @@ Hooks.once( 'ready', async () => {
       );
   }
 
-  console.debug( "Created actors: ", createdActors );
-  console.debug( "Created items: ", createdItems );
   // Prepare documents
 
   const character = createdActors["character"];
