@@ -2,7 +2,7 @@
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
- * @extends {Actor} extends Actor ED    
+ * @augments {Actor}
  */
 export default class ActorEd extends Actor {
 
@@ -85,6 +85,7 @@ export default class ActorEd extends Actor {
         return changes.concat(
           
           e.changes.map( ( c ) => {
+            // eslint-disable-next-line no-param-reassign
             c = foundry.utils.duplicate( c );
             c.effect = e;
             c.priority = c.priority ?? c.mode * 10;

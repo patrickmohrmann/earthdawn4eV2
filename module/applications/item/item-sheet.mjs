@@ -2,7 +2,7 @@ import ED4E from "../../config.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
- * @augments {ItemSheet} extends ItemSheet
+ * @augments {ItemSheet}
  */
 export default class ItemSheetEd extends ItemSheet {
 
@@ -74,6 +74,7 @@ export default class ItemSheetEd extends ItemSheet {
    * @private
    */
   _onEffectAdd( event ) {
+    event.preventDefault();
     return this.item.createEmbeddedDocuments( 'ActiveEffect', [{
       label: `New Effect`,
       icon: 'systems/earthdawn4e/assets/effect.png',
@@ -89,6 +90,7 @@ export default class ItemSheetEd extends ItemSheet {
    * @private
    */
   _onEffectDelete( event ) {
+    event.preventDefault();
     const li = event.currentTarget.closest( ".item-name" );
     const effect = this.item.effects.get( li.dataset.itemId );
     if ( !effect ) return;
@@ -102,6 +104,7 @@ export default class ItemSheetEd extends ItemSheet {
    * @private
    */
   _onEffectEdit( event ) {
+    event.preventDefault();
     const li = event.currentTarget.closest( ".item-name" );
     const effect = this.item.effects.get( li.dataset.itemId );
     return effect.sheet?.render( true );
