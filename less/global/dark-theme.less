@@ -17,16 +17,30 @@
 // }
 
 .dark-theme {
-    .character-sheet .body {
+    .character-sheet .body, 
+    .item-sheet .body, 
+    .content-link,
+    .fa-edit {
         background-color: var(--bg-color);
-    color: var(--text-color);
-    background-image: none;
-    .input__circle-input--centered, .input__number-input {
-        border: 1px solid var(--text-color);
         color: var(--text-color);
-    }
-    button {
-        color: var(--text-color);
-    }
+        background-image: none;
+        .input__circle-input--centered, 
+        .input__number-input,
+        .input__circle-input {
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+        }
+        button {
+            color: var(--text-color);
+        }
+        select {
+            color: var(--text-color);
+            option {
+                background-color: var(--bg-color);
+            }
+        } 
+        .karma__ritual--icon {
+            color: var(--text-color);
+        }      
     }
 }

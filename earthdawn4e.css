@@ -203,17 +203,51 @@ input.input__number-input {
   position: absolute;
   left: calc(50% - 64px);
 }
-.dark-theme .character-sheet .body {
+.dark-theme .character-sheet .body,
+.dark-theme .item-sheet .body,
+.dark-theme .content-link,
+.dark-theme .fa-edit {
   background-color: var(--bg-color);
   color: var(--text-color);
   background-image: none;
 }
 .dark-theme .character-sheet .body .input__circle-input--centered,
-.dark-theme .character-sheet .body .input__number-input {
+.dark-theme .item-sheet .body .input__circle-input--centered,
+.dark-theme .content-link .input__circle-input--centered,
+.dark-theme .fa-edit .input__circle-input--centered,
+.dark-theme .character-sheet .body .input__number-input,
+.dark-theme .item-sheet .body .input__number-input,
+.dark-theme .content-link .input__number-input,
+.dark-theme .fa-edit .input__number-input,
+.dark-theme .character-sheet .body .input__circle-input,
+.dark-theme .item-sheet .body .input__circle-input,
+.dark-theme .content-link .input__circle-input,
+.dark-theme .fa-edit .input__circle-input {
   border: 1px solid var(--text-color);
   color: var(--text-color);
 }
-.dark-theme .character-sheet .body button {
+.dark-theme .character-sheet .body button,
+.dark-theme .item-sheet .body button,
+.dark-theme .content-link button,
+.dark-theme .fa-edit button {
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body select,
+.dark-theme .item-sheet .body select,
+.dark-theme .content-link select,
+.dark-theme .fa-edit select {
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body select option,
+.dark-theme .item-sheet .body select option,
+.dark-theme .content-link select option,
+.dark-theme .fa-edit select option {
+  background-color: var(--bg-color);
+}
+.dark-theme .character-sheet .body .karma__ritual--icon,
+.dark-theme .item-sheet .body .karma__ritual--icon,
+.dark-theme .content-link .karma__ritual--icon,
+.dark-theme .fa-edit .karma__ritual--icon {
   color: var(--text-color);
 }
 .item-sheet .window-content {
