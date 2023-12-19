@@ -14,7 +14,6 @@ export default class SpiritData extends SentientTemplate {
     /** @inheritDoc */
     static defineSchema() {
         return super.defineSchema();
-        // TODO: spirit rating (or whatever it's called in english, german "Geisterstärke")?
     }
 
     /* -------------------------------------------- */

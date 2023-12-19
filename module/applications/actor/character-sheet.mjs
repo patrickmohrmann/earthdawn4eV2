@@ -5,8 +5,4 @@ import ActorSheetEd from './base-sheet.mjs';
  */
 export default class ActorSheetEdCharacter extends ActorSheetEd {
 
-    activateListeners( html ) {
-        super.activateListeners( html );
-        this.baseListeners( html );
-    }
 }

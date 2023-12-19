@@ -14,7 +14,6 @@ export default class HorrorData extends SentientTemplate {
     /** @inheritDoc */
     static defineSchema() {
         return super.defineSchema();
-        // TODO: horror marks (e.g., array of documentIDs)?
     }
 
     /* -------------------------------------------- */
