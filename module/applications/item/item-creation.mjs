@@ -68,12 +68,17 @@ export class ItemCreateDialog extends FormApplication {
   }
 
   /**
-   * @param {JQuery} jq jQuery HTML instance
+   * @param {$} jq jQuery HTML instance
    */
   activateListeners( jq ) {
     super.activateListeners( jq );
 
-    this.form.querySelector( "button.create-document" ).addEventListener( "click", this._createItem.bind( this ) );
+    $(
+      this.form.querySelector( "button.create-document" )
+    ).on( "click", this._createItem.bind( this ) );
+    $(
+      this.form.querySelectorAll( ".type-selection label" )
+    ).on( "dblclick", this._createItem.bind( this ) );
   }
 
   _updateObject( event, formData ) {

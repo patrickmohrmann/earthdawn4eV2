@@ -192,6 +192,7 @@ form#document-create > .form-group > header {
 }
 form#document-create header.type-group-label {
   border-bottom: double;
+  margin-top: 0.3em;
 }
 #typeSelectionHeader {
   font-size: larger;
@@ -229,7 +230,6 @@ form#document-create header.type-group-label {
   filter: none;
 }
 .type-selection .checkbox {
-  cursor: pointer;
   background-size: contain;
   background-repeat: no-repeat;
   display: inline-block;
