@@ -16,6 +16,7 @@
     "DataField": false,
     "DataModel": false,
     "Dialog": false,
+    "FormApplication": false,
     "Handlebars": false,
     "Hooks": false,
     "isOwned": false,

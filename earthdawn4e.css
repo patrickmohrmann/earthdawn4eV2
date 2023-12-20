@@ -185,6 +185,69 @@ input.input__number-input {
   position: absolute;
   left: calc(50% - 64px);
 }
+form#document-create > .form-group > label,
+form#document-create > .form-group > header {
+  font-size: larger;
+  font-weight: bold;
+}
+form#document-create header.type-group-label {
+  border-bottom: double;
+}
+#typeSelectionHeader {
+  font-size: larger;
+  font-weight: bold;
+}
+.type-selection input {
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.type-selection label:has(input[type='radio']) {
+  background-image: url('assets/icons/meditation.svg');
+  color: magenta;
+  font-variant: all-small-caps;
+  font-size: larger;
+  scale: 1;
+  margin-top: 0.6em;
+  vertical-align: middle;
+}
+.type-selection label:has(input[type='radio']):has(input:checked) {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+.checkbox,
+.type-selection input:active + .checkbox {
+  opacity: 0.9;
+}
+.checkbox,
+.type-selection input[checked=""] + .checkbox {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+.type-selection .checkbox {
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 100px;
+  height: 70px;
+  text-shadow: 1px 1px 5px white;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+  -webkit-filter: brightness(1.8) grayscale(1) opacity(0.7);
+  -moz-filter: brightness(1.8) grayscale(1) opacity(0.7);
+  filter: brightness(1.8) grayscale(1) opacity(0.7);
+}
+.checkbox:hover {
+  -webkit-filter: brightness(1.2) grayscale(0.5) opacity(0.9);
+  -moz-filter: brightness(1.2) grayscale(0.5) opacity(0.9);
+  filter: brightness(1.2) grayscale(0.5) opacity(0.9);
+}
 .item-sheet .window-content {
   padding: 0px;
 }

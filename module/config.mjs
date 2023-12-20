@@ -10,6 +10,17 @@ ________  _____       _____ _______
 |_______| |___/        |  | |______|
 _______________________________`;
 
+ED4E.typeGroups = {
+	Item: {
+		Equipment: ['armor', 'equipment', 'shield', 'weapon'],
+		Abilities: ['attack', 'devotion', 'knack', 'maneuver', 'power', 'skill', 'specialAbility', 'talent'],
+		Conditions: ['cursemark', 'effect', 'poisonDisease'],
+		Magic: ['spell', 'thread'],
+		Classes: ['discipline', 'path', 'questor'],
+		Other: ['mask', 'namegiver', 'shipWeapon']
+	}
+}
+
 /**
  * Configuration data for abilities.
  * @typedef {object} AttributeConfiguration
@@ -155,6 +166,7 @@ Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path 
 		});
 		Object.values(ui.windows).forEach(app => app.render(true));
 	}
+	return true;
 });
 /* eslint-enable */
 
