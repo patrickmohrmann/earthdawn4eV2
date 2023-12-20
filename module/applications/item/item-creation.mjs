@@ -68,7 +68,7 @@ export class ItemCreateDialog extends FormApplication {
   }
 
   /**
-   * @param {$} jq jQuery HTML instance
+   * @param {JQuery} jq jQuery HTML instance
    */
   activateListeners( jq ) {
     super.activateListeners( jq );
