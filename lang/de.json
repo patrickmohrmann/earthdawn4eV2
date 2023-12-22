@@ -502,6 +502,78 @@
             "missle":                                               "Projektilwaffe",
             "thrown":                                               "Wurfwaffe",
             "unarmed":                                              "Waffenlos"
+        },
+        "Settings": {
+            "StepTable": {
+                "editionClassic":                                   "Klassik Edition",
+                "editionfirst":                                     "Erste Edition",
+                "editionFourth":                                    "Vierte Edition",
+                "editionThird":                                     "Dritte Edition",
+                "hint":                                             "Wähle die Stufentabelle zur Konvertierung der Stufen in Würfel",
+                "stepTable":                                        "Stufen-Tabelle",
+                "stepTableHeader":                                  "Stufen-Tabelle (Global)"
+            },
+            "DarkMode": {
+                "darkModeHeader":                                   "Anzeige Modus - Dark Mode (pro Client)",
+                "darkMode":                                         "Anzeige Modus",
+                "hint":                                             "Benutzte den Schieber um das Farbschema anzupassen. Die Anpassung erfordert ein Neuladen des Browsers (F5)."     
+            },
+            "LpTracking": {
+                "allTalents":                                       "Alle Talente",
+                "automaticSilverReduction":                         "Silber wird automatisch verrechnet",
+                "disciplineTalents":                                "Nur Disciplin Talente",
+                "freePerCircle":                                    "Eine kostenlose Steigerung pro Kreis.",
+                "hintAttributesOption":                             "Welche option soll für die Steigerung von Attributen gewählt werden?",
+                "hintAllTalentsOption":                             "Sollen alle Talente für den Kreisaufstieg gewertet werden, oder nur die Disciplintalente?",
+                "hintAutomaticSilverOption":                        "Soll Silber automatische beim erhöhen abgezogen werden?",
+                "lpTrackingAllTalentsOption":                       "Alle Talente für den Kreisaufstieg",
+                "lpTrackingAttributeOptions":                      "Attribut Steigerung",
+                "lpTrackingHeader":                                 "Legendenpunkte Optionen (Global)",
+                "lpTrackingRemoveSilverOption":                     "Automatische Silber Reduzierung",
+                "notAutomaticSilverReduction":                      "Silber wird nicht automatische verrechnet",
+                "spendLp":                                          "Kostenpflichtige Steigerung (Standard)",
+                "spendLpPerCircle":                                 "Eine kostenpflichtige Steigerung pro Kreis."
+            },
+            "Encumbrance": {
+                "encumbrance":                                      "Belastung",
+                "encumberedHeader":                                 "Belastung (Global)",
+                "encumbranceVisualizeOnly":                         "Belastung wird nur angezeigt, hat jedoch keine Bewandnis",
+                "encumbranceWithEffects":                           "Belastung wird berechnet und hat Auswirkungen auf den Akteur",
+                "encumbranceHint":                                  "Soll die Belastung der Spielercharaktere nur angezeigt werden, oder soll Belastung genutzt werden."
+            },
+            "SpecificSettingOptions": {
+                "changelog":                                        "Änderungsprotokoll",
+                "help":                                             "Hilfe",
+                "troubleshooting":                                  "Einen Fehler melden",
+                "title":                                            "Earthdawneinstellungen"           
+            }
+        },
+        "Tours": {
+            "Settings": {
+                
+                "ed4eSpecificSettingsTitle":                        "Systemeinstellungstour",
+                "description":                                      "Beschreibung der Earthdawnspezifischen Systemeinstellungen",
+                "Intro": {
+                    "title":                                        "Systemeinstellungen",
+                    "text":                                         "Systemspezifische Einstellungen"
+                },
+                "Changelog": {
+                    "title":                                        "Änderungsprotokoll",
+                    "text":                                         "Hier stehen die letzten Systemänderungen"
+                },
+                "Help": {
+                    "title":                                        "Hilfe",
+                    "text":                                         "Hier gelangst du zum System Wiki, wo alle funktionen beschrieben werden."
+                },
+                "Troubleshooting": {
+                    "title":                                        "Fehler!",
+                    "text":                                         "Fehler können direkt über diesen Button gemeldet werden."
+                }
+                
+                
+                
+            }
         }
     }
+    
 }

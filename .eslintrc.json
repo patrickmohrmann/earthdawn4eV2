@@ -36,7 +36,8 @@
     "loadTemplates": false,
     "mergeObject": false,
     "packs": false,
-    "ui": false
+    "ui": false,
+    "Settings": false
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
