@@ -1,8 +1,8 @@
 /**
  * Register all the system's settings.
  */
-export async function registerSystemSettings() {
-
+export default function registerSystemSettings() {
+// export async function registerSystemSettings() {
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */
