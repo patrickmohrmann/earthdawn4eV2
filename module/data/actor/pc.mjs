@@ -1,6 +1,6 @@
+import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum } from '../../utils.mjs';
-import ActorDescriptionTemplate from "./templates/description.mjs";
 
 /**
  * System data definition for PCs.
