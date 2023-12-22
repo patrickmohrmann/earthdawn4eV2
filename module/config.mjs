@@ -12,17 +12,17 @@ _______________________________`;
 
 ED4E.typeGroups = {
 	Item: {
-		Equipment: ['armor', 'equipment', 'shield', 'weapon'],
-		Abilities: ['attack', 'devotion', 'knack', 'maneuver', 'power', 'skill', 'specialAbility', 'talent'],
-		Conditions: ['cursemark', 'effect', 'poisonDisease'],
-		Magic: ['spell', 'thread'],
-		Classes: ['discipline', 'path', 'questor'],
-		Other: ['mask', 'namegiver', 'shipWeapon']
+		Abilities: ["talent", "skill", "devotion", "knack", "attack", "maneuver", "power"  ],
+		Equipment: ["armor", "equipment", "shield", "weapon"],
+		Magic: ["spell", "matrix", "thread", "spellKnack", "bindingSecrets" ],
+		Classes: ["discipline", "path", "questor"],
+		Conditions: ["effect", "cursemark", "poisonDisease"],
+		Other: ["namegiver", "mask", "specialAbility", "shipWeapon"]
 	},
 	Actor: {
-		Namegivers: ['character', 'npc'],
-		Creatures: ['creature', 'spirit', 'horror', 'dragon'],
-		Other: ['group', 'vehicle', 'trap', 'loot']
+		Namegivers: ["character", "npc"],
+		Creatures: ["creature", "spirit", "horror", "dragon"],
+		Other: ["group", "vehicle", "trap", "loot"]
 	}
 }
 

@@ -42,14 +42,11 @@ form#document-create{
     label:has(input[type='radio']){
       color: magenta;
       font-variant: all-small-caps;
-      font-size: large;
       scale: 1;
+      text-shadow: none;
       margin-top: 0.6em;
       vertical-align: middle;
-      text-shadow:    @labelOutlineThickness @labelOutlineThickness 0 @labelOutlineColor,
-                      @labelOutlineThickness -@labelOutlineThickness 0 @labelOutlineColor,
-                      -@labelOutlineThickness @labelOutlineThickness 0 @labelOutlineColor,
-                      -@labelOutlineThickness -@labelOutlineThickness 0 @labelOutlineColor;
+
 
       &:has(input:checked){
         -webkit-filter: none;
@@ -102,5 +99,22 @@ form#document-create{
 }
 
 .create-document.create-item{
-  .type-selection label:has(input[type='radio']){background-image:url('assets/icons/meditation.svg');}
+  .type-selection label:has(input[type='radio']){
+    background-image:url('assets/icons/meditation.svg');
+  }
+}
+
+.app.window-app.form.earthdawn4e.create-document.create-item {
+  min-width: 800px;
+  display: block;
+}
+
+.app.window-app.form.earthdawn4e.create-document.create-actor {
+  min-width: 450px;
+  display: block;
+}
+
+form#document-create .type-selection label {
+  font-size: 1.5rem;
+  text-shadow: none;
 }

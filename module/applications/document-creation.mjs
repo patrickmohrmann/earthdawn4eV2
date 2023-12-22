@@ -32,12 +32,24 @@ export class DocumentCreateDialog extends FormApplication {
       closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: false,
-      height: 'auto',
-      width: 'auto',
+      // height: 800,
+      // width: 800,
       resizable: true,
       classes: [...options.classes, 'earthdawn4e', 'create-document'],
     };
   }
+
+  // static get defaultOptions() {
+  //   return mergeObject( super.defaultOptions, {
+  //     classes: ['earthdawn4e', 'create-document'],
+  //     closeOnSubmit: false,
+  //     submitOnChange: true,
+  //     submitOnClose: false,
+  //     width: 800,
+  //     height: 800,
+  //     resizable: true,
+  //   } );
+  // }
 
   get initialData() {
     return this.object;
