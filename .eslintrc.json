@@ -18,6 +18,7 @@
     "DataModel": false,
     "Dialog": false,
     "Folder": false,
+    "FormApplication": false,
     "Handlebars": false,
     "Hooks": false,
     "isOwned": false,

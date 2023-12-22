@@ -1,3 +1,4 @@
+import { DocumentCreateDialog } from '../applications/document-creation.mjs';
 
 
 /**
@@ -5,6 +6,11 @@
  * @augments {Actor}
  */
 export default class ActorEd extends Actor {
+
+  /** @inheritDoc */
+  static async createDialog( data = {}, { parent = null, pack = null, ...options } = {} ) {
+    return DocumentCreateDialog.waitPrompt( data, { documentCls: Actor, parent, pack, options } );
+  }
 
   activateListeners( html ) {
     super.activateListeners( html );
