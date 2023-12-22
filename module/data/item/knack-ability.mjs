@@ -11,7 +11,7 @@ import TalentData from "./talent.mjs";
  * @property {boolean} maneuver             maneuver knack
  * @property {number} extraSuccesses        extra successes to trigger the maneuver
  */
-export default class KnackData extends AbilityTemplate.mixin(
+export default class KnackAbilityData extends AbilityTemplate.mixin(
     ItemDescriptionTemplate
 )  {
 

@@ -1,12 +1,12 @@
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-import MagicTemplate from "./templates/sorcery-item.mjs";
+import KnackTemplate from "./templates/knack-item.mjs";
 
 /**
- * Data model template with information on Spell items.
+ * Data model template with information on items that are used to represent custom active effects.
  */
-export default class SpellData extends MagicTemplate.mixin(
+export default class KnackKarmaData extends KnackTemplate.mixin(
     ItemDescriptionTemplate
-)  {
+) {
 
     /** @inheritDoc */
     static defineSchema() {
