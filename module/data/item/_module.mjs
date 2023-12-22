@@ -7,7 +7,7 @@ import DisciplineData from "./discipline.mjs";
 import EffectData from "./effect.mjs";
 import EquipmentData from "./equipment.mjs";
 import KnackAbilityData from "./knack-ability.mjs";
-import KnackKarmaData from "./knack-karma-ability.mjs";
+import KnackKarmaData from "./knack-karma.mjs";
 import KnackManeuverData from "./knack-maneuver.mjs";
 import ManeuverData from "./maneuver.mjs";
 import MaskData from "./mask.mjs";
