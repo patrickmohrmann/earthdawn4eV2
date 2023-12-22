@@ -26,9 +26,9 @@
     <header id='typeSelectionHeader'>{{localize "Type"}}</header>
     {{#each typesRadio}}
       <header class='type-group-label'>{{@key}}</header>
-    <div class='form-fields'>
-      {{radioBoxes 'type' this checked=../currentType}}
-    </div>
+      <div class='form-fields'>
+        {{radioBoxes 'type' this checked=../currentType}}
+      </div>
     {{/each}}
   </div>
 

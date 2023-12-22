@@ -1,25 +1,28 @@
 /**
  * Derivate of Foundry's Item.createDialog() functionality.
  */
-export class ItemCreateDialog extends FormApplication {
-  
+export class DocumentCreateDialog extends FormApplication {
   /** @inheritDoc */
-  constructor( data = {}, { resolve, pack = null, parent = null, options = {} } = {} ) {
+  constructor( data = {}, { resolve, documentCls, pack = null, parent = null, options = {} } = {} ) {
     super( data, options );
 
     this.resolve = resolve;
+    this.documentCls = documentCls;
+    this.documentType = documentCls.name;
     this.pack = pack;
     this.parent = parent;
+    // since after super we are sure that default options already set the `classes` property
+    this.options.classes.push( `create-${this.documentType.toLowerCase()}` );
 
     this._updateCreationData( data );
   }
 
   get title() {
-    return game.i18n.format( "DOCUMENT.Create", { type: game.i18n.localize( "DOCUMENT.Item" ) } );
+    return game.i18n.format( 'DOCUMENT.Create', { type: game.i18n.localize( `DOCUMENT.${this.documentType}` ) } );
   }
 
   get template() {
-    return "systems/ed4e/templates/item/item-creation.hbs";
+    return 'systems/ed4e/templates/global-templates/document-creation.hbs';
   }
 
   static get defaultOptions() {
@@ -29,10 +32,10 @@ export class ItemCreateDialog extends FormApplication {
       closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: false,
-      height: "auto",
-      width: "auto",
+      height: 'auto',
+      width: 'auto',
       resizable: true,
-      classes: [...options.classes, "earthdawn4e", "create-document", "create-item"],
+      classes: [...options.classes, 'earthdawn4e', 'create-document'],
     };
   }
 
@@ -44,13 +47,13 @@ export class ItemCreateDialog extends FormApplication {
   createData = {};
 
   getData( options = {} ) {
-    const folders = this.parent ? [] : game.folders.filter( ( f ) => f.type === "Item" && f.displayed );
+    const folders = this.parent ? [] : game.folders.filter( ( f ) => f.type === this.documentType && f.displayed );
 
-    const types = CONFIG.ED4E.typeGroups.Item;
+    const types = CONFIG.ED4E.typeGroups[this.documentType];
     const typesRadio = Object.fromEntries(
       Object.entries( types ).map( ( [k, v], i ) => {
-        return [k, v.reduce( ( a, v ) => ( { ...a, [v]: v} ), {} )]
-      } )
+        return [k, v.reduce( ( a, v ) => ( { ...a, [v]: v } ), {} )];
+      } ),
     );
 
     const createData = this.createData;
@@ -58,12 +61,12 @@ export class ItemCreateDialog extends FormApplication {
     return {
       folders,
       name: createData.name,
-      defaultName: Item.implementation.defaultName(),
+      defaultName: this.documentCls.implementation.defaultName(),
       folder: createData.folder,
       hasFolders: folders.length > 0,
       currentType: createData.type,
       types,
-      typesRadio
+      typesRadio,
     };
   }
 
@@ -73,12 +76,8 @@ export class ItemCreateDialog extends FormApplication {
   activateListeners( jq ) {
     super.activateListeners( jq );
 
-    $(
-      this.form.querySelector( "button.create-document" )
-    ).on( "click", this._createItem.bind( this ) );
-    $(
-      this.form.querySelectorAll( ".type-selection label" )
-    ).on( "dblclick", this._createItem.bind( this ) );
+    $( this.form.querySelector( 'button.create-document' ) ).on( 'click', this._createDocument.bind( this ) );
+    $( this.form.querySelectorAll( '.type-selection label' ) ).on( 'dblclick', this._createDocument.bind( this ) );
   }
 
   _updateObject( event, formData ) {
@@ -91,7 +90,7 @@ export class ItemCreateDialog extends FormApplication {
 
   _updateCreationData( data = {} ) {
     // Fill in default type if missing
-    data.type ||= CONFIG.Item.defaultType || game.documentTypes.Item[1];
+    data.type ||= CONFIG[this.documentType].defaultType || game.documentTypes[this.documentType][1];
 
     this.createData = mergeObject( this.initialData, data, { inplace: false } );
     this.createData.system ??= {};
@@ -105,7 +104,7 @@ export class ItemCreateDialog extends FormApplication {
   /**
    * @param {Event} event
    */
-  async _createItem( event ) {
+  async _createDocument( event ) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -113,15 +112,15 @@ export class ItemCreateDialog extends FormApplication {
     await this.submit( { preventRender: true } );
 
     let createData = this._updateCreationData( this.createData );
-    createData.name ||= Item.implementation.defaultName();
-    createData = new Item.implementation( createData ).toObject();
+    createData.name ||= this.documentCls.implementation.defaultName();
+    createData = new this.documentCls.implementation( createData ).toObject();
 
     const options = {};
     if ( this.pack ) options.pack = this.pack;
     if ( this.parent ) options.parent = this.parent;
     options.renderSheet = true;
 
-    const promise = Item.implementation.create( createData, options );
+    const promise = this.documentCls.implementation.create( createData, options );
 
     this.resolve?.( promise );
     this.close();

@@ -18,6 +18,11 @@ ED4E.typeGroups = {
 		Magic: ['spell', 'thread'],
 		Classes: ['discipline', 'path', 'questor'],
 		Other: ['mask', 'namegiver', 'shipWeapon']
+	},
+	Actor: {
+		Namegivers: ['character', 'npc'],
+		Creatures: ['creature', 'spirit', 'horror', 'dragon'],
+		Other: ['group', 'vehicle', 'trap', 'loot']
 	}
 }
 
