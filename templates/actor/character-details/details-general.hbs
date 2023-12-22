@@ -1,11 +1,11 @@
 <div class="details__area left-part">
     {{!-- Attribute --}}
     <div>
-        <h4>
-            <label class="character__attribute">{{localize "ED.Attributes.attributes"}}</label>
+        <h3>
+            <label class="character__attribute">{{localize "ED.Sheet.Header.attributes"}}</label>
             <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
                 ED.LpTracking.attributeImprovement"}}"></a>
-        </h4>
+        </h3>
         <table class="table__attribute">
             <tr>
                 <th class="text__alignment--left">{{localize "ED.Attributes.attribute"}}</th>
@@ -227,10 +227,6 @@
                         </span>
                     </div>
                 </td>
-                {{!-- <td>
-                    <input class="input__number-input" type="text" name="system.attributes.cha.timesIncreased"
-                        value="{{actor.system.attributes.cha.timesIncreased}}">
-                </td> --}}
             </tr>
             <tr>
                 <td class="attribute__name--content">
@@ -257,10 +253,9 @@
             <label>{{localize "ED.General.karma"}}</label>
             <span class="icon__position--right">
                 <input type="checkbox" class="input__checkbox karma__usage--always" name="system.karma.useAlways"
-                    {{checked actor.system.karma.useAlways}} title="{{localize " ED.General.karmaAlways"}}">
+                    {{checked actor.system.karma.useAlways}} title="{{localize "ED.General.karmaAlways"}}">
                 <a class="karma__ritual">
-                    <img class="karma__ritual--icon image__border--none" src="systems/ed4e/assets/icons/meditation.svg"
-                        title="{{localize " ED.General.karmaRitualTooltip"}}">
+                    <i class="fa-solid fa-person-rays" title="{{localize "ED.General.karmaRitualTooltip"}}"></i>
                 </a>
             </span>
         </h4>
@@ -273,20 +268,20 @@
             <tr>
                 <td class="karma__current--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.current"
-                                value="{{actor.system.karma.current}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.value"
+                            value="{{actor.system.karma.value}}" readonly>
                     </div>
                 </td>
                 <td class="karma__maximum--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.karma.maximum"
-                                value="{{actor.system.karma.maximum}}" readonly>
+                        <input class="input__number-input" type="number" name="system.karma.max"
+                            value="{{actor.system.karma.max}}" readonly>
                     </div>
                 </td>
                 <td class="karma__step--content">
                     <div>
                         <input class="input__number-input" type="number" name="system.karma.step"
-                                value="{{actor.system.karma.step}}">
+                            value="{{actor.system.karma.step}}">
                     </div>
                 </td>
             </tr>
@@ -294,7 +289,7 @@
     </div>
     {{!-- Devotion --}}
     <div>
-        <h4>Devotions</h4>
+        <h4>{{localize "ED.Sheet.Header.devotionPoints"}}</h4>
         <table class="table__devotion">
             <tr>
                 <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
@@ -304,20 +299,20 @@
             <tr>
                 <td class="devotion__current--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.devotion.current"
-                                value="{{actor.system.devotion.current}}">
+                        <input class="input__number-input" type="number" name="system.devotion.value"
+                            value="{{actor.system.devotion.value}}">
                     </div>
                 </td>
                 <td class="devotion__maximum--content">
                     <div>
-                        <input class="input__number-input" type="number" name="system.devotion.maximum"
-                                value="{{actor.system.devotion.maximum}}" readonly>
+                        <input class="input__number-input" type="number" name="system.devotion.max"
+                            value="{{actor.system.devotion.max}}" readonly>
                     </div>
                 </td>
                 <td class="devotion__step--content">
                     <div>
                         <input class="input__number-input" type="number" name="system.devotion.step"
-                                value="{{actor.system.devotion.step}}">
+                            value="{{actor.system.devotion.step}}">
                     </div>
                 </td>
             </tr>
@@ -327,7 +322,7 @@
 {{!-- Conditions --}}
 <div class="right-part">
     <div class="partial__two">
-        <h3>conditions</h3>
+        <h3>{{localize "ED.Sheet.Header.conditions"}}</h3>
         <div>
             <div>
                 <div class="partial__two">
@@ -442,84 +437,26 @@
                     <label>{{localize "ED.Conditions.overwhelmed"}}</label>
                 </div>
                 <div class="partial__two">
-                    <input type="Number" class="input__checkbox" name="system.condition.overwhelmed"
+                    <input type="Number" class="input__number-input" name="system.condition.overwhelmed"
                         value="{{actor.system.condition.overwhelmed}}">
                 </div>
             </div>
         </div>
     </div>
     <div class="partial__two">
-        <h3>special abilities</h3>
+        <h3>{{localize "ED.specialAbility"}}</h3>
         <div>
             {{#each actor.itemTypes.specialAbility}}
             <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
-        </div>
-    </div>
-    {{/each}}
-        </div>
-        <h3>Disciplines</h3>
-        <div>
-            {{#each actor.itemTypes.discipline}}
-            <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+                <div class="partial__two one-line__vertical-align">
+                    <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                    {{name}}
+                </div>
+                <div class="partial__two one-line__vertical-align">
+                    {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+                </div>
+            </div>
+            {{/each}}
         </div>
     </div>
-    {{/each}}
-        </div>
-        <h3>Paths</h3>
-        <div>
-            {{#each actor.itemTypes.path}}
-            <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
-        </div>
-    </div>
-    {{/each}}
-        </div>
-        <h3>Questor</h3>
-        <div>
-            {{#each actor.itemTypes.questor}}
-            <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
-        </div>
-    </div>
-    {{/each}}
-        </div>
-        <h3>Namegiver</h3>
-        <div >
-            {{#each actor.itemTypes.namegiver}}
-            <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
-        </div>
-    </div>
-    {{/each}}
-        </div>
-    </div>
-
-
 </div>

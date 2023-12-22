@@ -54,6 +54,7 @@
             "strength":                                         "Strength",
             "WIL":                                              "WIL",
             "willpower":                                        "Willpower"
-        }
+        },
+        "classes":                                              "Vocation"
     }
 }

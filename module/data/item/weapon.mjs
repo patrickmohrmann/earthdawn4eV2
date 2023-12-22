@@ -4,8 +4,9 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 /**
  * Data model template with information on weapon items.
  * @property {string} weaponType            type of weapon
- * @property {string} damageAttribute       base attribute used for damage
- * @property {number} damageBaseStep        weapon basic damage step
+ * @property {object} damage                damage object
+ * @property {string} damage.attribute       base attribute used for damage
+ * @property {number} damage.baseStep        weapon basic damage step
  * @property {number} size                  weapon size 1-7
  * @property {number} strengthMinimum       strength minimum to use without penalty
  * @property {number} dexterityMinimum      dexterity minimum to use without penalty
@@ -26,22 +27,24 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 initial: "melee",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
-            } ),
-            damageAttribute: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: false,
-                initial: "strength",
-                label: "ED.Item.Weapon.Label.damageAttribute",
-                hint: "ED.Item.Weapon.Hint.damageAttribute"
-            } ),
-            damageBaseStep: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Weapon.Label.damageBaseStep",
-                hint: "ED.Item.Weapon.Hint.damageBaseStep"
+            } ), 
+            damage: new foundry.data.fields.SchemaField( {
+                attribute: new foundry.data.fields.StringField( {
+                    required: true,
+                    nullable: false,
+                    initial: "strength",
+                    label: "ED.Item.Weapon.Label.damageAttribute",
+                    hint: "ED.Item.Weapon.Hint.damageAttribute"
+                } ),
+                baseStep: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.Weapon.Label.damageBaseStep",
+                    hint: "ED.Item.Weapon.Hint.damageBaseStep"
+                } ),
             } ),
             size: new foundry.data.fields.NumberField( {
                 required: true,
@@ -71,17 +74,23 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Weapon.Label.dexterityMinimum",
                 hint: "ED.Item.Weapon.Hint.dexterityMinimum"
             } ),
-            rangeShort: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: true,
-                label: "ED.Item.Weapon.Label.rangeShort",
-                hint: "ED.Item.Weapon.Hint.rangeShort"
-            } ),
-            rangeLong: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: true,
-                label: "ED.Item.Weapon.Label.rangeLong",
-                hint: "ED.Item.Weapon.Hint.rangeLong"
+            range: new foundry.data.fields.SchemaField( {
+                short: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeShort"
+                } ), 
+                long: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeLong"
+                } ), 
             } ),
             ammunition: new foundry.data.fields.NumberField( {
                 required: true,

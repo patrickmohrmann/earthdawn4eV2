@@ -1,0 +1,33 @@
+<div>
+    <div class="header-section__name">
+        <div class="partial__two">
+            <h4>
+                <input type="text" name="name" value="{{actor.name}}" placeholder="Name / Race">
+            </h4> 
+        </div>
+        <div class="partial__two">
+            {{#each actor.itemTypes.namegiver}}
+            <div class="item-name one-line__vertical-align namegiver__item" data-item-id="{{_id}}">
+                <div class="one-line__vertical-align">
+                    <div class="partial__two">
+                        <h4>
+                            {{name}}
+                        </h4>
+                    </div>
+                    <div class="partial__three align__Namegiver-options">
+                        <h5>
+                            {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="header-section__characteristics">
+        <h4>
+            {{localize "ED.Sheet.Header.characteristics"}}
+            <a class="fa fa-refresh"></a>
+        </h4>
+    </div>
+</div>

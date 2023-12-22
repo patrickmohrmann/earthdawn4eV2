@@ -3,13 +3,13 @@
     {{!-- Physical Defense Bonus --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Shield.Label.defenseBonusPhysical"}}:</label>
-        <input class="input__circle-input" name="system.defenseBonusPhysical" type="text" value="{{item.system.defenseBonusPhysical}}"
+        <input class="input__circle-input" name="system.defenseBonus.physical" type="text" value="{{item.system.defenseBonus.physical}}"
             data-dtype="Number">
     </div>
     {{!-- Mystische Defense Bonus --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Shield.Label.defenseBonusMystical"}}:</label>
-        <input class="input__circle-input" name="system.defenseBonusMystical" type="text" value="{{item.system.defenseBonusMystical}}"
+        <input class="input__circle-input" name="system.defenseBonus.mystical" type="text" value="{{item.system.defenseBonus.mystical}}"
             data-dtype="Number">
     </div>
     {{!-- SHatter Threshold --}}
@@ -27,7 +27,7 @@
     {{!-- price --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
-        <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
+        <input class="input__number-input" name="system.price.value" type="text" value="{{item.system.price.value}}"
             data-dtype="Number">
             <select name="system.price.denomination">
                 {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}

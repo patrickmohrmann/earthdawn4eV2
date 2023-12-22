@@ -35,11 +35,45 @@ export function getDefenseValue( attributeValue ) {
 
 /**
  * Computes the sum of the values in array.
- * @param {Array} arr An array of numbers.
+ * @param {Array<number>} arr An array of numbers.
  * @returns {number} The sum of the values in the array.
  */
 export function sum( arr ) {
   return arr.reduce( ( partialSum, a ) => partialSum + a, 0 );
+}
+
+/**
+ * Computes the sum of a specific property's  values in an array of objects. The sum for only one property can be
+ * calculated, and its name must be consistent across all objects in the array.
+ * @param {Array<object>} arr   An array of numbers.
+ * @param {string|symbol} prop  The name of the property that should be summed. Its values must be numerical.
+ * @returns {number|undefined}  The sum of the property values in the array, or undefined if the values are not numeric.
+ */
+export function sumProperty( arr, prop ) {
+  return arr.reduce( ( partialSum, obj ) => partialSum + resolvePath( obj, prop ), 0 );
+}
+
+/* -------------------------------------------- */
+/*  Other                                       */
+/* -------------------------------------------- */
+
+/**
+ * Retrieves the value of a given string property of an object which works for nested property names.
+ * Taken from {@link https://stackoverflow.com/a/43849204 this answer on StackOverflow}.
+ * @example
+ * const myVar = {
+ *  a: { b: [ { c:1 } ] }
+ * }
+ * resolvePath(myVar,'a.b[0].c') => 1
+ * resolvePath(myVar,'a["b"][\'0\'].c') => 1
+ * @param {object} object     The object to access.
+ * @param {string} path       The path of the property to be accessed. If nested, must be separated by `.` a period. If
+ *                            an array, must use bracket notation.
+ * @param {any} defaultValue  The value to return if the given key does not exist in the `object`.
+ * @returns {any}             The value of the given key in the object.
+ */
+function resolvePath( object, path, defaultValue ){
+  return path.split( '.' ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
 }
 
 /* -------------------------------------------- */
@@ -71,34 +105,29 @@ export const validators = {
 export async function preloadHandlebarsTemplates() {
   const partials = [
     // Global Templates
-    "systems/ed4e/templates/global-templates/attribute-selector.hbs",
     "systems/ed4e/templates/global-templates/editor.hbs",
     "systems/ed4e/templates/global-templates/card-options-chat.hbs",
     "systems/ed4e/templates/global-templates/card-options-enhance.hbs",
 
-    // Character partials.
-    "systems/ed4e/templates/actor/character-partials/header-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/image-characteristics-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/disciplines-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/attribute-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/details-section.hbs",
-    "systems/ed4e/templates/actor/character-partials/action-button-section.hbs",
-
     // Character details section partials
-    "systems/ed4e/templates/actor/character-partials/character-details/details-talents.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-skills.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-devotions.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-spells.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-equipment.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-notes.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-familiars-mounts.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-reputation.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-general.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-specials.hbs",
-    "systems/ed4e/templates/actor/character-partials/character-details/details-legend.hbs",
+    "systems/ed4e/templates/actor/character-details/details-talents.hbs",
+    "systems/ed4e/templates/actor/character-details/details-skills.hbs",
+    "systems/ed4e/templates/actor/character-details/details-devotions.hbs",
+    "systems/ed4e/templates/actor/character-details/details-spells.hbs",
+    "systems/ed4e/templates/actor/character-details/details-equipment.hbs",
+    "systems/ed4e/templates/actor/character-details/details-notes.hbs",
+    "systems/ed4e/templates/actor/character-details/details-familiars-reputation.hbs",
+    "systems/ed4e/templates/actor/character-details/details-general.hbs",
+    "systems/ed4e/templates/actor/character-details/details-specials.hbs",
+    "systems/ed4e/templates/actor/character-details/details-legend.hbs",
+    "systems/ed4e/templates/actor/character-details/details-disciplines.hbs",
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/action-button-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/header-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/image-characteristics-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/details-section.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",

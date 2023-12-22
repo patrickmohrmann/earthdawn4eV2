@@ -139,29 +139,34 @@ export default class MaskData extends SystemDataModel.mixin(
             {
                 label: "ED.Item.Masks.movement"
             } ),
-            physicaldefense: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Masks.physicaldefense"
-            } ),
-            mysticdefense: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Masks.mysticdefense"
-            } ),
-            socialdefense: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Masks.socialdefense"
+            defenses: new foundry.data.fields.SchemaField( {
+                physical: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Actor.Characteristics.defensePhysical"
+                } ),
+                mystical: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Actor.Characteristics.defenseMystical"
+                } ),
+                social: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Actor.Characteristics.defenseSocial"
+                } ),
             } ),
             physicalarmor: new foundry.data.fields.NumberField( {
                 required: true,

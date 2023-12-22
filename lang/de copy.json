@@ -1,0 +1,282 @@
+{
+    "TYPES": {
+        "Actor": {
+            "character":                                            "Charakter",
+            "creature":                                             "Kreatur",
+            "dragon":                                               "Drache",
+            "group":                                                "Gruppe",
+            "horror":                                               "Dämon",
+            "loot":                                                 "Loot",
+            "npc":                                                  "NSC",
+            "spirit":                                               "Geist",
+            "trap":                                                 "Falle",
+            "vehicle":                                              "Transportmittel"
+        },
+        "Item": {
+            "armor":                                                "Rüstung",
+            "attack":                                               "Angriff",
+            "cursemark":                                            "Fluch / Dämonenmal",
+            "devotion":                                             "Weihekraft",
+            "discipline":                                           "Disziplin",
+            "effect":                                               "Effekt",
+            "equipment":                                            "Ausrüstung",
+            "knack":                                                "Kniff",
+            "maneuver":                                             "Manöver",
+            "mask":                                                 "Maske",
+            "namegiver":                                            "Namensgeber",
+            "path":                                                 "Pfad",
+            "poisonDisease":                                        "Gift / Krankheit",
+            "power":                                                "Kraft",
+            "questor":                                              "Questor",
+            "shield":                                               "Schild",
+            "skill":                                                "Fertigkeit",
+            "specialAbility":                                       "Sonstige Fähigkeit",
+            "spell":                                                "Zauberspruch",
+            "talent":                                               "Talent",
+            "thread":                                               "Permanenter Faden",
+            "weapon":                                               "Waffe",
+            "shipWeapon":                                           "Schiffswaffe"
+        }
+    },
+    "ED": {
+        "Globals": {
+            "ItemControls": {
+                "delete":                                           "Löschen",
+                "toChat":                                           "Im Chat anzeigen",     
+                "edit":                                             "Editieren",
+                "levelUp":                                          "Rang erhöhen",
+                "levelDown":                                        "Rang senken"                                
+            }
+        },
+        "ActorSheets": {
+            "Globals": {
+                "Buttons": {
+                    "jumpUp":                                       "Aufspringen",
+                    "knockDownTest":                                "Niederschlagtest",
+                    "takeDamage":                                   "Schaden nehmen",
+                    "halfMagic":                                    "Halbmagie"
+                }
+            },
+            "character": {
+                "Characteristics": {
+                    "Defenses": {
+                        "defenses":                                 "Verteidigungen",
+                        "physical":                                 "Körperlich",
+                        "mystical":                                 "Mystisch",
+                        "social":                                   "Sozial"
+                    },
+                    "health": {
+                        "healthRating":                             "Gesundheitswerte",
+
+                        "woundThreshold":                           "Wundschwelle",
+                        "unconsciousThreshold":                     "Bewußtlosigkeit",
+                        "deathTheshold":                            "Tod"
+                    },
+                    "Armor": {
+                        "armor":                                    "Rüstung",
+                        
+                        "physical":                                 "Körperlich",
+                        "mystical":                                 "Mystisch"
+                    },
+                    "Movement": {
+                        "movement":                                 "Bewegung",
+
+                        "climb":                                    "Klettern",
+                        "swim":                                     "Schwimmen",
+                        "burrow":                                   "Graben",
+                        "fly":                                      "Fliegen",
+                        "walk":                                     "Laufen"
+                    }, 
+                    "Damage": {
+                        "damage":                                   "Schaden",
+                        "current":                                  "Aktuell",
+                        "wounds":                                   "Wunden",
+                        "subdual":                                  "Betäubung"
+                    },
+                    "Recovery": {
+                        "recoverytests":                            "Erholungsproben",
+                        "current":                                  "Aktuell",
+                        "daily":                                    "Täglich"     
+                    }
+                },
+                "Navigator": {
+                    "navigator":                                        "Navigator",
+                    
+                    "devotions":                                        "Weihekräfte",
+                    "classes":                                          "Berufung",
+                    "equipment":                                        "Ausrüstung",
+                    "familarsReputation":                               "Verbindungen",
+                    "general":                                          "Allgemein",
+                    "legend":                                           "Legende",
+                    "notes":                                            "Notizen",
+                    "skills":                                           "Fertigkeiten",
+                    "spells":                                           "Zauber",
+                    "specials":                                         "Besonderheiten",
+                    "talents":                                          "Talente"
+                },
+                "Tabs": {
+                    "Devotions": {
+
+                    },
+                    "Classes": {
+
+                    },
+                    "Equipment": {
+
+                    },
+                    "FamilarsReputation": {
+
+                    },
+                    "General": {
+
+                    },
+                    "Legend": {
+
+                    },
+                    "Notes": {
+
+                    },
+                    "Skills": {
+
+                    },
+                    "Spells": {
+
+                    },
+                    "Specials": {
+
+                    },
+                    "Talents": {
+
+                    }        
+                }
+            },
+            "creature": {
+
+            },
+            "dragon": {
+
+            },
+            "group": {
+
+            },
+            "horror": {
+
+            },
+            "loot": {
+
+            },
+            "npc": {
+
+            },
+            "spirit": {
+
+            },
+            "trap": {
+
+            },
+            "vehicle":  {
+
+            }
+        },
+        "ItemSheets": {
+            "armor": {
+
+            },
+            "attack": {
+
+            },
+            "cursemark": {
+
+            },
+            "devotion": {
+
+            },
+            "discipline": {
+
+            },
+            "effect": {
+
+            },
+            "equipment": {
+
+            },
+            "knack": {
+
+            },
+            "maneuver": {
+
+            },
+            "mask": {
+
+            },
+            "namegiver": {
+
+            },
+            "path": {
+
+            },
+            "poisonDisease": {
+
+            },
+            "power": {
+
+            },
+            "questor": {
+
+            },
+            "shield": {
+
+            },
+            "skill": {
+
+            },
+            "specialAbility": {
+
+            },
+            "spell": {
+
+            },
+            "talent": {
+
+            },
+            "thread": {
+
+            },
+            "weapon": {
+
+            },
+            "shipWeapon": {
+
+            }
+        },
+        "JournalSheets": {
+            "AdventureLog": {
+
+            }
+        },
+        "SystemSettings": {
+            "Configurations": {
+                "StepsTable": {
+
+                },
+                "DarkMode": {
+
+                },
+                "LpTracking": {
+
+                },
+                "Encumbrance": {
+
+                }
+            }
+        },
+        "Gui": {
+            "Controls": {
+
+            },
+            "Sidebar": {
+
+            }
+        }
+    }
+}

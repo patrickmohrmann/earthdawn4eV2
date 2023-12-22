@@ -15,12 +15,14 @@
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageAttribute"}}:</label>
-        {{> "systems/ed4e/templates/global-templates/attribute-selector.hbs"}}
+        <select name="system.damage.attribute">
+            {{selectOptions config.attributes selected=item.system.damage.attribute labelAttr="label" localize=true }}
+        </select>
     </div>
     {{!-- Mystische Armor --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageBaseStep"}}:</label>
-        <input class="input__circle-input" name="system.damageBaseStep" type="text" value="{{item.system.damageBaseStep}}"
+        <input class="input__circle-input" name="system.damage.baseStep" type="text" value="{{item.system.damage.baseStep}}"
             data-dtype="Number">
     </div>
     {{!-- Forged Physical Armor --}}
@@ -38,13 +40,13 @@
     {{!-- Initiative Penalty --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeShort"}}:</label>
-        <input class="input__circle-input" name="system.rangeShort" type="text" value="{{item.system.rangeShort}}"
+        <input class="input__circle-input" name="system.range.short" type="text" value="{{item.system.range.short}}"
             data-dtype="Number">
     </div>
     {{!-- Initiative Penalty --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeLong"}}:</label>
-        <input class="input__circle-input" name="system.rangeLong" type="text" value="{{item.system.rangeLong}}"
+        <input class="input__circle-input" name="system.range.long" type="text" value="{{item.system.range.long}}"
             data-dtype="Number">
     </div>
     {{!-- Initiative Penalty --}}
@@ -62,7 +64,7 @@
     {{!-- price --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
-        <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
+        <input class="input__number-input" name="system.price.value" type="text" value="{{item.system.price.value}}"
             data-dtype="Number">
             <select name="system.price.denomination">
                 {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}

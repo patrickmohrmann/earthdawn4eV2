@@ -33,7 +33,7 @@
     {{!-- price --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
-        <input class="input__number-input" name="system.value" type="text" value="{{item.system.value}}"
+        <input class="input__number-input" name="system.price.value" type="text" value="{{item.system.price.value}}"
             data-dtype="Number">
             <select name="system.price.denomination">
                 {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
@@ -52,17 +52,6 @@
             {{selectOptions config.availability selected=item.system.availability localize=true }}
         </select>
     </div>
-    
-
-
-
-
-
-
-
-
-
-    
 </div>
 <div class="item__right--main item-sheet__editor">
     <h3>{{localize "ED.Item.General.description"}}</h3>

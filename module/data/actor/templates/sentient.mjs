@@ -36,34 +36,27 @@ export default class SentientTemplate extends CommonTemplate {
                 label: "ED.Attributes.attributes"
             } ),
             characteristics: new foundry.data.fields.SchemaField( {
-                defenses: new foundry.data.fields.SchemaField( {
-                    physical: new foundry.data.fields.NumberField( {
+                defenses: new MappingField( new foundry.data.fields.SchemaField( {
+                    baseValue: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
                         step: 1,
                         initial: 0,
                         integer: true,
-                        label: "ED.Actor.Characteristics.defensePhysical"
                     } ),
-                    mystical: new foundry.data.fields.NumberField( {
+                    value: new foundry.data.fields.NumberField( {
                         required: true,
                         nullable: false,
                         min: 0,
                         step: 1,
                         initial: 0,
                         integer: true,
-                        label: "ED.Actor.Characteristics.defenseMystical"
                     } ),
-                    social: new foundry.data.fields.NumberField( {
-                        required: true,
-                        nullable: false,
-                        min: 0,
-                        step: 1,
-                        initial: 0,
-                        integer: true,
-                        label: "ED.Actor.Characteristics.defenseSocial"
-                    } ),
+                } ), {
+                    initialKeys: ['physical', 'mystical', 'social'],
+                    initialKeysOnly: true,
+                    label: "ED.Actor.Characteristics.defenses"
                 } ),
                 armor: new MappingField( new foundry.data.fields.SchemaField( {
                     baseValue: new foundry.data.fields.NumberField( {
@@ -114,6 +107,26 @@ export default class SentientTemplate extends CommonTemplate {
                         initial: 0,
                         integer: true,
                         label: "ED.Actor.Characteristics.woundThreshold"
+                    } ),
+                    bloodMagic: new foundry.data.fields.SchemaField( {
+                        damage: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.unconsciousRate"
+                        } ),
+                        wounds: new foundry.data.fields.NumberField( {
+                            required: true,
+                            nullable: false,
+                            min: 0,
+                            step: 1,
+                            initial: 0,
+                            integer: true,
+                            label: "ED.Actor.Characteristics.unconsciousRate"
+                        } ),
                     } ),
                     damage: new foundry.data.fields.SchemaField( {
                         standard: new foundry.data.fields.NumberField( {
@@ -263,7 +276,7 @@ export default class SentientTemplate extends CommonTemplate {
                 } )
             } ),
             devotion: new foundry.data.fields.SchemaField( {
-                current: new foundry.data.fields.NumberField( {
+                value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -272,7 +285,7 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.devotion.current"
                 } ),
-                maximum: new foundry.data.fields.NumberField( {
+                max: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -341,7 +354,7 @@ export default class SentientTemplate extends CommonTemplate {
                     initial: false,
                     label: "ED.General.Karma.karmaAlways"
                 } ),
-                current: new foundry.data.fields.NumberField( {
+                value: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -350,7 +363,7 @@ export default class SentientTemplate extends CommonTemplate {
                     integer: true,
                     label: "ED.General.karma.current"
                 } ),
-                maximum: new foundry.data.fields.NumberField( {
+                max: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,

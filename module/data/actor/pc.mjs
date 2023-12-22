@@ -1,5 +1,6 @@
+import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
-import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum } from '../../utils.mjs';
+import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from '../../utils.mjs';
 
 /**
  * System data definition for PCs.
@@ -9,7 +10,9 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum } from '.
  * @property {number} value             value is the one shown. baseValue + modifications
  * @property {number} timesIncreased    attribute increases
  */
-export default class PcData extends NamegiverTemplate {
+export default class PcData extends NamegiverTemplate.mixin(
+  ActorDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static _systemType = "character";
@@ -135,7 +138,7 @@ export default class PcData extends NamegiverTemplate {
             social: "cha"
         }
         for ( const defenseType of Object.keys( this.characteristics.defenses ) ) {
-            this.characteristics.defenses[defenseType] = getDefenseValue(
+            this.characteristics.defenses[defenseType].baseValue = getDefenseValue(
               this.attributes[defenseAttributeMapping[defenseType]].value
             );
         }
@@ -198,6 +201,8 @@ export default class PcData extends NamegiverTemplate {
      */
     #prepareDerivedCharacteristics() {
         this.#prepareDerivedArmor();
+        this.#prepareDerivedBloodMagic();
+        this.#prepareDerivedDefenses();
         this.#prepareDerivedHealth();
         this.#prepareDerivedMovement();
     }
@@ -219,6 +224,35 @@ export default class PcData extends NamegiverTemplate {
     }
 
     /**
+     * Prepare the derived blood magic damage based on items.
+     * @private
+     */
+    #prepareDerivedBloodMagic() {
+      const bloodDamageItems = this.parent.items.filter(
+        ( item ) => item.system.hasOwnProperty( "bloodMagicDamage" ) && item.system.itemStatus.equipped,
+      );
+      // Calculate sum of defense bonuses, defaults to zero if no shields equipped
+      const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );
+      this.characteristics.health.bloodMagic.damage += bloodDamage;
+    }
+
+    /**
+     * prepare the derived defense values based on items.
+     * @private
+     */
+    #prepareDerivedDefenses() {
+        const shieldItems = this.parent.items.filter(
+          item => item.type === 'shield' && item.system.itemStatus.equipped
+        );
+        // Calculate sum of defense bonuses, defaults to zero if no shields equipped
+        const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
+        const mysticalBonus = sumProperty( shieldItems, "system.defenseBonus.mystical" );
+
+        this.characteristics.defenses.physical.value = this.characteristics.defenses.physical.baseValue + physicalBonus;
+        this.characteristics.defenses.mystical.value = this.characteristics.defenses.mystical.baseValue + mysticalBonus;
+    }
+
+    /**
      * Prepare the base health ratings based on items.
      * @private
      */
@@ -226,7 +260,12 @@ export default class PcData extends NamegiverTemplate {
         const durabilityItems = this.parent.items.filter(
           item => ["discipline", "devotion"].includes( item.type ) && item.system.durability > 0
         );
-        if ( !durabilityItems?.length ) return;
+        if ( !durabilityItems?.length ) {
+            console.log(
+              `ED4E | Cannot calculate derived health data for actor "${this.parent.name}" (${this.parent.id}). No items with durability > 0.`
+            );
+            return;
+        }
 
         const durabilityByCircle = {};
         const maxLevel = Math.max( ...durabilityItems.map( item => item.system.level ) );
@@ -251,8 +290,8 @@ export default class PcData extends NamegiverTemplate {
 
         const maxDurability = sum( Object.values( durabilityByCircle ) );
 
-        this.characteristics.health.unconscious += maxDurability;
-        this.characteristics.health.death += maxDurability + maxCircle;
+        this.characteristics.health.unconscious += maxDurability - this.characteristics.health.bloodMagic.damage;
+        this.characteristics.health.death += maxDurability + maxCircle - this.characteristics.health.bloodMagic.damage;
     }
 
     /**
@@ -325,7 +364,7 @@ export default class PcData extends NamegiverTemplate {
         const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
         const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmamodifier ?? 0;
 
-        this.karma.maximum = karmaModifier * highestCircle + this.karma.freeAttributePoints;
+        this.karma.max = karmaModifier * highestCircle + this.karma.freeAttributePoints;
     }
 
     /**
@@ -335,7 +374,7 @@ export default class PcData extends NamegiverTemplate {
     #prepareDerivedDevotion() {
         const questor = this.parent.items.filter( item => item.type === "questor" )[0];
         if ( questor ) {
-            this.devotion.maximum = questor.system.level * 10;
+            this.devotion.max = questor.system.level * 10;
         }
     }
 

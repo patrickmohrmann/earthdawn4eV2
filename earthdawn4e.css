@@ -140,6 +140,24 @@ input.input__number-input {
   line-height: 35px;
   vertical-align: middle;
 }
+.sheet__editor {
+  min-height: 400px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.sheet__editor .editor,
+.sheet__editor .prosemirror,
+.sheet__editor .editor-container,
+.sheet__editor .editor-content {
+  min-height: 400px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.itemControlGroup {
+  float: right;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -184,6 +202,300 @@ input.input__number-input {
   opacity: 0.5;
   position: absolute;
   left: calc(50% - 64px);
+}
+.dark-theme .character-sheet .body,
+.dark-theme .item-sheet .body,
+.dark-theme .content-link,
+.dark-theme .fa-edit,
+.dark-theme .window-content,
+.dark-theme .tabs,
+.dark-theme .sidebar-tab,
+.dark-theme .chat-message,
+.dark-theme .sidebar-tab button,
+.dark-theme #chat-form textarea,
+.dark-theme .prosemirror menu .pm-dropdown > *,
+.dark-theme .prosemirror menu .pm-dropdown {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: none;
+}
+.dark-theme .character-sheet .body .input__circle-input--centered,
+.dark-theme .item-sheet .body .input__circle-input--centered,
+.dark-theme .content-link .input__circle-input--centered,
+.dark-theme .fa-edit .input__circle-input--centered,
+.dark-theme .window-content .input__circle-input--centered,
+.dark-theme .tabs .input__circle-input--centered,
+.dark-theme .sidebar-tab .input__circle-input--centered,
+.dark-theme .chat-message .input__circle-input--centered,
+.dark-theme .sidebar-tab button .input__circle-input--centered,
+.dark-theme #chat-form textarea .input__circle-input--centered,
+.dark-theme .prosemirror menu .pm-dropdown > * .input__circle-input--centered,
+.dark-theme .prosemirror menu .pm-dropdown .input__circle-input--centered,
+.dark-theme .character-sheet .body .input__number-input,
+.dark-theme .item-sheet .body .input__number-input,
+.dark-theme .content-link .input__number-input,
+.dark-theme .fa-edit .input__number-input,
+.dark-theme .window-content .input__number-input,
+.dark-theme .tabs .input__number-input,
+.dark-theme .sidebar-tab .input__number-input,
+.dark-theme .chat-message .input__number-input,
+.dark-theme .sidebar-tab button .input__number-input,
+.dark-theme #chat-form textarea .input__number-input,
+.dark-theme .prosemirror menu .pm-dropdown > * .input__number-input,
+.dark-theme .prosemirror menu .pm-dropdown .input__number-input,
+.dark-theme .character-sheet .body .input__circle-input,
+.dark-theme .item-sheet .body .input__circle-input,
+.dark-theme .content-link .input__circle-input,
+.dark-theme .fa-edit .input__circle-input,
+.dark-theme .window-content .input__circle-input,
+.dark-theme .tabs .input__circle-input,
+.dark-theme .sidebar-tab .input__circle-input,
+.dark-theme .chat-message .input__circle-input,
+.dark-theme .sidebar-tab button .input__circle-input,
+.dark-theme #chat-form textarea .input__circle-input,
+.dark-theme .prosemirror menu .pm-dropdown > * .input__circle-input,
+.dark-theme .prosemirror menu .pm-dropdown .input__circle-input,
+.dark-theme .character-sheet .body textarea,
+.dark-theme .item-sheet .body textarea,
+.dark-theme .content-link textarea,
+.dark-theme .fa-edit textarea,
+.dark-theme .window-content textarea,
+.dark-theme .tabs textarea,
+.dark-theme .sidebar-tab textarea,
+.dark-theme .chat-message textarea,
+.dark-theme .sidebar-tab button textarea,
+.dark-theme #chat-form textarea textarea,
+.dark-theme .prosemirror menu .pm-dropdown > * textarea,
+.dark-theme .prosemirror menu .pm-dropdown textarea {
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body button,
+.dark-theme .item-sheet .body button,
+.dark-theme .content-link button,
+.dark-theme .fa-edit button,
+.dark-theme .window-content button,
+.dark-theme .tabs button,
+.dark-theme .sidebar-tab button,
+.dark-theme .chat-message button,
+.dark-theme .sidebar-tab button button,
+.dark-theme #chat-form textarea button,
+.dark-theme .prosemirror menu .pm-dropdown > * button,
+.dark-theme .prosemirror menu .pm-dropdown button,
+.dark-theme .character-sheet .body p,
+.dark-theme .item-sheet .body p,
+.dark-theme .content-link p,
+.dark-theme .fa-edit p,
+.dark-theme .window-content p,
+.dark-theme .tabs p,
+.dark-theme .sidebar-tab p,
+.dark-theme .chat-message p,
+.dark-theme .sidebar-tab button p,
+.dark-theme #chat-form textarea p,
+.dark-theme .prosemirror menu .pm-dropdown > * p,
+.dark-theme .prosemirror menu .pm-dropdown p,
+.dark-theme .character-sheet .body .prototype,
+.dark-theme .item-sheet .body .prototype,
+.dark-theme .content-link .prototype,
+.dark-theme .fa-edit .prototype,
+.dark-theme .window-content .prototype,
+.dark-theme .tabs .prototype,
+.dark-theme .sidebar-tab .prototype,
+.dark-theme .chat-message .prototype,
+.dark-theme .sidebar-tab button .prototype,
+.dark-theme #chat-form textarea .prototype,
+.dark-theme .prosemirror menu .pm-dropdown > * .prototype,
+.dark-theme .prosemirror menu .pm-dropdown .prototype,
+.dark-theme .character-sheet .body .units,
+.dark-theme .item-sheet .body .units,
+.dark-theme .content-link .units,
+.dark-theme .fa-edit .units,
+.dark-theme .window-content .units,
+.dark-theme .tabs .units,
+.dark-theme .sidebar-tab .units,
+.dark-theme .chat-message .units,
+.dark-theme .sidebar-tab button .units,
+.dark-theme #chat-form textarea .units,
+.dark-theme .prosemirror menu .pm-dropdown > * .units,
+.dark-theme .prosemirror menu .pm-dropdown .units,
+.dark-theme .character-sheet .body form .form-group.slim .form-fields > label,
+.dark-theme .item-sheet .body form .form-group.slim .form-fields > label,
+.dark-theme .content-link form .form-group.slim .form-fields > label,
+.dark-theme .fa-edit form .form-group.slim .form-fields > label,
+.dark-theme .window-content form .form-group.slim .form-fields > label,
+.dark-theme .tabs form .form-group.slim .form-fields > label,
+.dark-theme .sidebar-tab form .form-group.slim .form-fields > label,
+.dark-theme .chat-message form .form-group.slim .form-fields > label,
+.dark-theme .sidebar-tab button form .form-group.slim .form-fields > label,
+.dark-theme #chat-form textarea form .form-group.slim .form-fields > label,
+.dark-theme .prosemirror menu .pm-dropdown > * form .form-group.slim .form-fields > label,
+.dark-theme .prosemirror menu .pm-dropdown form .form-group.slim .form-fields > label,
+.dark-theme .character-sheet .body input[type="text"],
+.dark-theme .item-sheet .body input[type="text"],
+.dark-theme .content-link input[type="text"],
+.dark-theme .fa-edit input[type="text"],
+.dark-theme .window-content input[type="text"],
+.dark-theme .tabs input[type="text"],
+.dark-theme .sidebar-tab input[type="text"],
+.dark-theme .chat-message input[type="text"],
+.dark-theme .sidebar-tab button input[type="text"],
+.dark-theme #chat-form textarea input[type="text"],
+.dark-theme .prosemirror menu .pm-dropdown > * input[type="text"],
+.dark-theme .prosemirror menu .pm-dropdown input[type="text"],
+.dark-theme .character-sheet .body input[type="number"],
+.dark-theme .item-sheet .body input[type="number"],
+.dark-theme .content-link input[type="number"],
+.dark-theme .fa-edit input[type="number"],
+.dark-theme .window-content input[type="number"],
+.dark-theme .tabs input[type="number"],
+.dark-theme .sidebar-tab input[type="number"],
+.dark-theme .chat-message input[type="number"],
+.dark-theme .sidebar-tab button input[type="number"],
+.dark-theme #chat-form textarea input[type="number"],
+.dark-theme .prosemirror menu .pm-dropdown > * input[type="number"],
+.dark-theme .prosemirror menu .pm-dropdown input[type="number"],
+.dark-theme .character-sheet .body input[type="date"],
+.dark-theme .item-sheet .body input[type="date"],
+.dark-theme .content-link input[type="date"],
+.dark-theme .fa-edit input[type="date"],
+.dark-theme .window-content input[type="date"],
+.dark-theme .tabs input[type="date"],
+.dark-theme .sidebar-tab input[type="date"],
+.dark-theme .chat-message input[type="date"],
+.dark-theme .sidebar-tab button input[type="date"],
+.dark-theme #chat-form textarea input[type="date"],
+.dark-theme .prosemirror menu .pm-dropdown > * input[type="date"],
+.dark-theme .prosemirror menu .pm-dropdown input[type="date"],
+.dark-theme .character-sheet .body input[type="time"],
+.dark-theme .item-sheet .body input[type="time"],
+.dark-theme .content-link input[type="time"],
+.dark-theme .fa-edit input[type="time"],
+.dark-theme .window-content input[type="time"],
+.dark-theme .tabs input[type="time"],
+.dark-theme .sidebar-tab input[type="time"],
+.dark-theme .chat-message input[type="time"],
+.dark-theme .sidebar-tab button input[type="time"],
+.dark-theme #chat-form textarea input[type="time"],
+.dark-theme .prosemirror menu .pm-dropdown > * input[type="time"],
+.dark-theme .prosemirror menu .pm-dropdown input[type="time"],
+.dark-theme .character-sheet .body .message-header,
+.dark-theme .item-sheet .body .message-header,
+.dark-theme .content-link .message-header,
+.dark-theme .fa-edit .message-header,
+.dark-theme .window-content .message-header,
+.dark-theme .tabs .message-header,
+.dark-theme .sidebar-tab .message-header,
+.dark-theme .chat-message .message-header,
+.dark-theme .sidebar-tab button .message-header,
+.dark-theme #chat-form textarea .message-header,
+.dark-theme .prosemirror menu .pm-dropdown > * .message-header,
+.dark-theme .prosemirror menu .pm-dropdown .message-header,
+.dark-theme .character-sheet .body .title-group,
+.dark-theme .item-sheet .body .title-group,
+.dark-theme .content-link .title-group,
+.dark-theme .fa-edit .title-group,
+.dark-theme .window-content .title-group,
+.dark-theme .tabs .title-group,
+.dark-theme .sidebar-tab .title-group,
+.dark-theme .chat-message .title-group,
+.dark-theme .sidebar-tab button .title-group,
+.dark-theme #chat-form textarea .title-group,
+.dark-theme .prosemirror menu .pm-dropdown > * .title-group,
+.dark-theme .prosemirror menu .pm-dropdown .title-group {
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body select,
+.dark-theme .item-sheet .body select,
+.dark-theme .content-link select,
+.dark-theme .fa-edit select,
+.dark-theme .window-content select,
+.dark-theme .tabs select,
+.dark-theme .sidebar-tab select,
+.dark-theme .chat-message select,
+.dark-theme .sidebar-tab button select,
+.dark-theme #chat-form textarea select,
+.dark-theme .prosemirror menu .pm-dropdown > * select,
+.dark-theme .prosemirror menu .pm-dropdown select {
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body select option,
+.dark-theme .item-sheet .body select option,
+.dark-theme .content-link select option,
+.dark-theme .fa-edit select option,
+.dark-theme .window-content select option,
+.dark-theme .tabs select option,
+.dark-theme .sidebar-tab select option,
+.dark-theme .chat-message select option,
+.dark-theme .sidebar-tab button select option,
+.dark-theme #chat-form textarea select option,
+.dark-theme .prosemirror menu .pm-dropdown > * select option,
+.dark-theme .prosemirror menu .pm-dropdown select option {
+  background-color: var(--bg-color);
+}
+.dark-theme .character-sheet .body .karma__ritual--icon,
+.dark-theme .item-sheet .body .karma__ritual--icon,
+.dark-theme .content-link .karma__ritual--icon,
+.dark-theme .fa-edit .karma__ritual--icon,
+.dark-theme .window-content .karma__ritual--icon,
+.dark-theme .tabs .karma__ritual--icon,
+.dark-theme .sidebar-tab .karma__ritual--icon,
+.dark-theme .chat-message .karma__ritual--icon,
+.dark-theme .sidebar-tab button .karma__ritual--icon,
+.dark-theme #chat-form textarea .karma__ritual--icon,
+.dark-theme .prosemirror menu .pm-dropdown > * .karma__ritual--icon,
+.dark-theme .prosemirror menu .pm-dropdown .karma__ritual--icon {
+  color: var(--text-color);
+}
+.dark-theme .character-sheet .body .header-actions > *,
+.dark-theme .item-sheet .body .header-actions > *,
+.dark-theme .content-link .header-actions > *,
+.dark-theme .fa-edit .header-actions > *,
+.dark-theme .window-content .header-actions > *,
+.dark-theme .tabs .header-actions > *,
+.dark-theme .sidebar-tab .header-actions > *,
+.dark-theme .chat-message .header-actions > *,
+.dark-theme .sidebar-tab button .header-actions > *,
+.dark-theme #chat-form textarea .header-actions > *,
+.dark-theme .prosemirror menu .pm-dropdown > * .header-actions > *,
+.dark-theme .prosemirror menu .pm-dropdown .header-actions > *,
+.dark-theme .character-sheet .body .header-search input[type="search"],
+.dark-theme .item-sheet .body .header-search input[type="search"],
+.dark-theme .content-link .header-search input[type="search"],
+.dark-theme .fa-edit .header-search input[type="search"],
+.dark-theme .window-content .header-search input[type="search"],
+.dark-theme .tabs .header-search input[type="search"],
+.dark-theme .sidebar-tab .header-search input[type="search"],
+.dark-theme .chat-message .header-search input[type="search"],
+.dark-theme .sidebar-tab button .header-search input[type="search"],
+.dark-theme #chat-form textarea .header-search input[type="search"],
+.dark-theme .prosemirror menu .pm-dropdown > * .header-search input[type="search"],
+.dark-theme .prosemirror menu .pm-dropdown .header-search input[type="search"],
+.dark-theme .character-sheet .body #chat-controls .roll-type-select > *,
+.dark-theme .item-sheet .body #chat-controls .roll-type-select > *,
+.dark-theme .content-link #chat-controls .roll-type-select > *,
+.dark-theme .fa-edit #chat-controls .roll-type-select > *,
+.dark-theme .window-content #chat-controls .roll-type-select > *,
+.dark-theme .tabs #chat-controls .roll-type-select > *,
+.dark-theme .sidebar-tab #chat-controls .roll-type-select > *,
+.dark-theme .chat-message #chat-controls .roll-type-select > *,
+.dark-theme .sidebar-tab button #chat-controls .roll-type-select > *,
+.dark-theme #chat-form textarea #chat-controls .roll-type-select > *,
+.dark-theme .prosemirror menu .pm-dropdown > * #chat-controls .roll-type-select > *,
+.dark-theme .prosemirror menu .pm-dropdown #chat-controls .roll-type-select > *,
+.dark-theme .character-sheet .body #chat-controls .roll-type-select,
+.dark-theme .item-sheet .body #chat-controls .roll-type-select,
+.dark-theme .content-link #chat-controls .roll-type-select,
+.dark-theme .fa-edit #chat-controls .roll-type-select,
+.dark-theme .window-content #chat-controls .roll-type-select,
+.dark-theme .tabs #chat-controls .roll-type-select,
+.dark-theme .sidebar-tab #chat-controls .roll-type-select,
+.dark-theme .chat-message #chat-controls .roll-type-select,
+.dark-theme .sidebar-tab button #chat-controls .roll-type-select,
+.dark-theme #chat-form textarea #chat-controls .roll-type-select,
+.dark-theme .prosemirror menu .pm-dropdown > * #chat-controls .roll-type-select,
+.dark-theme .prosemirror menu .pm-dropdown #chat-controls .roll-type-select {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 .item-sheet .window-content {
   padding: 0px;
@@ -715,8 +1027,7 @@ input.input__number-input {
 .character-sheet .header-section .header-section__name {
   position: absolute;
   color: red;
-  width: 40%;
-  left: 5%;
+  width: 45%;
 }
 .character-sheet .header-section .header-section__name input {
   position: absolute;
@@ -724,8 +1035,22 @@ input.input__number-input {
   background: transparent;
   border: none;
   color: red;
-  width: 100%;
+  width: 49%;
   text-align: center;
+}
+.character-sheet .header-section .header-section__name .namegiver__item {
+  position: absolute;
+  z-index: 6;
+  background: transparent;
+  border: none;
+  color: red;
+  width: 49%;
+  text-align: right;
+  margin-left: 5px;
+  margin-top: -5px;
+}
+.character-sheet .header-section .header-section__name .namegiver__item .align__Namegiver-options {
+  margin-top: -19px;
 }
 .character-sheet .header-section .header-section__characteristics {
   position: absolute;
@@ -734,6 +1059,7 @@ input.input__number-input {
   width: 40%;
   text-align: center;
   z-index: 6;
+  margin-top: 3px;
 }
 .character-sheet .image-characteristics-section {
   margin-top: 40px;
