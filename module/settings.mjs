@@ -1,7 +1,7 @@
 /**
  * Register all the system's settings.
  */
-export async function registerSystemSettings() {
+export default function registerSystemSettings() {
     // Step Table used for step to dice conversion
     game.settings.register( "ed4e", "stepTable", {
         name: "ED.Settings.StepTable.stepTable",
