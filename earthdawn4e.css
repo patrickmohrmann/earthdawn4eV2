@@ -497,6 +497,78 @@ input.input__number-input {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
+  border-top: 1px solid black;
+}
+label,
+.form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.lpTrackingHeader"] p {
+  display: none;
+}
+.form-group[data-setting-id="ed4e.darkMode"] {
+  border-top: 1px solid black;
+}
+label,
+.form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.darkModeHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.darkModeHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.darkModeHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.darkModeHeader"] p {
+  display: none;
+}
+.form-group[data-setting-id="ed4e.stepTable"] {
+  border-top: 1px solid black;
+}
+label,
+.form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.stepTableHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.stepTableHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.stepTableHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.stepTableHeader"] p {
+  display: none;
+}
+.form-group[data-setting-id="ed4e.encumbrance"] {
+  border-top: 1px solid black;
+}
+label,
+.form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.encumberedHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.encumberedHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.encumberedHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.encumberedHeader"] p {
+  display: none;
+}
 .item-sheet .window-content {
   padding: 0px;
 }
