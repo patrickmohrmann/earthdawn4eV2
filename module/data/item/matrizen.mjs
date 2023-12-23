@@ -1,12 +1,12 @@
+import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-import MagicTemplate from "./templates/sorcery-item.mjs";
 
 /**
- * Data model template with information on Spell items.
+ * Data model template with information on matrix items.
  */
-export default class SpellData extends MagicTemplate.mixin(
+export default class MatrixData extends SystemDataModel.mixin(
     ItemDescriptionTemplate
-)  {
+) {
 
     /** @inheritDoc */
     static defineSchema() {

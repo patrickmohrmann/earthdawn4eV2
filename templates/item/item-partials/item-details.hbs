@@ -6,6 +6,10 @@
 {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-attack.hbs"}}
 {{/if}}
 
+{{#if (eq item.type "bindingSecret") }}
+{{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-bindingSecret.hbs"}}
+{{/if}}
+
 {{#if (eq item.type "cursemark") }}
 {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-cursemark.hbs"}}
 {{/if}}
@@ -30,12 +34,24 @@
 {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-knack.hbs"}}
 {{/if}}
 
+{{#if (eq item.type "knackKarma") }}
+{{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-knackKarma.hbs"}}
+{{/if}}
+
+{{#if (eq item.type "knackManeuver") }}
+{{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-knackManeuver.hbs"}}
+{{/if}}
+
 {{#if (eq item.type "maneuver") }}
 {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-maneuver.hbs"}}
 {{/if}}
 
 {{#if (eq item.type "mask") }}
 {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-mask.hbs"}}
+{{/if}}
+
+{{#if (eq item.type "matrix") }}
+{{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-matrix.hbs"}}
 {{/if}}
 
 {{#if (eq item.type "namegiver") }}
@@ -72,6 +88,10 @@
 
 {{#if (eq item.type "spell") }}
 {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-spell.hbs"}}
+{{/if}}
+
+{{#if (eq item.type "spellKnack") }}
+{{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-spellKnack.hbs"}}
 {{/if}}
 
 {{#if (eq item.type "talent") }}

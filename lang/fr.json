@@ -15,6 +15,7 @@
         "Item": {
             "armor":                                            "Armor",
             "attack":                                           "Attack",
+            "bindingSecret":                                    "Binding Secret",
             "cursemark":                                        "Curse / Horror mark",
             "devotion":                                         "Devotion",
             "discipline":                                       "Discipline",
@@ -23,6 +24,7 @@
             "knack":                                            "Knack",
             "maneuver":                                         "Maneuver",
             "mask":                                             "Mask",
+            "matrix":                                           "Matrix",
             "namegiver":                                        "Namegiver",
             "path":                                             "Path",
             "poisonDisease":                                    "Poison / Disease",
@@ -32,9 +34,11 @@
             "skill":                                            "Skill",
             "specialAbility":                                   "Special Ability",
             "spell":                                            "Spell",
+            "spellKnack":                                       "Spell Knack",
             "talent":                                           "Talent",
             "thread":                                           "Permanent Thread",
-            "weapon":                                           "Weapon"
+            "weapon":                                           "Weapon",
+            "shipWeapon":                                       "Ship Weapon"
         }
     },
     "ED": {}

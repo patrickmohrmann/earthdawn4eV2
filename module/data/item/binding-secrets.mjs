@@ -4,7 +4,7 @@ import MagicTemplate from "./templates/sorcery-item.mjs";
 /**
  * Data model template with information on Spell items.
  */
-export default class SpellData extends MagicTemplate.mixin(
+export default class BindingSecretData extends MagicTemplate.mixin(
     ItemDescriptionTemplate
 )  {
 
