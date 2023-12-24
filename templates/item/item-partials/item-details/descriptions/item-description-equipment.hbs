@@ -12,8 +12,12 @@
     {{!-- Weight --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.General.weight"}}:</label>
-        <input class="input__number-input" name="system.weight" type="text" value="{{item.system.weight}}"
+        <input class="input__number-input" name="system.weight.value" type="text" value="{{item.system.weight.value}}"
             data-dtype="Number">
+        <button class="weight-calculation--button">WEIGHT</button>
+        <input class="input__number-input" name="system.weight.weightMultiplier" type="text" value="{{item.system.weight.weightMultiplier}}"
+            data-dtype="Number">
+        <input class="item-data__checkbox--line" type="checkbox" name="system.weight.weightCalculated" {{ checked item.system.weight.weightCalculated }}>
     </div>
         {{!-- Amount --}}
     <div class="item-data__input--line">

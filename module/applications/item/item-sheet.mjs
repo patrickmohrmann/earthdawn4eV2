@@ -56,6 +56,10 @@ export default class ItemSheetEd extends ItemSheet {
 
   /** @inheritDoc */
   activateListeners( html ) {
+
+    // Triggering weight calculation for physical items
+    html.find( ".weight-calculation--button" ).click( this._onWeightCalculation.bind( this ) );
+
     super.activateListeners( html );
 
     // All listeners below are only needed if the sheet is editable
@@ -109,4 +113,77 @@ export default class ItemSheetEd extends ItemSheet {
     const effect = this.item.effects.get( li.dataset.itemId );
     return effect.sheet?.render( true );
   }
+
+  /* ----------------------------------------------------------------------- */
+  /*                Auto calculation for equipments weight                   */
+  /* ----------------------------------------------------------------------- */
+
+  /**
+   * Handle autorecalculation of physical items for actors, based on the namegiver modifier for weight.
+   */
+  async _onWeightCalculation( ) {
+    const item = this.object;
+    const itemWeight = item.system.weight.value;
+    const itemName = item.name;
+    let itemCalculationCheck = item.system.weight.weightCalculated;
+    if( itemWeight > 0 ) {
+      if ( item.isOwned ) {
+        if ( !itemCalculationCheck ) {
+          const namegiver = item.parent.items.filter( item => item.type === 'namegiver' );
+          item.system.weight.value = namegiver[0].system.weightMultiplier * itemWeight;
+          item.name = namegiver[0].name + " - " + itemName;
+          item.system.weight.weightCalculated = true;
+          item.system.weight.weightMultiplier = namegiver[0].system.weightMultiplier
+          this.render( true );
+          } else {
+            ui.notifications.warn( game.i18n.localize( "this items weight has already been changed!" ) );
+            return
+          }
+        } else {
+          // input prompt for weight calculator and name addition
+          // take weightMultiplyer and multiply weight
+          // overwrite current weight
+          // overwrite name with Name-Input
+          await new Promise( ( resolve ) => {
+            new Dialog( {
+              title: game.i18n.localize( "RECALCULATEWEIGHT" ),
+              content: `
+              <div style="float: left">
+                  <label>${game.i18n.localize( 'WEIGHTMULTIPLIER' )}: </label>
+                  <input id="weight-modifier" value=0 autofocus/>
+              </div>
+              <div>
+              <label>${game.i18n.localize( 'NAMEMODIFIER' )}: </label>
+              <input id="name-modifier" value=0 autofocus/>
+              </div>`,
+              
+              buttons: {
+                ok: {
+                  label: game.i18n.localize( 'OK' ),
+                  callback: ( html ) => {
+                    resolve( {
+                      newWeightMultiplier: html.find( "weight-modifier" ).val(),
+                      newNameModifier: html.find( "name-modifier" ).val(),
+                    } );
+                  },
+                },
+              },
+              default: 'ok',
+            } ).render( true );
+          } );
+          // @chris hier ist das problem
+          // item.name = newNameModifier + " - " + itemName;
+          item.system.weight.weightCalculated = true;
+          // item.system.weight.weightMultiplier = newWeightMultiplier
+          this.render( true );
+          }
+    } else {
+      ui.notifications.warn( game.i18n.localize( "this item has no weight value" ) )
+    }
+    
+      
+    
+    return
+  }
 }
+
