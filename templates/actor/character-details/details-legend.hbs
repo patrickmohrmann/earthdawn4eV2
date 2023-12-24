@@ -41,18 +41,20 @@
                         steigerung
                     </th>
                 </tr>
+                {{#each actor.system.attributes }} {{@key}}:
                 <tr>
                     <td class="attribute__name--content">
                         <a>
-                            <label>{{localize "ED.Attributes.dexterity"}}</label>
+                            <label>{{@key}}</label>
                         </a>
                     </td>
                     <td>
-                        <input class="input__number-input" type="text" name="system.attributes.dex.timesIncreased"
-                            value="{{actor.system.attributes.dex.timesIncreased}}">
+                        <input class="input__number-input" type="text" name="system.attributes.{{@key}}.timesIncreased"
+                            value="{{timesIncreased}}">
                     </td>
                 </tr>
-                <tr>
+                {{/each}}
+                {{!-- <tr>
                     <td class="attribute__name--content">
                         <a>
                             <label>{{localize "ED.Attributes.strength"}}</label>
@@ -106,7 +108,7 @@
                         <input class="input__number-input" type="text" name="system.attributes.cha.timesIncreased"
                             value="{{actor.system.attributes.cha.timesIncreased}}">
                     </td>
-                </tr>
+                </tr> --}}
             </table>
         </div>
     </div>
