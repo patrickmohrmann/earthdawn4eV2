@@ -35,11 +35,45 @@ export function getDefenseValue( attributeValue ) {
 
 /**
  * Computes the sum of the values in array.
- * @param {Array} arr An array of numbers.
+ * @param {Array<number>} arr An array of numbers.
  * @returns {number} The sum of the values in the array.
  */
 export function sum( arr ) {
   return arr.reduce( ( partialSum, a ) => partialSum + a, 0 );
+}
+
+/**
+ * Computes the sum of a specific property's  values in an array of objects. The sum for only one property can be
+ * calculated, and its name must be consistent across all objects in the array.
+ * @param {Array<object>} arr   An array of numbers.
+ * @param {string|symbol} prop  The name of the property that should be summed. Its values must be numerical.
+ * @returns {number|undefined}  The sum of the property values in the array, or undefined if the values are not numeric.
+ */
+export function sumProperty( arr, prop ) {
+  return arr.reduce( ( partialSum, obj ) => partialSum + resolvePath( obj, prop ), 0 );
+}
+
+/* -------------------------------------------- */
+/*  Other                                       */
+/* -------------------------------------------- */
+
+/**
+ * Retrieves the value of a given string property of an object which works for nested property names.
+ * Taken from {@link https://stackoverflow.com/a/43849204 this answer on StackOverflow}.
+ * @example
+ * const myVar = {
+ *  a: { b: [ { c:1 } ] }
+ * }
+ * resolvePath(myVar,'a.b[0].c') => 1
+ * resolvePath(myVar,'a["b"][\'0\'].c') => 1
+ * @param {object} object     The object to access.
+ * @param {string} path       The path of the property to be accessed. If nested, must be separated by `.` a period. If
+ *                            an array, must use bracket notation.
+ * @param {any} defaultValue  The value to return if the given key does not exist in the `object`.
+ * @returns {any}             The value of the given key in the object.
+ */
+function resolvePath( object, path, defaultValue ){
+  return path.split( '.' ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
 }
 
 /* -------------------------------------------- */
