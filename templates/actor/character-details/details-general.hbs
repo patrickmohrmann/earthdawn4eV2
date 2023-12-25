@@ -12,7 +12,45 @@
                 <th class="text__alignment--left">{{localize "ED.General.value"}}</th>
                 <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
             </tr>
+            {{#each actor.system.attributes }}
             <tr>
+                <td class="attribute__name--content">
+                    <a title="{{localize " ED.Attributes.rollAttribute"}}">
+                        <label class="roll__step--hover">{{@key}}</label>
+                        <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
+                    </a>
+                </td>
+                <td class="attribute__value--content">
+                    <div>
+                        <span class="attribute__value">
+                            <input class="input__number-input" type="number" name="system.attributes.{{@key}}.value"
+                                value="{{value}}">
+                        </span>
+                        {{#if (eq timesIncreased 1)}}
+                        <i class="enhancemente-1 fa fa-star"></i>
+                        {{/if}}
+                        {{#if (eq timesIncreased 2)}}
+                        <i class="enhancemente-1 fa fa-star"></i>
+                        <i class="enhancemente-2 fa fa-star"></i>
+                        {{/if}}
+                        {{#if (eq timesIncreased 3)}}
+                        <i class="enhancemente-1 fa fa-star"></i>
+                        <i class="enhancemente-2 fa fa-star"></i>
+                        <i class="enhancemente-3 fa fa-star"></i>
+                        {{/if}}
+                    </div>
+                </td>
+                <td class="attribute__step--content">
+                    <div>
+                        <span class="attribute__step">
+                            <input class="input__number-input" type="number" name="system.attributes.dex.step"
+                                value="{{this.baseStep}}" readonly>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            {{/each}} 
+            {{!-- <tr>
                 <td class="attribute__name--content">
                     <a title="{{localize "ED.Attributes.rollAttribute"}}">
                         <label class="roll__step--hover">{{localize "ED.Attributes.dexterity"}}</label>
@@ -227,7 +265,7 @@
                         </span>
                     </div>
                 </td>
-            </tr>
+            </tr> --}}
             <tr>
                 <td class="attribute__name--content">
                     <a title="{{localize "ED.General.initiative"}}">
