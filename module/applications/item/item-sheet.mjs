@@ -137,53 +137,15 @@ export default class ItemSheetEd extends ItemSheet {
           this.render( true );
           } else {
             ui.notifications.warn( game.i18n.localize( "this items weight has already been changed!" ) );
-            return
+            return;
           }
         } else {
-          // input prompt for weight calculator and name addition
-          // take weightMultiplyer and multiply weight
-          // overwrite current weight
-          // overwrite name with Name-Input
-          await new Promise( ( resolve ) => {
-            new Dialog( {
-              title: game.i18n.localize( "RECALCULATEWEIGHT" ),
-              content: `
-              <div style="float: left">
-                  <label>${game.i18n.localize( 'WEIGHTMULTIPLIER' )}: </label>
-                  <input id="weight-modifier" value=0 autofocus/>
-              </div>
-              <div>
-              <label>${game.i18n.localize( 'NAMEMODIFIER' )}: </label>
-              <input id="name-modifier" value=0 autofocus/>
-              </div>`,
-              
-              buttons: {
-                ok: {
-                  label: game.i18n.localize( 'OK' ),
-                  callback: ( html ) => {
-                    resolve( {
-                      newWeightMultiplier: html.find( "weight-modifier" ).val(),
-                      newNameModifier: html.find( "name-modifier" ).val(),
-                    } );
-                  },
-                },
-              },
-              default: 'ok',
-            } ).render( true );
-          } );
-          // @chris hier ist das problem
-          // item.name = newNameModifier + " - " + itemName;
-          item.system.weight.weightCalculated = true;
-          // item.system.weight.weightMultiplier = newWeightMultiplier
-          this.render( true );
-          }
+          return;
+        }
     } else {
       ui.notifications.warn( game.i18n.localize( "this item has no weight value" ) )
     }
-    
-      
-    
-    return
+    return;
   }
 }
 
