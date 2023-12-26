@@ -43,9 +43,19 @@
         <label>{{localize "ED.General.equipped"}}:</label>
        <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
     </div>
-        {{!-- automatic Weight Calculation --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.General.autoCalculateWeight"}}:</label>
-       <input name="system.autoCalculateWeight" type="checkbox" {{checked item.system.autoCalculateWeight}}>
+    {{!-- automatic Weight Calculation --}}
+    {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
+    --}}
+    <div>
+        {{!-- the weightMultiplyer and the weight Calculated check are only editable by GMs --}}
+        <label>{{localize "Weight-calculation"}}:</label>
+        <input class="input__number-input" name="system.weight.weightMultiplier" type="text"
+            value="{{item.system.weight.weightMultiplier}}" {{disabled isPlayer}} data-dtype="Number"
+            title="{{localize " Only-Editable-as-GM"}}">
+        <input class="item-data__checkbox--line" type="checkbox" name="system.weight.weightCalculated" {{ checked
+            item.system.weight.weightCalculated }} {{disabled isPlayer}} title="{{localize " Only-Editable-as-GM"}}">
+            {{#if ( uneq item.parent null) }}
+        <button class="weight-calculation--button button">{{localize "Change-Weight"}}</button>
+        {{/if}}
     </div>
 </div>

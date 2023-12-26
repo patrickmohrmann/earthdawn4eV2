@@ -40,11 +40,16 @@ export default class ItemSheetEd extends ItemSheet {
     return expandObject( enrichment );
   }
 
+
+
   async getData() {
     const systemData = super.getData();
+
+
     systemData.enrichment = await this._enableHTMLEnrichment();
     // console.log( '[EARTHDAWN] Item data: ', systemData );
 
+    systemData.isPlayer = !game.user.isGM;
     systemData.config = ED4E;
 
     return systemData;
