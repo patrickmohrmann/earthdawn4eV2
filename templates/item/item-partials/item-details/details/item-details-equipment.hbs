@@ -65,6 +65,7 @@
         <label>{{localize "ED.General.equipped"}}:</label>
         <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
     </div>
+    {{#if ( uneq item.parent null) }}
     {{!-- automatic Weight Calculation --}}
     {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
     --}}
@@ -76,8 +77,7 @@
             title="{{localize " Only-Editable-as-GM"}}">
         <input class="item-data__checkbox--line" type="checkbox" name="system.weight.weightCalculated" {{ checked
             item.system.weight.weightCalculated }} {{disabled isPlayer}} title="{{localize " Only-Editable-as-GM"}}">
-            {{#if ( uneq item.parent null) }}
         <button class="weight-calculation--button button">{{localize "Change-Weight"}}</button>
-        {{/if}}
     </div>
+    {{/if}}
 </div>
