@@ -1,3 +1,5 @@
+import ED4E from "../../config.mjs";
+
 /**
  * Extend the basic ActorSheet with modifications
  * @augments {ActorSheet}
@@ -25,6 +27,29 @@ export default class ActorSheetEd extends ActorSheet {
   /** @override */
   get template() {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
+  }
+
+  // HTML enrichment
+  async _enableHTMLEnrichment() {
+    let enrichment = {};
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.actor.system.description.value, {
+      async: true,
+      secrets: this.actor.isOwner,
+    } );
+    return expandObject( enrichment );
+  }
+
+  /* -------------------------------------------- */
+  /*  Get Data            */
+  /* -------------------------------------------- */
+  async getData() {
+    const systemData = super.getData();
+    systemData.enrichment = await this._enableHTMLEnrichment();
+    // console.log( '[EARTHDAWN] Item data: ', systemData );
+
+    systemData.config = ED4E;
+
+    return systemData;
   }
 
   /* -------------------------------------------- */
