@@ -1,0 +1,59 @@
+<form id="roll-prompt-form" autocomplete="off">
+    <div class="roll-prompt-body">
+        <div>
+            <!-- navigator left -->
+            <div class="navigator-section">
+                <nav class="prompt-tabs tabs" data-group="primary">
+                    <ul class="list">
+                        <li><a class="roll-prompt-tab" data-tab="base-input">{{localize "base input"}}</a></li>
+                        <li><a class="roll-prompt-tab" data-tab="other-tab">{{localize "some other tab"}}</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="tab-body">
+                <!-- tab1: base input -->
+                <div class="tab base-input" data-group="primary" data-tab="base-input">
+                    <div class="roll-modifier form-group">
+                        <label class="modifier-description">{{localize "earthdawn.s.step"}}: </label>
+                        <input class="" id="step-mod-input" value={{step.base}} name="step.base" data-type="number" autofocus/>
+                    </div>
+                    <div class="roll-modifier form-group">
+                        <label class="modifier-description">{{localize "earthdawn.m.modifierStep"}}: </label>
+                        <input class="" id="step-mod-input" value={{step.modifiers.manual}} name="step.modifiers.manual" data-type="number" autofocus/>
+                    </div>
+                    <div class="roll-modifier form-group">
+                        <label class="modifier-description">{{localize "earthdawn.d.difficulty"}}: </label>
+                        <input class="" id="difficulty-input" value={{target.total}} name="target.difficulty" data-type="number" />
+                    </div>
+                    <div class="roll-modifier form-group">
+                        <label class="modifier-description">{{localize "earthdawn.s.strain"}}:</label>
+                        <input class="" id="strain-input" value={{strain}} name="strain" data-type="number" />
+                    </div>
+                    <div class="roll-modifier form-group">
+                        <label class="modifier-description">{{localize "earthdawn.k.karmaPoints"}}: </label>
+                        <input class="" id="karma-input" value={{karma.pointsUsed}} name="karma.points" data-type="number" />
+                        <label class="modifier-description">{{localize "earthdawn.s.step"}}: </label>
+                        <input class="" id="karma-step" value={{karma.step}} name="karma.step" data-type="number" />
+                    </div>
+                    <div class="roll-modifier form-group">
+                        <label class="modifier-description">{{localize "earthdawn.d.devotionPoints"}}: </label>
+                        <input class="" id="devotion-input" value={{devotion.pointsUsed}} name="devotion.points" data-type="number" />
+                        <label class="modifier-description">{{localize "earthdawn.s.step"}}: </label>
+                        <input class="" id="devotion-step" value={{devotion.step}} name="devotion.step" data-type="number" />
+                    </div>
+                </div>
+                <!-- tab2: other inputs -->
+                <div class="tab other-tab" data-group="primary" data-tab="other-tab">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons roll-prompt-buttons">
+        <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
+            {{ localize 'earthdawn.c.cancel' }}
+        </button>
+        <button class='ok default button-ok' type="submit" name="submit" data-button='ok'>
+            {{ localize 'earthdawn.o.ok' }}
+        </button>
+    </div>
+</form>

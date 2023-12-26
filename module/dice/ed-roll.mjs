@@ -16,7 +16,7 @@ import getDice from './step-tables.mjs';
 /**
  * @param { any } formula TODO
  * @param { object } data TODO
- * @param { EdRollOptions } options Collection of data, steps, karma, devotions, target and additional.
+ * @param { RollData } options Collection of data, steps, karma, devotions, target and additional.
  */
 export default class EdRoll extends Roll {
     constructor( formula = undefined, data = {}, options = {} ) {
