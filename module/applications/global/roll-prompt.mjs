@@ -1,19 +1,19 @@
 import EdRoll from "../../dice/ed-roll.mjs";
-import RollData from "../../data/other/roll-data.mjs";
+import EdRollOptions from "../../data/other/roll-options.mjs";
 
 export default class RollPrompt extends FormApplication {
 
     /** @inheritDoc */
-    constructor( data = {},  { resolve, rollOptions = {}, options = {} } = {} ) {
-        if ( !( data instanceof RollData) ) {
-            throw new TypeError("ED4E | Cannot construct RollPrompt from data. Must be of type `RollData`.");
+    constructor( data = {},  { resolve, rollData = {}, options = {} } = {} ) {
+        if ( !( data instanceof EdRollOptions) ) {
+            throw new TypeError("ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`.");
         }
         super( data, options );
 
         this.resolve = resolve;
-        this.rollData = data;
-        this.rollData.step.modifiers.manual ??= 0;
-        this.rollOptions = rollOptions;
+        this.edRollOptions = data;
+        this.edRollOptions.step.modifiers.manual ??= 0;
+        this.rollData = rollData;
     }
 
     /**
@@ -59,7 +59,7 @@ export default class RollPrompt extends FormApplication {
     }
 
     /** @type {EdRollOptions} */
-    rollData = {};
+    edRollOptions = {};
 
     /** @inheritDoc */
     activateListeners( html ) {
@@ -76,7 +76,7 @@ export default class RollPrompt extends FormApplication {
 
     /** @inheritDoc */
     getData( options = {} ) {
-        return this.rollData;
+        return this.edRollOptions;
     }
 
     /** @inheritDoc */
@@ -85,9 +85,9 @@ export default class RollPrompt extends FormApplication {
     }
 
     _updateRollData( data = {} ) {
-        console.debug( "ED4E | _updateRollData: ", data );
-        this.rollData.updateSource( data );
-        return this.rollData;
+        this.edRollOptions.updateSource( data );
+        console.debug( "ED4E | updated roll data: ", this.edRollOptions );
+        return this.edRollOptions;
     }
 
     async _createRoll( event ) {
@@ -97,7 +97,7 @@ export default class RollPrompt extends FormApplication {
 
         await this.submit( {preventRender: true} );
 
-        const roll = new EdRoll( undefined, this.rollOptions, this.rollData );
+        const roll = new EdRoll( undefined, this.rollData, this.edRollOptions );
         this.resolve?.( roll );
         this.close();
     }

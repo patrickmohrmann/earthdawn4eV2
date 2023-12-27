@@ -2,7 +2,7 @@ import {FormulaField, MappingField} from "../fields.mjs";
 import {sum} from "../../utils.mjs";
 import getDice from "../../dice/step-tables.mjs";
 
-export default class RollData extends foundry.abstract.DataModel {
+export default class EdRollOptions extends foundry.abstract.DataModel {
     /** @inheritDoc */
     static defineSchema() {
         return {

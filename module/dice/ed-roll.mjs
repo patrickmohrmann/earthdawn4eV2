@@ -1,7 +1,7 @@
 import getDice from './step-tables.mjs';
 
 /**
- * @typedef { object } EdRollOptions for creating an EdRoll instance.
+ * EdRollOptions for creating an EdRoll instance.
  * @property { object } step Ever information related to the step of the action, Mods, Boni, Mali etc.
  * @property { number } step.total The final step that is used to determine the dice that are rolled.
  * @property { object } karma Available Karma, Karma dice and used karma.
@@ -16,7 +16,7 @@ import getDice from './step-tables.mjs';
 /**
  * @param { any } formula TODO
  * @param { object } data TODO
- * @param { RollData } options Collection of data, steps, karma, devotions, target and additional.
+ * @param { EdRollOptions } options Collection of data, steps, karma, devotions, target and additional.
  */
 export default class EdRoll extends Roll {
     constructor( formula = undefined, data = {}, options = {} ) {

@@ -1,4 +1,4 @@
-import RollData from "../data/other/roll-data.mjs";
+import EdRollOptions from "../data/other/roll-options.mjs";
 import EdRoll from "../dice/ed-roll.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
@@ -17,14 +17,23 @@ export default class ActorEd extends Actor {
    */
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
-    const rollData = new RollData( {
+    const edRollOptions = new EdRollOptions( {
       step: { base: attributeStep }
     } );
-    const rollOptions = {
-      flavor: `${game.i18n.localize( ED4E.attributes[attributeId].label )} - Test<br>Step ${attributeStep}`,
+    const rollData = {
+      flavor: `${
+        game.i18n.localize( ED4E.attributes[attributeId].label )
+      } - Test<br>Step ${
+        edRollOptions.step.total
+      }`,
     };
-    const roll = await RollPrompt.waitPrompt( rollData, {rollOptions} );
-    await roll.toMessage(rollOptions);
+    // RollPrompt.waitPrompt( rollData, {rollOptions} ).then( this.processRoll );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, {rollOptions: rollData} );
+    await roll.toMessage(rollData);
+  }
+
+  processRoll( roll ) {
+    roll.toMessage()
   }
 
   _applyBaseEffects( baseCharacteristics ) {
