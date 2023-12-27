@@ -16,18 +16,20 @@ import getDice from './step-tables.mjs';
 /**
  * @param { any } formula TODO
  * @param { object } data TODO
- * @param { EdRollOptions } options Collection of data, steps, karma, devotions, target and additional.
+ * @param { EdRollOptions } edRollOptions Collection of data, steps, karma, devotions, target and additional.
  */
 export default class EdRoll extends Roll {
-    constructor( formula = undefined, data = {}, options = {} ) {
+    constructor( formula = undefined, data = {}, edRollOptions = {} ) {
         // us ternary operator to also check for empty strings, nullish coalescing operator (??) only checks null or undefined
-        const baseTerm = formula ? formula : getDice( options.step.total );
-        super( baseTerm, data, options );
+        const baseTerm = formula ? formula : getDice( edRollOptions.step.total );
+        super( baseTerm, data, edRollOptions );
         if ( !this.options.configured ) this.#configureModifiers();
+
+        this.edRollOptions = edRollOptions;
     }
 
     /**
-     * Is this roll a valid earthdawn test?
+     * Is this roll a valid Earthdawn test?
      * @type {boolean}
      */
     get validEdRoll() {
@@ -47,7 +49,7 @@ export default class EdRoll extends Roll {
     }
 
     /**
-     *  this function counts the number of dice rolled.
+     *  The number of dice in this roll.
      *  @type { number }
      */
     get numDice() {
@@ -61,13 +63,33 @@ export default class EdRoll extends Roll {
         );
     }
 
+    /**
+     * The number of successes in this roll. Only available if a target number is specified and the roll is evaluated.
+     * @type {number}
+     */
     get numSuccesses() {
         // TODO
         return 0;
     }
 
     /**
-     * Apply optional modifiers which customize the behavior of the d20term
+     * The text that is added to this roll's chat message when calling `toMessage`.
+     * @type {string|undefined}
+     */
+    get chatFlavor() {
+        return this.edRollOptions.chatFlavor;
+    }
+
+    /**
+     * Set the text of this roll's chat message.
+     * @type {string}
+     */
+    set chatFlavor( flavor ) {
+        this.edRollOptions.updateSource( {chatFlavor: flavor} );
+    }
+
+    /**
+     * Apply modifiers to make all dice explode.
      * @private
      */
     #configureModifiers() {
@@ -87,5 +109,9 @@ export default class EdRoll extends Roll {
     configureRollPrompt() {
     }
 
-    // async toMessage(){}
+    /** @inheritDoc */
+    async toMessage( messageData = {}, options = {} ){
+        messageData.flavor ??= this.edRollOptions.chatFlavor;
+        return super.toMessage( messageData, options );
+    }
 }

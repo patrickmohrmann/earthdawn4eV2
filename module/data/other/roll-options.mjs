@@ -45,8 +45,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             }, {
                 required: true,
                 nullable: false,
-                label: "step info",
-                hint: "all data about how the step is composed"
+                label: "localize: step info",
+                hint: "localize: all data about how the step is composed"
             } ),
             karma: this.#bonusResource,
             devotion: this.#bonusResource,
@@ -72,8 +72,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             }, {
                 required: true,
                 nullable: false,
-                label: "ExtraDice",
-                hint: "any extra dice terms for the roll with their labels",
+                label: "localize: ExtraDice",
+                hint: "localize: any extra dice terms for the roll with their labels",
             } ),
             target: new foundry.data.fields.SchemaField( {
                 base: new foundry.data.fields.NumberField( {
@@ -114,8 +114,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             }, {
                 required: true,
                 nullable: false,
-                label: "step info",
-                hint: "all data about how the step is composed"
+                label: "localize: step info",
+                hint: "localize: all data about how the step is composed"
             } ),
             strain: new foundry.data.fields.NumberField( {
                 required: true,
@@ -124,7 +124,15 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                 initial: 0,
                 integer: true,
                 label: "earthdawn.strain"
-            } )
+            } ),
+            chatFlavor: new foundry.data.fields.StringField( {
+                required: true,
+                nullable: false,
+                blank: true,
+                initial: "",
+                label: "localize: roll chat flavour",
+                hint: "localize: text that is added to the chatmessage when this call is put to chat"
+            } ),
         };
     }
 

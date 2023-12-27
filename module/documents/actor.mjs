@@ -18,18 +18,10 @@ export default class ActorEd extends Actor {
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const edRollOptions = new EdRollOptions( {
-      step: { base: attributeStep }
+      step: { base: attributeStep },
+      chatFlavor: `${game.i18n.localize( ED4E.attributes[attributeId].label )} Test`
     } );
-    const rollData = {
-      flavor: `${
-        game.i18n.localize( ED4E.attributes[attributeId].label )
-      } - Test<br>Step ${
-        edRollOptions.step.total
-      }`,
-    };
-    // RollPrompt.waitPrompt( rollData, {rollOptions} ).then( this.processRoll );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, {rollOptions: rollData} );
-    await roll.toMessage(rollData);
+    RollPrompt.waitPrompt( edRollOptions ).then( this.processRoll );
   }
 
   processRoll( roll ) {

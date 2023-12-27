@@ -107,6 +107,6 @@ export default class RollPrompt extends FormApplication {
 
         const roll = new EdRoll( undefined, this.rollData, this.edRollOptions );
         this.resolve?.( roll );
-        this.close();
+        return this.close();
     }
 }
