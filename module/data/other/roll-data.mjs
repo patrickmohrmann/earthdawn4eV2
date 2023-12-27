@@ -129,8 +129,9 @@ export default class RollData extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
     updateSource( changes={}, options={} ) {
-        changes.step.total = this.#totalStep;
-        return super.updateSource( changes, options );
+        const diff = super.updateSource( changes, options );
+        this.step.total = this.#totalStep;
+        return diff;
     }
 
     static initTotalStep( parent ) {
