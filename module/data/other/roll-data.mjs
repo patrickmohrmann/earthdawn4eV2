@@ -1,10 +1,52 @@
 import {FormulaField, MappingField} from "../fields.mjs";
+import {sum} from "../../utils.mjs";
 
 export default class RollData extends foundry.abstract.DataModel {
     /** @inheritDoc */
     static defineSchema() {
         return {
-            step: this.#modifiableIntegerField,
+            step: new foundry.data.fields.SchemaField( {
+                base: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    initial: 1,
+                    label: "earthdawn.baseStep",
+                    hint: "earthdawn.baseStepForTheRoll",
+                    min: 1,
+                    step: 1,
+                    integer: true,
+                } ),
+                modifiers: new MappingField( new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    initial: 1,
+                    label: "earthdawn.totalStep",
+                    hint: "earthdawn.totalStepForTheRoll",
+                    min: 1,
+                    step: 1,
+                    integer: true,
+                } ), {
+                    required: true,
+                    initialKeysOnly: false,
+                    label: "allModifiers",
+                    hint: "keys are localizable labels of the given step modifying value"
+                } ),
+                total: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    initial: this.initTotalStep,
+                    label: "earthdawn.totalStep",
+                    hint: "earthdawn.totalStepForTheRoll",
+                    min: 1,
+                    step: 1,
+                    integer: true,
+                } ),
+            }, {
+                required: true,
+                nullable: false,
+                label: "step info",
+                hint: "all data about how the step is composed"
+            } ),
             karma: this.#bonusResource,
             devotion: this.#bonusResource,
             extraDice: new foundry.data.fields.SchemaField( {
@@ -32,7 +74,48 @@ export default class RollData extends foundry.abstract.DataModel {
                 label: "ExtraDice",
                 hint: "any extra dice terms for the roll with their labels",
             } ),
-            target: this.#modifiableIntegerField,
+            target: new foundry.data.fields.SchemaField( {
+                base: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    initial: 1,
+                    label: "earthdawn.baseStep",
+                    hint: "earthdawn.baseStepForTheRoll",
+                    min: 1,
+                    step: 1,
+                    integer: true,
+                } ),
+                modifiers: new MappingField( new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    initial: 1,
+                    label: "earthdawn.totalStep",
+                    hint: "earthdawn.totalStepForTheRoll",
+                    min: 1,
+                    step: 1,
+                    integer: true,
+                } ), {
+                    required: true,
+                    initialKeysOnly: false,
+                    label: "allModifiers",
+                    hint: "keys are localizable labels of the given step modifying value"
+                } ),
+                total: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    initial: 1,
+                    label: "earthdawn.totalStep",
+                    hint: "earthdawn.totalStepForTheRoll",
+                    min: 1,
+                    step: 1,
+                    integer: true,
+                } ),
+            }, {
+                required: true,
+                nullable: false,
+                label: "step info",
+                hint: "all data about how the step is composed"
+            } ),
             strain: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
@@ -44,8 +127,18 @@ export default class RollData extends foundry.abstract.DataModel {
         };
     }
 
-    get "step.total"() {
-        console.log("WWEEEIIRRDDD")
+    /** @inheritDoc */
+    updateSource( changes={}, options={} ) {
+        changes.step.total = this.#totalStep;
+        return super.updateSource( changes, options );
+    }
+
+    static initTotalStep( parent ) {
+        return parent.step.base + sum( Object.values( parent.step.modifiers ) );
+    }
+
+    get #totalStep() {
+        return this.step.base + sum( Object.values( this.step.modifiers ) );
     }
 
     /**
@@ -78,54 +171,5 @@ export default class RollData extends foundry.abstract.DataModel {
             required: true,
             nullable: false
         } );
-    }
-
-    /**
-     * @type {object}
-     * @property {number} something
-     */
-    static get #modifiableIntegerField() {
-        return new foundry.data.fields.SchemaField( {
-            base: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                initial: 1,
-                label: "earthdawn.baseStep",
-                hint: "earthdawn.baseStepForTheRoll",
-                min: 1,
-                step: 1,
-                integer: true,
-            } ),
-            modifiers: new MappingField( new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                initial: 1,
-                label: "earthdawn.totalStep",
-                hint: "earthdawn.totalStepForTheRoll",
-                min: 1,
-                step: 1,
-                integer: true,
-            } ), {
-                required: true,
-                initialKeysOnly: false,
-                label: "allModifiers",
-                hint: "keys are localizable labels of the given step modifying value"
-            } ),
-            total: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                initial: 1,
-                label: "earthdawn.totalStep",
-                hint: "earthdawn.totalStepForTheRoll",
-                min: 1,
-                step: 1,
-                integer: true,
-            } ),
-        }, {
-            required: true,
-            nullable: false,
-            label: "step info",
-            hint: "all data about how the step is composed"
-        } )
     }
 }
