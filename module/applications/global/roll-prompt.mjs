@@ -1,26 +1,34 @@
 import EdRoll from "../../dice/ed-roll.mjs";
 import EdRollOptions from "../../data/other/roll-options.mjs";
 
+/**
+ * The application responsible for handling additional data for rolling dice in Earthdawn.
+ *
+ * @augments {FormApplication}
+ *
+ * @param {EdRollOptions} edRollOptions         Some object which is the target data structure to be updated by the form.
+ * @param {object} [rollData={}]                The data object that will be passed to {@link Roll}'s `data` argument.
+ * @param {FormApplicationOptions} [options={}] Additional options which modify the rendering of the sheet.
+ */
 export default class RollPrompt extends FormApplication {
 
-    /** @inheritDoc */
-    constructor( data = {},  { resolve, rollData = {}, options = {} } = {} ) {
-        if ( !( data instanceof EdRollOptions) ) {
+    constructor( edRollOptions = {},  { resolve, rollData = {}, options = {} } = {} ) {
+        if ( !( edRollOptions instanceof EdRollOptions) ) {
             throw new TypeError("ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`.");
         }
-        super( data, options );
+        super( edRollOptions, options );
 
         this.resolve = resolve;
-        this.edRollOptions = data;
+        this.edRollOptions = edRollOptions;
         this.edRollOptions.step.modifiers.manual ??= 0;
         this.rollData = rollData;
     }
 
     /**
-     * Wait for dialog to the resolved.
-     * @param {object} [data] Initial data to pass to the constructor.
-     * @param {object} [options] Options to pass to the constructor.
-     * @returns {Promise<EdRoll|null>} Created roll instance or `null`.
+     * Wait for dialog to be resolved.
+     * @param {object} [data]           Initial data to pass to the constructor.
+     * @param {object} [options]        Options to pass to the constructor.
+     * @returns {Promise<EdRoll|null>}  Created roll instance or `null`.
      */
     static waitPrompt( data, options = {} ) {
         return new Promise( ( resolve ) => {
