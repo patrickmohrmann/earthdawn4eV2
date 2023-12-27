@@ -1,5 +1,6 @@
 import {FormulaField, MappingField} from "../fields.mjs";
 import {sum} from "../../utils.mjs";
+import getDice from "../../dice/step-tables.mjs";
 
 export default class RollData extends foundry.abstract.DataModel {
     /** @inheritDoc */
@@ -131,6 +132,8 @@ export default class RollData extends foundry.abstract.DataModel {
     updateSource( changes={}, options={} ) {
         const diff = super.updateSource( changes, options );
         this.step.total = this.#totalStep;
+        this.karma.dice = getDice( this.karma.step );
+        this.devotion.dice = getDice( this.devotion.step );
         return diff;
     }
 
@@ -140,6 +143,10 @@ export default class RollData extends foundry.abstract.DataModel {
 
     get #totalStep() {
         return this.step.base + sum( Object.values( this.step.modifiers ) );
+    }
+
+    static initDiceForStep( parent ) {
+        return getDice( parent.step );
     }
 
     /**
@@ -167,6 +174,12 @@ export default class RollData extends foundry.abstract.DataModel {
                 min: 1,
                 step: 1,
                 integer: true,
+            } ),
+            dice: new FormulaField( {
+                required: true,
+                initial: this.initDiceForStep,
+                label: "earthdawn.diceForStep",
+                hint: "earthdawn.TheDiceForGibenStep"
             } ),
         }, {
             required: true,
