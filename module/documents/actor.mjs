@@ -24,8 +24,35 @@ export default class ActorEd extends Actor {
     RollPrompt.waitPrompt( edRollOptions ).then( this.processRoll );
   }
 
+  /**
+   * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
+   * damage according to the parameters.
+   * @param {number} amount                                     The unaltered amount of damage this actor should take.
+   * @param {('standard'|'stun')} damageType                    The type of damage. One of either 'standard' or 'stun'.
+   * @param {boolean} ignoreAmor                                Whether armor should be ignored when applying this damage.
+   * @param {('physical'|'mystical')} [armorType]               The type of armor that protects from this damage, one of either
+   *                                                            'physical', 'mystical', or 'none'.
+   */
+  takeDamage( amount, damageType = 'standard', ignoreAmor = false, armorType ) {
+    const finalAmount = amount - (
+        ( ignoreAmor || !armorType )
+            ? 0
+            : this.system.characteristics.armor[armorType].value
+    );
+    const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount;
+    this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
+  }
+
+  /**
+   * Evaluate a Roll and process its data in this actor. This includes (if applicable):
+   * <ul>
+   *     <li>taking strain damage</li>
+   *     <li>reducing resources (karma, devotion)</li>
+   * </ul>
+   * @param {EdRoll} roll The prepared Roll.
+   */
   processRoll( roll ) {
-    roll.toMessage()
+    roll.toMessage();
   }
 
   _applyBaseEffects( baseCharacteristics ) {
