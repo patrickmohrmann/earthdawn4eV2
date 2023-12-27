@@ -48,6 +48,9 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+
+    // Karma refresh button --> karmaritual
+    html.find( ".button__Karma-refresh" ).click( this._onKarmaRefresh.bind( this ) );
   }
 
   /**
@@ -119,5 +122,12 @@ export default class ActorSheetEd extends ActorSheet {
     const li = event.currentTarget.closest( ".item-name" );
     const item = this.actor.items.get( li.dataset.itemId );
     return item.sheet?.render( true );
+  }
+
+  async _onKarmaRefresh ( ) {
+    const karmaMaximum = this.actor.system.karma.max;
+    this.actor.system.karma.value = karmaMaximum;
+    this.render( true );
+    return 
   }
 }
