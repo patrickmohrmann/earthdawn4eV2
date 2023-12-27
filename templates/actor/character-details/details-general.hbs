@@ -15,7 +15,7 @@
             {{#each actor.system.attributes }}
             <tr>
                 <td class="attribute__name--content">
-                    <a title="{{localize " ED.Attributes.rollAttribute"}}">
+                    <a class="rollable" title="{{localize " ED.Attributes.rollAttribute"}}" data-attribute="{{@key}}">
                         <label class="roll__step--hover">{{@key}}</label>
                         <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
                     </a>

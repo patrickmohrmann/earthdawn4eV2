@@ -41,6 +41,9 @@ export default class ActorSheetEd extends ActorSheet {
     // All listeners below are only needed if the sheet is editable
     if ( !this.isEditable ) return;
 
+    // Attribute tests
+    html.find( "table.table__attribute a.rollable" ).click( this._onRollAttribute.bind( this ) );
+
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
@@ -48,6 +51,17 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+  }
+
+  /**
+   * Handle rolling an attribute test.
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+  _onRollAttribute( event ) {
+    event.preventDefault();
+    const attribute = event.currentTarget.dataset.attribute;
+    this.actor.rollAttribute( attribute, {event: event});
   }
 
   /**

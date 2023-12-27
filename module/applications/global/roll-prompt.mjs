@@ -4,7 +4,7 @@ import RollData from "../../data/other/roll-data.mjs";
 export default class RollPrompt extends FormApplication {
 
     /** @inheritDoc */
-    constructor( data = {},  { resolve, options = {} } = {} ) {
+    constructor( data = {},  { resolve, rollOptions = {}, options = {} } = {} ) {
         if ( !( data instanceof RollData) ) {
             throw new TypeError("ED4E | Cannot construct RollPrompt from data. Must be of type `RollData`.");
         }
@@ -13,6 +13,7 @@ export default class RollPrompt extends FormApplication {
         this.resolve = resolve;
         this.rollData = data;
         this.rollData.step.modifiers.manual ??= 0;
+        this.rollOptions = rollOptions;
     }
 
     /**
@@ -96,7 +97,7 @@ export default class RollPrompt extends FormApplication {
 
         await this.submit( {preventRender: true} );
 
-        const roll = new EdRoll( undefined, undefined, this.rollData );
+        const roll = new EdRoll( undefined, this.rollOptions, this.rollData );
         this.resolve?.( roll );
         this.close();
     }
