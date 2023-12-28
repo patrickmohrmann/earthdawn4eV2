@@ -1,3 +1,5 @@
+import ED4E from "../../config.mjs";
+
 /**
  * Extend the basic ActorSheet with modifications
  * @augments {ActorSheet}
@@ -27,6 +29,28 @@ export default class ActorSheetEd extends ActorSheet {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
   }
 
+  async _enableHTMLEnrichment() {
+    let enrichment = {};
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.actor.system.description.value, {
+      async: true,
+      secrets: this.actor.isOwner,
+    } );
+    return expandObject( enrichment );
+  }
+
+  /* -------------------------------------------- */
+  /*  Get Data            */
+  /* -------------------------------------------- */
+  async getData() {
+    const systemData = super.getData();
+    systemData.enrichment = await this._enableHTMLEnrichment();
+    // console.log( '[EARTHDAWN] Item data: ', systemData );
+
+    systemData.config = ED4E;
+
+    return systemData;
+  }
+
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
@@ -42,7 +66,7 @@ export default class ActorSheetEd extends ActorSheet {
     if ( !this.isEditable ) return;
 
     // Attribute tests
-    html.find( "table.table__attribute a.rollable" ).click( this._onRollAttribute.bind( this ) );
+    html.find( "table.table__attribute .rollable" ).click( this._onRollAttribute.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -61,7 +85,7 @@ export default class ActorSheetEd extends ActorSheet {
   _onRollAttribute( event ) {
     event.preventDefault();
     const attribute = event.currentTarget.dataset.attribute;
-    this.actor.rollAttribute( attribute, {event: event});
+    this.actor.rollAttribute( attribute, {event: event} );
   }
 
   /**

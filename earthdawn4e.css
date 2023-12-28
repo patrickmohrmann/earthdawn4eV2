@@ -1151,15 +1151,43 @@ label,
 .main-section h3 {
   border-bottom: none;
 }
-.main-section .table__attribute .roll__step--hover {
-  padding-top: 6px;
-  margin-top: 4px;
-  vertical-align: bottom;
-}
-.main-section .table__attribute .roll__step--hover:hover + .roll__icon {
-  height: 13px;
-  display: inline-block;
+.main-section .table__attribute .attribute__name--content {
+  height: 20px;
   vertical-align: middle;
+  padding: inherit;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons {
+  margin-top: 5px;
+}
+.main-section .table__attribute .attribute__name--content .roll-icon {
+  height: 20px;
+}
+.main-section .table__attribute .attribute__name--content .attribute-label {
+  margin-top: 4px;
+}
+.main-section .table__attribute .attribute__name--content .roll-icon__pointer {
+  display: none;
+  height: 20px;
+}
+.main-section .table__attribute .attribute__name--content .roll-icon__hover {
+  height: 20px;
+  border: none;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons:hover .roll-icon .roll-icon__hover {
+  display: inline-block;
+  border: none;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons:hover .roll-icon:hover .roll-icon__hover {
+  display: none;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons:hover .roll-icon:hover .roll-icon__pointer {
+  display: inline-block;
+  border: none;
+}
+.main-section .table__attribute .attribute__value--content,
+.main-section .table__attribute .attribute__step--content {
+  vertical-align: middle;
+  padding: none;
 }
 .main-section .table__attribute .roll__icon {
   height: 15px;
