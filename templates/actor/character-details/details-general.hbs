@@ -13,13 +13,26 @@
                 <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
             </tr>
             {{#each actor.system.attributes }}
-            <tr>
+            <tr  class="table-row__attribute">
                 <td class="attribute__name--content">
+                    <div class="rollable">
+                        <div class="roll-icon partial__six">
+                            <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
+                            <img class="roll-icon__pointer" src="icons/svg/d20-black.svg">
+                        </div>
+                        <div class="attribute-label partial__two">
+                            <label>{{@key}}</label>
+                        </div>
+                        
+                       
+                    </div>
+                </td>
+                {{!-- <td class="attribute__name--content">
                     <a title="{{localize " ED.Attributes.rollAttribute"}}">
                         <label class="roll__step--hover">{{@key}}</label>
                         <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
                     </a>
-                </td>
+                </td> --}}
                 <td class="attribute__value--content">
                     <div>
                         <span class="attribute__value">
