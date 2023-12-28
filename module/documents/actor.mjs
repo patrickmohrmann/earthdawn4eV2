@@ -68,6 +68,10 @@ export default class ActorEd extends Actor {
    * @param {EdRoll} roll The prepared Roll.
    */
   #processRoll( roll ) {
+    if ( !roll ) {
+      // No roll available, do nothing.
+      return;
+    }
     // Check if this uses karma or strain at all
     this.takeDamage( roll.edRollOptions.strain, "standard" );
     if (
