@@ -94,7 +94,6 @@ export default class RollPrompt extends FormApplication {
 
     _updateRollData( data = {} ) {
         this.edRollOptions.updateSource( data );
-        console.debug( "ED4E | updated roll data: ", this.edRollOptions );
         return this.edRollOptions;
     }
 
