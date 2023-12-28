@@ -1,5 +1,4 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
-import EdRoll from "../dice/ed-roll.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 
@@ -19,12 +18,11 @@ export default class ActorEd extends Actor {
     const attributeStep = this.system.attributes[attributeId].step;
     const edRollOptions = new EdRollOptions( {
       step: { base: attributeStep },
-      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, step: this.system.karma.step },
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { step: this.system.devotion.step },
       chatFlavor: `${game.i18n.localize( ED4E.attributes[attributeId].label )} Test`,
     } );
-    // RollPrompt.waitPrompt( edRollOptions ).then( this.#processRoll );
-    const roll = await RollPrompt.waitPrompt( edRollOptions );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
 
@@ -48,20 +46,17 @@ export default class ActorEd extends Actor {
   }
 
   /**
-   * Use a resource (karma, devotion) by deducting the amount, if possible.
+   * Use a resource (karma, devotion) by deducting the amount. This will always happen, even if not enough is available.
+   * Look out for the return value to see if that was the case.
    * @param {"karma"|"devotion"} resourceType The type of resource to use. One of either "karma" or "devotion".
    * @param {number} amount                   The amount to use of the resource.
-   * @returns {boolean}                       If enough of the resource is available deduct the `amount` and return
-   *                                          `true`. If not available, return 'false' and do not change system data.
+   * @returns {boolean}                       Returns `true` if the full amount was deducted (enough available), 'false'
+   *                                          otherwise.
    */
   #useResource( resourceType, amount ) {
     const available = this.system[resourceType].value;
-    if ( amount > available ) {
-      return false;
-    } else {
-      this.update( {[`system.${resourceType}.value`]: ( available - amount ) } );
-      return true;
-    }
+    this.update( {[`system.${resourceType}.value`]: ( available - amount ) } );
+    return amount <= available;
   }
 
   /**
@@ -79,8 +74,7 @@ export default class ActorEd extends Actor {
         !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
     ) {
-      ui.notifications.warn("Localize: Not enough karma or devotion. Move this to validation of EdRollData later.");
-      //return;
+      ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
     }
     roll.toMessage();
   }

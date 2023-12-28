@@ -173,6 +173,16 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                 step: 1,
                 integer: true,
             } ),
+            available: new foundry.data.fields.NumberField( {
+                required: true,
+                nullable: false,
+                initial: 0,
+                label: "earthdawn.availableKarmaPoints",
+                hint: "earthdawn.howManyKarmaPointsAreAvailable",
+                min: 0,
+                step: 1,
+                integer: true,
+            } ),
             step: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,

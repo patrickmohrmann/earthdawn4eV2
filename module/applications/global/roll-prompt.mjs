@@ -74,6 +74,9 @@ export default class RollPrompt extends FormApplication {
         super.activateListeners( html );
         $( this.form.querySelector( "button.cancel" ) ).on( "click" , this.close.bind( this ) );
         $( this.form.querySelector( "button.ok" ) ).on( "click" , this._createRoll.bind( this ) );
+        $( this.form.querySelectorAll("#karma-input,#devotion-input") ).on(
+            "change", this._validateAvailableRessource.bind( this )
+        );
     }
 
     /** @inheritDoc */
@@ -90,6 +93,14 @@ export default class RollPrompt extends FormApplication {
     /** @inheritDoc */
     async _updateObject( event, formData ) {
         return Promise.resolve( this._updateRollData( formData ) );
+    }
+
+    _validateAvailableRessource( event ) {
+        const newValue = event.currentTarget.value;
+        const resource = event.currentTarget.dataset.resource;
+        if ( newValue > this.edRollOptions[resource].available ) {
+            ui.notifications.warn(`Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.`);
+        }
     }
 
     _updateRollData( data = {} ) {
