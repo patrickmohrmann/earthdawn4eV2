@@ -21,11 +21,16 @@ import getDice from './step-tables.mjs';
 export default class EdRoll extends Roll {
     constructor( formula = undefined, data = {}, edRollOptions = {} ) {
         // us ternary operator to also check for empty strings, nullish coalescing operator (??) only checks null or undefined
-        const baseTerm = formula ? formula : getDice( edRollOptions.step.total );
+        const baseTerm = formula
+            ? formula
+            // : ( `${getDice( step )}[${game.i18n.localize( "ED.General.S.step" )} ${step}]` );
+            : `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.General.S.step" )} ${edRollOptions.step.total}]`;
         super( baseTerm, data, edRollOptions );
-        if ( !this.options.configured ) this.#configureModifiers();
 
         this.edRollOptions = edRollOptions;
+
+        if ( !this.options.extraDiceAdded ) this.#addExtraDice();
+        if ( !this.options.configured ) this.#configureModifiers();
     }
 
     /**
@@ -101,6 +106,36 @@ export default class EdRoll extends Roll {
 
         // Mark configuration as complete
         this.options.configured = true;
+    }
+
+    /**
+     * Add additional dice in groups, like karma, devotion or elemental damage.
+     */
+    #addExtraDice() {
+        this.#addResourceDice( 'karma' );
+        this.#addResourceDice( 'devotion' );
+
+        // Mark extra dice as complete
+        this.options.extraDiceAdded = true;
+    }
+
+    /**
+     * Add dice from a given resource step. Currently only karma or devotion.
+     * @param {"karma"|"devotion"} type
+     */
+    #addResourceDice( type ) {
+        const pointsUsed = this.edRollOptions[type]?.pointsUsed;
+        if ( pointsUsed > 0 ) {
+            let diceTerm, newTerms;
+            for ( let i = 1; i <= pointsUsed; i++ ) {
+                diceTerm = getDice( this.edRollOptions[type].step );
+                newTerms = Roll.parse(
+                    `+ (${diceTerm})[${game.i18n.localize( `ED.General.${type[0]}.${type}` )} ${i}]`
+                );
+                this.terms.push( ...newTerms );
+            }
+            this.resetFormula();
+        }
     }
 
     /**

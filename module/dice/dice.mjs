@@ -2,8 +2,8 @@
 /* Step Roll                                    */
 
 /* -------------------------------------------- */
-
-/**
+/*
+/!**
  * @description function to combine all roll relevant information
  * @param { number } step Step of the roll
  * @param { object } karma used Karma and Karma step
@@ -21,7 +21,7 @@
  * @param { object } chatMessage containing the information to hand over to the chat
  * @param { object } messageData containing the information shown in the message ... isn't this the same as chatMessage @chris???
  * @param { string } flavor combined information to be visible in the chat message
- */
+ *!/
 export async function rollStep( {
                                     step,
                                     karma = {
@@ -43,4 +43,11 @@ export async function rollStep( {
                                     messageData,
                                     flavor
                                 } ) {
+}*/
+
+export class KarmaDice extends DiceTerm {
+    constructor( step ) {
+        // nee, man kann glaub ich auch diceterms im roll labeln einfach
+        super();
+    }
 }
