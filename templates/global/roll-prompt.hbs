@@ -1,45 +1,98 @@
-<form id="roll-prompt-form" autocomplete="off">
+<form class="roll-prompt" id="roll-prompt-form" autocomplete="off">
+    {{!-- <div class="header-item__frame">
+        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+    </div> --}}
     <div class="roll-prompt-body">
         <div>
             <!-- navigator left -->
-            <div class="navigator-section">
-                <nav class="prompt-tabs tabs" data-group="primary">
-                    <ul class="list">
-                        <li><a class="roll-prompt-tab" data-tab="base-input">{{localize "base input"}}</a></li>
-                        <li><a class="roll-prompt-tab" data-tab="other-tab">{{localize "some other tab"}}</a></li>
-                    </ul>
+            <div class="navigator-section input--centered">
+                <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
+                    <a class="roll-prompt-tab" data-tab="base-input">{{localize "base input"}}</a>
+                    <a class="roll-prompt-tab" data-tab="other-tab">{{localize "some other tab"}}</a>
                 </nav>
             </div>
             <div class="tab-body">
                 <!-- tab1: base input -->
                 <div class="tab base-input" data-group="primary" data-tab="base-input">
-                    <div class="roll-modifier form-group">
-                        <label class="modifier-description">{{localize "earthdawn.s.step"}}: </label>
-                        <input class="" id="step-mod-input" value={{step.base}} name="step.base" data-type="number" autofocus/>
+
+                    <!-- 30/20 -->
+                    <div>
+                        <div class="roll-modifier form-group partial__three">
+                            <label class="modifier-description">{{localize "X-Step"}}: </label>
+                        </div>
+                        <div class="partial__four">
+                            <input class="input__circle-input--centered" id="step-mod-input" value={{step.base}}
+                                name="step.base" data-type="number" autofocus />
+                        </div>
                     </div>
-                    <div class="roll-modifier form-group">
-                        <label class="modifier-description">{{localize "earthdawn.m.modifierStep"}}: </label>
-                        <input class="" id="step-mod-input" value={{step.modifiers.manual}} name="step.modifiers.manual" data-type="number" autofocus/>
+
+
+                    <!-- 30/20 -->
+                    <div>
+                        <div class="roll-modifier form-group partial__three">
+                            <label class="modifier-description">{{localize "X-Modifier"}}: </label>
+                        </div>
+                        <div class="partial__four">
+                            <input class="input__circle-input--centered" id="step-mod-input"
+                                value={{step.modifiers.manual}} name="step.modifiers.manual" data-type="number"
+                                autofocus />
+                        </div>
                     </div>
-                    <div class="roll-modifier form-group">
-                        <label class="modifier-description">{{localize "earthdawn.d.difficulty"}}: </label>
-                        <input class="" id="difficulty-input" value={{target.total}} name="target.difficulty" data-type="number" />
+
+                    <!-- 30/20 -->
+                    <div>
+                        <div class="roll-modifier form-group partial__three">
+                            <label class="modifier-description">{{localize "X-Difficulty"}}: </label>
+                        </div>
+                        <div class="partial__four">
+                            <input class="input__circle-input--centered" id="difficulty-input" value={{target.total}}
+                                name="target.difficulty" data-type="number" />
+                        </div>
                     </div>
-                    <div class="roll-modifier form-group">
-                        <label class="modifier-description">{{localize "earthdawn.s.strain"}}:</label>
-                        <input class="" id="strain-input" value={{strain}} name="strain" data-type="number" />
+
+                    <!-- 30/20 -->
+                    <div>
+                        <div class="roll-modifier form-group partial__three">
+                            <label class="modifier-description">{{localize "X-Strain"}}:</label>
+                        </div>
+                        <div class="partial__four">
+                            <input class="input__circle-input--centered" id="strain-input" value={{strain}}
+                                name="strain" data-type="number" />
+                        </div>
                     </div>
-                    <div class="roll-modifier form-group">
-                        <label class="modifier-description">{{localize "earthdawn.k.karmaPoints"}}: </label>
-                        <input class="" id="karma-input" value={{karma.pointsUsed}} name="karma.points" data-type="number" />
-                        <label class="modifier-description">{{localize "earthdawn.s.step"}}: </label>
-                        <input class="" id="karma-step" value={{karma.step}} name="karma.step" data-type="number" />
+
+                    <!-- 30/20 30/20 -->
+                    <div class="roll-modifier form-group partial__three">
+                        <label class="modifier-description">{{localize "X-Karma"}}: </label>
                     </div>
-                    <div class="roll-modifier form-group">
-                        <label class="modifier-description">{{localize "earthdawn.d.devotionPoints"}}: </label>
-                        <input class="" id="devotion-input" value={{devotion.pointsUsed}} name="devotion.points" data-type="number" />
-                        <label class="modifier-description">{{localize "earthdawn.s.step"}}: </label>
-                        <input class="" id="devotion-step" value={{devotion.step}} name="devotion.step" data-type="number" />
+                    <div class="partial__sixteen-percent">
+                        <input class="input__circle-input--centered" id="karma-input" value={{karma.pointsUsed}}
+                            name="karma.points" data-type="number" />
+                    </div>
+                    <div class="partial__three prompt__right">
+                        <label class="modifier-description">{{localize "X-Karma-Step"}}: </label>
+                    </div>
+                    <div class="partial__sixteen-percent">
+                        <input class="input__circle-input--centered" id="karma-step" value={{karma.step}}
+                            name="karma.step" data-type="number" />
+                    </div>
+
+
+
+                    <!-- 30/20 30/20 -->
+                    <div class="roll-modifier form-group partial__three">
+                        <label class="modifier-description">{{localize "X-Devotion"}}: </label>
+                    </div>
+                    <div class="partial__sixteen-percent">
+                        <input class="input__circle-input--centered" id="devotion-input" value={{devotion.pointsUsed}}
+                            name="devotion.points" data-type="number" />
+                    </div>
+                    <div class="partial__three prompt__right">
+                        <label class="modifier-description">{{localize "X-Dev-Step"}}: </label>
+                    </div>
+                    <div class="partial__sixteen-percent">
+                        <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
+                            name="devotion.step" data-type="number" />
                     </div>
                 </div>
                 <!-- tab2: other inputs -->
@@ -50,10 +103,13 @@
     </div>
     <div class="buttons roll-prompt-buttons">
         <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
-            {{ localize 'earthdawn.c.cancel' }}
+            {{ localize 'X-cancel' }}
         </button>
         <button class='ok default button-ok' type="submit" name="submit" data-button='ok'>
-            {{ localize 'earthdawn.o.ok' }}
+            {{ localize 'X-ok' }}
         </button>
     </div>
+    {{!-- <div class="footer-item__frame">
+        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+    </div> --}}
 </form>
