@@ -21,8 +21,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                     required: true,
                     nullable: false,
                     initial: 1,
-                    label: "earthdawn.totalStep",
-                    hint: "earthdawn.totalStepForTheRoll",
+                    label: "earthdawn.modifierStep",
+                    hint: "earthdawn.modifierStepForTheRoll",
                     min: 0,
                     step: 1,
                     integer: true,
@@ -80,8 +80,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                     required: true,
                     nullable: false,
                     initial: 1,
-                    label: "earthdawn.baseStep",
-                    hint: "earthdawn.baseStepForTheRoll",
+                    label: "earthdawn.baseDifficulty",
+                    hint: "earthdawn.baseDifficultyForTheRoll",
                     min: 1,
                     step: 1,
                     integer: true,
@@ -90,8 +90,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                     required: true,
                     nullable: false,
                     initial: 1,
-                    label: "earthdawn.totalStep",
-                    hint: "earthdawn.totalStepForTheRoll",
+                    label: "earthdawn.modifierDifficulty",
+                    hint: "earthdawn.modifierDifficultyForTheRoll",
                     min: 1,
                     step: 1,
                     integer: true,
@@ -99,14 +99,14 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                     required: true,
                     initialKeysOnly: false,
                     label: "allModifiers",
-                    hint: "keys are localizable labels of the given step modifying value"
+                    hint: "keys are localizable labels of the given difficulty modifying value"
                 } ),
                 total: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
                     initial: 1,
-                    label: "earthdawn.totalStep",
-                    hint: "earthdawn.totalStepForTheRoll",
+                    label: "earthdawn.totalDifficulty",
+                    hint: "earthdawn.totalDifficultyForTheRoll",
                     min: 1,
                     step: 1,
                     integer: true,
@@ -114,8 +114,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             }, {
                 required: true,
                 nullable: false,
-                label: "localize: step info",
-                hint: "localize: all data about how the step is composed"
+                label: "localize: difficulty info",
+                hint: "localize: all data about how the difficulty is composed"
             } ),
             strain: new foundry.data.fields.NumberField( {
                 required: true,
@@ -197,7 +197,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                 required: true,
                 initial: this.initDiceForStep,
                 label: "earthdawn.diceForStep",
-                hint: "earthdawn.TheDiceForGibenStep"
+                hint: "earthdawn.TheDiceForGivenStep"
             } ),
         }, {
             required: true,
