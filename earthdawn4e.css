@@ -1,3 +1,10 @@
+form .form-group > * {
+  flex: none;
+}
+form .form-group label {
+  line-height: 25px;
+  padding-top: 4px;
+}
 h1,
 h2,
 h3,
@@ -41,6 +48,10 @@ h6 {
 .partial__six {
   float: left;
   width: 16.6%;
+}
+.partial__sixteen-percent {
+  float: left;
+  width: 16%;
 }
 .partial__seventy-five-percent {
   float: left;
@@ -157,6 +168,19 @@ input.input__number-input {
 }
 .itemControlGroup {
   float: right;
+}
+.button-ok {
+  float: left;
+  width: 48%;
+}
+.button-cancel {
+  float: right;
+  width: 48%;
+  margin-top: 2px;
+}
+.prompt__right {
+  line-height: 25px;
+  padding-top: 8px;
 }
 @font-face {
   font-family: 'ArnoPro Bold';
@@ -568,6 +592,13 @@ label,
 .form-group[data-setting-id="ed4e.encumberedHeader"] .form-fields,
 .form-group[data-setting-id="ed4e.encumberedHeader"] p {
   display: none;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content {
+  position: relative;
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  color: black;
+  background-repeat: repeat;
 }
 .item-sheet .window-content {
   padding: 0px;
@@ -1151,15 +1182,43 @@ label,
 .main-section h3 {
   border-bottom: none;
 }
-.main-section .table__attribute .roll__step--hover {
-  padding-top: 6px;
-  margin-top: 4px;
-  vertical-align: bottom;
-}
-.main-section .table__attribute .roll__step--hover:hover + .roll__icon {
-  height: 13px;
-  display: inline-block;
+.main-section .table__attribute .attribute__name--content {
+  height: 20px;
   vertical-align: middle;
+  padding: inherit;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons {
+  margin-top: 5px;
+}
+.main-section .table__attribute .attribute__name--content .roll-icon {
+  height: 20px;
+}
+.main-section .table__attribute .attribute__name--content .attribute-label {
+  margin-top: 4px;
+}
+.main-section .table__attribute .attribute__name--content .roll-icon__pointer {
+  display: none;
+  height: 20px;
+}
+.main-section .table__attribute .attribute__name--content .roll-icon__hover {
+  height: 20px;
+  border: none;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons:hover .roll-icon .roll-icon__hover {
+  display: inline-block;
+  border: none;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons:hover .roll-icon:hover .roll-icon__hover {
+  display: none;
+}
+.main-section .table__attribute .attribute__name--content .rollable-icons:hover .roll-icon:hover .roll-icon__pointer {
+  display: inline-block;
+  border: none;
+}
+.main-section .table__attribute .attribute__value--content,
+.main-section .table__attribute .attribute__step--content {
+  vertical-align: middle;
+  padding: none;
 }
 .main-section .table__attribute .roll__icon {
   height: 15px;
