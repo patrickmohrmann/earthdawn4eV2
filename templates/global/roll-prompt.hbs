@@ -70,11 +70,11 @@
                             name="karma.pointsUsed" data-type="number" data-resource="karma" />
                     </div>
                     <div class="partial__three prompt__right">
-                        <label class="modifier-description">{{localize "X-Karma-Step"}}: </label>
+                        <label class="modifier-description" title={{localize "X-karma-Dice:"}}+{{karma.dice}}>{{localize "X-Karma-Step"}}: </label>
                     </div>
                     <div class="partial__sixteen-percent">
                         <input class="input__circle-input--centered" id="karma-step" value={{karma.step}}
-                            name="karma.step" data-type="number" />
+                            name="karma.step" data-type="number"/>
                     </div>
 
 
@@ -88,7 +88,7 @@
                             name="devotion.pointsUsed" data-type="number" data-resource="devotion"/>
                     </div>
                     <div class="partial__three prompt__right">
-                        <label class="modifier-description">{{localize "X-Dev-Step"}}: </label>
+                        <label class="modifier-description" title={{localize "X-devotion-Dice:"}}+{{devotion.dice}}>{{localize "X-Dev-Step"}}: </label>
                     </div>
                     <div class="partial__sixteen-percent">
                         <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
