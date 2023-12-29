@@ -10,7 +10,14 @@ import getDice from './step-tables.mjs';
  * @property { object } additional Additional, non-standard, additions like extra steps for a separate dice (like flame weapon).
  * @property { number } strain How much strain this roll will cost
  * @property { string } testType Type of roll, action test or effect test.
- * @property { string } rollType Type of roll, like damage, attack, ability, resistances, etc. TODO: complete list
+ * @property { string } rollType Type of roll, like 
+ * damageRanged (Effect), damageMelee (Effect), attackRanged, attackMelee, 
+ * ability, 
+ * resistances (Effect), reaction, opposed
+ * spellCasting, threadWeaving, spellCastingEffect (Effect)
+ * Initiative (effect), Recovery (Effect), effects (Effect)
+ * poison
+ * etc. TODO: complete list
  */
 
 /**
