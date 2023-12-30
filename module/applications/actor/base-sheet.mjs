@@ -164,8 +164,6 @@ export default class ActorSheetEd extends ActorSheet {
 
   async _onKarmaRefresh ( ) {
     const karmaMaximum = this.actor.system.karma.max;
-    this.actor.system.karma.value = karmaMaximum;
-    this.render( true );
-    return 
-  }
+    this.actor.karmaRitual( karmaMaximum );
+  };
 }

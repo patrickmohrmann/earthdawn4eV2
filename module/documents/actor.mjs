@@ -118,4 +118,9 @@ export default class ActorEd extends Actor {
     // Expand the set of final overrides
     this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
   }
+
+  karmaRitual() {
+    this.update( {"system.karma.value": this.system.karma.max} );
+}
+
 }
