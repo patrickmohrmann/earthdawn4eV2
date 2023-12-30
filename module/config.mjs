@@ -128,6 +128,25 @@ ED4E.action = {
 }
 
 /**
+ * Armor
+ * @enum {string}
+ */
+ED4E.armor = {
+	none: 				"ED.General.none",
+	physical:			"ED.Armor.physical",
+	mystical: 			"ED.Armor.mystical",
+}
+
+/**
+ * Damage type
+ * @enum {string}
+ */
+ED4E.damageType = {
+	standard:			"ED.Health.Damage.standard",
+	stun:				"ED.Health.Damage.stun",
+}
+
+/**
  * Tier
  */
 ED4E.tier = {
