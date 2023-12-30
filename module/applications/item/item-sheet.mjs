@@ -61,19 +61,20 @@ export default class ItemSheetEd extends ItemSheet {
 
   /** @inheritDoc */
   activateListeners( html ) {
-
-    // Triggering weight calculation for physical items
-    html.find( ".weight-calculation--button" ).click( this._onWeightCalculation.bind( this ) );
-
     super.activateListeners( html );
 
     // All listeners below are only needed if the sheet is editable
     if ( !this.isEditable ) return;
 
+    // Triggering weight calculation for physical items
+    html.find( ".weight-calculation--button" ).click( this._onWeightCalculation.bind( this ) );
+
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+
+    
   }
 
   /**
@@ -127,30 +128,31 @@ export default class ItemSheetEd extends ItemSheet {
    * Handle autorecalculation of physical items for actors, based on the namegiver modifier for weight.
    */
   async _onWeightCalculation( ) {
-    const item = this.object;
-    const itemWeight = item.system.weight.value;
-    const itemName = item.name;
-    let itemCalculationCheck = item.system.weight.weightCalculated;
-    if( itemWeight > 0 ) {
-      if ( item.isOwned ) {
-        if ( !itemCalculationCheck ) {
-          const namegiver = item.parent.items.filter( item => item.type === 'namegiver' );
-          item.system.weight.value = namegiver[0].system.weightMultiplier * itemWeight;
-          item.name = namegiver[0].name + " - " + itemName;
-          item.system.weight.weightCalculated = true;
-          item.system.weight.weightMultiplier = namegiver[0].system.weightMultiplier
-          this.render( true );
-          } else {
-            ui.notifications.warn( game.i18n.localize( "this items weight has already been changed!" ) );
-            return;
-          }
-        } else {
-          return;
-        }
-    } else {
-      ui.notifications.warn( game.i18n.localize( "this item has no weight value" ) )
-    }
-    return;
+    const item = this.item;
+    const namegiver = item.parent.items.filter( item => item.type === 'namegiver' );
+    this.item.weightCalculation( item, namegiver[0] );
+
+    // let itemCalculationCheck = item.system.weight.weightCalculated;
+    // if( itemWeight > 0 ) {
+    //   if ( item.isOwned ) {
+    //     if ( !itemCalculationCheck ) {
+    //       const namegiver = item.parent.items.filter( item => item.type === 'namegiver' );
+    //       item.system.weight.value = namegiver[0].system.weightMultiplier * itemWeight;
+    //       item.name = namegiver[0].name + " - " + itemName;
+    //       item.system.weight.weightCalculated = true;
+    //       item.system.weight.weightMultiplier = namegiver[0].system.weightMultiplier
+    //       this.render( true );
+    //       } else {
+    //         ui.notifications.warn( game.i18n.localize( "this items weight has already been changed!" ) );
+    //         return;
+    //       }
+    //     } else {
+    //       return;
+    //     }
+    // } else {
+    //   ui.notifications.warn( game.i18n.localize( "this item has no weight value" ) )
+    // }
+    // return;
   }
 }
 

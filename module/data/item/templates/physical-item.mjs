@@ -49,12 +49,13 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                 weightMultiplier: new foundry.data.fields.NumberField( {
                     required: true,
                     nullable: false,
-                    min: 0,
-                    initial: 0,
+                    min: 1,
+                    initial: 1,
                     label: "ED.Item.General.weightMultiplier"
                 } ),
                 weightCalculated: new foundry.data.fields.BooleanField( {
                     required: true,
+                    initial: false,
                     label: "ED.Item.General.weightCalculated"
                 } ),
             } ),
