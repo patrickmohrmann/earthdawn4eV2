@@ -105,9 +105,9 @@ export const validators = {
 export async function preloadHandlebarsTemplates() {
   const partials = [
     // Global Templates
-    "systems/ed4e/templates/global-templates/editor.hbs",
-    "systems/ed4e/templates/global-templates/card-options-chat.hbs",
-    "systems/ed4e/templates/global-templates/card-options-enhance.hbs",
+    "systems/ed4e/templates/global/editor.hbs",
+    "systems/ed4e/templates/global/card-options-chat.hbs",
+    "systems/ed4e/templates/global/card-options-enhance.hbs",
 
     // Character details section partials
     "systems/ed4e/templates/actor/character-details/details-talents.hbs",

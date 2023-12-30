@@ -4,19 +4,78 @@
   }
 
   .table__attribute {
-    .roll__step--hover {
-      padding-top: 6px;
-      margin-top: 4px;
-      vertical-align: bottom;
-    }
-
-    .roll__step--hover:hover+.roll__icon {
-      height: 13px;
-      display: inline-block;
+    .attribute__name--content{
+      height: 20px;
       vertical-align: middle;
-
+      padding: inherit;
+      .rollable-icons {
+        margin-top: 5px;
+      }
+      .roll-icon {
+        height: 20px;
+      }
+      .attribute-label {
+        margin-top: 4px;
+      }
+      .roll-icon__pointer{
+        display: none;
+        height: 20px;
+      }
+      .roll-icon__hover{
+        //display: none;
+        height: 20px;
+        border: none;
+      }
+      .rollable-icons:hover {
+        .roll-icon {
+          .roll-icon__hover {
+            display: inline-block;
+            border: none;
+          }
+        }
+        .roll-icon:hover {
+          .roll-icon__hover {
+            display: none;
+          }
+          .roll-icon__pointer {
+            display: inline-block;
+            border: none;
+          }
+        }
+      }
+    }
+    .attribute__value--content, .attribute__step--content  {
+      vertical-align: middle;
+      padding: none;
 
     }
+
+    
+    
+
+    // .rollable:hover {
+    //   cursor: pointer;
+    //   color: #000;
+    //   text-shadow: 0 0 10px red;
+    //   &.rollable:hover{
+    //     background-image: url("icons/svg/d20-grey.svg") !important;
+    //   }
+    //   &.rollable{
+    //     background-image: url("icons/svg/d20-black.svg") !important;
+    //   }
+    // }
+
+    // .roll__step--hover {
+    //   padding-top: 6px;
+    //   margin-top: 4px;
+    //   vertical-align: bottom;
+    // }
+
+    // .roll__step--hover:hover+.roll__icon {
+    //   height: 13px;
+    //   display: inline-block;
+    //   vertical-align: middle;
+    // }
 
     .roll__icon {
       height: 15px;

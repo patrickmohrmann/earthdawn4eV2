@@ -13,12 +13,19 @@
                 <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
             </tr>
             {{#each actor.system.attributes }}
-            <tr>
+            <tr  class="table-row__attribute">
                 <td class="attribute__name--content">
-                    <a title="{{localize " ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{@key}}</label>
-                        <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
+                    <div class="rollable-icons">
+                        <div class="roll-icon partial__six">
+                            <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
+                            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+                        </div>
+                        <div class="attribute-label partial__two">
+                            <label> {{#with (lookup ../config.attributes @key)}}
+                            {{localize label}}
+                            {{/with}}</label>
+                        </div>                      
+                    </div>
                 </td>
                 <td class="attribute__value--content">
                     <div>
@@ -50,228 +57,17 @@
                 </td>
             </tr>
             {{/each}} 
-            {{!-- <tr>
-                <td class="attribute__name--content">
-                    <a title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.dexterity"}}</label>
-                        <img class="image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.dex.value"
-                                value="{{actor.system.attributes.dex.value}}">
-                        </span>
-                        {{#if (eq actor.system.attributes.dex.timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.dex.timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.dex.timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.dex.step"
-                                value="{{actor.system.attributes.dex.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
             <tr>
                 <td class="attribute__name--content">
-                    <a title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.strength"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.str.value"
-                                value="{{actor.system.attributes.str.value}}">
-                        </span>
-                        {{#if (eq actor.system.attributes.str.timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.str.timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.str.timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
+                    <div class="rollable-icons">
+                        <div class="roll-icon partial__six">
+                            <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
+                            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+                        </div>
+                        <div class="attribute-label partial__two">
+                            <label class="roll__step--hover">{{localize "ED.General.initiative"}}</label>
+                        </div>                      
                     </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.str.step"
-                                value="{{actor.system.attributes.str.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="attribute__name--content">
-                    <a title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.toughness"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.tou.value"
-                                value="{{actor.system.attributes.tou.value}}">
-                        </span>
-                        {{#if (eq actor.system.attributes.tou.timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.tou.timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.tou.timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.tou.step"
-                                value="{{actor.system.attributes.tou.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="attribute__name--content">
-                    <a title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.perception"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.per.value"
-                                value="{{actor.system.attributes.per.value}}">
-                        </span>
-                        {{#if (eq actor.system.attributes.per.timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.per.timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.per.timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.per.step"
-                                value="{{actor.system.attributes.per.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="attribute__name--content">
-                    <a title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.willpower"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.wil.value"
-                                value="{{actor.system.attributes.wil.value}}">
-                        </span>
-                        {{#if (eq actor.system.attributes.wil.timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.wil.timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.wil.timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.wil.step"
-                                value="{{actor.system.attributes.wil.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="attribute__name--content">
-                    <a title="{{localize "ED.Attributes.rollAttribute"}}">
-                        <label class="roll__step--hover">{{localize "ED.Attributes.charisma"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.cha.value"
-                                value="{{actor.system.attributes.cha.value}}">
-                        </span>
-                        {{#if (eq actor.system.attributes.cha.timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.cha.timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq actor.system.attributes.cha.timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.cha.step"
-                                value="{{actor.system.attributes.cha.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr> --}}
-            <tr>
-                <td class="attribute__name--content">
-                    <a title="{{localize "ED.General.initiative"}}">
-                        <label class="roll__step--hover">{{localize "ED.General.initiative"}}</label>
-                        <img class="fixed-height4 image__border--none roll__icon" src="icons/svg/d20-grey.svg">
-                    </a>
                 </td>
                 <td></td>
                 <td class="attribute__value--content">
@@ -491,7 +287,7 @@
                     {{name}}
                 </div>
                 <div class="partial__two one-line__vertical-align">
-                    {{> "systems/ed4e/templates/global-templates/card-options-chat.hbs"}}
+                    {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
                 </div>
             </div>
             {{/each}}

@@ -51,8 +51,8 @@ Hooks.once( "init", () => {
   CONFIG.Actor.documentClass = documents.ActorEd;
   CONFIG.Item.documentClass = documents.ItemEd;
 
-  // Register System Settings
-  // registerSystemSettings();
+  // Register Roll Extensions
+  CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
 
   // Register Handlebars Helper
   registerHandlebarHelpers();
