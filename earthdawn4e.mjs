@@ -14,6 +14,8 @@ import registerSystemSettings from './module/settings.mjs';
 import { registerHandlebarHelpers } from './module/handlebar-helpers.mjs'
 import  "./module/tours/tours.mjs";
 
+import { rollArbitrary } from "./module/applications/global/sidebar.mjs";
+
 
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -22,6 +24,7 @@ import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as utils from "./module/utils.mjs";
+// import * as rollArbitrary from "./module/applications/global/sidebar.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -34,7 +37,8 @@ globalThis.ed4e = {
     dataModels,
     dice,
     documents,
-    utils
+    utils,
+    rollArbitrary
 };
 
 /* -------------------------------------------- */
@@ -106,7 +110,7 @@ Hooks.once( "init", () => {
 /**
  * Perform one-time pre-localization and sorting of some configuration objects
  */
-Hooks.once("i18nInit", () => utils.performPreLocalization( CONFIG.ED4E ) );
+Hooks.once( "i18nInit", () => utils.performPreLocalization( CONFIG.ED4E ) );
 
 /* -------------------------------------------- */
 /*  Foundry VTT Ready                           */
@@ -189,6 +193,12 @@ Hooks.once( 'ready', async () => {
             createdItems.weapon.toObject(),
         ]
     )
+
+    // Listen for dice icon click
+    const diceIconSelector = '#chat-controls i.fas.fa-dice-d20';
+    $( document ).on( 'click', diceIconSelector, () => {
+      rollArbitrary();
+    } );
 } );
 
 /* -------------------------------------------- */

@@ -75,6 +75,7 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+
   }
 
   /**

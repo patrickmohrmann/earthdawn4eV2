@@ -20,6 +20,7 @@ export default class ActorEd extends Actor {
       step: { base: attributeStep },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      rollType: "AttributeRoll",
       chatFlavor: `${game.i18n.localize( ED4E.attributes[attributeId].label )} Test`,
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
@@ -78,7 +79,7 @@ export default class ActorEd extends Actor {
         !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
     ) {
-      ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
+      ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
     }
     roll.toMessage();
   }

@@ -133,6 +133,14 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                 label: "localize: roll chat flavour",
                 hint: "localize: text that is added to the chatmessage when this call is put to chat"
             } ),
+            rollType: new foundry.data.fields.StringField( {
+                required: true,
+                nullable: false,
+                blank: true,
+                initial: "",
+                label: "localize: roll type flavour",
+                hint: "localize: text that is added to the chatmessage when this call is put to chat"
+            } ),
         };
     }
 

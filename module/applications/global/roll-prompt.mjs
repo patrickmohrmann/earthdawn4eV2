@@ -74,7 +74,7 @@ export default class RollPrompt extends FormApplication {
         super.activateListeners( html );
         $( this.form.querySelector( "button.cancel" ) ).on( "click" , this.close.bind( this ) );
         $( this.form.querySelector( "button.ok" ) ).on( "click" , this._createRoll.bind( this ) );
-        $( this.form.querySelectorAll("#karma-input,#devotion-input") ).on(
+        $( this.form.querySelectorAll( "#karma-input,#devotion-input" ) ).on(
             "change", this._validateAvailableRessource.bind( this )
         );
     }
@@ -98,8 +98,9 @@ export default class RollPrompt extends FormApplication {
     _validateAvailableRessource( event ) {
         const newValue = event.currentTarget.value;
         const resource = event.currentTarget.dataset.resource;
-        if ( newValue > this.edRollOptions[resource].available ) {
-            ui.notifications.warn(`Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.`);
+        const rollType = this.edRollOptions.rollType;
+        if ( newValue > this.edRollOptions[resource].available && rollType !== "ArbitraryRoll" ) {
+            ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );
         }
     }
 
