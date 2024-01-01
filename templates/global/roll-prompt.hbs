@@ -28,6 +28,7 @@
 
 
                     <!-- 30/20 -->
+                   {{#if (uneq rollType "ArbitraryRoll" )}} 
                     <div>
                         <div class="roll-modifier form-group partial__three">
                             <label class="modifier-description">{{localize "X-Modifier"}}: </label>
@@ -38,6 +39,7 @@
                                 autofocus />
                         </div>
                     </div>
+                    {{/if}}
 
                     <!-- 30/20 -->
                     <div>
@@ -51,6 +53,7 @@
                     </div>
 
                     <!-- 30/20 -->
+                    {{#if (uneq rollType "ArbitraryRoll" )}} 
                     <div>
                         <div class="roll-modifier form-group partial__three">
                             <label class="modifier-description">{{localize "X-Strain"}}:</label>
@@ -60,6 +63,7 @@
                                 name="strain" data-type="number" />
                         </div>
                     </div>
+                    {{/if}}
 
                     <!-- 30/20 30/20 -->
                     <div class="roll-modifier form-group partial__three">

@@ -20,6 +20,7 @@ export default class ActorEd extends Actor {
       step: { base: attributeStep },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      rollType: "AttributeRoll",
       chatFlavor: `${game.i18n.localize( ED4E.attributes[attributeId].label )} Test`,
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );

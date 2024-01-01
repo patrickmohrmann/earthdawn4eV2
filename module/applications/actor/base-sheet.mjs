@@ -76,9 +76,6 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
 
-    // to be moved to sidebar.mjs ... but how???
-    // Dice symbole roll prompt trigger
-    html.finde ( ".chat.control-icon" ).click( this._onRollArbitrary.bind( this ) )
   }
 
   /**

@@ -14,7 +14,8 @@ export async function rollArbitrary() {
                 devotion: { pointsUsed: 0, available: 0, step: 3 },
                 strain: 0,
                 target: { base: 0, modifier: 0 },
-                chatFlavor: `${game.i18n.localize( "arbitraryStep.label" )} Test`,
+                rollType: "ArbitraryRoll",
+                chatFlavor: `${game.i18n.localize( "X-Arbitrary-Step" )}`,
             } );
             const roll = await RollPrompt.waitPrompt( edRollOptions );
             roll.toMessage();
