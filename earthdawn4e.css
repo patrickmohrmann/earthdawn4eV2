@@ -119,6 +119,9 @@ h6 {
   width: 40%;
   margin-right: 50px;
 }
+.button {
+  width: 150px;
+}
 .icon__position--right {
   float: right;
 }
@@ -743,7 +746,6 @@ input.input__number-input {
   height: 20px;
 }
 .item-sheet .label__left {
-  float: left;
   width: 50%;
 }
 .item-sheet .item-data__input--line {

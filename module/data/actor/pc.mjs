@@ -321,7 +321,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         const carriedWeight = relevantItems.reduce( ( accumulator, currentItem ) => {
             return accumulator
               + (
-                currentItem.system.weight
+                currentItem.system.weight.value
                 * (
                   ( currentItem.system.amount ?? 1 )
                   / ( currentItem.system.bundleSize > 1 ? currentItem.system.bundleSize : 1 )
