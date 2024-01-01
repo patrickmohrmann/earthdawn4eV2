@@ -78,7 +78,7 @@ export default class ActorEd extends Actor {
         !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
     ) {
-      ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
+      ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
     }
     roll.toMessage();
   }
