@@ -38,12 +38,26 @@ export default class PhysicalItemTemplate extends SystemDataModel {
             {
                 label: "ED.Item.General.price"
             } ),
-            weight: new foundry.data.fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                label: "ED.Item.General.weight"
+            weight: new foundry.data.fields.SchemaField( {
+                value: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    label: "ED.Item.General.weight"
+                } ),
+                weightMultiplier: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 1,
+                    label: "ED.Item.General.weightMultiplier"
+                } ),
+                weightCalculated: new foundry.data.fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Item.General.weightCalculated"
+                } ),
             } ),
             // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
             availability: new foundry.data.fields.StringField( {
