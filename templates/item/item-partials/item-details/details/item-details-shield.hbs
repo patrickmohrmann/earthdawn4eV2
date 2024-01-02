@@ -43,7 +43,7 @@
         <label>{{localize "ED.General.equipped"}}:</label>
        <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
     </div>
-    {{#if ( uneq item.parent null) }}
+    {{#if item.isOwned }}
     {{!-- automatic Weight Calculation --}}
     {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
     --}}
