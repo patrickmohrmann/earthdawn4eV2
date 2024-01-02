@@ -10,6 +10,14 @@ import RollPrompt from "../applications/global/roll-prompt.mjs";
 export default class ActorEd extends Actor {
 
   /**
+   * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
+   * @type {Item|undefined}
+   */
+  get namegiver() {
+    return this.items.filter( item => item.type === 'namegiver' )[0];
+  }
+
+  /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.
