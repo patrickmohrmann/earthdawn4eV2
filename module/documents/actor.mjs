@@ -10,6 +10,14 @@ import RollPrompt from "../applications/global/roll-prompt.mjs";
 export default class ActorEd extends Actor {
 
   /**
+   * Perform the karma ritual for this actor to set the current karma points to maximum.
+   * Only to be used for namegivers with a discipline.
+   */
+  karmaRitual() {
+    this.update( {"system.karma.value": this.system.karma.max} );
+  }
+
+  /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.
@@ -118,9 +126,5 @@ export default class ActorEd extends Actor {
     // Expand the set of final overrides
     this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
   }
-
-  karmaRitual() {
-    this.update( {"system.karma.value": this.system.karma.max} );
-}
 
 }
