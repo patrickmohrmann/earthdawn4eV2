@@ -10,6 +10,14 @@ import RollPrompt from "../applications/global/roll-prompt.mjs";
 export default class ActorEd extends Actor {
 
   /**
+   * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
+   * @type {Item|undefined}
+   */ 
+  get namegiver() {
+    return this.items.filter( item => item.type === 'namegiver' )[0];
+  }
+
+  /** 
    * Perform the karma ritual for this actor to set the current karma points to maximum.
    * Only to be used for namegivers with a discipline.
    */

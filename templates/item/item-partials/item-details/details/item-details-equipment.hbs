@@ -9,7 +9,8 @@
     {{!-- usable Item --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.General.usableItem"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector" {{checked item.system.usableItem.usableItemSelector}}>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
+            item.system.usableItem.usableItemSelector}}>
         {{#if (eq item.system.usableItem.usableItemSelector true)}}
         <label>{{localize "ED.Item.General.arbitraryStep"}}:</label>
         <input class="input__number-input" name="system.arbitraryStep" type="text" value="{{item.system.arbitraryStep}}"
@@ -25,7 +26,8 @@
             {{/select}}
         </select>
         <label>{{localize "ED.Item.General.recoveryPropertyValue"}}:</label>
-        <select class="input__select-input" name="system.recoveryPropertyValue" value="{{item.system.usableItem.recoveryPropertyValue}}" {{#select
+        <select class="input__select-input" name="system.recoveryPropertyValue"
+            value="{{item.system.usableItem.recoveryPropertyValue}}" {{#select
             item.system.usableItem.recoveryPropertyValue}}>
             <option value="0">{{localize "ED.Item.RecoveryPropertyValue.0"}}</option>
             <option value="1">{{localize "ED.Item.RecoveryPropertyValue.1"}}</option>
@@ -38,10 +40,11 @@
         </select>
         {{/if}}
     </div>
-     {{!-- consumable Item --}}
+    {{!-- consumable Item --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.Equipment.consumable"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.consumable" {{ checked system.consumable }}>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.consumable" {{ checked system.consumable
+            }}>
     </div>
     <div>
         <label>{{localize "ED.Item.Equipment.ammoType"}}:</label>
@@ -55,16 +58,26 @@
             {{/select}}
         </select>
         <label>{{localize "ED.General.bundleSize"}}:</label>
-       <input class="input__number-input" name="system.bundleSize" type="number" value="{{item.system.bundleSize}}">
+        <input class="input__number-input" name="system.bundleSize" type="number" value="{{item.system.bundleSize}}">
     </div>
-        {{!-- equipped --}}
+    {{!-- equipped --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.General.equipped"}}:</label>
-       <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
+        <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
     </div>
+    {{#if item.isOwned }}
     {{!-- automatic Weight Calculation --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.General.autoCalculateWeight"}}:</label>
-       <input name="system.autoCalculateWeight" type="checkbox" {{checked item.system.autoCalculateWeight}}>
+    {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
+    --}}
+    <div>
+        {{!-- the weightMultiplyer and the weight Calculated check are only editable by GMs --}}
+        <label>{{localize "Weight-calculation"}}:</label>
+        <input class="input__number-input" name="system.weight.weightMultiplier" type="text"
+            value="{{item.system.weight.weightMultiplier}}" {{disabled isPlayer}} data-dtype="Number"
+            title="{{localize " Only-Editable-as-GM"}}">
+        <input class="item-data__checkbox--line" type="checkbox" name="system.weight.weightCalculated" {{ checked
+            item.system.weight.weightCalculated }} {{disabled isPlayer}} title="{{localize " Only-Editable-as-GM"}}">
+        <button class="weight-calculation--button button">{{localize "Tailor to Namegiver"}}</button>
     </div>
+    {{/if}}
 </div>

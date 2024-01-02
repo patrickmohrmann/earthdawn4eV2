@@ -40,11 +40,16 @@ export default class ItemSheetEd extends ItemSheet {
     return expandObject( enrichment );
   }
 
+
+
   async getData() {
     const systemData = super.getData();
+
+
     systemData.enrichment = await this._enableHTMLEnrichment();
     // console.log( '[EARTHDAWN] Item data: ', systemData );
 
+    systemData.isPlayer = !game.user.isGM;
     systemData.config = ED4E;
 
     return systemData;
@@ -60,6 +65,9 @@ export default class ItemSheetEd extends ItemSheet {
 
     // All listeners below are only needed if the sheet is editable
     if ( !this.isEditable ) return;
+
+    // Triggering weight calculation for physical items
+    html.find( ".weight-calculation--button" ).click( this._onWeightCalculation.bind( this ) );
 
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
@@ -109,4 +117,16 @@ export default class ItemSheetEd extends ItemSheet {
     const effect = this.item.effects.get( li.dataset.itemId );
     return effect.sheet?.render( true );
   }
+
+  /* ----------------------------------------------------------------------- */
+  /*                Auto calculation for equipments weight                   */
+  /* ----------------------------------------------------------------------- */
+
+  /**
+   * Handle autorecalculation of physical items for actors, based on the namegiver modifier for weight.
+   */
+  async _onWeightCalculation( ) {
+    this.item.tailorToNamegiver( this.item.parent.namegiver );
+  }
 }
+
