@@ -12,7 +12,7 @@ export default class ActorEd extends Actor {
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
    * @type {Item|undefined}
-   */
+   */ 
   get namegiver() {
     return this.items.filter( item => item.type === 'namegiver' )[0];
   }
