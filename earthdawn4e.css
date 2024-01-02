@@ -956,6 +956,12 @@ label,
   left: 0px;
   height: 100%;
 }
+.character-sheet .main-section .left-part .button__Karma-refresh {
+  width: 25px;
+  height: 25px;
+  border: none;
+  padding: none;
+}
 .character-sheet .main-section .right-part {
   float: right;
   position: inherit;

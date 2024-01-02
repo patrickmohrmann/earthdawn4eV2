@@ -17,6 +17,14 @@ export default class ActorEd extends Actor {
     return this.items.filter( item => item.type === 'namegiver' )[0];
   }
 
+  /** 
+   * Perform the karma ritual for this actor to set the current karma points to maximum.
+   * Only to be used for namegivers with a discipline.
+   */
+  karmaRitual() {
+    this.update( {"system.karma.value": this.system.karma.max} );
+  }
+
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
@@ -126,4 +134,5 @@ export default class ActorEd extends Actor {
     // Expand the set of final overrides
     this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
   }
+
 }

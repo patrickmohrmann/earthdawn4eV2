@@ -1,3 +1,5 @@
+import {preLocalize} from "./utils.mjs";
+
 // Namespace Configuration Values
 const ED4E = {};
 
@@ -49,7 +51,8 @@ ED4E.attributes = {
 		label: 			"ED.Attributes.charisma",
 		abbreviation: 	"ED.Attributes.charismaAbbr"
 	}
-}
+};
+preLocalize( "attributes", {keys: ["label", "abbreviation"]} );
 
 /**
  * configuration data for Global Bonuses
@@ -93,19 +96,23 @@ ED4E.globalBonuses = {
 	allSpellEffects: {
 		label: 			"ED.Actor.GlobalBonus.allSpellEffects"
 	}
-}
+};
+preLocalize( "globalBonuses", {key: "label"} );
 
 /**
- * ??? Denomination options
+ * Denomination options
+ * @enum {string}
  */
 ED4E.denomination = {
 	copper: 			"ED.Denomination.copper",
 	silver: 			"ED.Denomination.silver",
 	gold: 				"ED.Denomination.gold"
 }
+preLocalize( "denomination" );
 
 /**
  * Availability
+ * @enum {string}
  */
 ED4E.availability = {
 	everyday: 			"ED.Item.Availability.everyday",
@@ -115,9 +122,11 @@ ED4E.availability = {
 	veryRare: 			"ED.Item.Availability.veryRare",
 	unique: 			"ED.Item.Availability.unique"
 }
+preLocalize( "availability" );
 
 /**
  * Actions
+ * @enum {string}
  */
 ED4E.action = {
 	none: 				"ED.General.none",
@@ -126,6 +135,7 @@ ED4E.action = {
     standard: 			"ED.Action.standard",
     sustained: 			"ED.Action.sustained"
 }
+preLocalize( "action" );
 
 /**
  * Armor
@@ -136,6 +146,7 @@ ED4E.armor = {
 	physical:			"ED.Armor.physical",
 	mystical: 			"ED.Armor.mystical",
 }
+preLocalize( "armor" );
 
 /**
  * Damage type
@@ -145,9 +156,11 @@ ED4E.damageType = {
 	standard:			"ED.Health.Damage.standard",
 	stun:				"ED.Health.Damage.stun",
 }
+preLocalize( "damageType" );
 
 /**
  * Tier
+ * @enum {string}
  */
 ED4E.tier = {
 	none: 				"ED.General.none",
@@ -156,17 +169,27 @@ ED4E.tier = {
 	warden: 			"ED.Tier.warden",
 	master: 			"ED.Tier.master"
 }
+preLocalize( "tier" );
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
 /* -------------------------------------------- */
 
+/**
+ * The possible statuses of encumbrance
+ * @enum {string}
+ */
 ED4E.encumbranceStatus = {
 	notEncumbered: "ED.Conditions.Encumbrance.notEncumbered",
 	light: "ED.Conditions.Encumbrance.light",
 	heavy: "ED.Conditions.Encumbrance.heavy",
 	tooHeavy: "ED.Conditions.Encumbrance.tooHeavy"
 }
+preLocalize( "encumbranceStatus" );
+
+/* -------------------------------------------- */
+/*  Enable .hbs Hot Reload                      */
+/* -------------------------------------------- */
 
 /* eslint-disable */
 // Since Foundry does not support hot reloading object notation templates...
@@ -188,6 +211,8 @@ Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path 
 });
 /* eslint-enable */
 
+/* -------------------------------------------- */
+/*  Export Config                               */
 /* -------------------------------------------- */
 
 export default ED4E;

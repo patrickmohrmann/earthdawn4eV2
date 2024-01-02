@@ -75,6 +75,9 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+
+    // Karma refresh button --> karma ritual
+    html.find( ".button__Karma-refresh" ).click( this._onKarmaRefresh.bind( this ) );
   }
 
   /**
@@ -158,4 +161,8 @@ export default class ActorSheetEd extends ActorSheet {
     const item = this.actor.items.get( li.dataset.itemId );
     return item.sheet?.render( true );
   }
+
+  _onKarmaRefresh ( ) {
+    this.actor.karmaRitual();
+  };
 }
