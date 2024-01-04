@@ -41,6 +41,10 @@ h6 {
   float: left;
   width: 25%;
 }
+#chat-controls i.fas.fa-dice-d20:hover {
+  color: var(--color-text-hyperlink);
+  cursor: pointer;
+}
 .partial__five {
   float: left;
   width: 20%;
