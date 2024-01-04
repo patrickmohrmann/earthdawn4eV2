@@ -115,6 +115,15 @@ Hooks.once("i18nInit", () => utils.performPreLocalization( CONFIG.ED4E ) );
 Hooks.once( 'ready', async () => {
 
     /* -------------------------------------------- */
+    /*  Dice Icon Roll                              */
+    /* -------------------------------------------- */
+
+    $( "#chat-controls i.fas.fa-dice-d20" ).on(
+        "click",
+        applications.global.RollPrompt.rollArbitraryPrompt.bind()
+    );
+
+    /* -------------------------------------------- */
     /*  Debug Documents                             */
     /* -------------------------------------------- */
 

@@ -188,6 +188,22 @@ ED4E.encumbranceStatus = {
 preLocalize( "encumbranceStatus" );
 
 /* -------------------------------------------- */
+/*  Rolls and Tests                             */
+/* -------------------------------------------- */
+
+/**
+ * The available types of rolls for {@link EdRollOptions}.
+ * @enum {string}
+ */
+ED4E.rollTypes = {
+	arbitrary: "X.arbitraryStepRoll",
+	action: "X.actionTestRoll",
+	effect: "X.effectTestRoll",
+	damage: "X.damageTestRoll",
+}
+preLocalize( "rollTypes" );
+
+/* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */
 /* -------------------------------------------- */
 
