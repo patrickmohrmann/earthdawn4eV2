@@ -26,6 +26,17 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * Expand Item Cards by clicking on the name span
+   * @param {object} item item 
+   */
+  expandItemCards( item ) {
+    console.log( "card wurde geklickt" )
+    const itemDescriptionDocument = document.getElementsByClassName( "card__description" );
+    const currentItemElement = itemDescriptionDocument.nextElementSibling;
+    currentItemElement.classList.toggle( "d-none" )
+  }
+
+  /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.

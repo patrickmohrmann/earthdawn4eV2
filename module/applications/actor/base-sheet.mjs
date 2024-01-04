@@ -78,6 +78,11 @@ export default class ActorSheetEd extends ActorSheet {
 
     // Karma refresh button --> karma ritual
     html.find( ".button__Karma-refresh" ).click( this._onKarmaRefresh.bind( this ) );
+
+    // item card description
+    // Item summaries
+    html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
+
   }
 
   /**
@@ -164,5 +169,17 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onKarmaRefresh ( ) {
     this.actor.karmaRitual();
-  };
+  }
+
+
+  _onCardExpand( event ) {
+    event.preventDefault();
+    const toggler = $( event.currentTarget );
+    const cardAbilityClass = toggler.parent( ".card__ability" );
+    const itemNameClass = cardAbilityClass.parent( ".item-name" );
+    const itemDescription = itemNameClass.children( ".card__description" );
+
+    itemDescription.toggleClass( "card__description--toggle" );
+  }
+
 }

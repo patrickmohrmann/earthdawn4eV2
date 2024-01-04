@@ -1129,6 +1129,79 @@ label,
   border: none;
   font-weight: bold;
 }
+.item-name__card {
+  cursor: pointer;
+}
+.item-name__card div * {
+  cursor: pointer;
+}
+.item-name__card .card__ability {
+  display: flex;
+  gap: 15px;
+}
+.item-name__card .card__ability label {
+  font-weight: bold;
+}
+.item-name__card .card__ability .card__icon {
+  min-width: 25px;
+  float: left;
+}
+.item-name__card .card__ability .card__icon .roll-icon__hover,
+.item-name__card .card__ability .card__icon .roll-icon__pointer {
+  height: 25px;
+  display: none;
+}
+.item-name__card .card__ability .card__icon .item__image {
+  display: block;
+}
+.item-name__card .card__ability .card__name {
+  min-width: 150px;
+  float: left;
+}
+.item-name__card .card__ability .card__name:hover {
+  color: #000;
+  text-shadow: 0 0 10px red;
+}
+.item-name__card .card__ability .card__action {
+  min-width: 50px;
+  float: left;
+}
+.item-name__card .card__ability .card__number {
+  min-width: 50px;
+  float: left;
+}
+.item-name__card .card__ability .card__attribute {
+  min-width: 50px;
+  float: left;
+  text-transform: uppercase;
+}
+.item-name__card .card__ability .card__attribute label {
+  text-transform: none;
+}
+.item-name__card .card__ability .card__control {
+  float: right;
+  margin-left: auto;
+}
+.item-name__card .card__description--toggle {
+  display: none;
+  color: blue;
+}
+.item-name__card .card__ability:hover .item__image,
+.item-name__card .card__ability:hover .roll-icon__pointer {
+  height: 25px;
+  display: none;
+}
+.item-name__card .card__ability:hover .roll-icon__hover {
+  display: block;
+}
+.item-name__card .card__ability .card__icon:hover .item__image,
+.item-name__card .card__ability .card__icon:hover .roll-icon__hover {
+  height: 25px;
+  display: none;
+}
+.item-name__card .card__ability .card__icon:hover .roll-icon__pointer {
+  display: block;
+}
 .character-sheet .header-section {
   margin-top: 15px;
 }
