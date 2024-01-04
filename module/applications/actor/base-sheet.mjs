@@ -38,12 +38,28 @@ export default class ActorSheetEd extends ActorSheet {
     return expandObject( enrichment );
   }
 
+  async _enableHTMLEnrichmentItem( itemC ) {
+   let enrichmentItem = {};
+   // itemC.system.enrichmentItem = await TextEditor.enrichHTML( itemC.system.description.value, {
+    enrichmentItem = await TextEditor.enrichHTML( itemC.system.description.value, {
+      async: true,
+      secrets: this.actor.isOwner,
+    } );
+    return expandObject( enrichmentItem );
+  }
+
   /* -------------------------------------------- */
   /*  Get Data            */
   /* -------------------------------------------- */
   async getData() {
     const systemData = super.getData();
     systemData.enrichment = await this._enableHTMLEnrichment();
+    let  itemCollection = this.actor.items;
+    for ( const itemC of itemCollection ) {
+      console.log ( itemC )
+      itemC.system.description.value = await this._enableHTMLEnrichmentItem( itemC );
+      console.log ( itemC )
+    }
     // console.log( '[EARTHDAWN] Item data: ', systemData );
 
     systemData.config = ED4E;
