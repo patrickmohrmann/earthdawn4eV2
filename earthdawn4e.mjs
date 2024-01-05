@@ -106,7 +106,7 @@ Hooks.once( "init", () => {
 /**
  * Perform one-time pre-localization and sorting of some configuration objects
  */
-Hooks.once("i18nInit", () => utils.performPreLocalization( CONFIG.ED4E ) );
+Hooks.once( "i18nInit", () => utils.performPreLocalization( CONFIG.ED4E ) );
 
 /* -------------------------------------------- */
 /*  Foundry VTT Ready                           */
