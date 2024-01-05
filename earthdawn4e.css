@@ -524,8 +524,8 @@ input.input__number-input {
 .form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
   border-top: 1px solid black;
 }
-label,
-.form-fields {
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] label,
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.lpTrackingHeader"] {
@@ -542,8 +542,8 @@ label,
 .form-group[data-setting-id="ed4e.darkMode"] {
   border-top: 1px solid black;
 }
-label,
-.form-fields {
+.form-group[data-setting-id="ed4e.darkMode"] label,
+.form-group[data-setting-id="ed4e.darkMode"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.darkModeHeader"] {
@@ -560,8 +560,8 @@ label,
 .form-group[data-setting-id="ed4e.stepTable"] {
   border-top: 1px solid black;
 }
-label,
-.form-fields {
+.form-group[data-setting-id="ed4e.stepTable"] label,
+.form-group[data-setting-id="ed4e.stepTable"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.stepTableHeader"] {
@@ -578,8 +578,8 @@ label,
 .form-group[data-setting-id="ed4e.encumbrance"] {
   border-top: 1px solid black;
 }
-label,
-.form-fields {
+.form-group[data-setting-id="ed4e.encumbrance"] label,
+.form-group[data-setting-id="ed4e.encumbrance"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.encumberedHeader"] {
