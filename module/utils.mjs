@@ -223,6 +223,12 @@ export async function preloadHandlebarsTemplates() {
 
     // Actor cards
     "systems/ed4e/templates/actor/cards/ability-card.hbs",
+    "systems/ed4e/templates/actor/cards/equipment-card.hbs",
+    "systems/ed4e/templates/actor/cards/weapon-card.hbs",
+    "systems/ed4e/templates/actor/cards/armor-card.hbs",
+    "systems/ed4e/templates/actor/cards/shield-card.hbs",
+    "systems/ed4e/templates/actor/cards/spell-card.hbs",
+    "systems/ed4e/templates/actor/cards/class-card.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",
