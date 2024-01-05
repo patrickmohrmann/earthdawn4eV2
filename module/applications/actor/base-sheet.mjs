@@ -71,6 +71,13 @@ export default class ActorSheetEd extends ActorSheet {
     // item card description shown on item click
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
+    // Character Generation
+    html.find( ".character-generation" ).click( this._onCharacterGeneration.bind( this ) );
+  }
+
+  _onCharacterGeneration( event ) {
+    event.preventDefault();
+    this.actor.characterGeneration( );
   }
 
   /**
