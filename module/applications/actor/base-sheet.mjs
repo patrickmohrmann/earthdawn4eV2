@@ -78,6 +78,14 @@ export default class ActorSheetEd extends ActorSheet {
 
     // Karma refresh button --> karma ritual
     html.find( ".button__Karma-refresh" ).click( this._onKarmaRefresh.bind( this ) );
+
+    // Character Generation
+    html.find( ".character-generation" ).click( this._onCharacterGeneration.bind( this ) );
+  }
+
+  _onCharacterGeneration( event ) {
+    event.preventDefault();
+    this.actor.characterGeneration( );
   }
 
   /**
