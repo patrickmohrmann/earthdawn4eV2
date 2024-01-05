@@ -37,17 +37,6 @@ export default class RollPrompt extends FormApplication {
         } );
     }
 
-    static rollArbitraryPrompt() {
-        RollPrompt.waitPrompt(
-            new EdRollOptions( {
-                rollType: CONFIG.ED4E.rollTypes.arbitrary,
-                chatFlavor: game.i18n.localize( "X-Arbitrary-Step" ),
-            } )
-        ).then(
-            ( roll ) => roll?.toMessage()
-        );
-    }
-
     static get defaultOptions() {
         const options = super.defaultOptions;
         return {
@@ -98,10 +87,7 @@ export default class RollPrompt extends FormApplication {
 
     /** @inheritDoc */
     getData( options = {} ) {
-        return {
-            ...this.edRollOptions,
-            CONFIG
-        };
+        return this.edRollOptions;
     }
 
     /** @inheritDoc */
@@ -112,10 +98,7 @@ export default class RollPrompt extends FormApplication {
     _validateAvailableRessource( event ) {
         const newValue = event.currentTarget.value;
         const resource = event.currentTarget.dataset.resource;
-        if (
-            this.edRollOptions.rollType !== CONFIG.ED4E.rollTypes.arbitrary
-            && newValue > this.edRollOptions[resource].available
-        ) {
+        if ( newValue > this.edRollOptions[resource].available ) {
             ui.notifications.warn(`Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.`);
         }
     }

@@ -133,14 +133,6 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
                 label: "localize: roll chat flavour",
                 hint: "localize: text that is added to the chatmessage when this call is put to chat"
             } ),
-            rollType: new foundry.data.fields.StringField( {
-                required: true,
-                nullable: false,
-                blank: true,
-                initial: "",
-                label: "localize: roll type",
-                hint: "localize: type of this roll, like action or effect test, or arbitrary step roll"
-            } ),
         };
     }
 
@@ -153,9 +145,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         return diff;
     }
 
-    static initTotalStep( source ) {
-        const step = source.step?.base ?? source.base ?? 1;
-        return step + sum( Object.values( source.step?.modifiers ?? {} ) );
+    static initTotalStep( parent ) {
+        return parent.step.base + sum( Object.values( parent.step.modifiers ) );
     }
 
     get #totalStep() {
