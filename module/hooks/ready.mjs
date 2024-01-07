@@ -1,13 +1,18 @@
-/**
- * TODO Chris 
- */
+import RollPrompt from '../applications/global/roll-prompt.mjs';
+
 export default function () {
-    Hooks.once( "ready", async () => {
-      /* -------------------------------------------- */
-      /*  Debug Documents                             */
-      /* -------------------------------------------- */
-      await _createDebugDocuments();
-    } );
+  Hooks.once( "ready", async () => {
+    /* -------------------------------------------- */
+    /*  Dice Icon Roll                              */
+    /* -------------------------------------------- */
+
+    $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
+
+    /* -------------------------------------------- */
+    /*  Debug Documents                             */
+    /* -------------------------------------------- */
+    await _createDebugDocuments();
+  } );
 }
 
 /**
