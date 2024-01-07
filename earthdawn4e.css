@@ -163,8 +163,6 @@ input.input__number-input {
 .sheet__editor .editor-content {
   min-height: 400px;
   max-height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 .itemControlGroup {
   float: right;
@@ -775,8 +773,6 @@ input.input__number-input {
 .item-sheet .item-sheet__editor .editor-content {
   min-height: 400px;
   max-height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 .earthdawn.sheet.namegiver .headerLine {
   display: flex;
