@@ -9,56 +9,32 @@
 <h4>{{localize "ED.Sheet.Header.equipment"}}</h4>
 <div>
     {{#each actor.itemTypes.equipment}}
-    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-        </div>
+    <div class="item-name item-name__card" data-item-id="{{_id}}">
+        {{> "systems/ed4e/templates/actor/cards/equipment-card.hbs"}}
     </div>
     {{/each}}
 </div>
 <h4>{{localize "ED.Sheet.Header.weapons"}}</h4>
 <div>
     {{#each actor.itemTypes.weapon}}
-    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-        </div>
+    <div class="item-name item-name__card" data-item-id="{{_id}}">
+        {{> "systems/ed4e/templates/actor/cards/weapon-card.hbs"}}
     </div>
     {{/each}}
 </div>
 <h4>{{localize "ED.Sheet.Header.armor"}}</h4>
 <div>
     {{#each actor.itemTypes.armor}}
-    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-        </div>
+    <div class="item-name item-name__card" data-item-id="{{_id}}">
+        {{> "systems/ed4e/templates/actor/cards/armor-card.hbs"}}
     </div>
     {{/each}}
 </div>
 <h4>{{localize "ED.Sheet.Header.shields"}}</h4>
 <div>
     {{#each actor.itemTypes.shield}}
-    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
-        </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-        </div>
+    <div class="item-name item-name__card" data-item-id="{{_id}}">
+        {{> "systems/ed4e/templates/actor/cards/shield-card.hbs"}}
     </div>
     {{/each}}
 </div>

@@ -63,11 +63,11 @@ export function sumProperty( arr, prop ) {
  * @param {string} [sortKey]  An inner key upon which to sort.
  * @returns {object}          A copy of the original object that has been sorted.
  */
-export function sortObjectEntries(obj, sortKey) {
-  let sorted = Object.entries(obj);
-  if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
-  else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
-  return Object.fromEntries(sorted);
+export function sortObjectEntries( obj, sortKey ) {
+  let sorted = Object.entries( obj );
+  if ( sortKey ) sorted = sorted.sort( ( a, b ) => a[1][sortKey].localeCompare( b[1][sortKey] ) );
+  else sorted = sorted.sort( ( a, b ) => a[1].localeCompare( b[1] ) );
+  return Object.fromEntries( sorted );
 }
 
 /* -------------------------------------------- */
@@ -130,8 +130,8 @@ const _preLocalizationRegistrations = {};
  *                                        if multiple are provided.
  * @param {boolean} [options.sort=false]  Sort this config enum, using the key if set.
  */
-export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
-  if ( key ) keys.unshift(key);
+export function preLocalize( configKeyPath, { key, keys=[], sort=false }={} ) {
+  if ( key ) keys.unshift( key );
   _preLocalizationRegistrations[configKeyPath] = { keys, sort };
 }
 
@@ -141,11 +141,11 @@ export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
  * Execute previously defined pre-localization tasks on the provided config object.
  * @param {object} config  The `CONFIG.ED4E` object to localize and sort. *Will be mutated.*
  */
-export function performPreLocalization(config) {
-  for ( const [keyPath, settings] of Object.entries(_preLocalizationRegistrations) ) {
-    const target = foundry.utils.getProperty(config, keyPath);
-    _localizeObject(target, settings.keys);
-    if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
+export function performPreLocalization( config ) {
+  for ( const [keyPath, settings] of Object.entries( _preLocalizationRegistrations ) ) {
+    const target = foundry.utils.getProperty( config, keyPath );
+    _localizeObject( target, settings.keys );
+    if ( settings.sort ) foundry.utils.setProperty( config, keyPath, sortObjectEntries( target, settings.keys[0] ) );
   }
 }
 
@@ -157,30 +157,30 @@ export function performPreLocalization(config) {
  * @param {string[]} [keys]  List of inner keys that should be localized if this is an object.
  * @private
  */
-function _localizeObject(obj, keys) {
-  for ( const [k, v] of Object.entries(obj) ) {
+function _localizeObject( obj, keys ) {
+  for ( const [k, v] of Object.entries( obj ) ) {
     const type = typeof v;
     if ( type === "string" ) {
-      obj[k] = game.i18n.localize(v);
+      obj[k] = game.i18n.localize( v );
       continue;
     }
 
     if ( type !== "object" ) {
-      console.error(new Error(
+      console.error( new Error(
           `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
-      ));
+      ) );
       continue;
     }
     if ( !keys?.length ) {
-      console.error(new Error(
+      console.error( new Error(
           "Localization keys must be provided for pre-localizing when target is an object."
-      ));
+      ) );
       continue;
     }
 
     for ( const key of keys ) {
       if ( !v[key] ) continue;
-      v[key] = game.i18n.localize(v[key]);
+      v[key] = game.i18n.localize( v[key] );
     }
   }
 }
@@ -220,6 +220,15 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/actor-partials/header-section.hbs",
     "systems/ed4e/templates/actor/actor-partials/image-characteristics-section.hbs",
     "systems/ed4e/templates/actor/actor-partials/details-section.hbs",
+
+    // Actor cards
+    "systems/ed4e/templates/actor/cards/ability-card.hbs",
+    "systems/ed4e/templates/actor/cards/equipment-card.hbs",
+    "systems/ed4e/templates/actor/cards/weapon-card.hbs",
+    "systems/ed4e/templates/actor/cards/armor-card.hbs",
+    "systems/ed4e/templates/actor/cards/shield-card.hbs",
+    "systems/ed4e/templates/actor/cards/spell-card.hbs",
+    "systems/ed4e/templates/actor/cards/class-card.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",

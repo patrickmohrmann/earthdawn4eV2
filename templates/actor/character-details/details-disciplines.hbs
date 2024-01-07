@@ -2,42 +2,24 @@
     <h3>{{localize "ED.Sheet.Header.disciplines"}}</h3>
     <div>
         {{#each actor.itemTypes.discipline}}
-        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-            <div class="partial__two one-line__vertical-align">
-                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-                {{name}}
-            </div>
-            <div class="partial__two one-line__vertical-align">
-                {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-            </div>
+        <div class="item-name item-name__card" data-item-id="{{_id}}">
+            {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
         </div>
         {{/each}}
     </div>
     <h3>{{localize "ED.Sheet.Header.paths"}}</h3>
     <div>
         {{#each actor.itemTypes.path}}
-        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-            <div class="partial__two one-line__vertical-align">
-                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-                {{name}}
-            </div>
-            <div class="partial__two one-line__vertical-align">
-                {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-            </div>
+        <div class="item-name item-name__card" data-item-id="{{_id}}">
+            {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
         </div>
         {{/each}}
     </div>
     <h3>{{localize "ED.Sheet.Header.questor"}}</h3>
     <div>
         {{#each actor.itemTypes.questor}}
-        <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-            <div class="partial__two one-line__vertical-align">
-                <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-                {{name}}
-            </div>
-            <div class="partial__two one-line__vertical-align">
-                {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-            </div>
+        <div class="item-name item-name__card" data-item-id="{{_id}}">
+            {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
         </div>
         {{/each}}
     </div>
