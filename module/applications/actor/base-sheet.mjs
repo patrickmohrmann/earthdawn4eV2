@@ -38,14 +38,13 @@ export default class ActorSheetEd extends ActorSheet {
     return expandObject( enrichment );
   }
 
-  async _enableHTMLEnrichmentItem( itemC ) {
-   let enrichmentItem = {};
-   // itemC.system.enrichmentItem = await TextEditor.enrichHTML( itemC.system.description.value, {
-    enrichmentItem = await TextEditor.enrichHTML( itemC.system.description.value, {
-      async: true,
-      secrets: this.actor.isOwner,
-    } );
-    return expandObject( enrichmentItem );
+  async _enableHTMLEnrichmentItem( item ) {
+    return expandObject(
+      await TextEditor.enrichHTML( item.system.description.value, {
+        async: true,
+        secret: this.actor.isOwner
+      } )
+    )
   }
 
   /* -------------------------------------------- */
@@ -54,16 +53,11 @@ export default class ActorSheetEd extends ActorSheet {
   async getData() {
     const systemData = super.getData();
     systemData.enrichment = await this._enableHTMLEnrichment();
-    let  itemCollection = this.actor.items;
-    for ( const itemC of itemCollection ) {
-      console.log ( itemC )
-      itemC.system.description.value = await this._enableHTMLEnrichmentItem( itemC );
-      console.log ( itemC )
-    }
-    // console.log( '[EARTHDAWN] Item data: ', systemData );
-
+    this.actor.items.forEach(
+      async ( item ) => {
+        item.system.description.value = await this._enableHTMLEnrichmentItem( item )
+      } );
     systemData.config = ED4E;
-
     return systemData;
   }
 
@@ -95,8 +89,7 @@ export default class ActorSheetEd extends ActorSheet {
     // Karma refresh button --> karma ritual
     html.find( ".button__Karma-refresh" ).click( this._onKarmaRefresh.bind( this ) );
 
-    // item card description
-    // Item summaries
+    // item card description shown on item click
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
   }
@@ -190,10 +183,11 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onCardExpand( event ) {
     event.preventDefault();
-    const toggler = $( event.currentTarget );
-    const cardAbilityClass = toggler.parent( ".card__ability" );
-    const itemNameClass = cardAbilityClass.parent( ".item-name" );
-    const itemDescription = itemNameClass.children( ".card__description" );
+
+    const itemDescription = $( event.currentTarget )
+    .parent( ".card__ability" )
+    .parent( ".item-name" )
+    .children( ".card__description" );
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
