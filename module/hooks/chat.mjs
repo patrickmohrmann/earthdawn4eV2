@@ -1,7 +1,8 @@
 const cmdMapping = {
   char: triggerCharGen,
   coin: triggerCoinAward,
-  group: triggerCRcalc,
+  group: triggerCrCalc,
+  h: triggerHelp,
   help: triggerHelp,
   lp: triggerLPAward,
   s: triggerRollStep,
@@ -18,7 +19,7 @@ export default function () {
    * /s Triggers Step roll
    */
   Hooks.on('chatMessage', (html, content, msg) => {
-    if (!Object.keys(CONFIG.ED4E.chatCommands).some((cmd) => content.startsWith(`/${cmd}`))) {
+    if (!Object.keys(CONFIG.ED4E.chatCommands).some((cmd) => content.startsWith(`/${cmd.toLowerCase()}`))) {
       // No ED command, continue Foundry workflow
       return true;
     }
@@ -32,28 +33,47 @@ export default function () {
     const cmdRegExp = /(?<command>\/\w+)(?<arguments>.*)/;
     const commandMatches = content.match(cmdRegExp);
 
-    return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments);
+    return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments.trim());
   });
 }
 
 function triggerCharGen(argString) {
-  ui.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  return false;
 }
 
 function triggerCoinAward(argString) {
-  ui.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  return false;
 }
 
-function triggerCRcalc(argString) {
-  ui.warn(game.i18n.localize('X.NotImplementedYet'));
+function triggerCrCalc(argString) {
+  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  return false;
 }
 
 function triggerHelp(argString) {
-  ui.warn(game.i18n.localize('X.NotImplementedYet'));
+  const helpText =
+    CONFIG.ED4E.chatCommands[argString.toLowerCase()] ??
+    `X.localize<br>
+    /char Triggers Character Generation<br>
+    /coin Triggers awarding Silver for players<br>
+    /group Triggers Group calculation for Challenging rates<br>
+    /help - Display a help message on all the commands above<br>
+    /lp Triggers awarding legend points for players<br>
+    /s Triggers Step roll<br>
+    `;
+
+  ChatMessage.create({
+    content: helpText,
+  });
+
+  return false;
 }
 
 function triggerLPAward(argString) {
-  ui.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  return false;
 }
 
 function triggerRollStep(argString) {
