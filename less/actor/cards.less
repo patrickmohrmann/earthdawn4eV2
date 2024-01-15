@@ -1,0 +1,106 @@
+// hier muss ein Grid her
+.item-name__card {
+    cursor: pointer;
+
+    div *> {
+        cursor: pointer;
+        
+    }
+
+    .card__ability {
+        display: flex;
+        gap: 15px;
+
+        label {
+            font-weight: bold;
+        }
+
+        .card__icon {
+            min-width: 25px;
+            float: left;
+
+            .roll-icon__hover,
+            .roll-icon__pointer {
+                height: 25px;
+                display: none;
+            }
+
+            .item__image {
+                display: block;
+            }
+        }
+
+        .card__name {
+            min-width: 150px;
+            float: left;
+        }
+        .card__name:hover {
+            color: #000;
+            text-shadow: 0 0 10px red;
+        }
+
+        .card__action {
+            min-width: 50px;
+            float: left;
+        }
+
+        .card__number {
+            min-width: 50px;
+            float: left;
+        }
+
+        .card__attribute {
+            min-width: 50px;
+            float: left;
+            text-transform: uppercase;
+            label {
+                text-transform: none;
+            }
+        }
+
+        .card__control {
+            float: right;
+            margin-left: auto;
+
+        }
+    }
+    .card__description--toggle {
+        display: none;
+        color: blue;
+        // display: flex;
+        // flex-direction: column;
+    }
+}
+
+.item-name__card {
+    .card__ability:hover {
+
+        .item__image,
+        .roll-icon__pointer {
+            height: 25px;
+            display: none;
+        }
+
+        .roll-icon__hover {
+            display: block;
+        }
+    }
+}
+
+.item-name__card {
+    .card__ability {
+        .card__icon:hover {
+
+        .item__image,
+        .roll-icon__hover {
+            height: 25px;
+            display: none;
+        }
+
+        .roll-icon__pointer {
+            display: block;
+            
+        }
+    }
+    }
+}

@@ -9,14 +9,14 @@ export default class ActorDescriptionTemplate extends foundry.abstract.DataModel
         return {
             // TODO: does chat properties/flavour fit in here?
             description: new foundry.data.fields.SchemaField( {
-            value: new foundry.data.fields.HTMLField( {
-                required: true, 
-                nullable: true, 
-                label: "ED.Description"
-            } ), 
-        } )
-    };
-}
+                value: new foundry.data.fields.HTMLField( {
+                    required: true, 
+                    nullable: true, 
+                    label: "ED.Description"
+                } ), 
+            } )
+        };
+    }
 
     /* -------------------------------------------- */
     /*  Migrations                                  */

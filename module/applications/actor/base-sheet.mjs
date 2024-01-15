@@ -29,25 +29,14 @@ export default class ActorSheetEd extends ActorSheet {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
   }
 
-  async _enableHTMLEnrichment() {
-    let enrichment = {};
-    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.actor.system.description.value, {
-      async: true,
-      secrets: this.actor.isOwner,
-    } );
-    return expandObject( enrichment );
-  }
-
   /* -------------------------------------------- */
   /*  Get Data            */
   /* -------------------------------------------- */
   async getData() {
     const systemData = super.getData();
-    systemData.enrichment = await this._enableHTMLEnrichment();
-    // console.log( '[EARTHDAWN] Item data: ', systemData );
-
+    systemData.enrichment = await this.actor._enableHTMLEnrichment();
+    await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
-
     return systemData;
   }
 
@@ -78,6 +67,10 @@ export default class ActorSheetEd extends ActorSheet {
 
     // Karma refresh button --> karma ritual
     html.find( ".button__Karma-refresh" ).click( this._onKarmaRefresh.bind( this ) );
+
+    // item card description shown on item click
+    html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
+
   }
 
   /**
@@ -164,5 +157,18 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onKarmaRefresh ( ) {
     this.actor.karmaRitual();
-  };
+  }
+
+
+  _onCardExpand( event ) {
+    event.preventDefault();
+
+    const itemDescription = $( event.currentTarget )
+    .parent( ".card__ability" )
+    .parent( ".item-name" )
+    .children( ".card__description" );
+
+    itemDescription.toggleClass( "card__description--toggle" );
+  }
+
 }
