@@ -39,14 +39,14 @@ export default function getDice( step ) {
         if ( step <= 20 ) {
             dice = stepTable[step];
         } else {
-            let i = step;
-            let loops = 0;
-            while ( i > 20 ) {
-                loops += 1;
-                i -= 11;
-            }
-            // 1d20 + 2d6
-            dice = loops +  '1d20+' + stepTable[i];
+          let i = step;
+          let loops = 0;
+          while (i > 20) {
+            loops += 1;
+            i -= 11;
+          }
+          // 1d20 + 2d6
+          dice = loops + 'd20+' + stepTable[i];
         }
     } else if ( edition === 'third' ) {
         dice = get3eDice( step );
