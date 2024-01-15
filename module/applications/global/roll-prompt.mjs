@@ -20,8 +20,10 @@ export default class RollPrompt extends FormApplication {
 
         this.resolve = resolve;
         this.edRollOptions = edRollOptions;
-        this.edRollOptions.step.modifiers.manual ??= 0;
         this.rollData = rollData;
+        this._updateObject(undefined, {
+          'step.modifiers.manual': edRollOptions.step.modifiers.manual ?? 0,
+        });
     }
 
     /**
@@ -106,7 +108,7 @@ export default class RollPrompt extends FormApplication {
 
     /** @inheritDoc */
     async _updateObject( event, formData ) {
-        return Promise.resolve( this._updateRollData( formData ) );
+      return Promise.resolve(this._updateRollData(formData)).then(this.render(true));
     }
 
     _validateAvailableRessource( event ) {
