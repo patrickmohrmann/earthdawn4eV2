@@ -146,4 +146,22 @@ export default class ActorEd extends Actor {
     this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
   }
 
+  async _enableHTMLEnrichment() {
+    let enrichment = {};
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.system.description.value, {
+      async: true,
+      secrets: this.isOwner,
+    } );
+    return expandObject( enrichment );
+  }
+
+  async _enableHTMLEnrichmentEmbeddedItems( ) {
+    for ( const item of this.items ) {
+      item.system.description.value = expandObject( await TextEditor.enrichHTML( item.system.description.value, {
+            async: true,
+            secrets: this.isOwner,
+          } )
+      );
+    }
+  }
 }

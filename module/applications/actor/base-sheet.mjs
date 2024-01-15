@@ -29,34 +29,13 @@ export default class ActorSheetEd extends ActorSheet {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
   }
 
-  async _enableHTMLEnrichment() {
-    let enrichment = {};
-    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.actor.system.description.value, {
-      async: true,
-      secrets: this.actor.isOwner,
-    } );
-    return expandObject( enrichment );
-  }
-
-  async _enableHTMLEnrichmentItem( item ) {
-    return expandObject(
-      await TextEditor.enrichHTML( item.system.description.value, {
-        async: true,
-        secret: this.actor.isOwner
-      } )
-    )
-  }
-
   /* -------------------------------------------- */
   /*  Get Data            */
   /* -------------------------------------------- */
   async getData() {
     const systemData = super.getData();
-    systemData.enrichment = await this._enableHTMLEnrichment();
-    this.actor.items.forEach(
-      async ( item ) => {
-        item.system.description.value = await this._enableHTMLEnrichmentItem( item )
-      } );
+    systemData.enrichment = await this.actor._enableHTMLEnrichment();
+    await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
     return systemData;
   }
