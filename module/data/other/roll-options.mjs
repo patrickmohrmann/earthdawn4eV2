@@ -155,13 +155,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
     };
   }
 
-  /** @inheritDoc */
-  updateSource(changes = {}, options = {}) {
-    const diff = super.updateSource(changes, options);
-    this.step.total = this.#totalStep;
-    this.karma.dice = getDice(this.karma.step);
-    this.devotion.dice = getDice(this.devotion.step);
-    return diff;
+  get #totalTarget() {
+    return this.target.base + sum(Object.values(this.target.modifiers));
   }
 
   static initTotalStep(source) {
@@ -171,6 +166,16 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
 
   get #totalStep() {
     return this.step.base + sum(Object.values(this.step.modifiers));
+  }
+
+  /** @inheritDoc */
+  updateSource(changes = {}, options = {}) {
+    const diff = super.updateSource(changes, options);
+    this.step.total = this.#totalStep;
+    this.target.total = this.#totalTarget;
+    this.karma.dice = getDice(this.karma.step);
+    this.devotion.dice = getDice(this.devotion.step);
+    return diff;
   }
 
   static initDiceForStep(parent) {
