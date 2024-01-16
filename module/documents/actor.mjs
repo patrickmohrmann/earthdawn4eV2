@@ -26,6 +26,17 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * Expand Item Cards by clicking on the name span
+   * @param {object} item item 
+   */
+  expandItemCards( item ) {
+    console.log( "card wurde geklickt" )
+    const itemDescriptionDocument = document.getElementsByClassName( "card__description" );
+    const currentItemElement = itemDescriptionDocument.nextElementSibling;
+    currentItemElement.classList.toggle( "d-none" )
+  }
+
+  /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.
@@ -135,4 +146,22 @@ export default class ActorEd extends Actor {
     this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
   }
 
+  async _enableHTMLEnrichment() {
+    let enrichment = {};
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.system.description.value, {
+      async: true,
+      secrets: this.isOwner,
+    } );
+    return expandObject( enrichment );
+  }
+
+  async _enableHTMLEnrichmentEmbeddedItems( ) {
+    for ( const item of this.items ) {
+      item.system.description.value = expandObject( await TextEditor.enrichHTML( item.system.description.value, {
+            async: true,
+            secrets: this.isOwner,
+          } )
+      );
+    }
+  }
 }
