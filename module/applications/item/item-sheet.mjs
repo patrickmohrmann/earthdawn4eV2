@@ -20,6 +20,11 @@ export default class ItemSheetEd extends ItemSheet {
           contentSelector: '.item-sheet-body',
           initial: 'main',
         },
+        {
+          navSelector: '.item-advancement-tabs',
+          contentSelector: '.item-advancement-body',
+          initial: 'main',
+        },
       ],
     } );
   }
@@ -73,7 +78,26 @@ export default class ItemSheetEd extends ItemSheet {
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+
+    // add extra Level to a class sheet
+    html.find( ".class__add-level" ).click( this._onClassLevelAdd.bind( this ) );
+    html.find( ".class__delete-level" ).click( this._onClassLevelDelete.bind( this ) );
   }
+
+  /**
+   * adding a level to the class item.
+   * @param { event } event click event
+   */
+  _onClassLevelAdd( event ) {
+    event.preventDefault();
+    this.item.addClassLevel();
+  }
+
+  _onClassLevelDelete( event ) {
+    event.preventDefault();
+    this.item.deleteClassLevel();
+  }
+
 
   /**
    * Handle creating an owned ActiveEffect for the Actor.

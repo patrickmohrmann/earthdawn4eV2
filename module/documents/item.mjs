@@ -24,4 +24,27 @@ export default class ItemEd extends Item {
             ui.notifications.warn( game.i18n.localize( "X.cantUpdateItemWeight" ) );
         }
     }
+
+    async addClassLevel( ) {
+        let newLevel = {
+            id: foundry.utils.randomID( 16 ),
+            level: this.system.advancementLevel.length + 1,
+            // level: "",
+            tier: "",
+            ability: "",
+            specialAbilities: "",
+            actveEffects: "",
+            karmaStep: "",
+        }
+        const additionalLevel = foundry.utils.deepClone( this.system.advancementLevel );
+        additionalLevel.push( newLevel );
+        await this.update( { "system.advancementLevel":additionalLevel }, { render: true } );
+    }
+
+    async deleteClassLevel() {
+        let levelList = this.system.advancementLevel;
+        let lastLevel = levelList.length - 1;
+        levelList.splice( lastLevel, 1 )
+        await this.update( { "system.advancementLevel":levelList }, { render: true } );
+    }
 }
