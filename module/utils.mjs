@@ -300,6 +300,9 @@ export async function preloadHandlebarsTemplates() {
     // cards
     "systems/ed4e/templates/item/cards/effect-card.hbs",
 
+    // other tabs
+    "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",
+
   ];
 
   const paths = {};

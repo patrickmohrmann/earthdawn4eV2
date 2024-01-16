@@ -1,0 +1,128 @@
+<div class="advancment__level">
+    {{!-- <h3> --}}
+        <div class="test">
+            <span class="advancement__title">
+            {{localize "X-Add-Level"}}
+            <a class="class__add-level" data-type="extra-level" title="{{localize " X-Add-Level" }}">
+                <I class="fas fa-plus"></I>
+            </a>
+            </span>
+            
+            {{!-- Option 8: delete, edit etc.
+            TODO: options only for GM --}}
+            <span class="item__control-group">
+                <a class="item-control item-display" title="Display Item">
+                    <i class="fas fa-comments"></i> 
+                </a>
+                <a class="item-control class__delete-level text-align-middle" title="Delete Item">
+                    <i class="fas fa-trash"></i>
+                </a>
+                {{!-- <a class="item-control item-edit text-align-middle" title="Edit Item">
+                    <i class="fas fa-edit"></i>
+                </a> --}}
+            </span>
+        </div>
+    {{!-- </h3> --}}
+    <section class="content">
+        <div class="advancement__navigator">
+            <nav class="item-advancement-tabs list__ordered-column--flex">
+                <ul class="no-bullets">
+                    {{#each item.system.advancementLevel as | this keyLevel | }}
+                    <li>
+                        <a data-tab="item-description-tab-{{this.level}}">Kreis {{this.level}}</a>
+                    </li>
+                    {{/each}}
+                </ul>
+
+            </nav>
+        </div>
+        <div class="advancement__content">
+            <div class="item-advancement-body discipline__level">
+                {{#each item.system.advancementLevel as | this keyLevel | }}
+                <div class="tab item-name" name="system.advancementLevel.{{keyLevel}}.id"
+                    data-tab="item-description-tab-{{this.level}}" value="{{this.keyLevel}}"
+                    data-item-id="{{keyLevel}}">
+                    <span class="oneLine text-align-middle">
+                        {{!-- Option 1: Level ID --}}
+                        <a class="">
+                            <input class="" name="system.advancementLevel.{{keyLevel}}.id" type="text"
+                                value="{{this.id}}" data-dtype="String" />
+                        </a>
+                        {{!-- Option 2: Level Number --}}
+                        <a class="">
+                            <input class="" name="system.advancementLevel.{{keyLevel}}.level" type="text"
+                                value="{{this.level}}" data-dtype="String" />
+                        </a>
+                        {{!-- Option 3: Discipline Talent
+                        TODO: possibility to dragdrop items into this input field and show them as links. And enable
+                        dragging them out of here (in JS) --}}
+                        <a class="">
+                            <input class="" name="system.advancementLevel.{{keyLevel}}.levelDisciplineTalent"
+                                type="text" value="{{this.levelDisciplineTalent}}" data-dtype="String"
+                                placeholder="Discipline Talent" />
+                        </a>
+                        {{!-- Option 4: Optional Talents
+                        TODO: option to choose the Tier only editable as GM --}}
+                        <a class="">
+                            <select class="" name="system.advancementLevel.{{keyLevel}}.levelOptionalTalentsTier"
+                                type="text" value="{{this.levelOptionalTalentsTier}}" data-dtype="String">
+                                {{#select item.system.advancementLevel.optionalTalentListNovice}}
+                                <option value="Novice">Novice</option>
+                                <option value="Journeymen">Journeymen</option>
+                                <option value="Warden">Warden</option>
+                                <option value="Master">Master</option>
+                                {{/select}}
+                            </select>
+                            </select>
+                        </a>
+                        {{!-- TODO: create a drop down list out of a field, where multiple items can be dragged into.
+                        all Items have to be Links
+                        TODO: fill the list based on the tier selection. Make a Devider for lower tiers and have the
+                        current tier on top of the list --}}
+                        <a class="">
+                            <select name="system.advancementLevel.optionalTalentList" class="inherent-width" type="text"
+                                value="{{item.system.advancementLevel.optionalTalentListNovice}}" data-dtype="String">
+                                {{#select item.system.advancementLevel.optionalTalentListNovice}}>
+                                <option value="OptionalTalent1">OptionalTalent1</option>
+                                <option value="OptionalTalent2">OptionalTalent2</option>
+                                <option value="OptionalTalent3">OptionalTalent3</option>
+                                <option value="OptionalTalent4">OptionalTalent4</option>
+                                <option value="...">...</option>
+                                {{/select}}
+                            </select>
+                        </a>
+                        {{!-- Option 5: Special Abilities
+                        TODO: possibility to drag&drop items into this input field and show them as links. And enable
+                        dragging them out of here (in JS)
+                        TODO: multiple items are possible --}}
+                        <a class="">
+                            <input class="" name="system.advancementLevel.{{keyLevel}}.levelSpecialAbility" type="text"
+                                value="{{this.levelSpecialAbility}}" data-dtype="String"
+                                placeholder="Special Abilities" />
+                        </a>
+
+                        {{!-- Option 7: Karma Step
+                        TODO: possibility to drag&drop items into this input field and show them as links. And enable
+                        dragging them out of here (in JS)
+                        TODO: multiple items are possible --}}
+                        <a class="">
+                            <input class="" name="system.advancementLevel.{{keyLevel}}.levelKarmaStep" type="text"
+                                value="{{this.levelKarmaStep}}" data-dtype="String" placeholder="KarmaStep" />
+                        </a>
+
+                        {{!-- Option 7: EAEs
+                        TODO: possibility to drag&drop items into this input field and show them as links. And enable
+                        dragging them out of here (in JS)
+                        TODO: multiple items are possible --}}
+                        <a class="">
+                            <input class="" name="system.advancementLevel.{{keyLevel}}.levelEarthdawnActiveEffects"
+                                type="text" value="{{this.levelEarthdawnActiveEffects}}" data-dtype="String"
+                                placeholder="Active Effects" />
+                        </a>
+                    </span>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+</div>

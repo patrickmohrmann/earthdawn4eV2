@@ -180,6 +180,14 @@ input.input__number-input {
   line-height: 25px;
   padding-top: 8px;
 }
+ul.no-bullets {
+  list-style-type: none;
+  /* Remove bullets */
+  padding: 0;
+  /* Remove padding */
+  margin: 0;
+  /* Remove margins */
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -852,6 +860,30 @@ input.input__number-input {
 }
 .editors {
   margin-top: 200px;
+}
+.discipline__level {
+  height: 500px;
+}
+.advancement__level h3 .test .advancement__title {
+  float: left;
+  width: 50%;
+}
+.advancement__level h3 .test .item__control-group {
+  float: right;
+  width: 50%;
+}
+.advancement__navigator {
+  float: left;
+  width: 15%;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  gap: 15px;
+  font-style: normal;
+}
+.advancement__content {
+  float: left;
+  width: 80%;
 }
 .actor-image {
   border: none;

@@ -8,6 +8,9 @@
             <a data-tab="item-description-tab">Beschreibung</a>
             <a data-tab="item-details-tab">Details</a>
             <a data-tab="item-effects-tab">Effekte etc</a>
+            {{#if (eq item.type "discipline") }}
+            <a data-tab="item-class-tab">Disciplines etc.</a>
+            {{/if}}
         </nav>
         <hr class="thematic-change">
     </div>
