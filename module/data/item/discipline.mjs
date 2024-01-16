@@ -1,3 +1,4 @@
+import AdvancementData from "../advancement/base-advancement.mjs";
 import ClassTemplate from "./templates/class.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
@@ -6,7 +7,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {number} durability durability value
  */
 export default class DisciplineData extends ClassTemplate.mixin(
-    ItemDescriptionTemplate
+    ItemDescriptionTemplate, AdvancementData
 ) {
 
     /** @inheritDoc */
