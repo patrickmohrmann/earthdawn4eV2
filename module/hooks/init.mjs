@@ -25,6 +25,33 @@ export default function () {
         // Register Roll Extensions
         CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
 
+        // // Register journal entry text transformation into a roll trigger
+        // CONFIG.TextEditor.enrichers.push( {
+        //     pattern: /(@Roll)\[(?=\s*\+?\s*)]/gi,
+
+        //     enricher: (  ) => {
+        //       let returnRoll = document.createElement( "a" );
+        //       returnRoll.title = "click to roll";
+        //       returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
+        //       return returnRoll;
+        //     },
+        //   } );
+
+        // config Request Roll
+  CONFIG.TextEditor.enrichers.push({
+    pattern: /(@RequestRoll)\[(.*?)\](?:{([^}]+)})?/gi,
+    enricher: (match, options) => {
+      let returnRoll = document.createElement('a');
+
+      returnRoll.innerHTML = match[3] ?? match[2];
+      returnRoll.dataset.talent = match[2];
+      returnRoll.dataset.skill = match[2];
+      returnRoll.classList.add( "journal--roll", "fa", "fa-dice" );
+      returnRoll.classList.add('myRequest');
+      return returnRoll;
+    },
+  });
+
         // Register Handlebars Helper
         registerHandlebarHelpers();
 
