@@ -31,6 +31,28 @@
       "extensions": ["css", "hbs", "json"]
     }
   },
+  "packs": [
+    {
+      "name": "manual",
+      "label": "System Manual",
+      "system": "ed4e",
+      "path": "packs/manual.db",
+      "type": "JournalEntry",
+      "banner": "modules/earthdawnbarsaive/pictures/artwork/banner/compendium.jpg",
+      "private": false,
+      "flags": {}
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Earthdawn Content",
+      "sorting": "m",
+      "color": "#0d4e09",
+      "packs": [
+        "manual"
+      ]
+    }
+  ],
   "languages": [
     {
       "lang": "en",
