@@ -72,19 +72,24 @@ function triggerHelp(argString) {
 }
 
 function triggerLPAward(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn( game.i18n.localize( "X.NotImplementedYet" ) );
   return false;
 }
 
+/**
+ * this triggers the chat command to roll steps using /s 
+ * @param {*} argString roll Options 
+ * @returns { number } step
+ */
 function triggerRollStep(argString) {
   const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
-  const steps = argString.match(argRegExp);
+  const steps = argString.match( argRegExp );
 
-  if (!steps) return true;
+  if ( !steps ) return true;
 
-  steps.forEach((currentStep) =>
-    new ed4e.dice.EdRoll(undefined, {}, { step: { total: Number(currentStep) } }).toMessage(),
-  );
+  steps.forEach( ( currentStep ) =>
+    new ed4e.dice.EdRoll( undefined, {}, { step: { total: Number( currentStep ) }, rollType: "arbitraryChat", chatFlavor: game.i18n.localize( "X.arbitraryChatRoll" ) } ).toMessage(  ),
+   );
 
   return false;
 }

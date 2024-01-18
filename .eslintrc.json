@@ -13,6 +13,7 @@
     "Actor": false,
     "ActorSheet": false,
     "Actors": false,
+    "ChatMessage": false,
     "CONFIG": false,
     "DataField": false,
     "DataModel": false,

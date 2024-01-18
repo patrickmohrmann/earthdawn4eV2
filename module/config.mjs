@@ -196,7 +196,9 @@ preLocalize( "encumbranceStatus" );
  * @enum {string}
  */
 ED4E.rollTypes = {
-	arbitrary: "X.arbitraryStepRoll",
+	ability: "X.abilityRoll",
+	arbitraryDialog: "X.arbitraryStepRoll",
+	arbitraryChat: "X.arbitraryChatRoll",
 	action: "X.actionTestRoll",
 	effect: "X.effectTestRoll",
 	damage: "X.damageTestRoll",
