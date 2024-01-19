@@ -12,6 +12,8 @@ import * as dice from "../dice/_module.mjs";
 import * as documents from "../documents/_module.mjs";
 import * as utils from "../utils.mjs";
 
+
+
 export default function () {
     Hooks.once( "init", () => {
         globalThis.ed4e = game.ed4e = Object.assign( game.system, globalThis.ed4e );
@@ -25,32 +27,42 @@ export default function () {
         // Register Roll Extensions
         CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
 
-        // // Register journal entry text transformation into a roll trigger
-        // CONFIG.TextEditor.enrichers.push( {
-        //     pattern: /(@Roll)\[(?=\s*\+?\s*)]/gi,
+        // Register journal entry text transformation into a roll trigger
+        CONFIG.TextEditor.enrichers.push( {
+            pattern: /@Roll\((\/s \d+(( )?\+( )?\d+)*)\)/g,
 
-        //     enricher: (  ) => {
-        //       let returnRoll = document.createElement( "a" );
-        //       returnRoll.title = "click to roll";
-        //       returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
-        //       return returnRoll;
-        //     },
-        //   } );
+            enricher: ( match ) => {
+                let returnRoll = document.createElement( "a" );
+                 returnRoll.innerHTML = match[1];
+                returnRoll.dataset.step = match[1]
+                // returnRoll.dataset.flavor = match[2];
+                returnRoll.title = "click to roll";
+                returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
+                return returnRoll;
+            },
+          } );
 
-        // config Request Roll
-  CONFIG.TextEditor.enrichers.push({
-    pattern: /(@RequestRoll)\[(.*?)\](?:{([^}]+)})?/gi,
-    enricher: (match, options) => {
-      let returnRoll = document.createElement('a');
+          // listener click to request roll
+            $( 'body' ).on( 'click', '.journal--roll', async ( event ) => {
+                let chatData = {
+                content: `${event.target.dataset.step}`,
+                };
+                 triggerRollStep( event.target.dataset.step );
+                await ChatMessage.create( chatData, {} );
+            } );
 
-      returnRoll.innerHTML = match[3] ?? match[2];
-      returnRoll.dataset.talent = match[2];
-      returnRoll.dataset.skill = match[2];
-      returnRoll.classList.add( "journal--roll", "fa", "fa-dice" );
-      returnRoll.classList.add('myRequest');
-      return returnRoll;
-    },
-  });
+            function triggerRollStep(argString) {
+                const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
+                const steps = argString.match(argRegExp);
+              
+                if (!steps) return true;
+              
+                steps.forEach((currentStep) =>
+                  new ed4e.dice.EdRoll(undefined, {}, { step: { total: Number(currentStep) } }).toMessage(),
+                );
+              
+                return false;
+              }
 
         // Register Handlebars Helper
         registerHandlebarHelpers();
