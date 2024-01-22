@@ -128,14 +128,52 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           hint: 'localize: all data about how the difficulty is composed',
         },
       ),
-      strain: new foundry.data.fields.NumberField({
-        required: true,
-        nullable: false,
-        min: 0,
-        initial: 0,
-        integer: true,
-        label: 'earthdawn.strain',
-      }),
+      strain: new foundry.data.fields.SchemaField(
+        {
+          base: new foundry.data.fields.NumberField({
+            required: true,
+            nullable: false,
+            min: 0,
+            initial: 0,
+            integer: true,
+            label: 'earthdawn.strain',
+          }),
+          modifiers: new MappingField(
+            new foundry.data.fields.NumberField({
+              required: true,
+              nullable: false,
+              initial: 1,
+              label: 'earthdawn.modifierStep',
+              hint: 'earthdawn.modifierStepForTheRoll',
+              min: 0,
+              step: 1,
+              integer: true,
+            }),
+            {
+              required: true,
+              initialKeysOnly: false,
+              label: 'allModifiers',
+              hint: 'keys are localizable labels of the given step modifying value',
+            },
+          ),
+          total: new foundry.data.fields.NumberField({
+            required: true,
+            nullable: false,
+            initial: this.initTotalStrain,
+            label: 'earthdawn.totalStep',
+            hint: 'earthdawn.totalStepForTheRoll',
+            min: 0,
+            step: 1,
+            integer: true,
+          }),
+        },
+        {
+          required: true,
+          nullable: false,
+          label: 'localize: step info',
+          hint: 'localize: all data about how the step is composed',
+        },
+      ),
       chatFlavor: new foundry.data.fields.StringField({
         required: true,
         nullable: false,
@@ -162,6 +200,11 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
   static initTotalStep(source) {
     const step = source.step?.base ?? source.base ?? 1;
     return step + sum(Object.values(source.step?.modifiers ?? {}));
+  }
+
+  static initTotalStrain(source) {
+    const strain = source.strain?.base ?? source.base ?? 0;
+    return strain + sum(Object.values(source.strain?.modifiers ?? {}));
   }
 
   get #totalStep() {
