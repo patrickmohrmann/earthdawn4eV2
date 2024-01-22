@@ -80,14 +80,14 @@ export default class EdRoll extends Roll {
    * @type {number}
    */
   get numSuccesses() {
-    if (!this.validEdRoll || !this._evaluated) return undefined;
-    return this.total < this.edRollOptions.target.total
+    if (!this.validEdRoll || !this._evaluated || !this.edRollOptions.target) return undefined;
+    return this.total < this.edRollOptions.target?.total
       ? 0
       : Math.trunc((this.total - this.edRollOptions.target.total) / 5) + 1;
   }
 
   get numExtraSuccesses() {
-    if (!this.validEdRoll || !this._evaluated) return undefined;
+    if (!this.validEdRoll || !this._evaluated || !this.edRollOptions.target) return undefined;
     return this.numSuccesses < 1 ? 0 : this.numSuccesses - 1;
   }
 
@@ -160,7 +160,33 @@ export default class EdRoll extends Roll {
   /** @inheritDoc */
   async toMessage(messageData = {}, options = {}) {
     if (!this._evaluated) await this.evaluate({ async: true });
-    messageData.flavor ??= `${this.edRollOptions.chatFlavor}<br>Difficulty: ${this.edRollOptions.target.total}<br>Num Successes: ${this.numSuccesses}<br>Num Extra Successes: ${this.numExtraSuccesses}`;
+
+    // the localization keys need to be adjusted
+    // the template literal is only so we can see the numbers during development
+    const difficulty =
+      this.edRollOptions.target?.total >= 0
+        ? game.i18n.format(`<br>X.Difficulty: ${this.edRollOptions.target.total}`, {
+            difficulty: this.edRollOptions.target.total,
+          })
+        : '';
+    const numSuccesses =
+      this.numSuccesses >= 0
+        ? game.i18n.format(`<br>X.Num Successes: ${this.numSuccesses}`, { numSuccesses: this.numSuccesses })
+        : '';
+    const numExtraSuccesses =
+      this.numExtraSuccesses >= 0
+        ? game.i18n.format(`<br>X.Num Extra Successes: ${this.numExtraSuccesses}`, {
+            numExtraSuccesses: this.numExtraSuccesses,
+          })
+        : '';
+
+    messageData.flavor ??= `
+      ${this.edRollOptions.chatFlavor ?? ''}
+      ${difficulty}
+      ${numSuccesses}
+      ${numExtraSuccesses}
+    `;
+
     return super.toMessage(messageData, options);
   }
 }
