@@ -209,6 +209,7 @@ export default class EdRoll extends Roll {
 
     return renderTemplate( this.constructor.TOOLTIP_TEMPLATE, { parts } );
   }
+
   /** @inheritDoc */
   async toMessage(messageData = {}, options = {}) {
     if (!this._evaluated) await this.evaluate({ async: true });
