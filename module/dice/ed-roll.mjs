@@ -36,8 +36,6 @@ export default class EdRoll extends Roll {
         }]`;
     super(baseTerm, data, edRollOptions);
 
-    this.edRollOptions = edRollOptions;
-
     if (!this.options.extraDiceAdded) this.#addExtraDice();
     if (!this.options.configured) this.#configureModifiers();
   }
@@ -80,14 +78,14 @@ export default class EdRoll extends Roll {
    * @type {number}
    */
   get numSuccesses() {
-    if (!this.validEdRoll || !this._evaluated || !this.edRollOptions.target) return undefined;
-    return this.total < this.edRollOptions.target?.total
+    if (!this.validEdRoll || !this._evaluated || !this.options.target) return undefined;
+    return this.total < this.options.target?.total
       ? 0
-      : Math.trunc((this.total - this.edRollOptions.target.total) / 5) + 1;
+      : Math.trunc((this.total - this.options.target.total) / 5) + 1;
   }
 
   get numExtraSuccesses() {
-    if (!this.validEdRoll || !this._evaluated || !this.edRollOptions.target) return undefined;
+    if (!this.validEdRoll || !this._evaluated || !this.options.target) return undefined;
     return this.numSuccesses < 1 ? 0 : this.numSuccesses - 1;
   }
 
@@ -96,7 +94,7 @@ export default class EdRoll extends Roll {
    * @type {string|undefined}
    */
   get chatFlavor() {
-    return this.edRollOptions.chatFlavor;
+    return this.options.chatFlavor;
   }
 
   /**
@@ -104,7 +102,7 @@ export default class EdRoll extends Roll {
    * @type {string}
    */
   set chatFlavor(flavor) {
-    this.edRollOptions.updateSource({
+    this.options.updateSource({
       chatFlavor: flavor,
     });
   }
@@ -140,11 +138,11 @@ export default class EdRoll extends Roll {
    * @param {"karma"|"devotion"} type
    */
   #addResourceDice(type) {
-    const pointsUsed = this.edRollOptions[type]?.pointsUsed;
+    const pointsUsed = this.options[type]?.pointsUsed;
     if (pointsUsed > 0) {
       let diceTerm, newTerms;
       for (let i = 1; i <= pointsUsed; i++) {
-        diceTerm = getDice(this.edRollOptions[type].step);
+        diceTerm = getDice(this.options[type].step);
         newTerms = Roll.parse(`+ (${diceTerm})[${game.i18n.localize(`ED.General.${type[0]}.${type}`)} ${i}]`);
         this.terms.push(...newTerms);
       }
@@ -164,9 +162,9 @@ export default class EdRoll extends Roll {
     // the localization keys need to be adjusted
     // the template literal is only so we can see the numbers during development
     const difficulty =
-      this.edRollOptions.target?.total >= 0
-        ? game.i18n.format(`<br>X.Difficulty: ${this.edRollOptions.target.total}`, {
-            difficulty: this.edRollOptions.target.total,
+      this.options.target?.total >= 0
+        ? game.i18n.format(`<br>X.Difficulty: ${this.options.target.total}`, {
+            difficulty: this.options.target.total,
           })
         : '';
     const numSuccesses =
@@ -181,7 +179,7 @@ export default class EdRoll extends Roll {
         : '';
 
     messageData.flavor ??= `
-      ${this.edRollOptions.chatFlavor ?? ''}
+      ${this.options.chatFlavor ?? ''}
       ${difficulty}
       ${numSuccesses}
       ${numExtraSuccesses}
