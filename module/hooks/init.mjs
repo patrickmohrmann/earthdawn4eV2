@@ -28,39 +28,31 @@ export default function () {
         CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
 
         // Register journal entry text transformation into a roll trigger
-        CONFIG.TextEditor.enrichers.push( {
-            pattern: /@Roll\((\/s \d+(( )?\+( )?\d+)*)\)/g,
+        _enrichJournalsToRoll();
 
-            enricher: ( match ) => {
-                let returnRoll = document.createElement( "a" );
-                 returnRoll.innerHTML = match[1];
-                returnRoll.dataset.step = match[1]
-                // returnRoll.dataset.flavor = match[2];
-                returnRoll.title = "click to roll";
-                returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
-                return returnRoll;
-            },
-          } );
 
+          // in application @Patrick
           // listener click to request roll
             $( 'body' ).on( 'click', '.journal--roll', async ( event ) => {
-                let chatData = {
-                content: `${event.target.dataset.step}`,
-                };
-                 triggerRollStep( event.target.dataset.step );
-                await ChatMessage.create( chatData, {} );
+                let step = event.target.dataset.step
+                let chatFlavor= event.target.dataset.flavor
+                 triggerRollStep( step, chatFlavor );
             } );
 
-            function triggerRollStep(argString) {
+            // in Journal document @Patrick
+            /**
+             * @description creating the roll
+             * @param {string} argString step
+             * @param {string} chatFlavor chatflavor
+             * @returns 
+             */
+            function triggerRollStep( argString, chatFlavor ) {
                 const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
-                const steps = argString.match(argRegExp);
-              
-                if (!steps) return true;
-              
-                steps.forEach((currentStep) =>
-                  new ed4e.dice.EdRoll(undefined, {}, { step: { total: Number(currentStep) } }).toMessage(),
+                const steps = argString.match( argRegExp );
+                if ( !steps ) return true;
+                steps.forEach( ( currentStep ) =>
+                  new ed4e.dice.EdRoll( undefined, {}, { step: { total: Number( currentStep ) }, chatFlavor: chatFlavor } ).toMessage(),
                 );
-              
                 return false;
               }
 
@@ -99,12 +91,59 @@ export default function () {
     } );
 }
 
+// /**
+//  * @summary Enrich Journals to be able to create roll triger as inline text
+//  */
+// function _enrichJournalsToRoll () {
+//     CONFIG.TextEditor.enrichers.push( {
+//         pattern: /@Roll\((\/s \d+(( )?\+( )?\d+)*)\)(\(([A-z]*)\))/g,
+//         // in eine extra Function @Patrick
+//         enricher: ( match ) => {
+//             let returnRoll = document.createElement( "a" );
+//             returnRoll.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
+//             returnRoll.dataset.step = match[1]
+//             returnRoll.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
+//             returnRoll.title = "click to roll";
+//             returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
+//             return returnRoll;
+//         },
+//       } );
+// }
+
+
+
+function _enrichJournalsToRoll () {
+    CONFIG.TextEditor.enrichers.push( {
+        pattern: /@Roll\((\/s \d+(( )?\+( )?\d+)*)\)(\(([A-z]*)\))/g,
+        // in eine extra Function @Patrick
+        enricher: ( match ) => {
+            let returnRoll = document.createElement( "a" );
+            // returnRoll.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
+            let textNode = document.createTextNode ( returnRoll.innerHTML )
+            textNode = document.createElement( "a" )
+            textNode.dataset.step = match[1];
+            textNode.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
+            returnRoll.appendChild( textNode );
+            textNode.classList.add( "journal--roll" );
+            textNode.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
+            
+            returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
+
+            returnRoll.dataset.step = match[1]
+            returnRoll.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
+            returnRoll.title = "click to roll";
+            returnRoll.classList.add( "journal--roll" );
+            return returnRoll;
+        },
+    } );
+}
+
+/**
+ * @summary Dark theme gradient calculation
+ * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
+ * @description darkValue percentage value in 5% steps
+ */
 function _registerDarkMode() {
-    /**
-     * @summary Dark theme gradient calculation
-     * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
-     * @param {number} darkValue percentage value in 5% steps
-     */
     const darkValue = game.settings.get( "ed4e", "darkMode" ) * 5 + 50;
     const bgValue = 255 - ( darkValue * 2.55 );
     const textValue = darkValue * 2.55;
