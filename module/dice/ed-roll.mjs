@@ -1,4 +1,5 @@
 import getDice from "./step-tables.mjs";
+import { sum } from "../utils.mjs";
 
 /**
  * EdRollOptions for creating an EdRoll instance.
@@ -10,9 +11,9 @@ import getDice from "./step-tables.mjs";
  * @property { object } additional Additional, non-standard, additions like extra steps for a separate dice (like flame weapon).
  * @property { number } strain How much strain this roll will cost
  * @property { string } testType Type of roll, action test or effect test.
- * @property { string } rollType Type of roll, like 
- *                               damageRanged (Effect), damageMelee (Effect), attackRanged, attackMelee, 
- *                               ability, 
+ * @property { string } rollType Type of roll, like
+ *                               damageRanged (Effect), damageMelee (Effect), attackRanged, attackMelee,
+ *                               ability,
  *                               resistances (Effect), reaction, opposed
  *                               spellCasting, threadWeaving, spellCastingEffect (Effect)
  *                               Initiative (effect), Recovery (Effect), effects (Effect)
@@ -160,6 +161,54 @@ export default class EdRoll extends Roll {
    */
   configureRollPrompt() {}
 
+  /**
+   * Create the `rolls` part of the tooltip for displaying dice icons with results.
+   * @param {DiceTerm[]} diceTerms An array of dice terms with multiple results to be combined
+   * @returns {{}[]} The desired classes
+   */
+  #getTooltipsRollData( diceTerms ) {
+    const rolls = diceTerms.map( diceTerm => {
+      return diceTerm.results.map( r => {
+        return {
+          result: diceTerm.getResultLabel( r ),
+          classes: diceTerm.getResultCSS( r ).filterJoin(" ")
+        }
+      } )
+    } );
+
+    return rolls.flat( Infinity );
+  }
+
+  /**
+   * @inheritDoc
+   */
+  async getTooltip() {
+    const partsByFlavor = this.dice.reduce( ( acc, diceTerm ) => {
+      const key = diceTerm.flavor;
+      acc[key] = acc[key] ?? [];
+      acc[key].push( diceTerm );
+      return acc;
+    }, {} );
+
+    // Sort the dice terms of each part by size of the dice
+    Object.values( partsByFlavor ).forEach(
+      diceList => diceList.sort(
+        ( a, b ) => a.faces - b.faces
+      )
+    );
+
+    const parts = Object.keys( partsByFlavor ).map( part => {
+      return {
+        formula: partsByFlavor[part].map( d => d.expression ).join( " + " ),
+        total: sum( partsByFlavor[part].map( d => d.total ) ),
+        faces: undefined,
+        flavor: part,
+        rolls: this.#getTooltipsRollData( partsByFlavor[part] )
+      }
+    } );
+
+    return renderTemplate( this.constructor.TOOLTIP_TEMPLATE, { parts } );
+  }
   /** @inheritDoc */
   async toMessage(messageData = {}, options = {}) {
     if (!this._evaluated) await this.evaluate({ async: true });
