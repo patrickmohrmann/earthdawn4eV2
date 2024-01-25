@@ -41,6 +41,11 @@ export default class EdRoll extends Roll {
   }
 
   /**
+   * @inheritDoc
+   */
+  static TOOLTIP_TEMPLATE = "systems/ed4e/templates/dice/tooltip.hbs";
+
+  /**
    * Is this roll a valid Earthdawn test?
    * @type {boolean}
    */
