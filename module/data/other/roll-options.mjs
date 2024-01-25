@@ -17,7 +17,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             min: 1,
             step: 1,
             integer: true,
-          }),
+          } ),
           modifiers: new MappingField(
             new foundry.data.fields.NumberField({
               required: true,
@@ -28,7 +28,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               min: 0,
               step: 1,
               integer: true,
-            }),
+            } ),
             {
               required: true,
               initialKeysOnly: false,
@@ -45,7 +45,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             min: 1,
             step: 1,
             integer: true,
-          }),
+          } ),
         },
         {
           required: true,
@@ -64,14 +64,14 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             initial: [],
             label: 'array of dice terms',
             hint: 'extra dice terms used for the roll',
-          }),
+          } ),
           labels: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), {
             required: true,
             nullable: false,
             initial: [],
             label: 'labels for the extra dice terms',
             hint: 'each label corresponds to one dice in terms',
-          }),
+          } ),
         },
         {
           required: true,
@@ -91,7 +91,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             min: 1,
             step: 1,
             integer: true,
-          }),
+          } ),
           modifiers: new MappingField(
             new foundry.data.fields.NumberField({
               required: true,
@@ -102,7 +102,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               min: 1,
               step: 1,
               integer: true,
-            }),
+            } ),
             {
               required: true,
               initialKeysOnly: false,
@@ -119,7 +119,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             min: 1,
             step: 1,
             integer: true,
-          }),
+          } ),
         },
         {
           required: true,
@@ -135,7 +135,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         initial: 0,
         integer: true,
         label: 'earthdawn.strain',
-      }),
+      } ),
       chatFlavor: new foundry.data.fields.StringField({
         required: true,
         nullable: false,
@@ -143,7 +143,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         initial: '',
         label: 'localize: roll chat flavour',
         hint: 'localize: text that is added to the chatmessage when this call is put to chat',
-      }),
+      } ),
       rollType: new foundry.data.fields.StringField({
         required: true,
         nullable: false,
@@ -151,21 +151,21 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         initial: '',
         label: 'localize: roll type',
         hint: 'localize: type of this roll, like action or effect test, or arbitrary step roll',
-      }),
+      } ),
     };
   }
 
   get #totalTarget() {
-    return this.target.base + sum(Object.values(this.target.modifiers));
+    return this.target.base + sum( Object.values( this.target.modifiers ) );
   }
 
-  static initTotalStep(source) {
+  static initTotalStep( source ) {
     const step = source.step?.base ?? source.base ?? 1;
-    return step + sum(Object.values(source.step?.modifiers ?? {}));
+    return step + sum( Object.values( source.step?.modifiers ?? {} ) );
   }
 
   get #totalStep() {
-    return this.step.base + sum(Object.values(this.step.modifiers));
+    return this.step.base + sum( Object.values( this.step.modifiers ) );
   }
 
   /** @inheritDoc */
