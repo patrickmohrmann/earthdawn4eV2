@@ -124,7 +124,7 @@ function _enrichJournalsToRoll () {
             textNode.dataset.step = match[1];
             textNode.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
             returnRoll.appendChild( textNode );
-            textNode.classList.add( "journal--roll" );
+            textNode.classList.add( "journal--roll", "strong" );
             textNode.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
             
             returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
