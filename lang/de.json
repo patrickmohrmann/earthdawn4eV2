@@ -426,7 +426,8 @@
         "Rolls": {
             "formulaStep":                                          "Stufe {step}",
             "formulaKarma":                                         "{amount}x Karma (St {step})",
-            "formulaDevotion":                                      "{amount}x Weihe (St {step})"
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})"
         },
         "Sheet": {
             "Descriptions": {
