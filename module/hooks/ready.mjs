@@ -11,6 +11,7 @@ export default function () {
     /* -------------------------------------------- */
     /*  Debug Documents                             */
     /* -------------------------------------------- */
+
     await _createDebugDocuments();
   });
 }
@@ -19,6 +20,10 @@ export default function () {
  * Creation of actors and items for debugging purposes
  */
 async function _createDebugDocuments() {
+
+    /* -------------------------------------------- */
+    /*  Documents                                   */
+    /* -------------------------------------------- */
     // Create on document for each type
 
     game.folders.forEach( ( value, key, map ) => {
@@ -80,4 +85,51 @@ async function _createDebugDocuments() {
         createdItems.talent.toObject(),
         createdItems.weapon.toObject(),
     ] );
+
+    /* -------------------------------------------- */
+    /*  Dice                                        */
+    /* -------------------------------------------- */
+    // Create a dice roll with all possible options and evaluate it to chat
+
+    game.messages.forEach( ( value, key, map ) => {
+        if ( value.getFlag( "world", "deleteOnStartup" ) ) value.delete();
+    } );
+
+    const rollOptions = new ed4e.dataModels.other.RollData( {
+        rollType: "X.arbitraryStepRoll",
+        chatFlavor: "X-Arbitrary-Step",
+        step: {
+            base: 38,
+            modifiers: {
+                manual: 1
+            }
+        },
+        karma: {
+            pointsUsed: 4,
+            available: 0,
+            step: 9
+        },
+        devotion: {
+            pointsUsed: 2,
+            available: 0,
+            step: 4
+        },
+        extraDice: {
+            "Flame Weapon": 4,
+            "Night's Edge": 2
+        },
+        target: {
+            base: 14,
+            modifiers: {
+                "Earth Armor": 2
+            }
+        }
+    } )
+    const roll = ed4e.dice.EdRoll.create(
+      undefined,
+      {},
+      rollOptions
+    );
+    const rollMsg = await roll.toMessage();
+    await rollMsg.setFlag( "world", "deleteOnStartup", true);
 }
