@@ -104,7 +104,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           total: new foundry.data.fields.NumberField({
             required: true,
             nullable: false,
-            initial: 1,
+            initial: this.initTotalTarget,
             label: 'earthdawn.totalDifficulty',
             hint: 'earthdawn.totalDifficultyForTheRoll',
             min: 1,
@@ -188,14 +188,21 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
     return this.target.base + sum(Object.values(this.target.modifiers));
   }
 
+  static initTotal( source, attribute, defaultValue ){
+    const value = source?.[attribute]?.base ?? source.base ?? defaultValue;
+    return value + sum(Object.values(source?.[attribute]?.modifiers ?? {}));
+  }
+
   static initTotalStep(source) {
-    const step = source.step?.base ?? source.base ?? 1;
-    return step + sum(Object.values(source.step?.modifiers ?? {}));
+    return EdRollOptions.initTotal( source, "step", 1 );
   }
 
   static initTotalStrain(source) {
-    const strain = source.strain?.base ?? source.base ?? 0;
-    return strain + sum(Object.values(source.strain?.modifiers ?? {}));
+    return EdRollOptions.initTotal( source, "strain", 0 );
+  }
+
+  static initTotalTarget(source) {
+    return EdRollOptions.initTotal( source, "target", 1 );
   }
 
   get totalStep() {
