@@ -56,30 +56,21 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
       ),
       karma: this.#bonusResource,
       devotion: this.#bonusResource,
-      extraDice: new foundry.data.fields.SchemaField(
-        {
-          terms: new foundry.data.fields.ArrayField(new FormulaField({ nullable: true }), {
-            required: true,
-            nullable: false,
-            initial: [],
-            label: 'array of dice terms',
-            hint: 'extra dice terms used for the roll',
-          }),
-          labels: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), {
-            required: true,
-            nullable: false,
-            initial: [],
-            label: 'labels for the extra dice terms',
-            hint: 'each label corresponds to one dice in terms',
-          }),
-        },
-        {
-          required: true,
-          nullable: false,
-          label: 'localize: ExtraDice',
-          hint: 'localize: any extra dice terms for the roll with their labels',
-        },
-      ),
+      extraDice: new MappingField( new foundry.data.fields.NumberField({
+        required: true,
+        nullable: false,
+        initial: 1,
+        label: 'earthdawn.baseStep',
+        hint: 'earthdawn.baseStepForTheRoll',
+        min: 1,
+        step: 1,
+        integer: true,
+      }), {
+        required: true,
+        initialKeysOnly: false,
+        label: 'extra Steps apart from step, karma and devotion',
+        hint: 'keys are localized labels of the given extra step',
+      }),
       target: new foundry.data.fields.SchemaField(
         {
           base: new foundry.data.fields.NumberField({
