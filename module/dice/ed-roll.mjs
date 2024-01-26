@@ -114,6 +114,38 @@ export default class EdRoll extends Roll {
   }
 
   /**
+   * Returns the formula string based on strings instead of dice.
+   * @type {string}
+   */
+  get #stepsFormula() {
+    const formulaParts = [
+      game.i18n.format(
+        "ED.Rolls.formulaStep", {
+          step: this.options.step.total
+        }
+      ),
+      this.options.karma.pointsUsed
+        ? game.i18n.format(
+          "ED.Rolls.formulaKarma", {
+            step: this.options.karma.step,
+            amount: this.options.karma.pointsUsed
+          }
+        )
+        : undefined,
+      this.options.devotion.pointsUsed
+        ? game.i18n.format(
+          "ED.Rolls.formulaDevotion", {
+            step: this.options.devotion.step,
+            amount: this.options.devotion.pointsUsed
+          }
+        )
+        : undefined,
+    ];
+
+    return formulaParts.filterJoin(" + ");
+  }
+
+  /**
    * Apply modifiers to make all dice explode.
    * @private
    */
@@ -161,6 +193,10 @@ export default class EdRoll extends Roll {
    */
   configureRollPrompt() {}
 
+  /* -------------------------------------------- */
+  /*  Chat Messages                               */
+  /* -------------------------------------------- */
+
   /**
    * Create the `rolls` part of the tooltip for displaying dice icons with results.
    * @param {DiceTerm[]} diceTerms An array of dice terms with multiple results to be combined
@@ -178,6 +214,8 @@ export default class EdRoll extends Roll {
 
     return rolls.flat( Infinity );
   }
+
+  /* -------------------------------------------- */
 
   /**
    * @inheritDoc
@@ -209,6 +247,30 @@ export default class EdRoll extends Roll {
 
     return renderTemplate( this.constructor.TOOLTIP_TEMPLATE, { parts } );
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a Roll instance to HTML
+   * @param {object} [options={}]                  Options which affect how the Roll is rendered
+   * @param {string} [options.flavor]              Flavor text to include
+   * @param {string} [options.template]            A custom HTML template path
+   * @param {boolean} [options.isPrivate=false]    Is the Roll displayed privately?
+   * @returns {Promise<string>}                    The rendered HTML template as a string
+   */
+  async render({flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={}) {
+    if ( !this._evaluated ) await this.evaluate({async: true});
+    const chatData = {
+      formula: isPrivate ? "???" : this.#stepsFormula,
+      flavor: isPrivate ? null : flavor,
+      user: game.user.id,
+      tooltip: isPrivate ? "" : await this.getTooltip(),
+      total: isPrivate ? "?" : Math.round(this.total * 100) / 100
+    };
+    return renderTemplate(template, chatData);
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   async toMessage(messageData = {}, options = {}) {
