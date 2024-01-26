@@ -142,6 +142,18 @@ export default class EdRoll extends Roll {
         : undefined,
     ];
 
+    formulaParts.push( ...Object.entries(
+      this.options.extraDice
+    ).map(
+      ( [label, step] ) => game.i18n.format(
+        "ED.Rolls.formulaExtraStep",
+        {
+          label,
+          step
+        }
+      )
+    ) );
+
     return formulaParts.filterJoin(" + ");
   }
 
