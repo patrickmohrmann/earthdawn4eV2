@@ -178,6 +178,7 @@ export default class EdRoll extends Roll {
   #addExtraDice() {
     this.#addResourceDice('karma');
     this.#addResourceDice('devotion');
+    this.#addExtraSteps();
 
     // Mark extra dice as complete
     this.options.extraDiceAdded = true;
@@ -193,9 +194,29 @@ export default class EdRoll extends Roll {
       let diceTerm, newTerms;
       for (let i = 1; i <= pointsUsed; i++) {
         diceTerm = getDice(this.options[type].step);
-        newTerms = Roll.parse(`+ (${diceTerm})[${game.i18n.localize(`ED.General.${type[0]}.${type}`)} ${i}]`);
-        this.terms.push(...newTerms);
+        newTerms = Roll.parse(
+          `+ (${diceTerm})[${game.i18n.localize(`ED.General.${type[0]}.${type}`)} ${i}]`,
+          {}
+        );
+        this.terms.push( ...newTerms );
       }
+      this.resetFormula();
+    }
+  }
+
+  /**
+   * Add the dice from extra steps (like "Flame Weapon" or "Night's Edge").
+   */
+  #addExtraSteps() {
+    if ( !isEmpty( this.options?.extraDice ) ) {
+      Object.entries( this.options.extraDice ).forEach( ( [label, step] ) => {
+        const diceTerm = getDice( step );
+        const newTerms = Roll.parse(
+          `+ (${diceTerm})[${label}]`,
+          {}
+        );
+        this.terms.push( ...newTerms );
+      } );
       this.resetFormula();
     }
   }
