@@ -423,6 +423,11 @@
             "relation":                                             "Beziehung",
             "relations":                                            "Beziehungen"
         },
+        "Rolls": {
+            "formulaStep":                                          "Stufe {step}",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})"
+        },
         "Sheet": {
             "Descriptions": {
                 "burrow":                                           "Graben",                
