@@ -60,6 +60,11 @@
             "WIL":                                              "WIL",
             "willpower":                                        "Willpower"
         },
-        "classes":                                              "Vocation"
+        "classes":                                              "Vocation",
+        "Rolls": {
+            "formulaStep":                                          "Step {step}",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaDevotion":                                      "{amount}x Devotion (St {step})"
+        }
     }
 }
