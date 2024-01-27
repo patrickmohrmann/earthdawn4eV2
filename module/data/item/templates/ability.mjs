@@ -24,6 +24,7 @@ export default class AbilityTemplate extends SystemDataModel {
                 required: false,
                 nullable: true,
                 blank: true,
+                initital: "strength",
                 label: "ED.Item.Ability.attribute"
             } ),
             source: new foundry.data.fields.SchemaField( {
