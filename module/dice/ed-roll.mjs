@@ -272,9 +272,13 @@ export default class EdRoll extends Roll {
     const templateData = {};
 
     templateData.customFlavor = this.options.chatFlavor;
+    templateData.step = this.options.step;
+    templateData.target = this.options.target;
+    templateData.rollType = ED4E.rollTypes[this.options.rollType].label;
     templateData.difficulty = this.options.target?.total ?? 1;
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
+    templateData.ruleOfOne = this.isRuleOfOne;
 
     return templateData;
   }
