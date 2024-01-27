@@ -53,6 +53,25 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
+  async rollAbility ( ability, options = { } ) {
+    const abilityType = ability.type;
+    const level = ability.system.level;
+    const attribute = ability.system.attribute;
+    const attributeStep = this.system.attributes[attribute].step;
+    const step = attributeStep + level;
+    const strain = ability.system.strain;
+    const edRollOptions = new EdRollOptions( {
+      step: { base: step },
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      strain: { base: strain },
+      chatFlavor: `${game.i18n.localize( abilityType )} Test`,
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    this.#processRoll( roll );
+    // const abilityStep = this.system;
+  }
+
   /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
    * damage according to the parameters.
