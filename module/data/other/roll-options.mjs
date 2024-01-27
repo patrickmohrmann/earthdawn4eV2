@@ -111,6 +111,13 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             step: 1,
             integer: true,
           }),
+          public: new foundry.data.fields.BooleanField( {
+            required: true,
+            nullable: false,
+            initial: true,
+            label: "X.targetPublic",
+            hint: "X.whetherTheDifficultyIsKnownPublicly"
+          } ),
         },
         {
           required: true,

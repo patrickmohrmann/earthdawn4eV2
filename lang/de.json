@@ -427,7 +427,15 @@
             "formulaStep":                                          "Stufe {step}",
             "formulaKarma":                                         "{amount}x Karma (St {step})",
             "formulaDevotion":                                      "{amount}x Weihe (St {step})",
-            "formulaExtraStep":                                     "{label} (St {step})"
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "Chat": {
+                "rollTypeHeading":                                  "{rollType} von {roller}",
+                "stepModifiers":                                    "Stufe {step}",
+                "targetModifiers":                                  "Schwierigkeit {target}",
+                "baseValue":                                        "Basis",
+                "difficulty":                                       "Schwierigkeit",
+                "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)"
+            }
         },
         "Sheet": {
             "Descriptions": {

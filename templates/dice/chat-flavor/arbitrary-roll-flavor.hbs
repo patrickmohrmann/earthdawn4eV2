@@ -1,23 +1,9 @@
-const tmp = `
-${this.options.chatFlavor ?? ''}
-${difficulty}
-${numSuccesses}
-${numExtraSuccesses}
-`;
-
-const difficulty =
-this.options.target?.total >= 0
-? game.i18n.format(`<br>X.Difficulty: ${this.options.target.total}`, {
-difficulty: this.options.target.total,
-})
-: '';
-const numSuccesses =
-this.numSuccesses >= 0
-? game.i18n.format(`<br>X.Num Successes: ${this.numSuccesses}`, { numSuccesses: this.numSuccesses })
-: '';
-const numExtraSuccesses =
-this.numExtraSuccesses >= 0
-? game.i18n.format(`<br>X.Num Extra Successes: ${this.numExtraSuccesses}`, {
-numExtraSuccesses: this.numExtraSuccesses,
-})
-: '';
+<h5 class="roll-type">{{localize "ED.Rolls.Chat.rollTypeHeading" rollType=rollType roller=roller}}</h5>
+<div class="custom-flavor">{{ customFlavor }}</div>
+{{> "systems/ed4e/templates/dice/dice-partials/roll-successes.hbs"}}
+<div class="modifier-lists flexrow">
+  {{> "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs"}}
+  {{#if target.public}}
+  {{> "systems/ed4e/templates/dice/dice-partials/roll-target-modifier.hbs"}}
+  {{/if}}
+</div>

@@ -62,11 +62,18 @@
         },
         "classes":                                              "Vocation",
         "Rolls": {
-            "formulaStep":                                          "Step {step}",
-            "formulaKarma":                                         "{amount}x Karma (St {step})",
-            "formulaDevotion":                                      "{amount}x Devotion (St {step})",
-            "formulaExtraStep":                                     "{label} (St {step})"
-
+            "formulaStep":                                      "Step {step}",
+            "formulaKarma":                                     "{amount}x Karma (St {step})",
+            "formulaDevotion":                                  "{amount}x Devotion (St {step})",
+            "formulaExtraStep":                                 "{label} (St {step})",
+            "Chat": {
+                "rollTypeHeading":                              "{rollType} by {roller}",
+                "stepModifiers":                                "Step {step}",
+                "targetModifiers":                              "Difficulty {target}",
+                "baseValue":                                    "Base",
+                "difficulty":                                   "Difficulty",
+                "successesAchieved":                            "{numSuccesses} ({numExtraSuccesses} extra)"
+            }
         }
     }
 }
