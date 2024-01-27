@@ -27,6 +27,10 @@ _______________________________`;
  * @enum {AttributeConfiguration}
  */
 ED4E.attributes = {
+	none: {
+		label:			"ED.none",
+		abbreviation:	"ED.none"
+	},
 	str: {
 		label: 			"ED.Attributes.strength",
 		abbreviation: 	"ED.Attribute.strengthAbbr"
