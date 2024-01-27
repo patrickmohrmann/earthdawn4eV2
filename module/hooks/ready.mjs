@@ -96,7 +96,7 @@ async function _createDebugDocuments() {
     } );
 
     const rollOptions = new ed4e.dataModels.other.RollData( {
-        rollType: "X.arbitraryStepRoll",
+        rollType: "arbitrary",
         chatFlavor: "X-Arbitrary-Step",
         step: {
             base: 38,

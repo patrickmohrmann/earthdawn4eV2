@@ -177,7 +177,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         required: true,
         nullable: false,
         blank: true,
-        initial: '',
+        initial: 'arbitrary',
         label: 'localize: roll type',
         hint: 'localize: type of this roll, like action or effect test, or arbitrary step roll',
       }),
