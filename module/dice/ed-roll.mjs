@@ -1,5 +1,6 @@
 import getDice from "./step-tables.mjs";
 import { sum } from "../utils.mjs";
+import ED4E from "../config.mjs";
 
 /**
  * EdRollOptions for creating an EdRoll instance.
@@ -25,6 +26,7 @@ import { sum } from "../utils.mjs";
  * @param { any } formula TODO
  * @param { object } data TODO
  * @param { EdRollOptions } edRollOptions Collection of data, steps, karma, devotions, target and additional.
+ * @property { string } flavorTemplate The template to use ofr rendering additional information in this roll's chat messages.
  */
 export default class EdRoll extends Roll {
 
@@ -41,6 +43,8 @@ export default class EdRoll extends Roll {
           edRollOptions.step.total
         }]`;
     super(baseTerm, data, edRollOptions);
+
+    this.flavorTemplate = ED4E.rollTypes[this.options.rollType]?.flavorTemplate ?? ED4E.rollTypes.arbitrary.flavorTemplate;
 
     if (!this.options.extraDiceAdded) this.#addExtraDice();
     if (!this.options.configured) this.#configureModifiers();
@@ -118,10 +122,10 @@ export default class EdRoll extends Roll {
 
   /**
    * The text that is added to this roll's chat message when calling `toMessage`.
-   * @type {string|undefined}
+   * @type {Promise<string>}
    */
   get chatFlavor() {
-    return this.options.chatFlavor;
+    return renderTemplate( this.flavorTemplate, this.getFlavorTemplateData() );
   }
 
   /* -------------------------------------------- */
@@ -256,13 +260,25 @@ export default class EdRoll extends Roll {
     }
   }
 
-  /**
-   * Create a Dialog prompt used to configure evaluation of an existing EdRoll instance.
-   */
-  configureRollPrompt() {}
-
   /* -------------------------------------------- */
   /*  Chat Messages                               */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the roll data for rendering the flavor template.
+   * @returns {object}
+   */
+  getFlavorTemplateData() {
+    const templateData = {};
+
+    templateData.customFlavor = this.options.chatFlavor;
+    templateData.difficulty = this.options.target?.total ?? 1;
+    templateData.numSuccesses = this.numSuccesses ?? 0;
+    templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
+
+    return templateData;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -344,31 +360,7 @@ export default class EdRoll extends Roll {
   async toMessage(messageData = {}, options = {}) {
     if (!this._evaluated) await this.evaluate({ async: true });
 
-    // the localization keys need to be adjusted
-    // the template literal is only so we can see the numbers during development
-    const difficulty =
-      this.options.target?.total >= 0
-        ? game.i18n.format(`<br>X.Difficulty: ${this.options.target.total}`, {
-            difficulty: this.options.target.total,
-          })
-        : '';
-    const numSuccesses =
-      this.numSuccesses >= 0
-        ? game.i18n.format(`<br>X.Num Successes: ${this.numSuccesses}`, { numSuccesses: this.numSuccesses })
-        : '';
-    const numExtraSuccesses =
-      this.numExtraSuccesses >= 0
-        ? game.i18n.format(`<br>X.Num Extra Successes: ${this.numExtraSuccesses}`, {
-            numExtraSuccesses: this.numExtraSuccesses,
-          })
-        : '';
-
-    messageData.flavor ??= `
-      ${this.options.chatFlavor ?? ''}
-      ${difficulty}
-      ${numSuccesses}
-      ${numExtraSuccesses}
-    `;
+    messageData.flavor = await this.chatFlavor;
 
     return super.toMessage(messageData, options);
   }
