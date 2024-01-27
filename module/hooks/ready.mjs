@@ -12,7 +12,7 @@ export default function () {
     /*  Debug Documents                             */
     /* -------------------------------------------- */
 
-    await _createDebugDocuments();
+      if ( game.user.isGM ) await _createDebugDocuments();
   });
 }
 
