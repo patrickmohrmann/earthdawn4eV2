@@ -97,7 +97,7 @@ async function _createDebugDocuments() {
 
     const rollOptions = new ed4e.dataModels.other.RollData( {
         rollType: "arbitrary",
-        chatFlavor: "X-Arbitrary-Step",
+        chatFlavor: "This is debug custom flavor text for this roll. Great, he?",
         step: {
             base: 38,
             modifiers: {
