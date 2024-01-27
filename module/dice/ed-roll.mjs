@@ -75,13 +75,35 @@ export default class EdRoll extends Roll {
 
   /**
    * Is this roll an automatic fail? True, if at least 2 dice, no effect test, and all dice are 1.
-   * @type { boolean|void }
+   * @type { boolean|undefined }
    */
   get isRuleOfOne() {
     if (!this.validEdRoll || !this._evaluated) return undefined;
     // more than one die required
     if (this.numDice < 2) return false;
     return this.total === this.numDice;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this roll a success? True, if at least one success and arbitrary or action test.
+   * @type { boolean|undefined }
+   */
+  get isSuccess() {
+    if (!this.validEdRoll || !this._evaluated) return undefined;
+    return this.numSuccesses > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this roll a failure? True, if zero successes and arbitrary or action test.
+   * @type { boolean|undefined }
+   */
+  get isFailure() {
+    if (!this.validEdRoll || !this._evaluated) return undefined;
+    return this.numSuccesses <= 0;
   }
 
   /* -------------------------------------------- */
@@ -271,14 +293,19 @@ export default class EdRoll extends Roll {
   getFlavorTemplateData() {
     const templateData = {};
 
+    templateData.roller = game.user.character?.name
+      ?? canvas.tokens.controlled[0]
+      ?? game.user.name;
     templateData.customFlavor = this.options.chatFlavor;
+    templateData.result = this.total;
     templateData.step = this.options.step;
     templateData.target = this.options.target;
     templateData.rollType = ED4E.rollTypes[this.options.rollType].label;
-    templateData.difficulty = this.options.target?.total ?? 1;
+    templateData.success = this.isSuccess;
+    templateData.failure = this.isFailure;
+    templateData.ruleOfOne = this.isRuleOfOne;
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
-    templateData.ruleOfOne = this.isRuleOfOne;
 
     return templateData;
   }
@@ -366,6 +393,7 @@ export default class EdRoll extends Roll {
 
     messageData.flavor = await this.chatFlavor;
 
+    // TODO: set background-color of .dice-total depending on success
     return super.toMessage(messageData, options);
   }
 }

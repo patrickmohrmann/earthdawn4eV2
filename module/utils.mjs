@@ -300,6 +300,10 @@ export async function preloadHandlebarsTemplates() {
     // cards
     "systems/ed4e/templates/item/cards/effect-card.hbs",
 
+    // Dice partials
+    "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs",
+    "systems/ed4e/templates/dice/dice-partials/roll-target-modifier.hbs",
+    "systems/ed4e/templates/dice/dice-partials/roll-successes.hbs",
   ];
 
   const paths = {};
