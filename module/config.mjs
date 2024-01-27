@@ -200,12 +200,24 @@ preLocalize( "encumbranceStatus" );
  * @enum {string}
  */
 ED4E.rollTypes = {
-	arbitrary: "X.arbitraryStepRoll",
-	action: "X.actionTestRoll",
-	effect: "X.effectTestRoll",
-	damage: "X.damageTestRoll",
+	arbitrary: {
+		label: "X.arbitraryStepRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/arbitrary-roll-flavor.hbs",
+	},
+	action: {
+		label: "X.actionTestRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/action-roll-flavor.hbs",
+	},
+	effect: {
+		label: "X.effectTestRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/effect-roll-flavor.hbs",
+	},
+	damage: {
+		label: "X.damageTestRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/damage-roll-flavor.hbs",
+	},
 }
-preLocalize( "rollTypes" );
+preLocalize( "rollTypes", { key: "label" } );
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */
