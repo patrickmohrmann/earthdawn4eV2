@@ -27,6 +27,11 @@ import { sum } from "../utils.mjs";
  * @param { EdRollOptions } edRollOptions Collection of data, steps, karma, devotions, target and additional.
  */
 export default class EdRoll extends Roll {
+
+  /* -------------------------------------------- */
+  /*  Constructor and Fields                      */
+  /* -------------------------------------------- */
+
   constructor(formula = undefined, data = {}, edRollOptions = {}) {
     // us ternary operator to also check for empty strings, nullish coalescing operator (??) only checks null or undefined
     const baseTerm = formula
@@ -41,10 +46,16 @@ export default class EdRoll extends Roll {
     if (!this.options.configured) this.#configureModifiers();
   }
 
+  /* -------------------------------------------- */
+
   /**
    * @inheritDoc
    */
   static TOOLTIP_TEMPLATE = "systems/ed4e/templates/dice/tooltip.hbs";
+
+  /* -------------------------------------------- */
+  /*  Getter and Setter                           */
+  /* -------------------------------------------- */
 
   /**
    * Is this roll a valid Earthdawn test?
@@ -56,6 +67,8 @@ export default class EdRoll extends Roll {
     return true;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Is this roll an automatic fail? True, if at least 2 dice, no effect test, and all dice are 1.
    * @type { boolean|void }
@@ -66,6 +79,8 @@ export default class EdRoll extends Roll {
     if (this.numDice < 2) return false;
     return this.total === this.numDice;
   }
+
+  /* -------------------------------------------- */
 
   /**
    *  The number of dice in this roll.
@@ -79,6 +94,8 @@ export default class EdRoll extends Roll {
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * The number of successes in this roll. Only available if a target number is specified and the roll is evaluated.
    * @type {number}
@@ -90,10 +107,14 @@ export default class EdRoll extends Roll {
       : Math.trunc((this.total - this.options.target.total) / 5) + 1;
   }
 
+  /* -------------------------------------------- */
+
   get numExtraSuccesses() {
     if (!this.validEdRoll || !this._evaluated || !this.options.target) return undefined;
     return this.numSuccesses < 1 ? 0 : this.numSuccesses - 1;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * The text that is added to this roll's chat message when calling `toMessage`.
@@ -102,6 +123,8 @@ export default class EdRoll extends Roll {
   get chatFlavor() {
     return this.options.chatFlavor;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Set the text of this roll's chat message.
@@ -112,6 +135,8 @@ export default class EdRoll extends Roll {
       chatFlavor: flavor,
     });
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Returns the formula string based on strings instead of dice.
@@ -157,6 +182,10 @@ export default class EdRoll extends Roll {
     return formulaParts.filterJoin(" + ");
   }
 
+  /* -------------------------------------------- */
+  /*  Modifying                                   */
+  /* -------------------------------------------- */
+
   /**
    * Apply modifiers to make all dice explode.
    * @private
@@ -172,6 +201,8 @@ export default class EdRoll extends Roll {
     this.options.configured = true;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Add additional dice in groups, like karma, devotion or elemental damage.
    */
@@ -183,6 +214,8 @@ export default class EdRoll extends Roll {
     // Mark extra dice as complete
     this.options.extraDiceAdded = true;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Add dice from a given resource step. Currently only karma or devotion.
@@ -203,6 +236,8 @@ export default class EdRoll extends Roll {
       this.resetFormula();
     }
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Add the dice from extra steps (like "Flame Weapon" or "Night's Edge").
