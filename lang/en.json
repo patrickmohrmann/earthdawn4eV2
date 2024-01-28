@@ -74,7 +74,8 @@
                 "difficulty":                                   "Difficulty",
                 "successesAchieved":                            "{numSuccesses} successes ({numExtraSuccesses} extra)",
                 "buttonApplyDamage":                            "Apply Damage",
-                "buttonTakeDamage":                            "Take Damage"
+                "buttonTakeDamage":                             "Take Damage",
+                "buttonEffect":                                 "Do something cool"
             }
         }
     }

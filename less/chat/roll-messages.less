@@ -35,13 +35,16 @@
       background-color: indianred;
     }
   }
-  .damage-roll-buttons {
+  .message-buttons {
     margin: 1em 0;
-    .apply-damage {
-      margin-left: 0;
-    }
-    .take-damage {
-      margin-right: 0;
+    &.flexrow {
+      button:first-child {
+        margin-left: 0;
+      }
+
+      button:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
