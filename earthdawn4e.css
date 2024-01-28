@@ -625,6 +625,15 @@ input.input__number-input {
 .chat-message .dice-total.roll-failure {
   background-color: indianred;
 }
+.chat-message .damage-roll-buttons {
+  margin: 1em 0;
+}
+.chat-message .damage-roll-buttons .apply-damage {
+  margin-left: 0;
+}
+.chat-message .damage-roll-buttons .take-damage {
+  margin-right: 0;
+}
 .app.window-app.form.earthdawn4e.roll-prompt .window-content {
   position: relative;
   background-image: url('assets/sheet/background.png');
