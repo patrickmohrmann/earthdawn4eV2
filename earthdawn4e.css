@@ -591,6 +591,12 @@ input.input__number-input {
 .form-group[data-setting-id="ed4e.encumberedHeader"] p {
   display: none;
 }
+.chat-message img.avatar {
+  border: unset;
+  object-fit: scale-down;
+  max-height: 2em;
+  margin-bottom: 0.7em;
+}
 .chat-message h5 {
   margin: 1em;
   font-weight: lighter;
