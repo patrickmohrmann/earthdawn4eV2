@@ -35,6 +35,10 @@ export default function () {
 
     return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments.trim());
   });
+
+  Hooks.on( "renderChatMessage", ( msg, html, msgData ) => {
+    if ( msg.rolls[0] ) msg.rolls[0].addSuccessClass( html );
+  })
 }
 
 function triggerCharGen(argString) {

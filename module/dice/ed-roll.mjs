@@ -91,7 +91,7 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isSuccess() {
-    if (!this.validEdRoll || !this._evaluated) return undefined;
+    if (!this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
     return this.numSuccesses > 0;
   }
 
@@ -102,7 +102,7 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isFailure() {
-    if (!this.validEdRoll || !this._evaluated) return undefined;
+    if (!this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
     return this.numSuccesses <= 0;
   }
 
@@ -312,6 +312,16 @@ export default class EdRoll extends Roll {
 
   /* -------------------------------------------- */
 
+  addSuccessClass( jquery ) {
+    if ( this.isSuccess || this.isFailure ) {
+      jquery.find( ".dice-total" ).addClass(
+        this.isSuccess ? "roll-success" : "roll-failure"
+      );
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Create the `rolls` part of the tooltip for displaying dice icons with results.
    * @param {DiceTerm[]} diceTerms An array of dice terms with multiple results to be combined
@@ -393,7 +403,6 @@ export default class EdRoll extends Roll {
 
     messageData.flavor = await this.chatFlavor;
 
-    // TODO: set background-color of .dice-total depending on success
-    return super.toMessage(messageData, options);
+   return super.toMessage(messageData, options);
   }
 }
