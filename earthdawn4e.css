@@ -591,6 +591,40 @@ input.input__number-input {
 .form-group[data-setting-id="ed4e.encumberedHeader"] p {
   display: none;
 }
+.chat-message h5 {
+  margin: 1em;
+  font-weight: lighter;
+}
+.chat-message .custom-flavor {
+  margin: 0.5em 0;
+  font-size: medium;
+}
+.chat-message .roll-successes {
+  margin: 1em 0;
+  text-align: center;
+  font-size: large;
+}
+.chat-message .modifier-lists {
+  margin-bottom: 5px;
+  padding: 0 0.3em;
+  font-size: medium;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+}
+.chat-message .modifier-lists li {
+  text-transform: capitalize;
+}
+.chat-message .dice-formula {
+  word-break: unset;
+}
+.chat-message .dice-total.roll-success {
+  background-color: darkseagreen;
+}
+.chat-message .dice-total.roll-failure {
+  background-color: indianred;
+}
 .app.window-app.form.earthdawn4e.roll-prompt .window-content {
   position: relative;
   background-image: url('assets/sheet/background.png');

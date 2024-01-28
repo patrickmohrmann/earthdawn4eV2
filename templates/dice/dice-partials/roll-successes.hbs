@@ -1,5 +1,13 @@
-<div class="roll-successes">
-  <i class="fa-light fa-crosshairs"></i>&nbsp;{{ifThen target.public target.total "???"}}&nbsp;|
-  &nbsp;<i class="fa-regular fa-dice"></i>&nbsp;{{result}}&nbsp;|
-  &nbsp;<i class="fa-light fa-check-double"></i>&nbsp;{{localize "ED.Rolls.Chat.successesAchieved" numSuccesses=numSuccesses numExtraSuccesses=numExtraSuccesses}}
+<div class="roll-successes flexrow">
+  <span title="X.TargetDifficulty">
+  <i class="fa-light fa-crosshairs"></i>{{ifThen target.public target.total "???"}}
+  </span>
+  &#124;
+  <span title="X.RollResult">
+    <i class="fa-regular fa-dice"></i>&nbsp;{{result}}
+  </span>
+  &#124;
+  <span title="{{localize "ED.Rolls.Chat.successesAchieved" numSuccesses=numSuccesses numExtraSuccesses=numExtraSuccesses}}">
+    <i class="fa-light fa-check-double"></i>&nbsp;{{numSuccesses}}
+  </span>
 </div>

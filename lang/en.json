@@ -72,7 +72,7 @@
                 "targetModifiers":                              "Difficulty {target}",
                 "baseValue":                                    "Base",
                 "difficulty":                                   "Difficulty",
-                "successesAchieved":                            "{numSuccesses} ({numExtraSuccesses} extra)"
+                "successesAchieved":                            "{numSuccesses} successes ({numExtraSuccesses} extra)"
             }
         }
     }
