@@ -436,7 +436,8 @@
                 "difficulty":                                       "Schwierigkeit",
                 "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)",
                 "buttonApplyDamage":                                "Schaden geben",
-                "buttonTakeDamage":                                 "Schaden nehmen"
+                "buttonTakeDamage":                                 "Schaden nehmen",
+                "buttonEffect":                                     "Hier passiert was tolles"
             }
         },
         "Sheet": {
