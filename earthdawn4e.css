@@ -625,13 +625,13 @@ input.input__number-input {
 .chat-message .dice-total.roll-failure {
   background-color: indianred;
 }
-.chat-message .damage-roll-buttons {
+.chat-message .message-buttons {
   margin: 1em 0;
 }
-.chat-message .damage-roll-buttons .apply-damage {
+.chat-message .message-buttons.flexrow button:first-child {
   margin-left: 0;
 }
-.chat-message .damage-roll-buttons .take-damage {
+.chat-message .message-buttons.flexrow button:last-child {
   margin-right: 0;
 }
 .app.window-app.form.earthdawn4e.roll-prompt .window-content {
