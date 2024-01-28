@@ -1,0 +1,9 @@
+<h5 class="roll-type">{{localize "ED.Rolls.Chat.rollTypeHeading" rollType=rollType roller=roller}}</h5>
+<div class="custom-flavor">{{ customFlavor }}</div>
+<div class="flexrow damage-roll-buttons" data-roll-total={{ result }}>
+  <button type="button" class="apply-damage" title={{ localize "X.ApplyResultAsDamageToSelectedTarget" }} data-action="apply-damage">{{ localize "ED.Rolls.Chat.buttonApplyDamage" }}</button>
+  <button type="button" class="take-damage" title={{ localize "X.TakeResultAsDamageToYourCharacter" }} data-action="take-damage">{{ localize "ED.Rolls.Chat.buttonTakeDamage" }}</button>
+</div>
+<div class="modifier-lists flexrow">
+  {{> "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs"}}
+</div>

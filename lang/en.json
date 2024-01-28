@@ -72,7 +72,9 @@
                 "targetModifiers":                              "Difficulty {target}",
                 "baseValue":                                    "Base",
                 "difficulty":                                   "Difficulty",
-                "successesAchieved":                            "{numSuccesses} successes ({numExtraSuccesses} extra)"
+                "successesAchieved":                            "{numSuccesses} successes ({numExtraSuccesses} extra)",
+                "buttonApplyDamage":                            "Apply Damage",
+                "buttonTakeDamage":                            "Take Damage"
             }
         }
     }
