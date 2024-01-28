@@ -434,7 +434,9 @@
                 "targetModifiers":                                  "Schwierigkeit {target}",
                 "baseValue":                                        "Basis",
                 "difficulty":                                       "Schwierigkeit",
-                "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)"
+                "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)",
+                "buttonApplyDamage":                                "Schaden geben",
+                "buttonTakeDamage":                                 "Schaden nehmen"
             }
         },
         "Sheet": {
