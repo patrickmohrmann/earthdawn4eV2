@@ -35,22 +35,40 @@ export default function () {
 
     return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments.trim());
   });
+
+  Hooks.on( "renderChatMessage", ( msg, html, msgData ) => {
+    // Add character portrait to message
+    addUserPortrait( msg, html );
+
+    // Add class for highlighting success/failure on roll messages
+    if ( msg.rolls[0] ) msg.rolls[0].addSuccessClass( html );
+  })
 }
+
+/* -------------------------------------------- */
+/*  Chat Commands                               */
+/* -------------------------------------------- */
 
 function triggerCharGen(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
 
+/* -------------------------------------------- */
+
 function triggerCoinAward(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
 
+/* -------------------------------------------- */
+
 function triggerCrCalc(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
+
+/* -------------------------------------------- */
 
 function triggerHelp(argString) {
   const helpText =
@@ -71,10 +89,14 @@ function triggerHelp(argString) {
   return false;
 }
 
+/* -------------------------------------------- */
+
 function triggerLPAward(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
+
+/* -------------------------------------------- */
 
 function triggerRollStep(argString) {
   const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
@@ -87,4 +109,18 @@ function triggerRollStep(argString) {
   );
 
   return false;
+}
+
+/* -------------------------------------------- */
+/*  Message Styling                             */
+/* -------------------------------------------- */
+
+function addUserPortrait( msg, jquery ) {
+
+  const avatar = msg.user.avatar;
+  if ( avatar ) {
+    jquery.find( ".message-header" ).prepend(
+      `<img src="${avatar}" class="avatar">`
+    );
+  }
 }

@@ -423,6 +423,23 @@
             "relation":                                             "Beziehung",
             "relations":                                            "Beziehungen"
         },
+        "Rolls": {
+            "formulaStep":                                          "Stufe {step}",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "Chat": {
+                "rollTypeHeading":                                  "{rollType} von {roller}",
+                "stepModifiers":                                    "Stufe {step}",
+                "targetModifiers":                                  "Schwierigkeit {target}",
+                "baseValue":                                        "Basis",
+                "difficulty":                                       "Schwierigkeit",
+                "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)",
+                "buttonApplyDamage":                                "Schaden geben",
+                "buttonTakeDamage":                                 "Schaden nehmen",
+                "buttonEffect":                                     "Hier passiert was tolles"
+            }
+        },
         "Sheet": {
             "Descriptions": {
                 "burrow":                                           "Graben",                
