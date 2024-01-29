@@ -591,6 +591,24 @@ input.input__number-input {
 .form-group[data-setting-id="ed4e.encumberedHeader"] p {
   display: none;
 }
+.form-group[data-setting-id="ed4e.chatAvatar"] {
+  border-top: 1px solid black;
+}
+.form-group[data-setting-id="ed4e.chatAvatar"] label,
+.form-group[data-setting-id="ed4e.chatAvatar"] .form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] p {
+  display: none;
+}
 .chat-message img.avatar {
   border: unset;
   object-fit: scale-down;

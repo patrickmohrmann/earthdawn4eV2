@@ -526,6 +526,13 @@
             "unarmed":                                              "Waffenlos"
         },
         "Settings": {
+            "Chat": {
+                "chatAvatar":                                       "Chat Avatar",
+                "chatAvatarHeader":                                 "Chat Avatar (nur SL)",
+                "chatAvatarHint":                                   "Wähle, welcher Avatar im Chat angezeigt werden soll. Spielerkonfiguration oder ausgewählter Token?",
+                "chatAvatarConfiguration":                          "Avatar der Konfiguration",
+                "chatAvatarToken":                                  "Avatar des Token"
+            },
             "StepTable": {
                 "editionClassic":                                   "Klassik Edition",
                 "editionfirst":                                     "Erste Edition",
