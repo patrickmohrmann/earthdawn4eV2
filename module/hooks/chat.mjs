@@ -104,8 +104,8 @@ function triggerRollStep(argString) {
 
   if (!steps) return true;
 
-  steps.forEach((currentStep) =>
-    new ed4e.dice.EdRoll(undefined, {}, { step: { total: Number(currentStep) } }).toMessage(),
+  steps.forEach( ( currentStep ) =>
+    new ed4e.dice.EdRoll( undefined, {}, { step: { total: Number( currentStep ) } } ).toMessage(),
   );
 
   return false;
@@ -117,10 +117,21 @@ function triggerRollStep(argString) {
 
 function addUserPortrait( msg, jquery ) {
 
-  const avatar = msg.user.avatar;
+  const chatAvatarSetting = game.settings.get( "ed4e", "chatAvatar" );
+  let avatar;
+  if ( chatAvatarSetting === "configuration" && game.user.isGM ) {
+    avatar = msg.user.avatar;
+  } else if ( chatAvatarSetting === "selectedToken" ) {
+    if ( canvas.tokens.controlled[0] ) {
+    avatar = canvas.tokens.controlled[0].document.texture.src;
+    } else {
+      avatar = msg.user.avatar;
+    }
+  }
   if ( avatar ) {
     jquery.find( ".message-header" ).prepend(
       `<img src="${avatar}" class="avatar">`
     );
   }
 }
+
