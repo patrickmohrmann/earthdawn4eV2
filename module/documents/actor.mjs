@@ -1,6 +1,7 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
+import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
 
 /**
@@ -8,6 +9,11 @@ import RollPrompt from "../applications/global/roll-prompt.mjs";
  * @augments {Actor}
  */
 export default class ActorEd extends Actor {
+
+  /** @inheritDoc */
+  static async createDialog( data = {}, { parent = null, pack = null, ...options } = {} ) {
+    return DocumentCreateDialog.waitPrompt( data, { documentCls: Actor, parent, pack, options } );
+  }
 
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
