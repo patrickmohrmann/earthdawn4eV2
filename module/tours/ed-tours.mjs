@@ -14,7 +14,8 @@
 
 export default class EdTour extends Tour {
     static tours = [
-        "systems/ed4e/module/tours/lang/earthdawn-settings"
+        "systems/ed4e/module/tours/lang/actor-item-creation",
+        "systems/ed4e/module/tours/lang/sidebar-settings"
     ]
     static gmTours = [
 

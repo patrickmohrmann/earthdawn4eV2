@@ -1,0 +1,38 @@
+{
+    "title": "System Einstellungen",
+    "module": "ed4e",
+    "id": "edSettings",
+    "description": "Earthdawn Spezifische System Einstellungen",
+    "canBeResumed": true,
+    "display": true,
+    "steps": [
+      {
+        "id": "intro",
+        "selector": "#ed4e-sidebar",
+        "title": "Systemeinstellungen",
+        "content": "Systemspezifische Einstellungen",
+        "sidebarTab": "settings"
+      }, 
+      {
+        "id": "changelog",
+        "selector": "#ed4eChangelog",
+        "title": "Änderungsprotokoll",
+        "content": "Hier stehen die letzten Systemänderungen",
+        "sidebarTab": "settings"
+      },
+      {
+        "id": "help",
+        "selector": "#ed4eHelp",
+        "title": "Hilfe",
+        "content": "Hier gelangst du zum System Wiki, wo alle funktionen beschrieben werden.",
+        "sidebarTab": "settings"
+      },
+      {
+        "id": "troubleshooting",
+        "selector": "#ed4eTroubleshooting",
+        "title": "Fehler!",
+        "content": "Fehler können direkt über diesen Button gemeldet werden.",
+        "sidebarTab": "settings"
+      }
+    ]
+  }
