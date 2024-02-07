@@ -1,16 +1,3 @@
-// Hooks.once( "ready", async () => {
-//     // eslint-disable-next-line no-unused-expressions
-//     game.tours.register(
-//       "ed4e",
-//       "earthdawnSettings",
-//       await SidebarTour.fromJSON( "/systems/ed4e/module/tours/earthdawn-settings.json" )
-//     );
-//     // game.tours.register(
-//     //   "ed4e",
-//     //   "spellcasting",
-//     //   await SidebarTour.fromJSON( "/systems/ed4e/module/tours/spellcasting.json" )
-//     // )
-//   } );
 
 export default class EdTour extends Tour {
     static tours = [
@@ -46,6 +33,15 @@ export default class EdTour extends Tour {
         }
         else if( this.currentStep.appTab ){
             this.app.activateTab( this.currentStep.appTab )
+        }
+        if( this.currentStep.action !== "none" ) {
+            // Actor and Item Creation Tour Actions
+            if ( this.currentStep.action === "createActor" ) {
+                Actor.implementation.createDialog()  
+            }
+            else if ( this.currentStep.action === "createItem" ) {
+                Item.implementation.createDialog()      
+            }
         }
     }
 
