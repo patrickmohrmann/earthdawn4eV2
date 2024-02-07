@@ -11,28 +11,32 @@
         "selector": "#ed4e-sidebar",
         "title": "Systemeinstellungen",
         "content": "Systemspezifische Einstellungen",
-        "sidebarTab": "settings"
+        "sidebarTab": "settings",
+        "action": "none"
       }, 
       {
         "id": "changelog",
         "selector": "#ed4eChangelog",
         "title": "Änderungsprotokoll",
         "content": "Hier stehen die letzten Systemänderungen",
-        "sidebarTab": "settings"
+        "sidebarTab": "settings",
+        "action": "none"
       },
       {
         "id": "help",
         "selector": "#ed4eHelp",
         "title": "Hilfe",
-        "content": "Hier gelangst du zum System Wiki, wo alle funktionen beschrieben werden.",
-        "sidebarTab": "settings"
+        "content": "Hier gelangst du zum System Wiki, wo alle Funktionen beschrieben werden.",
+        "sidebarTab": "settings",
+        "action": "none"
       },
       {
         "id": "troubleshooting",
         "selector": "#ed4eTroubleshooting",
         "title": "Fehler!",
-        "content": "Fehler können direkt über diesen Button gemeldet werden.",
-        "sidebarTab": "settings"
+        "content": "Du hast einen Fehler gefunden, bitte teile ihn uns mit und lege ein Bug Issue an.",
+        "sidebarTab": "settings",
+        "action": "none"
       }
     ]
   }
