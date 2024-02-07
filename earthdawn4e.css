@@ -1571,3 +1571,6 @@ form#document-create .checkbox:hover {
 .main-section .table__devotion .devotion__dice--content {
   text-align: center;
 }
+#tooltip.tour .step-title {
+  padding-right: 25px;
+}
