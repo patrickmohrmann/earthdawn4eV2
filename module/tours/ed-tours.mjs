@@ -51,7 +51,7 @@ export default class EdTour extends Tour {
 
     async start() {
         if( this.config.preCommand ){
-            const AsyncFunction = Object.getPrototypeOf( async function(){ } ).constructor
+            const AsyncFunction = Object.getPrototypeOf( async () =>{ } ).constructor
             const fn = new AsyncFunction( this.config.preCommand )
             await fn.call( this );
         }
@@ -60,10 +60,10 @@ export default class EdTour extends Tour {
             while( !this.app.rendered ) await delay( 50 )
         }
         if( this.app || this.config.preCommand )
-            while( !$( this.steps[this.stepIndex + 1].selector + ':visible' ).length) await delay(50)
+            while( !$( this.steps[this.stepIndex + 1].selector + ":visible" ).length ) await delay( 50 )
 
         const res = await super.start()
-        $('#tooltip').show()
+        $( "#tooltip" ).show()
         return res
     }
 
