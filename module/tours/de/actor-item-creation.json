@@ -1,0 +1,26 @@
+{
+    "title": "Akteure und Items erstellen",
+    "module": "ed4e",
+    "id": "edActorItemCreation",
+    "description": "Akteure und Objekte erstellen",
+    "canBeResumed": true,
+    "display": true,
+    "steps": [
+      {
+        "id": "intro",
+        "selector": ".tabs>a[data-tab='actors']",
+        "title": "Systemeinstellungen",
+        "content": "Systemspezifische Einstellungen",
+        "activateTab": "actors",
+        "action": "none"
+      },
+      {
+        "id": "createNewActor",
+        "selector": "button.create-document.create-entry",
+        "title": "Systemeinstellungen",
+        "content": "Systemspezifische Einstellungen",
+        "activateTab": "actors",
+        "action": "execute"
+      }
+    ]
+  }

@@ -1,5 +1,9 @@
 import RollPrompt from '../applications/global/roll-prompt.mjs';
+import EdTour from "../tours/ed-tours.mjs";
 
+/**
+ * TODO
+ */
 export default function () {
   Hooks.once( "ready", async () => {
     /* -------------------------------------------- */
@@ -12,8 +16,11 @@ export default function () {
     /*  Debug Documents                             */
     /* -------------------------------------------- */
 
-      if ( game.user.isGM ) await _createDebugDocuments();
-  });
+    if ( game.user.isGM ) await _createDebugDocuments();
+    
+    EdTour.travelAgency();
+      
+  } );
 }
 
 /**

@@ -1,10 +1,12 @@
 
 {
-    "title": "ED.Tours.Settings.ed4eSpecificSettingsTitle",
-    "description": "ED.Tours.Settings.description",
-    "canBeResumed": true,
-    "display": true,
-    "steps": [
+  "title": "ED.Tours.Settings.ed4eSpecificSettingsTitle",
+  "module": "ed4e",
+  "id": "edSettings",
+  "description": "ED.Tours.Settings.description",
+  "canBeResumed": true,
+  "display": true,
+  "steps": [
       {
         "id": "intro",
         "selector": "#ed4e-sidebar",

@@ -1,6 +1,6 @@
 // Import configuration
 import ED4E from '../config.mjs';
-import  "../tours/tours.mjs";
+import  "../tours/ed-tours.mjs";
 import {registerHandlebarHelpers} from "../handlebar-helpers.mjs";
 import registerSystemSettings from "../settings.mjs";
 
