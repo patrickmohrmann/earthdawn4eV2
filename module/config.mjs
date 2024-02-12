@@ -13,6 +13,25 @@ ________  _____       _____ _______
 _______________________________`;
 
 /**
+ * @description The grouping for the document creation dialogues in from the sidebar.
+ */
+ED4E.typeGroups = {
+	Item: {
+		Equipment: ['armor', 'equipment', 'shield', 'weapon'],
+		Abilities: ['attack', 'devotion', 'knack', 'maneuver', 'power', 'skill', 'specialAbility', 'talent'],
+		Conditions: ['cursemark', 'effect', 'poisonDisease'],
+		Magic: ['spell', 'thread'],
+		Classes: ['discipline', 'path', 'questor'],
+		Other: ['mask', 'namegiver', 'shipWeapon']
+	},
+	Actor: {
+		Namegivers: ['character', 'npc'],
+		Creatures: ['creature', 'spirit', 'horror', 'dragon'],
+		Other: ['group', 'vehicle', 'trap', 'loot']
+	}
+}
+
+/**
  * Configuration data for abilities.
  * @typedef {object} AttributeConfiguration
  * @property {string} label                               Localized label.

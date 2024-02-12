@@ -1,3 +1,5 @@
+import EdRollOptions from "../data/other/roll-options.mjs";
+
 const cmdMapping = {
   char: triggerCharGen,
   coin: triggerCoinAward,
@@ -106,6 +108,16 @@ function triggerRollStep(argString) {
 
   steps.forEach( ( currentStep ) =>
     new ed4e.dice.EdRoll( undefined, {}, { step: { total: Number( currentStep ) } } ).toMessage(),
+  steps.forEach((currentStep) =>
+    new ed4e.dice.EdRoll(
+      undefined,
+      {},
+      new EdRollOptions( {
+        step: {
+          total: Number(currentStep)
+        }
+      } )
+    ).toMessage(),
   );
 
   return false;
