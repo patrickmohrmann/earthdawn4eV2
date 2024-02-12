@@ -118,16 +118,16 @@ function triggerRollStep(argString) {
 function addUserPortrait( msg, jquery ) {
 
   const chatAvatarSetting = game.settings.get( "ed4e", "chatAvatar" );
-  let avatar;
-  if ( chatAvatarSetting === "configuration" && game.user.isGM ) {
-    avatar = msg.user.avatar;
-  } else if ( chatAvatarSetting === "selectedToken" ) {
-    if ( canvas.tokens.controlled[0] ) {
-    avatar = canvas.tokens.controlled[0].document.texture.src;
-    } else {
-      avatar = msg.user.avatar;
-    }
-  }
+  const isGM = msg.user.isGM;
+  const avatar_img = msg.user.avatar;
+  const token = canvas.tokens.controlled[0];
+  const token_img =  ( isGM || token?.document.isOwner ) ? token?.document.texture.src : undefined;
+  const is_config_setting = chatAvatarSetting === "configuration";
+
+  let avatar = is_config_setting ? avatar_img : undefined;
+  avatar ??= token_img;
+  avatar ??= isGM ? avatar_img : msg.user.character?.img;
+
   if ( avatar ) {
     jquery.find( ".message-header" ).prepend(
       `<img src="${avatar}" class="avatar">`
