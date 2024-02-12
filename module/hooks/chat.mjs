@@ -117,7 +117,6 @@ function triggerRollStep(argString) {
       } )
     ).toMessage(),
   );
-
   return false;
 }
 
@@ -127,10 +126,21 @@ function triggerRollStep(argString) {
 
 function addUserPortrait( msg, jquery ) {
 
-  const avatar = msg.user.avatar;
+  const chatAvatarSetting = game.settings.get( "ed4e", "chatAvatar" );
+  const isGM = msg.user.isGM;
+  const avatar_img = msg.user.avatar;
+  const token = canvas.tokens.controlled[0];
+  const token_img =  ( isGM || token?.document.isOwner ) ? token?.document.texture.src : undefined;
+  const is_config_setting = chatAvatarSetting === "configuration";
+
+  let avatar = is_config_setting ? avatar_img : undefined;
+  avatar ??= token_img;
+  avatar ??= isGM ? avatar_img : msg.user.character?.img;
+
   if ( avatar ) {
     jquery.find( ".message-header" ).prepend(
       `<img src="${avatar}" class="avatar">`
     );
   }
 }
+

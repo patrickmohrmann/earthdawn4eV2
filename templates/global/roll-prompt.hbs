@@ -28,7 +28,7 @@
 
 
                     <!-- 30/20 -->
-                    {{#if ( uneq rollType CONFIG.ED4E.rollTypes.arbitrary) }}
+                    {{#if ( uneq rollType "arbitrary") }}
                         <div>
                             <div class="roll-modifier form-group partial__three">
                                 <label class="modifier-description">{{localize "X-Modifier"}}: </label>
@@ -53,7 +53,7 @@
                     </div>
 
                     <!-- 30/20 -->
-                    {{#if ( uneq rollType CONFIG.ED4E.rollTypes.arbitrary) }}
+                    {{#if ( uneq rollType "arbitrary") }}
                         <div>
                             <div class="roll-modifier form-group partial__three">
                                 <label class="modifier-description">{{localize "X-Strain"}}:</label>
