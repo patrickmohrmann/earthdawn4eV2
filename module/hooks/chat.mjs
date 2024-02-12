@@ -1,3 +1,5 @@
+import EdRollOptions from "../data/other/roll-options.mjs";
+
 const cmdMapping = {
   char: triggerCharGen,
   coin: triggerCoinAward,
@@ -35,22 +37,40 @@ export default function () {
 
     return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments.trim());
   });
+
+  Hooks.on( "renderChatMessage", ( msg, html, msgData ) => {
+    // Add character portrait to message
+    addUserPortrait( msg, html );
+
+    // Add class for highlighting success/failure on roll messages
+    if ( msg.rolls[0] ) msg.rolls[0].addSuccessClass( html );
+  })
 }
+
+/* -------------------------------------------- */
+/*  Chat Commands                               */
+/* -------------------------------------------- */
 
 function triggerCharGen(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
 
+/* -------------------------------------------- */
+
 function triggerCoinAward(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
 
+/* -------------------------------------------- */
+
 function triggerCrCalc(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
+
+/* -------------------------------------------- */
 
 function triggerHelp(argString) {
   const helpText =
@@ -71,10 +91,14 @@ function triggerHelp(argString) {
   return false;
 }
 
+/* -------------------------------------------- */
+
 function triggerLPAward(argString) {
   ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
   return false;
 }
+
+/* -------------------------------------------- */
 
 function triggerRollStep(argString) {
   const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
@@ -83,8 +107,40 @@ function triggerRollStep(argString) {
   if (!steps) return true;
 
   steps.forEach((currentStep) =>
-    new ed4e.dice.EdRoll(undefined, {}, { step: { total: Number(currentStep) } }).toMessage(),
+    new ed4e.dice.EdRoll(
+      undefined,
+      {},
+      new EdRollOptions( {
+        step: {
+          total: Number(currentStep)
+        }
+      } )
+    ).toMessage(),
   );
-
   return false;
 }
+
+/* -------------------------------------------- */
+/*  Message Styling                             */
+/* -------------------------------------------- */
+
+function addUserPortrait( msg, jquery ) {
+
+  const chatAvatarSetting = game.settings.get( "ed4e", "chatAvatar" );
+  const isGM = msg.user.isGM;
+  const avatar_img = msg.user.avatar;
+  const token = canvas.tokens.controlled[0];
+  const token_img =  ( isGM || token?.document.isOwner ) ? token?.document.texture.src : undefined;
+  const is_config_setting = chatAvatarSetting === "configuration";
+
+  let avatar = is_config_setting ? avatar_img : undefined;
+  avatar ??= token_img;
+  avatar ??= isGM ? avatar_img : msg.user.character?.img;
+
+  if ( avatar ) {
+    jquery.find( ".message-header" ).prepend(
+      `<img src="${avatar}" class="avatar">`
+    );
+  }
+}
+

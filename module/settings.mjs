@@ -116,7 +116,7 @@ export default function registerSystemSettings() {
         name: "ED.Settings.Encumbrance.encumberedHeader",
         config: true,
     } );
-    // LP Tracking Option Attributes
+    // Encumbrance options
     game.settings.register( "ed4e", "encumbrance", {
         name: "ED.Settings.Encumbrance.encumbrance",
         hint: "ED.Settings.Encumbrance.encumbranceHint",
@@ -127,6 +127,28 @@ export default function registerSystemSettings() {
         choices: {
             visualizeOnly: "ED.Settings.Encumbrance.encumbranceVisualizeOnly",
             calculate: "ED.Settings.Encumbrance.encumbranceWithEffects"
+          }
+    } );
+
+     /* -------------------------------------------------------------------------------- */
+    /*                                  GM Chat Avatar                                     */
+    /* -------------------------------------------------------------------------------- */
+    // Chat Avatar settings Header
+    game.settings.register( "ed4e", "chatAvatarHeader", {
+        name: "ED.Settings.Chat.chatAvatarHeader",
+        config: true,
+    } );
+    // Chat Avater Options
+    game.settings.register( "ed4e", "chatAvatar", {
+        name: "ED.Settings.Chat.chatAvatar",
+        hint: "ED.Settings.Chat.chatAvatarHint",
+        scope: "world",
+        config: true,
+        default: "configuration",
+        type: String,
+        choices: {
+            configuration: "ED.Settings.Chat.chatAvatarConfiguration",
+            selectedToken: "ED.Settings.Chat.chatAvatarToken"
           }
     } );
 }

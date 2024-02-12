@@ -42,8 +42,8 @@ export default class RollPrompt extends FormApplication {
     static rollArbitraryPrompt() {
         RollPrompt.waitPrompt(
             new EdRollOptions( {
-                rollType: CONFIG.ED4E.rollTypes.arbitrary,
-                chatFlavor: game.i18n.localize( "X-Arbitrary-Step" ),
+                rollType: "arbitrary",
+                chatFlavor: game.i18n.localize( "X.ThisIsTheCustomFlavorTextFromArbitraryPrompt" ),
             } )
         ).then(
             ( roll ) => roll?.toMessage()

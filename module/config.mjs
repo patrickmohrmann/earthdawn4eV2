@@ -13,6 +13,25 @@ ________  _____       _____ _______
 _______________________________`;
 
 /**
+ * @description The grouping for the document creation dialogues in from the sidebar.
+ */
+ED4E.typeGroups = {
+	Item: {
+		Equipment: ['armor', 'equipment', 'shield', 'weapon'],
+		Abilities: ['attack', 'devotion', 'knack', 'maneuver', 'power', 'skill', 'specialAbility', 'talent'],
+		Conditions: ['cursemark', 'effect', 'poisonDisease'],
+		Magic: ['spell', 'thread'],
+		Classes: ['discipline', 'path', 'questor'],
+		Other: ['mask', 'namegiver', 'shipWeapon']
+	},
+	Actor: {
+		Namegivers: ['character', 'npc'],
+		Creatures: ['creature', 'spirit', 'horror', 'dragon'],
+		Other: ['group', 'vehicle', 'trap', 'loot']
+	}
+}
+
+/**
  * Configuration data for abilities.
  * @typedef {object} AttributeConfiguration
  * @property {string} label                               Localized label.
@@ -196,12 +215,24 @@ preLocalize( "encumbranceStatus" );
  * @enum {string}
  */
 ED4E.rollTypes = {
-	arbitrary: "X.arbitraryStepRoll",
-	action: "X.actionTestRoll",
-	effect: "X.effectTestRoll",
-	damage: "X.damageTestRoll",
+	arbitrary: {
+		label: "X.arbitraryStepRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/arbitrary-roll-flavor.hbs",
+	},
+	action: {
+		label: "X.actionTestRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/action-roll-flavor.hbs",
+	},
+	effect: {
+		label: "X.effectTestRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/effect-roll-flavor.hbs",
+	},
+	damage: {
+		label: "X.damageTestRoll",
+		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/damage-roll-flavor.hbs",
+	},
 }
-preLocalize( "rollTypes" );
+preLocalize( "rollTypes", { key: "label" } );
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */

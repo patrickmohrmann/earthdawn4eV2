@@ -56,30 +56,21 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
       ),
       karma: this.#bonusResource,
       devotion: this.#bonusResource,
-      extraDice: new foundry.data.fields.SchemaField(
-        {
-          terms: new foundry.data.fields.ArrayField(new FormulaField({ nullable: true }), {
-            required: true,
-            nullable: false,
-            initial: [],
-            label: 'array of dice terms',
-            hint: 'extra dice terms used for the roll',
-          } ),
-          labels: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), {
-            required: true,
-            nullable: false,
-            initial: [],
-            label: 'labels for the extra dice terms',
-            hint: 'each label corresponds to one dice in terms',
-          } ),
-        },
-        {
-          required: true,
-          nullable: false,
-          label: 'localize: ExtraDice',
-          hint: 'localize: any extra dice terms for the roll with their labels',
-        },
-      ),
+      extraDice: new MappingField( new foundry.data.fields.NumberField({
+        required: true,
+        nullable: false,
+        initial: 1,
+        label: 'earthdawn.baseStep',
+        hint: 'earthdawn.baseStepForTheRoll',
+        min: 1,
+        step: 1,
+        integer: true,
+      }), {
+        required: true,
+        initialKeysOnly: false,
+        label: 'extra Steps apart from step, karma and devotion',
+        hint: 'keys are localized labels of the given extra step',
+      }),
       target: new foundry.data.fields.SchemaField(
         {
           base: new foundry.data.fields.NumberField({
@@ -113,12 +104,19 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           total: new foundry.data.fields.NumberField({
             required: true,
             nullable: false,
-            initial: 1,
+            initial: this.initTotalTarget,
             label: 'earthdawn.totalDifficulty',
             hint: 'earthdawn.totalDifficultyForTheRoll',
             min: 1,
             step: 1,
             integer: true,
+          }),
+          public: new foundry.data.fields.BooleanField( {
+            required: true,
+            nullable: false,
+            initial: true,
+            label: "X.targetPublic",
+            hint: "X.whetherTheDifficultyIsKnownPublicly"
           } ),
         },
         {
@@ -128,14 +126,52 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           hint: 'localize: all data about how the difficulty is composed',
         },
       ),
-      strain: new foundry.data.fields.NumberField({
-        required: true,
-        nullable: false,
-        min: 0,
-        initial: 0,
-        integer: true,
-        label: 'earthdawn.strain',
-      } ),
+      strain: new foundry.data.fields.SchemaField(
+        {
+          base: new foundry.data.fields.NumberField({
+            required: true,
+            nullable: false,
+            min: 0,
+            initial: 0,
+            integer: true,
+            label: 'earthdawn.strain',
+          }),
+          modifiers: new MappingField(
+            new foundry.data.fields.NumberField({
+              required: true,
+              nullable: false,
+              initial: 1,
+              label: 'earthdawn.modifierStep',
+              hint: 'earthdawn.modifierStepForTheRoll',
+              min: 0,
+              step: 1,
+              integer: true,
+            }),
+            {
+              required: true,
+              initialKeysOnly: false,
+              label: 'allModifiers',
+              hint: 'keys are localizable labels of the given step modifying value',
+            },
+          ),
+          total: new foundry.data.fields.NumberField({
+            required: true,
+            nullable: false,
+            initial: this.initTotalStrain,
+            label: 'earthdawn.totalStep',
+            hint: 'earthdawn.totalStepForTheRoll',
+            min: 0,
+            step: 1,
+            integer: true,
+          }),
+        },
+        {
+          required: true,
+          nullable: false,
+          label: 'localize: step info',
+          hint: 'localize: all data about how the step is composed',
+        },
+      ),
       chatFlavor: new foundry.data.fields.StringField({
         required: true,
         nullable: false,
@@ -148,34 +184,48 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         required: true,
         nullable: false,
         blank: true,
-        initial: '',
+        initial: 'arbitrary',
         label: 'localize: roll type',
         hint: 'localize: type of this roll, like action or effect test, or arbitrary step roll',
       } ),
     };
   }
-
-  get #totalTarget() {
-    return this.target.base + sum( Object.values( this.target.modifiers ) );
+  get totalTarget() {
+    return this.target.base + sum(Object.values(this.target.modifiers));
   }
 
-  static initTotalStep( source ) {
-    const step = source.step?.base ?? source.base ?? 1;
-    return step + sum( Object.values( source.step?.modifiers ?? {} ) );
+  static initTotal( source, attribute, defaultValue ){
+    const value = source?.[attribute]?.base ?? source.base ?? defaultValue;
+    return value + sum(Object.values(source?.[attribute]?.modifiers ?? {}));
   }
 
-  get #totalStep() {
-    return this.step.base + sum( Object.values( this.step.modifiers ) );
+  static initTotalStep(source) {
+    return EdRollOptions.initTotal( source, "step", 1 );
+  }
+
+  static initTotalStrain(source) {
+    return EdRollOptions.initTotal( source, "strain", 0 );
+  }
+
+  static initTotalTarget(source) {
+    return EdRollOptions.initTotal( source, "target", 1 );
+  }
+
+  get totalStep() {
+    return this.step.base + sum(Object.values(this.step.modifiers));
   }
 
   /** @inheritDoc */
   updateSource(changes = {}, options = {}) {
-    const diff = super.updateSource(changes, options);
-    this.step.total = this.#totalStep;
-    this.target.total = this.#totalTarget;
-    this.karma.dice = getDice(this.karma.step);
-    this.devotion.dice = getDice(this.devotion.step);
-    return diff;
+    return super.updateSource(
+      mergeObject( changes, {
+        "step.total": this.totalStep,
+        "target.total": this.totalTarget,
+        "karma.dice": getDice(this.karma.step),
+        "devotion.dice": getDice(this.devotion.step),
+      }),
+      options
+    );
   }
 
   static initDiceForStep(parent) {
@@ -232,4 +282,6 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
       },
     );
   }
+
+
 }

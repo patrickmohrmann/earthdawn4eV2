@@ -20,6 +20,7 @@
     "Dialog": false,
     "Die": false,
     "Folder": false,
+    "FormApplication": false,
     "Handlebars": false,
     "Hooks": false,
     "Item": false,

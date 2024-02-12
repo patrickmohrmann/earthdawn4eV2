@@ -1,6 +1,7 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
+import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
 
 /**
@@ -8,6 +9,11 @@ import RollPrompt from "../applications/global/roll-prompt.mjs";
  * @augments {Actor}
  */
 export default class ActorEd extends Actor {
+
+  /** @inheritDoc */
+  static async createDialog( data = {}, { parent = null, pack = null, ...options } = {} ) {
+    return DocumentCreateDialog.waitPrompt( data, { documentCls: Actor, parent, pack, options } );
+  }
 
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
@@ -44,6 +50,7 @@ export default class ActorEd extends Actor {
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const edRollOptions = new EdRollOptions( {
+      rollType: "action",
       step: { base: attributeStep },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
@@ -95,17 +102,17 @@ export default class ActorEd extends Actor {
    * @param {EdRoll} roll The prepared Roll.
    */
   #processRoll( roll ) {
-    if ( !roll ) {
+    if (!roll) {
       // No roll available, do nothing.
       return;
     }
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.edRollOptions.strain, "standard" );
+    this.takeDamage(roll.options.strain.total, 'standard');
     if (
-        !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
-        || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
+      !this.#useResource('karma', roll.options.karma.pointsUsed) ||
+      !this.#useResource('devotion', roll.options.devotion.pointsUsed)
     ) {
-      ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
+      ui.notifications.warn('Localize: Not enough karma or devotion. Used all that was available.');
     }
     roll.toMessage();
   }

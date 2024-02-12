@@ -423,6 +423,23 @@
             "relation":                                             "Beziehung",
             "relations":                                            "Beziehungen"
         },
+        "Rolls": {
+            "formulaStep":                                          "Stufe {step}",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "Chat": {
+                "rollTypeHeading":                                  "{rollType} von {roller}",
+                "stepModifiers":                                    "Stufe {step}",
+                "targetModifiers":                                  "Schwierigkeit {target}",
+                "baseValue":                                        "Basis",
+                "difficulty":                                       "Schwierigkeit",
+                "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)",
+                "buttonApplyDamage":                                "Schaden geben",
+                "buttonTakeDamage":                                 "Schaden nehmen",
+                "buttonEffect":                                     "Hier passiert was tolles"
+            }
+        },
         "Sheet": {
             "Descriptions": {
                 "burrow":                                           "Graben",                
@@ -509,6 +526,13 @@
             "unarmed":                                              "Waffenlos"
         },
         "Settings": {
+            "Chat": {
+                "chatAvatar":                                       "Chat Avatar",
+                "chatAvatarHeader":                                 "Chat Avatar (nur SL)",
+                "chatAvatarHint":                                   "Wähle, welcher Avatar im Chat angezeigt werden soll. Spielerkonfiguration oder ausgewählter Token?",
+                "chatAvatarConfiguration":                          "Avatar der Konfiguration",
+                "chatAvatarToken":                                  "Avatar des Token"
+            },
             "StepTable": {
                 "editionClassic":                                   "Klassik Edition",
                 "editionfirst":                                     "Erste Edition",
