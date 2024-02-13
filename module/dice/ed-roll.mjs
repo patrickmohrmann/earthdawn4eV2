@@ -34,20 +34,20 @@ export default class EdRoll extends Roll {
   /*  Constructor and Fields                      */
   /* -------------------------------------------- */
 
-  constructor(formula = undefined, data = {}, edRollOptions = {}) {
+  constructor( formula = undefined, data = {}, edRollOptions = {} ) {
     // us ternary operator to also check for empty strings, nullish coalescing operator (??) only checks null or undefined
     const baseTerm = formula
       ? formula
       : // : ( `${getDice( step )}[${game.i18n.localize( "ED.General.S.step" )} ${step}]` );
-        `(${getDice(edRollOptions.step.total)})[${game.i18n.localize('ED.General.S.step')} ${
+        `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.General.S.step" )} ${
           edRollOptions.step.total
         }]`;
-    super(baseTerm, data, edRollOptions);
+    super( baseTerm, data, edRollOptions );
 
     this.flavorTemplate = ED4E.rollTypes[this.options.rollType]?.flavorTemplate ?? ED4E.rollTypes.arbitrary.flavorTemplate;
 
-    if (!this.options.extraDiceAdded) this.#addExtraDice();
-    if (!this.options.configured) this.#configureModifiers();
+    if ( !this.options.extraDiceAdded ) this.#addExtraDice();
+    if ( !this.options.configured ) this.#configureModifiers();
   }
 
   /* -------------------------------------------- */
@@ -78,9 +78,9 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isRuleOfOne() {
-    if (!this.validEdRoll || !this._evaluated) return undefined;
+    if ( !this.validEdRoll || !this._evaluated ) return undefined;
     // more than one die required
-    if (this.numDice < 2) return false;
+    if ( this.numDice < 2 ) return false;
     return this.total === this.numDice;
   }
 
@@ -91,7 +91,7 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isSuccess() {
-    if (!this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
     return this.numSuccesses > 0;
   }
 
@@ -102,7 +102,7 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isFailure() {
-    if (!this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
     return this.numSuccesses <= 0;
   }
 
@@ -114,10 +114,10 @@ export default class EdRoll extends Roll {
    */
   get numDice() {
     // must be evaluated since dice can explode and add more dice
-    if (!this.validEdRoll || !this._evaluated) return undefined;
+    if ( !this.validEdRoll || !this._evaluated ) return undefined;
     return this.dice
-      .map((diceTerm) => diceTerm.number)
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      .map( ( diceTerm ) => diceTerm.number )
+      .reduce( ( accumulator, currentValue ) => accumulator + currentValue, 0 );
   }
 
   /* -------------------------------------------- */
@@ -127,16 +127,16 @@ export default class EdRoll extends Roll {
    * @type {number}
    */
   get numSuccesses() {
-    if (!this.validEdRoll || !this._evaluated || !this.options.target) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || !this.options.target || this.options.target.total < 0 ) return undefined;
     return this.total < this.options.target?.total
       ? 0
-      : Math.trunc((this.total - this.options.target.total) / 5) + 1;
+      : Math.trunc( ( this.total - this.options.target.total ) / 5 ) + 1;
   }
 
   /* -------------------------------------------- */
 
   get numExtraSuccesses() {
-    if (!this.validEdRoll || !this._evaluated || !this.options.target) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || !this.options.target || this.options.target.total < 0 ) return undefined;
     return this.numSuccesses < 1 ? 0 : this.numSuccesses - 1;
   }
 
@@ -156,10 +156,10 @@ export default class EdRoll extends Roll {
    * Set the text of this roll's chat message.
    * @type {string}
    */
-  set chatFlavor(flavor) {
-    this.options.updateSource({
+  set chatFlavor( flavor ) {
+    this.options.updateSource( {
       chatFlavor: flavor,
-    });
+    } );
   }
 
   /* -------------------------------------------- */
@@ -205,7 +205,7 @@ export default class EdRoll extends Roll {
       )
     ) );
 
-    return formulaParts.filterJoin(" + ");
+    return formulaParts.filterJoin( " + " );
   }
 
   /* -------------------------------------------- */
@@ -217,11 +217,11 @@ export default class EdRoll extends Roll {
    * @private
    */
   #configureModifiers() {
-    this.dice.map((diceTerm) => {
+    this.dice.map( ( diceTerm ) => {
       // Explodify all dice terms
-      diceTerm.modifiers.push('X');
+      diceTerm.modifiers.push( 'X' );
       return diceTerm;
-    });
+    } );
 
     // Mark configuration as complete
     this.options.configured = true;
@@ -233,8 +233,8 @@ export default class EdRoll extends Roll {
    * Add additional dice in groups, like karma, devotion or elemental damage.
    */
   #addExtraDice() {
-    this.#addResourceDice('karma');
-    this.#addResourceDice('devotion');
+    this.#addResourceDice( "karma" );
+    this.#addResourceDice( "devotion" );
     this.#addExtraSteps();
 
     // Mark extra dice as complete
@@ -247,14 +247,15 @@ export default class EdRoll extends Roll {
    * Add dice from a given resource step. Currently only karma or devotion.
    * @param {"karma"|"devotion"} type
    */
-  #addResourceDice(type) {
+  #addResourceDice( type ) {
     const pointsUsed = this.options[type]?.pointsUsed;
-    if (pointsUsed > 0) {
-      let diceTerm, newTerms;
-      for (let i = 1; i <= pointsUsed; i++) {
-        diceTerm = getDice(this.options[type].step);
+    if ( pointsUsed > 0 ) {
+      let diceTerm;
+      let newTerms;
+      for ( let i = 1; i <= pointsUsed; i++ ) {
+        diceTerm = getDice( this.options[type].step );
         newTerms = Roll.parse(
-          `+ (${diceTerm})[${game.i18n.localize(`ED.General.${type[0]}.${type}`)} ${i}]`,
+          `+ (${diceTerm})[${game.i18n.localize( `ED.General.${type[0]}.${type}` )} ${i}]`,
           {}
         );
         this.terms.push( ...newTerms );
@@ -332,7 +333,7 @@ export default class EdRoll extends Roll {
       return diceTerm.results.map( r => {
         return {
           result: diceTerm.getResultLabel( r ),
-          classes: diceTerm.getResultCSS( r ).filterJoin(" ")
+          classes: diceTerm.getResultCSS( r ).filterJoin( " " )
         }
       } )
     } );
@@ -383,26 +384,26 @@ export default class EdRoll extends Roll {
    * @param {boolean} [options.isPrivate=false]    Is the Roll displayed privately?
    * @returns {Promise<string>}                    The rendered HTML template as a string
    */
-  async render({flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={}) {
-    if ( !this._evaluated ) await this.evaluate({async: true});
+  async render( {flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={} ) {
+    if ( !this._evaluated ) await this.evaluate( {async: true} );
     const chatData = {
       formula: isPrivate ? "???" : this.#stepsFormula,
       flavor: isPrivate ? null : flavor,
       user: game.user.id,
       tooltip: isPrivate ? "" : await this.getTooltip(),
-      total: isPrivate ? "?" : Math.round(this.total * 100) / 100
+      total: isPrivate ? "?" : Math.round( this.total * 100 ) / 100
     };
-    return renderTemplate(template, chatData);
+    return renderTemplate( template, chatData );
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async toMessage(messageData = {}, options = {}) {
-    if (!this._evaluated) await this.evaluate({ async: true });
+  async toMessage( messageData = {}, options = {} ) {
+    if ( !this._evaluated ) await this.evaluate( { async: true } );
 
     messageData.flavor = await this.chatFlavor;
 
-   return super.toMessage(messageData, options);
+   return super.toMessage( messageData, options );
   }
 }
