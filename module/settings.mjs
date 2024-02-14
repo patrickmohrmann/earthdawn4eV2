@@ -83,15 +83,16 @@ export default function registerSystemSettings() {
     } );
     // LP Tracking Option Talents
     game.settings.register( "ed4e", "lpTrackingAllTalents", {
-        name: "ED.Settings.LpTracking.lpTrackingAllTalentsOption",
-        hint: "ED.Settings.LpTracking.hintAllTalentsOption",
+        name: "ED.Settings.LpTracking.lpTalentsRequirement",
+        hint: "ED.Settings.LpTracking.hintTalents",
         scope: "world",
         config: true,
         default: "disciplineTalents",
         type: String,
         choices: {
             disciplineTalents: "ED.Settings.LpTracking.disciplineTalents",
-            allTalents: "ED.Settings.LpTracking.allTalents"
+            allTalents: "ED.Settings.LpTracking.allTalents",
+            allTalentsHouseRule: "ED.Settings.LpTracking.allTalentsHouseRule"
           }
     } );
     // LP Tracking Option Skill Training
@@ -127,28 +128,6 @@ export default function registerSystemSettings() {
         choices: {
             visualizeOnly: "ED.Settings.Encumbrance.encumbranceVisualizeOnly",
             calculate: "ED.Settings.Encumbrance.encumbranceWithEffects"
-          }
-    } );
-
-     /* -------------------------------------------------------------------------------- */
-    /*                                  GM Chat Avatar                                     */
-    /* -------------------------------------------------------------------------------- */
-    // Chat Avatar settings Header
-    game.settings.register( "ed4e", "chatAvatarHeader", {
-        name: "ED.Settings.Chat.chatAvatarHeader",
-        config: true,
-    } );
-    // Chat Avater Options
-    game.settings.register( "ed4e", "chatAvatar", {
-        name: "ED.Settings.Chat.chatAvatar",
-        hint: "ED.Settings.Chat.chatAvatarHint",
-        scope: "world",
-        config: true,
-        default: "configuration",
-        type: String,
-        choices: {
-            configuration: "ED.Settings.Chat.chatAvatarConfiguration",
-            selectedToken: "ED.Settings.Chat.chatAvatarToken"
           }
     } );
 }
