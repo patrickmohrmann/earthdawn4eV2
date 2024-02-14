@@ -130,7 +130,31 @@ export default function registerSystemSettings() {
             calculate: "ED.Settings.Encumbrance.encumbranceWithEffects"
           }
     } );
+
+    
+     /* -------------------------------------------------------------------------------- */
+    /*                                  GM Chat Avatar                                     */
+    /* -------------------------------------------------------------------------------- */
+    // Chat Avatar settings Header
+    game.settings.register( "ed4e", "chatAvatarHeader", {
+        name: "ED.Settings.Chat.chatAvatarHeader",
+        config: true,
+    } );
+    // Chat Avater Options
+    game.settings.register( "ed4e", "chatAvatar", {
+        name: "ED.Settings.Chat.chatAvatar",
+        hint: "ED.Settings.Chat.chatAvatarHint",
+        scope: "world",
+        config: true,
+        default: "configuration",
+        type: String,
+        choices: {
+            configuration: "ED.Settings.Chat.chatAvatarConfiguration",
+            selectedToken: "ED.Settings.Chat.chatAvatarToken"
+          }
+    } );
 }
+
 
 
 
