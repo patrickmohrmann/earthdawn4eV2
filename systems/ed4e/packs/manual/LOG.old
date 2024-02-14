@@ -1,5 +1,13 @@
-2024/02/05-23:35:15.215 3a48 Log #21: 0 ops saved to Table #24 OK
-2024/02/05-23:35:15.215 3a48 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000021.log: OK
-2024/02/05-23:35:15.216 3a48 Table #23: 8 entries OK
-2024/02/05-23:35:15.223 3a48 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000019: OK
-2024/02/05-23:35:15.232 3a48 **** Repaired leveldb C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual; recovered 1 files; 2834 bytes. Some data may have been lost. ****
+2024/02/14-19:53:54.278 13e0 Log #17: 0 ops saved to Table #31 OK
+2024/02/14-19:53:54.279 13e0 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000017.log: OK
+2024/02/14-19:53:54.279 13e0 Log #26: 0 ops saved to Table #32 OK
+2024/02/14-19:53:54.280 13e0 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000026.log: OK
+2024/02/14-19:53:54.288 13e0 Log #30: 393 ops saved to Table #33 OK
+2024/02/14-19:53:54.288 13e0 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000030.log: OK
+2024/02/14-19:53:54.288 13e0 Table #19: 8 entries OK
+2024/02/14-19:53:54.289 13e0 Table #23: 8 entries OK
+2024/02/14-19:53:54.289 13e0 Table #33: 393 entries OK
+2024/02/14-19:53:54.300 13e0 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000015: OK
+2024/02/14-19:53:54.301 13e0 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000025: OK
+2024/02/14-19:53:54.302 13e0 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000029: OK
+2024/02/14-19:53:54.315 13e0 **** Repaired leveldb C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual; recovered 3 files; 78397 bytes. Some data may have been lost. ****
