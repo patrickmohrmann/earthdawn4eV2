@@ -1,4 +1,4 @@
-
+import ItemSheetEd from "../item/item-sheet.mjs";
 
 /**
  * The application responsible for handling Charaktergeneration
@@ -11,9 +11,8 @@
 export default class CharacterGenerationPrompt extends FormApplication {
 
     constructor( edCharakterGeneration = {},  ) {
-        // if ( !( edCharakterGeneration instanceof edCharakterGeneration ) ) {
-        //     throw new TypeError( "ED4E | Cannot construct Character Generation from data.`." );
-        // }
+        const namegiverData = ItemSheetEd.getNamegiverData()
+        console.log( "namegiverData", namegiverData )
         super( edCharakterGeneration );
     }
 
@@ -29,6 +28,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
         } );
     }
 
+    
     static get defaultOptions() {
         const options = super.defaultOptions;
         return {
@@ -60,6 +60,22 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     /** @type {edCharakterGeneration} */
     edCharacterOptions = {};
+
+    /* -------------------------------------------- */
+    /*             get Namegiver Data               */
+    /* -------------------------------------------- */
+
+    async getNamegiverData() {
+        const namegiverData = {};
+
+        const items = game.items;
+        for ( let i = 0; i< items.length; i++ ) {
+        if ( items[i].type === "namegiver" ) {
+            namegiverData.push( items[i].key )
+        }
+        }
+        return namegiverData;
+    } 
 
     /** @inheritDoc */
     activateListeners( html ) {
