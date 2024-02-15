@@ -21,6 +21,7 @@ import * as hooks from "./module/hooks/_module.mjs";
 import * as system from "./module/system/_module.mjs";
 import * as tours from "./module/tours/_module.mjs";
 import * as utils from "./module/utils.mjs";
+import * as itemDataCollection from "./module/item-data-collectors.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -34,6 +35,7 @@ globalThis.ed4e = {
     dice,
     documents,
     hooks,
+    itemDataCollection,
     system,
     tours,
     utils
@@ -57,6 +59,7 @@ export {
     dice,
     documents,
     hooks,
+    itemDataCollection,
     // migrations,
     system,
     utils,

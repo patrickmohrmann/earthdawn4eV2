@@ -33,9 +33,9 @@ export default class ActorEd extends Actor {
     this.update( {"system.karma.value": this.system.karma.max} );
   }
 
-  async characterGeneration () {
+  async characterGeneration ( dataCollection ) {
     const name = this.name;
-    const generation = await CharacterGenerationPrompt.waitPrompt( name )
+    const generation = await CharacterGenerationPrompt.waitPrompt( name, dataCollection )
     this.#processGeneration ( generation );
   }
 

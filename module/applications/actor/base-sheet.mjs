@@ -1,4 +1,11 @@
 import ED4E from "../../config.mjs";
+import { getNamegiverCollection  } from "../../item-data-collectors.mjs";
+import { getTalentCollection  } from "../../item-data-collectors.mjs";
+import { getSkillCollection } from "../../item-data-collectors.mjs";
+import { getDevotionCollection  } from "../../item-data-collectors.mjs";
+import { getSpellCollection  } from "../../item-data-collectors.mjs";
+import { getDisciplineCollection  } from "../../item-data-collectors.mjs";
+import { getQuestorCollection  } from "../../item-data-collectors.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -75,9 +82,22 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".character-generation" ).click( this._onCharacterGeneration.bind( this ) );
   }
 
-  _onCharacterGeneration( event ) {
+  // eslint-disable-next-line complexity
+  async _onCharacterGeneration( event ) {
     event.preventDefault();
-    this.actor.characterGeneration( );
+
+    let dataCollection = {
+        namegiverCollection: getNamegiverCollection(),
+        talentCollection: getTalentCollection(),
+        skillCollection: getSkillCollection(),
+        devotionCollection: getDevotionCollection(),
+        spellCollection: getSpellCollection(),
+        disciplineCollection: getDisciplineCollection(),
+        questorCollection: getQuestorCollection(),
+      }
+      console.log( "EARTHDAWN-DATACOLLECTION", dataCollection )
+
+    this.actor.characterGeneration( dataCollection );
   }
 
   /**
