@@ -182,7 +182,7 @@ preLocalize( "damageType" );
  * @enum {string}
  */
 ED4E.tier = {
-	none: 				"ED.General.none",
+	//none: 				"ED.General.none",
 	novice: 			"ED.Tier.novice",
 	journeyman: 		"ED.Tier.journeyman",
 	warden: 			"ED.Tier.warden",
