@@ -304,6 +304,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs",
     "systems/ed4e/templates/dice/dice-partials/roll-target-modifier.hbs",
     "systems/ed4e/templates/dice/dice-partials/roll-successes.hbs",
+
+    // other tabs
+    "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",
   ];
 
   const paths = {};

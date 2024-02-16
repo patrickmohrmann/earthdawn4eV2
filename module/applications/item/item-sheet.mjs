@@ -1,4 +1,5 @@
 import ED4E from "../../config.mjs";
+import ClassTemplate from "../../data/item/templates/class.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -20,6 +21,11 @@ export default class ItemSheetEd extends ItemSheet {
           contentSelector: '.item-sheet-body',
           initial: 'main',
         },
+        {
+          navSelector: '.item-advancement-tabs',
+          contentSelector: '.item-advancement-body',
+          initial: 'main'
+        }
       ],
     } );
   }
@@ -45,11 +51,9 @@ export default class ItemSheetEd extends ItemSheet {
   async getData() {
     const systemData = super.getData();
 
-
     systemData.enrichment = await this._enableHTMLEnrichment();
-    // console.log( '[EARTHDAWN] Item data: ', systemData );
-
     systemData.isPlayer = !game.user.isGM;
+    systemData.isClass = this.item.system instanceof ClassTemplate ;
     systemData.config = ED4E;
 
     return systemData;
@@ -73,6 +77,34 @@ export default class ItemSheetEd extends ItemSheet {
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
     html.find( ".effect-delete" ).click( this._onEffectDelete.bind( this ) );
+
+    // add extra Level to a class sheet
+    html.find( ".class__add-level" ).click( this._onClassLevelAdd.bind( this ) );
+    html.find( ".class__delete-level" ).click( this._onClassLevelDelete.bind( this ) );
+  }
+
+  /* ----------------------------------------------------------------------- */
+  /*                Item CRUD                                                */
+  /* ----------------------------------------------------------------------- */
+
+  /**
+   * Handle adding a level to the class' advancement.
+   * @param { event } event   The originating click event.
+   */
+  _onClassLevelAdd( event ) {
+    event.preventDefault();
+    this.item.system.advancement.addLevel();
+    this.render();
+  }
+
+  /**
+   * Handle removing the last added level from the class' advancement.
+   * @param { event } event   The originating click event.
+   */
+  _onClassLevelDelete( event ) {
+    event.preventDefault();
+    this.item.system.advancement.deleteLevel();
+    this.render();
   }
 
   /**
