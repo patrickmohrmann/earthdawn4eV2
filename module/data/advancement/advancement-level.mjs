@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { FormulaField, IdentifierField } from "../fields.mjs";
+import { IdentifierField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 
