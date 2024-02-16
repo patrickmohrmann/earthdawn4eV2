@@ -104,11 +104,13 @@ export default class AdvancementLevelData extends SparseDataModel {
           hint: "ED.TheSetOfActiveAbilitiesGrantedOnThisLevel"
         }
       ),
-      resourceStep: new FormulaField( {
+      resourceStep: new fields.NumberField( {
         required: true,
-        nullable: true,
-        blank: true,
-        deterministic: false
+        nullable: false,
+        step: 1,
+        min: 1,
+        positive: true,
+        initial: 4,
       } ),
     }
   }
