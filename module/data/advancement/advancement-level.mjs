@@ -21,6 +21,8 @@ export default class AdvancementLevelData extends SparseDataModel {
       level: new fields.NumberField( {
         required: true,
         nullable: false,
+        step: 1,
+        positive: true,
         initial: 1,
         label: "ED.level",
         hint: "ED.TheLevelThisAdvancementDescribes"
@@ -99,7 +101,7 @@ export default class AdvancementLevelData extends SparseDataModel {
         {
           required: true,
           label: "ED.advancement.levelActiveEffects",
-          hint: "ED.TheSetOfActiveAbilitesGrantedOnThisLevel"
+          hint: "ED.TheSetOfActiveAbilitiesGrantedOnThisLevel"
         }
       ),
       resourceStep: new FormulaField( {
