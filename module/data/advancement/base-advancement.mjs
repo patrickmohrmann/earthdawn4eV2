@@ -56,4 +56,31 @@ export default class AdvancementData extends SparseDataModel {
       tmp: new fields.EmbeddedDataField(AdvancementLevelData)
     };
   }
+
+  /**
+   * Add a new level to this advancement.
+   * @param {object} [data={}]    If provided, will initialize the new level with the given data.
+   */
+  addLevel( data = {} ) {
+    this.updateSource( {
+      levels: this.levels.concat(
+        new AdvancementLevelData(
+          {
+            ...data,
+            level: this.levels.length + 1
+          }
+        )
+      )
+    } );
+  }
+
+  /**
+   * Remove the last {@link amount} levels added from this advancement.
+   * @param {number} [amount=1]   The number of levels to remove.
+   */
+  deleteLevel( amount = 1 ) {
+    this.updateSource( {
+      levels: this.levels.slice( 0, -( amount ?? 1 ) )
+    } );
+  }
 }
