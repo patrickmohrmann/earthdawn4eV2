@@ -243,6 +243,10 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/cards/spell-card.hbs",
     "systems/ed4e/templates/actor/cards/class-card.hbs",
 
+    // Character Generation
+    "systems/ed4e/templates/actor/generation/generation.hbs",
+    "systems/ed4e/templates/actor/generation/option-selection.hbs",
+
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",
     "systems/ed4e/templates/item/item-partials/navigator-section.hbs",

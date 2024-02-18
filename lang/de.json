@@ -361,6 +361,11 @@
                 "rangeShort":                                   "Kurze Reichweite",
                 "salvoCost":                                    "Salven Kosten"
             },
+            "Skill": {
+                "general":                                      "Allgemein",
+				"artisan":                                      "Kunsthandwerk",
+	 			"knowledge":                                    "Wissen"
+            },
             "Spell": {      
                 "binding":                                      "Bindung",
                 "castingdifficulty":                            "Schwierigkeit",

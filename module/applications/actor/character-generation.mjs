@@ -1,5 +1,4 @@
 
-
 /**
  * The application responsible for handling Charaktergeneration
  *
@@ -11,21 +10,37 @@
 export default class CharacterGenerationPrompt extends FormApplication {
 
     constructor( edCharakterGeneration = {}, dataCollection = {} ) {
-        // if ( !( edCharakterGeneration instanceof edCharakterGeneration ) ) {
-        //     throw new TypeError( "ED4E | Cannot construct Character Generation from data.`." );
-        // }
-        super( edCharakterGeneration );
+        super( edCharakterGeneration, dataCollection );
+
+        this.namegiver = dataCollection.namegiverCollection;
+        this.talents = dataCollection.talentCollection;
+        this.skills = dataCollection.skillCollection;
+        this.devotions = dataCollection.devotionCollection;
+        this.spells = dataCollection.spellCollection;
+        this.disciplines = dataCollection.disciplineCollection;
+        this.questors = dataCollection.questorCollection;
+        this.fullNamegiver = dataCollection.fullNamegiverItemCollection;
+        this.fullTalents = dataCollection.fullTalentItemCollection;
+        this.skillsFull = dataCollection.fullSkillItemCollection;
+        this.skillsArtisan = dataCollection.SkillArtisanItemCollection;
+        this.fullDevotions = dataCollection.fullDevotionItemCollection;
+        this.fullSpells = dataCollection.fullSpellItemCollection;
+        this.fullDisciplines = dataCollection.fullDisciplineItemCollection;
+        this.fullQuestors = dataCollection.fullQuestorItemCollection;
+        console.log( "DATACOLLECTION - CHARACTER GENERATION", dataCollection )
     }
+
+    
 
     /**
      * Wait for dialog to be resolved.
-     * @param {object} [data]           Initial data to pass to the constructor.
-     * @param {object} [options]        Options to pass to the constructor.
+     * @param {object} [edCharakterGeneration]           Initial data to pass to the constructor.
+     * @param {object} [dataCollection]        Options to pass to the constructor.
      */
-    static waitPrompt( data, options = {} ) {
+    static waitPrompt( edCharakterGeneration, dataCollection ) {
         return new Promise( ( resolve ) => {
-            options.resolve = resolve;
-            new this( data, options ).render( true, { focus: true } );
+           //  dataCollection.resolve = resolve;
+            new this( edCharakterGeneration, dataCollection, this.namegiver ).render( true, { focus: true } );
         } );
     }
 
@@ -51,16 +66,30 @@ export default class CharacterGenerationPrompt extends FormApplication {
     }
 
     get title() {
+        
         return game.i18n.localize( "X-Character Generation" );
     }
 
     get template() {
+        console.log( "this.Namgeiver", this.namegiver ) 
         return 'systems/ed4e/templates/actor/generation/generation.hbs';
     }
 
     /** @type {edCharakterGeneration} */
     edCharacterOptions = {
     };
+
+
+
+    // namegiver.forEach( ( (this.namegiver) ) => {
+    //     let option = document.createElement( "option" );
+    //     option.text = item.name;
+    //     option.value = item.name;
+    //     let namegiverSelector = document.getElementById( "namegiver__selector" )
+    //     namegiverSelector.appendChild(option)
+    // } );
+
+
 
     /** @inheritDoc */
     activateListeners( html ) {
@@ -85,4 +114,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
     async _finishGeneration( event ) {
         return this.close();
     }
+
+    // async _updateObject( event, formData ) {
+    //     return Promise.resolve(this._updateCharacterData(formData)).then(this.render(true));
+    //   }
+
+    // _updateCharacterData() {
+    //     this.actor.system.armor = 1
+    // }
 }

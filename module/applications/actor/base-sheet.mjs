@@ -6,6 +6,8 @@ import { getDevotionCollection  } from "../../item-data-collectors.mjs";
 import { getSpellCollection  } from "../../item-data-collectors.mjs";
 import { getDisciplineCollection  } from "../../item-data-collectors.mjs";
 import { getQuestorCollection  } from "../../item-data-collectors.mjs";
+import { getSkillFullCollection } from "../../item-data-collectors.mjs";
+import { getSkillArtisanCollection } from "../../item-data-collectors.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -94,6 +96,8 @@ export default class ActorSheetEd extends ActorSheet {
         spellCollection: getSpellCollection(),
         disciplineCollection: getDisciplineCollection(),
         questorCollection: getQuestorCollection(),
+        skillFullCollection: getSkillFullCollection(),
+        skillArtisanCollection: getSkillArtisanCollection(),
       }
       console.log( "EARTHDAWN-DATACOLLECTION", dataCollection )
 

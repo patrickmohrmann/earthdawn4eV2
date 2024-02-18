@@ -200,6 +200,17 @@ ED4E.abilityPools = {
 	special:	"ED.ability.special"
 }
 
+/**
+ * skill Type
+ * @enum {string}
+ */
+ED4E.skillType = {
+	general: 			"ED.Item.Skill.general",
+	artisan:			"ED.Item.Skill.artisan",
+	knowledge: 			"ED.Item.Skill.knowledge",
+}
+preLocalize( "skillType" );
+
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
 /* -------------------------------------------- */

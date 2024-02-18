@@ -1,5 +1,12 @@
 <div class="item__left--main">
     <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Tier --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
+        <select name="system.skillType">
+            {{selectOptions config.skillType selected=item.system.skillType localize=true }}
+        </select>
+    </div>
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.General.rank"}}:</label>
         <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
