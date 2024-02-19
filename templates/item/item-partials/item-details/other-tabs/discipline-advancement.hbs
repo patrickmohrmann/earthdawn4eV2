@@ -27,8 +27,9 @@
     </div>
     <div class="advancement__content item-advancement-body">
       {{#each item.system.advancement.levels}}
-        <div class="tab item-name" name="system.advancement.level[{{this.level}}].id"
-             data-tab="item-description-tab-{{this.level}}" value="{{@index}}" data-item-id="{{@index}}">
+        <div class="tab item-name advancement-level" name="system.advancement.level[{{this.level}}].id"
+             data-tab="item-description-tab-{{this.level}}" value="{{@index}}" data-level-index="{{@index}}"
+             data-level="{{this.level}}">
 
           <!-- Level Number -->
           <div class="title-level-number">
@@ -44,6 +45,7 @@
             <span>
               <select class="" name="system.advancement.levels[{{@index}}].tier" type="text" value="{{this.tier}}"
                       data-dtype="String">
+                <option value="">{{localize "ED.General.none"}}</option>
                 {{selectOptions ../config.tier selected=this.tier sort=false}}
               </select>
             </span>
@@ -63,16 +65,17 @@
           <!-- Class Talents -->
           <div class="class-abilities">
             <p class="flexrow">
-            <label>{{localize "X-Talents"}}</label>
-            <span class="abilities-list">
-                {{#each this.abilities}}
-                  <a class="content-link" draggable="true" data-uuid="{{../../item.uuid}}"
-                     data-id="{{../../item.id}}" data-type="Item" data-tooltip="{{../../item.tooltip}}">
+              <label>{{localize "X-Talents"}}</label>
+              <span class="abilities-list abilities-pool class-pool" data-drop-function="abilities-pool" data-pool-type="class">
+                {{#each this.abilities.class}}
+                  <a class="content-link" draggable="true" data-uuid="{{concat "Item." this}}"
+                     data-id="{{this}}" data-type="Item" {{!--data-tooltip="{{../../item.tooltip}}"--}}>
                   <i class="fas fa-suitcase"></i>
+                    {{this}}
                 </a>
                 {{else}}
                   {{localize
-                  "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
+                    "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
                 {{/each}}
               </span>
             </p>
@@ -82,11 +85,12 @@
           <div class="free-abilities">
             <p class="flexrow">
               <label>{{localize "X-Free Abilities"}}</label>
-              <span class="abilities-list">
-                {{#each this.freeAbilities}}
-                  <a class="content-link" draggable="true" data-uuid="{{../../item.uuid}}"
+              <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="free">
+                {{#each this.abilities.free}}
+                  <a class="content-link" draggable="true" data-uuid="{{concat "Item." this}}"
                      data-id="{{../../item.id}}" data-type="Item" data-tooltip="{{../../item.tooltip}}">
                 <i class="fas fa-suitcase"></i>
+                    {{this}}
               </a>
                 {{else}}
                   {{localize
@@ -100,12 +104,13 @@
           <div class="special-abilities">
             <p class="flexrow">
               <label>{{localize "X-Special Abilities"}}</label>
-              <span class="abilities-list">
-                {{#each this.freeAbilities}}
-                  <a class="content-link" draggable="true" data-uuid="{{../../item.uuid}}"
+              <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="special">
+                {{#each this.abilities.special}}
+                  <a class="content-link" draggable="true" data-uuid="{{concat "Item." this}}"
                      data-id="{{../../item.id}}" data-type="Item" data-tooltip="{{../../item.tooltip}}">
-                <i class="fas fa-suitcase"></i>
-              </a>
+                  <i class="fas fa-suitcase"></i>
+                    {{this}}
+                  </a>
                 {{else}}
                   {{localize
                     "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
@@ -118,12 +123,13 @@
           <div class="class-effects">
             <p class="flexrow">
               <label>{{localize "X-Effects"}}</label>
-              <span class="abilities-list">
+              <span class="abilities-list effect-pool">
                 {{#each this.effects}}
                   <a class="content-link" draggable="true" data-uuid="{{../../item.uuid}}"
                      data-id="{{../../item.id}}" data-type="Item" data-tooltip="{{../../item.tooltip}}">
-                <i class="fas fa-suitcase"></i>
-              </a>
+                  <i class="fas fa-suitcase"></i>
+                    {{this}}
+                  </a>
                 {{else}}
                   {{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
                 {{/each}}

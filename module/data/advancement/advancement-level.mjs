@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { IdentifierField } from "../fields.mjs";
+import { IdentifierField, MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 
@@ -29,62 +29,39 @@ export default class AdvancementLevelData extends SparseDataModel {
       } ),
       tier: new fields.StringField( {
         required: true,
-        nullable: false,
+        nullable: true,
+        blank: true,
+        initial: "",
         choices: ED4E.tier,
-        initial: "none",
         label: "ED.tier",
         hint: "ED.The tier to which this level belongs to"
       } ),
-      abilities: new fields.ArrayField(
-        new fields.ForeignDocumentField(
-          AbilityTemplate,
+      abilities: new MappingField(
+        new fields.ArrayField(
+          new fields.ForeignDocumentField(
+            AbilityTemplate,
+            {
+              required: false,
+              nullable: true,
+              idOnly: true,
+              initial: null,
+              label: "ED.Ability",
+              hint: "ED.AnAbilityGrantedOnThisLevel"
+            }
+          ),
           {
-            required: false,
-            nullable: true,
-            idOnly: true,
-            initial: null,
-            label: "ED.Ability",
-            hint: "ED.AnAbilityGrantedOnThisLevel"
+            required: true,
+            label: "ED.advancement.abilityPoolLevel",
+            hint: "ED.TheSetOfAbilitiesGrantedOnThisLevel"
           }
         ),
         {
+          initialKeys: CONFIG.ED4E.abilityPools,
+          initialKeysOnly: true,
           required: true,
+          nullable: false,
           label: "ED.advancement.levelAbilities",
-          hint: "ED.TheSetOfAbilitiesGrantedOnThisLevel"
-        }
-      ),
-      freeAbilities: new fields.ArrayField(
-        new fields.ForeignDocumentField(
-          AbilityTemplate,
-          {
-            required: false,
-            nullable: true,
-            idOnly: true,
-            label: "ED.Ability",
-            hint: "ED.AnAbilityGrantedForFreeOnThisLevel"
-          }
-        ),
-        {
-          required: true,
-          label: "ED.advancement.levelAbilities",
-          hint: "ED.TheSetOfAbilitiesGrantedForFreeOnThisLevel"
-        }
-      ),
-      specialAbilities: new fields.ArrayField(
-        new fields.ForeignDocumentField(
-          AbilityTemplate,
-          {
-            required: false,
-            nullable: true,
-            idOnly: true,
-            label: "ED.SpecialAbility",
-            hint: "ED.ASpecialAbilityGrantedOnThisLevel"
-          }
-        ),
-        {
-          required: true,
-          label: "ED.advancement.levelSpecialAbilities",
-          hint: "ED.TheSetOfSpecialAbilitiesGrantedOnThisLevel"
+          hint: "good stoff"
         }
       ),
       effects: new fields.ArrayField(
@@ -113,5 +90,19 @@ export default class AdvancementLevelData extends SparseDataModel {
         initial: 4,
       } ),
     }
+  }
+
+  /**
+   * Add abilities to the given type of pool on this level.
+   * @param {[Item]} abilities              An array of ability item IDs to add.
+   * @param {ED4E.abilityPools} poolType    The type of pool the abilities are added to.
+   */
+  addAbilities( abilities, poolType ) {
+    const propertyKey = `abilities.${poolType}`;
+    const currentAbilities = this.abilities[poolType];
+    const abilityIDs = abilities.map( ability => ability.id );
+    this.updateSource( {
+      [propertyKey]: currentAbilities.concat( abilityIDs ),
+    } );
   }
 }

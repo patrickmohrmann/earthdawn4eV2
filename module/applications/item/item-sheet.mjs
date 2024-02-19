@@ -7,6 +7,15 @@ import ClassTemplate from "../../data/item/templates/class.mjs";
  */
 export default class ItemSheetEd extends ItemSheet {
 
+  constructor( options = {} ) {
+    super( options );
+
+    // mapping of drop event target classes to handling function
+    this._dropCallbackMapping = {
+      "abilities-pool": this._onDropAdvancementAbility.bind( this ),
+    };
+  }
+
   /**
    * @override
    */
@@ -27,6 +36,12 @@ export default class ItemSheetEd extends ItemSheet {
           initial: 'main'
         }
       ],
+      dragDrop: [
+        {
+          dragSelector: ".item",
+          dropSelector: "span.abilities-list",
+        }
+      ]
     } );
   }
 
@@ -45,8 +60,6 @@ export default class ItemSheetEd extends ItemSheet {
     } );
     return expandObject( enrichment );
   }
-
-
 
   async getData() {
     const systemData = super.getData();
@@ -81,6 +94,9 @@ export default class ItemSheetEd extends ItemSheet {
     // add extra Level to a class sheet
     html.find( ".class__add-level" ).click( this._onClassLevelAdd.bind( this ) );
     html.find( ".class__delete-level" ).click( this._onClassLevelDelete.bind( this ) );
+
+    // drop abilities on advancement fields
+    //html.find( "span.abilities-list" ).ondrop( this._onDropAdvancementAbility( this ) );
   }
 
   /* ----------------------------------------------------------------------- */
@@ -149,6 +165,51 @@ export default class ItemSheetEd extends ItemSheet {
     const effect = this.item.effects.get( li.dataset.itemId );
     return effect.sheet?.render( true );
   }
+
+  /* ----------------------------------------------------------------------- */
+  /*                          Drag & Drop Handler                            */
+  /* ----------------------------------------------------------------------- */
+
+  _onDropAdvancementAbility( event ) {
+    event.preventDefault();
+    const transferData = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
+    const poolType = event.target.dataset.poolType;
+    const level = event.target.closest(".advancement-level").dataset.level;
+    const levelIndex = event.target.closest(".advancement-level").dataset.levelIndex;
+    const abilities = fromUuidSync( transferData.uuid );
+    this.item.system.advancement.levels[levelIndex].addAbilities(
+      [abilities],
+      poolType
+    );
+  }
+
+  _onDragOver( event ) {
+    super._onDragOver( event );
+  }
+
+  _onDrop( event ) {
+    event.preventDefault();
+    const transferData = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
+
+    let dropFunction;
+    switch ( transferData.type ) {
+      case "Item":
+        dropFunction = event.target?.dataset?.dropFunction;
+        break;
+      default:
+        return super._onDrop( event );
+    }
+
+    if ( dropFunction ) {
+      this._dropCallbackMapping[dropFunction]( event );
+      this.render();
+    }
+  }
+  _onDropItemOnAdvancement( event ) {
+    const data = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
+    console.log( data );
+  }
+
 
   /* ----------------------------------------------------------------------- */
   /*                Auto calculation for equipments weight                   */

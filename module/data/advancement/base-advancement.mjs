@@ -28,20 +28,20 @@ export default class AdvancementData extends SparseDataModel {
           nullable: true
         } ),
       abilityOptions: new MappingField(
-        new fields.SetField(
+        new fields.ArrayField(
           new fields.ForeignDocumentField(
             AbilityTemplate,
             {
               required: false,
               nullable: true,
               idOnly: true,
+              initial: null,
               label: "An Ability in this options pool.",
               hint: "An Ability in this options pool."
             }
           ),
           {
             required: true,
-            nullable: true,
             label: "ED.advancement.abilityPool",
             hint: "The set of available abilities at the given tier."
           } ),

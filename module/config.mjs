@@ -190,6 +190,16 @@ ED4E.tier = {
 }
 preLocalize( "tier" );
 
+/**
+ * Type of grantable abilities for a class level
+ * @enum {string}
+ */
+ED4E.abilityPools = {
+	class:		"ED.ability.class",
+	free:			"ED.ability.free",
+	special:	"ED.ability.special"
+}
+
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
 /* -------------------------------------------- */
