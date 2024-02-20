@@ -15,9 +15,14 @@
     <div class="advancement__navigator">
       <nav class="item-advancement-tabs flexcol">
         <ul class="no-bullets">
+          <li>
+            <a data-tab="item-advancement-options-pools">
+              {{localize "ED.AbilityPools"}}
+            </a>
+          </li>
           {{#each item.system.advancement.levels}}
             <li>
-              <a data-tab="item-description-tab-{{this.level}}">
+              <a data-tab="item-advancement-level-tab-{{this.level}}">
                 {{localize "ED.CircleNumber" level=this.level}}
               </a>
             </li>
@@ -26,9 +31,25 @@
       </nav>
     </div>
     <div class="advancement__content item-advancement-body">
+      <div class="tab advancement-options-pools flexcol" data-tab="item-advancement-options-pools">
+        {{#each item.system.advancement.abilityOptions}}
+        <!-- Ability Options -->
+        <div class="{{@key}}-abilities">
+          <h3>{{lookup @root.config.tier @key}}</h3>
+          <div class="abilities-list abilities-pool {{@key}}-pool" data-drop-function="abilities-pool" data-pool-type="{{@key}}">
+            {{#each this}}
+              {{{ed-linkForUuid this}}}
+            {{else}}
+              {{localize
+                "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
+            {{/each}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
       {{#each item.system.advancement.levels}}
         <div class="tab item-name advancement-level" name="system.advancement.level[{{this.level}}].id"
-             data-tab="item-description-tab-{{this.level}}" value="{{@index}}" data-level-index="{{@index}}"
+             data-tab="item-advancement-level-tab-{{this.level}}" value="{{@index}}" data-level-index="{{@index}}"
              data-level="{{this.level}}">
 
           <!-- Level Number -->

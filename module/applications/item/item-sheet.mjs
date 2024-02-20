@@ -198,7 +198,7 @@ export default class ItemSheetEd extends ItemSheet {
 
     const transferData = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
     const poolType = event.target.dataset.poolType;
-    const level = event.target.closest(".advancement-level").dataset.level;
+    const level = event.target.closest(".advancement-level")?.dataset.level;
 
     this.item.addAdvancementAbilities( [transferData.uuid], poolType, level );
   }
