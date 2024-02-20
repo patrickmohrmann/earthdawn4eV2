@@ -25,7 +25,8 @@ export default class AdvancementData extends SparseDataModel {
         ),
         {
           required: true,
-          nullable: true
+          nullable: true,
+          initial: [new AdvancementLevelData( {level: 1} )],
         } ),
       abilityOptions: new MappingField(
         new fields.ArrayField(
@@ -49,7 +50,6 @@ export default class AdvancementData extends SparseDataModel {
           label: "ED.advancement.abilityOptions",
           hint: ""
         } ),
-      tmp: new fields.EmbeddedDataField(AdvancementLevelData)
     };
   }
 

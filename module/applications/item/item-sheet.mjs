@@ -33,13 +33,17 @@ export default class ItemSheetEd extends ItemSheet {
         {
           navSelector: '.item-advancement-tabs',
           contentSelector: '.item-advancement-body',
-          initial: 'main'
+          initial: 'item-advancement-options-pools'
         }
       ],
       dragDrop: [
         {
           dragSelector: ".item",
           dropSelector: "span.abilities-list",
+        },
+        {
+          dragSelector: ".item",
+          dropSelector: null,
         }
       ]
     } );
