@@ -87,7 +87,7 @@ export default class AdvancementLevelData extends SparseDataModel {
         step: 1,
         min: 1,
         positive: true,
-        initial: 4,
+        initial: this.initResourceStep,
       } ),
     }
   }
@@ -104,5 +104,9 @@ export default class AdvancementLevelData extends SparseDataModel {
     this.updateSource( {
       [propertyKey]: currentAbilities.concat( abilityIDs ),
     } );
+  }
+
+  static initResourceStep( source ) {
+    return source.level >= 13 ? 5 : 4;
   }
 }
