@@ -170,19 +170,6 @@ export default class ItemSheetEd extends ItemSheet {
   /*                          Drag & Drop Handler                            */
   /* ----------------------------------------------------------------------- */
 
-  _onDropAdvancementAbility( event ) {
-    event.preventDefault();
-    const transferData = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
-    const poolType = event.target.dataset.poolType;
-    const level = event.target.closest(".advancement-level").dataset.level;
-    const levelIndex = event.target.closest(".advancement-level").dataset.levelIndex;
-    const abilities = fromUuidSync( transferData.uuid );
-    this.item.system.advancement.levels[levelIndex].addAbilities(
-      [abilities],
-      poolType
-    );
-  }
-
   _onDragOver( event ) {
     super._onDragOver( event );
   }
@@ -205,11 +192,16 @@ export default class ItemSheetEd extends ItemSheet {
       this.render();
     }
   }
-  _onDropItemOnAdvancement( event ) {
-    const data = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
-    console.log( data );
-  }
 
+  _onDropAdvancementAbility( event ) {
+    event.preventDefault();
+
+    const transferData = JSON.parse( event.dataTransfer.getData( "text/plain" ) );
+    const poolType = event.target.dataset.poolType;
+    const level = event.target.closest(".advancement-level").dataset.level;
+
+    this.item.addAdvancementAbilities( [transferData.uuid], poolType, level );
+  }
 
   /* ----------------------------------------------------------------------- */
   /*                Auto calculation for equipments weight                   */

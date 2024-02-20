@@ -83,4 +83,18 @@ export default class AdvancementData extends SparseDataModel {
       levels: this.levels.slice( 0, -( amount ?? 1 ) )
     } );
   }
+
+  /**
+   * Add abilities to the given type of options pool.
+   * @param {[Item]} abilities              An array of ability item IDs to add.
+   * @param {ED4E.abilityPools} poolType    The type of pool the abilities are added to.
+   */
+  addAbilities( abilities, poolType ) {
+    const propertyKey = `abilityOptions.${poolType}`;
+    const currentAbilities = this.abilityOptions[poolType];
+    const abilityIDs = abilities.map( ability => ability.id );
+    this.updateSource( {
+      [propertyKey]: currentAbilities.concat( abilityIDs ),
+    } );
+  }
 }
