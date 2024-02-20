@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { MappingField } from "../fields.mjs";
+import { DocumentUUIDField, MappingField } from "../fields.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 import AdvancementLevelData from "./advancement-level.mjs";
 
@@ -29,13 +29,9 @@ export default class AdvancementData extends SparseDataModel {
         } ),
       abilityOptions: new MappingField(
         new fields.ArrayField(
-          new fields.ForeignDocumentField(
+          new DocumentUUIDField(
             AbilityTemplate,
             {
-              required: false,
-              nullable: true,
-              idOnly: true,
-              initial: null,
               label: "An Ability in this options pool.",
               hint: "An Ability in this options pool."
             }
@@ -92,7 +88,7 @@ export default class AdvancementData extends SparseDataModel {
   addAbilities( abilities, poolType ) {
     const propertyKey = `abilityOptions.${poolType}`;
     const currentAbilities = this.abilityOptions[poolType];
-    const abilityIDs = abilities.map( ability => ability.id );
+    const abilityIDs = abilities.map( ability => ability.uuid ?? ability );
     this.updateSource( {
       [propertyKey]: currentAbilities.concat( abilityIDs ),
     } );

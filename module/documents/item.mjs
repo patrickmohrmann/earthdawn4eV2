@@ -42,12 +42,12 @@ export default class ItemEd extends Item {
 
         if ( level ) {
             this.system.advancement.levels[level - 1].addAbilities(
-              abilityIDs,
+              abilities,
               poolType
             );
         } else {
             this.system.advancement.addAbilities(
-              abilityIDs,
+              abilities,
               poolType
             );
         }

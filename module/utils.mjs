@@ -101,7 +101,7 @@ function resolvePath( object, path, defaultValue ){
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
 export function linkForUuid(uuid) {
-  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  return TextEditor._createContentLink( ["", "UUID", uuid] ).outerHTML;
 }
 
 /* -------------------------------------------- */

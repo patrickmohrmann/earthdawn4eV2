@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { IdentifierField, MappingField } from "../fields.mjs";
+import { DocumentUUIDField, IdentifierField, MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 
@@ -38,13 +38,9 @@ export default class AdvancementLevelData extends SparseDataModel {
       } ),
       abilities: new MappingField(
         new fields.ArrayField(
-          new fields.ForeignDocumentField(
+          new DocumentUUIDField(
             AbilityTemplate,
             {
-              required: false,
-              nullable: true,
-              idOnly: true,
-              initial: null,
               label: "ED.Ability",
               hint: "ED.AnAbilityGrantedOnThisLevel"
             }
@@ -65,12 +61,9 @@ export default class AdvancementLevelData extends SparseDataModel {
         }
       ),
       effects: new fields.ArrayField(
-        new fields.ForeignDocumentField(
+        new DocumentUUIDField(
           ActiveEffect,
           {
-            required: false,
-            nullable: true,
-            idOnly: true,
             label: "ED.ActiveEffect",
             hint: "ED.AnActiveEffectGrantedOnThisLevel"
           }
@@ -100,7 +93,7 @@ export default class AdvancementLevelData extends SparseDataModel {
   addAbilities( abilities, poolType ) {
     const propertyKey = `abilities.${poolType}`;
     const currentAbilities = this.abilities[poolType];
-    const abilityIDs = abilities.map( ability => ability.id );
+    const abilityIDs = abilities.map( ability => ability.uuid ?? ability );
     this.updateSource( {
       [propertyKey]: currentAbilities.concat( abilityIDs ),
     } );

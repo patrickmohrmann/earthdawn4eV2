@@ -56,7 +56,6 @@
             <p class="flexrow">
               <label>{{localize "X-Resource Step"}}</label>
               <span title="{{ed-diceFormulaForStep this.resourceStep}}">
-                <!-- TODO: values shouldn't be this.level but the ressourceStep -->
                 {{numberInput this.resourceStep name=(concat "system.advancement.levels[" this.level "].resourceStep") step=1
                               min=1}}
               </span>
@@ -69,11 +68,7 @@
               <label>{{localize "X-Talents"}}</label>
               <span class="abilities-list abilities-pool class-pool" data-drop-function="abilities-pool" data-pool-type="class">
                 {{#each this.abilities.class}}
-                  <a class="content-link" draggable="true" data-uuid="{{concat "Item." this}}"
-                     data-id="{{this}}" data-type="Item">
-                  <i class="fas fa-suitcase"></i>
-                    {{this}}
-                </a>
+                  {{{ed-linkForUuid this}}}
                 {{else}}
                   {{localize
                     "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
@@ -88,11 +83,7 @@
               <label>{{localize "X-Free Abilities"}}</label>
               <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="free">
                 {{#each this.abilities.free}}
-                  <a class="content-link" draggable="true" data-uuid="{{concat "Item." this}}"
-                     data-id="{{this}}" data-type="Item">
-                <i class="fas fa-suitcase"></i>
-                    {{this}}
-              </a>
+                  {{{ed-linkForUuid this}}}
                 {{else}}
                   {{localize
                     "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
@@ -107,11 +98,7 @@
               <label>{{localize "X-Special Abilities"}}</label>
               <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="special">
                 {{#each this.abilities.special}}
-                  <a class="content-link" draggable="true" data-uuid="{{concat "Item." this}}"
-                     data-id="{{this}}" data-type="Item">
-                  <i class="fas fa-suitcase"></i>
-                    {{this}}
-                  </a>
+                  {{{ed-linkForUuid this}}}
                 {{else}}
                   {{localize
                     "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
@@ -126,11 +113,7 @@
               <label>{{localize "X-Effects"}}</label>
               <span class="abilities-list effect-pool">
                 {{#each this.effects}}
-                  <a class="content-link" draggable="true" data-uuid="{{../../item.uuid}}"
-                     data-id="{{../../item.id}}" data-type="Item" data-tooltip="{{../../item.tooltip}}">
-                  <i class="fas fa-suitcase"></i>
-                    {{this}}
-                  </a>
+                  {{{ed-linkForUuid this}}}
                 {{else}}
                   {{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
                 {{/each}}
