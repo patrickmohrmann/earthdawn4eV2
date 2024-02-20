@@ -2,6 +2,8 @@
 /*  Earthdawn                                   */
 /* -------------------------------------------- */
 
+import getDice from "./dice/step-tables.mjs";
+
 /**
  * Calculate the armor value for the given attribute value.
  * @param { number } attributeValue Willpower value for mystical armor
@@ -89,6 +91,17 @@ export function sortObjectEntries( obj, sortKey ) {
  */
 function resolvePath( object, path, defaultValue ){
   return path.split( '.' ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Creates an HTML document link for the provided UUID.
+ * @param {string} uuid  UUID for which to produce the link.
+ * @returns {string}     Link to the item or empty string if item wasn't found.
+ */
+export function linkForUuid(uuid) {
+  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
 }
 
 /* -------------------------------------------- */
@@ -186,7 +199,7 @@ function _localizeObject( obj, keys ) {
 }
 
 /* -------------------------------------------- */
-/*  Handlebars Template Helpers                 */
+/*  Handlebars -  Template - Helpers            */
 /* -------------------------------------------- */
 
 /**
@@ -319,9 +332,15 @@ export async function preloadHandlebarsTemplates() {
   return loadTemplates( paths );
 }
 
-/**
- * Register custom Handlebars helpers used by the ed4e system.
- */
-export function registerHandlebarHelpers() {
+/* -------------------------------------------- */
 
+/**
+ * Register custom Handlebars helpers used by Earthdawn.
+ */
+export function registerHandlebarsHelpers() {
+  Handlebars.registerHelper({
+    getProperty: foundry.utils.getProperty,
+    "ed-linkForUuid": linkForUuid,
+    "ed-diceFormulaForStep": getDice
+  });
 }
