@@ -167,7 +167,7 @@ export async function getSkillCollectionGeneral(  ) {
           }
         }
       }
-      console.log( "skillCollectionGeneral", typeof( skillCollectionGeneral ) )
+      // console.log( "skillCollectionGeneral", typeof( skillCollectionGeneral ) )
     return skillCollectionGeneral;
 }
 /**

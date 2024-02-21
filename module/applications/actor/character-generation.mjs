@@ -30,7 +30,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
         this.fullDevotions = dataCollection.fullDevotionItemCollection;
         this.fullDisciplines = dataCollection.fullDisciplineItemCollection;
         this.fullQuestors = dataCollection.fullQuestorItemCollection;
-        console.log( "DATACOLLECTION - CHARACTER GENERATION", dataCollection )
+        // console.log( "DATACOLLECTION - CHARACTER GENERATION", dataCollection )
     }   
 
     /**
@@ -72,7 +72,6 @@ export default class CharacterGenerationPrompt extends FormApplication {
     }
 
     get template() {
-        console.log( "this.Namgeiver", this.namegiver ) 
         return 'systems/ed4e/templates/actor/generation/generation.hbs';
     }
 
@@ -98,6 +97,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
         $( this.form.querySelector( "button.cancel" ) ).on( "click" , this.close.bind( this ) );
         $( this.form.querySelector( "button.next" ) ).on( "click" , this._nextTab.bind( this ) );
         $( this.form.querySelector( "button.ok" ) ).on( "click" , this._finishGeneration.bind( this ) );
+
+        // namegiver selection
+        $( this.form.querySelector( "#namegiver__selector" ) ).on( "click" , this._selectNamegiver.bind( this ) );
     }
 
     /** @inheritDoc */
@@ -116,11 +118,17 @@ export default class CharacterGenerationPrompt extends FormApplication {
         return this.close();
     }
 
-    // async _updateObject( event, formData ) {
-    //     return Promise.resolve(this._updateCharacterData(formData)).then(this.render(true));
-    //   }
+    async _selectNamegiver( event ) {
+        console.log( "this.value", this )
+        return this.value
 
-    // _updateCharacterData() {
-    //     this.actor.system.armor = 1
-    // }
+    }
+
+    async _updateObject( event, formData ) {
+        return Promise.resolve();
+      }
+
+    _updateCharacterData() {
+        return
+    }
 }
