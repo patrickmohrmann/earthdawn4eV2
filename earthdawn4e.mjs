@@ -10,8 +10,6 @@
 
 // Import configuration
 import ED4E from './module/config.mjs';
-import  "./module/tours/ed-tours.mjs";
-
 
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";

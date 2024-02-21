@@ -5,22 +5,25 @@ import EdTour from "../tours/ed-tours.mjs";
  * TODO
  */
 export default function () {
-  Hooks.once( "ready", async () => {
-    /* -------------------------------------------- */
-    /*  Dice Icon Roll                              */
-    /* -------------------------------------------- */
+    Hooks.once( "ready", async () => {
 
-    $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
+        /* -------------------------------------------- */
+        /*  Dice Icon Roll                              */
+        /* -------------------------------------------- */
 
-    /* -------------------------------------------- */
-    /*  Debug Documents                             */
-    /* -------------------------------------------- */
+        $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
 
-    if ( game.user.isGM ) await _createDebugDocuments();
-    
-    EdTour.travelAgency();
-      
-  } );
+        /* -------------------------------------------- */
+        /*  Debug Documents                             */
+        /* -------------------------------------------- */
+
+        if ( game.user.isGM ) await _createDebugDocuments();
+
+        /* -------------------------------------------- */
+        /*  Tour                                        */
+        /* -------------------------------------------- */
+        EdTour.travelAgency();
+    } );
 }
 
 /**
