@@ -43,7 +43,8 @@ export default function () {
             makeDefault: true
         } );
 
-        // Preload Handlebars templates.
+        // Preload Handlebars helpers and partials.
+        utils.registerHandlebarsHelpers();
         utils.preloadHandlebarsTemplates();
 
         /* -------------------------------------------- */

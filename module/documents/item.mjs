@@ -31,4 +31,39 @@ export default class ItemEd extends Item {
             ui.notifications.warn( game.i18n.localize( "X.cantUpdateItemWeight" ) );
         }
     }
+
+    async addAdvancementAbilities( abilityUUIDs, poolType, level ) {
+        const abilities = await Promise.all(
+          abilityUUIDs.map( uuid => fromUuid( uuid ) )
+        );
+        const abilityIDs = abilities.map(
+          ability => ability.id
+        );
+
+        if ( level ) {
+            this.system.advancement.levels[level - 1].addAbilities(
+              abilities,
+              poolType
+            );
+        } else {
+            this.system.advancement.addAbilities(
+              abilities,
+              poolType
+            );
+        }
+    }
+
+    async removeAdvancementAbility( abilityUUIDs, poolType, level ) {
+        if ( level ) {
+            this.system.advancement.levels[level - 1].removeAbilities(
+              abilityUUIDs,
+              poolType
+            );
+        } else {
+            this.system.advancement.removeAbilities(
+              abilityUUIDs,
+              poolType
+            );
+        }
+    }
 }

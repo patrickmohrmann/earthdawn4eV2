@@ -19,6 +19,36 @@ export class IdentifierField extends foundry.data.fields.StringField {
 /* -------------------------------------------- */
 
 /**
+ * A subclass of {@link StringField} which supports referencing some other Document by its UUID.
+ * This field may not be blank, but may be null to indicate that no UUID is referenced.
+ */
+export class DocumentUUIDField extends foundry.data.fields.StringField {
+
+  /** @inheritdoc */
+  static get _defaults() {
+    return Object.assign(super._defaults, {
+      required: true,
+      blank: false,
+      nullable: true,
+      initial: null
+    });
+  }
+
+  /** @override */
+  _validateType(value) {
+    const p = parseUuid(value);
+    if (
+      !(Object.keys(game.documentTypes).includes(p.documentType)
+      && ed4e.utils.validators.isValidIdentifier(p.documentId))
+    ) {
+      throw new Error("must provide a valid UUID string");
+    }
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {StringFieldOptions} FormulaFieldOptions
  * @property {boolean} [deterministic=false]  Is this formula not allowed to have dice values?
  */
