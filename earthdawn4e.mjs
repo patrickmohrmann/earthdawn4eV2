@@ -19,6 +19,7 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
+import * as enrichers from "./module/enrichers.mjs";
 import * as hooks from "./module/hooks/_module.mjs";
 import * as system from "./module/system/_module.mjs";
 import * as utils from "./module/utils.mjs";
@@ -34,6 +35,7 @@ globalThis.ed4e = {
     dataModels,
     dice,
     documents,
+    enrichers,
     hooks,
     system,
     utils
@@ -56,6 +58,7 @@ export {
     dataModels,
     dice,
     documents,
+    enrichers,
     hooks,
     // migrations,
     system,

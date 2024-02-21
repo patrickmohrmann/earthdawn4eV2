@@ -10,6 +10,7 @@ import * as canvas from "../canvas/_module.mjs";
 import * as dataModels from "../data/_module.mjs";
 import * as dice from "../dice/_module.mjs";
 import * as documents from "../documents/_module.mjs";
+import * as enrichers from "../enrichers.mjs";
 import * as utils from "../utils.mjs";
 
 
@@ -23,38 +24,13 @@ export default function () {
         CONFIG.ED4E = ED4E;
         CONFIG.Actor.documentClass = documents.ActorEd;
         CONFIG.Item.documentClass = documents.ItemEd;
+        CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
 
         // Register Roll Extensions
         CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
 
-        // Register journal entry text transformation into a roll trigger
-        _enrichJournalsToRoll();
-
-
-          // in application @Patrick
-          // listener click to request roll
-            $( 'body' ).on( 'click', '.journal--roll', async ( event ) => {
-                let step = event.target.dataset.step
-                let chatFlavor= event.target.dataset.flavor
-                 triggerRollStep( step, chatFlavor );
-            } );
-
-            // in Journal document @Patrick
-            /**
-             * @description creating the roll
-             * @param {string} argString step
-             * @param {string} chatFlavor chatflavor
-             * @returns 
-             */
-            function triggerRollStep( argString, chatFlavor ) {
-                const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
-                const steps = argString.match( argRegExp );
-                if ( !steps ) return true;
-                steps.forEach( ( currentStep ) =>
-                  new ed4e.dice.EdRoll( undefined, {}, { step: { total: Number( currentStep ) }, chatFlavor: chatFlavor } ).toMessage(),
-                );
-                return false;
-              }
+        // Register text editor enrichers
+        enrichers.registerCustomEnrichers();
 
         // Register Handlebars Helper
         registerHandlebarHelpers();
@@ -73,6 +49,15 @@ export default function () {
         Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
             makeDefault: true
         } );
+        Journal.unregisterSheet( "core", JournalSheet );
+        Journal.registerSheet( "earthdawn4e", applications.journal.JournalSheetEd, {
+            makeDefault: true
+        } );
+        /*DocumentSheetConfig.registerSheet( JournalEntryPage, "earthdawn4e", applications.journal.JournalSheetEd, {
+            label: "text",
+            types: ["text"],
+            makeDefault: true
+        } );*/
 
         // Preload Handlebars templates.
         utils.preloadHandlebarsTemplates();
@@ -91,49 +76,34 @@ export default function () {
     } );
 }
 
-// /**
-//  * @summary Enrich Journals to be able to create roll triger as inline text
-//  */
-// function _enrichJournalsToRoll () {
-//     CONFIG.TextEditor.enrichers.push( {
-//         pattern: /@Roll\((\/s \d+(( )?\+( )?\d+)*)\)(\(([A-z]*)\))/g,
-//         // in eine extra Function @Patrick
-//         enricher: ( match ) => {
-//             let returnRoll = document.createElement( "a" );
-//             returnRoll.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
-//             returnRoll.dataset.step = match[1]
-//             returnRoll.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
-//             returnRoll.title = "click to roll";
-//             returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
-//             return returnRoll;
-//         },
-//       } );
-// }
-
-
-
+/**
+ * @summary Enrich Journals to be able to create roll trigger as inline text
+ */
 function _enrichJournalsToRoll () {
     CONFIG.TextEditor.enrichers.push( {
-        pattern: /@Roll\((\/s \d+(( )?\+( )?\d+)*)\)(\(([A-z]*)\))/g,
-        // in eine extra Function @Patrick
+        pattern: /@Roll\(\s*(?<rollCmd>\/s\s*\d+(?:\s*\+\s*\d+)?)\s*\)(?:\((?<flavor>(?:[\u00C0-\u1FFF\u2C00-\uD7FF\w]+\s?)*)\))?(?:\((?<rollType>action|effect|damage)\))?/g,
         enricher: ( match ) => {
-            let returnRoll = document.createElement( "a" );
-            // returnRoll.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
-            let textNode = document.createTextNode ( returnRoll.innerHTML )
-            textNode = document.createElement( "a" )
-            textNode.dataset.step = match[1];
-            textNode.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
-            returnRoll.appendChild( textNode );
-            textNode.classList.add( "journal--roll", "strong" );
-            textNode.innerHTML = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
-            
-            returnRoll.classList.add( "journal--roll", "fa-regular", "fa-dice" );
 
-            returnRoll.dataset.step = match[1]
-            returnRoll.dataset.flavor = " " + match[1].replace( "/s", game.i18n.localize( "X.Stufe" ) ) + " " + match[6];
-            returnRoll.title = "click to roll";
-            returnRoll.classList.add( "journal--roll" );
-            return returnRoll;
+            const rollCmd = match.groups.rollCmd;
+            const rollFlavor = match.groups.flavor;
+            const rollType = match.groups.rollType ?? 'arbitrary';
+
+            const textRollFormula = rollCmd.replace(
+              "/s",
+              game.i18n.localize( "ED.General.step"
+              ) );
+            const textRollType = (rollType === 'arbitrary')
+              ? ""
+              : `${ED4E.rollTypes[rollType].label}:&nbsp;`;
+
+            const rollElement = `
+            <a class="journal--roll strong" data-roll-cmd="${rollCmd}" data-roll-flavor="${rollFlavor}" 
+              title="${game.i18n.localize( "X.Click to roll" )}">
+              <i class="fas fa-regular fa-dice"></i>
+              ${textRollType}${textRollFormula}&nbsp;${rollFlavor}
+            </a>`
+
+            return $( rollElement )[0];
         },
     } );
 }

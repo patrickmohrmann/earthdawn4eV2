@@ -190,6 +190,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
       } ),
     };
   }
+
   get totalTarget() {
     return this.target.base + sum(Object.values(this.target.modifiers));
   }

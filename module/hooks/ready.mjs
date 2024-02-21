@@ -1,19 +1,19 @@
 import RollPrompt from '../applications/global/roll-prompt.mjs';
 
 export default function () {
-  Hooks.once( "ready", async () => {
-    /* -------------------------------------------- */
-    /*  Dice Icon Roll                              */
-    /* -------------------------------------------- */
+    Hooks.once( "ready", async () => {
+        /* -------------------------------------------- */
+        /*  Dice Icon Roll                              */
+        /* -------------------------------------------- */
 
-    $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
+        $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
 
-    /* -------------------------------------------- */
-    /*  Debug Documents                             */
-    /* -------------------------------------------- */
+        /* -------------------------------------------- */
+        /*  Debug Documents                             */
+        /* -------------------------------------------- */
 
-      if ( game.user.isGM ) await _createDebugDocuments();
-  });
+        if ( game.user.isGM ) await _createDebugDocuments();
+    });
 }
 
 /**
@@ -33,6 +33,9 @@ async function _createDebugDocuments() {
         if ( value.flags.deleteOnStartup ) value.delete();
     } );
     game.actors.forEach( ( value, key, map ) => {
+        if ( value.flags.deleteOnStartup ) value.delete();
+    } );
+    game.journal.forEach( ( value, key, map ) => {
         if ( value.flags.deleteOnStartup ) value.delete();
     } );
 
@@ -85,6 +88,29 @@ async function _createDebugDocuments() {
         createdItems.talent.toObject(),
         createdItems.weapon.toObject(),
     ] );
+
+    /* -------------------------------------------- */
+    /*  Journal Entries                             */
+    /* -------------------------------------------- */
+
+    const journalData = {
+        "name": "journal entry",
+        "pages": [
+            {
+                "sort": 100000,
+                "name": "fff",
+                "type": "text",
+                "title": {"show":true,"level":1},
+                "text": {
+                    "content": "<p>Jetzt nimm erstmal @Roll( /s 13 + 1 )(Säureschaden)(damage) wenn du das machst.</p>",
+                },
+            }
+        ]
+        ,"folder": null,
+        "sort": 0,
+        "flags": { deleteOnStartup: true },
+    };
+    await JournalEntry.create( journalData );
 
     /* -------------------------------------------- */
     /*  Dice                                        */
