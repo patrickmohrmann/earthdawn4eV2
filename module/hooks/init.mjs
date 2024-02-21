@@ -77,38 +77,6 @@ export default function () {
 }
 
 /**
- * @summary Enrich Journals to be able to create roll trigger as inline text
- */
-function _enrichJournalsToRoll () {
-    CONFIG.TextEditor.enrichers.push( {
-        pattern: /@Roll\(\s*(?<rollCmd>\/s\s*\d+(?:\s*\+\s*\d+)?)\s*\)(?:\((?<flavor>(?:[\u00C0-\u1FFF\u2C00-\uD7FF\w]+\s?)*)\))?(?:\((?<rollType>action|effect|damage)\))?/g,
-        enricher: ( match ) => {
-
-            const rollCmd = match.groups.rollCmd;
-            const rollFlavor = match.groups.flavor;
-            const rollType = match.groups.rollType ?? 'arbitrary';
-
-            const textRollFormula = rollCmd.replace(
-              "/s",
-              game.i18n.localize( "ED.General.step"
-              ) );
-            const textRollType = (rollType === 'arbitrary')
-              ? ""
-              : `${ED4E.rollTypes[rollType].label}:&nbsp;`;
-
-            const rollElement = `
-            <a class="journal--roll strong" data-roll-cmd="${rollCmd}" data-roll-flavor="${rollFlavor}" 
-              title="${game.i18n.localize( "X.Click to roll" )}">
-              <i class="fas fa-regular fa-dice"></i>
-              ${textRollType}${textRollFormula}&nbsp;${rollFlavor}
-            </a>`
-
-            return $( rollElement )[0];
-        },
-    } );
-}
-
-/**
  * @summary Dark theme gradient calculation
  * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
  * @description darkValue percentage value in 5% steps
