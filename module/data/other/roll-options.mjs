@@ -75,13 +75,12 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         {
           base: new foundry.data.fields.NumberField( {
             required: true,
-            nullable: true,
+            nullable: false,
             initial: 0,
             label: 'earthdawn.baseDifficulty',
             hint: 'earthdawn.baseDifficultyForTheRoll',
             min: 0,
             step: 1,
-            // integer: true,
           } ),
           modifiers: new MappingField(
             new foundry.data.fields.NumberField( {
@@ -92,7 +91,6 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               hint: 'earthdawn.modifierDifficultyForTheRoll',
               min: 0,
               step: 1,
-              // integer: true,
             } ),
             {
               required: true,
@@ -103,7 +101,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           ),
           total: new foundry.data.fields.NumberField( {
             required: true,
-            nullable: true,
+            nullable: false,
             initial: this.initTotalTarget,
             label: 'earthdawn.totalDifficulty',
             hint: 'earthdawn.totalDifficultyForTheRoll',
