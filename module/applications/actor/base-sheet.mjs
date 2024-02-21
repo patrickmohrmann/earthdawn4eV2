@@ -1,14 +1,22 @@
 import ED4E from "../../config.mjs";
 import { getNamegiverCollection  } from "../../item-data-collectors.mjs";
+import { getNamegiverCollectionSelection } from "../../item-data-collectors.mjs";
 import { getTalentCollection  } from "../../item-data-collectors.mjs";
 import { getSkillCollection } from "../../item-data-collectors.mjs";
 import { getDevotionCollection  } from "../../item-data-collectors.mjs";
 import { getSpellCollection  } from "../../item-data-collectors.mjs";
+import { getSpellCollectionSelection } from "../../item-data-collectors.mjs";
+import { getSpellCollectionGeneration } from "../../item-data-collectors.mjs";
 import { getDisciplineCollection  } from "../../item-data-collectors.mjs";
 import { getQuestorCollection  } from "../../item-data-collectors.mjs";
 import { getSkillFullCollection } from "../../item-data-collectors.mjs";
 import { getSkillCollectionArtisan } from "../../item-data-collectors.mjs";
 import { getskillCollectionArtisanSelection } from "../../item-data-collectors.mjs";
+import { getSkillCollectionGeneral } from "../../item-data-collectors.mjs";
+import { getskillCollectionGeneralSelection } from "../../item-data-collectors.mjs";
+import { getSkillCollectionKnowledge } from "../../item-data-collectors.mjs";
+import { getskillCollectionKnowledgeSelection } from "../../item-data-collectors.mjs";
+
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -88,18 +96,50 @@ export default class ActorSheetEd extends ActorSheet {
 
   // eslint-disable-next-line complexity
   async _onCharacterGeneration( event ) {
+    let artisanSkillPromise = getSkillCollectionArtisan();
+    let artisanSkillSelectionPromise = getskillCollectionArtisanSelection();
+    const artisanSkillCollection = await artisanSkillPromise.then( result => result )
+    const artisanSkillSelectionCollection = await artisanSkillSelectionPromise.then( result => result )
+
+    let generalSkillPromise = getSkillCollectionGeneral();
+    let genearlSkillSelectionPromise = getskillCollectionGeneralSelection();
+    const generalSkillCollection = await generalSkillPromise.then( result => result )
+    const genearlSkillSelectionCollection = await genearlSkillSelectionPromise.then( result => result )
+
+    let knowledgeSkillPromise = getSkillCollectionKnowledge();
+    let knowledgeSkillSelectionPromise = getskillCollectionKnowledgeSelection();
+    const knowledgeSkillCollection = await knowledgeSkillPromise.then( result => result )
+    const knowledgeSkillSelectionCollection = await knowledgeSkillSelectionPromise.then( result => result )
+
+    let namegiverPromise = getNamegiverCollection();
+    const namegiverCollection = await namegiverPromise.then( result => result )
+
+    let spellPromise = getSpellCollection();
+    let spellPromiseGeneration = getSpellCollectionGeneration();
+    const spellCollection = await spellPromise.then( result => result )
+    const spellCollectionGeneration = await spellPromiseGeneration.then( result => result )
+
+    
     event.preventDefault();
     let dataCollection = {
-        namegiverCollection: getNamegiverCollection(),
+        namegiverCollection: namegiverCollection,
+        // namegiverCollectionSelection: namegiverSelectionCollection,
+        namegiverCollectionSelection: getNamegiverCollectionSelection(),
         talentCollection: getTalentCollection(),
         skillCollection: getSkillCollection(),
         devotionCollection: getDevotionCollection(),
-        spellCollection: getSpellCollection(),
+        spellCollection: spellCollection,
+        spellCollectionGeneration: spellCollectionGeneration,
+        spellCollectionSelection: getSpellCollectionSelection(),        
         disciplineCollection: getDisciplineCollection(),
         questorCollection: getQuestorCollection(),
         skillFullCollection: getSkillFullCollection(),
-        skillCollectionArtisan: getSkillCollectionArtisan(),
-        skillCollectionArtisanSelection: getskillCollectionArtisanSelection()
+        skillCollectionArtisan: artisanSkillCollection,
+        skillCollectionArtisanSelection: artisanSkillSelectionCollection,
+        skillCollectionGeneral: generalSkillCollection,
+        skillCollectionGeneralSelection: genearlSkillSelectionCollection,
+        skillCollectionKnowledge: knowledgeSkillCollection,
+        skillCollectionKnowledgeSelection: knowledgeSkillSelectionCollection
       }
       console.log( "EARTHDAWN-DATACOLLECTION", dataCollection )
 

@@ -17,14 +17,17 @@ export default class CharacterGenerationPrompt extends FormApplication {
         this.skills = dataCollection.skillCollection;
         this.devotions = dataCollection.devotionCollection;
         this.spells = dataCollection.spellCollection;
+        this.spellCollection = dataCollection.spellCollectionSelection
+        this.spellCollectionGeneration = dataCollection.spellCollectionGeneration
         this.disciplines = dataCollection.disciplineCollection;
         this.questors = dataCollection.questorCollection;
         this.fullNamegiver = dataCollection.fullNamegiverItemCollection;
         this.fullTalents = dataCollection.fullTalentItemCollection;
         this.skillsFull = dataCollection.fullSkillItemCollection;
         this.artisanSkills = dataCollection.skillCollectionArtisanSelection;
+        this.knowledgeSkills = dataCollection.skillCollectionKnowledgeSelection;
+        this.generalSkills = dataCollection.skillCollectionGeneralSelection;
         this.fullDevotions = dataCollection.fullDevotionItemCollection;
-        this.fullSpells = dataCollection.fullSpellItemCollection;
         this.fullDisciplines = dataCollection.fullDisciplineItemCollection;
         this.fullQuestors = dataCollection.fullQuestorItemCollection;
         console.log( "DATACOLLECTION - CHARACTER GENERATION", dataCollection )

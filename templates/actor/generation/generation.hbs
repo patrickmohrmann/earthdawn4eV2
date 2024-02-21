@@ -29,7 +29,7 @@
                         Namegiversprache wird auch vorbelegt, nach der auswahl.
                     </div>
                     <select name="namegiver-collection" id="namegiver__selector">
-                        {{selectOptions options.namegiverCollection selected=value }}
+                        {{selectOptions options.namegiverCollectionSelection selected=value }}
                     </select>
                 </div>
                 <!-- tab2: other inputs -->
@@ -216,7 +216,7 @@
                         doppel click schiebt die Ability in die andere Tabelle
                     </div>
                     <select name="spell-collection" id="spell__selector">
-                        {{selectOptions options.spellCollection selected=value }}
+                        {{selectOptions options.spellCollectionGeneration selected=value }}
                     </select>
                     <div>
                         <Table>
@@ -293,13 +293,29 @@
                 </div>
                 <!-- tab5: base input -->
                 <div class="tab skill-tab" data-group="primary" data-tab="skill-tab">
-                    Skill
+                    <div>
+                    All Skills
 
                     <select name="skill-collection" id="skill__selector">
                         {{selectOptions options.skillCollection selected=value }}
                     </select>
+                </div>
+                <div>
+                    artisan skills
                     <select name="skill-collection" id="skill__selector">
                         {{selectOptions options.skillCollectionArtisanSelection selected=value }}
+                    </select>
+                </div>
+                <div>
+                    Knowledge skills
+                    <select name="skill-collection" id="skill__selector">
+                        {{selectOptions options.skillCollectionKnowledgeSelection selected=value }}
+                    </select>
+                    </div>
+                <div>
+                    General skills
+                    <select name="skill-collection" id="skill__selector">
+                        {{selectOptions options.skillCollectionGeneralSelection selected=value }}
                     </select>
 {{log this}}
                     {{#each options.skillCollection }}
