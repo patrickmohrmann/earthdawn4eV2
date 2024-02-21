@@ -83,15 +83,16 @@ export default function registerSystemSettings() {
     } );
     // LP Tracking Option Talents
     game.settings.register( "ed4e", "lpTrackingAllTalents", {
-        name: "ED.Settings.LpTracking.lpTrackingAllTalentsOption",
-        hint: "ED.Settings.LpTracking.hintAllTalentsOption",
+        name: "ED.Settings.LpTracking.lpTalentsRequirement",
+        hint: "ED.Settings.LpTracking.hintTalents",
         scope: "world",
         config: true,
         default: "disciplineTalents",
         type: String,
         choices: {
             disciplineTalents: "ED.Settings.LpTracking.disciplineTalents",
-            allTalents: "ED.Settings.LpTracking.allTalents"
+            allTalents: "ED.Settings.LpTracking.allTalents",
+            allTalentsHouseRule: "ED.Settings.LpTracking.allTalentsHouseRule"
           }
     } );
     // LP Tracking Option Skill Training
@@ -130,6 +131,7 @@ export default function registerSystemSettings() {
           }
     } );
 
+    
      /* -------------------------------------------------------------------------------- */
     /*                                  GM Chat Avatar                                     */
     /* -------------------------------------------------------------------------------- */
@@ -152,6 +154,7 @@ export default function registerSystemSettings() {
           }
     } );
 }
+
 
 
 
