@@ -93,9 +93,19 @@ export default class AdvancementLevelData extends SparseDataModel {
   addAbilities( abilities, poolType ) {
     const propertyKey = `abilities.${poolType}`;
     const currentAbilities = this.abilities[poolType];
-    const abilityIDs = abilities.map( ability => ability.uuid ?? ability );
+    const abilityUUIDs = abilities.map( ability => ability.uuid ?? ability );
     this.updateSource( {
-      [propertyKey]: currentAbilities.concat( abilityIDs ),
+      [propertyKey]: currentAbilities.concat( abilityUUIDs ),
+    } );
+  }
+
+  removeAbilities( abilities, poolType ) {
+    const propertyKey = `abilities.${poolType}`;
+    const currentAbilities = this.abilities[poolType];
+    const abilityUUIDs = abilities.map( ability => ability.uuid ?? ability );
+
+    this.updateSource( {
+      [propertyKey]: currentAbilities.filter( uuid => !abilityUUIDs.includes( uuid ) ),
     } );
   }
 

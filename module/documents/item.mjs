@@ -52,4 +52,18 @@ export default class ItemEd extends Item {
             );
         }
     }
+
+    async removeAdvancementAbility( abilityUUIDs, poolType, level ) {
+        if ( level ) {
+            this.system.advancement.levels[level - 1].removeAbilities(
+              abilityUUIDs,
+              poolType
+            );
+        } else {
+            this.system.advancement.removeAbilities(
+              abilityUUIDs,
+              poolType
+            );
+        }
+    }
 }

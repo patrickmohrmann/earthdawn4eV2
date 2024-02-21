@@ -93,4 +93,14 @@ export default class AdvancementData extends SparseDataModel {
       [propertyKey]: currentAbilities.concat( abilityIDs ),
     } );
   }
+
+  removeAbilities( abilities, poolType ) {
+    const propertyKey = `abilityOptions.${poolType}`;
+    const currentAbilities = this.abilityOptions[poolType];
+    const abilityUUIDs = abilities.map( ability => ability.uuid ?? ability );
+
+    this.updateSource( {
+      [propertyKey]: currentAbilities.filter( uuid => !abilityUUIDs.includes( uuid ) ),
+    } );
+  }
 }
