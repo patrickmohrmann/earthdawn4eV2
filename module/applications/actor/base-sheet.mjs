@@ -7,7 +7,8 @@ import { getSpellCollection  } from "../../item-data-collectors.mjs";
 import { getDisciplineCollection  } from "../../item-data-collectors.mjs";
 import { getQuestorCollection  } from "../../item-data-collectors.mjs";
 import { getSkillFullCollection } from "../../item-data-collectors.mjs";
-import { getSkillArtisanCollection } from "../../item-data-collectors.mjs";
+import { getSkillCollectionArtisan } from "../../item-data-collectors.mjs";
+import { getskillCollectionArtisanSelection } from "../../item-data-collectors.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -49,6 +50,7 @@ export default class ActorSheetEd extends ActorSheet {
     return systemData;
   }
 
+
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
@@ -87,7 +89,6 @@ export default class ActorSheetEd extends ActorSheet {
   // eslint-disable-next-line complexity
   async _onCharacterGeneration( event ) {
     event.preventDefault();
-
     let dataCollection = {
         namegiverCollection: getNamegiverCollection(),
         talentCollection: getTalentCollection(),
@@ -97,7 +98,8 @@ export default class ActorSheetEd extends ActorSheet {
         disciplineCollection: getDisciplineCollection(),
         questorCollection: getQuestorCollection(),
         skillFullCollection: getSkillFullCollection(),
-        skillArtisanCollection: getSkillArtisanCollection(),
+        skillCollectionArtisan: getSkillCollectionArtisan(),
+        skillCollectionArtisanSelection: getskillCollectionArtisanSelection()
       }
       console.log( "EARTHDAWN-DATACOLLECTION", dataCollection )
 

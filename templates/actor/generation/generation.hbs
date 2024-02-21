@@ -298,8 +298,16 @@
                     <select name="skill-collection" id="skill__selector">
                         {{selectOptions options.skillCollection selected=value }}
                     </select>
+                    <select name="skill-collection" id="skill__selector">
+                        {{selectOptions options.skillCollectionArtisanSelection selected=value }}
+                    </select>
 {{log this}}
                     {{#each options.skillCollection }}
+                        <div class="item-name item-name__card" data-item-id="{{_id}}">
+                            {{> "systems/ed4e/templates/actor/generation/option-selection.hbs"}}
+                        </div>
+                    {{/each}}
+                    {{#each options.skillCollectionArtisanSelection }}
                         <div class="item-name item-name__card" data-item-id="{{_id}}">
                             {{> "systems/ed4e/templates/actor/generation/option-selection.hbs"}}
                         </div>

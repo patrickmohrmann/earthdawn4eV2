@@ -6,7 +6,7 @@
  * @description Namegiver Collection from Packs and World items
  * @returns { object } dataCollectionNamegiver
  */
-export function getNamegiverCollection() {
+export async function getNamegiverCollection() {
     let namegiverCollection = {};
     for ( const item of game.items ) if ( item.type === "namegiver" ) namegiverCollection[item.uuid] = item.name;
     for ( const pack of game.packs ) if ( pack.metadata.type === "Item" ) {
@@ -80,25 +80,63 @@ export function getSkillCollection(  ) {
  * 
  * @returns {object} skillArtisanCollection
  */
-export function getSkillArtisanCollection(  ) {
-    let skillArtisanCollection = {};
-    for ( const item of game.items ) if ( item.type === "skill" ) skillArtisanCollection[item.uuid] = item.name;
-    for ( const pack of game.packs ) if ( pack.metadata.type === "Item" ) {
-        for ( const idx of pack.index ) if ( idx.type === "skill" ) skillArtisanCollection[idx.uuid] = idx.name;
+export async function getSkillCollectionArtisan(  ) {
+    let skillCollectionArtisan = [];
+    // collect world items
+    for ( const item of game.items ) if ( item.type === "skill" ) {
+        if ( item.system.skillType === "General" ) {
+            skillCollectionArtisan.push ( item );
+        }
     }
-    // this JSON.parse is necessary, because the key will otherwise handled as a data path.
-    skillArtisanCollection = JSON.parse(
-        JSON.stringify( skillArtisanCollection ).replaceAll( '.', ' ' )
-    );
-    
-    return skillArtisanCollection;
+    // collect pack items
+    for ( const collection of game.packs.filter( p => p.metadata.type === "Item" ) ) {
+        for ( const i of collection.index.contents ) if ( i.type === "skill" ) {
+          await collection.getIndex( {fields: ["system"]} )
+          if ( i.system.skillType === "General" ) {
+            skillCollectionArtisan.push ( i );
+          }
+        }
+      }
+      console.log("skillCollectionArtisan", typeof( skillCollectionArtisan ) )
+    return skillCollectionArtisan;
 }
-
+/**
+ * 
+ * @returns {object} skillArtisanCollection
+ */
+export async function getskillCollectionArtisanSelection() {
+    let skillCollectionArtisanSelection = [];
+    // collect world items
+    for ( const item of game.items ) if ( item.type === "skill" ) {
+        if ( item.system.skillType === "General" ) {
+            skillCollectionArtisanSelection.push ( item );
+        }
+    }
+    // collect pack items
+    for ( const collection of game.packs.filter( p => p.metadata.type === "Item" ) ) {
+        for ( const i of collection.index.contents ) if ( i.type === "skill" ) {
+          await collection.getIndex( {fields: ["system"]} )
+          if ( i.system.skillType === "General" ) {
+            skillCollectionArtisanSelection.push ( i );
+          }
+        }
+      }
+      let ArtisanCollection = {};
+      for ( const item of skillCollectionArtisanSelection ) {
+        ArtisanCollection[item.uuid] = item.name;
+      } 
+      // this JSON.parse is necessary, because the key will otherwise handled as a data path.
+      ArtisanCollection = JSON.parse(
+            JSON.stringify( ArtisanCollection ).replaceAll( '.', ' ' )
+        );
+    
+    return ArtisanCollection;
+}
 /**
  * 
  * @returns {object} fullSkillItemCollection
  */
-export function getSkillFullCollection(  ) {
+export async function getSkillFullCollection(  ) {
     // add an array with all items including all data
     let fullSkillItemCollection = [];
     for ( const item of game.items ) if ( item.type === "skill" ) {
