@@ -22,6 +22,7 @@
     "Die": false,
     "Folder": false,
     "FormApplication": false,
+    "FormApplicationOptions": false,
     "Handlebars": false,
     "Hooks": false,
     "Item": false,
@@ -29,6 +30,7 @@
     "ItemSheet": false,
     "ItemSheetEd": true,
     "Items": false,
+    "isEmpty": false,
     "Roll": false,
     "Settings": false,
     "TextEditor": false,
@@ -43,6 +45,7 @@
     "loadTemplates": false,
     "mergeObject": false,
     "packs": false,
+    "renderTemplate": false,
     "ui": false
   },
   "parser": "@babel/eslint-parser",

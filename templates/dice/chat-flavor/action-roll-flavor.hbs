@@ -1,6 +1,8 @@
 <h5 class="roll-type">{{localize "ED.Rolls.Chat.rollTypeHeading" rollType=rollType roller=roller}}</h5>
 <div class="custom-flavor">{{ customFlavor }}</div>
+{{#if (uneq target.total 0)}}
 {{> "systems/ed4e/templates/dice/dice-partials/roll-successes.hbs"}}
+{{/if}}
 <div class="modifier-lists flexrow">
   {{> "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs"}}
   {{#if target.public}}

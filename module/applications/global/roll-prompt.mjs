@@ -3,9 +3,7 @@ import EdRollOptions from "../../data/other/roll-options.mjs";
 
 /**
  * The application responsible for handling additional data for rolling dice in Earthdawn.
- *
  * @augments {FormApplication}
- *
  * @param {EdRollOptions} edRollOptions         Some object which is the target data structure to be updated by the form.
  * @param {object} [rollData={}]                The data object that will be passed to {@link Roll}'s `data` argument.
  * @param {FormApplicationOptions} [options={}] Additional options which modify the rendering of the sheet.
@@ -13,17 +11,17 @@ import EdRollOptions from "../../data/other/roll-options.mjs";
 export default class RollPrompt extends FormApplication {
 
     constructor( edRollOptions = {},  { resolve, rollData = {}, options = {} } = {} ) {
-        if ( !( edRollOptions instanceof EdRollOptions) ) {
-            throw new TypeError("ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`.");
+        if ( !( edRollOptions instanceof EdRollOptions ) ) {
+            throw new TypeError( "ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`." );
         }
         super( edRollOptions, options );
 
         this.resolve = resolve;
         this.edRollOptions = edRollOptions;
         this.rollData = rollData;
-        this._updateObject(undefined, {
+        this._updateObject( undefined, {
           'step.modifiers.manual': edRollOptions.step.modifiers.manual ?? 0,
-        });
+        } );
     }
 
     /**
@@ -87,7 +85,7 @@ export default class RollPrompt extends FormApplication {
         super.activateListeners( html );
         $( this.form.querySelector( "button.cancel" ) ).on( "click" , this.close.bind( this ) );
         $( this.form.querySelector( "button.ok" ) ).on( "click" , this._createRoll.bind( this ) );
-        $( this.form.querySelectorAll("#karma-input,#devotion-input") ).on(
+        $( this.form.querySelectorAll( "#karma-input,#devotion-input" ) ).on(
             "change", this._validateAvailableRessource.bind( this )
         );
     }
@@ -108,7 +106,7 @@ export default class RollPrompt extends FormApplication {
 
     /** @inheritDoc */
     async _updateObject( event, formData ) {
-      return Promise.resolve(this._updateRollData(formData)).then(this.render(true));
+      return Promise.resolve( this._updateRollData( formData ) ).then( this.render( true ) );
     }
 
     _validateAvailableRessource( event ) {
@@ -118,7 +116,7 @@ export default class RollPrompt extends FormApplication {
             this.edRollOptions.rollType !== CONFIG.ED4E.rollTypes.arbitrary
             && newValue > this.edRollOptions[resource].available
         ) {
-            ui.notifications.warn(`Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.`);
+            ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );
         }
     }
 
