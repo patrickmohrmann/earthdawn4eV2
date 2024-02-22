@@ -58,6 +58,9 @@ export function getDefenseValue( attributeValue ) {
  * @param {boolean} asUuid                If `true`, return the found documents
  *                                        as just their UUIDs. Otherwise, the
  *                                        full documents are returned.
+ * @param {DOCUMENT_OWNERSHIP_LEVELS} minOwnerRole The minimal ownership role
+ *                                        the current user needs to get any
+ *                                        document.
  * @param {[string]} filterFields         An array of document property keys that
  *                                        are used in the `predicate` function.
  *                                        Must contain all used keys.
@@ -77,6 +80,7 @@ export async function getAllDocuments(
   documentName,
   documentType,
   asUuid = true,
+  minOwnerRole = "OBSERVER",
   filterFields = [],
   predicate
 ) {
@@ -89,7 +93,9 @@ export async function getAllDocuments(
     !( documentName in docTypes )
     || ( documentType && !docTypes[documentName].includes( documentType ) )
   ) {
-    console.error(`ED4E: Invalid documentName or documentType: ${documentName}, ${documentType}`);
+    console.error(
+      `ED4E: Invalid documentName or documentType: ${documentName}, ${documentType}`
+    );
     return [];
   }
 
@@ -100,11 +106,16 @@ export async function getAllDocuments(
   const worldCollection = game.collections.get( documentName );
   const packs = game.packs.filter( p => p.documentName === documentName );
 
-  const documents = worldCollection.filter( d => !documentType || d.type === documentType );
+  const documents = worldCollection.filter(
+    d =>
+      ( !documentType || d.type === documentType )
+      && d.testUserPermission( game.user, minOwnerRole )
+  );
   const indices = await Promise.all(
     packs.map( async pack  => {
+      if ( !pack.testUserPermission( game.user, minOwnerRole ) ) return [];
       const idx = await pack.getIndex( { fields: filterFields } );
-      return Array.from( idx.values() );
+      return  Array.from( idx.values() );
     }),
   ).then( p => p.flat() );
 
