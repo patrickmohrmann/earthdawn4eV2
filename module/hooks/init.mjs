@@ -10,7 +10,10 @@ import * as canvas from "../canvas/_module.mjs";
 import * as dataModels from "../data/_module.mjs";
 import * as dice from "../dice/_module.mjs";
 import * as documents from "../documents/_module.mjs";
+import * as enrichers from "../enrichers.mjs";
 import * as utils from "../utils.mjs";
+
+
 
 export default function () {
     Hooks.once( "init", () => {
@@ -21,9 +24,13 @@ export default function () {
         CONFIG.ED4E = ED4E;
         CONFIG.Actor.documentClass = documents.ActorEd;
         CONFIG.Item.documentClass = documents.ItemEd;
+        CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
 
         // Register Roll Extensions
         CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
+
+        // Register text editor enrichers
+        enrichers.registerCustomEnrichers();
 
         // Register Handlebars Helper
         registerHandlebarHelpers();
@@ -42,6 +49,15 @@ export default function () {
         Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
             makeDefault: true
         } );
+        Journal.unregisterSheet( "core", JournalSheet );
+        Journal.registerSheet( "earthdawn4e", applications.journal.JournalSheetEd, {
+            makeDefault: true
+        } );
+        /*DocumentSheetConfig.registerSheet( JournalEntryPage, "earthdawn4e", applications.journal.JournalSheetEd, {
+            label: "text",
+            types: ["text"],
+            makeDefault: true
+        } );*/
 
         // Preload Handlebars helpers and partials.
         utils.registerHandlebarsHelpers();
@@ -61,12 +77,12 @@ export default function () {
     } );
 }
 
+/**
+ * @summary Dark theme gradient calculation
+ * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
+ * @description darkValue percentage value in 5% steps
+ */
 function _registerDarkMode() {
-    /**
-     * @summary Dark theme gradient calculation
-     * @description Dark theme slider adds the css class "dark-theme to :root if the slider is above 50%"
-     * @param {number} darkValue percentage value in 5% steps
-     */
     const darkValue = game.settings.get( "ed4e", "darkMode" ) * 5 + 50;
     const bgValue = 255 - ( darkValue * 2.55 );
     const textValue = darkValue * 2.55;

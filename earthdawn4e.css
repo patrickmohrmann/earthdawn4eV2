@@ -183,6 +183,9 @@ input.input__number-input {
   line-height: 25px;
   padding-top: 8px;
 }
+.strong {
+  font-weight: bold;
+}
 ul.no-bullets {
   list-style-type: none;
   /* Remove bullets */

@@ -179,6 +179,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         hint: 'localize: text that is added to the chatmessage when this call is put to chat',
       } ),
       rollType: new foundry.data.fields.StringField( {
+
         required: true,
         nullable: false,
         blank: true,
