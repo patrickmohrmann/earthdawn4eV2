@@ -115,7 +115,7 @@ export async function getAllDocuments(
     packs.map( async pack  => {
       if ( !pack.testUserPermission( game.user, minOwnerRole ) ) return [];
       const idx = await pack.getIndex( { fields: filterFields } );
-      return  Array.from( idx.values() );
+      return  Array.from( idx.values() ).filter( i => i.type === documentType );
     }),
   ).then( p => p.flat() );
 
