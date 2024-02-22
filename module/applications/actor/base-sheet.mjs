@@ -144,7 +144,12 @@ export default class ActorSheetEd extends ActorSheet {
       console.log( "EARTHDAWN-DATACOLLECTION", dataCollection )
 
     this.actor.characterGeneration( dataCollection );
+    
   }
+    // _onCharacterGeneration( event ) {
+    //   event.preventDefault();
+    //   this.actor.characterGeneration( );
+    // }
 
   /**
    * Handle rolling an attribute test.
