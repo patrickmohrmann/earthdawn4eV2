@@ -33,7 +33,51 @@ export function getDefenseValue( attributeValue ) {
 /*  Foundry                                     */
 /* -------------------------------------------- */
 
-export async function getAllDocuments( documentName, documentType, asUuid = true, filterFields = [], predicate ) {
+/**
+ * Search all documents in the game, including world and packs, according to the
+ * given constraints and return them in an array.
+ *
+ * Example usage:
+ * ```
+ * await ed4e.utils.getAllDocuments(
+ *  "Item",
+ *  "spell",
+ *  false,
+ *  ["system.level", "system.tier"],
+ *  x => ( x.system.level > 3 ) && ( x.system.binding === true )
+ * )
+ * ```
+ *
+ * @param {string} documentName           The type of document that is searched
+ *                                        for. One of `game.documentTypes` keys.
+ * @param {string} documentType           The subtype for the chosen document
+ *                                        type. One of the appropriate
+ *                                        `game.documentTypes` values.
+ * @param {boolean} asUuid                If `true`, return the found documents
+ *                                        as just their UUIDs. Otherwise, the
+ *                                        full documents are returned.
+ * @param {[string]} filterFields         An array of document property keys that
+ *                                        are used in the `predicate` function.
+ *                                        Must contain all used keys.
+ * @param {function} predicate            A function that can be used for
+ *                                        pre-filtering the searched documents.
+ *                                        Must be a function that takes one
+ *                                        parameter, either the document (for
+ *                                        world documents) or index (for packs).
+ *                                        It must return `true` if the item
+ *                                        should be kept, or `false` for it to
+ *                                        be discarded.
+ * @return {Promise<[Document|string]>}   A promise that resolves to an array of
+ *                                        either {@link Document}s or UUID
+ *                                        strings of the found documents.
+ */
+export async function getAllDocuments(
+  documentName,
+  documentType,
+  asUuid = true,
+  filterFields = [],
+  predicate
+) {
 
   // Input checks
 
