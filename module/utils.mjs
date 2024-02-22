@@ -30,6 +30,46 @@ export function getDefenseValue( attributeValue ) {
 }
 
 /* -------------------------------------------- */
+/*  Foundry                                     */
+/* -------------------------------------------- */
+
+export async function getAllDocuments( documentName, documentType, asUuid = true, filterFields = [], predicate ) {
+
+  // Input checks
+
+  const docTypes = game.documentTypes;
+
+  if (
+    !( documentName in docTypes )
+    || ( documentType && !docTypes[documentName].includes( documentType ) )
+  ) {
+    console.error(`ED4E: Invalid documentName or documentType: ${documentName}, ${documentType}`);
+    return [];
+  }
+
+  predicate ??= () => true;  // no filtering, take all items
+
+  // Search documents
+
+  const worldCollection = game.collections.get( documentName );
+  const packs = game.packs.filter( p => p.documentName === documentName );
+
+  const documents = worldCollection.filter( d => !documentType || d.type === documentType );
+  const indices = await Promise.all(
+    packs.map( async pack  => {
+      const idx = await pack.getIndex( { fields: filterFields } );
+      return Array.from( idx.values() );
+    }),
+  ).then( p => p.flat() );
+
+  const allDocuments = [...documents, ...indices].filter( predicate );
+
+  return asUuid
+    ? allDocuments.map( doc => doc.uuid )
+    : Promise.all( allDocuments.map( doc => fromUuid( doc.uuid ) ) );
+}
+
+/* -------------------------------------------- */
 /*  Maths                                       */
 /* -------------------------------------------- */
 
@@ -167,13 +207,13 @@ function _localizeObject(obj, keys) {
 
     if ( type !== "object" ) {
       console.error(new Error(
-          `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
+        `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
       ));
       continue;
     }
     if ( !keys?.length ) {
       console.error(new Error(
-          "Localization keys must be provided for pre-localizing when target is an object."
+        "Localization keys must be provided for pre-localizing when target is an object."
       ));
       continue;
     }
