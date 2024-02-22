@@ -22,6 +22,9 @@ h5,
 h6 {
   font-family: 'WarhorseDIY', serif;
 }
+p {
+  font-size: large;
+}
 .partial__two {
   float: left;
   width: 50%;
@@ -182,6 +185,14 @@ input.input__number-input {
 }
 .strong {
   font-weight: bold;
+}
+ul.no-bullets {
+  list-style-type: none;
+  /* Remove bullets */
+  padding: 0;
+  /* Remove padding */
+  margin: 0;
+  /* Remove margins */
 }
 @font-face {
   font-family: 'ArnoPro Bold';
@@ -594,6 +605,24 @@ input.input__number-input {
 .form-group[data-setting-id="ed4e.encumberedHeader"] p {
   display: none;
 }
+.form-group[data-setting-id="ed4e.chatAvatar"] {
+  border-top: 1px solid black;
+}
+.form-group[data-setting-id="ed4e.chatAvatar"] label,
+.form-group[data-setting-id="ed4e.chatAvatar"] .form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.chatAvatarHeader"] p {
+  display: none;
+}
 form#document-create > .form-group > label,
 form#document-create > .form-group > header {
   font-size: larger;
@@ -1000,6 +1029,48 @@ form#document-create .checkbox:hover {
 }
 .editors {
   margin-top: 200px;
+}
+.abilities-list {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.6em;
+  border-radius: 0.3em;
+  border: 1px ridge var(--color-border-light-2);
+}
+.advancement-options-pools {
+  align-content: stretch;
+  row-gap: 3em;
+}
+.advancement__level .item-controls {
+  margin: 1em;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.advancement__level .item-controls a {
+  text-align: center;
+}
+.advancement__level .advancement__navigator {
+  flex: 1 1 auto;
+}
+.advancement__level .advancement__navigator li {
+  text-align: center;
+  margin: 0.8em auto;
+}
+.advancement__level .advancement__content {
+  flex: 4 4;
+}
+.advancement__level .advancement__content .title-level-number {
+  text-align: center;
+}
+.advancement__level .advancement__content .tab.item-name div {
+  margin: 1.5em auto;
+}
+.advancement__level .advancement__content label {
+  flex: 1;
+  font-variant: all-small-caps;
+  text-align: left;
+}
+.advancement__level .advancement__content span {
+  flex: 5;
 }
 .actor-image {
   border: none;
@@ -1573,4 +1644,7 @@ form#document-create .checkbox:hover {
 .main-section .table__devotion .devotion__step--content,
 .main-section .table__devotion .devotion__dice--content {
   text-align: center;
+}
+#tooltip.tour .step-title {
+  padding-right: 25px;
 }

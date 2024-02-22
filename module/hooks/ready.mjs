@@ -1,7 +1,12 @@
 import RollPrompt from '../applications/global/roll-prompt.mjs';
+import EdTour from "../tours/ed-tours.mjs";
 
+/**
+ * TODO
+ */
 export default function () {
     Hooks.once( "ready", async () => {
+
         /* -------------------------------------------- */
         /*  Dice Icon Roll                              */
         /* -------------------------------------------- */
@@ -13,7 +18,13 @@ export default function () {
         /* -------------------------------------------- */
 
         if ( game.user.isGM ) await _createDebugDocuments();
-    });
+
+
+        /* -------------------------------------------- */
+        /*  Tour                                        */
+        /* -------------------------------------------- */
+        EdTour.travelAgency();
+    } );
 }
 
 /**

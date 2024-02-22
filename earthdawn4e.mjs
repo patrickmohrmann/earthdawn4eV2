@@ -10,8 +10,6 @@
 
 // Import configuration
 import ED4E from './module/config.mjs';
-import  "./module/tours/tours.mjs";
-
 
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -22,6 +20,7 @@ import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as hooks from "./module/hooks/_module.mjs";
 import * as system from "./module/system/_module.mjs";
+import * as tours from "./module/tours/_module.mjs";
 import * as utils from "./module/utils.mjs";
 
 /* -------------------------------------------- */
@@ -38,6 +37,7 @@ globalThis.ed4e = {
     enrichers,
     hooks,
     system,
+    tours,
     utils
 };
 

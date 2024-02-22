@@ -11,14 +11,17 @@ export class DocumentCreateDialog extends FormApplication {
     this.documentType = documentCls.name;
     this.pack = pack;
     this.parent = parent;
+    this.documentTypeLocalized = game.i18n.localize( `DOCUMENT.${this.documentType}` );
     // since after super we are sure that default options already set the `classes` property
     this.options.classes.push( `create-${this.documentType.toLowerCase()}` );
 
     this._updateCreationData( data );
   }
 
+  documentTypeLocalized;
+
   get title() {
-    return game.i18n.format( "DOCUMENT.Create", { type: game.i18n.localize( `DOCUMENT.${this.documentType}` ) } );
+    return game.i18n.format( "DOCUMENT.Create", { type: this.documentTypeLocalized } );
   }
 
   get template() {
@@ -59,6 +62,7 @@ export class DocumentCreateDialog extends FormApplication {
     const createData = this.createData;
 
     return {
+      documentTypeLocalized: this.documentTypeLocalized,
       folders,
       name: createData.name,
       defaultName: this.documentCls.implementation.defaultName(),
@@ -71,7 +75,7 @@ export class DocumentCreateDialog extends FormApplication {
   }
 
   /**
-   * @param {JQuery} jq jQuery HTML instance
+   * @param {jQuery} jq jQuery HTML instance
    */
   activateListeners( jq ) {
     super.activateListeners( jq );

@@ -182,13 +182,23 @@ preLocalize( "damageType" );
  * @enum {string}
  */
 ED4E.tier = {
-	none: 				"ED.General.none",
+	//none: 				"ED.General.none",
 	novice: 			"ED.Tier.novice",
 	journeyman: 		"ED.Tier.journeyman",
 	warden: 			"ED.Tier.warden",
 	master: 			"ED.Tier.master"
 }
 preLocalize( "tier" );
+
+/**
+ * Type of grantable abilities for a class level
+ * @enum {string}
+ */
+ED4E.abilityPools = {
+	class:		"ED.ability.class",
+	free:			"ED.ability.free",
+	special:	"ED.ability.special"
+}
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
