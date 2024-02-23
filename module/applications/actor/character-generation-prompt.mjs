@@ -13,121 +13,131 @@ import { getAllDocuments } from "../../utils.mjs";
  *      document subtypes to arrays of the available documents of that type.
  */
 export default class CharacterGenerationPrompt extends FormApplication {
+  constructor(charGen = {}, options = {}, documentCollections) {
+    super(charGen);
 
-    constructor( charGen = {}, options = {}, documentCollections ) {
-        super( charGen );
+    this.namegivers = documentCollections.namegivers;
+    this.disciplines = documentCollections.disciplines;
+    this.skills = documentCollections.skills;
 
-        this.namegivers = documentCollections.namegivers;
-        this.disciplines = documentCollections.disciplines;
-        this.skills = documentCollections.skills;
+    this._steps = ['namegiver-tab', 'class-tab', 'attribute-tab', 'spell-tab', 'skill-tab', 'equipment-tab'];
+    this._currentStep = 0;
+  }
 
-        this._steps = [
-            "namegiver-tab", "class-tab", "attribute-tab",
-            "spell-tab", "skill-tab", "equipment-tab",
-        ]
-        this._currentStep = 0;
-    }
+  /**
+   * Wait for dialog to be resolved.
+   * @param {object} [data]           Initial data to pass to the constructor.
+   * @param {object} [options]        Options to pass to the constructor.
+   */
+  static async waitPrompt(data, options = {}) {
+    const docCollections = {
+      namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
+      disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
+      skills: await getAllDocuments(
+        'Item',
+        'skill',
+        false,
+        'OBSERVER',
+        ['system.source.tier'],
+        (x) => x.system.source.tier === 'novice',
+      ),
+    };
+    return new Promise((resolve) => {
+      options.resolve = resolve;
+      new this(data, options, docCollections).render(true, { focus: true });
+    });
+  }
 
-    /**
-     * Wait for dialog to be resolved.
-     * @param {object} [data]           Initial data to pass to the constructor.
-     * @param {object} [options]        Options to pass to the constructor.
-     */
-    static async waitPrompt( data, options = {} ) {
-        const docCollections = {
-            namegivers: await getAllDocuments( "Item", "namegiver", false, "OBSERVER" ),
-            disciplines: await getAllDocuments( "Item", "discipline", false, "OBSERVER" ),
-            skills: await getAllDocuments(
-              "Item", "skill", false, "OBSERVER",
-              ["system.source.tier"], x =>  x.system.source.tier === 'novice'
-            ),
-        };
-        return new Promise( ( resolve ) => {
-            options.resolve = resolve;
-            new this( data, options, docCollections ).render( true, { focus: true } );
-        } );
-    }
+  static get defaultOptions() {
+    const options = super.defaultOptions;
+    return {
+      ...options,
+      closeOnSubmit: false,
+      submitOnChange: true,
+      submitOnClose: false,
+      height: 600,
+      width: 600,
+      resizable: true,
+      classes: [...options.classes, 'earthdawn4e', 'character-generation'],
+      tabs: [
+        {
+          navSelector: '.prompt-tabs',
+          contentSelector: '.tab-body',
+          initial: 'base-input',
+        },
+      ],
+    };
+  }
 
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        return {
-            ...options,
-            closeOnSubmit: false,
-            submitOnChange: true,
-            submitOnClose: false,
-            height: 600,
-            width: 600,
-            resizable: true,
-            classes: [...options.classes, 'earthdawn4e', 'character-generation'],
-            tabs: [
-                {
-                    navSelector: '.prompt-tabs',
-                    contentSelector: '.tab-body',
-                    initial: 'base-input',
-                },
-            ],
-        };
-    }
+  get title() {
+    return game.i18n.localize('X-Character Generation');
+  }
 
-    get title() {
-        return game.i18n.localize( "X-Character Generation" );
-    }
+  get template() {
+    return 'systems/ed4e/templates/actor/generation/generation.hbs';
+  }
 
-    get template() {
-        return 'systems/ed4e/templates/actor/generation/generation.hbs';
-    }
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
+    $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
+    $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
+    $(this.form.querySelector('button.ok')).on('click', this._finishGeneration.bind(this));
+  }
 
-    /** @inheritDoc */
-    activateListeners( html ) {
-        super.activateListeners(html);
-        $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
-        $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
-        $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
-        $(this.form.querySelector('button.ok')).on('click', this._finishGeneration.bind(this));
-    }
+  getData(options = {}) {
+    const context = super.getData(options);
 
-    getData( options = {} ) {
-        const context = super.getData( options );
+    context.namegivers = this.namegivers;
+    context.disciplines = this.disciplines;
+    context.skills = this.skills;
+    context.hasNextStep = this._hasNextStep();
+    context.hasNoNextStep = !context.hasNextStep;
+    context.hasPreviousStep = this._hasPreviousStep();
+    context.hasNoPreviousStep = !context.hasPreviousStep;
 
-        context.hasNextStep = this._hasNextStep();
-        context.hasNoNextStep = !context.hasNextStep;
-        context.hasPreviousStep = this._hasPreviousStep();
-        context.hasNoPreviousStep = !context.hasPreviousStep;
+    return context;
+  }
 
-        return context;
-    }
+  upd;
 
-    /** @inheritDoc */
-    async close( options = {} ) {
-        this.resolve?.( null );
-        return super.close( options );
-    }
+  /** @inheritDoc */
+  async close(options = {}) {
+    this.resolve?.(null);
+    return super.close(options);
+  }
 
-    // first check completeness and then proceed
-    _nextTab() {
-        if ( !this._hasNextStep() ) return;
-        this._currentStep++;
-        this.activateTab( this._steps[this._currentStep] );
-        this.render();
-    }
+  // finish Character Generation and Create Actor with collected data.
+  async _finishGeneration(event) {
+    return this.close();
+  }
 
-    _previousTab() {
-        if ( !this._hasPreviousStep() ) return;
-        this._currentStep--;
-        this.activateTab( this._steps[this._currentStep] );
-        this.render();
-    }
+  async _updateObject(event, formData) {
+    this.object.namegiver = formData.namegiver;
+    console.log( formData );
+  }
 
-    _hasNextStep() {
-        return this._currentStep < ( this._steps.length - 1 );
-    }
+  // first check completeness and then proceed
+  _nextTab() {
+    if (!this._hasNextStep()) return;
+    this._currentStep++;
+    this.activateTab(this._steps[this._currentStep]);
+    this.render();
+  }
 
-    _hasPreviousStep() {
-        return this._currentStep > 0;
-    }
+  _previousTab() {
+    if (!this._hasPreviousStep()) return;
+    this._currentStep--;
+    this.activateTab(this._steps[this._currentStep]);
+    this.render();
+  }
 
-    // finish Character Generation and Create Actor with collected data.
-    async _finishGeneration( event ) {
-        return this.close();
-    }
+  _hasNextStep() {
+    return this._currentStep < this._steps.length - 1;
+  }
+
+  _hasPreviousStep() {
+    return this._currentStep > 0;
+  }
 }
