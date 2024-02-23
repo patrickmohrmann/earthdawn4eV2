@@ -44,8 +44,7 @@ export default class ActorEd extends Actor {
   }
 
   async characterGeneration () {
-    const name = this.name;
-    const generation = await CharacterGenerationPrompt.waitPrompt( name )
+    const generation = await CharacterGenerationPrompt.waitPrompt();
     this.#processGeneration ( generation );
   }
 
