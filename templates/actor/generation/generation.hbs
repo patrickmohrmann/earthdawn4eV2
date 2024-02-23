@@ -1,530 +1,538 @@
-<form class="character-generation" id="character-generation-form" autocomplete="off">
-    <div class="header-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div>
-    <div class="character-generation-prompt-body">
-        <div>
-            <!-- navigator left -->
-            <div class="navigator-section input--centered">
-                <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
-                    <a class="character-generation-tab" data-tab="namegiver-tab">{{localize "X-Namegiver"}}</a>
-                    <a class="character-generation-tab" data-tab="class-tab">{{localize "X-Discipline/Questor"}}</a>
-                    <a class="character-generation-tab" data-tab="attribute-tab">{{localize "X-Attribute"}}</a>
-                    <a class="character-generation-tab" data-tab="spell-tab">{{localize "X-Spell"}}</a>
-                    <a class="character-generation-tab" data-tab="skill-tab">{{localize "X-Skill"}}</a>
-                    <a class="character-generation-tab" data-tab="equipment-tab">{{localize "X-Equipment"}}</a>
-                </nav>
-            </div>
-            <div class="tab-body">
-                <!-- tab1: base input -->
-                <div class="tab namegiver-tab" data-group="primary" data-tab="namegiver-tab">
-                    Namegiver
-                    <div>
-                        liste von allen Namegivern
-                    </div>
-                    <div>
-                        liste von SPrachen
-                        checkliste für Lesen und Schreiben
-                        Zwergisch ist vorbelegt bei beiden
-                        Namegiversprache wird auch vorbelegt, nach der auswahl.
-                    </div>
+<form class="character-generation flexcol" id="character-generation-form" autocomplete="off">
+  <div class="header-item__frame">
+    <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+  </div>
+  <div class="character-generation-prompt-body">
+    <div>
+      <!-- navigator left -->
+      <div class="navigator-section input--centered">
+        <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
+          <a class="character-generation-tab" data-tab="namegiver-tab">{{localize "X-Namegiver"}}</a>
+          <a class="character-generation-tab" data-tab="class-tab">{{localize "X-Discipline/Questor"}}</a>
+          <a class="character-generation-tab" data-tab="attribute-tab">{{localize "X-Attribute"}}</a>
+          <a class="character-generation-tab" data-tab="spell-tab">{{localize "X-Spell"}}</a>
+          <a class="character-generation-tab" data-tab="skill-tab">{{localize "X-Skill"}}</a>
+          <a class="character-generation-tab" data-tab="equipment-tab">{{localize "X-Equipment"}}</a>
+        </nav>
+      </div>
+      <div class="tab-body">
+        <!-- tab1: base input -->
+        <div class="tab namegiver-tab" data-group="primary" data-tab="namegiver-tab">
+          Namegiver
+          <div>
+            liste von allen Namegivern
+          </div>
+          <div>
+            liste von SPrachen
+            checkliste für Lesen und Schreiben
+            Zwergisch ist vorbelegt bei beiden
+            Namegiversprache wird auch vorbelegt, nach der auswahl.
+          </div>
 
-                    <select name="" id="">
-                        <option value="">Dwarf</option>
-                        <option value="">Elf</option>
-                        <option value="">Human</option>
-                        <option value="">Obsidiman</option>
-                        <option value="">Ork</option>
-                        <option value="">T'skrang</option>
-                        <option value="">Troll</option>
-                        <option value="">Windling</option>
-                    </select>
-                </div>
-                <!-- tab2: other inputs -->
-                <div class="tab class-tab" data-group="primary" data-tab="class-tab">
-                    Discipline/Questor
-                    <div>
-                        liste von allen disciplinen
-                        switch für disciplinen / questoren
-                    </div>
-                    <div>
-                        die Tabelle passt sich an, ob es disciplin oder Questor ausgewählt wurde.
-                    </div>
-                    <div>
-                        doppel click schiebt die Ability in die andere Tabelle
-                    </div>
-                    <div>
-                        <Table>
-                            <tr>
-                                <th>Optionen</th>
-                                <th>Gewählt</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Optionale Talent 1
-                                </td>
-                                <td>
-                                    Disciplintalente 1
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Optionale Talent 2
-                                </td>
-                                <td>
-                                    Disciplintalente 2
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Optionale Talent 3
-                                </td>
-                                <td>
-                                    Disciplintalente 3
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Optionale Talent 4
-                                </td>
-                                <td>
-                                    Disciplintalente 4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Optionale Talent 5
-                                </td>
-                                <td>
-                                    Disciplintalente 5
-                                </td>
-                            </tr>
-                        </Table>
-                    </div>
-                </div>
-                <!-- tab3: base input -->
-                <div class="tab attribute-tab" data-group="primary" data-tab="attribute-tab">
-                    Attribute
-                    <table>
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Startwert</th>
-                            <th>Kosten</th>
-                            <th>Steigerung</th>
-                            <th>End Wert</th>
-                            <th>Stufe</th>
-                        </tr>
-                        <tr>
-                            <td class="input--centered">STR</td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">2</td>
-                            <td class="input--centered">0
-                                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
-                                    <i class="fas fa-arrow-circle-up"></i>
-                                </a>
-                                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
-                                    <i class="fas fa-arrow-circle-down"></i>
-                                </a>
-                            </td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">5</td>
-                        </tr>
-                        <tr>
-                            <td class="input--centered">DEX</td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">2</td>
-                            <td class="input--centered">0
-                                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
-                                    <i class="fas fa-arrow-circle-up"></i>
-                                </a>
-                                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
-                                    <i class="fas fa-arrow-circle-down"></i>
-                                </a>
-                            </td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">5</td>
-                        </tr>
-                        <tr>
-                            <td class="input--centered">TOU</td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">2</td>
-                            <td class="input--centered">0
-                                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
-                                    <i class="fas fa-arrow-circle-up"></i>
-                                </a>
-                                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
-                                    <i class="fas fa-arrow-circle-down"></i>
-                                </a>
-                            </td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">5</td>
-                        </tr>
-                        <tr>
-                            <td class="input--centered">PER</td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">2</td>
-                            <td class="input--centered">0
-                                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
-                                    <i class="fas fa-arrow-circle-up"></i>
-                                </a>
-                                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
-                                    <i class="fas fa-arrow-circle-down"></i>
-                                </a>
-                            </td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">5</td>
-                        </tr>
-                        <tr>
-                            <td class="input--centered">WIL</td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">2</td>
-                            <td class="input--centered">0
-                                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
-                                    <i class="fas fa-arrow-circle-up"></i>
-                                </a>
-                                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
-                                    <i class="fas fa-arrow-circle-down"></i>
-                                </a>
-                            </td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">5</td>
-                        </tr>
-                        <tr>
-                            <td class="input--centered">CHA</td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">2</td>
-                            <td class="input--centered">0
-                                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
-                                    <i class="fas fa-arrow-circle-up"></i>
-                                </a>
-                                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
-                                    <i class="fas fa-arrow-circle-down"></i>
-                                </a>
-                            </td>
-                            <td class="input--centered">10</td>
-                            <td class="input--centered">5</td>
-                        </tr>
-                    </table>
-                </div>
-                <!-- tab4: other inputs -->
-                <div class="tab spell-tab" data-group="primary" data-tab="spell-tab">
-                    <div>
-                        Spells 
-                    </div>
-                    <div>
-                        doppel click schiebt die Ability in die andere Tabelle
-                    </div>
-                    <div>
-                        <Table>
-                            <tr>
-                                <th>Optionen</th>
-                                <th>Gewählt</th>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 1
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Zauber
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 1
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Zauber
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 1
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Zauber
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 1
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 1
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 2
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 2
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Zauber Kreis 2
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                        </Table>
-                    </div>
-                </div>
-                <!-- tab5: base input -->
-                <div class="tab skill-tab" data-group="primary" data-tab="skill-tab">
-                    Skill
-                     <Table>
-                            <tr>
-                                <th>Optionen</th>
-                                <th>Gewählt</th>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Knowledge Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                        </Table>
-
-                         <Table>
-                            <tr>
-                                <th>Optionen</th>
-                                <th>Gewählt</th>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    General Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                        </Table>
-
-                         <Table>
-                            <tr>
-                                <th>Optionen</th>
-                                <th>Gewählt</th>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    gewählter Skill
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="input--centered">
-                                    Artisan Skill
-                                </td>
-                                <td class="input--centered">
-                                    
-                                </td>
-                            </tr>
-                        </Table>
-                </div>
-                <!-- tab6: other inputs -->
-                <div class="tab equipment-tab" data-group="primary" data-tab="equipment-tab">
-                    Equipment
-                    <div>
-                        übersicht über standard equipment und das wars.
-                    </div>
-                </div>
-            </div>
+          <select name="" id="">
+            <option value="">Dwarf</option>
+            <option value="">Elf</option>
+            <option value="">Human</option>
+            <option value="">Obsidiman</option>
+            <option value="">Ork</option>
+            <option value="">T'skrang</option>
+            <option value="">Troll</option>
+            <option value="">Windling</option>
+          </select>
         </div>
+        <!-- tab2: other inputs -->
+        <div class="tab class-tab" data-group="primary" data-tab="class-tab">
+          Discipline/Questor
+          <div>
+            liste von allen disciplinen
+            switch für disciplinen / questoren
+          </div>
+          <div>
+            die Tabelle passt sich an, ob es disciplin oder Questor ausgewählt wurde.
+          </div>
+          <div>
+            doppel click schiebt die Ability in die andere Tabelle
+          </div>
+          <div>
+            <Table>
+              <tr>
+                <th>Optionen</th>
+                <th>Gewählt</th>
+              </tr>
+              <tr>
+                <td>
+                  Optionale Talent 1
+                </td>
+                <td>
+                  Disciplintalente 1
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Optionale Talent 2
+                </td>
+                <td>
+                  Disciplintalente 2
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Optionale Talent 3
+                </td>
+                <td>
+                  Disciplintalente 3
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Optionale Talent 4
+                </td>
+                <td>
+                  Disciplintalente 4
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Optionale Talent 5
+                </td>
+                <td>
+                  Disciplintalente 5
+                </td>
+              </tr>
+            </Table>
+          </div>
+        </div>
+        <!-- tab3: base input -->
+        <div class="tab attribute-tab" data-group="primary" data-tab="attribute-tab">
+          Attribute
+          <table>
+            <tr>
+              <th>Attribute</th>
+              <th>Startwert</th>
+              <th>Kosten</th>
+              <th>Steigerung</th>
+              <th>End Wert</th>
+              <th>Stufe</th>
+            </tr>
+            <tr>
+              <td class="input--centered">STR</td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">2</td>
+              <td class="input--centered">0
+                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
+                  <i class="fas fa-arrow-circle-up"></i>
+                </a>
+                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
+                  <i class="fas fa-arrow-circle-down"></i>
+                </a>
+              </td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">5</td>
+            </tr>
+            <tr>
+              <td class="input--centered">DEX</td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">2</td>
+              <td class="input--centered">0
+                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
+                  <i class="fas fa-arrow-circle-up"></i>
+                </a>
+                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
+                  <i class="fas fa-arrow-circle-down"></i>
+                </a>
+              </td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">5</td>
+            </tr>
+            <tr>
+              <td class="input--centered">TOU</td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">2</td>
+              <td class="input--centered">0
+                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
+                  <i class="fas fa-arrow-circle-up"></i>
+                </a>
+                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
+                  <i class="fas fa-arrow-circle-down"></i>
+                </a>
+              </td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">5</td>
+            </tr>
+            <tr>
+              <td class="input--centered">PER</td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">2</td>
+              <td class="input--centered">0
+                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
+                  <i class="fas fa-arrow-circle-up"></i>
+                </a>
+                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
+                  <i class="fas fa-arrow-circle-down"></i>
+                </a>
+              </td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">5</td>
+            </tr>
+            <tr>
+              <td class="input--centered">WIL</td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">2</td>
+              <td class="input--centered">0
+                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
+                  <i class="fas fa-arrow-circle-up"></i>
+                </a>
+                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
+                  <i class="fas fa-arrow-circle-down"></i>
+                </a>
+              </td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">5</td>
+            </tr>
+            <tr>
+              <td class="input--centered">CHA</td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">2</td>
+              <td class="input--centered">0
+                <a class="item-control item-upgrade" title="{{localize 'earthdawn.u.upgrade'}}">
+                  <i class="fas fa-arrow-circle-up"></i>
+                </a>
+                <a class="item-control item-downgrade" title="{{localize 'earthdawn.d.downgrade'}}">
+                  <i class="fas fa-arrow-circle-down"></i>
+                </a>
+              </td>
+              <td class="input--centered">10</td>
+              <td class="input--centered">5</td>
+            </tr>
+          </table>
+        </div>
+        <!-- tab4: other inputs -->
+        <div class="tab spell-tab" data-group="primary" data-tab="spell-tab">
+          <div>
+            Spells
+          </div>
+          <div>
+            doppel click schiebt die Ability in die andere Tabelle
+          </div>
+          <div>
+            <Table>
+              <tr>
+                <th>Optionen</th>
+                <th>Gewählt</th>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 1
+                </td>
+                <td class="input--centered">
+                  gewählter Zauber
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 1
+                </td>
+                <td class="input--centered">
+                  gewählter Zauber
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 1
+                </td>
+                <td class="input--centered">
+                  gewählter Zauber
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 1
+                </td>
+                <td class="input--centered">
+
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 1
+                </td>
+                <td class="input--centered">
+
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 2
+                </td>
+                <td class="input--centered">
+
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 2
+                </td>
+                <td class="input--centered">
+
+                </td>
+              </tr>
+              <tr>
+                <td class="input--centered">
+                  Zauber Kreis 2
+                </td>
+                <td class="input--centered">
+
+                </td>
+              </tr>
+            </Table>
+          </div>
+        </div>
+        <!-- tab5: base input -->
+        <div class="tab skill-tab" data-group="primary" data-tab="skill-tab">
+          Skill
+          <Table>
+            <tr>
+              <th>Optionen</th>
+              <th>Gewählt</th>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Knowledge Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+          </Table>
+
+          <Table>
+            <tr>
+              <th>Optionen</th>
+              <th>Gewählt</th>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                General Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+          </Table>
+
+          <Table>
+            <tr>
+              <th>Optionen</th>
+              <th>Gewählt</th>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+                gewählter Skill
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+            <tr>
+              <td class="input--centered">
+                Artisan Skill
+              </td>
+              <td class="input--centered">
+
+              </td>
+            </tr>
+          </Table>
+        </div>
+        <!-- tab6: other inputs -->
+        <div class="tab equipment-tab" data-group="primary" data-tab="equipment-tab">
+          Equipment
+          <div>
+            übersicht über standard equipment und das wars.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="buttons character-generation-buttons">
-        <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
-            {{ localize 'X-cancel' }}
-        </button>
-        <button class='ok default button-ok' type="submit" name="submit" data-button='next'>
-            {{ localize 'X-next' }}
-        </button>
-        <button class='ok default button-ok' type="submit" name="submit" data-button='ok'>
-            {{ localize 'X-finish' }}
-        </button>
+  </div>
+  <div class="buttons character-generation-buttons flexcol">
+    <div class="button-group buttons-navigation flexrow">
+      <button class='previous default button-previous' type="button" name="previous" data-button='previous' {{disabled
+        hasNoPreviousStep}}>
+        <i class="fas fa-solid fa-angles-left"></i>&emsp;{{ localize 'X-previous' }}
+      </button>
+      <button class='next default button-next' type="button" name="next" data-button='next' {{disabled hasNoNextStep}}>
+        {{ localize 'X-next' }}&emsp;<i class="fas fa-solid fa-angles-right"></i>
+      </button>
     </div>
-    <div class="footer-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+    <div class="button-group buttons-ending flexrow">
+      <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
+        {{ localize 'X-cancel' }}
+      </button>
+      <button class='ok default button-ok' type="submit" name="submit" data-button='ok'>
+        {{ localize 'X-finish' }}
+      </button>
     </div>
+  </div>
+  <div class="footer-item__frame">
+    <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+  </div>
 </form>

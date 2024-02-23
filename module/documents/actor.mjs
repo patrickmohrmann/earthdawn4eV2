@@ -2,7 +2,6 @@ import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
-import EdCharacterGeneration from "../applications/actor/character-generation.mjs";
 import CharacterGenerationPrompt from "../applications/actor/character-generation.mjs";
 
 
@@ -52,7 +51,7 @@ export default class ActorEd extends Actor {
 
   #processGeneration( generation ) {
     if ( generation ) {
-
+      
     return;
     }
   }

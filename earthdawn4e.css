@@ -821,6 +821,16 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body {
   margin-top: 50px;
+  flex: 5;
+}
+.character-generation .character-generation-buttons {
+  flex: 1;
+}
+.character-generation .character-generation-buttons .buttons-navigation button {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 .item-sheet .window-content {
   padding: 0px;
