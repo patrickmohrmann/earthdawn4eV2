@@ -2,14 +2,12 @@
  * @description handlebar helpers
  */
 export function registerHandlebarHelpers() {
-  // Generall Handlebars
+
+  // General Handlebars
+
   Handlebars.registerHelper( 'hasItems', ( array ) => {
     return array.length > 0;
   } );
-
-  // Handlebars.registerHelper( 'inc', ( value ) => {
-  //   return parseInt(value) + 1;
-  // } );
 
   Handlebars.registerHelper( 'add', ( value1, value2 ) => {
     return value1 + value2;
@@ -21,5 +19,9 @@ export function registerHandlebarHelpers() {
 
   Handlebars.registerHelper( 'uneq', ( a, b ) => {
     return a !== b;
+  } );
+
+  Handlebars.registerHelper( 'nameFromUuid', ( uuid ) => {
+    return fromUuid( uuid )?.name ?? "N/A";
   } );
 }

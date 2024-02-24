@@ -870,7 +870,11 @@ form#document-create .checkbox:hover {
   gap: 2em;
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label {
+  padding: 0.7em;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  justify-content: center;
   font-size: medium;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2em;

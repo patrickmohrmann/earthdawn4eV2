@@ -62,9 +62,9 @@
               <tr>
                 <th>{{localize "X.Optional Talents"}}</th>
               </tr>
-              {{log "Abiltiy options novice:"}}
+              {{log "In Abiltiy options novice. Context:"}}
+              {{log this}}
               {{#each object.selectedClass.system.advancement.abilityOptions.novice}}
-                {{log this}}
                 <tr>
                   <td data-ability-uuid="{{this}}"> {{nameFromUuid this}} </td>
                 </tr>
