@@ -16,6 +16,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
   constructor(charGen = {}, options = {}, documentCollections) {
     super(charGen);
 
+    //this.object.isAdept ??= true;
+
     this.namegivers = documentCollections.namegivers;
     this.disciplines = documentCollections.disciplines;
     this.skills = documentCollections.skills;
@@ -115,7 +117,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   async _updateObject(event, formData) {
     this.object.namegiver = formData.namegiver;
+    this.object.isAdept = formData.isAdept;
     console.log( formData );
+    this.render();
   }
 
   // first check completeness and then proceed

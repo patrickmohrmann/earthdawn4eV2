@@ -35,8 +35,20 @@
           </select>
         </div>
         <!-- tab2: other inputs -->
-        <div class="tab class-tab" data-group="primary" data-tab="class-tab">
-          Discipline/Questor
+        <div class="tab class-tab flexcol" data-group="primary" data-tab="class-tab">
+          <div class="discipline-questor-switch-group flexrow">
+            <span class="{{#unless object.isAdept}}deselected-class-type{{/unless}}">{{localize "ED.General.discipline"}}</span>
+            <label class="discipline-questor-switch-group">
+              <input type="checkbox" name="isAdept" {{checked object.isAdept}} hidden="">
+              {{#if object.isAdept}}
+                <i class="arrow-toggle-switch fas fa-duotone fa-arrow-left-from-line fa-xl"></i>
+              {{else}}
+                <i class="arrow-toggle-switch fas fa-duotone fa-arrow-right-from-line fa-xl"></i>
+              {{/if}}
+              <!--span class="discipline-questor-slider"></span-->
+            </label>
+            <span class="{{#if object.isAdept}}deselected-class-type{{/if}}">{{localize "ED.General.questor"}}</span>
+          </div>
           <div>
             liste von allen disciplinen
             switch für disciplinen / questoren
