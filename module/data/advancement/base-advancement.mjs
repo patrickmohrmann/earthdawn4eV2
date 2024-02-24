@@ -58,8 +58,8 @@ export default class AdvancementData extends SparseDataModel {
    * @param {object} [data={}]    If provided, will initialize the new level with the given data.
    */
   addLevel( data = {} ) {
-    this.updateSource( {
-      levels: this.levels.concat(
+    this.parent.parent.update( {
+      "system.advancement.levels": this.levels.concat(
         new AdvancementLevelData(
           {
             ...data,
@@ -75,31 +75,31 @@ export default class AdvancementData extends SparseDataModel {
    * @param {number} [amount=1]   The number of levels to remove.
    */
   deleteLevel( amount = 1 ) {
-    this.updateSource( {
-      levels: this.levels.slice( 0, -( amount ?? 1 ) )
+    this.parent.parent.update( {
+      "system.advancement.levels": this.levels.slice( 0, -( amount ?? 1 ) )
     } );
   }
 
   /**
    * Add abilities to the given type of options pool.
    * @param {[Item]} abilities              An array of ability item IDs to add.
-   * @param {ED4E.abilityPools} poolType    The type of pool the abilities are added to.
+   * @param {ED4E.tier} poolType    The type of pool the abilities are added to.
    */
   addAbilities( abilities, poolType ) {
-    const propertyKey = `abilityOptions.${poolType}`;
+    const propertyKey = `system.advancement.abilityOptions.${poolType}`;
     const currentAbilities = this.abilityOptions[poolType];
     const abilityIDs = abilities.map( ability => ability.uuid ?? ability );
-    this.updateSource( {
+    this.parent.parent.update( {
       [propertyKey]: currentAbilities.concat( abilityIDs ),
     } );
   }
 
   removeAbilities( abilities, poolType ) {
-    const propertyKey = `abilityOptions.${poolType}`;
+    const propertyKey = `system.advancement.abilityOptions.${poolType}`;
     const currentAbilities = this.abilityOptions[poolType];
     const abilityUUIDs = abilities.map( ability => ability.uuid ?? ability );
 
-    this.updateSource( {
+    this.parent.parent.update( {
       [propertyKey]: currentAbilities.filter( uuid => !abilityUUIDs.includes( uuid ) ),
     } );
   }

@@ -91,21 +91,26 @@ export default class AdvancementLevelData extends SparseDataModel {
    * @param {ED4E.abilityPools} poolType    The type of pool the abilities are added to.
    */
   addAbilities( abilities, poolType ) {
-    const propertyKey = `abilities.${poolType}`;
-    const currentAbilities = this.abilities[poolType];
+    const propertyKey = `system.advancement.levels.${this.level-1}.abilities`;
+    const currentAbilities = this.abilities;
     const abilityUUIDs = abilities.map( ability => ability.uuid ?? ability );
-    this.updateSource( {
-      [propertyKey]: currentAbilities.concat( abilityUUIDs ),
+    this.parent.parent.parent.update( {
+      [propertyKey]: {
+        ...currentAbilities,
+        [poolType]: currentAbilities[poolType].concat( abilityUUIDs )
+      },
     } );
   }
 
   removeAbilities( abilities, poolType ) {
-    const propertyKey = `abilities.${poolType}`;
-    const currentAbilities = this.abilities[poolType];
+    const propertyKey = `system.advancement.levels.${this.level-1}.abilities.${poolType}`;
+    const currentAbilities = this.abilities;
     const abilityUUIDs = abilities.map( ability => ability.uuid ?? ability );
 
-    this.updateSource( {
-      [propertyKey]: currentAbilities.filter( uuid => !abilityUUIDs.includes( uuid ) ),
+    this.parent.parent.parent.update( {
+      [propertyKey]: {
+        ...currentAbilities,
+        [poolType]: currentAbilities[poolType].filter( uuid => !abilityUUIDs.includes( uuid ) ) },
     } );
   }
 
