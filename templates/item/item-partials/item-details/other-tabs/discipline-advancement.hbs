@@ -48,8 +48,9 @@
         </div>
         {{/each}}
       </div>
+      <!-- Level Contents -->
       {{#each item.system.advancement.levels}}
-        <div class="tab item-name advancement-level" name="system.advancement.level[{{this.level}}].id"
+        <div class="tab item-name advancement-level" name="system.advancement.level.{{@index}}.id"
              data-tab="item-advancement-level-tab-{{this.level}}" value="{{@index}}" data-level-index="{{@index}}"
              data-level="{{this.level}}">
 

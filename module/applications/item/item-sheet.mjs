@@ -228,7 +228,7 @@ export default class ItemSheetEd extends ItemSheet {
     const poolType = event.target.dataset.poolType;
     const level = event.target.closest( '.advancement-level' )?.dataset.level;
 
-    this.item.addAdvancementAbilities( [transferData.uuid], poolType, level );
+    this.item.addAdvancementAbilities( transferData.uuid, poolType, level );
   }
 
   _onDeletePoolAbility( event ) {
@@ -238,7 +238,7 @@ export default class ItemSheetEd extends ItemSheet {
     const poolType = transferData["ed-poolType"];
     const level = transferData["ed-advancementLevel"];
 
-    this.item.removeAdvancementAbility( [transferData.uuid], poolType, level );
+    this.item.removeAdvancementAbility( transferData.uuid, poolType, level );
   }
 
   /* ----------------------------------------------------------------------- */

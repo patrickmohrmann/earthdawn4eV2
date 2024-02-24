@@ -32,38 +32,71 @@ export default class ItemEd extends Item {
         }
     }
 
-    async addAdvancementAbilities( abilityUUIDs, poolType, level ) {
-        const abilities = await Promise.all(
-          abilityUUIDs.map( uuid => fromUuid( uuid ) )
-        );
-        const abilityIDs = abilities.map(
-          ability => ability.id
-        );
-
+    async addAdvancementAbilities( abilityUUID, poolType, level ) {
         if ( level ) {
-            this.system.advancement.levels[level - 1].addAbilities(
-              abilities,
-              poolType
+            const levelIndex = level - 1 ;
+            const levelModel = this.system.advancement.levels[levelIndex];
+            const abilities = levelModel.abilities;
+            const abilitiesPool = abilities[poolType];
+            levelModel.updateSource( {
+                abilities: {
+                    ...abilities,
+                    [poolType]: abilitiesPool.concat( abilityUUID ),
+                },
+            } )
+
+            const newLevels = this.system.advancement.levels.toSpliced(
+              levelIndex, 1, levelModel
             );
+            const changes = {
+                "system.advancement.levels": newLevels,
+            };
+
+            return this.update( changes );
         } else {
-            this.system.advancement.addAbilities(
-              abilities,
-              poolType
-            );
+            const abilitiesPool = this.system.advancement.abilityOptions[poolType];
+            const changes = {
+                [`system.advancement.abilityOptions.${poolType}`]: abilitiesPool.concat( abilityUUID ),
+            }
+
+            return this.update( changes );
         }
     }
 
-    async removeAdvancementAbility( abilityUUIDs, poolType, level ) {
+    async removeAdvancementAbility( abilityUUID, poolType, level ) {
         if ( level ) {
-            this.system.advancement.levels[level - 1].removeAbilities(
-              abilityUUIDs,
-              poolType
+            const levelIndex = level - 1 ;
+            const levelModel = this.system.advancement.levels[levelIndex];
+            const abilities = levelModel.abilities;
+            const abilitiesPool = abilities[poolType];
+            const newPool = abilitiesPool.toSpliced(
+              abilitiesPool.indexOf( abilityUUID ),1
             );
+            levelModel.updateSource( {
+                abilities: {
+                    ...abilities,
+                    [poolType]: newPool,
+                },
+            } )
+
+            const newLevels = this.system.advancement.levels.toSpliced(
+              levelIndex, 1, levelModel
+            );
+            const changes = {
+                "system.advancement.levels": newLevels,
+            };
+
+            return this.update( changes );
         } else {
-            this.system.advancement.removeAbilities(
-              abilityUUIDs,
-              poolType
+            const abilitiesPool = this.system.advancement.abilityOptions[poolType];
+            const newPool = abilitiesPool.toSpliced(
+              abilitiesPool.indexOf( abilityUUID ), 1
             );
+            const changes = {
+                [`system.advancement.abilityOptions.${poolType}`]: newPool,
+            }
+
+            return this.update( changes );
         }
     }
 }
