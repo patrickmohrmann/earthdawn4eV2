@@ -28,10 +28,8 @@
             Zwergisch ist vorbelegt bei beiden
             Namegiversprache wird auch vorbelegt, nach der auswahl.
           </div>
-
-          {{log this}}
           <select name="namegiver">
-            {{selectOptions namegivers nameAttr="uuid" labelAttr="name"}}
+            {{selectOptions namegivers selected=object.namegiver.uuid nameAttr="uuid" labelAttr="name"}}
           </select>
         </div>
         <!-- tab2: other inputs -->
@@ -56,14 +54,23 @@
             {{/if}}
           </div>
           <h4>{{localize "X.Optional Talents"}}</h4>
-          <div class="available-ability-options flexrow">
-            <br>
-          </div>
-          <div>
-            doppel click schiebt die Ability in die andere Tabelle
-          </div>
-          <div>
-            <Table>
+          <div class="talent-tables flexrow">
+            <table class="optional-talents-pool">
+              <colgroup>
+                <col />
+              </colgroup>
+              <tr>
+                <th>{{localize "X.Optional Talents"}}</th>
+              </tr>
+              {{log "Abiltiy options novice:"}}
+              {{#each object.selectedClass.system.advancement.abilityOptions.novice}}
+                {{log this}}
+                <tr>
+                  <td data-ability-uuid="{{this}}"> {{nameFromUuid this}} </td>
+                </tr>
+              {{/each}}
+            </table>
+            <!--table>
               <tr>
                 <th>Optionen</th>
                 <th>Gewählt</th>
@@ -108,7 +115,7 @@
                   Disciplintalente 5
                 </td>
               </tr>
-            </Table>
+            </table-->
           </div>
         </div>
         <!-- tab3: base input -->

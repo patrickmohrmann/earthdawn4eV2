@@ -16,12 +16,20 @@ export default class CharacterGenerationPrompt extends FormApplication {
   constructor(charGen = {}, options = {}, documentCollections) {
     super(charGen);
 
-    this.object.isAdept ??= true;
-
     this.namegivers = documentCollections.namegivers;
     this.disciplines = documentCollections.disciplines;
     this.questors = documentCollections.questors;
     this.skills = documentCollections.skills;
+
+    // initialize the object's default values
+    foundry.utils.mergeObject( this.object, {
+      isAdept: true,
+      namegiver: this.namegivers[0],
+      selectedClass: this.disciplines[0],
+    }, {
+      overwrite: false,
+      inplace: true
+    } );
 
     this._steps = ['namegiver-tab', 'class-tab', 'attribute-tab', 'spell-tab', 'skill-tab', 'equipment-tab'];
     this._currentStep = 0;
@@ -111,7 +119,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
     return context;
   }
 
-  upd;
+  async _updateObject(event, formData) {
+    this.object.isAdept = formData.isAdept;
+    this.object.namegiver = await fromUuid( formData.namegiver );
+    this.object.selectedClass = await fromUuid( formData.selectedClass );
+    console.log( "Submitted form data:" );
+    console.log( formData );
+    this.render();
+  }
 
   /** @inheritDoc */
   async close(options = {}) {
@@ -119,17 +134,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
     return super.close(options);
   }
 
-  // finish Character Generation and Create Actor with collected data.
   async _finishGeneration(event) {
     return this.close();
-  }
-
-  async _updateObject(event, formData) {
-    this.object.namegiver = formData.namegiver;
-    this.object.isAdept = formData.isAdept;
-    this.object.selectedClass = formData.selectedClass
-    console.log( formData );
-    this.render();
   }
 
   // first check completeness and then proceed
