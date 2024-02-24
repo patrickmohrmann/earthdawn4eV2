@@ -48,9 +48,9 @@
           </div>
           <div class="available-disciplines-questors-choices flexrow">
             {{#if object.isAdept}}
-              {{radioBoxes "selectedClass" disciplineRadioChoices checked=object.selectedClass}}
+              {{radioBoxes "selectedClass" disciplineRadioChoices checked=object.selectedClass.uuid}}
             {{else}}
-              {{radioBoxes "selectedClass" questorRadioChoices checked=object.selectedClass}}
+              {{radioBoxes "selectedClass" questorRadioChoices checked=object.selectedClass.uuid}}
             {{/if}}
           </div>
           <h4>{{localize "X.Optional Talents"}}</h4>
