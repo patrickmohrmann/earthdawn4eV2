@@ -22,6 +22,6 @@ export function registerHandlebarHelpers() {
   } );
 
   Handlebars.registerHelper( 'nameFromUuid', ( uuid ) => {
-    return fromUuid( uuid )?.name ?? "N/A";
+    return fromUuidSync( uuid , {strict: false})?.name ?? "N/A";
   } );
 }
