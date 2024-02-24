@@ -819,6 +819,11 @@ form#document-create .checkbox:hover {
 .character-generation .window-resizable-handle {
   z-index: 2;
 }
+.character-generation h4 {
+  text-align: center;
+  margin: 0;
+  padding: 0.5em;
+}
 .character-generation .character-generation-prompt-body {
   margin-top: 2em;
   flex: 5;
@@ -827,7 +832,7 @@ form#document-create .checkbox:hover {
   padding: 0.5em;
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group {
-  padding: 1em;
+  padding: 0.5em;
   justify-content: center;
   text-align: center;
   font-size: larger;
@@ -857,6 +862,28 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label + span {
   justify-content: left;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices {
+  padding: 0.5em;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 2em;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label {
+  text-align: center;
+  font-size: medium;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2em;
+  cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label:has( input[type="radio"]:checked ) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label input[type="radio"] {
+  display: none;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-ability-options {
+  padding: 0.5em;
 }
 .character-generation .character-generation-buttons {
   flex: 1;

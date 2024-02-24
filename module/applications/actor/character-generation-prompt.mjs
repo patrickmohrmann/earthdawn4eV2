@@ -16,10 +16,11 @@ export default class CharacterGenerationPrompt extends FormApplication {
   constructor(charGen = {}, options = {}, documentCollections) {
     super(charGen);
 
-    //this.object.isAdept ??= true;
+    this.object.isAdept ??= true;
 
     this.namegivers = documentCollections.namegivers;
     this.disciplines = documentCollections.disciplines;
+    this.questors = documentCollections.questors;
     this.skills = documentCollections.skills;
 
     this._steps = ['namegiver-tab', 'class-tab', 'attribute-tab', 'spell-tab', 'skill-tab', 'equipment-tab'];
@@ -35,6 +36,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     const docCollections = {
       namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
       disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
+      questors: await getAllDocuments('Item', 'questor', false, 'OBSERVER'),
       skills: await getAllDocuments(
         'Item',
         'skill',
@@ -93,6 +95,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     context.namegivers = this.namegivers;
     context.disciplines = this.disciplines;
+    context.disciplineRadioChoices = this.disciplines.reduce(
+      ( obj, discipline ) => ( { ...obj, [discipline.uuid]: discipline.name} ),
+      {} );
+    context.questors = this.questors;
+    context.questorRadioChoices = this.questors.reduce(
+      ( obj, questor ) => ( { ...obj, [questor.uuid]: questor.name} ),
+      {} );
     context.skills = this.skills;
     context.hasNextStep = this._hasNextStep();
     context.hasNoNextStep = !context.hasNextStep;
@@ -118,6 +127,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   async _updateObject(event, formData) {
     this.object.namegiver = formData.namegiver;
     this.object.isAdept = formData.isAdept;
+    this.object.selectedClass = formData.selectedClass
     console.log( formData );
     this.render();
   }

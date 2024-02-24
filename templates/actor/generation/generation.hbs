@@ -45,16 +45,19 @@
               {{else}}
                 <i class="arrow-toggle-switch fas fa-duotone fa-arrow-right-from-line fa-xl"></i>
               {{/if}}
-              <!--span class="discipline-questor-slider"></span-->
             </label>
             <span class="{{#if object.isAdept}}deselected-class-type{{/if}}">{{localize "ED.General.questor"}}</span>
           </div>
-          <div>
-            liste von allen disciplinen
-            switch für disciplinen / questoren
+          <div class="available-disciplines-questors-choices flexrow">
+            {{#if object.isAdept}}
+              {{radioBoxes "selectedClass" disciplineRadioChoices checked=object.selectedClass}}
+            {{else}}
+              {{radioBoxes "selectedClass" questorRadioChoices checked=object.selectedClass}}
+            {{/if}}
           </div>
-          <div>
-            die Tabelle passt sich an, ob es disciplin oder Questor ausgewählt wurde.
+          <h4>{{localize "X.Optional Talents"}}</h4>
+          <div class="available-ability-options flexrow">
+            <br>
           </div>
           <div>
             doppel click schiebt die Ability in die andere Tabelle

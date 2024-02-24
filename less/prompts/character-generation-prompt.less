@@ -34,7 +34,7 @@
         }
     }
 
-    
+
 
     .footer-item__frame {
         position: absolute;
@@ -53,6 +53,12 @@
         z-index: 2;
     }
 
+    h4{
+        text-align: center;
+        margin: 0;
+        padding: .5em;
+    }
+
     .character-generation-prompt-body {
         margin-top: 2em;
         flex: 5;
@@ -67,7 +73,7 @@
         // discipline - questor
         .tab.class-tab {
             .discipline-questor-switch-group {
-                padding: 1em;
+                padding: .5em;
                 justify-content: center;
                 text-align: center;
                 font-size: larger;
@@ -106,6 +112,34 @@
                         justify-content: left;
                     }
                 }
+            }
+            .available-disciplines-questors-choices {
+                padding: .5em;
+                justify-content: space-around;
+                align-content: space-around;
+                gap: 2em;
+
+                label {
+                    text-align: center;
+                    font-size: medium;
+
+                    @color-class-choices: rgba(0, 0, 0, 0.1);
+                    border: 1px solid @color-class-choices;
+                    border-radius: 2em;
+
+                    cursor: pointer;
+
+                    &:has( input[type="radio"]:checked ) {
+                        background-color: @color-class-choices;
+                    }
+
+                    input[type="radio"] {
+                        display: none;
+                    }
+                }
+            }
+            .available-ability-options {
+                padding: .5em;
             }
         }
     }
