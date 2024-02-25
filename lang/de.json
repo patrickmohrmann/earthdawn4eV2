@@ -68,6 +68,13 @@
             "willpower":                                            "Willenskraft",
             "willpowerAbbr":                                        "WIL"
         },
+        "Advancement": {
+            "Pools": {
+                "class":                                            "Disziplin-Talente",
+                "free":                                             "Kostenlose Talente",
+                "special":                                          "Besondere Fähigkeiten"
+            }
+        },
         "Buttons": {
             "halfMagic":                                            "Halbmagie",
             "jumpUp":                                               "Aufspringen",

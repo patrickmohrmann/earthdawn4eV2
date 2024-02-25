@@ -53,7 +53,8 @@
               {{radioBoxes "selectedClass" questorRadioChoices checked=object.selectedClass.uuid}}
             {{/if}}
           </div>
-          <h4>{{localize "X.Optional Talents"}}</h4>
+          <h4>{{localize "X.Abilities"}}</h4>
+          <p class="explainer-text">{{localize "X. Below you find all abilities that the chosen class is granted on character generation. Please choose <em>one</em> of the optionals by clicking on the talent."}}</p>
           <div class="talent-tables flexrow">
             <table class="optional-talents-pool">
               <colgroup>
@@ -62,12 +63,29 @@
               <tr>
                 <th>{{localize "X.Optional Talents"}}</th>
               </tr>
-              {{log "In Abiltiy options novice. Context:"}}
-              {{log this}}
               {{#each object.selectedClass.system.advancement.abilityOptions.novice}}
                 <tr>
                   <td data-ability-uuid="{{this}}"> {{nameFromUuid this}} </td>
                 </tr>
+              {{/each}}
+            </table>
+            <!--span class="flexcol"><i class="flexcol fas fa-regular fa-right-from-line fa-2x"></i></span-->
+            <table class="class-talents-pool">
+              <colgroup>
+                <col />
+              </colgroup>
+              <tr>
+                <th>{{localize "X.Class Abilities" classType=object.selectedClass.type}}</th>
+              </tr>
+              {{#each object.selectedClass.system.advancement.levels.0.abilities}}
+                {{#if (hasItems this)}}
+                  <th>{{lookup @root.config.abilityPools @key}}</th>
+                {{/if}}
+                {{#each this}}
+                <tr>
+                  <td data-ability-uuid="{{this}}"> {{nameFromUuid this}} </td>
+                </tr>
+                {{/each}}
               {{/each}}
             </table>
             <!--table>

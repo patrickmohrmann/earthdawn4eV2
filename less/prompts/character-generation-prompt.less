@@ -145,6 +145,36 @@
             .available-ability-options {
                 padding: .5em;
             }
+            .talent-tables {
+                justify-content: center;
+                align-content: center;
+                gap: 1em;
+
+                table {
+                    text-align: center;
+                    flex: 4;
+                    &.optional-talents-pool {
+                        td {
+                            &.selected {
+                                border: 0.4em inset rgba(160, 160, 160, 0.4);
+                            }
+                            &:hover {
+                                transition: background-color .4s linear .05s,
+                                font-size .4s linear .05s;
+                                background-color: rgba(160, 160, 160, 0.4);
+                                font-size: larger;
+                            }
+                        }
+                    }
+                }
+
+                span,i {
+                    flex: 1;
+                    justify-content: center;
+                    align-content: center;
+                    text-align: center;
+                }
+            }
         }
     }
 

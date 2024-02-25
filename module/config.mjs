@@ -195,10 +195,11 @@ preLocalize( "tier" );
  * @enum {string}
  */
 ED4E.abilityPools = {
-	class:		"ED.ability.class",
-	free:			"ED.ability.free",
-	special:	"ED.ability.special"
+	class:		"ED.Advancement.Pools.class",
+	free:			"ED.Advancement.Pools.free",
+	special:	"ED.Advancement.Pools.special"
 }
+preLocalize( "abilityPools" );
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */

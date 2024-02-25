@@ -1,4 +1,5 @@
 import { getAllDocuments } from "../../utils.mjs";
+import ED4E from "../../config.mjs";
 
 /**
  * The application responsible for handling character generation
@@ -92,6 +93,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
+    $(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on('click', this._onSelectTalentOption.bind(this));
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
     $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
     $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
@@ -100,6 +102,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   getData(options = {}) {
     const context = super.getData(options);
+
+    context.config = ED4E;
 
     context.namegivers = this.namegivers;
     context.disciplines = this.disciplines;
@@ -136,6 +140,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   async _finishGeneration(event) {
     return this.close();
+  }
+
+  _onSelectTalentOption( event ) {
+    this.object.talentOption = event.currentTarget.dataset.abilityUuid;
+    const currentSelected = $(event.currentTarget).parent().parent().find("td.selected")[0];
+    currentSelected?.classList.toggle( "selected" );
+    event.currentTarget.classList.toggle( "selected" );
   }
 
   // first check completeness and then proceed

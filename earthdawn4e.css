@@ -889,6 +889,30 @@ form#document-create .checkbox:hover {
 .character-generation .character-generation-prompt-body .tab.class-tab .available-ability-options {
   padding: 0.5em;
 }
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables {
+  justify-content: center;
+  align-content: center;
+  gap: 1em;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table {
+  text-align: center;
+  flex: 4;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td.selected {
+  border: 0.4em inset rgba(160, 160, 160, 0.4);
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:hover {
+  transition: background-color 0.4s linear 0.05s, font-size 0.4s linear 0.05s;
+  background-color: rgba(160, 160, 160, 0.4);
+  font-size: larger;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables span,
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables i {
+  flex: 1;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
 .character-generation .character-generation-buttons {
   flex: 1;
 }
