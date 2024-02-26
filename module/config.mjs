@@ -46,13 +46,13 @@ ED4E.typeGroups = {
  * @enum {AttributeConfiguration}
  */
 ED4E.attributes = {
-	str: {
-		label: 			"ED.Attributes.strength",
-		abbreviation: 	"ED.Attribute.strengthAbbr"
-	},
 	dex: {
 		label: 			"ED.Attributes.dexterity",
 		abbreviation: 	"ED.Attributes.dexterityAbbr"
+	},
+	str: {
+		label: 			"ED.Attributes.strength",
+		abbreviation: 	"ED.Attribute.strengthAbbr"
 	},
 	tou: {
 		label: 			"ED.Attributes.toughness",
