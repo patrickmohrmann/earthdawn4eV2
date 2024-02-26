@@ -144,9 +144,15 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _onSelectTalentOption( event ) {
     this.object.talentOption = event.currentTarget.dataset.abilityUuid;
-    const currentSelected = $(event.currentTarget).parent().parent().find("td.selected")[0];
-    currentSelected?.classList.toggle( "selected" );
-    event.currentTarget.classList.toggle( "selected" );
+    const currentSelected = $(event.currentTarget).parent().parent().find('td.selected')[0];
+    currentSelected?.classList.toggle('selected');
+    event.currentTarget.classList.toggle('selected');
+  }
+  
+  _onChangeTab( event, tabs, active ) {
+    super._onChangeTab( event, tabs, active );
+    this._currentStep = this._steps.indexOf( active );
+    this.render();
   }
 
   // first check completeness and then proceed
