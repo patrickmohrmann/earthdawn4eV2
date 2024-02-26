@@ -19,34 +19,49 @@ export default class ItemSheetEd extends ItemSheet {
   /**
    * @override
    */
+  // static get defaultOptions() {
+  //   return mergeObject(super.defaultOptions, {
+  //     classes: ['earthdawn4e', 'sheet', 'item', 'item-sheet'],
+  //     width: 800,
+  //     height: 800,
+  //     tabs: [
+  //       {
+  //         navSelector: '.item-sheet-tabs',
+  //         contentSelector: '.item-sheet-body',
+  //         initial: 'main',
+  //       },
+  //       {
+  //         navSelector: '.item-advancement-tabs',
+  //         contentSelector: '.item-advancement-body',
+  //         initial: 'item-advancement-options-pools',
+  //       },
+  //     ],
+  //     dragDrop: [
+  //       {
+  //         dragSelector: '.item-list .item',
+  //         dropSelector: '.abilities-list',
+  //       },
+  //       {
+  //         dragSelector: '.abilities-list',
+  //         dropSelector: '.class__delete-level',
+  //       }
+  //     ],
+  //   });
+  // }
+
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      classes: ['earthdawn4e', 'sheet', 'item', 'item-sheet'],
+    const options = super.defaultOptions;
+    options.tabs = [{ navSelector: '.item-sheet-tabs', contentSelector: '.item-sheet-body', initial: 'main', }];
+    options.classes = ['earthdawn4e', 'sheet', 'item', 'item-sheet'];
+    mergeObject ( options, {
       width: 800,
       height: 800,
-      tabs: [
-        {
-          navSelector: '.item-sheet-tabs',
-          contentSelector: '.item-sheet-body',
-          initial: 'main',
-        },
-        {
-          navSelector: '.item-advancement-tabs',
-          contentSelector: '.item-advancement-body',
-          initial: 'item-advancement-options-pools',
-        },
-      ],
       dragDrop: [
-        {
-          dragSelector: '.item',
-          dropSelector: '.abilities-list',
-        },
-        {
-          dragSelector: '.abilities-list',
-          dropSelector: '.class__delete-level',
-        }
+        { dragSelector: '.item-list .item', dropSelector: '.abilities-list' },
+        { dragSelector: '.abilities-list', dropSelector: '.class__delete-level' }
       ],
-    });
+    } );
+    return options
   }
 
   /** @override */
@@ -58,11 +73,11 @@ export default class ItemSheetEd extends ItemSheet {
   // HTML enrichment
   async _enableHTMLEnrichment() {
     let enrichment = {};
-    enrichment['system.description.value'] = await TextEditor.enrichHTML(this.item.system.description.value, {
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.item.system.description.value, {
       async: true,
       secrets: this.item.isOwner,
-    });
-    return expandObject(enrichment);
+    } );
+    return expandObject( enrichment );
   }
 
   async getData() {

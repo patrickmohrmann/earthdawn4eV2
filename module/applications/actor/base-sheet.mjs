@@ -9,19 +9,30 @@ export default class ActorSheetEd extends ActorSheet {
   /**
    * @override
    */
+  // static get defaultOptions() {
+  //   return mergeObject( super.defaultOptions, {
+  //     classes: ['earthdawn4e', 'sheet', 'actor', 'character-sheet'],
+  //     width: 800,
+  //     height: 800,
+  //     tabs: [
+  //       {
+  //         navSelector: '.actor-sheet-tabs',
+  //         contentSelector: '.actor-sheet-body',
+  //         initial: 'main',
+  //       },
+  //     ],
+  //   } );
+  // }
+
   static get defaultOptions() {
-    return mergeObject( super.defaultOptions, {
-      classes: ['earthdawn4e', 'sheet', 'actor', 'character-sheet'],
+    const options = super.defaultOptions;
+    options.tabs = [{ navSelector: '.actor-sheet-tabs', contentSelector: '.actor-sheet-body', initial: 'main' }];
+    options.classes = ['earthdawn4e', 'sheet', 'actor', 'character-sheet']
+    mergeObject ( options, {
       width: 800,
       height: 800,
-      tabs: [
-        {
-          navSelector: '.actor-sheet-tabs',
-          contentSelector: '.actor-sheet-body',
-          initial: 'main',
-        },
-      ],
     } );
+    return options;
   }
 
   /** @override */
