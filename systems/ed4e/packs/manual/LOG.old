@@ -1,5 +1,7 @@
-2024/02/27-00:13:30.430 3248 Log #74: 0 ops saved to Table #75 OK
-2024/02/27-00:13:30.431 3248 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000074.log: OK
-2024/02/27-00:13:30.431 3248 Table #57: 32 entries OK
-2024/02/27-00:13:30.438 3248 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000073: OK
-2024/02/27-00:13:30.447 3248 **** Repaired leveldb C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual; recovered 1 files; 12292 bytes. Some data may have been lost. ****
+2024/02/28-22:56:02.667 2cb4 Recovering log #98
+2024/02/28-22:56:02.683 2cb4 Delete type=0 #98
+2024/02/28-22:56:02.683 2cb4 Delete type=3 #96
+2024/02/28-23:21:29.300 770 Level-0 table #103: started
+2024/02/28-23:21:29.300 770 Level-0 table #103: 0 bytes OK
+2024/02/28-23:21:29.306 770 Delete type=0 #101
+2024/02/28-23:21:29.324 770 Manual compaction at level-0 from '!journal!0ojRhmU7J13e27uU' @ 72057594037927935 : 1 .. '!journal.pages!LB0uwkC26dySBg4p.rc6txXGfLR72TX2e' @ 0 : 0; will stop at (end)
