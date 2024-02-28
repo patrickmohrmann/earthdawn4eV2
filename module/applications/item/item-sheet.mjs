@@ -19,49 +19,35 @@ export default class ItemSheetEd extends ItemSheet {
   /**
    * @override
    */
-  // static get defaultOptions() {
-  //   return mergeObject(super.defaultOptions, {
-  //     classes: ['earthdawn4e', 'sheet', 'item', 'item-sheet'],
-  //     width: 800,
-  //     height: 800,
-  //     tabs: [
-  //       {
-  //         navSelector: '.item-sheet-tabs',
-  //         contentSelector: '.item-sheet-body',
-  //         initial: 'main',
-  //       },
-  //       {
-  //         navSelector: '.item-advancement-tabs',
-  //         contentSelector: '.item-advancement-body',
-  //         initial: 'item-advancement-options-pools',
-  //       },
-  //     ],
-  //     dragDrop: [
-  //       {
-  //         dragSelector: '.item-list .item',
-  //         dropSelector: '.abilities-list',
-  //       },
-  //       {
-  //         dragSelector: '.abilities-list',
-  //         dropSelector: '.class__delete-level',
-  //       }
-  //     ],
-  //   });
-  // }
-
   static get defaultOptions() {
-    const options = super.defaultOptions;
-    options.tabs = [{ navSelector: '.item-sheet-tabs', contentSelector: '.item-sheet-body', initial: 'main', }];
-    options.classes = ['earthdawn4e', 'sheet', 'item', 'item-sheet'];
-    mergeObject ( options, {
+    return mergeObject(super.defaultOptions, {
+      classes: ['earthdawn4e', 'sheet', 'item', 'item-sheet'],
       width: 800,
       height: 800,
-      dragDrop: [
-        { dragSelector: '.item-list .item', dropSelector: '.abilities-list' },
-        { dragSelector: '.abilities-list', dropSelector: '.class__delete-level' }
+      tabs: [
+        {
+          navSelector: '.item-sheet-tabs',
+          contentSelector: '.item-sheet-body',
+          initial: 'main',
+        },
+        {
+          navSelector: '.item-advancement-tabs',
+          contentSelector: '.item-advancement-body',
+          initial: 'item-advancement-options-pools',
+          group: "advancement",
+        },
       ],
-    } );
-    return options
+      dragDrop: [
+        {
+          dragSelector: '.item-list .item',
+          dropSelector: '.abilities-list',
+        },
+        {
+          dragSelector: '.abilities-list',
+          dropSelector: '.class__delete-level',
+        }
+      ],
+    });
   }
 
   /** @override */
