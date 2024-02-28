@@ -45,8 +45,16 @@ export default class EdTour extends Tour {
             else if ( this.currentStep.action === "createItem" ) {
                 Item.implementation.createDialog()      
             }
+            else if ( this.currentStep.action === "setAdvancementCircleTabActive" ) {
+                ui.activeWindow.document.sheet.activateTab( "item-advancement-level-tab-1", {group: "advancement"} )
+            }
+            else if ( this.currentStep.action === "setAdvancementPoolTabActive" ) {
+                ui.activeWindow.document.sheet.activateTab( "item-advancement-options-pools", {group: "advancement"} )
+            }
         }
     }
+
+    
 
     // exit(){
     //     super.exit()
@@ -69,5 +77,7 @@ export default class EdTour extends Tour {
         // $( "#tooltip" ).show()
         return res
     }
+
+    
 
 }
