@@ -57,7 +57,21 @@ export default function registerSystemSettings() {
                 $( ':root' ).removeClass( 'dark-theme' );
             }
         } 
-    } );   
+    } );
+
+    /* -------------------------------------------------------------------------------- */
+    /*                              CHARACTER GENERATION                                */
+    /* -------------------------------------------------------------------------------- */
+
+    // starting attribute points to spend
+    game.settings.register( "ed4e", "charGenAttributePoints", {
+        name: "ED.Settings.CharGen.attributePoints",
+        hint: "ED.Settings.CharGen.hintAttributePoints",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 25,
+    })
 
     /* -------------------------------------------------------------------------------- */
     /*                                  LP TRACKING                                     */
