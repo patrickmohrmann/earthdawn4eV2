@@ -74,7 +74,8 @@ export function getDefenseValue( attributeValue ) {
  *                                        be discarded.
  * @return {Promise<[Document|string]>}   A promise that resolves to an array of
  *                                        either {@link Document}s or UUID
- *                                        strings of the found documents.
+ *                                        strings of the found documents. Empty
+ *                                        if no documents are found.
  */
 export async function getAllDocuments(
   documentName,
