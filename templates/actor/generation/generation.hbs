@@ -40,6 +40,7 @@
           <label for="char-gen-namegiver-select">
             {{localize "X.Choose namegiver: "}}
             <select id="char-gen-namegiver-select" name="namegiver">
+              <option value="none">&ndash;&ndash;&ndash;</option>
               {{selectOptions namegivers selected=object.namegiver nameAttr="uuid" labelAttr="name"}}
             </select>
           </label>
@@ -126,6 +127,7 @@
         <div class="tab attribute-tab flexcol" data-group="primary" data-tab="attribute-tab">
 
           <h3>{{localize "X. Attributes"}}</h3>
+
           <table class="char-gen-attributes">
             <tr>
               <th>{{localize "X.Attribut"}}</th>
@@ -135,31 +137,43 @@
               <th>{{localize "X.Wert"}}</th>
               <th>{{localize "X.Stufe"}}</th>
             </tr>
-            {{log object}}
             {{#each object.attributes}}
               <tr data-attribute="{{@key}}">
                 <td class="input--centered attribute-label">{{lookup (lookup @root.config.attributes @key) "abbreviation"}}</td>
-                <td class="input--centered attribute-base-value">{{lookup @root.object.namegiver.system.attributeValues @key}}</td>
+                <td class="input--centered attribute-base-value">{{lookup @root.namegiverDocument.system.attributeValues @key}}</td>
                 <td class="input--centered attribute-cost">{{this.cost}}</td>
                 <td class="input--centered attribute-change">
-                  <span class="attribute-increase" title="{{localize 'X.Increase Attribute Value'}}" data-change-type="decrease">
+                  <span class="attribute-decrease" title="{{localize 'X.Decrease Attribute Value'}}" data-change-type="decrease" data-attribute="{{@key}}">
                     <i class="fa-light fa-circle-minus"></i>
                   </span>
                   <span class="attribute-change-value">
                     {{this.change}}
                   </span>
-                  <span class="attribute-decrease" title="{{localize 'X.Decrease Attribute Value'}}" data-change-type="increase">
+                  <span class="attribute-increase" title="{{localize 'X.Increase Attribute Value'}}" data-change-type="increase" data-attribute="{{@key}}">
                     <i class="fa-light fa-circle-plus"></i>
                   </span>
                 </td>
-                <td class="input--centered attribute-final-value">{{this.finalValue}}</td>
+                <td class="input--centered attribute-final-value">{{lookup @root.finalAttributeValues @key}}</td>
                 <td class="input--centered attribute-step">5</td>
               </tr>
             {{else}}
               <tr>{{localize "X.No namegiver selected. Please go select one in the first tab."}}</tr>
             {{/each}}
           </table>
+
+          <div class="available-attribute-points flexrow">
+            <label>{{localize "X.Available Attribute Points: "}}{{availableAttributePoints}}</label>
+            <meter value="{{availableAttributePoints}}" min="0" max="{{maxAttributePoints}}">
+            </meter>
+          </div>
+
+          <button id="char-gen-clear-attribute-points-button" type="button" title="X.Clear all assigned attribute modifiers and reset to zero.">
+            <i class="fa-light fa-arrows-rotate"></i>
+            {{localize "X.Reset"}}
+          </button>
+
         </div>
+
         <!-- tab4: spells -->
         <div class="tab spell-tab" data-group="primary" data-tab="spell-tab">
           <div>

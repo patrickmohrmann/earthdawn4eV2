@@ -26,16 +26,6 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
 
-    // initialize the object's default values
-    this.object.updateSource( {
-      namegiver: this.object.namegiver ?? this.namegivers[0]?.uuid,
-    } );
-    /*this._updateObject( undefined, {
-      isAdept: true,
-      namegiver: this.namegivers[0]?.uuid,
-      selectedClass: this.disciplines[0]?.uuid,
-    } );*/
-
     this._steps = [
       'namegiver-tab',
       'class-tab',
@@ -109,8 +99,11 @@ export default class CharacterGenerationPrompt extends FormApplication {
     /*$(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on(
       'click', this._onSelectTalentOption.bind(this)
     );*/
-    $(this.form.querySelector( 'td.attribute-change .attribute-increase' )).on(
+    $(this.form.querySelectorAll( 'td.attribute-change span' )).on(
       'click', this._onChangeAttributeModifier.bind(this)
+    );
+    $(this.form.querySelector( 'button#char-gen-clear-attribute-points-button' )).on(
+      'click', this._resetAttributePoints.bind(this)
     );
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
     $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
@@ -142,6 +135,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.skills = this.skills;
 
     // Attributes
+    context.finalAttributeValues = await context.object.getFinalAttributeValues();
+    context.availableAttributePoints = context.object.availableAttributePoints;
+    context.maxAttributePoints = game.settings.get( "ed4e", "charGenAttributePoints" );
 
     // Dialog Config
     context.hasNextStep = this._hasNextStep();
@@ -175,9 +171,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   _onChangeAttributeModifier( event ) {
-    const attribute = event.currentTarget.parentElement.parentElement.dataset.attribute;
+    const attribute = event.currentTarget.dataset.attribute;
     const changeType = event.currentTarget.dataset.changeType;
-    this.object.attributes[attribute].change
+    this.object.changeAttributeModifier( attribute, changeType ).then( _ => this.render() );
+  }
+
+  _resetAttributePoints( event ) {
+    this.object.resetAttributePoints();
+    this.render();
   }
 
   _onSelectTalentOption( event ) {
@@ -185,6 +186,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     const currentSelected = $(event.currentTarget).parent().parent().find('td.selected')[0];
     currentSelected?.classList.toggle('selected');
     event.currentTarget.classList.toggle('selected');
+    this.render();
   }
   
   _onChangeTab( event, tabs, active ) {

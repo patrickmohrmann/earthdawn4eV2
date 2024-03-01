@@ -268,7 +268,9 @@ preLocalize( "chatCommands" );
 /*  Costs                                       */
 /* -------------------------------------------- */
 
-ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15]
+ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15];
+ED4E.attributePointsCost[-1] = -1;
+ED4E.attributePointsCost[-2] = -2;
 
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */

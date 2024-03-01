@@ -70,6 +70,13 @@
 
         // tabs
 
+        // namegiver
+        .tab.namegiver-tab {
+            option {
+                text-align: center;
+            }
+        }
+
         // discipline - questor
         .tab.class-tab {
             .discipline-questor-switch-group {
@@ -194,14 +201,26 @@
 
         // attributes
         .tab.attribute-tab {
+            gap: 1em;
             h3 {
                 padding: .2em;
-                margin: .5em;
                 text-align: center;
             }
             td.attribute-change {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
                 span {
                     cursor: pointer;
+                }
+            }
+            .available-attribute-points {
+                label {
+                    flex: 3;
+                }
+                meter {
+                    flex: 7;
+                    filter: grayscale(100%);
                 }
             }
         }

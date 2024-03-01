@@ -831,6 +831,9 @@ form#document-create .checkbox:hover {
 .character-generation .character-generation-prompt-body .navigator-section {
   padding: 0.5em;
 }
+.character-generation .character-generation-prompt-body .tab.namegiver-tab option {
+  text-align: center;
+}
 .character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group {
   padding: 0.5em;
   font-size: larger;
@@ -926,13 +929,27 @@ form#document-create .checkbox:hover {
   align-content: center;
   text-align: center;
 }
+.character-generation .character-generation-prompt-body .tab.attribute-tab {
+  gap: 1em;
+}
 .character-generation .character-generation-prompt-body .tab.attribute-tab h3 {
   padding: 0.2em;
-  margin: 0.5em;
   text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab td.attribute-change {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab td.attribute-change span {
   cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points label {
+  flex: 3;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points meter {
+  flex: 7;
+  filter: grayscale(100%);
 }
 .character-generation .character-generation-buttons {
   flex: 1;
