@@ -1,7 +1,7 @@
 // Import configuration
 import ED4E from '../config.mjs';
 import  "../tours/ed-tours.mjs";
-import {registerHandlebarHelpers} from "../handlebar-helpers.mjs";
+import registerHandlebarHelpers from "../handlebar-helpers.mjs";
 import registerSystemSettings from "../settings.mjs";
 
 // Import submodules
@@ -32,9 +32,6 @@ export default function () {
         // Register text editor enrichers
         enrichers.registerCustomEnrichers();
 
-        // Register Handlebars Helper
-        registerHandlebarHelpers();
-
         // Hook up system data types
         CONFIG.Actor.dataModels = dataModels.actor.config;
         CONFIG.Item.dataModels = dataModels.item.config;
@@ -53,14 +50,10 @@ export default function () {
         Journal.registerSheet( "earthdawn4e", applications.journal.JournalSheetEd, {
             makeDefault: true
         } );
-        /*DocumentSheetConfig.registerSheet( JournalEntryPage, "earthdawn4e", applications.journal.JournalSheetEd, {
-            label: "text",
-            types: ["text"],
-            makeDefault: true
-        } );*/
 
-        // Preload Handlebars helpers and partials.
-        utils.registerHandlebarsHelpers();
+        // Register Handlebars Helper
+        registerHandlebarHelpers();
+        // Preload Handlebars partials.
         utils.preloadHandlebarsTemplates();
 
         /* -------------------------------------------- */

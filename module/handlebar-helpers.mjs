@@ -1,7 +1,11 @@
+import ED4E from "./config.mjs";
+import getDice from "./dice/step-tables.mjs";
+import { linkForUuid } from "./utils.mjs";
+
 /**
  * @description handlebar helpers
  */
-export function registerHandlebarHelpers() {
+export default function registerHandlebarHelpers() {
 
   // General Handlebars
 
@@ -24,4 +28,14 @@ export function registerHandlebarHelpers() {
   Handlebars.registerHelper( 'nameFromUuid', ( uuid ) => {
     return fromUuidSync( uuid , {strict: false})?.name ?? "N/A";
   } );
+
+  Handlebars.registerHelper( 'stepFromAttributeValue', ( attributeValue ) => {
+    return ED4E.characteristicsTable.step[attributeValue];
+  } );
+
+  Handlebars.registerHelper( 'getProperty', foundry.utils.getProperty );
+
+  Handlebars.registerHelper( 'ed-linkForUuid', linkForUuid );
+
+  Handlebars.registerHelper( 'ed-diceFormulaForStep', getDice );
 }

@@ -433,10 +433,11 @@ export async function preloadHandlebarsTemplates() {
 /**
  * Register custom Handlebars helpers used by Earthdawn.
  */
+/*
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "ed-linkForUuid": linkForUuid,
     "ed-diceFormulaForStep": getDice
   });
-}
+}*/
