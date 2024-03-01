@@ -1,5 +1,4 @@
 import { SparseDataModel } from "../abstract.mjs";
-import ItemEd from "../../documents/item.mjs";
 import { DocumentUUIDField, MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 
