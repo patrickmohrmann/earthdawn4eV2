@@ -14,16 +14,13 @@ export default class CharacterGenerationData extends SparseDataModel {
     const fields = foundry.data.fields;
     return {
       // Namegiver
-      namegiver: new fields.EmbeddedDocumentField(
-        ItemEd,
-        {
-          required: true,
-          nullable: true,
-          initial: null,
-          label: "X.CharGenModel.namegiver",
-          hint: "X.CharGenModel.The chosen namegiver.",
-        }
-      ),
+      namegiver: new DocumentUUIDField( {
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "X.CharGenModel.namegiver",
+        hint: "X.CharGenModel.The chosen namegiver.",
+      } ),
       // Class
       isAdept: new fields.BooleanField( {
         required: true,
@@ -32,16 +29,13 @@ export default class CharacterGenerationData extends SparseDataModel {
         label: "X.CharGenModel.isAdept",
         hint: "X.CharGenModel.Choose discipline if true, questor otherwise.",
       } ),
-      selectedClass: new fields.EmbeddedDocumentField(
-        ItemEd,
-        {
-          required: true,
-          nullable: true,
-          initial: null,
-          label: "X.CharGenModel.selectedClass",
-          hint: "X.CharGenModel.The chosen class.",
-        }
-      ),
+      selectedClass: new DocumentUUIDField( {
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "X.CharGenModel.selectedClass",
+        hint: "X.CharGenModel.The chosen class.",
+      } ),
       // Attributes
       attributes: new MappingField( new fields.SchemaField( {
         change: new fields.NumberField( {
@@ -85,5 +79,13 @@ export default class CharacterGenerationData extends SparseDataModel {
         option: new DocumentUUIDField(),
       } ),
     };
+  }
+
+  get namegiverDocument() {
+    return fromUuid( this.namegiver );
+  }
+
+  get classDocument() {
+    return fromUuid( this.selectedClass );
   }
 }

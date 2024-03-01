@@ -74,42 +74,53 @@
         .tab.class-tab {
             .discipline-questor-switch-group {
                 padding: .5em;
-                justify-content: center;
-                text-align: center;
                 font-size: larger;
 
-                span {
-                    display: flex;
-                    flex: 5;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: large;
-
-                    &.deselected-class-type {
-                        opacity: 0.4;
-                    }
-
-                    // Discipline text
-                    &:has(+ label) {
-                        justify-content: right;
-                    }
+                input[type="checkbox"] {
+                    display: none;
                 }
 
                 label {
                     cursor: pointer;
-                    flex: 1;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
 
-                    @discipline-questor-arrow-transition: transform .3s ease ;
-                    .arrow-toggle-switch {
-                        transition: @discipline-questor-arrow-transition;
-                        &:hover {
-                            transform: rotate(180deg);
-                        }
+                    i {
+                        flex: 1;
                     }
 
+                    span {
+                        flex: 5;
+                        font-size: large;
+
+                        &.deselected-class-type {
+                            opacity: 0.4;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    // Discipline text
+                    #char-gen-class-type-discipline-label {
+                        justify-content: right;
+                    }
                     // Questor text
-                    & + span {
+                    #char-gen-class-type-questor-label {
                         justify-content: left;
+                    }
+
+                    @discipline-questor-arrow-transition: rotate .4s ease ;
+                    #char-gen-class-type-select-arrow {
+                        transition: @discipline-questor-arrow-transition;
+                    }
+                    &:hover {
+                        #char-gen-class-type-select-arrow {
+                            rotate: 180deg;
+                        }
+                        .deselected-class-type {
+                            color: @text-hover-highlight-color;
+                        }
                     }
                 }
             }
@@ -155,14 +166,18 @@
                     flex: 4;
                     &.optional-talents-pool {
                         td {
-                            &.selected {
+                            &:has( input[type="radio"]:checked ) {
                                 border: 0.4em inset rgba(160, 160, 160, 0.4);
                             }
                             &:hover {
-                                transition: background-color .4s linear .05s,
+                                cursor: pointer;
+                                transition: background-color .3s linear 0s,
                                 font-size .4s linear .05s;
                                 background-color: rgba(160, 160, 160, 0.4);
                                 font-size: larger;
+                            }
+                            input[type="radio"] {
+                                display: none;
                             }
                         }
                     }
@@ -173,6 +188,20 @@
                     justify-content: center;
                     align-content: center;
                     text-align: center;
+                }
+            }
+        }
+
+        // attributes
+        .tab.attribute-tab {
+            h3 {
+                padding: .2em;
+                margin: .5em;
+                text-align: center;
+            }
+            td.attribute-change {
+                span {
+                    cursor: pointer;
                 }
             }
         }

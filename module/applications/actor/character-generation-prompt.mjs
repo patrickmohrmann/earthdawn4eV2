@@ -1,20 +1,22 @@
 import { getAllDocuments } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
+import CharacterGenerationData from "../../data/other/character-generation.mjs";
 
 /**
  * The application responsible for handling character generation
  *
  * @augments {FormApplication}
  *
- * @param {{}} charGen                              Some object which is the
+ * @param {CharacterGenerationData} charGen         The data model which is the
  *      target data structure to be updated by the form.
- * @param {FormApplicationOptions} [options={}]     Additional options which modify
- *      the rendering of the sheet.
+ * @param {FormApplicationOptions} [options={}]     Additional options which
+ *      modify the rendering of the sheet.
  * @param {{string:[Document]}} documentCollections An object mapping the
  *      document subtypes to arrays of the available documents of that type.
  */
 export default class CharacterGenerationPrompt extends FormApplication {
-  constructor(charGen = {}, options = {}, documentCollections) {
+  constructor(charGen, options = {}, documentCollections) {
+    charGen ??= new CharacterGenerationData();
     super(charGen);
 
     this.namegivers = documentCollections.namegivers;
@@ -22,17 +24,26 @@ export default class CharacterGenerationPrompt extends FormApplication {
     this.questors = documentCollections.questors;
     this.skills = documentCollections.skills;
 
-    // initialize the object's default values
-    foundry.utils.mergeObject( this.object, {
-      isAdept: true,
-      namegiver: this.namegivers[0],
-      selectedClass: this.disciplines[0],
-    }, {
-      overwrite: false,
-      inplace: true
-    } );
+    this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
 
-    this._steps = ['namegiver-tab', 'class-tab', 'attribute-tab', 'spell-tab', 'skill-tab', 'equipment-tab'];
+    // initialize the object's default values
+    this.object.updateSource( {
+      namegiver: this.object.namegiver ?? this.namegivers[0]?.uuid,
+    } );
+    /*this._updateObject( undefined, {
+      isAdept: true,
+      namegiver: this.namegivers[0]?.uuid,
+      selectedClass: this.disciplines[0]?.uuid,
+    } );*/
+
+    this._steps = [
+      'namegiver-tab',
+      'class-tab',
+      'attribute-tab',
+      'spell-tab',
+      'skill-tab',
+      'equipment-tab'
+    ];
     this._currentStep = 0;
   }
 
@@ -42,6 +53,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
    * @param {object} [options]        Options to pass to the constructor.
    */
   static async waitPrompt(data, options = {}) {
+    data ??= new CharacterGenerationData();
     const docCollections = {
       namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
       disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
@@ -93,19 +105,29 @@ export default class CharacterGenerationPrompt extends FormApplication {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
-    $(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on('click', this._onSelectTalentOption.bind(this));
+
+    /*$(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on(
+      'click', this._onSelectTalentOption.bind(this)
+    );*/
+    $(this.form.querySelector( 'td.attribute-change .attribute-increase' )).on(
+      'click', this._onChangeAttributeModifier.bind(this)
+    );
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
     $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
     $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
     $(this.form.querySelector('button.ok')).on('click', this._finishGeneration.bind(this));
   }
 
-  getData(options = {}) {
+  async getData(options = {}) {
     const context = super.getData(options);
 
     context.config = ED4E;
 
+    // Namegiver
     context.namegivers = this.namegivers;
+    context.namegiverDocument = await context.object.namegiverDocument;
+
+    // Class
     context.disciplines = this.disciplines;
     context.disciplineRadioChoices = this.disciplines.reduce(
       ( obj, discipline ) => ( { ...obj, [discipline.uuid]: discipline.name} ),
@@ -114,7 +136,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.questorRadioChoices = this.questors.reduce(
       ( obj, questor ) => ( { ...obj, [questor.uuid]: questor.name} ),
       {} );
+    context.classDocument = await context.object.classDocument;
+
+    // Starting Abilities
     context.skills = this.skills;
+
+    // Attributes
+
+    // Dialog Config
     context.hasNextStep = this._hasNextStep();
     context.hasNoNextStep = !context.hasNextStep;
     context.hasPreviousStep = this._hasPreviousStep();
@@ -124,11 +153,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    this.object.isAdept = formData.isAdept;
-    this.object.namegiver = await fromUuid( formData.namegiver );
-    this.object.selectedClass = await fromUuid( formData.selectedClass );
-    console.log( "Submitted form data:" );
-    console.log( formData );
+    const data = foundry.utils.expandObject( formData );
+
+    // Reset selected class if class type changed
+    if ( data.isAdept !== this.object.isAdept ) data.selectedClass = null;
+
+    this.object.updateSource( data );
+
+    // Re-render sheet with updated values
     this.render();
   }
 
@@ -142,8 +174,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
     return this.close();
   }
 
+  _onChangeAttributeModifier( event ) {
+    const attribute = event.currentTarget.parentElement.parentElement.dataset.attribute;
+    const changeType = event.currentTarget.dataset.changeType;
+    this.object.attributes[attribute].change
+  }
+
   _onSelectTalentOption( event ) {
-    this.object.talentOption = event.currentTarget.dataset.abilityUuid;
+    this.object.abilities.option = event.currentTarget.dataset.abilityUuid;
     const currentSelected = $(event.currentTarget).parent().parent().find('td.selected')[0];
     currentSelected?.classList.toggle('selected');
     event.currentTarget.classList.toggle('selected');

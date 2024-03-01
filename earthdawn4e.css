@@ -833,35 +833,44 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group {
   padding: 0.5em;
-  justify-content: center;
-  text-align: center;
   font-size: larger;
 }
-.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group span {
-  display: flex;
-  flex: 5;
-  justify-content: center;
-  align-items: center;
-  font-size: large;
-}
-.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group span.deselected-class-type {
-  opacity: 0.4;
-}
-.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group span:has(+ label) {
-  justify-content: right;
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group input[type="checkbox"] {
+  display: none;
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label {
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label i {
   flex: 1;
 }
-.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label .arrow-toggle-switch {
-  transition: transform 0.3s ease;
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label span {
+  flex: 5;
+  font-size: large;
 }
-.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label .arrow-toggle-switch:hover {
-  transform: rotate(180deg);
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label span.deselected-class-type {
+  opacity: 0.4;
 }
-.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label + span {
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label span.deselected-class-type:hover {
+  cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label #char-gen-class-type-discipline-label {
+  justify-content: right;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label #char-gen-class-type-questor-label {
   justify-content: left;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label #char-gen-class-type-select-arrow {
+  transition: rotate 0.4s ease;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label:hover #char-gen-class-type-select-arrow {
+  rotate: 180deg;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label:hover .deselected-class-type {
+  color: palevioletred;
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices {
   padding: 0.5em;
@@ -898,13 +907,17 @@ form#document-create .checkbox:hover {
   text-align: center;
   flex: 4;
 }
-.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td.selected {
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:has( input[type="radio"]:checked ) {
   border: 0.4em inset rgba(160, 160, 160, 0.4);
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:hover {
-  transition: background-color 0.4s linear 0.05s, font-size 0.4s linear 0.05s;
+  cursor: pointer;
+  transition: background-color 0.3s linear 0s, font-size 0.4s linear 0.05s;
   background-color: rgba(160, 160, 160, 0.4);
   font-size: larger;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td input[type="radio"] {
+  display: none;
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables span,
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables i {
@@ -912,6 +925,14 @@ form#document-create .checkbox:hover {
   justify-content: center;
   align-content: center;
   text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab h3 {
+  padding: 0.2em;
+  margin: 0.5em;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab td.attribute-change span {
+  cursor: pointer;
 }
 .character-generation .character-generation-buttons {
   flex: 1;
