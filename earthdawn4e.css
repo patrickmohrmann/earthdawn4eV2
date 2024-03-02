@@ -968,9 +968,16 @@ form#document-create .checkbox:hover {
 .character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics {
   gap: 2em;
 }
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics table {
+  text-align: center;
+}
 .character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics #char-gen-preview-characteristics {
   table-layout: fixed;
   width: 100%;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics .preview-value {
+  opacity: 0.6;
+  font-size: smaller;
 }
 .character-generation .character-generation-buttons {
   flex: 1;

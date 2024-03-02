@@ -214,6 +214,7 @@
                 text-align: center;
             }
 
+            @preview-value-opacity: .6;
             td {
                 &.attribute-change {
                     display: flex;
@@ -224,7 +225,7 @@
                     }
                 }
                 span.attribute-cost-preview {
-                    opacity: .6;
+                    opacity: @preview-value-opacity;
                 }
             }
 
@@ -245,9 +246,16 @@
 
             .health-and-characteristics {
                 gap: 2em;
+                table {
+                    text-align: center;
+                }
                 #char-gen-preview-characteristics {
                     table-layout: fixed;
                     width: 100%;
+                }
+                .preview-value {
+                    opacity: @preview-value-opacity;
+                    font-size: smaller;
                 }
             }
         }

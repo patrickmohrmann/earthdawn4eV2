@@ -96,27 +96,40 @@ export default class CharacterGenerationData extends SparseDataModel {
     const finalValues = await this.getFinalAttributeValues();
     return {
       health: {
-        unconsciousness: lookup.unconsciousRating[finalValues.tou],
-        death: lookup.deathRating[finalValues.tou],
-        woundThreshold: lookup.woundThreshold[finalValues.tou],
-        recoveryPerDay: lookup.recovery[finalValues.tou],
-        recoveryStep: lookup.step[finalValues.tou],
+        unconsciousness: this._getPreviewValues( lookup, "unconsciousRating", finalValues.tou ),
+        death: this._getPreviewValues( lookup, "deathRating", finalValues.tou),
+        woundThreshold: this._getPreviewValues( lookup, "woundThreshold", finalValues.tou ),
+        recoveryPerDay: this._getPreviewValues( lookup, "recovery", finalValues.tou ),
+        recoveryStep: this._getPreviewValues( lookup, "step", finalValues.tou ),
       },
       characteristics: {
         defenses: {
-          physical: lookup.defenseRating[finalValues.dex],
-          mystic: lookup.defenseRating[finalValues.per],
-          social: lookup.defenseRating[finalValues.cha],
+          physical: this._getPreviewValues( lookup, "defenseRating", finalValues.dex ),
+          mystic: this._getPreviewValues( lookup, "defenseRating", finalValues.per ),
+          social: this._getPreviewValues( lookup, "defenseRating", finalValues.cha ),
         },
         armor: {
-          physical: 0,
-          mystic: lookup.armor[finalValues.wil],
+          physical: {
+            previous: 0,
+            current: 0,
+            next: 0,
+          },
+          mystic: this._getPreviewValues( lookup, "armor", finalValues.wil ),
         },
         other: {
-          carryingCapacity: lookup.carryingCapacity[finalValues.str],
-          initiativeStep: lookup.step[finalValues.dex],
+          carryingCapacity: this._getPreviewValues( lookup, "carryingCapacity", finalValues.str ),
+          initiativeStep: this._getPreviewValues( lookup, "step", finalValues.dex ),
         },
       },
+    };
+  }
+
+  _getPreviewValues( lookup, key, index ) {
+    lookup ??= ED4E.characteristicsTable;
+    return {
+      previous: lookup[key][index-1],
+      current: lookup[key][index],
+      next: lookup[key][index+1],
     };
   }
 

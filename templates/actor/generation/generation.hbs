@@ -162,11 +162,11 @@
                     <td class="input--centered attribute-base-value">{{lookup
                       @root.namegiverDocument.system.attributeValues @key}}</td>
                     <td class="input--centered attribute-cost">
-                      <span class="attribute-cost-preview attribute-cost-lower">{{lookup @root.config.attributePointsCost (subtract this.change 1)}}</span>
+                      <span class="preview-value attribute-cost-preview attribute-cost-lower">{{lookup @root.config.attributePointsCost (subtract this.change 1)}}</span>
                       &emsp;
                       {{this.cost}}
                       &emsp;
-                      <span class="attribute-cost-preview attribute-cost-higher">{{lookup @root.config.attributePointsCost (add this.change 1)}}</span>
+                      <span class="preview-value attribute-cost-preview attribute-cost-higher">{{lookup @root.config.attributePointsCost (add this.change 1)}}</span>
                     </td>
                     <td class="input--centered attribute-change">
                       <span class="attribute-decrease attribute-change-icon" title="{{localize 'X.Decrease Attribute Value'}}"
@@ -209,19 +209,42 @@
                 <tbody>
                 <tr>
                   <td>{{localize "X.Unconsciousness / Death "}}</td>
-                  <td>{{previews.health.unconsciousness}}&sol;{{previews.health.death}}{{!--format "X.un-death" un-rating=... death-rating=...--}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.health.unconsciousness.previous}}&sol;{{previews.health.death.previous}}{{!--format "X.un-death" un-rating=... death-rating=...--}}</span>
+                    &emsp;
+                      {{previews.health.unconsciousness.current}}&sol;{{previews.health.death.current}}{{!--format "X.un-death" un-rating=... death-rating=...--}}
+                    &emsp;
+                    <span class="preview-value">{{previews.health.unconsciousness.next}}&sol;{{previews.health.death.next}}{{!--format "X.un-death" un-rating=... death-rating=...--}}</td></span>
                 </tr>
                 <tr>
                   <td>{{localize "X.Wound Threshold "}}</td>
-                  <td>{{previews.health.woundThreshold}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.health.woundThreshold.previous}}</span>
+                    &emsp;
+                    {{previews.health.woundThreshold.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.health.woundThreshold.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Recovery tests per day"}}</td>
-                  <td>{{previews.health.recoveryPerDay}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.health.recoveryPerDay.previous}}</span>
+                    &emsp;
+                    {{previews.health.recoveryPerDay.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.health.recoveryPerDay.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Recovery step / Dice "}}</td>
-                  <td>{{previews.health.recoveryStep}}&sol;{{ed-diceFormulaForStep previews.health.recoveryStep}}{{!--format "X.recoveryStepDice" step=... dice=...--}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.health.recoveryStep.previous}}&sol;{{ed-diceFormulaForStep previews.health.recoveryStep.previous}}{{!--format "X.recoveryStepDice" step=... dice=...--}}</span>
+                    &emsp;
+                      {{previews.health.recoveryStep.current}}&sol;{{ed-diceFormulaForStep previews.health.recoveryStep.current}}{{!--format "X.recoveryStepDice" step=... dice=...--}}
+                    &emsp;
+                    <span class="preview-value">{{previews.health.recoveryStep.next}}&sol;{{ed-diceFormulaForStep previews.health.recoveryStep.next}}{{!--format "X.recoveryStepDice" step=... dice=...--}}</span>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -237,33 +260,75 @@
                 <tr>
                   <td rowspan="3">{{localize "X.Defenses"}}</td>
                   <td>{{localize "X.Physical"}}</td>
-                  <td>{{previews.characteristics.defenses.physical}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.defenses.physical.previous}}</span>
+                    &emsp;
+                    {{previews.characteristics.defenses.physical.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.defenses.physical.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Mystic"}}</td>
-                  <td>{{previews.characteristics.defenses.mystic}}<br></td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.defenses.mystic.previous}}</span>
+                    &emsp;
+                    {{previews.characteristics.defenses.mystic.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.defenses.mystic.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Social"}}</td>
-                  <td>{{previews.characteristics.defenses.social}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.defenses.social.previous}}</span>
+                    &emsp;
+                    {{previews.characteristics.defenses.social.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.defenses.social.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td rowspan="2">{{localize "X.Armor"}}</td>
                   <td>{{localize "X.Physical"}}</td>
-                  <td>{{previews.characteristics.armor.physical}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.armor.physical.previous}}</span>
+                    &emsp;
+                    {{previews.characteristics.armor.physical.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.armor.physical.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Mystic"}}</td>
-                  <td>{{previews.characteristics.armor.mystic}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.armor.mystic.previous}}</span>
+                    &emsp;
+                    {{previews.characteristics.armor.mystic.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.armor.mystic.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td rowspan="2">{{localize "X.Other"}}</td>
                   <td>{{localize "X.Carrying Capacity"}}<br></td>
-                  <td>{{previews.characteristics.other.carryingCapacity}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.other.carryingCapacity.previous}}</span>
+                    &emsp;
+                    {{previews.characteristics.other.carryingCapacity.current}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.other.carryingCapacity.next}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Initiative base"}}</td>
-                  <td>{{previews.characteristics.other.initiativeStep}}&sol;{{ed-diceFormulaForStep previews.characteristics.other.initiativeStep}}{{!--format "X.Initiative base" step=... dice=....--}}</td>
+                  <td>
+                    <span class="preview-value">{{previews.characteristics.other.initiativeStep.previous}}&sol;{{ed-diceFormulaForStep previews.characteristics.other.initiativeStep.previous}}{{!--format "X.Initiative base" step=... dice=....--}}</span>
+                    &emsp;
+                      {{previews.characteristics.other.initiativeStep.current}}&sol;{{ed-diceFormulaForStep previews.characteristics.other.initiativeStep.current}}{{!--format "X.Initiative base" step=... dice=....--}}
+                    &emsp;
+                    <span class="preview-value">{{previews.characteristics.other.initiativeStep.next}}&sol;{{ed-diceFormulaForStep previews.characteristics.other.initiativeStep.next}}{{!--format "X.Initiative base" step=... dice=....--}}</span>
+                  </td>
                 </tr>
                 </tbody>
               </table>
