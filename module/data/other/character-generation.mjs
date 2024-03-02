@@ -91,6 +91,35 @@ export default class CharacterGenerationData extends SparseDataModel {
     )
   }
 
+  async getCharacteristicsPreview() {
+    const lookup = ED4E.characteristicsTable;
+    const finalValues = await this.getFinalAttributeValues();
+    return {
+      health: {
+        unconsciousness: lookup.unconsciousRating[finalValues.tou],
+        death: lookup.deathRating[finalValues.tou],
+        woundThreshold: lookup.woundThreshold[finalValues.tou],
+        recoveryPerDay: lookup.recovery[finalValues.tou],
+        recoveryStep: lookup.step[finalValues.tou],
+      },
+      characteristics: {
+        defenses: {
+          physical: lookup.defenseRating[finalValues.dex],
+          mystic: lookup.defenseRating[finalValues.per],
+          social: lookup.defenseRating[finalValues.cha],
+        },
+        armor: {
+          physical: 0,
+          mystic: lookup.armor[finalValues.wil],
+        },
+        other: {
+          carryingCapacity: lookup.carryingCapacity[finalValues.str],
+          initiativeStep: lookup.step[finalValues.dex],
+        },
+      },
+    };
+  }
+
   async getFinalAttributeValues() {
     const updateData = {};
     for ( const attribute of Object.keys( this.attributes ) ){

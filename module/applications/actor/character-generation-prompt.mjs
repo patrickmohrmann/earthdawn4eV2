@@ -138,6 +138,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.finalAttributeValues = await context.object.getFinalAttributeValues();
     context.availableAttributePoints = context.object.availableAttributePoints;
     context.maxAttributePoints = game.settings.get( "ed4e", "charGenAttributePoints" );
+    context.previews = await context.object.getCharacteristicsPreview();
 
     // Dialog Config
     context.hasNextStep = this._hasNextStep();

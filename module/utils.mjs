@@ -2,8 +2,6 @@
 /*  Earthdawn                                   */
 /* -------------------------------------------- */
 
-import getDice from "./dice/step-tables.mjs";
-
 /**
  * Calculate the armor value for the given attribute value.
  * @param { number } attributeValue Willpower value for mystical armor
@@ -427,17 +425,3 @@ export async function preloadHandlebarsTemplates() {
 
   return loadTemplates( paths );
 }
-
-/* -------------------------------------------- */
-
-/**
- * Register custom Handlebars helpers used by Earthdawn.
- */
-/*
-export function registerHandlebarsHelpers() {
-  Handlebars.registerHelper({
-    getProperty: foundry.utils.getProperty,
-    "ed-linkForUuid": linkForUuid,
-    "ed-diceFormulaForStep": getDice
-  });
-}*/

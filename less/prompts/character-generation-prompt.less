@@ -201,7 +201,11 @@
 
         // attributes
         .tab.attribute-tab {
-            gap: 1em;
+            gap: 2em;
+            .char-gen-attribute-modification,
+            .char-gen-characteristics-preview {
+                gap: 1em;
+            }
             h3 {
                 padding: .2em;
                 text-align: center;
@@ -215,12 +219,25 @@
                 }
             }
             .available-attribute-points {
+                align-items: center;
+                button {
+                    flex: 1;
+                }
                 label {
                     flex: 3;
+                    text-align: center;
                 }
                 meter {
                     flex: 7;
                     filter: grayscale(100%);
+                }
+            }
+
+            .health-and-characteristics {
+                gap: 2em;
+                #char-gen-preview-characteristics {
+                    table-layout: fixed;
+                    width: 100%;
                 }
             }
         }

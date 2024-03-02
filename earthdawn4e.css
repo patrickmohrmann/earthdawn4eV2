@@ -930,6 +930,10 @@ form#document-create .checkbox:hover {
   text-align: center;
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab {
+  gap: 2em;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .char-gen-attribute-modification,
+.character-generation .character-generation-prompt-body .tab.attribute-tab .char-gen-characteristics-preview {
   gap: 1em;
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab h3 {
@@ -944,12 +948,26 @@ form#document-create .checkbox:hover {
 .character-generation .character-generation-prompt-body .tab.attribute-tab td.attribute-change span {
   cursor: pointer;
 }
+.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points {
+  align-items: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points button {
+  flex: 1;
+}
 .character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points label {
   flex: 3;
+  text-align: center;
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points meter {
   flex: 7;
   filter: grayscale(100%);
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics {
+  gap: 2em;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics #char-gen-preview-characteristics {
+  table-layout: fixed;
+  width: 100%;
 }
 .character-generation .character-generation-buttons {
   flex: 1;
