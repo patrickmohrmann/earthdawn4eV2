@@ -17,6 +17,10 @@ export default function registerHandlebarHelpers() {
     return value1 + value2;
   } );
 
+  Handlebars.registerHelper( 'subtract', ( value1, value2 ) => {
+    return value1 - value2;
+  } );
+
   Handlebars.registerHelper( 'eq', ( a, b ) => {
     return a === b;
   } );

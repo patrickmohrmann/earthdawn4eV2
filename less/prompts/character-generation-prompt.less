@@ -173,18 +173,21 @@
                     flex: 4;
                     &.optional-talents-pool {
                         td {
-                            &:has( input[type="radio"]:checked ) {
-                                border: 0.4em inset rgba(160, 160, 160, 0.4);
-                            }
                             &:hover {
                                 cursor: pointer;
                                 transition: background-color .3s linear 0s,
                                 font-size .4s linear .05s;
                                 background-color: rgba(160, 160, 160, 0.4);
                                 font-size: larger;
+                                & label {
+                                    cursor: pointer;
+                                }
                             }
                             input[type="radio"] {
                                 display: none;
+                            }
+                            &:has( label input[type="radio"]:checked ) {
+                                border: 0.4em inset rgba(160, 160, 160, 0.4);
                             }
                         }
                     }
@@ -201,7 +204,7 @@
 
         // attributes
         .tab.attribute-tab {
-            gap: 2em;
+            // gap: 2em;
             .char-gen-attribute-modification,
             .char-gen-characteristics-preview {
                 gap: 1em;
@@ -210,14 +213,21 @@
                 padding: .2em;
                 text-align: center;
             }
-            td.attribute-change {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                span {
-                    cursor: pointer;
+
+            td {
+                &.attribute-change {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                    span {
+                        cursor: pointer;
+                    }
+                }
+                span.attribute-cost-preview {
+                    opacity: .6;
                 }
             }
+
             .available-attribute-points {
                 align-items: center;
                 button {

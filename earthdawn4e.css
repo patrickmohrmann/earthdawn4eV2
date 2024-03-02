@@ -910,17 +910,20 @@ form#document-create .checkbox:hover {
   text-align: center;
   flex: 4;
 }
-.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:has( input[type="radio"]:checked ) {
-  border: 0.4em inset rgba(160, 160, 160, 0.4);
-}
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:hover {
   cursor: pointer;
   transition: background-color 0.3s linear 0s, font-size 0.4s linear 0.05s;
   background-color: rgba(160, 160, 160, 0.4);
   font-size: larger;
 }
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:hover label {
+  cursor: pointer;
+}
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td input[type="radio"] {
   display: none;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:has( label input[type="radio"]:checked ) {
+  border: 0.4em inset rgba(160, 160, 160, 0.4);
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables span,
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables i {
@@ -928,9 +931,6 @@ form#document-create .checkbox:hover {
   justify-content: center;
   align-content: center;
   text-align: center;
-}
-.character-generation .character-generation-prompt-body .tab.attribute-tab {
-  gap: 2em;
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab .char-gen-attribute-modification,
 .character-generation .character-generation-prompt-body .tab.attribute-tab .char-gen-characteristics-preview {
@@ -947,6 +947,9 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab td.attribute-change span {
   cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab td span.attribute-cost-preview {
+  opacity: 0.6;
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points {
   align-items: center;

@@ -150,8 +150,15 @@ export default class CharacterGenerationData extends SparseDataModel {
       && newModifier <= CharacterGenerationData.maxAttributeModifier
     );
 
+    const oldCost = this.attributes[attribute].cost;
     const newCost = ED4E.attributePointsCost[newModifier];
-    if ( ( newCost > this.availableAttributePoints ) || !isModifierValid ) return {};
+    // Add old cost, otherwise they're included in the calculation of available points
+    if ( ( newCost > ( this.availableAttributePoints + oldCost ) ) || !isModifierValid ) {
+      ui.notifications.warn( game.i18n.localize(
+        "X.No more points available. You can only modify an attribute in the range from -2 through +8."
+      ) );
+      return ;
+    };
 
     const baseValue = await this.getBaseAttributeValue(attribute);
     const finalValue = baseValue + newModifier;

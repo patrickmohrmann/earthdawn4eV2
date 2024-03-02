@@ -1,14 +1,16 @@
 <form class="character-generation flexcol" id="character-generation-form" autocomplete="off">
 
-  <div class="header-item__frame">
+  <!-- Header -->
+  <!--div class="header-item__frame">
     <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-  </div>
+  </div-->
 
+  <!-- Body -->
   <div class="character-generation-prompt-body">
 
     <div>
 
-      <!-- navigator left -->
+      <!-- navigator -->
       <div class="navigator-section input--centered">
         <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
           <a class="character-generation-tab" data-tab="namegiver-tab">{{localize "X-Namegiver"}}</a>
@@ -20,6 +22,7 @@
         </nav>
       </div>
 
+      <!-- tab bodies -->
       <div class="tab-body">
 
         <!-- tab1: namegiver -->
@@ -40,7 +43,7 @@
           <label for="char-gen-namegiver-select">
             {{localize "X.Choose namegiver: "}}
             <select id="char-gen-namegiver-select" name="namegiver">
-              <option value="none">&ndash;&ndash;&ndash;</option>
+              <option value="">&ndash;&ndash;&ndash;</option>
               {{selectOptions namegivers selected=object.namegiver nameAttr="uuid" labelAttr="name"}}
             </select>
           </label>
@@ -92,10 +95,10 @@
               </tr>
               {{#each classDocument.system.advancement.abilityOptions.novice}}
                 <tr>
-                  <td>
-                    <label>
+                  <td data-ability-uuid="{{this}}">
+                    <label for="char-gen-ability-option-radio">
+                      <input type="radio" id="char-gen-ability-option-radio" name="abilities.option" value="{{this}}" {{checked (eq this @root.object.abilities.option)}}>
                       {{nameFromUuid this}}
-                      <input type="radio" name="abilities.option" value="{{this}}">
                     </label>
                   </td>
                 </tr>
@@ -129,6 +132,18 @@
           <div class="char-gen-attribute-modification flexcol">
             <h3>{{localize "X. Attributes"}}</h3>
 
+            <!-- available attribute points indicator -->
+            <div class="available-attribute-points flexrow">
+              <button id="char-gen-clear-attribute-points-button" type="button"
+                      title="X.Clear all assigned attribute modifiers and reset to zero.">
+                <i class="fa-light fa-arrows-rotate"></i>
+                {{localize "X.Reset"}}
+              </button>
+              <label>{{localize "X.Available Attribute Points: "}}{{availableAttributePoints}} (Extra&nbsp;Karma) {{!--format "X.availablePointsKarma" points=... --}}</label>
+              <meter value="{{availableAttributePoints}}" min="0" max="{{maxAttributePoints}}">
+              </meter>
+            </div>
+
             <!-- attribute modification -->
             <table class="char-gen-attributes">
               <tr>
@@ -139,50 +154,49 @@
                 <th>{{localize "X.Wert"}}</th>
                 <th>{{localize "X.Stufe"}}</th>
               </tr>
-              {{#each object.attributes}}
-                <tr data-attribute="{{@key}}">
-                  <td class="input--centered attribute-label">{{lookup (lookup @root.config.attributes @key)
-                                                                       "abbreviation"}}</td>
-                  <td class="input--centered attribute-base-value">{{lookup
-                    @root.namegiverDocument.system.attributeValues @key}}</td>
-                  <td class="input--centered attribute-cost">{{this.cost}}</td>
-                  <td class="input--centered attribute-change">
-                  <span class="attribute-decrease" title="{{localize 'X.Decrease Attribute Value'}}"
-                        data-change-type="decrease" data-attribute="{{@key}}">
-                    <i class="fa-light fa-circle-minus"></i>
-                  </span>
-                    <span class="attribute-change-value">
-                      {{this.change}}
-                    </span>
-                    <span class="attribute-increase" title="{{localize 'X.Increase Attribute Value'}}"
-                          data-change-type="increase" data-attribute="{{@key}}">
-                    <i class="fa-light fa-circle-plus"></i>
-                  </span>
-                  </td>
-                  <td class="input--centered attribute-final-value">{{lookup @root.finalAttributeValues @key}}</td>
-                  <td class="input--centered attribute-step">5</td>
-                </tr>
+              {{#if namegiverDocument}}
+                {{#each object.attributes}}
+                  <tr data-attribute="{{@key}}">
+                    <td class="input--centered attribute-label">{{lookup (lookup @root.config.attributes @key)
+                                                                         "abbreviation"}}</td>
+                    <td class="input--centered attribute-base-value">{{lookup
+                      @root.namegiverDocument.system.attributeValues @key}}</td>
+                    <td class="input--centered attribute-cost">
+                      <span class="attribute-cost-preview attribute-cost-lower">{{lookup @root.config.attributePointsCost (subtract this.change 1)}}</span>
+                      &emsp;
+                      {{this.cost}}
+                      &emsp;
+                      <span class="attribute-cost-preview attribute-cost-higher">{{lookup @root.config.attributePointsCost (add this.change 1)}}</span>
+                    </td>
+                    <td class="input--centered attribute-change">
+                      <span class="attribute-decrease attribute-change-icon" title="{{localize 'X.Decrease Attribute Value'}}"
+                            data-change-type="decrease" data-attribute="{{@key}}">
+                        <i class="fa-light fa-circle-minus"></i>
+                      </span>
+                      <span class="attribute-change-value">
+                        {{this.change}}
+                      </span>
+                      <span class="attribute-increase attribute-change-icon" title="{{localize 'X.Increase Attribute Value'}}"
+                            data-change-type="increase" data-attribute="{{@key}}">
+                        <i class="fa-light fa-circle-plus"></i>
+                      </span>
+                    </td>
+                    <td class="input--centered attribute-final-value">{{lookup @root.finalAttributeValues @key}}</td>
+                    <td class="input--centered attribute-step">{{lookup @root.config.characteristicsTable.step (lookup @root.finalAttributeValues @key)}}</td>
+                  </tr>
+                {{else}}
+                  <span>Somethings fucked up, that shouldn't happen!</span>
+                {{/each}}
               {{else}}
                 <tr>{{localize "X.No namegiver selected. Please go select one in the first tab."}}</tr>
-              {{/each}}
+              {{/if}}
             </table>
-
-            <!-- available attribute points indicator -->
-            <div class="available-attribute-points flexrow">
-              <button id="char-gen-clear-attribute-points-button" type="button"
-                      title="X.Clear all assigned attribute modifiers and reset to zero.">
-                <i class="fa-light fa-arrows-rotate"></i>
-                {{localize "X.Reset"}}
-              </button>
-              <label>{{localize "X.Available Attribute Points: "}}{{availableAttributePoints}}</label>
-              <meter value="{{availableAttributePoints}}" min="0" max="{{maxAttributePoints}}">
-              </meter>
-            </div>
 
           </div>
 
+          <!-- Previews -->
           <div class="char-gen-characteristics-preview flexcol">
-            <h3>{{localize "X.Preview"}}</h3>
+            <h4>{{localize "X.Preview"}}</h4>
 
             <div class="health-and-characteristics flexrow">
               <!-- health preview -->
@@ -584,7 +598,10 @@
       </button>
     </div>
   </div>
-  <div class="footer-item__frame">
+
+  <!-- Footer -->
+  <!--div class="footer-item__frame">
     <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-  </div>
+  </div-->
+
 </form>

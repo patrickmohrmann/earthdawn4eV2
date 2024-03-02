@@ -70,8 +70,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
       closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: false,
-      height: 600,
-      width: 600,
+      height: 750,
+      width: 850,
       resizable: true,
       classes: [...options.classes, 'earthdawn4e', 'character-generation'],
       tabs: [
@@ -96,10 +96,10 @@ export default class CharacterGenerationPrompt extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
 
-    /*$(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on(
+    $(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on(
       'click', this._onSelectTalentOption.bind(this)
-    );*/
-    $(this.form.querySelectorAll( 'td.attribute-change span' )).on(
+    );
+    $(this.form.querySelectorAll( 'span.attribute-change-icon' )).on(
       'click', this._onChangeAttributeModifier.bind(this)
     );
     $(this.form.querySelector( 'button#char-gen-clear-attribute-points-button' )).on(
@@ -151,6 +151,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   async _updateObject(event, formData) {
     const data = foundry.utils.expandObject( formData );
+    data.namegiver ||= null;
 
     // Reset selected class if class type changed
     if ( data.isAdept !== this.object.isAdept ) data.selectedClass = null;
@@ -183,11 +184,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   _onSelectTalentOption( event ) {
-    this.object.abilities.option = event.currentTarget.dataset.abilityUuid;
-    const currentSelected = $(event.currentTarget).parent().parent().find('td.selected')[0];
-    currentSelected?.classList.toggle('selected');
-    event.currentTarget.classList.toggle('selected');
-    this.render();
+    event.currentTarget.querySelector( 'input[type="radio"]' ).click();
+    /*const abilityUuid = event.currentTarget.dataset.abilityUuid;
+    const currentSelected = this.form.querySelector('.optional-talents-pool td .checked');
+    currentSelected?.removeAttribute('checked');
+    event.currentTarget.querySelector("input[type=radio]").setAttribute('checked', '');
+    this.object.updateSource( { abilities: {option: abilityUuid} } );
+    this.render();*/
   }
   
   _onChangeTab( event, tabs, active ) {
