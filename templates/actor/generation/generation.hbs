@@ -162,11 +162,15 @@
                     <td class="input--centered attribute-base-value">{{lookup
                       @root.namegiverDocument.system.attributeValues @key}}</td>
                     <td class="input--centered attribute-cost">
-                      <span class="preview-value attribute-cost-preview attribute-cost-lower">{{lookup @root.config.attributePointsCost (subtract this.change 1)}}</span>
+                      <span class="preview-value attribute-cost-preview attribute-cost-lower">
+                        {{signedNumber ( subtract (lookup @root.config.attributePointsCost (subtract this.change 1)) this.cost )}}
+                      </span>
                       &emsp;
                       {{this.cost}}
                       &emsp;
-                      <span class="preview-value attribute-cost-preview attribute-cost-higher">{{lookup @root.config.attributePointsCost (add this.change 1)}}</span>
+                      <span class="preview-value attribute-cost-preview attribute-cost-higher">
+                        {{signedNumber ( subtract (lookup @root.config.attributePointsCost (add this.change 1)) this.cost )}}
+                      </span>
                     </td>
                     <td class="input--centered attribute-change">
                       <span class="attribute-decrease attribute-change-icon" title="{{localize 'X.Decrease Attribute Value'}}"
@@ -214,7 +218,8 @@
                     &emsp;
                       {{previews.health.unconsciousness.current}}&sol;{{previews.health.death.current}}{{!--format "X.un-death" un-rating=... death-rating=...--}}
                     &emsp;
-                    <span class="preview-value">{{previews.health.unconsciousness.next}}&sol;{{previews.health.death.next}}{{!--format "X.un-death" un-rating=... death-rating=...--}}</td></span>
+                    <span class="preview-value">{{previews.health.unconsciousness.next}}&sol;{{previews.health.death.next}}{{!--format "X.un-death" un-rating=... death-rating=...--}}</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>{{localize "X.Wound Threshold "}}</td>

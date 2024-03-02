@@ -70,8 +70,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
       closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: false,
-      height: 750,
-      width: 850,
+      height: 850,
+      width: 1000,
       resizable: true,
       classes: [...options.classes, 'earthdawn4e', 'character-generation'],
       tabs: [

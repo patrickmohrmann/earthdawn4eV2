@@ -29,6 +29,16 @@ export default function registerHandlebarHelpers() {
     return a !== b;
   } );
 
+  Handlebars.registerHelper( 'signedNumber', ( number ) => {
+    if ( number ) {
+      return new Intl.NumberFormat(
+        game.i18n.lang, { signDisplay: "exceptZero" }
+      ).format( number ) ;
+    } else {
+      return undefined;
+    }
+  } );
+
   Handlebars.registerHelper( 'getProperty', foundry.utils.getProperty );
 
   Handlebars.registerHelper( 'nameFromUuid', ( uuid ) => {
