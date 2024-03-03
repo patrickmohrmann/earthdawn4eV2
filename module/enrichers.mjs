@@ -78,9 +78,11 @@ async function rollAction( event ) {
   event.stopPropagation();
 
   // replace all whitespace in the roll formula
-  const [step, modifier] = target.dataset.rollCmd.replaceAll(/\s*/g, "").replace("/s", "").split("+");
+  const [step, modifier] = target.dataset.rollCmd.replaceAll( /\s*/g, "" ).replace( "/s", "" ).split( "+" );
   const formula = getDice( step ).trim();
-  const roll = new EdRoll(
+  let roll; 
+  if ( modifier ) {
+    roll = new EdRoll(
     `(${formula} + ${modifier})[${target.dataset.flavor}]`,
     {},
     new EdRollOptions( {
@@ -91,6 +93,19 @@ async function rollAction( event ) {
       rollType: target.dataset.rollType,
     } )
   );
+  } else {
+    roll = new EdRoll(
+      `${formula}[${target.dataset.flavor}]`,
+      {},
+      new EdRollOptions( {
+        step: {
+          base: step,
+        },
+        chatFlavor: target.dataset.rollFlavor,
+        rollType: target.dataset.rollType,
+      } )
+    );
+  }
 
   return roll.toMessage();
 }
