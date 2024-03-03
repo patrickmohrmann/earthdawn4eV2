@@ -1,5 +1,6 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ED4E from "../../config.mjs";
 
 /**
  * Data model template with information on Skill items.
@@ -13,7 +14,8 @@ export default class SkillData extends AbilityTemplate.mixin(
         return this.mergeSchema( super.defineSchema(), {
             skillType: new foundry.data.fields.StringField( {
                 required: true,
-                initial: "General",
+                initial: "general",
+                options: ED4E.skillType,
                 label: "ED.Item.Skill.skillType"
             } ),
         } );

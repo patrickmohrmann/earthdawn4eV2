@@ -1,0 +1,22 @@
+<div class="tab skill-tab flexcol" data-group="primary" data-tab="skill-tab">
+
+  <h3>{{localize "X.Skills"}}</h3>
+  <div class="skill-options artisan-skills flexrow">
+    <table>
+      <tr>
+        <th>{{localize "X.Options"}}</th>
+        <th>{{localize "X.Selected"}}</th>
+      </tr>
+      {{#each skills.artisan}}
+        <tr data-skill-uuid="{{this.uuid}}">
+          <td data-skill-uuid="{{this.uuid}}" title="{{this.system.description}}">
+            {{this.name}}
+          </td>
+        </tr>
+      {{else}}
+        {{localize "X.No Artisan Skills available."}}
+      {{/each}}
+    </table>
+  </div>
+
+</div>

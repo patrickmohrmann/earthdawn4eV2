@@ -131,8 +131,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
       {} );
     context.classDocument = await context.object.classDocument;
 
-    // Starting Abilities
-    context.skills = this.skills;
+    // Abilities
+    context.skills = {
+      general: this.skills.filter( skill => skill.system.skillType === 'general' ),
+      artisan: this.skills.filter( skill => skill.system.skillType === 'artisan' ),
+      knowledge: this.skills.filter( skill => skill.system.skillType === 'knowledge' ),
+    };
 
     // Attributes
     context.finalAttributeValues = await context.object.getFinalAttributeValues();

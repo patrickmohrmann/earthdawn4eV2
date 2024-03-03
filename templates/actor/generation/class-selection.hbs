@@ -1,0 +1,74 @@
+<div class="tab class-tab flexcol" data-group="primary" data-tab="class-tab">
+
+  <!-- choose class type: discipline or questor -->
+  <div class="discipline-questor-switch-group flexrow">
+    <label class="discipline-questor-switch-group flexrow">
+              <span class="{{#unless object.isAdept}}deselected-class-type{{/unless}}" id="char-gen-class-type-discipline-label">
+                {{localize "ED.General.discipline"}}
+              </span>
+      <input type="checkbox" name="isAdept" {{checked object.isAdept}} hidden="">
+      {{#if object.isAdept}}
+        <i id="char-gen-class-type-select-arrow" class="arrow-toggle-switch fas fa-duotone fa-arrow-left-from-line fa-xl"></i>
+      {{else}}
+        <i id="char-gen-class-type-select-arrow" class="arrow-toggle-switch fas fa-duotone fa-arrow-right-from-line fa-xl"></i>
+      {{/if}}
+      <span class="{{#if object.isAdept}}deselected-class-type{{/if}}" id="char-gen-class-type-questor-label">
+        {{localize "ED.General.questor"}}
+      </span>
+    </label>
+  </div>
+
+  <!-- choose class -->
+  <div class="available-disciplines-questors-choices flexrow">
+    {{#if object.isAdept}}
+      {{radioBoxes "selectedClass" disciplineRadioChoices checked=object.selectedClass}}
+    {{else}}
+      {{radioBoxes "selectedClass" questorRadioChoices checked=object.selectedClass}}
+    {{/if}}
+  </div>
+
+  <!-- Abilities explainer -->
+  <h4>{{localize "X.Abilities"}}</h4>
+  <p class="explainer-text">{{{localize "X. Below you find all abilities that the chosen class is granted on character generation. Please choose <em>one</em> of the optionals by clicking on the talent."}}}</p>
+
+  <!-- Ability selection -->
+  <div class="talent-tables flexrow">
+    <table class="optional-talents-pool">
+      <colgroup>
+        <col />
+      </colgroup>
+      <tr>
+        <th>{{localize "X.Optional Talents"}}</th>
+      </tr>
+      {{#each classDocument.system.advancement.abilityOptions.novice}}
+        <tr>
+          <td data-ability-uuid="{{this}}">
+            <label for="char-gen-ability-option-radio">
+              <input type="radio" id="char-gen-ability-option-radio" name="abilities.option" value="{{this}}" {{checked (eq this @root.object.abilities.option)}}>
+              {{nameFromUuid this}}
+            </label>
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+    <table class="class-talents-pool">
+      <colgroup>
+        <col />
+      </colgroup>
+      <tr>
+        <th>{{localize "X.Class Abilities" classType=classDocument.type}}</th>
+      </tr>
+      {{#each classDocument.system.advancement.levels.0.abilities}}
+        {{#if (hasItems this)}}
+          <th>{{lookup @root.config.abilityPools @key}}</th>
+        {{/if}}
+        {{#each this}}
+          <tr>
+            <td data-ability-uuid="{{this}}"> {{nameFromUuid this}} </td>
+          </tr>
+        {{/each}}
+      {{/each}}
+    </table>
+  </div>
+
+</div>

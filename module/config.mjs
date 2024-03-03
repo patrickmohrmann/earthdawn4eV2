@@ -205,6 +205,25 @@ ED4E.abilityPools = {
 }
 preLocalize( "abilityPools" );
 
+/**
+ * Types of skills.
+ * @enum {string}
+ */
+ED4E.skillTypes = {
+	general:		"ED.Skills.general",
+	artisan:		"ED.Skills.artisan",
+	knowledge:	"ED.Skills.knowledge",
+};
+preLocalize( "skillTypes" );
+
+/* -------------------------------------------- */
+/*  Character Generation                        */
+/* -------------------------------------------- */
+
+/**
+ * Lookup table used during character generation based on attribute values.
+ * @type {{defenseRating: number[], unconsciousRating: number[], carryingCapacity: number[], armor: number[], deathRating: number[], step: number[], woundThreshold: number[], recovery: number[]}}
+ */
 ED4E.characteristicsTable = {
 	step: [0, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11],
 	defenseRating: [0, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16],
@@ -215,6 +234,19 @@ ED4E.characteristicsTable = {
 	recovery: [0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, ],
 	armor: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6],
 }
+
+ED4E.availableRanks = {
+	talent: 8,
+	skill: {
+		knowledge: 2,
+		artisan: 1,
+		general: 8,
+		language: {
+			speak: 2,
+			readWrite: 1,
+		}
+	}
+};
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */

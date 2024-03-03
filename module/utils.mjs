@@ -308,6 +308,14 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global/card-options-chat.hbs",
     "systems/ed4e/templates/global/card-options-enhance.hbs",
 
+    // Character Generation
+    "systems/ed4e/templates/actor/generation/namegiver-selection.hbs",
+    "systems/ed4e/templates/actor/generation/class-selection.hbs",
+    "systems/ed4e/templates/actor/generation/attribute-assignment.hbs",
+    "systems/ed4e/templates/actor/generation/spell-selection.hbs",
+    "systems/ed4e/templates/actor/generation/skill-selection.hbs",
+    "systems/ed4e/templates/actor/generation/equipment.hbs",
+
     // Character details section partials
     "systems/ed4e/templates/actor/character-details/details-talents.hbs",
     "systems/ed4e/templates/actor/character-details/details-skills.hbs",

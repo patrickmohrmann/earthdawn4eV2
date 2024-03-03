@@ -69,6 +69,17 @@ export default class CharacterGenerationData extends SparseDataModel {
       // Abilities
       abilities: new fields.SchemaField( {
         option: new DocumentUUIDField(),
+        skills: new fields.SchemaField( {
+          selected: new fields.ArrayField(
+            new DocumentUUIDField(),
+            {
+              required: true,
+              initial: [],
+              label: "X.CharGenModel.Selected Skills",
+              hint: "X.CharGenModel.Which skills where taken on char gen.",
+            }
+          )
+        } ),
       } ),
     };
   }
