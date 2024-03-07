@@ -41,6 +41,10 @@ export default function registerHandlebarHelpers() {
 
   Handlebars.registerHelper( 'getProperty', foundry.utils.getProperty );
 
+  Handlebars.registerHelper( 'ed-hasOwnProperty', ( obj, prop ) => {
+    return obj.hasOwnProperty( prop );
+  } );
+
   Handlebars.registerHelper( 'nameFromUuid', ( uuid ) => {
     return fromUuidSync( uuid , {strict: false})?.name ?? "N/A";
   } );

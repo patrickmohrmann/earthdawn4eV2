@@ -194,6 +194,11 @@ ul.no-bullets {
   margin: 0;
   /* Remove margins */
 }
+.unlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -533,6 +538,24 @@ ul.no-bullets {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] {
+  border-top: 1px solid black;
+}
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] label,
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] .form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.charGenHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.charGenHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.charGenHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.charGenHeader"] p {
+  display: none;
+}
 .form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
   border-top: 1px solid black;
 }
@@ -828,6 +851,20 @@ form#document-create .checkbox:hover {
   margin-top: 2em;
   flex: 5;
 }
+.character-generation .character-generation-prompt-body .availability-meter {
+  align-items: center;
+}
+.character-generation .character-generation-prompt-body .availability-meter button {
+  flex: 1;
+}
+.character-generation .character-generation-prompt-body .availability-meter label {
+  flex: 3;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .availability-meter meter {
+  flex: 7;
+  filter: grayscale(100%);
+}
 .character-generation .character-generation-prompt-body .navigator-section {
   padding: 0.5em;
 }
@@ -912,7 +949,7 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:hover {
   cursor: pointer;
-  transition: background-color 0.3s linear 0s, font-size 0.4s linear 0.05s;
+  transition: background-color 0.2s linear 0s, font-size 0.2s linear 0s;
   background-color: rgba(160, 160, 160, 0.4);
   font-size: larger;
 }
@@ -923,7 +960,7 @@ form#document-create .checkbox:hover {
   display: none;
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td:has( label input[type="radio"]:checked ) {
-  border: 0.4em inset rgba(160, 160, 160, 0.4);
+  border: 0.4em double rgba(20, 20, 20, 0.6);
 }
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables span,
 .character-generation .character-generation-prompt-body .tab.class-tab .talent-tables i {
@@ -950,20 +987,6 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab td span.attribute-cost-preview {
   opacity: 0.6;
-}
-.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points {
-  align-items: center;
-}
-.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points button {
-  flex: 1;
-}
-.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points label {
-  flex: 3;
-  text-align: center;
-}
-.character-generation .character-generation-prompt-body .tab.attribute-tab .available-attribute-points meter {
-  flex: 7;
-  filter: grayscale(100%);
 }
 .character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics {
   gap: 2em;

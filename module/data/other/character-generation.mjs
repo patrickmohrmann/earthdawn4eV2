@@ -15,6 +15,7 @@ export default class CharacterGenerationData extends SparseDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
     return {
+
       // Namegiver
       namegiver: new DocumentUUIDField( {
         required: true,
@@ -23,6 +24,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         label: "X.CharGenModel.namegiver",
         hint: "X.CharGenModel.The chosen namegiver.",
       } ),
+
       // Class
       isAdept: new fields.BooleanField( {
         required: true,
@@ -38,6 +40,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         label: "X.CharGenModel.selectedClass",
         hint: "X.CharGenModel.The chosen class.",
       } ),
+
       // Attributes
       attributes: new MappingField( new fields.SchemaField( {
         change: new fields.NumberField( {
@@ -66,20 +69,84 @@ export default class CharacterGenerationData extends SparseDataModel {
         initialKeysOnly: true,
         label: "ED.Attributes.attributes"
       } ),
+
       // Abilities
-      abilities: new fields.SchemaField( {
-        option: new DocumentUUIDField(),
-        skills: new fields.SchemaField( {
-          selected: new fields.ArrayField(
-            new DocumentUUIDField(),
-            {
-              required: true,
-              initial: [],
-              label: "X.CharGenModel.Selected Skills",
-              hint: "X.CharGenModel.Which skills where taken on char gen.",
-            }
-          )
+      abilities: new MappingField(
+        new MappingField(
+          new fields.NumberField( {
+            required: true,
+            initial: 0,
+            min: 0,
+            max: game.settings.get("ed4e", "charGenHeader" ),
+            integer: true,
+            label: "X.CharGenModel.abilityLevel",
+            hint: "X.CharGenModel.The assigned level of the ability"
+          } ),
+          {
+            required: true,
+            initialKeys: [],
+            initialKeysOnly: false,
+            label: "X.CharGenModel.Selected Skills",
+            hint: "X.CharGenModel.Which skills where taken on char gen.",
+          }
+        ), {
+          required: true,
+          initialKeysOnly: true,
+          initialKeys: ["option", "class", "artisan", "knowledge", "general"],
         } ),
+      availableRanks: new fields.SchemaField( {
+        talent: new fields.NumberField( {
+          required: true,
+          initial: ED4E.availableRanks.talent,
+          min: 0,
+          max: ED4E.availableRanks.talent,
+          step: 1,
+        } ),
+        skill: new fields.SchemaField( {
+          knowledge: new fields.NumberField( {
+            required: true,
+            initial: ED4E.availableRanks.skill.knowledge,
+            min: 0,
+            max: ED4E.availableRanks.skill.knowledge,
+            step: 1,
+          } ),
+          artisan: new fields.NumberField( {
+            required: true,
+            initial: ED4E.availableRanks.skill.artisan,
+            min: 0,
+            max: ED4E.availableRanks.skill.artisan,
+            step: 1,
+          } ),
+          general: new fields.NumberField( {
+            required: true,
+            initial: ED4E.availableRanks.skill.general,
+            min: 0,
+            max: ED4E.availableRanks.skill.general,
+            step: 1,
+          } ),
+          language: new fields.SchemaField( {
+            speak: new fields.NumberField( {
+              required: true,
+              initial: ED4E.availableRanks.skill.language.speak,
+              min: 0,
+              max: ED4E.availableRanks.skill.language.speak,
+              step: 1,
+            } ),
+            readWrite: new fields.NumberField( {
+              required: true,
+              initial: ED4E.availableRanks.skill.language.speak,
+              min: 0,
+              max: ED4E.availableRanks.skill.language.speak,
+              step: 1,
+            } ),
+          }, {} ),
+        }, {
+          required: true,
+        } ),
+      }, {
+        required: true,
+        label: "X.CharGenModel.AssignableRanks",
+        hint: "X.CharGenModel.How ranks are left to assign to abilities",
       } ),
     };
   }
@@ -100,6 +167,28 @@ export default class CharacterGenerationData extends SparseDataModel {
       },
       startingPoints
     )
+  }
+
+  set abilityOption( abilityUuid ) {
+    this.updateSource( {
+      abilities: {
+        option: {
+          [abilityUuid]: 0,
+          [`-=${Object.keys(this.abilities.option)[0]}`]: null,
+        },
+      },
+    } );
+  }
+
+  set classAbilities( selectedClassDocument ) {
+    // Only update data if namegiver changes
+    if ( !selectedClassDocument || ( this.selectedClass === selectedClassDocument.uuid ) ) return;
+
+    this.updateSource( {
+      abilities: {
+        class: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.class.map( ability => [ability, 0] ))
+      }
+    } );
   }
 
   async getCharacteristicsPreview() {

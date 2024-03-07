@@ -131,6 +131,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
       {} );
     context.classDocument = await context.object.classDocument;
 
+    // Talents & Devotions
+    context.maxAssignableRanks = game.settings.get("ed4e", "charGenHeader" );
+
     // Abilities
     context.skills = {
       general: this.skills.filter( skill => skill.system.skillType === 'general' ),
@@ -155,10 +158,15 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   async _updateObject(event, formData) {
     const data = foundry.utils.expandObject( formData );
-    data.namegiver ||= null;
+
+    data.namegiver ??= null;
 
     // Reset selected class if class type changed
     if ( data.isAdept !== this.object.isAdept ) data.selectedClass = null;
+    if ( data.selectedClass ) this.object.classAbilities = await fromUuid( data.selectedClass );
+
+    // process selected class option ability
+    if ( data.abilityOption ) this.object.abilityOption = data.abilityOption;
 
     this.object.updateSource( data );
 
@@ -189,12 +197,6 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _onSelectTalentOption( event ) {
     event.currentTarget.querySelector( 'input[type="radio"]' ).click();
-    /*const abilityUuid = event.currentTarget.dataset.abilityUuid;
-    const currentSelected = this.form.querySelector('.optional-talents-pool td .checked');
-    currentSelected?.removeAttribute('checked');
-    event.currentTarget.querySelector("input[type=radio]").setAttribute('checked', '');
-    this.object.updateSource( { abilities: {option: abilityUuid} } );
-    this.render();*/
   }
   
   _onChangeTab( event, tabs, active ) {

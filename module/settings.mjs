@@ -6,11 +6,13 @@ export default function registerSystemSettings() {
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */
+
     // Step Table settings Header
     game.settings.register( "ed4e", "stepTableHeader", {
         name: "ED.Settings.StepTable.stepTableHeader",
         config: true,
     } );
+
     // Step Table used for step to dice conversion
     game.settings.register( "ed4e", "stepTable", {
         name: "ED.Settings.StepTable.stepTable",
@@ -30,11 +32,13 @@ export default function registerSystemSettings() {
     /* -------------------------------------------------------------------------------- */
     /*                                  DARK MODE                                       */
     /* -------------------------------------------------------------------------------- */
+
     // Dark Mode settings Header
     game.settings.register( "ed4e", "darkModeHeader", {
         name: "ED.Settings.DarkMode.darkModeHeader",
         config: true,
     } );
+
     /**
      * dark mode. Css adjustements are located in the dark-theme.less file.
      */
@@ -63,7 +67,13 @@ export default function registerSystemSettings() {
     /*                              CHARACTER GENERATION                                */
     /* -------------------------------------------------------------------------------- */
 
-    // starting attribute points to spend
+    // Legend point settings Header
+    game.settings.register( "ed4e", "charGenHeader", {
+        name: "ED.Settings.LpTracking.charGenHeader",
+        config: true,
+    } );
+
+    // Starting attribute points to spend
     game.settings.register( "ed4e", "charGenAttributePoints", {
         name: "ED.Settings.CharGen.attributePoints",
         hint: "ED.Settings.CharGen.hintAttributePoints",
@@ -73,14 +83,26 @@ export default function registerSystemSettings() {
         default: 25,
     })
 
+    // Maximum rank that can be assigned to a talent or skill on character generation
+    game.settings.register( "ed4e", "charGenMaxRank", {
+        name: "ED.Settings.CharGen.maxRanks",
+        hint: "ED.Settings.CharGen.hintMaxRanks",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 3,
+    } );
+
     /* -------------------------------------------------------------------------------- */
     /*                                  LP TRACKING                                     */
     /* -------------------------------------------------------------------------------- */
+
     // Legend point settings Header
     game.settings.register( "ed4e", "lpTrackingHeader", {
         name: "ED.Settings.LpTracking.lpTrackingHeader",
         config: true,
     } );
+
     // LP Tracking Option Attributes
     game.settings.register( "ed4e", "lpTrackingAttributes", {
         name: "ED.Settings.LpTracking.lpTrackingAttributeOptions",
@@ -95,6 +117,7 @@ export default function registerSystemSettings() {
             freePerCircle: "ED.Settings.LpTracking.freePerCircle"
           }
     } );
+
     // LP Tracking Option Talents
     game.settings.register( "ed4e", "lpTrackingAllTalents", {
         name: "ED.Settings.LpTracking.lpTalentsRequirement",
@@ -109,6 +132,7 @@ export default function registerSystemSettings() {
             allTalentsHouseRule: "ED.Settings.LpTracking.allTalentsHouseRule"
           }
     } );
+
     // LP Tracking Option Skill Training
     game.settings.register( "ed4e", "lpTrackingRemoveSilver", {
         name: "ED.Settings.LpTracking.lpTrackingRemoveSilverOption",
@@ -126,11 +150,13 @@ export default function registerSystemSettings() {
     /* -------------------------------------------------------------------------------- */
     /*                                  ENCUMBRANCE                                     */
     /* -------------------------------------------------------------------------------- */
+
     // Encumbrance settings Header
     game.settings.register( "ed4e", "encumberedHeader", {
         name: "ED.Settings.Encumbrance.encumberedHeader",
         config: true,
     } );
+
     // Encumbrance options
     game.settings.register( "ed4e", "encumbrance", {
         name: "ED.Settings.Encumbrance.encumbrance",
@@ -145,15 +171,16 @@ export default function registerSystemSettings() {
           }
     } );
 
-    
      /* -------------------------------------------------------------------------------- */
     /*                                  GM Chat Avatar                                     */
     /* -------------------------------------------------------------------------------- */
+
     // Chat Avatar settings Header
     game.settings.register( "ed4e", "chatAvatarHeader", {
         name: "ED.Settings.Chat.chatAvatarHeader",
         config: true,
     } );
+
     // Chat Avater Options
     game.settings.register( "ed4e", "chatAvatar", {
         name: "ED.Settings.Chat.chatAvatar",
