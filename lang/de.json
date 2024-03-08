@@ -554,15 +554,19 @@
                 "disciplineTalents":                                "Nur Disciplin Talente",
                 "freePerCircle":                                    "Eine kostenlose Steigerung pro Kreis.",
                 "hintAttributesOption":                             "Welche option soll für die Steigerung von Attributen gewählt werden?",
+                "hintUsed":                                         "Soll Legendenpunkt Verwaltung vom System unterstütz werden?",
                 "hintTalents":                                      "Die Auswahl legt die Voraussetzungen für einen Möglichen Kreisaufstieg fest.",
                 "hintAutomaticSilverOption":                        "Soll Silber automatische beim erhöhen abgezogen werden?",
                 "lpTalentsRequirement":                             "Talentvoraussetzungen für den Kreisaufstieg",
                 "lpTrackingAttributeOptions":                       "Attribut Steigerung",
                 "lpTrackingHeader":                                 "Legendenpunkte Optionen (Global)",
+                "lpTrackingUsed":                                   "Legendenpunkte Verwaltung",
                 "lpTrackingRemoveSilverOption":                     "Automatische Silber Reduzierung",
                 "notAutomaticSilverReduction":                      "Silber wird nicht automatische verrechnet",
+                "noTracking":                                       "keine Legendenpunkte Verrechnung",
                 "spendLp":                                          "Kostenpflichtige Steigerung (Standard)",
-                "spendLpPerCircle":                                 "Eine kostenpflichtige Steigerung pro Kreis."
+                "spendLpPerCircle":                                 "Eine kostenpflichtige Steigerung pro Kreis.",
+                "useTracking":                                      "Automatische Legendenpunkte Verrechnung"
             },
             "Encumbrance": {
                 "encumbrance":                                      "Belastung",
