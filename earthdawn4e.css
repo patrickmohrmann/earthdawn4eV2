@@ -150,6 +150,11 @@ input.input__number-input {
   padding-top: 5px;
   height: 20px;
 }
+input.input__number-input-big {
+  width: 60px;
+  padding-top: 5px;
+  height: 20px;
+}
 .one-line__vertical-align > * {
   line-height: 35px;
   vertical-align: middle;
@@ -1486,6 +1491,9 @@ form#document-create .checkbox:hover {
 }
 .character-sheet .details__section {
   padding-right: 20px;
+}
+.legend-point__info {
+  text-align: center;
 }
 .bookmarks-combat-modifier {
   top: 0;
