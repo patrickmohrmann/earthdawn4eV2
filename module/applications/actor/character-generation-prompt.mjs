@@ -96,8 +96,11 @@ export default class CharacterGenerationPrompt extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
 
-    $(this.form.querySelectorAll('.talent-tables .optional-talents-pool td')).on(
+    $(this.form.querySelectorAll('.talent-tables .optional-talents-pool td.ability-name')).on(
       'click', this._onSelectTalentOption.bind(this)
+    );
+    $(this.form.querySelectorAll( 'span.rank-change-icon' )).on(
+      'click', this._onChangeRank.bind(this)
     );
     $(this.form.querySelectorAll( 'span.attribute-change-icon' )).on(
       'click', this._onChangeAttributeModifier.bind(this)
@@ -132,7 +135,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.classDocument = await context.object.classDocument;
 
     // Talents & Devotions
-    context.maxAssignableRanks = game.settings.get("ed4e", "charGenHeader" );
+    context.maxAssignableRanks = game.settings.get("ed4e", "charGenMaxRank" );
 
     // Abilities
     context.skills = {
@@ -182,6 +185,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   async _finishGeneration(event) {
     return this.close();
+  }
+
+  _onChangeRank( event ) {
+    const abilityUuid = event.currentTarget.dataset.abilityUuid;
+    const abilityType = event.currentTarget.dataset.abilityType;
+    const changeType = event.currentTarget.dataset.changeType;
+    this.object.changeAbilityRank( abilityUuid, abilityType, changeType ).then( _ => this.render() );
   }
 
   _onChangeAttributeModifier( event ) {

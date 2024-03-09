@@ -11,6 +11,8 @@ export default class CharacterGenerationData extends SparseDataModel {
   static minAttributeModifier = -2;
   static maxAttributeModifier = 8;
 
+  static minAbilityRank = 0;
+
   /** @inheritDoc */
   static defineSchema() {
     const fields = foundry.data.fields;
@@ -92,7 +94,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         ), {
           required: true,
           initialKeysOnly: true,
-          initialKeys: ["option", "class", "artisan", "knowledge", "general"],
+          initialKeys: ["option", "class", "free", "special", "artisan", "knowledge", "general"],
         } ),
       availableRanks: new fields.SchemaField( {
         talent: new fields.NumberField( {
@@ -102,46 +104,47 @@ export default class CharacterGenerationData extends SparseDataModel {
           max: ED4E.availableRanks.talent,
           step: 1,
         } ),
-        skill: new fields.SchemaField( {
-          knowledge: new fields.NumberField( {
-            required: true,
-            initial: ED4E.availableRanks.skill.knowledge,
-            min: 0,
-            max: ED4E.availableRanks.skill.knowledge,
-            step: 1,
-          } ),
-          artisan: new fields.NumberField( {
-            required: true,
-            initial: ED4E.availableRanks.skill.artisan,
-            min: 0,
-            max: ED4E.availableRanks.skill.artisan,
-            step: 1,
-          } ),
-          general: new fields.NumberField( {
-            required: true,
-            initial: ED4E.availableRanks.skill.general,
-            min: 0,
-            max: ED4E.availableRanks.skill.general,
-            step: 1,
-          } ),
-          language: new fields.SchemaField( {
-            speak: new fields.NumberField( {
-              required: true,
-              initial: ED4E.availableRanks.skill.language.speak,
-              min: 0,
-              max: ED4E.availableRanks.skill.language.speak,
-              step: 1,
-            } ),
-            readWrite: new fields.NumberField( {
-              required: true,
-              initial: ED4E.availableRanks.skill.language.speak,
-              min: 0,
-              max: ED4E.availableRanks.skill.language.speak,
-              step: 1,
-            } ),
-          }, {} ),
-        }, {
+        devotion: new fields.NumberField( {
           required: true,
+          initial: ED4E.availableRanks.devotion,
+          min: 0,
+          max: ED4E.availableRanks.devotion,
+          step: 1,
+        } ),
+        knowledge: new fields.NumberField( {
+          required: true,
+          initial: ED4E.availableRanks.knowledge,
+          min: 0,
+          max: ED4E.availableRanks.knowledge,
+          step: 1,
+        } ),
+        artisan: new fields.NumberField( {
+          required: true,
+          initial: ED4E.availableRanks.artisan,
+          min: 0,
+          max: ED4E.availableRanks.artisan,
+          step: 1,
+        } ),
+        general: new fields.NumberField( {
+          required: true,
+          initial: ED4E.availableRanks.general,
+          min: 0,
+          max: ED4E.availableRanks.general,
+          step: 1,
+        } ),
+        speak: new fields.NumberField( {
+          required: true,
+          initial: ED4E.availableRanks.speak,
+          min: 0,
+          max: ED4E.availableRanks.speak,
+          step: 1,
+        } ),
+        readWrite: new fields.NumberField( {
+          required: true,
+          initial: ED4E.availableRanks.speak,
+          min: 0,
+          max: ED4E.availableRanks.speak,
+          step: 1,
         } ),
       }, {
         required: true,
@@ -186,7 +189,9 @@ export default class CharacterGenerationData extends SparseDataModel {
 
     this.updateSource( {
       abilities: {
-        class: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.class.map( ability => [ability, 0] ))
+        class: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.class.map( ability => [ability, 0] )),
+        free: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.free.map( ability => [ability, 0] )),
+        special: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.special.map( ability => [ability, 0] )),
       }
     } );
   }
@@ -247,6 +252,44 @@ export default class CharacterGenerationData extends SparseDataModel {
     return document?.system?.attributeValues[attribute] ?? 10;
   }
 
+  async changeAbilityRank( abilityUuid, abilityType, changeType ) {
+    const abilityClassType = this._getAbilityClassType( abilityType );
+
+    const oldRank = this.abilities[abilityType][abilityUuid];
+    let newRank = this.abilities[abilityType][abilityUuid];
+    switch ( changeType ) {
+      case 'increase':
+        newRank++;
+        break;
+      case 'decrease':
+        newRank--;
+        break;
+    }
+    const isRankValid = (
+      newRank >= CharacterGenerationData.minAbilityRank
+      && newRank <= game.settings.get( "ed4e", "charGenMaxRank" )
+    );
+
+    const costDifference = newRank - oldRank;
+    if ( !( ( this.availableRanks[abilityClassType] - costDifference ) >= 0 ) || !isRankValid ) {
+      ui.notifications.warn( game.i18n.localize(
+        "X.No more points available. You can only change the rank of an ability in the range from 0 through 3."
+      ) );
+      return ;
+    }
+
+    return this.updateSource( {
+      abilities: {
+        [abilityType]: {
+          [abilityUuid]: newRank
+        }
+      },
+      availableRanks: {
+        [abilityClassType]: this.availableRanks[abilityClassType] - costDifference
+      }
+    } );
+  }
+
   //Increase or decrease the value of an attribute modifier by 1 and update all associated values.
   async changeAttributeModifier( attribute, changeType ) {
     let newModifier = this.attributes[attribute].change;
@@ -271,7 +314,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         "X.No more points available. You can only modify an attribute in the range from -2 through +8."
       ) );
       return ;
-    };
+    }
 
     const baseValue = await this.getBaseAttributeValue(attribute);
     const finalValue = baseValue + newModifier;
@@ -296,5 +339,12 @@ export default class CharacterGenerationData extends SparseDataModel {
       };
     }
     this.updateSource( { attributes: updateData } );
+  }
+
+  _getAbilityClassType( abilityType ) {
+    const isClass = ["class", "option", "free"].includes( abilityType );
+    if ( isClass && this.isAdept ) return "talent";
+    if ( isClass && !this.isAdept ) return "devotion";
+    return abilityType;
   }
 }

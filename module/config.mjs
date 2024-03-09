@@ -149,10 +149,10 @@ preLocalize( "availability" );
  */
 ED4E.action = {
 	none: 				"ED.General.none",
-    free: 				"ED.Action.free",
-    simple: 			"ED.Action.simple",
-    standard: 			"ED.Action.standard",
-    sustained: 			"ED.Action.sustained"
+	free: 				"ED.Action.free",
+	simple: 			"ED.Action.simple",
+	standard: 			"ED.Action.standard",
+	sustained: 			"ED.Action.sustained"
 }
 preLocalize( "action" );
 
@@ -237,15 +237,12 @@ ED4E.characteristicsTable = {
 
 ED4E.availableRanks = {
 	talent: 8,
-	skill: {
-		knowledge: 2,
-		artisan: 1,
-		general: 8,
-		language: {
-			speak: 2,
-			readWrite: 1,
-		}
-	}
+	devotion: 1,
+	knowledge: 2,
+	artisan: 1,
+	general: 8,
+	speak: 2,
+	readWrite: 1,
 };
 
 /* -------------------------------------------- */
@@ -301,13 +298,13 @@ preLocalize( "rollTypes", { key: "label" } );
  * @type {string}
  */
 ED4E.chatCommands = {
-  char: 'X.chatCommandCharHelp no parameters, trigger char gen',
-  coin: 'X.chatCommandCoinHelp number plus coinage, pass out coins',
-  group: 'X.chatCommandGroupHelp no parameters?, calc CR for group',
-  h: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
-  help: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
-  lp: 'X.chatCommandLpHelp number, award LP points',
-  s: 'X.chatCommandSHelp any number of steps separated by whitespace or +, roll the given steps',
+	char: 'X.chatCommandCharHelp no parameters, trigger char gen',
+	coin: 'X.chatCommandCoinHelp number plus coinage, pass out coins',
+	group: 'X.chatCommandGroupHelp no parameters?, calc CR for group',
+	h: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
+	help: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
+	lp: 'X.chatCommandLpHelp number, award LP points',
+	s: 'X.chatCommandSHelp any number of steps separated by whitespace or +, roll the given steps',
 };
 preLocalize( "chatCommands" );
 
