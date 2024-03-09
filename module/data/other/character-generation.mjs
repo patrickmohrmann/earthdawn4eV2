@@ -1,6 +1,7 @@
 import { SparseDataModel } from "../abstract.mjs";
 import { DocumentUUIDField, MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
+import { filterObject, mapObject, renameKeysWithPrefix } from "../../utils.mjs";
 
 /**
  * The data used during character generation. Also used as the object of the
@@ -252,8 +253,42 @@ export default class CharacterGenerationData extends SparseDataModel {
     return document?.system?.attributeValues[attribute] ?? 10;
   }
 
+  async addAbility( abilityUuid, abilityType ) {
+    const abilityData = this.abilities[abilityType];
+    abilityData[abilityUuid] = 0;
+    return this.updateSource( { abilities: { [abilityType]: abilityData } } );
+  }
+
+  async removeRankZeroSkills() {
+    const greaterZeroPredicate = function ( key, value ) {
+      return value <= 0;
+    }.bind( this );
+    const artisanData = renameKeysWithPrefix( filterObject(
+      this.abilities.artisan, greaterZeroPredicate
+    ) );
+    const knowledgeData = renameKeysWithPrefix( filterObject(
+      this.abilities.knowledge, greaterZeroPredicate
+    ) );
+    const generalData = renameKeysWithPrefix( filterObject(
+      this.abilities.general, greaterZeroPredicate
+    ) );
+
+    return this.updateSource( {
+      abilities: {
+        artisan: artisanData,
+        knowledge: knowledgeData,
+        general: generalData,
+      }
+    } );
+  }
+
   async changeAbilityRank( abilityUuid, abilityType, changeType ) {
     const abilityClassType = this._getAbilityClassType( abilityType );
+    const isSkill = ["artisan", "knowledge", "general"].includes( abilityType );
+
+    if (
+      isSkill && !this.abilities[abilityType].hasOwnProperty( abilityUuid )
+    ) await this.addAbility( abilityUuid, abilityType );
 
     const oldRank = this.abilities[abilityType][abilityUuid];
     let newRank = this.abilities[abilityType][abilityUuid];
@@ -271,23 +306,26 @@ export default class CharacterGenerationData extends SparseDataModel {
     );
 
     const costDifference = newRank - oldRank;
-    if ( !( ( this.availableRanks[abilityClassType] - costDifference ) >= 0 ) || !isRankValid ) {
+    const availabilityType = this._getAvailabilityType( abilityType, costDifference );
+    if ( !( ( this.availableRanks[availabilityType] - costDifference ) >= 0 ) || !isRankValid ) {
       ui.notifications.warn( game.i18n.localize(
         "X.No more points available. You can only change the rank of an ability in the range from 0 through 3."
       ) );
       return ;
     }
 
-    return this.updateSource( {
+    const updateDiff = await this.updateSource( {
       abilities: {
         [abilityType]: {
           [abilityUuid]: newRank
         }
       },
       availableRanks: {
-        [abilityClassType]: this.availableRanks[abilityClassType] - costDifference
+        [availabilityType]: this.availableRanks[availabilityType] - costDifference
       }
     } );
+    await this.removeRankZeroSkills();
+    return updateDiff;
   }
 
   //Increase or decrease the value of an attribute modifier by 1 and update all associated values.
@@ -330,9 +368,10 @@ export default class CharacterGenerationData extends SparseDataModel {
     } );
   }
 
-  resetPoints( type ) {
+  async resetPoints( type ) {
     const updateData = this.getResetData( type );
     this.updateSource( updateData );
+    return this.removeRankZeroSkills();
   }
 
   getResetData( type ) {
@@ -377,6 +416,29 @@ export default class CharacterGenerationData extends SparseDataModel {
           availableRanks: availableRanksPayload,
         };
         break;
+
+      case "skills":
+        const skillsPayload = {};
+        for ( const abilityType of ["artisan", "knowledge", "general", "readWrite", "speak"] ) {
+          skillsPayload[abilityType] = mapObject(
+            this.abilities[abilityType] ?? {},
+            ( uuid, level ) => [uuid, 0]
+          );
+        }
+
+        const availableSkillRanksPayload = {
+          artisan: ED4E.availableRanks.artisan,
+          knowledge: ED4E.availableRanks.knowledge,
+          general: ED4E.availableRanks.general,
+          readWrite: ED4E.availableRanks.readWrite,
+          speak: ED4E.availableRanks.speak,
+        };
+
+        updateData = {
+          abilities: skillsPayload,
+          availableRanks: availableSkillRanksPayload,
+        };
+        break;
     }
 
     return updateData;
@@ -384,8 +446,15 @@ export default class CharacterGenerationData extends SparseDataModel {
 
   _getAbilityClassType( abilityType ) {
     const isClass = ["class", "option", "free"].includes( abilityType );
+    // const isSkill = ["artisan", "knowledge", "general"].includes( abilityType );
     if ( isClass && this.isAdept ) return "talent";
     if ( isClass && !this.isAdept ) return "devotion";
+    // if ( isSkill ) return "skill";
     return abilityType;
+  }
+
+  _getAvailabilityType( abilityType ) {
+    if ( !["artisan", "knowledge", "speak", "readWrite"].includes( abilityType ) ) return abilityType;
+    return this.availableRanks[abilityType] > 0 ? abilityType : "general";
   }
 }

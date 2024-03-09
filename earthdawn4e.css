@@ -870,7 +870,7 @@ form#document-create .checkbox:hover {
 }
 .character-generation .character-generation-prompt-body td.attribute-change,
 .character-generation .character-generation-prompt-body td.rank-change {
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   align-content: center;
 }
@@ -1010,6 +1010,25 @@ form#document-create .checkbox:hover {
 .character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics .preview-value {
   opacity: 0.6;
   font-size: smaller;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .skill-options table {
+  flex-grow: 3.236;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .skill-options span.available-ranks {
+  flex-grow: 2;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .availability-meter {
+  justify-content: center;
+  margin: 0.5em 0;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .availability-meter label {
+  flex: 1;
+  font-size: larger;
+  justify-content: flex-end;
+  align-items: center;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .availability-meter meter {
+  flex: 1;
 }
 .character-generation .character-generation-buttons {
   flex: 1;

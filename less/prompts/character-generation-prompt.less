@@ -83,7 +83,7 @@
             text-align: center;
 
             &.attribute-change, &.rank-change {
-                justify-content: space-evenly;
+                justify-content: center;
                 align-items: center;
                 align-content: center;
                 span {
@@ -92,11 +92,11 @@
             }
 
             &.ability-name {
-                flex-grow: 3.236;
+                flex-grow: @golden-ratio-unitless-bigger;
             }
 
             &.rank-change {
-                flex-grow: 2;
+                flex-grow: @golden-ratio-unitless-smaller;
             }
 
             span.attribute-cost-preview {
@@ -269,6 +269,37 @@
                 }
             }
         }
+
+        // spells
+        .tab.spell-tab {}
+
+        // skills
+        .tab.skill-tab {
+            .skill-options {
+                table {
+                    flex-grow: @golden-ratio-unitless-bigger;
+                }
+                span.available-ranks {
+                    flex-grow: @golden-ratio-unitless-smaller;
+                }
+            }
+            .availability-meter {
+                justify-content: center;
+                margin: 0.5em 0;
+                label {
+                    flex: 1;
+                    font-size: larger;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
+                meter {
+                    flex: 1;
+                }
+            }
+        }
+
+        // equipment
+        .tab.equipment-tab {}
     }
 
     .character-generation-buttons {

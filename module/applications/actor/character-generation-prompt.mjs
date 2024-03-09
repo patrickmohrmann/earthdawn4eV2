@@ -200,8 +200,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _onReset( event ) {
     const resetType = event.currentTarget.dataset.resetType;
-    this.object.resetPoints( resetType );
-    this.render();
+    this.object.resetPoints( resetType ).then( _ => this.render() );
   }
 
   _onSelectTalentOption( event ) {
