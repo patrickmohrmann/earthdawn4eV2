@@ -71,8 +71,21 @@ export default class ActorSheetEd extends ActorSheet {
     // item card description shown on item click
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
+    // Legend point History (Earned)
+    html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
+
+
   }
 
+  /**
+   * Legend Point history earned
+   * @param { Event } event    The originating click event.
+   * @private
+   */
+  _onLegendPointHistoryEarned( event ) {
+    event.preventDefault();
+    this.actor.legendPointHistoryEarned();
+  }
   /**
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.

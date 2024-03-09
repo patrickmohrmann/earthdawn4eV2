@@ -3,6 +3,7 @@ import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
+import LegendPointHistoryEarnedPrompt from "../applications/global/legend-point-history-earned-prompt.mjs"
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -41,6 +42,21 @@ export default class ActorEd extends Actor {
     const currentItemElement = itemDescriptionDocument.nextElementSibling;
     currentItemElement.classList.toggle( "d-none" )
   }
+
+  /**
+   * Legend point History earned prompt trigger
+   */
+  async legendPointHistoryEarned() {
+    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt();
+    this.#processHistoryEarned ( historyEarned );
+  }
+
+  #processHistoryEarned( historyEarned ) {
+    if ( historyEarned ) {
+      return;
+    }
+  }
+
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
