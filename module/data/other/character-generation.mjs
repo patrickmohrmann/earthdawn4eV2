@@ -330,15 +330,56 @@ export default class CharacterGenerationData extends SparseDataModel {
     } );
   }
 
-  resetAttributePoints() {
-    const updateData = {};
-    for ( const attribute of Object.keys( this.attributes ) ){
-      updateData[attribute] = {
-        change: 0,
-        cost: 0,
-      };
+  resetPoints( type ) {
+    const updateData = this.getResetData( type );
+    this.updateSource( updateData );
+  }
+
+  getResetData( type ) {
+    let updateData = {};
+
+    switch ( type ) {
+
+      case "attributes":
+        const updatePayload = {};
+        for ( const attribute of Object.keys( this.attributes ) ){
+          updatePayload[attribute] = {
+            change: 0,
+            cost: 0,
+          };
+        }
+        updateData = { attributes: updatePayload}
+        break;
+
+      case "classAbilities":
+        const classOptions = Object.fromEntries(
+          Object.entries(this.abilities.option).map(
+            ( [uuid, level] ) => [uuid, 0]
+          )
+        );
+        const classAbilities = Object.fromEntries(
+          Object.entries(this.abilities.class).map(
+            ( [uuid, level] ) => [uuid, 0]
+          )
+        );
+
+        const abilitiesPayload = {
+          option: classOptions,
+          class: classAbilities,
+        };
+        const availableRanksPayload = {
+          talent: ED4E.availableRanks.talent,
+          devotion: ED4E.availableRanks.devotion,
+        };
+
+        updateData = {
+          abilities: abilitiesPayload,
+          availableRanks: availableRanksPayload,
+        };
+        break;
     }
-    this.updateSource( { attributes: updateData } );
+
+    return updateData;
   }
 
   _getAbilityClassType( abilityType ) {

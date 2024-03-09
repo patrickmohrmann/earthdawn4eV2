@@ -105,9 +105,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     $(this.form.querySelectorAll( 'span.attribute-change-icon' )).on(
       'click', this._onChangeAttributeModifier.bind(this)
     );
-    $(this.form.querySelector( 'button#char-gen-clear-attribute-points-button' )).on(
-      'click', this._resetAttributePoints.bind(this)
-    );
+    $(this.form.querySelectorAll( 'button.reset-points' )).on('click', this._onReset.bind(this));
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
     $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
     $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
@@ -200,8 +198,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
     this.object.changeAttributeModifier( attribute, changeType ).then( _ => this.render() );
   }
 
-  _resetAttributePoints( event ) {
-    this.object.resetAttributePoints();
+  _onReset( event ) {
+    const resetType = event.currentTarget.dataset.resetType;
+    this.object.resetPoints( resetType );
     this.render();
   }
 
