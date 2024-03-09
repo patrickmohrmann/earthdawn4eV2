@@ -169,6 +169,64 @@ export function sortObjectEntries( obj, sortKey ) {
 /* -------------------------------------------- */
 
 /**
+ * Filter an object's entries by the given predicate (filter function). Creates
+ * a new object with only entries that satisfy the predicate.
+ * @param {object} obj                            The object to filter.
+ * @param {function(any, any): boolean} predicate A function that takes a key-value
+ *                                                pair of the object and returns
+ *                                                a boolean to decide whether the
+ *                                                entry should be kept or discarded.
+ *                                                Return `true` to keep the entry
+ *                                                or `false` to discard it.
+ */
+export function filterObject( obj, predicate ) {
+  return Object.fromEntries(
+    Object.entries( obj ).filter(
+      ( [key, value] ) => predicate( key, value )
+    )
+  )
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Map an object's entries by the given function. Creates a new object with the
+ * mapped entries according to the function.
+ * @param {object} obj                            The object to filter.
+ * @param {function} mappingFunction  A function that takes a key-value pair of
+ *                                    the object and return the new mapped
+ *                                    key-value pair. It takes two parameters
+ *                                    `[key, value]` and must return them as
+ *                                    `[key, value]`.
+ */
+export function mapObject( obj, mappingFunction ) {
+  return Object.fromEntries(
+    Object.entries( obj ).map(
+      ( [key, value] ) => mappingFunction( key, value )
+    )
+  )
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Renames all keys of an object by prepending a specified prefix to each key.
+ * @param {object} obj - The object whose keys are to be renamed.
+ * @returns {object} A new object with keys renamed with the specified prefix.
+ */
+export function renameKeysWithPrefix(obj) {
+  const renamedObj = {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      renamedObj['-=' + key] = obj[key];
+    }
+  }
+  return renamedObj;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Retrieves the value of a given string property of an object which works for nested property names.
  * Taken from {@link https://stackoverflow.com/a/43849204 this answer on StackOverflow}.
  * @example
