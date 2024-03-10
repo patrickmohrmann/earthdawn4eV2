@@ -1,6 +1,7 @@
 import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from "../../utils.mjs";
+import LpTransactionData from "../advancement/lp-transaction.mjs";
 
 /**
  * System data definition for PCs.
@@ -11,7 +12,7 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumPrope
  * @property {number} timesIncreased    attribute increases
  */
 export default class PcData extends NamegiverTemplate.mixin(
-  ActorDescriptionTemplate
+    ActorDescriptionTemplate
 ) {
 
     /** @inheritDoc */
@@ -64,6 +65,12 @@ export default class PcData extends NamegiverTemplate.mixin(
                 initial: 0,
                 integer: true
             } ),
+            lp: new foundry.data.fields.EmbeddedDataField(
+                LpTransactionData,
+                {
+                    required: true,
+                }
+            ),
         } );
         this.mergeSchema( superSchema, {
             durabilityBonus: new foundry.data.fields.NumberField( {
@@ -74,7 +81,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 label: "ED.General.durabilityBonus"
             } ),
-            legendPointsEarned: new foundry.data.fields.ArrayField( 
+            legendPointsEarned: new foundry.data.fields.ArrayField(
                 new foundry.data.fields.SchemaField( {
                     date: new foundry.data.fields.StringField( {
                         required: true,
@@ -97,7 +104,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                         integer: true
                     } ),
                 } )
-             )
+            )
         } );
         return superSchema;
     }
@@ -163,7 +170,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         }
         for ( const defenseType of Object.keys( this.characteristics.defenses ) ) {
             this.characteristics.defenses[defenseType].baseValue = getDefenseValue(
-              this.attributes[defenseAttributeMapping[defenseType]].value
+                this.attributes[defenseAttributeMapping[defenseType]].value
             );
         }
     }
@@ -212,9 +219,9 @@ export default class PcData extends NamegiverTemplate.mixin(
         const strengthFifth = Math.ceil( strengthValue / 5 );
 
         this.encumbrance.max = -12.5 * strengthFifth ** 2
-          + 5 * strengthFifth * strengthValue
-          + 12.5 * strengthFifth
-          + 5;
+            + 5 * strengthFifth * strengthValue
+            + 12.5 * strengthFifth
+            + 5;
     }
 
     /* -------------------------------------------- */
@@ -252,12 +259,12 @@ export default class PcData extends NamegiverTemplate.mixin(
      * @private
      */
     #prepareDerivedBloodMagic() {
-      const bloodDamageItems = this.parent.items.filter(
-        ( item ) => item.system.hasOwnProperty( "bloodMagicDamage" ) && item.system.itemStatus.equipped,
-      );
-      // Calculate sum of defense bonuses, defaults to zero if no shields equipped
-      const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );
-      this.characteristics.health.bloodMagic.damage += bloodDamage;
+        const bloodDamageItems = this.parent.items.filter(
+            ( item ) => item.system.hasOwnProperty( "bloodMagicDamage" ) && item.system.itemStatus.equipped,
+        );
+        // Calculate sum of defense bonuses, defaults to zero if no shields equipped
+        const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );
+        this.characteristics.health.bloodMagic.damage += bloodDamage;
     }
 
     /**
@@ -266,7 +273,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedDefenses() {
         const shieldItems = this.parent.items.filter(
-          item => item.type === 'shield' && item.system.itemStatus.equipped
+            item => item.type === 'shield' && item.system.itemStatus.equipped
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
@@ -283,11 +290,11 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedHealth() {
         const durabilityItems = this.parent.items.filter(
-          item => ["discipline", "devotion"].includes( item.type ) && item.system.durability > 0
+            item => ["discipline", "devotion"].includes( item.type ) && item.system.durability > 0
         );
         if ( !durabilityItems?.length ) {
             console.log(
-              `ED4E | Cannot calculate derived health data for actor "${this.parent.name}" (${this.parent.id}). No items with durability > 0.`
+                `ED4E | Cannot calculate derived health data for actor "${this.parent.name}" (${this.parent.id}). No items with durability > 0.`
             );
             return;
         }
@@ -300,17 +307,17 @@ export default class PcData extends NamegiverTemplate.mixin(
             // Find the maximum durability for the current level
             durabilityByCircle[currentLevel] = durabilityItems.reduce( ( max, item ) => {
                 return ( currentLevel <= item.system.level && item.system.durability > max )
-                  ? item.system.durability
-                  : max;
+                    ? item.system.durability
+                    : max;
             }, 0 );
         }
 
         const maxCircle = Math.max(
-          ...durabilityItems.filter(
-            item => item.type === "discipline"
-          ).map(
-            item => item.system.level
-          )
+            ...durabilityItems.filter(
+                item => item.type === "discipline"
+            ).map(
+                item => item.system.level
+            )
         );
 
         const maxDurability = sum( Object.values( durabilityByCircle ) );
@@ -325,7 +332,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedInitiative() {
         const armors = this.parent.items.filter( item =>
-          ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
+            ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
         );
         this.initiative -= sum( armors.map( item => item.system.initiativePenalty ) );
     }
@@ -339,19 +346,19 @@ export default class PcData extends NamegiverTemplate.mixin(
     #prepareDerivedEncumbrance() {
         // relevant items are those with a weight property and are either equipped or carried
         const relevantItems = this.parent.items.filter( item =>
-          item.system.hasOwnProperty( 'weight' )
-          && ( item.system.itemStatus.equipped || item.system.itemStatus.carried )
+            item.system.hasOwnProperty( 'weight' )
+            && ( item.system.itemStatus.equipped || item.system.itemStatus.carried )
         );
 
         const carriedWeight = relevantItems.reduce( ( accumulator, currentItem ) => {
             return accumulator
-              + (
-                currentItem.system.weight.value
-                * (
-                  ( currentItem.system.amount ?? 1 )
-                  / ( currentItem.system.bundleSize > 1 ? currentItem.system.bundleSize : 1 )
+                + (
+                    currentItem.system.weight.value
+                    * (
+                        ( currentItem.system.amount ?? 1 )
+                        / ( currentItem.system.bundleSize > 1 ? currentItem.system.bundleSize : 1 )
+                    )
                 )
-              )
         }, 0 );
 
         this.encumbrance.value = carriedWeight;
@@ -414,9 +421,9 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #getHighestClass( type ) {
         return this.parent.items.filter(
-          item => item.type === type
+            item => item.type === type
         ).sort(     // sort descending by circle/rank
-          ( a, b ) => a.system.level > b.system.level ? -1 : 1
+            ( a, b ) => a.system.level > b.system.level ? -1 : 1
         )[0];
     }
 
