@@ -73,7 +73,7 @@ async function enrichRoll( match, options ) {
  * @returns {Promise|void}
  */
 async function rollAction( event ) {
-  const target = event.target.closest('.journal--roll');
+  const target = event.target.closest( '.journal--roll' );
   if ( !target ) return;
   event.stopPropagation();
 
@@ -81,9 +81,9 @@ async function rollAction( event ) {
   const [step, modifier] = target.dataset.rollCmd.replaceAll( /\s*/g, "" ).replace( "/s", "" ).split( "+" );
   const formula = getDice( step ).trim();
   let roll; 
-  if ( modifier ) {
-    roll = new EdRoll(
-    `(${formula} + ${modifier})[${target.dataset.flavor}]`,
+  
+  roll = new EdRoll(
+    `(${formula} ${modifier ? "+" : "" } ${modifier ?? "" })[${target.dataset.flavor}]`,
     {},
     new EdRollOptions( {
       step: {
@@ -93,19 +93,8 @@ async function rollAction( event ) {
       rollType: target.dataset.rollType,
     } )
   );
-  } else {
-    roll = new EdRoll(
-      `${formula}[${target.dataset.flavor}]`,
-      {},
-      new EdRollOptions( {
-        step: {
-          base: step,
-        },
-        chatFlavor: target.dataset.rollFlavor,
-        rollType: target.dataset.rollType,
-      } )
-    );
-  }
+  
+  
 
   return roll.toMessage();
 }
