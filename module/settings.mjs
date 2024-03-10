@@ -73,12 +73,8 @@ export default function registerSystemSettings() {
         hint: "ED.Settings.LpTracking.hintUsed",
         scope: "world",
         config: true,
-        default: "spendLp",
-        type: String,
-        choices: {
-            useLpTracking: "ED.Settings.LpTracking.useTracking",
-            noLpTracking: "ED.Settings.LpTracking.noTracking",
-          }
+        default: true,
+        type: Boolean
     } );
     // LP Tracking Option Attributes
     game.settings.register( "ed4e", "lpTrackingAttributes", {
