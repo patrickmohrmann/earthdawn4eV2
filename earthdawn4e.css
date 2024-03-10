@@ -798,49 +798,59 @@ form#document-create .checkbox:hover {
   color: black;
   background-repeat: repeat;
 }
-.character-generation .window-header {
-  position: relative;
-  z-index: 2;
-  background: transparent;
-  padding-top: 6px;
-}
-.character-generation .window-header .window-title,
-.character-generation .window-header .window-title i {
-  position: relative;
-  font-size: large;
-  z-index: 2;
-  left: 60px;
-}
-.character-generation .window-header a {
-  position: relative;
-  z-index: 2;
-  right: 60px;
-}
-.character-generation .header-item__frame {
-  height: 50px;
-  margin-top: -60px;
-  position: absolute;
-  z-index: 1;
-  opacity: 0.9;
-}
-.character-generation .header-item__frame img {
-  border: none;
-  background: transparent;
-}
-.character-generation .footer-item__frame {
-  position: absolute;
-  bottom: -35px;
-  border: none;
-  z-index: 1;
-  opacity: 0.9;
-  transform: rotate(180deg);
-}
-.character-generation .footer-item__frame img {
-  border: none;
-  background: transparent;
-}
-.character-generation .window-resizable-handle {
-  z-index: 2;
+.character-generation {
+  /*.window-header {
+        position: relative;
+        z-index: 2;
+        background: transparent;
+        padding-top: 6px;
+
+        .window-title,
+        .window-title i {
+            position: relative;
+            font-size: large;
+            z-index: 2;
+            left: 60px;
+        }
+
+        a {
+            position: relative;
+            z-index: 2;
+            right: 60px;
+        }
+    }
+
+    .header-item__frame {
+        height: 50px;
+        margin-top: -60px;
+        position: absolute;
+        z-index: 1;
+        opacity: 0.9;
+
+        img {
+            border: none;
+            background: transparent;
+        }
+    }
+
+
+
+    .footer-item__frame {
+        position: absolute;
+        bottom: -35px;
+        border: none;
+        z-index: 1;
+        opacity: 0.9;
+        transform: rotate(180deg);
+
+        img {
+            border: none;
+            background: transparent;
+        }
+    }
+    .window-resizable-handle {
+        z-index: 2;
+    }*/
 }
 .character-generation h4 {
   text-align: center;

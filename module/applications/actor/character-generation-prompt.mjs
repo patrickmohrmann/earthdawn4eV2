@@ -1,6 +1,7 @@
-import { getAllDocuments } from "../../utils.mjs";
+import { filterObject, getAllDocuments } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
 import CharacterGenerationData from "../../data/other/character-generation.mjs";
+import EdRoll from "../../dice/ed-roll.mjs";
 
 /**
  * The application responsible for handling character generation
@@ -18,6 +19,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
   constructor(charGen, options = {}, documentCollections) {
     charGen ??= new CharacterGenerationData();
     super(charGen);
+
+    this.resolve = options.resolve;
 
     this.namegivers = documentCollections.namegivers;
     this.disciplines = documentCollections.disciplines;
@@ -82,6 +85,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
         },
       ],
     };
+  }
+
+  static errorMessages = {
+    noNamegiver: "X.You didn't choose a namegiver. Pretty difficult to be a person then, don't you think?",
+    noClass: "X.There's no class selected. Don't you wanna be magic?",
+    attributes: "X. This is just reminder: there are still some unspent attribute points. They will be converted to extra karma.",
+    talentRanksLeft: "X.There's still some ranks left for your class abilities. Use them, they're free.",
+    skillRanksLeft: "X.You haven't used all of your skill ranks. Come on, don't be shy.",
   }
 
   get title() {
@@ -182,6 +193,18 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   async _finishGeneration(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    await this.submit( {preventRender: true} );
+
+    if ( !this._validateCompletion() ) {
+      ui.notifications.error( game.i18n.localize( "X.No no no, You're not finished yet." ) );
+      return;
+    }
+
+    this.resolve?.( this.object );
     return this.close();
   }
 
@@ -206,7 +229,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   _onSelectTalentOption( event ) {
     event.currentTarget.querySelector( 'input[type="radio"]' ).click();
   }
-  
+
   _onChangeTab( event, tabs, active ) {
     super._onChangeTab( event, tabs, active );
     this._currentStep = this._steps.indexOf( active );
@@ -216,6 +239,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   // first check completeness and then proceed
   _nextTab() {
     if (!this._hasNextStep()) return;
+    // if ( !this._validateOnChangeTab() ) return;
     this._currentStep++;
     this.activateTab(this._steps[this._currentStep]);
     this.render();
@@ -223,6 +247,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _previousTab() {
     if (!this._hasPreviousStep()) return;
+    // if ( !this._validateOnChangeTab() ) return;
     this._currentStep--;
     this.activateTab(this._steps[this._currentStep]);
     this.render();
@@ -234,5 +259,88 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _hasPreviousStep() {
     return this._currentStep > 0;
+  }
+
+  _validateOnChangeTab() {
+    let hasValidationError = false;
+    let errorMessage = "";
+    switch ( this._steps[this._currentStep] ) {
+      case 'namegiver-tab':
+        hasValidationError = this._validateNamegiver();
+        errorMessage = this.constructor.errorMessages["noNamegiver"];
+        break;
+      case 'class-tab':
+         hasValidationError = this._validateClass();
+        errorMessage = ``;
+        break;
+      case 'attribute-tab':
+        break;
+      case 'spell-tab':
+        break;
+      case 'skill-tab':
+        break;
+      case 'equipment-tab':
+        break;
+    }
+  }
+
+  _validateCompletion() {
+    const errorLevel = "error";
+    return this._validateNamegiver( errorLevel, true )
+      && this._validateClass( errorLevel, true )
+      && this._validateClassRanks( errorLevel, true )
+      // this._validateAttributes( "warn", true );
+      && this._validateSkills( errorLevel, true );
+  }
+
+  _validateNamegiver( errorLevel = "warn", displayNotification = false ) {
+    const hasNamegiver = !!this.object.namegiver;
+    if ( displayNotification ) {
+      if ( !hasNamegiver ) this._displayValidationError( errorLevel, "noNamegiver" );
+    }
+    return hasNamegiver;
+  }
+
+  _validateClass( errorLevel = "warn", displayNotification = false ) {
+    const hasClass = !!this.object.selectedClass;
+    if ( displayNotification ) {
+      if ( !hasClass ) this._displayValidationError( errorLevel, "noClass" );
+    }
+    return hasClass;
+  }
+
+  _validateClassRanks( errorLevel = "warn", displayNotification = false ) {
+    const hasRanks = this.object.availableRanks[this.object.isAdept ? "talent" : "devotion"] > 0;
+    if ( displayNotification ) {
+      if ( hasRanks ) this._displayValidationError( errorLevel, "talentRanksLeft" );
+    }
+    return !hasRanks;
+  }
+
+  _validateAttributes( errorLevel = "info", displayNotification = false ) {
+    const hasAttributePoints = this.object.availableAttributePoints > 0;
+    if ( displayNotification ) {
+      if ( hasAttributePoints ) this._displayValidationError( errorLevel, "attributes" );
+    }
+    return !hasAttributePoints;
+  }
+
+  _validateSkills( errorLevel = "warn", displayNotification = false ) {
+    const availableRanks = filterObject(
+      this.object.availableRanks,
+      ( [key, value] ) => !["talent", "devotion"].includes( key )
+    );
+    availableRanks[this.object.isAdept ? "devotion" : "talent"] = 0
+    availableRanks["readWrite"] = 0;
+    availableRanks["speak"] = 0;
+    const hasRanks = Object.values( availableRanks ).some( value => value > 0);
+    if ( displayNotification ) {
+      if ( hasRanks ) this._displayValidationError( errorLevel, "skillRanksLeft" );
+    }
+    return !hasRanks;
+  }
+
+  _displayValidationError( level, type ) {
+    ui.notifications[level]( game.i18n.format( this.constructor.errorMessages[type] ) );
   }
 }

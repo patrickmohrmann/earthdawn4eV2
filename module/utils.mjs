@@ -138,6 +138,8 @@ export function sum( arr ) {
   return arr.reduce( ( partialSum, a ) => partialSum + a, 0 );
 }
 
+/* -------------------------------------------- */
+
 /**
  * Computes the sum of a specific property's  values in an array of objects. The sum for only one property can be
  * calculated, and its name must be consistent across all objects in the array.

@@ -3,6 +3,7 @@ import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 import CharacterGenerationPrompt from "../applications/actor/character-generation-prompt.mjs";
+import { mapObject } from "../utils.mjs";
 
 
 /**
@@ -45,14 +46,35 @@ export default class ActorEd extends Actor {
 
   async characterGeneration () {
     const generation = await CharacterGenerationPrompt.waitPrompt();
-    this.#processGeneration ( generation );
-  }
+    if ( !generation ) return;
 
-  #processGeneration( generation ) {
-    if ( generation ) {
-      
-    return;
-    }
+    const attributeData = mapObject(
+      await generation.getFinalAttributeValues(),
+      ( attribute, value ) => [attribute, {initialValue: value}]
+    );
+    const additionalKarma = generation.availableAttributePoints;
+
+    const newActor = await this.constructor.create( {
+      name: "Rename me! I was just created",
+      type: "character",
+      system: {
+        attributes: attributeData,
+        karma: {freeAttributePoints: additionalKarma},
+      },
+    } );
+
+    const namegiverDocument = await generation.namegiverDocument;
+    const classDocument = await generation.classDocument;
+    const abilities = await generation.abilityDocuments;
+
+    await newActor.createEmbeddedDocuments( "Item", [
+      namegiverDocument,
+      classDocument,
+      ...abilities,
+    ] );
+
+    const actorApp = newActor.sheet.render( true, {focus: true} );
+    // actorApp.activateTab("actor-notes-tab");
   }
 
   /**

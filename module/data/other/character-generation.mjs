@@ -155,6 +155,10 @@ export default class CharacterGenerationData extends SparseDataModel {
     };
   }
 
+  get actorSystemData() {
+    const systemData = {};
+  }
+
   get namegiverDocument() {
     return fromUuid( this.namegiver );
   }
@@ -195,6 +199,23 @@ export default class CharacterGenerationData extends SparseDataModel {
         special: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.special.map( ability => [ability, 0] )),
       }
     } );
+  }
+
+  /**
+   * Get all documents and adapt their level according to `this.abilities`.
+   * @return {Promise<Awaited<Document|null>[]>}  A Promise that resolves to an
+   *                                              array of ability documents.
+   */
+  get abilityDocuments() {
+    const allAbilityEntries = Object.assign( {}, ...Object.values( this.abilities ) );
+    const allAbilities = Object.entries( allAbilityEntries ).map(
+      async ( [uuid, level] ) => {
+        const itemDocument = (await fromUuid( uuid )).toObject();
+        itemDocument.system.level = level;
+        return itemDocument;
+      }
+    );
+    return Promise.all( allAbilities );
   }
 
   async getCharacteristicsPreview() {
@@ -285,7 +306,7 @@ export default class CharacterGenerationData extends SparseDataModel {
   async changeAbilityRank( abilityUuid, abilityType, changeType ) {
     const abilityClassType = this._getAbilityClassType( abilityType );
     const isSkill = ["artisan", "knowledge", "general"].includes( abilityType );
-
+    // TODO: fucked up class ability ranks assignment agian >:/
     if (
       isSkill && !this.abilities[abilityType].hasOwnProperty( abilityUuid )
     ) await this.addAbility( abilityUuid, abilityType );
@@ -454,7 +475,9 @@ export default class CharacterGenerationData extends SparseDataModel {
   }
 
   _getAvailabilityType( abilityType ) {
-    if ( !["artisan", "knowledge", "speak", "readWrite"].includes( abilityType ) ) return abilityType;
-    return this.availableRanks[abilityType] > 0 ? abilityType : "general";
+    if (
+      ["artisan", "knowledge", "speak", "readWrite"].includes( abilityType )
+    ) return this.availableRanks[abilityType] > 0 ? abilityType : "general";
+    return this._getAbilityClassType( abilityType ) ;
   }
 }
