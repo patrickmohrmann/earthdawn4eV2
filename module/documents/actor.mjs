@@ -59,13 +59,20 @@ export default class ActorEd extends Actor {
       type: "character",
       system: {
         attributes: attributeData,
-        karma: {freeAttributePoints: additionalKarma},
+        karma: {
+          freeAttributePoints: additionalKarma,
+        },
       },
     } );
 
     const namegiverDocument = await generation.namegiverDocument;
     const classDocument = await generation.classDocument;
-    const abilities = await generation.abilityDocuments;
+    const abilities = ( await generation.abilityDocuments ).map(
+      documentData => {
+        documentData.system.source.class = namegiverDocument.uuid;
+        return documentData;
+      }
+    );
 
     await newActor.createEmbeddedDocuments( "Item", [
       namegiverDocument,
