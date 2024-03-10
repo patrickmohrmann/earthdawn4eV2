@@ -1,7 +1,6 @@
 import { filterObject, getAllDocuments } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
 import CharacterGenerationData from "../../data/other/character-generation.mjs";
-import EdRoll from "../../dice/ed-roll.mjs";
 
 /**
  * The application responsible for handling character generation

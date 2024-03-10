@@ -155,10 +155,6 @@ export default class CharacterGenerationData extends SparseDataModel {
     };
   }
 
-  get actorSystemData() {
-    const systemData = {};
-  }
-
   get namegiverDocument() {
     return fromUuid( this.namegiver );
   }
@@ -304,9 +300,8 @@ export default class CharacterGenerationData extends SparseDataModel {
   }
 
   async changeAbilityRank( abilityUuid, abilityType, changeType ) {
-    const abilityClassType = this._getAbilityClassType( abilityType );
     const isSkill = ["artisan", "knowledge", "general"].includes( abilityType );
-    // TODO: fucked up class ability ranks assignment agian >:/
+
     if (
       isSkill && !this.abilities[abilityType].hasOwnProperty( abilityUuid )
     ) await this.addAbility( abilityUuid, abilityType );
