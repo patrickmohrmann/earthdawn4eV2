@@ -533,11 +533,11 @@ ul.no-bullets {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
-.form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] {
   border-top: 1px solid black;
 }
-.form-group[data-setting-id="ed4e.lpTrackingAttributes"] label,
-.form-group[data-setting-id="ed4e.lpTrackingAttributes"] .form-fields {
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] label,
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.lpTrackingHeader"] {
