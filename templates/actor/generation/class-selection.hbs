@@ -1,0 +1,154 @@
+<div class="tab class-tab flexcol" data-group="primary" data-tab="class-tab">
+
+  <!-- choose class type: discipline or questor -->
+  <section class="discipline-questor-switch-group flexrow">
+    <label class="discipline-questor-switch-group flexrow">
+              <span class="{{#unless object.isAdept}}deselected-class-type{{/unless}}" id="char-gen-class-type-discipline-label">
+                {{localize "ED.General.discipline"}}
+              </span>
+      <input type="checkbox" name="isAdept" {{checked object.isAdept}} hidden="">
+      {{#if object.isAdept}}
+        <i id="char-gen-class-type-select-arrow" class="arrow-toggle-switch fas fa-duotone fa-arrow-left-from-line fa-xl"></i>
+      {{else}}
+        <i id="char-gen-class-type-select-arrow" class="arrow-toggle-switch fas fa-duotone fa-arrow-right-from-line fa-xl"></i>
+      {{/if}}
+      <span class="{{#if object.isAdept}}deselected-class-type{{/if}}" id="char-gen-class-type-questor-label">
+        {{localize "ED.General.questor"}}
+      </span>
+    </label>
+  </section>
+
+  <!-- Choose class -->
+  <section class="available-disciplines-questors-choices flexrow">
+    {{#if object.isAdept}}
+      {{radioBoxes "selectedClass" disciplineRadioChoices checked=object.selectedClass}}
+    {{else}}
+      {{radioBoxes "selectedClass" questorRadioChoices checked=object.selectedClass}}
+    {{/if}}
+  </section>
+
+  <!-- Abilities explainer -->
+  <h4>{{localize "X.Abilities"}}</h4>
+  <p class="explainer-text">
+    {{{localize "X. Below you find all abilities that the chosen class is granted on character generation. Please choose <em>one</em> of the optionals by clicking on the talent."}}}
+    {{{localize "X. The number indicates the starting rank. You can assign them Config.maxrank. Free abilities are at level 1 for free."}}}
+  </p>
+
+  <!-- Rank assignment -->
+  <section class="rank-assignment">
+
+    <!-- Available Ranks Indicator -->
+    <div class="availability-meter available-talent-ranks flexrow">
+      <button class="reset-points" id="char-gen-clear-talent-ranks-button" type="button"
+              title="X.Clear all assigned ranks and reset to zero." data-reset-type="classAbilities">
+        <i class="fa-light fa-arrows-rotate"></i>
+        {{localize "X.Reset"}}
+      </button>
+      <label>{{localize "X.Available Ranks: "}}{{lookup object.availableRanks (ifThen object.isAdept "talent" "devotion" )}}{{!--format "X.availablePointsKarma" points=... --}}</label>
+      <meter value="{{lookup object.availableRanks (ifThen object.isAdept "talent" "devotion" )}}" min="0" max="{{lookup config.availableRanks (ifThen object.isAdept "talent" "devotion" )}}">
+      </meter>
+    </div>
+    <!--
+
+    &lt;!&ndash; Talent/Devotion List &ndash;&gt;
+    <div class="abilities-list">
+      <ul class="unlist">
+        {{#each object.abilities.class}}
+          <li data-ability-uuid="{{@key}}" data-level="{{this}}">
+            {{nameFromUuid @key}}
+            <label>
+              {{!--numberInput this name=(concat "abilities.class[" @key "]") step=1 min=0 max=@root.maxAssignableRanks--}}
+            </label>
+          </li>
+        {{/each}}
+      {{#each object.abilities.option}}
+          <li data-ability-uuid="{{@key}}" data-level="{{this}}">
+            {{nameFromUuid @key}}
+            <label>
+              {{!--numberInput this name=(concat "abilities.option[" @key "]") step=1 min=0 max=@root.maxAssignableRanks--}}
+            </label>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+-->
+
+  </section>
+
+  <!-- Ability selection -->
+  <div class="talent-tables flexrow">
+
+    <!-- Optional Abilities -->
+    <table class="optional-talents-pool">
+      <colgroup>
+        <col />
+      </colgroup>
+      <tr>
+        <th colspan="2">{{localize "X.Optional Talents"}}</th>
+      </tr>
+      {{#each classDocument.system.advancement.abilityOptions.novice}}
+        <tr class="flexrow">
+          <td class=" ability-name" data-ability-uuid="{{this}}">
+            <label for="char-gen-ability-option-radio">
+              <input type="radio" id="char-gen-ability-option-radio" name="abilityOption" value="{{this}}" {{checked (ed-hasOwnProperty @root.object.abilities.option this)}}>
+              {{nameFromUuid this}}
+            </label>
+          </td>
+          <td class="flexrow rank-change">
+            {{#if (ed-hasOwnProperty @root.object.abilities.option this)}}
+              <span class="decrease-value-button rank-decrease rank-change-icon" title="{{localize 'X.Decrease Rank Value'}}"
+                    data-change-type="decrease" data-ability-uuid="{{this}}" data-ability-type="option">
+              <i class="fa-light fa-circle-minus"></i>
+            </span>
+              <span class="rank-change-value">
+                {{lookup @root.object.abilities.option this}}
+              </span>
+              <span class="increase-value-button rank-increase rank-change-icon" title="{{localize 'X.Increase Rank Value'}}"
+                    data-change-type="increase" data-ability-uuid="{{this}}" data-ability-type="option">
+              <i class="fa-light fa-circle-plus"></i>
+            </span>
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+
+    <!-- Class Abilities -->
+    <table class="class-talents-pool">
+      <colgroup>
+        <col span="2"/>
+      </colgroup>
+      <tr>
+        <th colspan="2">{{localize "X.Class Abilities" classType=classDocument.type}}</th>
+      </tr>
+      {{#each classDocument.system.advancement.levels.0.abilities}}
+        {{#if (hasItems this)}}
+          <th colspan="2">{{lookup @root.config.abilityPools @key}}</th>
+        {{/if}}
+        {{#each this}}
+          <tr class="flexrow">
+            <td class="ability-name" data-ability-uuid="{{this}}">
+              {{nameFromUuid this}}
+            </td>
+            {{#if (eq @../key "class")}}
+              <td class="flexrow rank-change">
+              <span class="decrease-value-button rank-decrease rank-change-icon" title="{{localize 'X.Decrease Rank Value'}}"
+                    data-change-type="decrease" data-ability-uuid="{{this}}" data-ability-type="{{@../key}}">
+                <i class="fa-light fa-circle-minus"></i>
+              </span>
+                <span class="rank-change-value">
+                  {{lookup @root.object.abilities.class this}}
+                </span>
+                <span class="increase-value-button rank-increase rank-change-icon" title="{{localize 'X.Increase Rank Value'}}"
+                      data-change-type="increase" data-ability-uuid="{{this}}" data-ability-type="{{@../key}}">
+                <i class="fa-light fa-circle-plus"></i>
+              </span>
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
+      {{/each}}
+    </table>
+  </div>
+
+</div>

@@ -194,6 +194,11 @@ ul.no-bullets {
   margin: 0;
   /* Remove margins */
 }
+.unlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -533,6 +538,24 @@ ul.no-bullets {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] {
+  border-top: 1px solid black;
+}
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] label,
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] .form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.charGenHeader"] {
+  margin-bottom: 0px;
+}
+.form-group[data-setting-id="ed4e.charGenHeader"] label {
+  font-family: 'WarhorseDIY', serif;
+  font-size: larger;
+}
+.form-group[data-setting-id="ed4e.charGenHeader"] .form-fields,
+.form-group[data-setting-id="ed4e.charGenHeader"] p {
+  display: none;
+}
 .form-group[data-setting-id="ed4e.lpTrackingUsed"] {
   border-top: 1px solid black;
 }
@@ -775,6 +798,258 @@ form#document-create .checkbox:hover {
   color: black;
   background-repeat: repeat;
 }
+
+.character-generation {
+  /*.window-header {
+        position: relative;
+        z-index: 2;
+        background: transparent;
+        padding-top: 6px;
+
+        .window-title,
+        .window-title i {
+            position: relative;
+            font-size: large;
+            z-index: 2;
+            left: 60px;
+        }
+
+        a {
+            position: relative;
+            z-index: 2;
+            right: 60px;
+        }
+    }
+
+    .header-item__frame {
+        height: 50px;
+        margin-top: -60px;
+        position: absolute;
+        z-index: 1;
+        opacity: 0.9;
+
+        img {
+            border: none;
+            background: transparent;
+        }
+    }
+
+
+
+    .footer-item__frame {
+        position: absolute;
+        bottom: -35px;
+        border: none;
+        z-index: 1;
+        opacity: 0.9;
+        transform: rotate(180deg);
+
+        img {
+            border: none;
+            background: transparent;
+        }
+    }
+    .window-resizable-handle {
+        z-index: 2;
+    }*/
+}
+.character-generation h4 {
+  text-align: center;
+  margin: 0;
+  padding: 0.5em;
+}
+.character-generation .character-generation-prompt-body {
+  margin-top: 2em;
+  flex: 5;
+}
+.character-generation .character-generation-prompt-body .availability-meter {
+  align-items: center;
+}
+.character-generation .character-generation-prompt-body .availability-meter button {
+  flex: 1;
+}
+.character-generation .character-generation-prompt-body .availability-meter label {
+  flex: 3;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .availability-meter meter {
+  flex: 7;
+  filter: grayscale(100%);
+}
+.character-generation .character-generation-prompt-body td {
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body td.attribute-change,
+.character-generation .character-generation-prompt-body td.rank-change {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.character-generation .character-generation-prompt-body td.attribute-change span,
+.character-generation .character-generation-prompt-body td.rank-change span {
+  cursor: pointer;
+}
+.character-generation .character-generation-prompt-body td.ability-name {
+  flex-grow: 3.236;
+}
+.character-generation .character-generation-prompt-body td.rank-change {
+  flex-grow: 2;
+}
+.character-generation .character-generation-prompt-body td span.attribute-cost-preview {
+  opacity: 0.6;
+}
+.character-generation .character-generation-prompt-body .navigator-section {
+  padding: 0.5em;
+}
+.character-generation .character-generation-prompt-body .tab.namegiver-tab option {
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group {
+  padding: 0.5em;
+  font-size: larger;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group input[type="checkbox"] {
+  display: none;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label {
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label i {
+  flex: 1;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label span {
+  flex: 5;
+  font-size: large;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label span.deselected-class-type {
+  opacity: 0.4;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label span.deselected-class-type:hover {
+  cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label #char-gen-class-type-discipline-label {
+  justify-content: right;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label #char-gen-class-type-questor-label {
+  justify-content: left;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label #char-gen-class-type-select-arrow {
+  transition: rotate 0.4s ease;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label:hover #char-gen-class-type-select-arrow {
+  rotate: 180deg;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .discipline-questor-switch-group label:hover .deselected-class-type {
+  color: palevioletred;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices {
+  padding: 0.5em;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 2em;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label {
+  padding: 0.7em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  font-size: medium;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2em;
+  cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label:has( input[type="radio"]:checked ) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-disciplines-questors-choices label input[type="radio"] {
+  display: none;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .available-ability-options {
+  padding: 0.5em;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables {
+  gap: 1em;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table {
+  text-align: center;
+  flex: 4;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td.ability-name:hover {
+  cursor: pointer;
+  transition: background-color 0.2s linear 0s, font-size 0.2s linear 0s;
+  background-color: rgba(160, 160, 160, 0.4);
+  font-size: larger;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td.ability-name:hover label {
+  cursor: pointer;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td.ability-name input[type="radio"] {
+  display: none;
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables table.optional-talents-pool td.ability-name:has( label input[type="radio"]:checked ) {
+  border: 0.4em double rgba(20, 20, 20, 0.6);
+}
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables span,
+.character-generation .character-generation-prompt-body .tab.class-tab .talent-tables i {
+  flex: 1;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .char-gen-attribute-modification,
+.character-generation .character-generation-prompt-body .tab.attribute-tab .char-gen-characteristics-preview {
+  gap: 1em;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab h3 {
+  padding: 0.2em;
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics {
+  gap: 2em;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics table {
+  text-align: center;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics #char-gen-preview-characteristics {
+  table-layout: fixed;
+  width: 100%;
+}
+.character-generation .character-generation-prompt-body .tab.attribute-tab .health-and-characteristics .preview-value {
+  opacity: 0.6;
+  font-size: smaller;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .skill-options table {
+  flex-grow: 3.236;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .skill-options span.available-ranks {
+  flex-grow: 2;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .availability-meter {
+  justify-content: center;
+  margin: 0.5em 0;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .availability-meter label {
+  flex: 1;
+  font-size: larger;
+  justify-content: flex-end;
+  align-items: center;
+}
+.character-generation .character-generation-prompt-body .tab.skill-tab .availability-meter meter {
+  flex: 1;
+}
+.character-generation .character-generation-buttons {
+  flex: 1;
+}
+.character-generation .character-generation-buttons .buttons-navigation button {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
 .app.window-app.form.earthdawn4e.legend-point__history--earned .window-content {
   position: relative;
   background-image: url('assets/sheet/background.png');
@@ -785,6 +1060,7 @@ form#document-create .checkbox:hover {
 .app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .legend-point__history--earned .legend-point__history--earned-buttons button {
   height: 35px;
   align-self: flex-end;
+
 }
 .item-sheet .window-content {
   padding: 0px;

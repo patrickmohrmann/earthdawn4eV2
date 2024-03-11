@@ -46,13 +46,13 @@ ED4E.typeGroups = {
  * @enum {AttributeConfiguration}
  */
 ED4E.attributes = {
-	str: {
-		label: 			"ED.Attributes.strength",
-		abbreviation: 	"ED.Attribute.strengthAbbr"
-	},
 	dex: {
 		label: 			"ED.Attributes.dexterity",
 		abbreviation: 	"ED.Attributes.dexterityAbbr"
+	},
+	str: {
+		label: 			"ED.Attributes.strength",
+		abbreviation: 	"ED.Attribute.strengthAbbr"
 	},
 	tou: {
 		label: 			"ED.Attributes.toughness",
@@ -149,10 +149,10 @@ preLocalize( "availability" );
  */
 ED4E.action = {
 	none: 				"ED.General.none",
-    free: 				"ED.Action.free",
-    simple: 			"ED.Action.simple",
-    standard: 			"ED.Action.standard",
-    sustained: 			"ED.Action.sustained"
+	free: 				"ED.Action.free",
+	simple: 			"ED.Action.simple",
+	standard: 			"ED.Action.standard",
+	sustained: 			"ED.Action.sustained"
 }
 preLocalize( "action" );
 
@@ -177,6 +177,10 @@ ED4E.damageType = {
 }
 preLocalize( "damageType" );
 
+/* -------------------------------------------- */
+/*  Advancement & Char Gen                      */
+/* -------------------------------------------- */
+
 /**
  * Tier
  * @enum {string}
@@ -195,10 +199,51 @@ preLocalize( "tier" );
  * @enum {string}
  */
 ED4E.abilityPools = {
-	class:		"ED.ability.class",
-	free:			"ED.ability.free",
-	special:	"ED.ability.special"
+	class:		"ED.Advancement.Pools.class",
+	free:			"ED.Advancement.Pools.free",
+	special:	"ED.Advancement.Pools.special"
 }
+preLocalize( "abilityPools" );
+
+/**
+ * Types of skills.
+ * @enum {string}
+ */
+ED4E.skillTypes = {
+	general:		"ED.Skills.general",
+	artisan:		"ED.Skills.artisan",
+	knowledge:	"ED.Skills.knowledge",
+};
+preLocalize( "skillTypes" );
+
+/* -------------------------------------------- */
+/*  Character Generation                        */
+/* -------------------------------------------- */
+
+/**
+ * Lookup table used during character generation based on attribute values.
+ * @type {{defenseRating: number[], unconsciousRating: number[], carryingCapacity: number[], armor: number[], deathRating: number[], step: number[], woundThreshold: number[], recovery: number[]}}
+ */
+ED4E.characteristicsTable = {
+	step: [0, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11],
+	defenseRating: [0, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16],
+	carryingCapacity: [0, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 95, 110, 125, 140, 155, 175, 195, 215, 235, 255, 280, 305, 330, 355, 380, 410, 440, 470, 500, 530],
+	unconsciousRating: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60],
+	deathRating: [0, 4, 6, 8, 11, 13, 15, 18, 20, 22, 25, 27, 29, 32, 34, 36, 39, 41, 43, 46, 48, 50, 53, 55, 57, 60, 62, 64, 67, 69, 71],
+	woundThreshold: [0, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17],
+	recovery: [0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, ],
+	armor: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6],
+}
+
+ED4E.availableRanks = {
+	talent: 8,
+	devotion: 1,
+	knowledge: 2,
+	artisan: 1,
+	general: 8,
+	speak: 2,
+	readWrite: 1,
+};
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
@@ -270,15 +315,23 @@ preLocalize( "rollTypes", { key: "label" } );
  * @type {string}
  */
 ED4E.chatCommands = {
-  char: 'X.chatCommandCharHelp no parameters, trigger char gen',
-  coin: 'X.chatCommandCoinHelp number plus coinage, pass out coins',
-  group: 'X.chatCommandGroupHelp no parameters?, calc CR for group',
-  h: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
-  help: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
-  lp: 'X.chatCommandLpHelp number, award LP points',
-  s: 'X.chatCommandSHelp any number of steps separated by whitespace or +, roll the given steps',
+	char: 'X.chatCommandCharHelp no parameters, trigger char gen',
+	coin: 'X.chatCommandCoinHelp number plus coinage, pass out coins',
+	group: 'X.chatCommandGroupHelp no parameters?, calc CR for group',
+	h: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
+	help: "X.chatCommandHelp optional param 'chatCommand', show general help or for given command",
+	lp: 'X.chatCommandLpHelp number, award LP points',
+	s: 'X.chatCommandSHelp any number of steps separated by whitespace or +, roll the given steps',
 };
 preLocalize( "chatCommands" );
+
+/* -------------------------------------------- */
+/*  Costs                                       */
+/* -------------------------------------------- */
+
+ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15];
+ED4E.attributePointsCost[-1] = -1;
+ED4E.attributePointsCost[-2] = -2;
 
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */

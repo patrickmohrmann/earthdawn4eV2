@@ -1,6 +1,7 @@
 import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import MovementFields from '../actor/templates/movement.mjs';
+import { MappingField } from "../fields.mjs";
 
 /**
  * Data model template with information on namegiver items.
@@ -20,67 +21,24 @@ import MovementFields from '../actor/templates/movement.mjs';
  * @property {number} movement.climb                            movement type climb modifications
  */
 export default class NamegiverData extends SystemDataModel.mixin(
-    ItemDescriptionTemplate
+  ItemDescriptionTemplate
 ) {
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            attributeValues: new foundry.data.fields.SchemaField( {
-                dexterity: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    initial: 10,
-                    integer: true,
-                    positive: true,
-                    label: "ED.Item.Namegiver.dexterityValue"
-                } ), 
-                strength: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    initial: 10,
-                    integer: true,
-                    positive: true,
-                    label: "ED.Item.Namegiver.strengthValue"
-                } ), 
-                toughness: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    initial: 10,
-                    integer: true,
-                    positive: true,
-                    label: "ED.Item.Namegiver.toughnessValue"
-                } ), 
-                perception: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    initial: 10,
-                    integer: true,
-                    positive: true,
-                    label: "ED.Item.Namegiver.perceptionValue"
-                } ), 
-                willpower: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    initial: 10,
-                    integer: true,
-                    positive: true,
-                    label: "ED.Item.Namegiver.willpowerValue"
-                } ), 
-                charisma: new foundry.data.fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    initial: 10,
-                    integer: true,
-                    positive: true,
-                    label: "ED.Item.Namegiver.charismaValue"
-                } ), 
-            } ),
+            attributeValues: new MappingField(
+              new foundry.data.fields.NumberField( {
+                  required: true,
+                  nullable: false,
+                  min: 1,
+                  initial: 10,
+                  integer: true,
+                  positive: true,
+              } ), {
+                  initialKeys: CONFIG.ED4E.attributes,
+                  initialKeysOnly: true,
+                  label: "ED.items.namegiver.attributes"
+              } ),
             karmamodifier: new foundry.data.fields.NumberField( {
                 required: true,
                 nullable: false,
@@ -97,7 +55,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 integer: false,
                 positive: true,
                 label: "ED.Item.Namegiver.weightMultiplier"
-            } ), 
+            } ),
         } );
     }
 

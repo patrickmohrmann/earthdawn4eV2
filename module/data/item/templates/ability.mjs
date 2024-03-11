@@ -1,5 +1,6 @@
 import SystemDataModel from "../../abstract.mjs";
 import ClassTemplate from './class.mjs';
+import { DocumentUUIDField } from "../../fields.mjs";
 
 /**
  * Data model template with information on Ability items.
@@ -27,8 +28,7 @@ export default class AbilityTemplate extends SystemDataModel {
                 label: "ED.Item.Ability.attribute"
             } ),
             source: new foundry.data.fields.SchemaField( {
-                    class: new foundry.data.fields.ForeignDocumentField( ClassTemplate, {
-                        idOnly: true,
+                    class: new DocumentUUIDField( ClassTemplate, {
                         label: "ED.Item.Class.source"
                     } ),
                     tier: new foundry.data.fields.StringField( {

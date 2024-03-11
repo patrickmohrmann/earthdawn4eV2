@@ -2,8 +2,6 @@
 /*  Earthdawn                                   */
 /* -------------------------------------------- */
 
-import getDice from "./dice/step-tables.mjs";
-
 /**
  * Calculate the armor value for the given attribute value.
  * @param { number } attributeValue Willpower value for mystical armor
@@ -32,6 +30,102 @@ export function getDefenseValue( attributeValue ) {
 }
 
 /* -------------------------------------------- */
+/*  Foundry                                     */
+/* -------------------------------------------- */
+
+/**
+ * Search all documents in the game, including world and packs, according to the
+ * given constraints and return them in an array.
+ *
+ * Example usage:
+ * ```
+ * await ed4e.utils.getAllDocuments(
+ *  "Item",
+ *  "spell",
+ *  false,
+ *  ["system.level", "system.tier"],
+ *  x => ( x.system.level > 3 ) && ( x.system.binding === true )
+ * )
+ * ```
+ *
+ * @param {string} documentName           The type of document that is searched
+ *                                        for. One of `game.documentTypes` keys.
+ * @param {string} documentType           The subtype for the chosen document
+ *                                        type. One of the appropriate
+ *                                        `game.documentTypes` values.
+ * @param {boolean} asUuid                If `true`, return the found documents
+ *                                        as just their UUIDs. Otherwise, the
+ *                                        full documents are returned.
+ * @param {DOCUMENT_OWNERSHIP_LEVELS} minOwnerRole The minimal ownership role
+ *                                        the current user needs to get any
+ *                                        document.
+ * @param {[string]} filterFields         An array of document property keys that
+ *                                        are used in the `predicate` function.
+ *                                        Must contain all used keys.
+ * @param {function} predicate            A function that can be used for
+ *                                        pre-filtering the searched documents.
+ *                                        Must be a function that takes one
+ *                                        parameter, either the document (for
+ *                                        world documents) or index (for packs).
+ *                                        It must return `true` if the item
+ *                                        should be kept, or `false` for it to
+ *                                        be discarded.
+ * @return {Promise<[Document|string]>}   A promise that resolves to an array of
+ *                                        either {@link Document}s or UUID
+ *                                        strings of the found documents. Empty
+ *                                        if no documents are found.
+ */
+export async function getAllDocuments(
+  documentName,
+  documentType,
+  asUuid = true,
+  minOwnerRole = "OBSERVER",
+  filterFields = [],
+  predicate
+) {
+
+  // Input checks
+
+  const docTypes = game.documentTypes;
+
+  if (
+    !( documentName in docTypes )
+    || ( documentType && !docTypes[documentName].includes( documentType ) )
+  ) {
+    console.error(
+      `ED4E: Invalid documentName or documentType: ${documentName}, ${documentType}`
+    );
+    return [];
+  }
+
+  predicate ??= () => true;  // no filtering, take all items
+
+  // Search documents
+
+  const worldCollection = game.collections.get( documentName );
+  const packs = game.packs.filter( p => p.documentName === documentName );
+
+  const documents = worldCollection.filter(
+    d =>
+      ( !documentType || d.type === documentType )
+      && d.testUserPermission( game.user, minOwnerRole )
+  );
+  const indices = await Promise.all(
+    packs.map( async pack  => {
+      if ( !pack.testUserPermission( game.user, minOwnerRole ) ) return [];
+      const idx = await pack.getIndex( { fields: filterFields } );
+      return  Array.from( idx.values() ).filter( i => i.type === documentType );
+    }),
+  ).then( p => p.flat() );
+
+  const allDocuments = [...documents, ...indices].filter( predicate );
+
+  return asUuid
+    ? allDocuments.map( doc => doc.uuid )
+    : Promise.all( allDocuments.map( doc => fromUuid( doc.uuid ) ) );
+
+}
+/* -------------------------------------------- */
 /*  View Helper                                 */
 /* -------------------------------------------- */
 /**
@@ -41,6 +135,7 @@ export function getDefenseValue( attributeValue ) {
  */
 export async function delay( ms ) {
   return new Promise( resolve => setTimeout( resolve, ms ) );
+
 }
 
 /* -------------------------------------------- */
@@ -55,6 +150,8 @@ export async function delay( ms ) {
 export function sum( arr ) {
   return arr.reduce( ( partialSum, a ) => partialSum + a, 0 );
 }
+
+/* -------------------------------------------- */
 
 /**
  * Computes the sum of a specific property's  values in an array of objects. The sum for only one property can be
@@ -82,6 +179,64 @@ export function sortObjectEntries( obj, sortKey ) {
   if ( sortKey ) sorted = sorted.sort( ( a, b ) => a[1][sortKey].localeCompare( b[1][sortKey] ) );
   else sorted = sorted.sort( ( a, b ) => a[1].localeCompare( b[1] ) );
   return Object.fromEntries( sorted );
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Filter an object's entries by the given predicate (filter function). Creates
+ * a new object with only entries that satisfy the predicate.
+ * @param {object} obj                            The object to filter.
+ * @param {function(any, any): boolean} predicate A function that takes a key-value
+ *                                                pair of the object and returns
+ *                                                a boolean to decide whether the
+ *                                                entry should be kept or discarded.
+ *                                                Return `true` to keep the entry
+ *                                                or `false` to discard it.
+ */
+export function filterObject( obj, predicate ) {
+  return Object.fromEntries(
+    Object.entries( obj ).filter(
+      ( [key, value] ) => predicate( key, value )
+    )
+  )
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Map an object's entries by the given function. Creates a new object with the
+ * mapped entries according to the function.
+ * @param {object} obj                            The object to filter.
+ * @param {function} mappingFunction  A function that takes a key-value pair of
+ *                                    the object and return the new mapped
+ *                                    key-value pair. It takes two parameters
+ *                                    `[key, value]` and must return them as
+ *                                    `[key, value]`.
+ */
+export function mapObject( obj, mappingFunction ) {
+  return Object.fromEntries(
+    Object.entries( obj ).map(
+      ( [key, value] ) => mappingFunction( key, value )
+    )
+  )
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Renames all keys of an object by prepending a specified prefix to each key.
+ * @param {object} obj - The object whose keys are to be renamed.
+ * @returns {object} A new object with keys renamed with the specified prefix.
+ */
+export function renameKeysWithPrefix(obj) {
+  const renamedObj = {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      renamedObj['-=' + key] = obj[key];
+    }
+  }
+  return renamedObj;
 }
 
 /* -------------------------------------------- */
@@ -226,6 +381,14 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global/card-options-chat.hbs",
     "systems/ed4e/templates/global/card-options-enhance.hbs",
 
+    // Character Generation
+    "systems/ed4e/templates/actor/generation/namegiver-selection.hbs",
+    "systems/ed4e/templates/actor/generation/class-selection.hbs",
+    "systems/ed4e/templates/actor/generation/attribute-assignment.hbs",
+    "systems/ed4e/templates/actor/generation/spell-selection.hbs",
+    "systems/ed4e/templates/actor/generation/skill-selection.hbs",
+    "systems/ed4e/templates/actor/generation/equipment.hbs",
+
     // Character details section partials
     "systems/ed4e/templates/actor/character-details/details-talents.hbs",
     "systems/ed4e/templates/actor/character-details/details-skills.hbs",
@@ -346,17 +509,4 @@ export async function preloadHandlebarsTemplates() {
   }
 
   return loadTemplates( paths );
-}
-
-/* -------------------------------------------- */
-
-/**
- * Register custom Handlebars helpers used by Earthdawn.
- */
-export function registerHandlebarsHelpers() {
-  Handlebars.registerHelper({
-    getProperty: foundry.utils.getProperty,
-    "ed-linkForUuid": linkForUuid,
-    "ed-diceFormulaForStep": getDice
-  });
 }
