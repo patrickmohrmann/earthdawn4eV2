@@ -1,7 +1,8 @@
-
+import { delay } from "../utils.mjs";
 export default class EdTour extends Tour {
     static tours = [
         "systems/ed4e/module/tours/lang/actor-item-creation",
+        "systems/ed4e/module/tours/lang/item-class",
         "systems/ed4e/module/tours/lang/sidebar-settings"
     ]
     static gmTours = [
@@ -24,6 +25,7 @@ export default class EdTour extends Tour {
     }
 
     async _preStep() {
+        // tabs of sidebar
         if( this.currentStep.activateTab ){
             ui.sidebar.activateTab( this.currentStep.activateTab )
         }
@@ -31,8 +33,9 @@ export default class EdTour extends Tour {
             await canvas[this.currentStep.activateLayer].activate()
             await delay( 100 )
         }
+        // tabs of documents
         else if( this.currentStep.appTab ){
-            this.app.activateTab( this.currentStep.appTab )
+            ui.activeWindow.activateTab( this.currentStep.appTab )
         }
         if( this.currentStep.action !== "none" ) {
             // Actor and Item Creation Tour Actions
@@ -42,8 +45,16 @@ export default class EdTour extends Tour {
             else if ( this.currentStep.action === "createItem" ) {
                 Item.implementation.createDialog()      
             }
+            else if ( this.currentStep.action === "setAdvancementCircleTabActive" ) {
+                ui.activeWindow.document.sheet.activateTab( "item-advancement-level-tab-1", {group: "advancement"} )
+            }
+            else if ( this.currentStep.action === "setAdvancementPoolTabActive" ) {
+                ui.activeWindow.document.sheet.activateTab( "item-advancement-options-pools", {group: "advancement"} )
+            }
         }
     }
+
+    
 
     // exit(){
     //     super.exit()
@@ -55,16 +66,18 @@ export default class EdTour extends Tour {
             const fn = new AsyncFunction( this.config.preCommand )
             await fn.call( this );
         }
-        if( this.app ){
-            await this.app.render( true, {focus: true} )
-            while( !this.app.rendered ) await delay( 50 )
+        if( this.apps ){
+            await this.apps.render( true, {focus: true} )
+            while( !this.apps.rendered ) await delay( 50 )
         }
-        if( this.app || this.config.preCommand )
-            while( !$( this.steps[this.stepIndex + 1].selector + ":visible" ).length ) await delay( 50 )
+        if( this.apps || this.config.preCommand )
+            while( !$( this.steps[this.stepIndex + 1].selector + ":visible" ).length ) await delay( 100 )
 
         const res = await super.start()
-        $( "#tooltip" ).show()
+        // $( "#tooltip" ).show()
         return res
     }
+
+    
 
 }

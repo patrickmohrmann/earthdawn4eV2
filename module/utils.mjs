@@ -32,6 +32,18 @@ export function getDefenseValue( attributeValue ) {
 }
 
 /* -------------------------------------------- */
+/*  View Helper                                 */
+/* -------------------------------------------- */
+/**
+ * 
+ * @param {*} ms miliseconds
+ * @returns {*} miliseconds
+ */
+export async function delay( ms ) {
+  return new Promise( resolve => setTimeout( resolve, ms ) );
+}
+
+/* -------------------------------------------- */
 /*  Maths                                       */
 /* -------------------------------------------- */
 

@@ -34,11 +34,12 @@ export default class ItemSheetEd extends ItemSheet {
           navSelector: '.item-advancement-tabs',
           contentSelector: '.item-advancement-body',
           initial: 'item-advancement-options-pools',
+          group: "advancement",
         },
       ],
       dragDrop: [
         {
-          dragSelector: '.item',
+          dragSelector: '.item-list .item',
           dropSelector: '.abilities-list',
         },
         {
@@ -58,11 +59,11 @@ export default class ItemSheetEd extends ItemSheet {
   // HTML enrichment
   async _enableHTMLEnrichment() {
     let enrichment = {};
-    enrichment['system.description.value'] = await TextEditor.enrichHTML(this.item.system.description.value, {
+    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.item.system.description.value, {
       async: true,
       secrets: this.item.isOwner,
-    });
-    return expandObject(enrichment);
+    } );
+    return expandObject( enrichment );
   }
 
   async getData() {
