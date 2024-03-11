@@ -775,6 +775,17 @@ form#document-create .checkbox:hover {
   color: black;
   background-repeat: repeat;
 }
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content {
+  position: relative;
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  color: black;
+  background-repeat: repeat;
+}
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .legend-point__history--earned .legend-point__history--earned-buttons button {
+  height: 35px;
+  align-self: flex-end;
+}
 .item-sheet .window-content {
   padding: 0px;
 }
