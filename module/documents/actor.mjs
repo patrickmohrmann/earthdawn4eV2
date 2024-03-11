@@ -5,6 +5,7 @@ import { DocumentCreateDialog } from "../applications/global/document-creation.m
 import CharacterGenerationPrompt from "../applications/actor/character-generation-prompt.mjs";
 import { mapObject } from "../utils.mjs";
 
+import LegendPointHistoryEarnedPrompt from "../applications/global/legend-point-history-earned-prompt.mjs"
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -83,6 +84,21 @@ export default class ActorEd extends Actor {
     const actorApp = newActor.sheet.render( true, {focus: true} );
     // actorApp.activateTab("actor-notes-tab");
   }
+
+  /**
+   * Legend point History earned prompt trigger
+   */
+  async legendPointHistoryEarned() {
+    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt();
+    this.#processHistoryEarned ( historyEarned );
+  }
+
+  #processHistoryEarned( historyEarned ) {
+    if ( historyEarned ) {
+      return;
+    }
+  }
+
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.

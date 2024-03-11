@@ -123,6 +123,17 @@ export async function getAllDocuments(
   return asUuid
     ? allDocuments.map( doc => doc.uuid )
     : Promise.all( allDocuments.map( doc => fromUuid( doc.uuid ) ) );
+/* -------------------------------------------- */
+/*  View Helper                                 */
+/* -------------------------------------------- */
+/**
+ * 
+ * @param {*} ms miliseconds
+ * @returns {*} miliseconds
+ */
+export async function delay( ms ) {
+  return new Promise( resolve => setTimeout( resolve, ms ) );
+
 }
 
 /* -------------------------------------------- */
@@ -404,6 +415,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/cards/shield-card.hbs",
     "systems/ed4e/templates/actor/cards/spell-card.hbs",
     "systems/ed4e/templates/actor/cards/class-card.hbs",
+    "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/top-section.hbs",
@@ -482,6 +494,9 @@ export async function preloadHandlebarsTemplates() {
 
     // other tabs
     "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",
+
+    // Build your own Legend
+    "systems/ed4e/templates/actor/legend-points/history-earned.hbs",
   ];
 
   const paths = {};

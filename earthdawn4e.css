@@ -556,11 +556,11 @@ ul.no-bullets {
 .form-group[data-setting-id="ed4e.charGenHeader"] p {
   display: none;
 }
-.form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] {
   border-top: 1px solid black;
 }
-.form-group[data-setting-id="ed4e.lpTrackingAttributes"] label,
-.form-group[data-setting-id="ed4e.lpTrackingAttributes"] .form-fields {
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] label,
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.lpTrackingHeader"] {
@@ -798,6 +798,7 @@ form#document-create .checkbox:hover {
   color: black;
   background-repeat: repeat;
 }
+
 .character-generation {
   /*.window-header {
         position: relative;
@@ -1048,6 +1049,18 @@ form#document-create .checkbox:hover {
   border: none;
   background: transparent;
   cursor: pointer;
+
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content {
+  position: relative;
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  color: black;
+  background-repeat: repeat;
+}
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .legend-point__history--earned .legend-point__history--earned-buttons button {
+  height: 35px;
+  align-self: flex-end;
+
 }
 .item-sheet .window-content {
   padding: 0px;

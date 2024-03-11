@@ -262,6 +262,23 @@ ED4E.encumbranceStatus = {
 preLocalize( "encumbranceStatus" );
 
 /* -------------------------------------------- */
+/*  Advancement                                 */
+/* -------------------------------------------- */
+
+ED4E.lpSpendingTypes = {
+	attribute: "X.Attribute",
+	devotion: "X.devotion",
+	knack: "X.knack",
+	knackManeuver: "X.knackManeuver",
+	skill: "X.skill",
+	spell: "X.spell",
+	spellKnack: "X.spellKnack",
+	talent: "X.talent",
+	thread: "thread",
+};
+preLocalize( "lpSpendingTypes" );
+
+/* -------------------------------------------- */
 /*  Rolls and Tests                             */
 /* -------------------------------------------- */
 

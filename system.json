@@ -51,6 +51,16 @@
       "banner": "systems/ed4e/assets/foundry/earthdawn-logo.png",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "tour-items",
+      "label": "tour-items",
+      "system": "ed4e",
+      "path": "systems/ed4e/packs/tour-items.db",
+      "type": "Item",
+      "banner": "systems/ed4e/assets/foundry/earthdawn-logo.png",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -60,7 +70,8 @@
       "color": "#0d4e09",
       "packs": [
         "manual-english",
-        "manual-german"
+        "manual-german",
+        "tour-items"
       ]
     }
   ],

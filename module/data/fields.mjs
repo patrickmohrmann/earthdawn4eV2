@@ -84,6 +84,13 @@ export class FormulaField extends foundry.data.fields.StringField {
 
 /* -------------------------------------------- */
 
+export class DatetimeField extends foundry.data.fields.DataField {
+  //TODO: implement
+}
+
+/* -------------------------------------------- */
+
+
 /**
  * @callback MappingFieldInitialValueBuilder
  * @param {string} key       The key within the object where this new value is being generated.
