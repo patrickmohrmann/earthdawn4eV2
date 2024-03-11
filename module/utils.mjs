@@ -123,6 +123,8 @@ export async function getAllDocuments(
   return asUuid
     ? allDocuments.map( doc => doc.uuid )
     : Promise.all( allDocuments.map( doc => fromUuid( doc.uuid ) ) );
+
+}
 /* -------------------------------------------- */
 /*  View Helper                                 */
 /* -------------------------------------------- */
