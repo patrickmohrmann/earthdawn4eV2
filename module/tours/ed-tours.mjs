@@ -2,6 +2,7 @@ import { delay } from "../utils.mjs";
 export default class EdTour extends Tour {
     static tours = [
         "systems/ed4e/module/tours/lang/actor-item-creation",
+        "systems/ed4e/module/tours/lang/arbitrary-roll",
         "systems/ed4e/module/tours/lang/item-class",
         "systems/ed4e/module/tours/lang/sidebar-settings"
     ]
@@ -50,6 +51,9 @@ export default class EdTour extends Tour {
             }
             else if ( this.currentStep.action === "setAdvancementPoolTabActive" ) {
                 ui.activeWindow.document.sheet.activateTab( "item-advancement-options-pools", {group: "advancement"} )
+            }
+            else if ( this.currentStep.action === "arbitraryRollStep14" ) {
+                $( "#chat-message" ).val( "/s 14" );
             }
         }
     }
