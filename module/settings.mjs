@@ -69,7 +69,7 @@ export default function registerSystemSettings() {
 
     // Legend point settings Header
     game.settings.register( "ed4e", "charGenHeader", {
-        name: "ED.Settings.LpTracking.charGenHeader",
+        name: "ED.Settings.CharGen.charGenHeader",
         config: true,
     } );
 
@@ -81,7 +81,7 @@ export default function registerSystemSettings() {
         config: true,
         type: Number,
         default: 25,
-    })
+    } )
 
     // Maximum rank that can be assigned to a talent or skill on character generation
     game.settings.register( "ed4e", "charGenMaxRank", {
@@ -148,12 +148,8 @@ export default function registerSystemSettings() {
         hint: "ED.Settings.LpTracking.hintAutomaticSilverOption",
         scope: "world",
         config: true,
-        default: "automatic",
-        type: String,
-        choices: {
-            automatic: "ED.Settings.LpTracking.automaticSilverReduction",
-            notAutomatic: "ED.Settings.LpTracking.notAutomaticSilverReduction",
-          }
+        default: true,
+        type: Boolean
     } );
 
     /* -------------------------------------------------------------------------------- */
@@ -172,12 +168,8 @@ export default function registerSystemSettings() {
         hint: "ED.Settings.Encumbrance.encumbranceHint",
         scope: "world",
         config: true,
-        default: "visualizeOnly",
-        type: String,
-        choices: {
-            visualizeOnly: "ED.Settings.Encumbrance.encumbranceVisualizeOnly",
-            calculate: "ED.Settings.Encumbrance.encumbranceWithEffects"
-          }
+        default: true,
+        type: Boolean
     } );
 
      /* -------------------------------------------------------------------------------- */
