@@ -11,4 +11,18 @@
             data-dtype="Number">
         {{/if}}
     </div>
+    {{!-- Target Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
+        <select name="system.difficulty.target">
+            {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
+        </select>
+    </div>
+    {{!-- Group Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-GroupDifficulty"}}:</label>
+        <select name="system.difficulty.group">
+            {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
+        </select>
+    </div>
 </div>

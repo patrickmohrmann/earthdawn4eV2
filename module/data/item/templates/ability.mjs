@@ -58,6 +58,20 @@ export default class AbilityTemplate extends SystemDataModel {
                 integer: true,
                 label: "ED.Item.Ability.strain"
             } ),
+            difficulty: new foundry.data.fields.SchemaField( {
+                target: new foundry.data.fields.StringField( {
+                    nullable: false,
+                    blank: false,
+                    initial: "none",
+                    label: "X.TargetDifficulty"
+                } ),
+                group: new foundry.data.fields.StringField( {
+                    nullable: false,
+                    blank: false,
+                    initial: "none",
+                    label: "X.GroupDifficulty"
+                } ),
+            } ),
         } );
     }
 
