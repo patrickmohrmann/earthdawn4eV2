@@ -119,6 +119,26 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @description                 Roll an Ability. use {@link RollPrompt} for further input data.
+   * @param {object} ability      ability.
+   * @param {object} options      Any additional options for the {@link EdRoll}.
+   */
+  async rollAbility( ability, options = {} ) {
+    const attributeStep = this.system.attributes[ability.system.attribute].step;
+    const abilityFinalStep = attributeStep + ability.system.level;
+    const edRollOptions = new EdRollOptions( {
+      rollType: "ability",
+      step: { base: abilityFinalStep },
+      strain: { base: ability.system.strain},
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { pointsUsed: ability.system.devotionRequired ? 1: 0, pointsRequired: ability.system.devotionRequired, available: this.system.devotion.value, step: this.system.devotion.step },
+      chatFlavor: ability.name + " Test",
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    this.#processRoll( roll );
+  }
+
+  /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
    * damage according to the parameters.
    * @param {number} amount                                     The unaltered amount of damage this actor should take.
@@ -127,14 +147,15 @@ export default class ActorEd extends Actor {
    *                                                            'physical', 'mystical', or 'none'.
    * @param {boolean} [ignoreAmor]                                Whether armor should be ignored when applying this damage.
    */
+  // eslint-disable-next-line max-params
   takeDamage( amount, damageType = "standard", armorType, ignoreAmor ) {
     const finalAmount = amount - (
         ( ignoreAmor || !armorType )
             ? 0
             : this.system.characteristics.armor[armorType].value
     );
-    const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount;
-    this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
+      const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
+      this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
   }
 
   /**
@@ -165,12 +186,16 @@ export default class ActorEd extends Actor {
       return;
     }
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.edRollOptions.strain, "standard" );
+    this.takeDamage( roll.options.strain.total, "standard", undefined, true );
     if (
-        !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
-        || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
+        !this.#useResource( 'karma', roll.options.karma.pointsUsed )
+        || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
-      ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
+      ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
+    }
+    if ( roll.options.devotion.pointsUsed < 1 && roll.options.devotion.pointsRequired ) {
+      ui.notifications.warn( "Localize: This ability requires the use of one devotion point." );
+      return;
     }
     roll.toMessage();
   }

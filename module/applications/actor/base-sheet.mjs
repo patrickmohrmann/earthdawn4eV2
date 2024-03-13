@@ -57,6 +57,9 @@ export default class ActorSheetEd extends ActorSheet {
     // Attribute tests
     html.find( "table.table__attribute .rollable" ).click( this._onRollAttribute.bind( this ) );
 
+    // Attribute tests
+    html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
+
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
@@ -92,6 +95,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     this.actor.legendPointHistoryEarned();
   }
+
   /**
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
@@ -101,6 +105,18 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const attribute = event.currentTarget.dataset.attribute;
     this.actor.rollAttribute( attribute, {event: event} );
+  }
+
+  /**
+   * Handle rolling an attribute test.
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+  _onRollAbility( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-name" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    this.actor.rollAbility( ability, {event: event} );
   }
 
   /**
