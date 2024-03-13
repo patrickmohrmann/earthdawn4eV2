@@ -199,6 +199,16 @@ ul.no-bullets {
   padding: 0;
   margin: 0;
 }
+.card__ability .card__icon .item__image,
+.card__ability .card__icon--visible .item__image,
+.card__ability .card__icon .item__image--visible,
+.card__ability .card__icon--visible .item__image--visible,
+.card__ability .card__icon .roll-icon__hover,
+.card__ability .card__icon--visible .roll-icon__hover,
+.card__ability .card__icon .roll-icon__pointer,
+.card__ability .card__icon--visible .roll-icon__pointer {
+  border: none;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -538,11 +548,11 @@ ul.no-bullets {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
-.form-group[data-setting-id="ed4e.charGenAttributePoints"] {
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] {
   border-top: 1px solid black;
 }
-.form-group[data-setting-id="ed4e.charGenAttributePoints"] label,
-.form-group[data-setting-id="ed4e.charGenAttributePoints"] .form-fields {
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] label,
+.form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.charGenHeader"] {
@@ -556,11 +566,11 @@ ul.no-bullets {
 .form-group[data-setting-id="ed4e.charGenHeader"] p {
   display: none;
 }
-.form-group[data-setting-id="ed4e.lpTrackingUsed"] {
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] {
   border-top: 1px solid black;
 }
-.form-group[data-setting-id="ed4e.lpTrackingUsed"] label,
-.form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] label,
+.form-group[data-setting-id="ed4e.lpTrackingAttributes"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.lpTrackingHeader"] {
@@ -798,60 +808,49 @@ form#document-create .checkbox:hover {
   color: black;
   background-repeat: repeat;
 }
-
-.character-generation {
-  /*.window-header {
-        position: relative;
-        z-index: 2;
-        background: transparent;
-        padding-top: 6px;
-
-        .window-title,
-        .window-title i {
-            position: relative;
-            font-size: large;
-            z-index: 2;
-            left: 60px;
-        }
-
-        a {
-            position: relative;
-            z-index: 2;
-            right: 60px;
-        }
-    }
-
-    .header-item__frame {
-        height: 50px;
-        margin-top: -60px;
-        position: absolute;
-        z-index: 1;
-        opacity: 0.9;
-
-        img {
-            border: none;
-            background: transparent;
-        }
-    }
-
-
-
-    .footer-item__frame {
-        position: absolute;
-        bottom: -35px;
-        border: none;
-        z-index: 1;
-        opacity: 0.9;
-        transform: rotate(180deg);
-
-        img {
-            border: none;
-            background: transparent;
-        }
-    }
-    .window-resizable-handle {
-        z-index: 2;
-    }*/
+.character-generation .window-header {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  padding-top: 6px;
+}
+.character-generation .window-header .window-title,
+.character-generation .window-header .window-title i {
+  position: relative;
+  font-size: large;
+  z-index: 2;
+  left: 60px;
+}
+.character-generation .window-header a {
+  position: relative;
+  z-index: 2;
+  right: 60px;
+}
+.character-generation .header-item__frame {
+  height: 50px;
+  margin-top: -60px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.9;
+}
+.character-generation .header-item__frame img {
+  border: none;
+  background: transparent;
+}
+.character-generation .footer-item__frame {
+  position: absolute;
+  bottom: -35px;
+  border: none;
+  z-index: 1;
+  opacity: 0.9;
+  transform: rotate(180deg);
+}
+.character-generation .footer-item__frame img {
+  border: none;
+  background: transparent;
+}
+.character-generation .window-resizable-handle {
+  z-index: 2;
 }
 .character-generation h4 {
   text-align: center;
@@ -1049,7 +1048,7 @@ form#document-create .checkbox:hover {
   border: none;
   background: transparent;
   cursor: pointer;
-
+}
 .app.window-app.form.earthdawn4e.legend-point__history--earned .window-content {
   position: relative;
   background-image: url('assets/sheet/background.png');
@@ -1060,7 +1059,6 @@ form#document-create .checkbox:hover {
 .app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .legend-point__history--earned .legend-point__history--earned-buttons button {
   height: 35px;
   align-self: flex-end;
-
 }
 .item-sheet .window-content {
   padding: 0px;
