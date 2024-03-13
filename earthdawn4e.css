@@ -746,6 +746,9 @@ form#document-create .checkbox:hover {
 .create-document.create-actor .type-selection label:has(input[type='radio'][value='loot']) {
   background-image: url('assets/icons/loot.svg');
 }
+.create-document.create-item {
+  min-width: 750px;
+}
 .create-document.create-item .type-selection label:has(input[type='radio']) {
   background-image: url('assets/icons/meditation.svg');
 }
