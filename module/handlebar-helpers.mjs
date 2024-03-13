@@ -46,7 +46,7 @@ export default function registerHandlebarHelpers() {
   } );
 
   Handlebars.registerHelper( 'nameFromUuid', ( uuid ) => {
-    return fromUuidSync( uuid , {strict: false})?.name ?? "N/A";
+    return fromUuidSync( uuid , {strict: false} )?.name ?? "N/A";
   } );
 
   Handlebars.registerHelper( 'ed-stepFromAttributeValue', ( attributeValue ) => {
@@ -56,4 +56,15 @@ export default function registerHandlebarHelpers() {
   Handlebars.registerHelper( 'ed-linkForUuid', linkForUuid );
 
   Handlebars.registerHelper( 'ed-diceFormulaForStep', getDice );
+
+  Handlebars.registerHelper( "getTalentType", ( talents, type ) => {
+    return talents.filter( ( talent ) => talent.system.talentType === type );
+  } );  
+
+  Handlebars.registerHelper( "getKnackName", ( talent, knacks ) => {
+    if ( talent === undefined || knacks === undefined ) {
+      return;
+    }
+    return knacks.filter( ( knack ) => knack.system.sourceTalentName === talent.name );
+  } );
 }
