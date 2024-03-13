@@ -498,7 +498,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",
 
     // Build your own Legend
+    "systems/ed4e/templates/actor/legend-points/history.hbs",
     "systems/ed4e/templates/actor/legend-points/history-earned.hbs",
+    "systems/ed4e/templates/actor/legend-points/history-spend.hbs",
   ];
 
   const paths = {};

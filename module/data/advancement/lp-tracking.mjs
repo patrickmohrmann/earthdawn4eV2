@@ -14,7 +14,8 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
                     required: true,
                     nullable: false,
                     label: "X.Earned Legend Points",
-                    hint: "X.All LP this character earned"
+                    hint: "X.All LP this character earned",
+                    
                 } ),
             spendings: new fields.ArrayField(
                 LpSpendingTransactionData,

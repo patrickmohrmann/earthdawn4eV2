@@ -5,7 +5,7 @@ import { DocumentCreateDialog } from "../applications/global/document-creation.m
 import CharacterGenerationPrompt from "../applications/actor/character-generation-prompt.mjs";
 import { mapObject } from "../utils.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/legend-point-history-earned-prompt.mjs"
+import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.

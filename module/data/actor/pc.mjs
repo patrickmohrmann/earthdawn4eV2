@@ -2,6 +2,7 @@ import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from "../../utils.mjs";
 import LpTransactionData from "../advancement/lp-transaction.mjs";
+import LpTrackingData from "../advancement/lp-tracking.mjs";
 
 /**
  * System data definition for PCs.
@@ -277,7 +278,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
-        const mysticalBonus = sumProperty(shieldItems, 'system.defenseBonus.mystical');
+        const mysticalBonus = sumProperty( shieldItems, 'system.defenseBonus.mystical');
 
         this.characteristics.defenses.physical.value = this.characteristics.defenses.physical.baseValue + physicalBonus;
         this.characteristics.defenses.mystical.value = this.characteristics.defenses.mystical.baseValue + mysticalBonus;

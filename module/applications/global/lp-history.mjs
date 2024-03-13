@@ -85,7 +85,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
   }
 
   get template() {
-    return 'systems/ed4e/templates/actor/legend-points/history-earned.hbs';
+    return 'systems/ed4e/templates/actor/legend-points/history.hbs';
   }
 
   /** @inheritDoc */
