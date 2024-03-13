@@ -1,11 +1,3 @@
-{{!-- <div>
-    {{#each actor.itemTypes.talent}}
-    <div class="item-name item-name__card" data-item-id="{{_id}}">
-        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
-    </div>
-    {{/each}}
-</div> --}}
-
 <div>
     <h3>
         {{localize "X-DisciplineTalents"}}
@@ -51,4 +43,14 @@
             {{/each}}
         </div>
     {{/each}}
+
+    Müssen noch eingeordnet werden
+    <div>
+        {{#each actor.itemTypes.knackAbility}}
+        <div class="item-name item-name__card" data-item-id="{{_id}}">
+            {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
+        </div>
+        {{/each}}
+    </div>
+
 </div>

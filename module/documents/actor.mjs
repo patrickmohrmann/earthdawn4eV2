@@ -127,7 +127,7 @@ export default class ActorEd extends Actor {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityFinalStep = attributeStep + ability.system.level;
     const edRollOptions = new EdRollOptions( {
-      rollType: "ability",
+      rollType: "action",
       step: { base: abilityFinalStep },
       strain: { base: ability.system.strain},
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
