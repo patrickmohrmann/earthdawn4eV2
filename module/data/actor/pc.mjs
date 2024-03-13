@@ -81,71 +81,6 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 label: "ED.General.durabilityBonus"
             } ),
-
-                    legendPoints: new foundry.data.fields.SchemaField( {
-                        current: new foundry.data.fields.StringField( {
-                            required: false,
-                            blank: true,
-                            nullable: true,
-                            initial: ""
-                        } ),
-                        spend: new foundry.data.fields.StringField( {
-                            required: false,
-                            blank: true,
-                            nullable: true,
-                            initial: ""
-                        } ),
-                        total: new foundry.data.fields.StringField( {
-                            required: false,
-                            blank: true,
-                            nullable: true,
-                            initial: ""
-                        } ),
-                        status: new foundry.data.fields.NumberField( {
-                            required: false,
-                            nullable: true,
-                            min: 1,
-                            step: 1,
-                            initial: 1,
-                            integer: true,
-                            positive: true
-                        } ),
-                    } )
-            // legendPoints: new foundry.data.fields.SchemaField( {
-            //     current: new foundry.data.fields.NumberField( {
-            //         required: false,
-            //         nullable: true,
-            //         min: 0,
-            //         step: 1,
-            //         initial: 0,
-            //         integer: true
-            //     } ),
-            //     spend: new foundry.data.fields.NumberField( {
-            //         required: false,
-            //         nullable: true,
-            //         min: 0,
-            //         step: 1,
-            //         initial: 0,
-            //         integer: true
-            //     } ),
-            //     total: new foundry.data.fields.NumberField( {
-            //         required: false,
-            //         nullable: true,
-            //         min: 0,
-            //         step: 1,
-            //         initial: 0,
-            //         integer: true
-            //     } ),
-            //     status: new foundry.data.fields.NumberField( {
-            //         required: false,
-            //         nullable: true,
-            //         min: 1,
-            //         step: 1,
-            //         initial: 1,
-            //         integer: true,
-            //         positive: true
-            //     } ),
-            // } )
         } );
         return superSchema;
     }
@@ -171,7 +106,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         this.#prepareDerivedEncumbrance();
         this.#prepareDerivedKarma();
         this.#prepareDerivedDevotion();
-        this.#prepareDerivedCurrentLp();
+        // this.#prepareDerivedCurrentLp();
     }
 
     /* -------------------------------------------- */
@@ -302,7 +237,8 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedBloodMagic() {
         const bloodDamageItems = this.parent.items.filter(
-            ( item ) => item.system.hasOwnProperty( "bloodMagicDamage" ) && item.system.itemStatus.equipped,
+            ( item ) => ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type !== "path" && item.system.itemStatus.equipped ) || 
+            ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type === "path" ),
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );
@@ -452,28 +388,28 @@ export default class PcData extends NamegiverTemplate.mixin(
         }
     }
 
-    /**
-     * Prepare Legendpoint infromation calculation
-     */
+    // /**
+    //  * Prepare Legendpoint infromation calculation
+    //  */
 
-    #prepareDerivedCurrentLp() {
-        const stingTotalLp = this.legendPoints.total;
-        const stringSpendLp = this.legendPoints.spend;
-        // const stringcurrentLp = this.legendPoints.current;
+    // #prepareDerivedCurrentLp() {
+    //     const stingTotalLp = this.legendPoints.total;
+    //     const stringSpendLp = this.legendPoints.spend;
+    //     // const stringcurrentLp = this.legendPoints.current;
 
-        const totalLp = stingTotalLp.replaceAll( ".","" )
-        const totalLpNumber = Number( totalLp )
-        this.legendPoints.current = totalLpNumber - Number( stringSpendLp.replaceAll( ".","" ) );
-        if ( totalLp < 10000 ) {
-            this.legendPoints.status = 1
-        } else if ( totalLp >= 10000 && totalLp < 100000 ) {
-            this.legendPoints.status = 2
-        } else if ( totalLp >= 100000 && totalLp < 1000000 ) {
-            this.legendPoints.status = 3
-        } else if ( totalLp >= 1000000 ) {
-            this.legendPoints.status = 4
-        } 
-    }
+    //     const totalLp = stingTotalLp.replaceAll( ".","" )
+    //     const totalLpNumber = Number( totalLp )
+    //     this.legendPoints.current = totalLpNumber - Number( stringSpendLp.replaceAll( ".","" ) );
+    //     if ( totalLp < 10000 ) {
+    //         this.legendPoints.status = 1
+    //     } else if ( totalLp >= 10000 && totalLp < 100000 ) {
+    //         this.legendPoints.status = 2
+    //     } else if ( totalLp >= 100000 && totalLp < 1000000 ) {
+    //         this.legendPoints.status = 3
+    //     } else if ( totalLp >= 1000000 ) {
+    //         this.legendPoints.status = 4
+    //     } 
+    // }
 
     /* -------------------------------------------- */
 
