@@ -1,7 +1,13 @@
 <div>
     <h3>{{localize "ED.Item.General.details"}}</h3>
 </div>
-{{!-- Target Difficulty --}}
+    {{!-- Target Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-FixedDifficulty"}}:</label>
+        <input class="input__number-input" name="system.difficulty.fixed" type="text"
+            value="{{item.system.difficulty.fixed}}" data-dtype="Number">
+    </div>
+    {{!-- Target Difficulty --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
         <select name="system.difficulty.target">

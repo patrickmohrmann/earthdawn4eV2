@@ -43,6 +43,28 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 integer: true,
                 label: "ED.Item.Power.damageStep"
             } ),
+            difficulty: new foundry.data.fields.SchemaField( {
+                target: new foundry.data.fields.StringField( {
+                    nullable: false,
+                    blank: false,
+                    initial: "none",
+                    label: "X.TargetDifficulty"
+                } ),
+                group: new foundry.data.fields.StringField( {
+                    nullable: false,
+                    blank: false,
+                    initial: "none",
+                    label: "X.GroupDifficulty"
+                } ),
+                fixed: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "X.FixedDifficulty"
+                } ),
+            } ),
         } );
     }
 

@@ -71,6 +71,14 @@ export default class AbilityTemplate extends SystemDataModel {
                     initial: "none",
                     label: "X.GroupDifficulty"
                 } ),
+                fixed: new foundry.data.fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "X.FixedDifficulty"
+                } ),
             } ),
         } );
     }

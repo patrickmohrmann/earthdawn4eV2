@@ -126,10 +126,12 @@ export default class ActorEd extends Actor {
   async rollAbility( ability, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityFinalStep = attributeStep + ability.system.level;
+    const difficulty = await this.getTarget( ability );
     const edRollOptions = new EdRollOptions( {
       rollType: "action",
       step: { base: abilityFinalStep },
       strain: { base: ability.system.strain},
+      target: { base: difficulty },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { pointsUsed: ability.system.devotionRequired ? 1: 0, pointsRequired: ability.system.devotionRequired, available: this.system.devotion.value, step: this.system.devotion.step },
       chatFlavor: ability.name + " Test",
@@ -137,6 +139,58 @@ export default class ActorEd extends Actor {
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
+
+  async getTarget( ability ) {
+
+    let difficulty = 0;
+    let currentTarget = game.user.targets.first()?.actor;
+    let currentTargets = [...game.user.targets.map( ( t ) => t.actor )];
+    let numTargets = game.user.targets.size;
+    let targetDifficultySetting = ability.system.difficulty.target
+    let groupDiffciultySetting = ability.system.difficulty.group
+    let fixedDifficultySetting = ability.system.difficulty.fixed
+
+    if ( numTargets <= 0 || targetDifficultySetting === "none" ) {
+      difficulty = 0; 
+    } else {
+      let baseDifficulty = 0;
+      let additionalTargetDifficulty = 0;
+
+      if ( fixedDifficultySetting > 0 ) {
+        difficulty = fixedDifficultySetting;
+      }
+      else if ( groupDiffciultySetting ) {
+        switch ( groupDiffciultySetting ) {
+          case 'hightestX':
+            additionalTargetDifficulty = numTargets - 1;
+          case 'highestOfGroup':
+            baseDifficulty = _getAggregatedDefense(currentTargets, targetDifficultySetting, Math.max);
+            break;
+          case 'lowestX':
+            additionalTargetDifficulty = numTargets - 1;
+          case 'lowestOfGroup':
+            baseDifficulty = _getAggregatedDefense(currentTargets, targetDifficultySetting, Math.min);
+            break;
+        }
+        difficulty = baseDifficulty + additionalTargetDifficulty;
+      } else {
+        difficulty = currentTarget?.getModifiedDefense( targetDifficultySetting ) ?? 0;
+      }
+
+        return difficulty;
+      }
+
+      /**
+       * @param { Array } targets array of all targets
+       * @param { string } targetDefenseType defense 
+       * @param { any } aggregate ???
+       * @returns { number} return  
+       */
+      function _getAggregatedDefense(targets, targetDefenseType, aggregate = Math.max) {
+        return targets.length > 0 ? aggregate( ...targets.map( ( t ) => t.system.characteristics.defenses[targetDefenseType].value ) ) : 0;
+      }
+    }
+      
 
   /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
