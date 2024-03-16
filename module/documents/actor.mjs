@@ -151,7 +151,12 @@ export default class ActorEd extends Actor {
     let fixedDifficultySetting = ability.system.difficulty.fixed
 
     if ( numTargets <= 0 || targetDifficultySetting === "none" ) {
-      difficulty = 0; 
+      if ( fixedDifficultySetting > 0 ) {
+        difficulty = fixedDifficultySetting;
+      } else {
+        difficulty = 0; 
+      }
+      
     } else {
       let baseDifficulty = 0;
       let additionalTargetDifficulty = 0;
@@ -159,7 +164,7 @@ export default class ActorEd extends Actor {
       if ( fixedDifficultySetting > 0 ) {
         difficulty = fixedDifficultySetting;
       }
-      else if ( groupDiffciultySetting ) {
+      else if ( groupDiffciultySetting !== "none" ) {
         switch ( groupDiffciultySetting ) {
           case 'hightestX':
             additionalTargetDifficulty = numTargets - 1;
@@ -174,10 +179,10 @@ export default class ActorEd extends Actor {
         }
         difficulty = baseDifficulty + additionalTargetDifficulty;
       } else {
-        difficulty = currentTarget?.getModifiedDefense( targetDifficultySetting ) ?? 0;
+        difficulty = currentTarget?.system.characteristics.defenses[targetDifficultySetting].value ?? 0;
       }
 
-        return difficulty;
+        
       }
 
       /**
@@ -186,9 +191,10 @@ export default class ActorEd extends Actor {
        * @param { any } aggregate ???
        * @returns { number} return  
        */
-      function _getAggregatedDefense(targets, targetDefenseType, aggregate = Math.max) {
+      function _getAggregatedDefense( targets, targetDefenseType, aggregate = Math.max ) {
         return targets.length > 0 ? aggregate( ...targets.map( ( t ) => t.system.characteristics.defenses[targetDefenseType].value ) ) : 0;
       }
+      return difficulty;
     }
       
 
