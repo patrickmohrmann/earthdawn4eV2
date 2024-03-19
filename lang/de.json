@@ -540,6 +540,13 @@
                 "chatAvatarConfiguration":                          "Avatar der Konfiguration",
                 "chatAvatarToken":                                  "Avatar des Token"
             },
+            "CharGen": {
+                "charGenHeader":                                    "Character Generierung (Global)",
+                "attributePoints":                                  "Attributespunkte",
+                "hintAttributePoints":                              "Wie viele Attributspunkte können während der Charactergenerierung verwendet werden (default 25)",
+                "maxRanks":                                         "Maximale Ränge",
+                "hintMaxRanks":                                     "Was ist der maximal Rang während der Charaktergenerierung (default 3)"
+            },
             "StepTable": {
                 "editionClassic":                                   "Klassik Edition",
                 "editionfirst":                                     "Erste Edition",
@@ -557,19 +564,17 @@
             "LpTracking": {
                 "allTalents":                                       "Alle Talente",
                 "allTalentsHouseRule":                              "Alle Talente - Hausregel",
-                "automaticSilverReduction":                         "Silber wird automatisch verrechnet",
                 "disciplineTalents":                                "Nur Disciplin Talente",
                 "freePerCircle":                                    "Eine kostenlose Steigerung pro Kreis.",
                 "hintAttributesOption":                             "Welche option soll für die Steigerung von Attributen gewählt werden?",
-                "hintUsed":                                         "Soll Legendenpunkt Verwaltung vom System unterstütz werden?",
+                "hintUsed":                                         "Soll die Verwaltung von Legendenpunkten vom System unterstützt werden?",
                 "hintTalents":                                      "Die Auswahl legt die Voraussetzungen für einen Möglichen Kreisaufstieg fest.",
-                "hintAutomaticSilverOption":                        "Soll Silber automatische beim erhöhen abgezogen werden?",
+                "hintAutomaticSilverOption":                        "Soll Silber automatische beim steigern abgezogen werden?",
                 "lpTalentsRequirement":                             "Talentvoraussetzungen für den Kreisaufstieg",
                 "lpTrackingAttributeOptions":                       "Attribut Steigerung",
                 "lpTrackingHeader":                                 "Legendenpunkte Optionen (Global)",
                 "lpTrackingUsed":                                   "Legendenpunkte Verwaltung",
                 "lpTrackingRemoveSilverOption":                     "Automatische Silber Reduzierung",
-                "notAutomaticSilverReduction":                      "Silber wird nicht automatische verrechnet",
                 "noTracking":                                       "keine Legendenpunkte Verrechnung",
                 "spendLp":                                          "Kostenpflichtige Steigerung (Standard)",
                 "spendLpPerCircle":                                 "Eine kostenpflichtige Steigerung pro Kreis.",
@@ -578,9 +583,7 @@
             "Encumbrance": {
                 "encumbrance":                                      "Belastung",
                 "encumberedHeader":                                 "Belastung (Global)",
-                "encumbranceVisualizeOnly":                         "Belastung wird nur angezeigt, hat jedoch keine Bewandnis",
-                "encumbranceWithEffects":                           "Belastung wird berechnet und hat Auswirkungen auf den Akteur",
-                "encumbranceHint":                                  "Soll die Belastung der Spielercharaktere nur angezeigt werden, oder soll Belastung genutzt werden."
+                "encumbranceHint":                                  "Sollen die Belastungsregeln verwendet werden?"
             },
             "SpecificSettingOptions": {
                 "changelog":                                        "Änderungsprotokoll",
