@@ -1,10 +1,15 @@
 <div class="card__ability one-line__vertical-align">
+    {{#if (eq this.system.usableItem.usableItemSelector true)}}
     <span class="card__icon rollable-icons">
         <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
         <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
         <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-
     </span>
+    {{else}}
+    <span class="card__icon--visible">
+        <img class="item__image--visible" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+    </span>
+    {{/if }}
     <span class="card__name">
         {{name}}
     </span>

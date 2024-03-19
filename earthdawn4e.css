@@ -199,6 +199,16 @@ ul.no-bullets {
   padding: 0;
   margin: 0;
 }
+.card__ability .card__icon .item__image,
+.card__ability .card__icon--visible .item__image,
+.card__ability .card__icon .item__image--visible,
+.card__ability .card__icon--visible .item__image--visible,
+.card__ability .card__icon .roll-icon__hover,
+.card__ability .card__icon--visible .roll-icon__hover,
+.card__ability .card__icon .roll-icon__pointer,
+.card__ability .card__icon--visible .roll-icon__pointer {
+  border: none;
+}
 @font-face {
   font-family: 'ArnoPro Bold';
   src: url('fonts/ArnoPro-Bold.otf');
@@ -543,13 +553,6 @@ ul.no-bullets {
 }
 .form-group[data-setting-id="ed4e.lpTrackingUsed"] label,
 .form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
-  padding-top: 10px;
-}
-.form-group[data-setting-id="ed4e.charGenAttributePoints"] {
-  border-top: 1px solid black;
-}
-.form-group[data-setting-id="ed4e.charGenAttributePoints"] label,
-.form-group[data-setting-id="ed4e.charGenAttributePoints"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.charGenHeader"] {
