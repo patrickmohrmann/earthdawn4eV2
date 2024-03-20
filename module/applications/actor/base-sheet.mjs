@@ -90,7 +90,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onLegendPointHistoryEarned( event ) {
     event.preventDefault();
-    this.actor.legendPointHistoryEarned();
+    const actor = this.actor;
+    this.actor.legendPointHistoryEarned( actor );
   }
   /**
    * Handle rolling an attribute test.

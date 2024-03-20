@@ -150,6 +150,11 @@ input.input__number-input {
   padding-top: 5px;
   height: 20px;
 }
+input.input__number-input--wide {
+  width: 100px;
+  padding-top: 5px;
+  height: 20px;
+}
 .one-line__vertical-align > * {
   line-height: 35px;
   vertical-align: middle;

@@ -6,7 +6,9 @@ import CharacterGenerationPrompt from "../applications/actor/character-generatio
 import { mapObject } from "../utils.mjs";
 
 import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
-
+import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
+import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
+import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -88,8 +90,9 @@ export default class ActorEd extends Actor {
   /**
    * Legend point History earned prompt trigger
    */
-  async legendPointHistoryEarned() {
-    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt();
+  async legendPointHistoryEarned( actor ) {
+    let history = await getLegendPointHistoryData( actor );
+    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt( history );
     this.#processHistoryEarned ( historyEarned );
   }
 
@@ -98,6 +101,8 @@ export default class ActorEd extends Actor {
       return;
     }
   }
+
+  
 
 
   /**
@@ -228,5 +233,15 @@ export default class ActorEd extends Actor {
           } )
       );
     }
+  }
+
+  async addLpTransaction( type, transactionData ) {
+    const oldTransactions = this.system.lp[type];
+    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new transactionModel( transactionData )
+
+    return this.update( { 
+      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
+    } )
   }
 }

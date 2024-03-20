@@ -1,35 +1,36 @@
 <div class="tab earned-tab" data-group="primary" data-tab="earned-tab">
-  earned
-  Add a plus button und die automatische anlege function ... hatte ich schon einmal
   <!-- Body -->
   <div class="lp-history__earned-body">
+    <label>{{localize "X-Total LP"}}</label>
+    <input class="input__number-input--wide" name="this.object.system.lp.total" type="text" value="{{this.object.system.lp.total}}" data-dtype="String" />
     <table class="input--centered">
       <thead>
         <tr>
           <th>
-            date
+            {{localize "X-Date"}}
           </th>
           <th>
-            description
+            {{localize "X-Description"}}
           </th>
           <th>
-            Legend Points
+            {{localize "X-LP"}}
           </th>
           <th>
-            Editors
+            {{localize "X-Editors"}}
           </th>
         </tr>
       </thead>
       <tbody>
+        {{#each this.object.system.lp.earnings as | this key | }}
         <tr>
           <td>
-            2024-01-01 17:23
+            <input class="" name="date" type="text" value="{{this.date}}" data-dtype="String" />
           </td>
           <td>
-            Reward 1
+            <input class="" name="description" type="text" value="{{this.description}}" data-dtype="String" />
           </td>
           <td>
-            100
+            <input class="" name="amount" type="text" value="{{this.amount}}" data-dtype="String" />
           </td>
           <td><a class="item-control item-display" title="Display Item">
               <i class="fas fa-comments"></i>
@@ -42,72 +43,9 @@
             </a>
           </td>
         </tr>
-        <tr>
-          <td>
-            2024-02-01 17:23
-          </td>
-          <td>
-            Reward 2
-          </td>
-          <td>
-            200
-          </td>
-          <td><a class="item-control item-display" title="Display Item">
-              <i class="fas fa-comments"></i>
-            </a>
-            <a class="item-control item-delete" title="Delete Item">
-              <i class="fas fa-trash"></i>
-            </a>
-            <a class="item-control item-edit" title="Edit Item">
-              <i class="fas fa-edit"></i>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2024-03-01 17:23
-          </td>
-          <td>
-            Reward 3
-          </td>
-          <td>
-            300
-          </td>
-          <td>
-            <a class="item-control item-display" title="Display Item">
-              <i class="fas fa-comments"></i>
-            </a>
-            <a class="item-control item-delete" title="Delete Item">
-              <i class="fas fa-trash"></i>
-            </a>
-            <a class="item-control item-edit" title="Edit Item">
-              <i class="fas fa-edit"></i>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2024-04-01 17:23
-          </td>
-          <td>
-            Reward 4
-          </td>
-          <td>
-            400
-          </td>
-          <td>
-            <a class="item-control item-display" title="Display Item">
-              <i class="fas fa-comments"></i>
-            </a>
-            <a class="item-control item-delete" title="Delete Item">
-              <i class="fas fa-trash"></i>
-            </a>
-            <a class="item-control item-edit" title="Edit Item">
-              <i class="fas fa-edit"></i>
-            </a>
-          </td>
-        </tr>
+        {{/each}}
       </tbody>
     </table>
+
   </div>
 </div>

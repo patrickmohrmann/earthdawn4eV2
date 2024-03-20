@@ -66,13 +66,9 @@ export default class PcData extends NamegiverTemplate.mixin(
                 initial: 0,
                 integer: true
             } ),
-            lp: new foundry.data.fields.EmbeddedDataField(
-                LpTransactionData,
-                {
-                    required: true,
-                }
-            ),
+            
         } );
+        
         this.mergeSchema( superSchema, {
             durabilityBonus: new foundry.data.fields.NumberField( {
                 required: true,
@@ -82,6 +78,14 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 label: "ED.General.durabilityBonus"
             } ),
+            lp: new foundry.data.fields.EmbeddedDataField(
+                LpTrackingData,
+                {
+                    required: true,
+                    initial: new LpTrackingData(),
+                }
+                
+            ),
             legendPointsEarned: new foundry.data.fields.ArrayField(
                 new foundry.data.fields.SchemaField( {
                     date: new foundry.data.fields.StringField( {
