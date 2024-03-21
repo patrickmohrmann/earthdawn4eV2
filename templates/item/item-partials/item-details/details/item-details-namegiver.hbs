@@ -1,7 +1,14 @@
 <div>
     <h3>{{localize "ED.Item.General.details"}}</h3>
+    {{!-- weight Multiplier--}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.General.weightMultiplier"}}</label>
         <input class="input__number-input" type="number" name="system.weightMultiplier" value="{{item.system.weightMultiplier}}">
     </div>
+    {{!-- Tail Attack --}}
+    <div class="item-data__input--line">
+    <label class="label__left">{{localize "X-TailAttack"}}:</label>
+    <input class="item-data__checkbox--line" type="checkbox" name="system.tailAttack" {{checked
+            item.system.tailAttack}}>
+            </div>
 </div>
