@@ -1,7 +1,8 @@
 import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import MovementFields from '../actor/templates/movement.mjs';
-import { MappingField } from "../fields.mjs";
+import { DocumentUUIDField, IdentifierField, MappingField } from "../fields.mjs";
+import AbilityTemplate from "../item/templates/ability.mjs";
 
 /**
  * Data model template with information on namegiver items.
@@ -25,6 +26,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
             attributeValues: new MappingField(
               new foundry.data.fields.NumberField( {
@@ -56,6 +58,30 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 positive: true,
                 label: "ED.Item.Namegiver.weightMultiplier"
             } ),
+            abilities: new MappingField(
+                new fields.ArrayField(
+                  new DocumentUUIDField(
+                    AbilityTemplate,
+                    {
+                      label: "ED.Ability",
+                      hint: "ED.AnAbilityGrantedOnThisLevel"
+                    }
+                  ),
+                  {
+                    required: true,
+                    label: "ED.advancement.abilityPoolLevel",
+                    hint: "ED.TheSetOfAbilitiesGrantedOnThisLevel"
+                  }
+                ),
+                {
+                  initialKeys: CONFIG.ED4E.abilityPools,
+                  initialKeysOnly: true,
+                  required: true,
+                  nullable: false,
+                  label: "ED.advancement.levelAbilities",
+                  hint: "good stoff"
+                }
+              ),
         } );
     }
 

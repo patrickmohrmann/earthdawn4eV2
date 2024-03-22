@@ -6,12 +6,12 @@ import ClassTemplate from "../../data/item/templates/class.mjs";
  * @augments {ItemSheet}
  */
 export default class ItemSheetEd extends ItemSheet {
-  constructor(options = {}) {
-    super(options);
+  constructor( options = {} ) {
+    super( options );
 
     // mapping of drop event target classes to handling function
     this._dropCallbackMapping = {
-      'abilities-pool': this._onDropAdvancementAbility.bind( this ),
+      'abilities-pool': this._onDropPoolAbility.bind( this ),
       'delete-pool-ability': this._onDeletePoolAbility.bind( this ),
     };
   }
@@ -222,24 +222,29 @@ export default class ItemSheetEd extends ItemSheet {
     }
   }
 
-  _onDropAdvancementAbility( event ) {
+  _onDropPoolAbility( event ) {
     event.preventDefault();
-
+    const itemType = this.item.type;
     const transferData = JSON.parse( event.dataTransfer.getData( 'text/plain' ) );
     const poolType = event.target.dataset.poolType;
-    const level = event.target.closest( '.advancement-level' )?.dataset.level;
+    let level = 0;
+    if ( itemType === "discipline" || itemType === "questor" || itemType === "path" ) {
+    level = event.target.closest( '.advancement-level' )?.dataset.level;
+    }
 
-    this.item.addAdvancementAbilities( transferData.uuid, poolType, level );
+    this.item.addPoolAbilities( transferData.uuid, poolType, itemType, level );
   }
 
   _onDeletePoolAbility( event ) {
     event.preventDefault();
-
+    const itemType = this.item.type;
     const transferData = JSON.parse( event.dataTransfer.getData( 'text/plain' ) );
     const poolType = transferData["ed-poolType"];
-    const level = transferData["ed-advancementLevel"];
-
-    this.item.removeAdvancementAbility( transferData.uuid, poolType, level );
+    let level = 0;
+    if ( itemType === "discipline" || itemType === "questor" || itemType === "path" ) {
+    level = transferData["ed-advancementLevel"];
+  }
+    this.item.removePoolAbility( transferData.uuid, poolType, itemType, level );
   }
 
   /* ----------------------------------------------------------------------- */

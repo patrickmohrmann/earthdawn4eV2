@@ -4,4 +4,32 @@
         <label>{{localize "ED.Item.General.weightMultiplier"}}</label>
         <input class="input__number-input" type="number" name="system.weightMultiplier" value="{{item.system.weightMultiplier}}">
     </div>
+
+
+
+
+
+
+
+
+
+
+
+    <h4>{{localize "X-Abilities"}}</h4>
+
+     <!-- Special Abilities -->
+          <div class="special-abilities">
+            <p class="flexrow">
+              <label>{{localize "X-Special Abilities"}}</label>
+              <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="special">
+                {{#each this.abilities.special}}
+                  {{{ed-linkForUuid this}}}
+                {{else}}
+                  {{localize
+                    "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
+                {{/each}}
+              </span>
+            </p>
+          </div>
+
 </div>

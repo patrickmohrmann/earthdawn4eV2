@@ -32,38 +32,49 @@ export default class ItemEd extends Item {
         }
     }
 
-    async addAdvancementAbilities( abilityUUID, poolType, level ) {
-        if ( level ) {
-            const levelIndex = level - 1 ;
-            const levelModel = this.system.advancement.levels[levelIndex];
-            const abilities = levelModel.abilities;
-            const abilitiesPool = abilities[poolType];
-            levelModel.updateSource( {
-                abilities: {
-                    ...abilities,
-                    [poolType]: abilitiesPool.concat( abilityUUID ),
-                },
-            } )
+    // eslint-disable-next-line max-params
+    async addPoolAbilities( abilityUUID, poolType, itemType, level ) {
+        if ( itemType === "discipline" || itemType === "questor" || itemType === "path" ) {
+            if ( level ) {
+                const levelIndex = level - 1 ;
+                const levelModel = this.system.advancement.levels[levelIndex];
+                const abilities = levelModel.abilities;
+                const abilitiesPool = abilities[poolType];
+                levelModel.updateSource( {
+                    abilities: {
+                        ...abilities,
+                        [poolType]: abilitiesPool.concat( abilityUUID ),
+                    },
+                } )
 
-            const newLevels = this.system.advancement.levels.toSpliced(
-              levelIndex, 1, levelModel
-            );
-            const changes = {
-                "system.advancement.levels": newLevels,
-            };
+                const newLevels = this.system.advancement.levels.toSpliced(
+                levelIndex, 1, levelModel
+                );
+                const changes = {
+                    "system.advancement.levels": newLevels,
+                };
 
-            return this.update( changes );
-        } else {
-            const abilitiesPool = this.system.advancement.abilityOptions[poolType];
-            const changes = {
-                [`system.advancement.abilityOptions.${poolType}`]: abilitiesPool.concat( abilityUUID ),
+                return this.update( changes );
+            } else {
+                const abilitiesPool = this.system.advancement.abilityOptions[poolType];
+                const changes = {
+                    [`system.advancement.abilityOptions.${poolType}`]: abilitiesPool.concat( abilityUUID ),
+                }
+
+                return this.update( changes );
             }
+        } else if ( itemType === "namegiver" ) {
+            const abilitiesPool = this.system.abilities[poolType];
+                const changes = {
+                    [`system.abilities.${poolType}`]: abilitiesPool.concat( abilityUUID ),
+                }
 
-            return this.update( changes );
+                return this.update( changes );
         }
     }
 
-    async removeAdvancementAbility( abilityUUID, poolType, level ) {
+    // eslint-disable-next-line max-params
+    async removePoolAbility( abilityUUID, poolType, itemType, level ) {
         if ( level ) {
             const levelIndex = level - 1 ;
             const levelModel = this.system.advancement.levels[levelIndex];
