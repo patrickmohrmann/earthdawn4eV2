@@ -6,12 +6,12 @@ import LpTrackingData from "../../data/advancement/lp-tracking.mjs";
  * @param {object} inputs actor data
  * @returns 
  */
-export async function getLegendPointHistoryData( inputs ) {
-  return new Promise( ( resolve ) => {
-    let history = new LegendPointHistoryEarnedPrompt( inputs, resolve );
-    history.render( true );
-  } )
-}
+// export async function getLegendPointHistoryData( inputs ) {
+//   return new Promise( ( resolve ) => {
+//     let history = new LegendPointHistoryEarnedPrompt( inputs, resolve );
+//     history.render( true );
+//   } )
+// }
 
 /**
  * The application responsible for handling Legend Point History of Earned Points
@@ -25,8 +25,10 @@ export async function getLegendPointHistoryData( inputs ) {
  */
 export default class LegendPointHistoryEarnedPrompt extends FormApplication {
   constructor( legendpointHistoryEarned , options = {} ) {
-    legendpointHistoryEarned ??= new LpTrackingData()
+     legendpointHistoryEarned ??= new LpTrackingData();
     super( legendpointHistoryEarned );
+    this.actor = options.actor;
+    this.resolve = options.resolve;
   }
 
   /**
@@ -35,7 +37,11 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
    * @param {object} [options]        Options to pass to the constructor.
    */
   static async waitPrompt( data, options = {} ) {
-    data ??= new LpTrackingData();
+    data ??= new LpTrackingData(); 
+    return new Promise( ( resolve ) => {
+      options.resolve = resolve;
+      new this( data, options ) .render( true, { focus: true } );
+    } );
   }
 
   static get defaultOptions() {
@@ -71,15 +77,12 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
   activateListeners( html ) {
     super.activateListeners( html );
 
-    $( this.form.querySelector( 'button.ok' ) ).on( 'click', this.close.bind( this ) );
+    $( this.form.querySelector( 'button.ok' ) ).on( 'click', this.ok.bind( this ) );
+
   }
 
   async _updateObject( event, formData ) {
     const data = foundry.utils.expandObject( formData );
-    data.namegiver ||= null;
-
-    // Reset selected class if class type changed
-    if ( data.isAdept !== this.object.isAdept ) data.selectedClass = null;
 
     this.object.updateSource( data );
 
@@ -92,4 +95,16 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
     this.resolve?.( null );
     return super.close( options );
   }
+
+  /** @inheritDoc */
+  async ok( event ) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    await this.submit( { preventRender: true } );
+    this.resolve?.( this.object );
+    return this.close( );
+  }
+
 }

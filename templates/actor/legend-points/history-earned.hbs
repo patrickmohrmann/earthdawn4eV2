@@ -2,7 +2,7 @@
   <!-- Body -->
   <div class="lp-history__earned-body">
     <label>{{localize "X-Total LP"}}</label>
-    <input class="input__number-input--wide" name="this.object.system.lp.total" type="text" value="{{this.object.system.lp.total}}" data-dtype="String" />
+    {{!-- <input class="input__number-input--wide" name="this.object.system.lp.total" type="text" value="{{this.object.system.lp.total}}" data-dtype="String" /> --}}
     <table class="input--centered">
       <thead>
         <tr>
@@ -21,16 +21,17 @@
         </tr>
       </thead>
       <tbody>
-        {{#each this.object.system.lp.earnings as | this key | }}
+        {{log this.object}}
+        {{#each this.object.earnings}}
         <tr>
           <td>
-            <input class="" name="date" type="text" value="{{this.date}}" data-dtype="String" />
+            <input class="" name={{concat "earnings." @index ".date"}} type="text" value="{{this.date}}" data-dtype="String" />
           </td>
           <td>
-            <input class="" name="description" type="text" value="{{this.description}}" data-dtype="String" />
+            <input class="" name={{concat "earnings." @index ".description"}} type="text" value="{{this.description}}" data-dtype="String" data-transaction-index="{{@index}}" />
           </td>
           <td>
-            <input class="" name="amount" type="text" value="{{this.amount}}" data-dtype="String" />
+            <input class="" name={{concat "earnings." @index ".amount"}} type="number" value="{{this.amount}}" data-dtype="Number" />
           </td>
           <td><a class="item-control item-display" title="Display Item">
               <i class="fas fa-comments"></i>

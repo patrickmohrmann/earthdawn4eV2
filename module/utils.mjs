@@ -256,7 +256,7 @@ export function renameKeysWithPrefix(obj) {
  * @param {any} defaultValue  The value to return if the given key does not exist in the `object`.
  * @returns {any}             The value of the given key in the object.
  */
-function resolvePath( object, path, defaultValue ){
+export function resolvePath( object, path, defaultValue ){
   return path.split( '.' ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
 }
 

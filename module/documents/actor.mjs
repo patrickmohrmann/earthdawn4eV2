@@ -8,7 +8,8 @@ import { mapObject } from "../utils.mjs";
 import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
-import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
+import LpTrackingData from "../data/advancement/lp-tracking.mjs";
+// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -90,20 +91,11 @@ export default class ActorEd extends Actor {
   /**
    * Legend point History earned prompt trigger
    */
-  async legendPointHistoryEarned( actor ) {
-    let history = await getLegendPointHistoryData( actor );
-    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt( history );
-    this.#processHistoryEarned ( historyEarned );
+  async legendPointHistoryEarned( ) {
+    // let history = await getLegendPointHistoryData( actor );
+    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), {actor: this} );
+    return this.update( {system: { lp: lpUpdateData }} )
   }
-
-  #processHistoryEarned( historyEarned ) {
-    if ( historyEarned ) {
-      return;
-    }
-  }
-
-  
-
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
