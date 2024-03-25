@@ -33,6 +33,13 @@
             {{selectOptions config.tier selected=item.system.tier localize=true }}
         </select>
     </div>
+    {{!-- Tier --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
+        <select name="system.talentType">
+            {{selectOptions config.talentType selected=item.system.talentType localize=true }}
+        </select>
+    </div>
 </div>
 <div class="item__right--main item-sheet__editor">
     <h3>{{localize "ED.Item.General.description"}}</h3>
