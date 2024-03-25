@@ -56,6 +56,11 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 positive: true,
                 label: "ED.Item.Namegiver.weightMultiplier"
             } ),
+            tailAttack: new foundry.data.fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "X-TailAttack"
+            } ),
         } );
     }
 
