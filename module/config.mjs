@@ -129,6 +129,20 @@ ED4E.denomination = {
 }
 preLocalize( "denomination" );
 
+
+/**
+ * weapon Type
+ * @enum {string}
+ */
+ED4E.weaponType = {
+	melee:				"ED.Item.WeaponType.melee",
+	unarmed:			"ED.Item.WeaponType.unarmed",
+	missle:				"ED.Item.WeaponType.missle",
+	thrown:				"ED.Item.WeaponType.thrown",
+	meleeThrown:		"ED.Item.WeaponType.meleeThrown",
+}
+ preLocalize( "weaponType" );
+
 /**
  * Availability
  * @enum {string}
@@ -186,7 +200,7 @@ preLocalize( "damageType" );
  * @enum {string}
  */
 ED4E.tier = {
-	//none: 				"ED.General.none",
+	// none: 				"ED.General.none",
 	novice: 			"ED.Tier.novice",
 	journeyman: 		"ED.Tier.journeyman",
 	warden: 			"ED.Tier.warden",

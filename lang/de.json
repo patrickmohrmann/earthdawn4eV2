@@ -421,6 +421,13 @@
                     "strengthMinimum":                          "Min Str",
                     "weaponType":                               "Kategorie"
                 }
+            },
+            "WeaponType": {
+                "melee":				                        "Nahkampfwaffe",
+	            "unarmed":			                            "Waffenlos",
+	            "missle":				                        "Projektilwaffe",
+	            "thrown":				                        "Wurfwaffe",
+	            "meleeThrown":		                            "Nah- und Wurfwaffe"
             }
         },
         "LpTracking": {
