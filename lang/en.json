@@ -67,7 +67,7 @@
             "formulaDevotion":                                  "{amount}x Devotion (St {step})",
             "formulaExtraStep":                                 "{label} (St {step})",
             "Chat": {
-                "rollTypeHeading":                              "{rollType} by {roller}",
+                "testTypeHeading":                              "{testType} by {roller}",
                 "stepModifiers":                                "Step {step}",
                 "targetModifiers":                              "Difficulty {target}",
                 "baseValue":                                    "Base",
