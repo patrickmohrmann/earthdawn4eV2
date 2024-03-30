@@ -90,6 +90,10 @@ export default class PcData extends NamegiverTemplate.mixin(
     /*  Character Generation                        */
     /* -------------------------------------------- */
 
+    /**
+     *
+     * @return {Promise<ActorEd|void>}
+     */
     static async characterGeneration () {
         const generation = await CharacterGenerationPrompt.waitPrompt();
         if ( !generation ) return;
