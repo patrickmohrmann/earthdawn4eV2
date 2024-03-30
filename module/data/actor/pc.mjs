@@ -1,7 +1,8 @@
 import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
-import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from "../../utils.mjs";
+import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, sum, sumProperty } from "../../utils.mjs";
 import LpTransactionData from "../advancement/lp-transaction.mjs";
+import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
 
 /**
  * System data definition for PCs.
@@ -83,6 +84,52 @@ export default class PcData extends NamegiverTemplate.mixin(
             } ),
         } );
         return superSchema;
+    }
+
+    /* -------------------------------------------- */
+    /*  Character Generation                        */
+    /* -------------------------------------------- */
+
+    static async characterGeneration () {
+        const generation = await CharacterGenerationPrompt.waitPrompt();
+        if ( !generation ) return;
+
+        const attributeData = mapObject(
+          await generation.getFinalAttributeValues(),
+          ( attribute, value ) => [attribute, {initialValue: value}]
+        );
+        const additionalKarma = generation.availableAttributePoints;
+
+        const newActor = await this.constructor.create( {
+            name: "Rename me! I was just created",
+            type: "character",
+            system: {
+                attributes: attributeData,
+                karma: {
+                    freeAttributePoints: additionalKarma,
+                },
+            },
+        } );
+
+        const namegiverDocument = await generation.namegiverDocument;
+        const classDocument = await generation.classDocument;
+        const abilities = ( await generation.abilityDocuments ).map(
+          documentData => {
+              documentData.system.source.class = namegiverDocument.uuid;
+              return documentData;
+          }
+        );
+
+        await newActor.createEmbeddedDocuments( "Item", [
+            namegiverDocument,
+            classDocument,
+            ...abilities,
+        ] );
+
+        const actorApp = newActor.sheet.render( true, {focus: true} );
+        actorApp.activateTab("actor-notes-tab");
+
+        return newActor;
     }
 
     /* -------------------------------------------- */
