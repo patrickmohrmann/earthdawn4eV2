@@ -165,7 +165,7 @@ export default class ActorEd extends Actor {
       return;
     }
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.options.strain, "standard" );
+    if ( roll.options.strain.total ) this.takeDamage( roll.options.strain.total, "standard" );
     if (
         !this.#useResource( 'karma', roll.options.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
