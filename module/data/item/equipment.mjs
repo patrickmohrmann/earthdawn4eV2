@@ -12,20 +12,21 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            consumable: new foundry.data.fields.BooleanField( {
+            consumable: new fields.BooleanField( {
                 required: true,
                 label: "ED.Item.Equipment.consumable"
             } ),
             // different ammo types are availabel see issue #
-            ammoType: new foundry.data.fields.StringField( {
+            ammoType: new fields.StringField( {
                     required: true,
                     nullable: true,
                     blank: true,
                     initial: "",
                 label: "ED.Item.Equipment.ammoType"
             } ),
-            bundleSize: new foundry.data.fields.NumberField( {
+            bundleSize: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

@@ -9,8 +9,9 @@ export default class KnackTemplate extends SystemDataModel{
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            level: new foundry.data.fields.NumberField( {
+            level: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,

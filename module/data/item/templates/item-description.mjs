@@ -6,9 +6,10 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
 
     /** @inheritdoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return {
-            description: new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.HTMLField( {
+            description: new fields.SchemaField( {
+                value: new fields.HTMLField( {
                     required: true, 
                     nullable: true, 
                     label: "ED.Description"

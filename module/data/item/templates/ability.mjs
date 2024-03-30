@@ -13,25 +13,26 @@ import { DocumentUUIDField } from "../../fields.mjs";
 export default class AbilityTemplate extends SystemDataModel {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            action: new foundry.data.fields.StringField( {
+            action: new fields.StringField( {
                 required: true,
                 nullable: false,
                 blank: false,
                 initial: "standard",
                 label: "ED.Item.Ability.action"
             } ),
-            attribute: new foundry.data.fields.StringField( {
+            attribute: new fields.StringField( {
                 required: false,
                 nullable: true,
                 blank: true,
                 label: "ED.Item.Ability.attribute"
             } ),
-            source: new foundry.data.fields.SchemaField( {
+            source: new fields.SchemaField( {
                     class: new DocumentUUIDField( ClassTemplate, {
                         label: "ED.Item.Class.source"
                     } ),
-                    tier: new foundry.data.fields.StringField( {
+                    tier: new fields.StringField( {
                         nullable: false,
                         blank: false,
                         initial: "novice",
@@ -42,7 +43,7 @@ export default class AbilityTemplate extends SystemDataModel {
                     required: false
                 }
             ),
-            level: new foundry.data.fields.NumberField( {
+            level: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -50,7 +51,7 @@ export default class AbilityTemplate extends SystemDataModel {
                 integer: true,
                 label: "ED.Item.Ability.rank"
             } ),
-            strain: new foundry.data.fields.NumberField( {
+            strain: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

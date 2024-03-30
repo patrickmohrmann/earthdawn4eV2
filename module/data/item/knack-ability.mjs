@@ -17,25 +17,26 @@ export default class KnackAbilityData extends AbilityTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            sourceTalent: new foundry.data.fields.ForeignDocumentField( TalentData, {
+            sourceTalent: new fields.ForeignDocumentField( TalentData, {
                 idOnly: true,
                 label: "ED.Item.Knack.sourceTalent"
             } ),
             // TODO @Chris how do we do this
             // restrictions: [], // there will be several options possible see issue #212
             // requirements: [], // there will be several options possible see issue #212 
-            standardEffect: new foundry.data.fields.BooleanField( {
+            standardEffect: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Knack.standardEffect"
             } ),
-            maneuver: new foundry.data.fields.BooleanField( {
+            maneuver: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Knack.maneuver"
             } ),
-            extraSuccesses: new foundry.data.fields.NumberField( {
+            extraSuccesses: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

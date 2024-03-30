@@ -20,23 +20,24 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            weaponType: new foundry.data.fields.StringField( {
+            weaponType: new fields.StringField( {
                 required: true,
                 nullable: false,
                 initial: "melee",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
             } ), 
-            damage: new foundry.data.fields.SchemaField( {
-                attribute: new foundry.data.fields.StringField( {
+            damage: new fields.SchemaField( {
+                attribute: new fields.StringField( {
                     required: true,
                     nullable: false,
                     initial: "strength",
                     label: "ED.Item.Weapon.Label.damageAttribute",
                     hint: "ED.Item.Weapon.Hint.damageAttribute"
                 } ),
-                baseStep: new foundry.data.fields.NumberField( {
+                baseStep: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -46,7 +47,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                     hint: "ED.Item.Weapon.Hint.damageBaseStep"
                 } ),
             } ),
-            size: new foundry.data.fields.NumberField( {
+            size: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -57,7 +58,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Weapon.Label.size",
                 hint: "ED.Item.Weapon.Hint.size"
             } ),
-            strengthMinimum: new foundry.data.fields.NumberField( {
+            strengthMinimum: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 3,
@@ -66,7 +67,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Weapon.Label.strengthMinimum",
                 hint: "ED.Item.Weapon.Hint.strengthMinimum"
             } ),
-            dexterityMinimum: new foundry.data.fields.NumberField( {
+            dexterityMinimum: new fields.NumberField( {
                 required: true,
                 nullable: true,
                 min: 0,
@@ -74,8 +75,8 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Weapon.Label.dexterityMinimum",
                 hint: "ED.Item.Weapon.Hint.dexterityMinimum"
             } ),
-            range: new foundry.data.fields.SchemaField( {
-                short: new foundry.data.fields.NumberField( {
+            range: new fields.SchemaField( {
+                short: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -83,7 +84,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                     integer: true,
                     label: "ED.Item.ShipWeapon.rangeShort"
                 } ), 
-                long: new foundry.data.fields.NumberField( {
+                long: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -92,14 +93,14 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                     label: "ED.Item.ShipWeapon.rangeLong"
                 } ), 
             } ),
-            ammunition: new foundry.data.fields.NumberField( {
+            ammunition: new fields.NumberField( {
                 required: true,
                 nullable: true,
                 min: 0,
                 integer: true,
                 label: "ED.Item.Weapon.Label.ammunition"
             } ),
-            forgeBonus: new foundry.data.fields.NumberField( {
+            forgeBonus: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

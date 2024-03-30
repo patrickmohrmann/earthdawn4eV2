@@ -11,15 +11,16 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            action: new foundry.data.fields.StringField( {
+            action: new fields.StringField( {
                 required: true,
                 nullable: false,
                 blank: false,
                 initial: "standard",
                 label: "ED.Item.Power.action"
             } ), 
-            strain: new foundry.data.fields.NumberField( {
+            strain: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -27,7 +28,7 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 integer: true,
                 label: "ED.Item.Power.strain"
             } ),
-            powerStep: new foundry.data.fields.NumberField( {
+            powerStep: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -35,7 +36,7 @@ export default class NoneNamegiverPowerData extends SystemDataModel {
                 integer: true,
                 label: "ED.Item.Power.powerStep"
             } ),
-            damageStep: new foundry.data.fields.NumberField( {
+            damageStep: new fields.NumberField( {
                 required: false,
                 nullable: false,
                 min: 0,

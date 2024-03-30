@@ -11,8 +11,9 @@ export default class ManeuverData extends SystemDataModel.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            extraSuccesses: new foundry.data.fields.NumberField( {
+            extraSuccesses: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

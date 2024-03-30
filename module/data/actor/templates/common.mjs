@@ -9,9 +9,10 @@ export default class CommonTemplate extends SystemDataModel {
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            globalBonuses: new MappingField( new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.NumberField( {
+            globalBonuses: new MappingField( new fields.SchemaField( {
+                value: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     step: 1,
