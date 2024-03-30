@@ -165,10 +165,10 @@ export default class ActorEd extends Actor {
       return;
     }
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.edRollOptions.strain, "standard" );
+    this.takeDamage( roll.options.strain, "standard" );
     if (
-        !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
-        || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
+        !this.#useResource( 'karma', roll.options.karma.pointsUsed )
+        || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
       ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
     }
