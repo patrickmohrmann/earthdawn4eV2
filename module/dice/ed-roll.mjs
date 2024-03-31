@@ -67,7 +67,9 @@ export default class EdRoll extends Roll {
    * @type {number}
    */
   get total() {
-    return  Math.max( super.total, 1 );
+    return this.options.hasOwnProperty( "rollType" )
+      ? Math.max( super.total, 1 )
+      : super.total;
   }
 
   /**
