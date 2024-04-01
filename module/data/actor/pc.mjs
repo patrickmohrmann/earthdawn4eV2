@@ -135,6 +135,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         this.#prepareDerivedEncumbrance();
         this.#prepareDerivedKarma();
         this.#prepareDerivedDevotion();
+        // this.#prepareDerivedCurrentLp();
     }
 
     /* -------------------------------------------- */
@@ -265,7 +266,8 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedBloodMagic() {
         const bloodDamageItems = this.parent.items.filter(
-            ( item ) => item.system.hasOwnProperty( "bloodMagicDamage" ) && item.system.itemStatus.equipped,
+            ( item ) => ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type !== "path" && item.system.itemStatus.equipped ) || 
+            ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type === "path" ),
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );
@@ -282,7 +284,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
-        const mysticalBonus = sumProperty( shieldItems, 'system.defenseBonus.mystical');
+        const mysticalBonus = sumProperty( shieldItems, 'system.defenseBonus.mystical' );
 
         this.characteristics.defenses.physical.value = this.characteristics.defenses.physical.baseValue + physicalBonus;
         this.characteristics.defenses.mystical.value = this.characteristics.defenses.mystical.baseValue + mysticalBonus;
@@ -414,6 +416,29 @@ export default class PcData extends NamegiverTemplate.mixin(
             this.devotion.max = questor.system.level * 10;
         }
     }
+
+    // /**
+    //  * Prepare Legendpoint infromation calculation
+    //  */
+
+    // #prepareDerivedCurrentLp() {
+    //     const stingTotalLp = this.legendPoints.total;
+    //     const stringSpendLp = this.legendPoints.spend;
+    //     // const stringcurrentLp = this.legendPoints.current;
+
+    //     const totalLp = stingTotalLp.replaceAll( ".","" )
+    //     const totalLpNumber = Number( totalLp )
+    //     this.legendPoints.current = totalLpNumber - Number( stringSpendLp.replaceAll( ".","" ) );
+    //     if ( totalLp < 10000 ) {
+    //         this.legendPoints.status = 1
+    //     } else if ( totalLp >= 10000 && totalLp < 100000 ) {
+    //         this.legendPoints.status = 2
+    //     } else if ( totalLp >= 100000 && totalLp < 1000000 ) {
+    //         this.legendPoints.status = 3
+    //     } else if ( totalLp >= 1000000 ) {
+    //         this.legendPoints.status = 4
+    //     } 
+    // }
 
     /* -------------------------------------------- */
 
