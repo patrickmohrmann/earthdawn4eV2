@@ -150,8 +150,8 @@ input.input__number-input {
   padding-top: 5px;
   height: 20px;
 }
-input.input__number-input-big {
-  width: 60px;
+input.input__number-input--wide {
+  width: 100px;
   padding-top: 5px;
   height: 20px;
 }
@@ -1495,8 +1495,13 @@ form#document-create .checkbox:hover {
 .character-sheet .details__section {
   padding-right: 20px;
 }
-.legend-point__info {
-  text-align: center;
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons {
+  position: absolute;
+  bottom: 0;
+  margin-left: 450px;
+}
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons .button-group {
+  width: 100px;
 }
 .bookmarks-combat-modifier {
   top: 0;

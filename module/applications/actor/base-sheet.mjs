@@ -90,8 +90,10 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onLegendPointHistoryEarned( event ) {
     event.preventDefault();
-    this.actor.legendPointHistoryEarned();
+    this.actor.legendPointHistoryEarned( this.actor );
   }
+
+
   /**
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
@@ -178,7 +180,6 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.karmaRitual();
   }
 
-
   _onCardExpand( event ) {
     event.preventDefault();
 
@@ -189,5 +190,4 @@ export default class ActorSheetEd extends ActorSheet {
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
-
 }

@@ -5,8 +5,11 @@ import { DocumentCreateDialog } from "../applications/global/document-creation.m
 import CharacterGenerationPrompt from "../applications/actor/character-generation-prompt.mjs";
 import { mapObject } from "../utils.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/legend-point-history-earned-prompt.mjs"
-
+import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
+import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
+import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
+import LpTrackingData from "../data/advancement/lp-tracking.mjs";
+// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -88,17 +91,11 @@ export default class ActorEd extends Actor {
   /**
    * Legend point History earned prompt trigger
    */
-  async legendPointHistoryEarned() {
-    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt();
-    this.#processHistoryEarned ( historyEarned );
+  async legendPointHistoryEarned( ) {
+    // let history = await getLegendPointHistoryData( actor );
+    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), {actor: this} );
+    return this.update( {system: { lp: lpUpdateData }} )
   }
-
-  #processHistoryEarned( historyEarned ) {
-    if ( historyEarned ) {
-      return;
-    }
-  }
-
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
@@ -228,5 +225,15 @@ export default class ActorEd extends Actor {
           } )
       );
     }
+  }
+
+  async addLpTransaction( type, transactionData ) {
+    const oldTransactions = this.system.lp[type];
+    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new transactionModel( transactionData )
+
+    return this.update( { 
+      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
+    } )
   }
 }

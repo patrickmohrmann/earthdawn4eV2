@@ -2,6 +2,7 @@ import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from "../../utils.mjs";
 import LpTransactionData from "../advancement/lp-transaction.mjs";
+import LpTrackingData from "../advancement/lp-tracking.mjs";
 
 /**
  * System data definition for PCs.
@@ -65,13 +66,9 @@ export default class PcData extends NamegiverTemplate.mixin(
                 initial: 0,
                 integer: true
             } ),
-            lp: new foundry.data.fields.EmbeddedDataField(
-                LpTransactionData,
-                {
-                    required: true,
-                }
-            ),
+            
         } );
+        
         this.mergeSchema( superSchema, {
             durabilityBonus: new foundry.data.fields.NumberField( {
                 required: true,
@@ -81,6 +78,38 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 label: "ED.General.durabilityBonus"
             } ),
+            lp: new foundry.data.fields.EmbeddedDataField(
+                LpTrackingData,
+                {
+                    required: true,
+                    initial: new LpTrackingData(),
+                }
+                
+            ),
+            legendPointsEarned: new foundry.data.fields.ArrayField(
+                new foundry.data.fields.SchemaField( {
+                    date: new foundry.data.fields.StringField( {
+                        required: true,
+                        blank: false,
+                        nullable: false,
+                        initial: "date?"
+                    } ),
+                    description: new foundry.data.fields.StringField( {
+                        required: true,
+                        blank: true,
+                        nullable: false,
+                        initial: ""
+                    } ),
+                    lp: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        integer: true
+                    } ),
+                } )
+            )
         } );
         return superSchema;
     }

@@ -256,7 +256,7 @@ export function renameKeysWithPrefix(obj) {
  * @param {any} defaultValue  The value to return if the given key does not exist in the `object`.
  * @returns {any}             The value of the given key in the object.
  */
-function resolvePath( object, path, defaultValue ){
+export function resolvePath( object, path, defaultValue ){
   return path.split( '.' ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
 }
 
@@ -498,7 +498,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",
 
     // Build your own Legend
+    "systems/ed4e/templates/actor/legend-points/history.hbs",
     "systems/ed4e/templates/actor/legend-points/history-earned.hbs",
+    "systems/ed4e/templates/actor/legend-points/history-spend.hbs",
   ];
 
   const paths = {};
