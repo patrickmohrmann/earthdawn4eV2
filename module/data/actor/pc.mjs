@@ -1,7 +1,9 @@
 import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
-import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from "../../utils.mjs";
+import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, sum, sumProperty } from "../../utils.mjs";
 import LpTransactionData from "../advancement/lp-transaction.mjs";
+import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
+import LpTrackingData from "../advancement/lp-tracking.mjs";
 
 /**
  * System data definition for PCs.
@@ -73,6 +75,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 }
             ),
         } );
+        
         this.mergeSchema( superSchema, {
             durabilityBonus: new fields.NumberField( {
                 required: true,
@@ -82,8 +85,90 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 label: "ED.General.durabilityBonus"
             } ),
+            lp: new foundry.data.fields.EmbeddedDataField(
+                LpTrackingData,
+                {
+                    required: true,
+                    initial: new LpTrackingData(),
+                }
+                
+            ),
+            legendPointsEarned: new foundry.data.fields.ArrayField(
+                new foundry.data.fields.SchemaField( {
+                    date: new foundry.data.fields.StringField( {
+                        required: true,
+                        blank: false,
+                        nullable: false,
+                        initial: "date?"
+                    } ),
+                    description: new foundry.data.fields.StringField( {
+                        required: true,
+                        blank: true,
+                        nullable: false,
+                        initial: ""
+                    } ),
+                    lp: new foundry.data.fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        min: 0,
+                        step: 1,
+                        initial: 0,
+                        integer: true
+                    } ),
+                } )
+            )
         } );
         return superSchema;
+    }
+
+    /* -------------------------------------------- */
+    /*  Character Generation                        */
+    /* -------------------------------------------- */
+
+    /**
+     *
+     * @return {Promise<ActorEd|void>}
+     */
+    static async characterGeneration () {
+        const generation = await CharacterGenerationPrompt.waitPrompt();
+        if ( !generation ) return;
+
+        const attributeData = mapObject(
+          await generation.getFinalAttributeValues(),
+          ( attribute, value ) => [attribute, {initialValue: value}]
+        );
+        const additionalKarma = generation.availableAttributePoints;
+
+        const newActor = await this.constructor.create( {
+            name: "Rename me! I was just created",
+            type: "character",
+            system: {
+                attributes: attributeData,
+                karma: {
+                    freeAttributePoints: additionalKarma,
+                },
+            },
+        } );
+
+        const namegiverDocument = await generation.namegiverDocument;
+        const classDocument = await generation.classDocument;
+        const abilities = ( await generation.abilityDocuments ).map(
+          documentData => {
+              documentData.system.source.class = namegiverDocument.uuid;
+              return documentData;
+          }
+        );
+
+        await newActor.createEmbeddedDocuments( "Item", [
+            namegiverDocument,
+            classDocument,
+            ...abilities,
+        ] );
+
+        const actorApp = newActor.sheet.render( true, {focus: true} );
+        actorApp.activateTab("actor-notes-tab");
+
+        return newActor;
     }
 
     /* -------------------------------------------- */

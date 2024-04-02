@@ -150,8 +150,8 @@ input.input__number-input {
   padding-top: 5px;
   height: 20px;
 }
-input.input__number-input-big {
-  width: 60px;
+input.input__number-input--wide {
+  width: 100px;
   padding-top: 5px;
   height: 20px;
 }
@@ -558,6 +558,13 @@ ul.no-bullets {
 }
 .form-group[data-setting-id="ed4e.lpTrackingUsed"] label,
 .form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
+  padding-top: 10px;
+}
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] {
+  border-top: 1px solid black;
+}
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] label,
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] .form-fields {
   padding-top: 10px;
 }
 .form-group[data-setting-id="ed4e.charGenHeader"] {
@@ -1495,8 +1502,13 @@ form#document-create .checkbox:hover {
 .character-sheet .details__section {
   padding-right: 20px;
 }
-.legend-point__info {
-  text-align: center;
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons {
+  position: absolute;
+  bottom: 0;
+  margin-left: 450px;
+}
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons .button-group {
+  width: 100px;
 }
 .bookmarks-combat-modifier {
   top: 0;

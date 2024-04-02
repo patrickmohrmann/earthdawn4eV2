@@ -179,14 +179,21 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'localize: roll chat flavour',
         hint: 'localize: text that is added to the chatmessage when this call is put to chat',
       } ),
-      rollType: new fields.StringField( {
-
+      testType: new fields.StringField( {
         required: true,
         nullable: false,
         blank: true,
         initial: 'arbitrary',
+        label: 'localize: test type',
+        hint: 'localize: type of this roll test, like action or effect test, or arbitrary step roll',
+      } ),
+      rollType: new fields.StringField( {
+        required: false,
+        nullable: true,
+        blank: true,
+        initial: '',
         label: 'localize: roll type',
-        hint: 'localize: type of this roll, like action or effect test, or arbitrary step roll',
+        hint: 'localize: type of this roll, like attackMelee, or threadWeaving',
       } ),
     };
   }
