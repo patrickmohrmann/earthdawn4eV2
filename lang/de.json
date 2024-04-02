@@ -436,7 +436,7 @@
             "formulaDevotion":                                      "{amount}x Weihe (St {step})",
             "formulaExtraStep":                                     "{label} (St {step})",
             "Chat": {
-                "rollTypeHeading":                                  "{rollType} von {roller}",
+                "testTypeHeading":                                  "{testType} von {roller}",
                 "stepModifiers":                                    "Stufe {step}",
                 "targetModifiers":                                  "Schwierigkeit {target}",
                 "baseValue":                                        "Basis",

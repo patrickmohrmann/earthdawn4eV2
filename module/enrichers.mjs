@@ -9,7 +9,7 @@ import getDice from "./dice/step-tables.mjs";
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push(
     {
-      pattern: /@(?<type>roll)\(\s*(?<rollCmd>\/s\s*\d+(?:\s*\+\s*\d+)?)\s*\)(?:\((?<flavor>(?:[\u00C0-\u1FFF\u2C00-\uD7FF\w]+\s?)*)\))?(?:\((?<rollType>action|effect|damage)\))?/gi,
+      pattern: /@(?<type>roll)\(\s*(?<rollCmd>\/s\s*\d+(?:\s*\+\s*\d+)?)\s*\)(?:\((?<flavor>(?:[\u00C0-\u1FFF\u2C00-\uD7FF\w]+\s?)*)\))?(?:\((?<testType>action|effect|damage)\))?/gi,
       enricher: enrichString,
     },
   );
@@ -45,21 +45,21 @@ async function enrichRoll( match, options ) {
 
   const rollCmd = match.groups.rollCmd;
   const rollFlavor = match.groups.flavor;
-  const rollType = match.groups.rollType ?? 'arbitrary';
+  const testType = match.groups.testType ?? 'arbitrary';
 
   const textRollFormula = rollCmd.replace(
     "/s",
     game.i18n.localize( "ED.General.step"
     ) );
-  const textRollType = (rollType === 'arbitrary')
+  const textTestType = (testType === 'arbitrary')
     ? ""
-    : `${ED4E.rollTypes[rollType].label}:&nbsp;`;
+    : `${ED4E.testTypes[testType].label}:&nbsp;`;
 
   const rollElement = `
             <a class="journal--roll strong" data-roll-cmd="${rollCmd}" data-roll-flavor="${rollFlavor}" 
-              data-roll-type="${rollType}" title="${game.i18n.localize( "X.Click to roll" )}">
+              data-test-type="${testType}" title="${game.i18n.localize( "X.Click to roll" )}">
               <i class="fas fa-regular fa-dice"></i>
-              ${textRollType}${textRollFormula}&nbsp;${rollFlavor}
+              ${textTestType}${textRollFormula}&nbsp;${rollFlavor}
             </a>`
 
   return $( rollElement )[0];
@@ -90,7 +90,7 @@ async function rollAction( event ) {
         base: step,
       },
       chatFlavor: target.dataset.rollFlavor,
-      rollType: target.dataset.rollType,
+      testType: target.dataset.testType,
     } )
   );
   

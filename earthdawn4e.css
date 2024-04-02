@@ -560,6 +560,13 @@ ul.no-bullets {
 .form-group[data-setting-id="ed4e.lpTrackingUsed"] .form-fields {
   padding-top: 10px;
 }
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] {
+  border-top: 1px solid black;
+}
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] label,
+.form-group[data-setting-id="ed4e.charGenAttributePoints"] .form-fields {
+  padding-top: 10px;
+}
 .form-group[data-setting-id="ed4e.charGenHeader"] {
   margin-bottom: 0px;
 }
