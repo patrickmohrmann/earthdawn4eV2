@@ -62,6 +62,17 @@ export default class EdRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Return the total result of the Roll expression if it has been evaluated. This
+   * always evaluates to at least 1.
+   * @type {number}
+   */
+  get total() {
+    return this.options.hasOwnProperty( "rollType" )
+      ? Math.max( super.total, 1 )
+      : super.total;
+  }
+
+  /**
    * Is this roll a valid Earthdawn test?
    * @type {boolean}
    */
