@@ -10,9 +10,10 @@ export default class MovementFields {
    * @property {number} movement.climb  Climbing speed.
    */
   static get movement() {
+    const fields = foundry.data.fields;
     return {
-      movement: new foundry.data.fields.SchemaField( {
-          walk: new foundry.data.fields.NumberField( {
+      movement: new fields.SchemaField( {
+          walk: new fields.NumberField( {
             required: true,
             nullable: false,
             min: 0,
@@ -20,7 +21,7 @@ export default class MovementFields {
             integer: true,
             label: "ED.Item.Namegiver.walk"
           } ),
-          fly: new foundry.data.fields.NumberField( {
+          fly: new fields.NumberField( {
             required: true,
             nullable: false,
             min: 0,
@@ -28,7 +29,7 @@ export default class MovementFields {
             integer: true,
             label: "ED.Item.Namegiver.fly"
           } ),
-          swim: new foundry.data.fields.NumberField( {
+          swim: new fields.NumberField( {
             required: true,
             nullable: false,
             min: 0,
@@ -36,7 +37,7 @@ export default class MovementFields {
             integer: true,
             label: "ED.Item.Namegiver.swim"
           } ),
-          burrow: new foundry.data.fields.NumberField( {
+          burrow: new fields.NumberField( {
             required: true,
             nullable: false,
             min: 0,
@@ -44,7 +45,7 @@ export default class MovementFields {
             integer: true,
             label: "ED.Item.Namegiver.burrow"
           } ),
-          climb: new foundry.data.fields.NumberField( {
+          climb: new fields.NumberField( {
             required: true,
             nullable: false,
             min: 0,

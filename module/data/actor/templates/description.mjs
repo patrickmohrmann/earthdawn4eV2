@@ -6,10 +6,11 @@ export default class ActorDescriptionTemplate extends foundry.abstract.DataModel
 
     /** @inheritdoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return {
             // TODO: does chat properties/flavour fit in here?
-            description: new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.HTMLField( {
+            description: new fields.SchemaField( {
+                value: new fields.HTMLField( {
                     required: true, 
                     nullable: true, 
                     label: "ED.Description"

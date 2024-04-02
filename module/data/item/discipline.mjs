@@ -11,8 +11,9 @@ export default class DisciplineData extends ClassTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            durability: new foundry.data.fields.NumberField( {
+            durability: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -20,7 +21,7 @@ export default class DisciplineData extends ClassTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Class.durability"
             } ), 
-            spellcasting: new foundry.data.fields.BooleanField( {
+            spellcasting: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Class.spellcasting"

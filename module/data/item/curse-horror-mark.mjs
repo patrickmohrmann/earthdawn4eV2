@@ -16,8 +16,9 @@ export default class CurseHorrorMarkData extends SystemDataModel.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            step: new foundry.data.fields.NumberField( {
+            step: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -25,25 +26,25 @@ export default class CurseHorrorMarkData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.Curse.step"
             } ), 
-            type: new foundry.data.fields.StringField( {
+            type: new fields.StringField( {
                 required: true,
                 blank: false,
                 initial: "minor",
                 label: "ED.Item.Curse.curseType"
             } ),
-            active: new foundry.data.fields.BooleanField( {
+            active: new fields.BooleanField( {
                 required: true,
                 label: "ED.Item.Curse.curseActive"
             } ),
-            detected: new foundry.data.fields.BooleanField( {
+            detected: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Curse.curseDetected"
             } ),
-            source: new foundry.data.fields.ForeignDocumentField( SystemDataModel, {
+            source: new fields.ForeignDocumentField( SystemDataModel, {
                 idOnly: true,
             } ),
-            target: new foundry.data.fields.ForeignDocumentField( ActorEd, {
+            target: new fields.ForeignDocumentField( ActorEd, {
                 idOnly: true,
             } ),
         } );

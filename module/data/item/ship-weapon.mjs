@@ -15,8 +15,9 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            firePowerPoints: new foundry.data.fields.NumberField( {
+            firePowerPoints: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -24,7 +25,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.ShipWeapon.firePowerPoints"
             } ), 
-            crewWeapon: new foundry.data.fields.NumberField( {
+            crewWeapon: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -32,8 +33,8 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.ShipWeapon.crewWeapon"
             } ), 
-            range: new foundry.data.fields.SchemaField( {
-                short: new foundry.data.fields.NumberField( {
+            range: new fields.SchemaField( {
+                short: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -41,7 +42,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                     integer: true,
                     label: "ED.Item.ShipWeapon.rangeShort"
                 } ), 
-                long: new foundry.data.fields.NumberField( {
+                long: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -50,7 +51,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                     label: "ED.Item.ShipWeapon.rangeLong"
                 } ), 
             } ),
-            salvoCost: new foundry.data.fields.NumberField( {
+            salvoCost: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -58,7 +59,7 @@ export default class ShipWeaponData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.ShipWeapon.salvoCost"
             } ), 
-            characterDamage: new foundry.data.fields.NumberField( {
+            characterDamage: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

@@ -24,9 +24,10 @@ export default class PcData extends NamegiverTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         const superSchema = super.defineSchema();
         this.mergeSchema( superSchema.attributes.model.fields,  {
-            initialValue: new foundry.data.fields.NumberField( {
+            initialValue: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -35,7 +36,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 positive: true
             } ),
-            baseValue: new foundry.data.fields.NumberField( {
+            baseValue: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -44,12 +45,12 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 positive: true
             } ),
-            valueModifier: new foundry.data.fields.NumberField( {
+            valueModifier: new fields.NumberField( {
                 required: true,
                 step: 1,
                 initial: 0,
             } ),
-            value: new foundry.data.fields.NumberField( {
+            value: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -58,7 +59,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 positive: true
             } ),
-            timesIncreased: new foundry.data.fields.NumberField( {
+            timesIncreased: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -67,11 +68,16 @@ export default class PcData extends NamegiverTemplate.mixin(
                 initial: 0,
                 integer: true
             } ),
-            
+            lp: new fields.EmbeddedDataField(
+                LpTransactionData,
+                {
+                    required: true,
+                }
+            ),
         } );
         
         this.mergeSchema( superSchema, {
-            durabilityBonus: new foundry.data.fields.NumberField( {
+            durabilityBonus: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 step: 1,

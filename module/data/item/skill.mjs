@@ -11,8 +11,9 @@ export default class SkillData extends AbilityTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            skillType: new foundry.data.fields.StringField( {
+            skillType: new fields.StringField( {
                 required: true,
                 initial: "general",
                 options: ED4E.skillType,

@@ -18,9 +18,10 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            physical: new foundry.data.fields.SchemaField( {
-                armor: new foundry.data.fields.NumberField( {
+            physical: new fields.SchemaField( {
+                armor: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -28,7 +29,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Armor.physicalArmor"
                 } ), 
-                forgeBonus: new foundry.data.fields.NumberField( {
+                forgeBonus: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -37,8 +38,8 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                     label: "ED.Item.Armor.forgeBonusPhysical"
                 } ),
             } ),
-            mystical: new foundry.data.fields.SchemaField( {
-                armor: new foundry.data.fields.NumberField( {
+            mystical: new fields.SchemaField( {
+                armor: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -46,7 +47,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                     integer: true,
                     label: "ED.Item.Armor.mysticalArmor"
                 } ),
-                forgeBonus: new foundry.data.fields.NumberField( {
+                forgeBonus: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -55,7 +56,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                     label: "ED.Item.Armor.forgeBonusMystical"
                 } ),
             } ),
-            initiativePenalty: new foundry.data.fields.NumberField( {
+            initiativePenalty: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -63,13 +64,13 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Armor.initiativePenalty"
             } ),
-            piecemealArmor: new foundry.data.fields.SchemaField( {
-                selector: new foundry.data.fields.BooleanField( {
+            piecemealArmor: new fields.SchemaField( {
+                selector: new fields.BooleanField( {
                     required: true,
                     initial: false,
                     label: "ED.Item.Armor.piecemealArmor"
                 } ),
-                size: new foundry.data.fields.NumberField( {
+                size: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
