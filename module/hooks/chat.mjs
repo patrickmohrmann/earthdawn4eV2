@@ -1,4 +1,5 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
+import PcData from "../data/actor/pc.mjs";
 
 const cmdMapping = {
   char: triggerCharGen,
@@ -52,7 +53,7 @@ export default function () {
 /* -------------------------------------------- */
 
 function triggerCharGen(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  PcData.characterGeneration();
   return false;
 }
 

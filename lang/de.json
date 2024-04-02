@@ -541,8 +541,10 @@
                 "chatAvatarToken":                                  "Avatar des Token"
             },
             "CharGen": {
+                "autoOpenCharGen":                                  "Auto-Öffnen bei Charakter-Erstellung",
                 "charGenHeader":                                    "Character Generierung (Global)",
                 "attributePoints":                                  "Attributespunkte",
+                "hintAutoOpenCharGen":                              "Wenn ausgewählt wird bei der Erstellung eines neuen Charakters automatisch die interaktive Charaktergenerierung geöffnet.",
                 "hintAttributePoints":                              "Wie viele Attributspunkte können während der Charactergenerierung verwendet werden (default 25)",
                 "maxRanks":                                         "Maximale Ränge",
                 "hintMaxRanks":                                     "Was ist der maximal Rang während der Charaktergenerierung (default 3)"
