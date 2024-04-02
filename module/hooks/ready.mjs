@@ -155,23 +155,23 @@ async function _createDebugDocuments() {
         },
     }
 
-    for( const rollType of Object.keys( CONFIG.ED4E.rollTypes ) ) {
+    for( const testType of Object.keys( CONFIG.ED4E.testTypes ) ) {
         const rollOptions = new ed4e.dataModels.other.RollData( {
-            rollType: rollType,
+            testType: testType,
             chatFlavor: "This is debug custom flavor text for this roll. Great, he?",
             step: {
-                base: rollParameters[rollType].step,
+                base: rollParameters[testType].step,
                 modifiers: {
                     manual: 1
                 }
             },
             karma: {
-                pointsUsed: rollParameters[rollType].karma,
+                pointsUsed: rollParameters[testType].karma,
                 available: 0,
                 step: 9
             },
             devotion: {
-                pointsUsed: rollParameters[rollType].devotion,
+                pointsUsed: rollParameters[testType].devotion,
                 available: 0,
                 step: 4
             },

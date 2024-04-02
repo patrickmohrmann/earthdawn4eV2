@@ -3,8 +3,11 @@ import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/legend-point-history-earned-prompt.mjs"
-
+import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
+import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
+import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
+import LpTrackingData from "../data/advancement/lp-tracking.mjs";
+// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -46,17 +49,11 @@ export default class ActorEd extends Actor {
   /**
    * Legend point History earned prompt trigger
    */
-  async legendPointHistoryEarned() {
-    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt();
-    this.#processHistoryEarned ( historyEarned );
+  async legendPointHistoryEarned( ) {
+    // let history = await getLegendPointHistoryData( actor );
+    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), {actor: this} );
+    return this.update( {system: { lp: lpUpdateData }} )
   }
-
-  #processHistoryEarned( historyEarned ) {
-    if ( historyEarned ) {
-      return;
-    }
-  }
-
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
@@ -66,7 +63,7 @@ export default class ActorEd extends Actor {
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const edRollOptions = new EdRollOptions( {
-      rollType: "action",
+      testType: "action",
       step: { base: attributeStep },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
@@ -123,10 +120,10 @@ export default class ActorEd extends Actor {
       return;
     }
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.edRollOptions.strain, "standard" );
+    if ( roll.options.strain.total ) this.takeDamage( roll.options.strain.total, "standard" );
     if (
-        !this.#useResource( 'karma', roll.edRollOptions.karma.pointsUsed )
-        || !this.#useResource( 'devotion', roll.edRollOptions.devotion.pointsUsed )
+        !this.#useResource( 'karma', roll.options.karma.pointsUsed )
+        || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
       ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
     }
@@ -186,5 +183,15 @@ export default class ActorEd extends Actor {
           } )
       );
     }
+  }
+
+  async addLpTransaction( type, transactionData ) {
+    const oldTransactions = this.system.lp[type];
+    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new transactionModel( transactionData )
+
+    return this.update( { 
+      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
+    } )
   }
 }

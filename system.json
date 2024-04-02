@@ -61,6 +61,16 @@
       "banner": "systems/ed4e/assets/foundry/earthdawn-logo.png",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "macros",
+      "label": "macros",
+      "system": "ed4e",
+      "path": "systems/ed4e/packs/macros.db",
+      "type": "Macro",
+      "banner": "systems/ed4e/assets/foundry/earthdawn-logo.png",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -71,7 +81,8 @@
       "packs": [
         "manual-english",
         "manual-german",
-        "tour-items"
+        "tour-items",
+        "macros"
       ]
     }
   ],

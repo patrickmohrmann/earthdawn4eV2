@@ -4,7 +4,7 @@
         <h4>
             Legend Points and Status
         </h4>
-        <button class="legend-point__history--earned">{{localize "ED.Buttons.X-Legend Point History - Earned"}}</button>
+        <button class="legend-point__history--earned">{{localize "ED.Buttons.X-Legend Point History"}}</button>
         <table>
             <tr>
                 <th>Current LP</th>
@@ -14,16 +14,16 @@
             </tr>
             <tr class="legend-point__info">
                 <td>
-                    <input id="current-Lp" class="input__number-input-big legendPoints__current" type="text" name="system.legendPoints.current" value="{{actor.system.legendPoints.current}}">
+                    <input class="input__number-input--wide" type="text" name="system.lp.current" value="{{actor.system.lp.current}}">
                 </td>
                 <td>
-                    <input id="spend-Lp" class="input__number-input-big legendPoints__spend" type="text" name="system.legendPoints.spend" value="{{actor.system.legendPoints.spend}}">
+                    <input class="input__number-input--wide" type="text" name="system.lp.spend" value="{{actor.system.lp.spend}}">
                 </td>
                 <td>
-                    <input id="total-Lp" class="input__number-input-big legendPoints__total" type="text" name="system.legendPoints.total" value="{{actor.system.legendPoints.total}}">
+                    <input class="input__number-input--wide" type="text" name="system.lp.total" value="{{actor.system.lp.total}}">
                 </td>
                 <td>
-                    <input class="input__number-input" type="text" name="system.legendPoints.status" value="{{actor.system.legendPoints.status}}">
+                    <input class="input__number-input--wide" type="text" name="system.lp.status" value="{{actor.system.lp.status}}">
                 </td>
             </tr>
         </table>
@@ -42,7 +42,7 @@
                         steigerung
                     </th>
                 </tr>
-                {{#each actor.system.attributes }} {{@key}}:
+                {{#each actor.system.attributes }}
                 <tr>
                     <td class="attribute__name--content">
                         <a>
@@ -55,61 +55,6 @@
                     </td>
                 </tr>
                 {{/each}}
-                {{!-- <tr>
-                    <td class="attribute__name--content">
-                        <a>
-                            <label>{{localize "ED.Attributes.strength"}}</label>
-                        </a>
-                    </td>
-                    <td>
-                        <input class="input__number-input" type="text" name="system.attributes.str.timesIncreased"
-                            value="{{actor.system.attributes.str.timesIncreased}}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="attribute__name--content">
-                        <a>
-                            <label>{{localize "ED.Attributes.toughness"}}</label>
-                        </a>
-                    </td>
-                    <td>
-                        <input class="input__number-input" type="text" name="system.attributes.tou.timesIncreased"
-                            value="{{actor.system.attributes.tou.timesIncreased}}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="attribute__name--content">
-                        <a>
-                            <label>{{localize "ED.Attributes.perception"}}</label>
-                        </a>
-                    </td>
-                    <td>
-                        <input class="input__number-input" type="text" name="system.attributes.per.timesIncreased"
-                            value="{{actor.system.attributes.per.timesIncreased}}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="attribute__name--content">
-                        <a>
-                            <label>{{localize "ED.Attributes.willpower"}}</label>
-                        </a>
-                    </td>
-                    <td>
-                        <input class="input__number-input" type="text" name="system.attributes.wil.timesIncreased"
-                            value="{{actor.system.attributes.wil.timesIncreased}}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="attribute__name--content">
-                        <a>
-                            <label>{{localize "ED.Attributes.charisma"}}</label>
-                        </a>
-                    </td>
-                    <td>
-                        <input class="input__number-input" type="text" name="system.attributes.cha.timesIncreased"
-                            value="{{actor.system.attributes.cha.timesIncreased}}">
-                    </td>
-                </tr> --}}
             </table>
         </div>
     </div>
