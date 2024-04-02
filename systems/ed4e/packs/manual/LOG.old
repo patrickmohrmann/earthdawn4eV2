@@ -1,6 +1,9 @@
-2024/03/12-10:09:04.022 2350 Log #105: 383 ops saved to Table #106 OK
-2024/03/12-10:09:04.023 2350 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000105.log: OK
-2024/03/12-10:09:04.023 2350 Table #87: 32 entries OK
-2024/03/12-10:09:04.023 2350 Table #106: 383 entries OK
-2024/03/12-10:09:04.032 2350 Archiving C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000104: OK
-2024/03/12-10:09:04.045 2350 **** Repaired leveldb C:\Users\patri\AppData\Local\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual; recovered 2 files; 53677 bytes. Some data may have been lost. ****
+2024/04/02-12:46:42.710 3f3c Delete type=3 #1
+2024/04/02-12:46:42.710 1a1c Compacting 4@0 + 0@1 files
+2024/04/02-12:46:42.722 1a1c Generated table #263@0: 53 keys, 15547 bytes
+2024/04/02-12:46:42.722 1a1c Compacted 4@0 + 0@1 files => 15547 bytes
+2024/04/02-12:46:42.734 1a1c compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/04/02-12:46:42.735 1a1c Delete type=2 #87
+2024/04/02-12:46:42.735 1a1c Delete type=2 #106
+2024/04/02-12:46:42.735 1a1c Delete type=2 #254
+2024/04/02-12:46:42.735 1a1c Delete type=2 #259
