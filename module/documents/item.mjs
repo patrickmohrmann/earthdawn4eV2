@@ -1,4 +1,5 @@
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
+import AdvancementLevelData from "../data/advancement/advancement-level.mjs";
 
 /**
  * Extend the base Item class to implement additional system-specific logic.
@@ -33,9 +34,12 @@ export default class ItemEd extends Item {
     }
 
     async addAdvancementAbilities( abilityUUID, poolType, level ) {
+        let changes;
         if ( level ) {
             const levelIndex = level - 1 ;
-            const levelModel = this.system.advancement.levels[levelIndex];
+            const levelModel = new AdvancementLevelData(
+              this.system.advancement.levels[levelIndex].toObject()
+            );
             const abilities = levelModel.abilities;
             const abilitiesPool = abilities[poolType];
             levelModel.updateSource( {
@@ -48,25 +52,25 @@ export default class ItemEd extends Item {
             const newLevels = this.system.advancement.levels.toSpliced(
               levelIndex, 1, levelModel
             );
-            const changes = {
+            changes = {
                 "system.advancement.levels": newLevels,
             };
-
-            return this.update( changes );
         } else {
             const abilitiesPool = this.system.advancement.abilityOptions[poolType];
-            const changes = {
+            changes = {
                 [`system.advancement.abilityOptions.${poolType}`]: abilitiesPool.concat( abilityUUID ),
             }
-
-            return this.update( changes );
         }
+        return this.update( changes );
     }
 
     async removeAdvancementAbility( abilityUUID, poolType, level ) {
+        let changes;
         if ( level ) {
             const levelIndex = level - 1 ;
-            const levelModel = this.system.advancement.levels[levelIndex];
+            const levelModel = new AdvancementLevelData(
+              this.system.advancement.levels[levelIndex].toObject()
+            );
             const abilities = levelModel.abilities;
             const abilitiesPool = abilities[poolType];
             const newPool = abilitiesPool.toSpliced(
@@ -82,21 +86,18 @@ export default class ItemEd extends Item {
             const newLevels = this.system.advancement.levels.toSpliced(
               levelIndex, 1, levelModel
             );
-            const changes = {
+            changes = {
                 "system.advancement.levels": newLevels,
             };
-
-            return this.update( changes );
         } else {
             const abilitiesPool = this.system.advancement.abilityOptions[poolType];
             const newPool = abilitiesPool.toSpliced(
               abilitiesPool.indexOf( abilityUUID ), 1
             );
-            const changes = {
+            changes = {
                 [`system.advancement.abilityOptions.${poolType}`]: newPool,
             }
-
-            return this.update( changes );
         }
+        return this.update( changes );
     }
 }
