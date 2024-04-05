@@ -1,0 +1,94 @@
+
+.app.window-app.form.earthdawn4e.legend-point__history--earned,
+
+.app.window-app.earthdawn4e.sheet,
+.app.window-app.form.earthdawn4e {
+    background-image: url('assets/sheet/background.png');
+    background-size: cover;
+    header {
+        position: relative;
+        z-index: 3;
+        border: none;
+        .window-title {
+            padding-left: 80px;
+            margin-top: -4px;
+            
+        }
+        .header-button {
+            margin-top: -4px;
+        }
+        .close {
+            padding-right: 80px;
+        }
+    }
+    .window-content {
+        background-image: url('assets/sheet/background.png');
+        background-size: cover;
+        padding: 0; 
+        .header__frame {
+            position:absolute;
+            margin-top: -70px;
+            z-index: 2;
+            img {
+                border: none;  
+            }
+            .section__name {
+                position: relative;
+                z-index: 4;
+                margin-top: -22px;
+
+                .sheet-header__indent--left {
+                    width: 45%;
+                    float: left;
+                    padding-left: 5px;
+                }
+
+                .sheet-header__indent--right {
+                    width: 45%;
+                    float: right;
+                    padding-right: 10px;
+                }
+            }
+        }
+        .body {
+            position: relative;
+            z-index: 1;
+            margin-top: 30px;
+
+            .actor-section__top {
+                .actor__image {
+                    width: 25%;
+                    float: left;
+                }
+                .actor__characteristics {
+                    width: 75%;
+                    float: left;
+                }
+                img {
+                    border: none;
+                }
+                .padding__top-small {
+                    // height ist doof
+                    height: 80px;
+                }
+            }
+            .item-section__top {
+                img {
+                    width: 128px;
+                    height: 128px;
+                    border: none;
+                }
+            }
+        }
+        
+        .footer__frame {
+            position:absolute;
+            transform: rotate(180deg);
+            bottom: -45px;
+            z-index: 2;
+            img {
+                border: none;  
+            }
+        }
+    }
+}

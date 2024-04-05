@@ -1,25 +1,24 @@
 <form class="item item-sheet flexcol" autocomplete="off" draggable="false">
-    <div id="ed-item-header" class="header-item__frame">
+    <div id="ed-item-header" class="header__frame">
         <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+        <section class="section__name">
+            {{> "systems/ed4e/templates/item/item-partials/item-section-name.hbs"}}
+        </section>
     </div>
     <div class="body">
-        <section class="item__top">
-             {{> "systems/ed4e/templates/item/item-partials/top-section.hbs"}}
+        <section class="item-section__top">
+                {{> "systems/ed4e/templates/item/item-partials/item-section-top.hbs"}}
         </section>
-        <section class="item__navigator">
-            <div class="item__left--top">
-                <img src="{{item.img}}" data-edit="img" height="128" width="128" />
-            </div>
-            <div class="item__right--top">
-               {{> "systems/ed4e/templates/item/item-partials/navigator-section.hbs"}}
+        <section class="section__navigator">
+            <div class="">
+                {{> "systems/ed4e/templates/item/item-partials/item-section-navigator.hbs"}}
             </div>
         </section>
-        <section class="item__main">
-            {{> "systems/ed4e/templates/item/item-partials/main-section.hbs"}}
+        <section class="section__main">
+            {{> "systems/ed4e/templates/item/item-partials/item-section-main.hbs"}}
         </section>
     </div>
-    <div class="footer-item__frame">
+    <div class="footer__frame">
         <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
     </div>
 </form>
-

@@ -403,10 +403,10 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-details/details-disciplines.hbs",
 
     // Actor partials
-    "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/actor-section-navigator.hbs",
     "systems/ed4e/templates/actor/actor-partials/action-button-section.hbs",
-    "systems/ed4e/templates/actor/actor-partials/header-section.hbs",
-    "systems/ed4e/templates/actor/actor-partials/image-characteristics-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/actor-section-name.hbs",
+    "systems/ed4e/templates/actor/actor-partials/actor-section-top.hbs",
     "systems/ed4e/templates/actor/actor-partials/details-section.hbs",
 
     // Actor cards
@@ -420,11 +420,12 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",
 
     // Item partials
-    "systems/ed4e/templates/item/item-partials/top-section.hbs",
-    "systems/ed4e/templates/item/item-partials/navigator-section.hbs",
-    "systems/ed4e/templates/item/item-partials/main-section.hbs",
+    "systems/ed4e/templates/item/item-partials/item-section-name.hbs",
+    "systems/ed4e/templates/item/item-partials/item-section-navigator.hbs",
+    "systems/ed4e/templates/item/item-partials/item-section-main.hbs",
     "systems/ed4e/templates/item/item-partials/item-description.hbs",
     "systems/ed4e/templates/item/item-partials/item-details.hbs",
+    "systems/ed4e/templates/item/item-partials/item-section-top.hbs",
 
     // Item details
     "systems/ed4e/templates/item/item-partials/item-details/item-effects.hbs",

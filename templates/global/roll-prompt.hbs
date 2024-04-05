@@ -1,8 +1,9 @@
 <form class="roll-prompt" id="roll-prompt-form" autocomplete="off">
-    {{!-- <div class="header-item__frame">
+    <header class="header__frame">
         <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
-    <div class="roll-prompt-body">
+        <title>{{actor.name}}</title>
+    </header>
+    <div class="body roll-prompt-body">
         <div>
             <!-- navigator left -->
             <div class="navigator-section input--centered">
@@ -22,7 +23,7 @@
                         </div>
                         <div class="partial__four">
                             <input class="input__circle-input--centered" id="step-mod-input" value={{step.base}}
-                                   name="step.base" data-type="number" autofocus />
+                                name="step.base" data-type="number" autofocus />
                         </div>
                     </div>
 
@@ -39,6 +40,12 @@
                                        autofocus />
                             </div>
                         </div>
+                        <div class="partial__four">
+                            <input class="input__circle-input--centered" id="step-mod-input"
+                                value={{step.modifiers.manual}} name="step.modifiers.manual" data-type="number"
+                                autofocus />
+                        </div>
+                    </div>
                     {{/if}}
 
                     <!-- 30/20 -->
@@ -48,7 +55,7 @@
                         </div>
                         <div class="partial__four">
                             <input class="input__circle-input--centered" id="difficulty-input" value={{target.base}}
-                                   name="target.base" data-type="number" />
+                                name="target.base" data-type="number" />
                         </div>
                     </div>
 
@@ -63,6 +70,11 @@
                                      name="strain.total" data-type="number" />
                             </div>
                         </div>
+                        <div class="partial__four">
+                            <input class="input__circle-input--centered" id="strain-input" value={{strain.total}}
+                                name="strain.total" data-type="number" />
+                        </div>
+                    </div>
                     {{/if}}
 
                     <!-- 30/20 30/20 -->
@@ -71,14 +83,15 @@
                     </div>
                     <div class="partial__sixteen-percent">
                         <input class="input__circle-input--centered" id="karma-input" value={{karma.pointsUsed}}
-                               name="karma.pointsUsed" data-type="number" data-resource="karma" />
+                            name="karma.pointsUsed" data-type="number" data-resource="karma" />
                     </div>
                     <div class="partial__three prompt__right">
-                        <label class="modifier-description" title="{{localize "X-karma-Dice:"}}+{{karma.dice}}">{{localize "X-Karma-Step"}}: </label>
+                        <label class="modifier-description" title="{{localize "
+                            X-karma-Dice:"}}+{{karma.dice}}">{{localize "X-Karma-Step"}}: </label>
                     </div>
                     <div class="partial__sixteen-percent">
                         <input class="input__circle-input--centered" id="karma-step" value={{karma.step}}
-                               name="karma.step" data-type="number"/>
+                            name="karma.step" data-type="number" />
                     </div>
 
 
@@ -89,14 +102,15 @@
                     </div>
                     <div class="partial__sixteen-percent">
                         <input class="input__circle-input--centered" id="devotion-input" value={{devotion.pointsUsed}}
-                               name="devotion.pointsUsed" data-type="number" data-resource="devotion"/>
+                            name="devotion.pointsUsed" data-type="number" data-resource="devotion" />
                     </div>
                     <div class="partial__three prompt__right">
-                        <label class="modifier-description" title="{{localize "X-devotion-Dice:"}}+{{devotion.dice}}">{{localize "X-Dev-Step"}}: </label>
+                        <label class="modifier-description" title="{{localize "
+                            X-devotion-Dice:"}}+{{devotion.dice}}">{{localize "X-Dev-Step"}}: </label>
                     </div>
                     <div class="partial__sixteen-percent">
                         <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
-                               name="devotion.step" data-type="number" />
+                            name="devotion.step" data-type="number" />
                     </div>
                 </div>
                 <!-- tab2: other inputs -->
@@ -104,15 +118,19 @@
                 </div>
             </div>
         </div>
+        <div class="buttons roll-prompt-buttons">
+            <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
+                {{ localize 'X-cancel' }}
+            </button>
+            <button class='ok default button-ok' type="submit" name="submit" data-button='ok'>
+                {{ localize 'X-ok' }}
+            </button>
+        </div>
     </div>
-    <div class="buttons roll-prompt-buttons">
-        <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
-            {{ localize 'X-cancel' }}
-        </button>
-        <button class='ok default button-ok' type="submit" name="submit" data-button='ok'>
-            {{ localize 'X-ok' }}
-        </button>
-    </div>
+    <footer class="footer__frame">
+        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+    </footer>
+
     {{!-- <div class="footer-item__frame">
         <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
     </div> --}}

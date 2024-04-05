@@ -2,26 +2,26 @@
        <header class="header__frame">
               <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
               <title>{{actor.name}}</title>
-       </header>
-       <div class="body ">
               {{!-- name & Characteristics title --}}
-              <section class="header-section">
-                     {{> "systems/ed4e/templates/actor/actor-partials/header-section.hbs"}}
+              <section class="section__name">
+                     {{> "systems/ed4e/templates/actor/actor-partials/actor-section-name.hbs"}}
               </section>
+       </header>
+       <div class="body">
               {{!-- image && Characteristics --}}
-              <section class="image-characteristics-section">
-                     {{> "systems/ed4e/templates/actor/actor-partials/image-characteristics-section.hbs"}}
+              <section class="actor-section__top">
+                     {{> "systems/ed4e/templates/actor/actor-partials/actor-section-top.hbs"}}
               </section>
               {{!-- Navigator of the sheet --}}
-             <section class="navigator-section">
-                     {{> "systems/ed4e/templates/actor/actor-partials/navigator-section.hbs"}}
+             <section class="section__navigator">
+                     {{> "systems/ed4e/templates/actor/actor-partials/actor-section-navigator.hbs"}}
              </section>
               {{!-- Including all items and Information --}}
-             <section class="main-section">
+             <section class="section__main">
                             {{> "systems/ed4e/templates/actor/actor-partials/details-section.hbs"}}
              </section>
               {{!-- Navigator of the sheet --}}
-             <section class="action-button-section">
+             <section class="section__button">
                      {{> "systems/ed4e/templates/actor/actor-partials/action-button-section.hbs"}}
              </section>
        </div>
