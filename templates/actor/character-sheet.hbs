@@ -1,8 +1,6 @@
 <form class="actor character-sheet-content flexcol" autocomplete="off">
        <header class="header__frame">
               <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-              <title>{{actor.name}}</title>
-              {{!-- name & Characteristics title --}}
               <section class="section__name">
                      {{> "systems/ed4e/templates/actor/actor-partials/actor-section-name.hbs"}}
               </section>
@@ -18,7 +16,7 @@
              </section>
               {{!-- Including all items and Information --}}
              <section class="section__main">
-                            {{> "systems/ed4e/templates/actor/actor-partials/details-section.hbs"}}
+                            {{> "systems/ed4e/templates/actor/actor-partials/actor-section-main.hbs"}}
              </section>
               {{!-- Navigator of the sheet --}}
              <section class="section__button">

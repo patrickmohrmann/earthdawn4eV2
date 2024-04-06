@@ -1,17 +1,17 @@
 <div class="input--centered">
-  <div id="item-navigation" class="navigator__item">
-    <hr class="thematic-change">
+  <div id="item-navigation" class="navigator">
+    <hr>
     <h4>
-      Navigator
+      {{localize "ED.Sheet.Header.navigator"}}
     </h4>
-    <nav class="item-sheet-tabs list__ordered-column--flex">
-      <a data-tab="item-description-tab">Beschreibung</a>
-      <a id="item-navigator-detials-tab" data-tab="item-details-tab">Details</a>
-      <a data-tab="item-effects-tab">Effekte etc</a>
+    <nav class="item-sheet-tabs navigator__flex">
+      <a class="navigator__tab" data-tab="item-description-tab">{{localize "X-description"}}</a>
+      <a class="navigator__tab" id="item-navigator-detials-tab" data-tab="item-details-tab">{{localize "X-details"}}</a>
+      <a class="navigator__tab" data-tab="item-effects-tab">{{localize "X-effects"}}</a>
       {{#if isClass }}
-        <a data-tab="item-class-tab">Advancement/Kreise</a>
+        <a class="navigator__tab" data-tab="item-class-tab">{{localize "X-advancement"}}</a>
       {{/if}}
     </nav>
-    <hr class="thematic-change">
+    <hr>
   </div>
 </div>

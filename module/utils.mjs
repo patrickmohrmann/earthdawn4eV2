@@ -407,7 +407,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/actor-partials/action-button-section.hbs",
     "systems/ed4e/templates/actor/actor-partials/actor-section-name.hbs",
     "systems/ed4e/templates/actor/actor-partials/actor-section-top.hbs",
-    "systems/ed4e/templates/actor/actor-partials/details-section.hbs",
+    "systems/ed4e/templates/actor/actor-partials/actor-section-main.hbs",
 
     // Actor cards
     "systems/ed4e/templates/actor/cards/ability-card.hbs",

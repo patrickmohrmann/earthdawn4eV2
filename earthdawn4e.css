@@ -71,127 +71,139 @@
 .input--centered {
   text-align: center;
 }
-.app.window-app.form.earthdawn4e.legend-point__history--earned,
-.app.window-app.earthdawn4e.sheet,
-.app.window-app.form.earthdawn4e {
-  background-image: url('assets/sheet/background.png');
-  background-size: cover;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned header,
-.app.window-app.earthdawn4e.sheet header,
-.app.window-app.form.earthdawn4e header {
-  position: relative;
-  z-index: 3;
-  border: none;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned header .window-title,
-.app.window-app.earthdawn4e.sheet header .window-title,
-.app.window-app.form.earthdawn4e header .window-title {
-  padding-left: 80px;
-  margin-top: -4px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned header .header-button,
-.app.window-app.earthdawn4e.sheet header .header-button,
-.app.window-app.form.earthdawn4e header .header-button {
-  margin-top: -4px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned header .close,
-.app.window-app.earthdawn4e.sheet header .close,
-.app.window-app.form.earthdawn4e header .close {
-  padding-right: 80px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content,
-.app.window-app.earthdawn4e.sheet .window-content,
-.app.window-app.form.earthdawn4e .window-content {
-  background-image: url('assets/sheet/background.png');
-  background-size: cover;
-  padding: 0;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .header__frame,
-.app.window-app.earthdawn4e.sheet .window-content .header__frame,
-.app.window-app.form.earthdawn4e .window-content .header__frame {
-  position: absolute;
-  margin-top: -70px;
-  z-index: 2;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .header__frame img,
-.app.window-app.earthdawn4e.sheet .window-content .header__frame img,
-.app.window-app.form.earthdawn4e .window-content .header__frame img {
-  border: none;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .header__frame .section__name,
-.app.window-app.earthdawn4e.sheet .window-content .header__frame .section__name,
-.app.window-app.form.earthdawn4e .window-content .header__frame .section__name {
-  position: relative;
-  z-index: 4;
-  margin-top: -22px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .header__frame .section__name .sheet-header__indent--left,
-.app.window-app.earthdawn4e.sheet .window-content .header__frame .section__name .sheet-header__indent--left,
-.app.window-app.form.earthdawn4e .window-content .header__frame .section__name .sheet-header__indent--left {
-  width: 45%;
-  float: left;
-  padding-left: 5px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .header__frame .section__name .sheet-header__indent--right,
-.app.window-app.earthdawn4e.sheet .window-content .header__frame .section__name .sheet-header__indent--right,
-.app.window-app.form.earthdawn4e .window-content .header__frame .section__name .sheet-header__indent--right {
-  width: 45%;
-  float: right;
-  padding-right: 10px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .body,
-.app.window-app.earthdawn4e.sheet .window-content .body,
-.app.window-app.form.earthdawn4e .window-content .body {
-  position: relative;
-  z-index: 1;
-  margin-top: 30px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .body .actor-section__top .actor__image,
-.app.window-app.earthdawn4e.sheet .window-content .body .actor-section__top .actor__image,
-.app.window-app.form.earthdawn4e .window-content .body .actor-section__top .actor__image {
-  width: 25%;
-  float: left;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .body .actor-section__top .actor__characteristics,
-.app.window-app.earthdawn4e.sheet .window-content .body .actor-section__top .actor__characteristics,
-.app.window-app.form.earthdawn4e .window-content .body .actor-section__top .actor__characteristics {
-  width: 75%;
-  float: left;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .body .actor-section__top img,
-.app.window-app.earthdawn4e.sheet .window-content .body .actor-section__top img,
-.app.window-app.form.earthdawn4e .window-content .body .actor-section__top img {
-  border: none;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .body .actor-section__top .padding__top-small,
-.app.window-app.earthdawn4e.sheet .window-content .body .actor-section__top .padding__top-small,
-.app.window-app.form.earthdawn4e .window-content .body .actor-section__top .padding__top-small {
-  height: 80px;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .body .item-section__top img,
-.app.window-app.earthdawn4e.sheet .window-content .body .item-section__top img,
-.app.window-app.form.earthdawn4e .window-content .body .item-section__top img {
-  width: 128px;
-  height: 128px;
-  border: none;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .footer__frame,
-.app.window-app.earthdawn4e.sheet .window-content .footer__frame,
-.app.window-app.form.earthdawn4e .window-content .footer__frame {
-  position: absolute;
-  transform: rotate(180deg);
-  bottom: -45px;
-  z-index: 2;
-}
-.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content .footer__frame img,
-.app.window-app.earthdawn4e.sheet .window-content .footer__frame img,
-.app.window-app.form.earthdawn4e .window-content .footer__frame img {
-  border: none;
-}
 .itemControlGroup {
   float: right;
 }
 .icons__small {
   font-size: small;
+}
+.body .actor-section__top {
+  height: 158px;
+}
+.body .actor-section__top .actor__image {
+  width: 20%;
+  float: left;
+}
+.body .actor-section__top .actor__characteristics {
+  width: 80%;
+  float: left;
+}
+.body .actor-section__top img {
+  border: none;
+}
+.body .actor-section__top .padding__top-small {
+  height: 80px;
+}
+.action--buttons {
+  padding-top: 5px;
+  position: relative;
+  width: 100%;
+  z-index: -6;
+}
+.action--buttons button {
+  position: relative;
+  z-index: 4;
+  width: 100px;
+}
+.action--buttons .buttons--left {
+  margin-left: 45px;
+  margin-right: 50px;
+  float: left;
+  width: 40%;
+}
+.action--buttons .buttons--right {
+  float: left;
+  width: 40%;
+  margin-right: 50px;
+}
+.body .item-section__top img {
+  width: 158px;
+  height: 158px;
+  border: none;
+}
+.app.window-app.earthdawn4e.sheet {
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+}
+.app.window-app.earthdawn4e.sheet header {
+  position: relative;
+  z-index: 3;
+  border: none;
+}
+.app.window-app.earthdawn4e.sheet header .window-title {
+  padding-left: 80px;
+  margin-top: -4px;
+}
+.app.window-app.earthdawn4e.sheet header .header-button {
+  margin-top: -4px;
+}
+.app.window-app.earthdawn4e.sheet header .close {
+  padding-right: 80px;
+}
+.app.window-app.earthdawn4e.sheet .window-content {
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  padding: 0;
+}
+.app.window-app.earthdawn4e.sheet .window-content .header__frame {
+  position: absolute;
+  margin-top: -70px;
+  z-index: 2;
+}
+.app.window-app.earthdawn4e.sheet .window-content .header__frame img {
+  border: none;
+}
+.app.window-app.earthdawn4e.sheet .window-content .header__frame .section__name {
+  position: relative;
+  z-index: 4;
+  margin-top: -22px;
+}
+.app.window-app.earthdawn4e.sheet .window-content .header__frame .section__name .sheet-header__indent--left {
+  width: 45%;
+  float: left;
+  padding-left: 5px;
+}
+.app.window-app.earthdawn4e.sheet .window-content .header__frame .section__name .sheet-header__indent--right {
+  width: 45%;
+  float: right;
+  padding-right: 10px;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body {
+  position: relative;
+  z-index: 4;
+  margin-top: 30px;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .navigator__flex .navigator__tab {
+  padding-left: 5px;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .main {
+  height: 440px;
+  overflow-y: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .main .sheet__editor {
+  min-height: 400px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .main .sheet__editor .editor,
+.app.window-app.earthdawn4e.sheet .window-content .body .main .sheet__editor .prosemirror,
+.app.window-app.earthdawn4e.sheet .window-content .body .main .sheet__editor .editor-container,
+.app.window-app.earthdawn4e.sheet .window-content .body .main .sheet__editor .editor-content {
+  min-height: 350px;
+  max-height: 100%;
+}
+.app.window-app.earthdawn4e.sheet .window-content .footer__frame {
+  position: absolute;
+  transform: rotate(180deg);
+  bottom: -45px;
+  z-index: 2;
+}
+.app.window-app.earthdawn4e.sheet .window-content .footer__frame img {
+  border: none;
+}
+.app.window-app.earthdawn4e.sheet .window-resizable-handle {
+  z-index: 5;
 }
