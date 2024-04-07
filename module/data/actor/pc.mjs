@@ -4,6 +4,8 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, su
 import LpTransactionData from "../advancement/lp-transaction.mjs";
 import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
 import LpTrackingData from "../advancement/lp-tracking.mjs";
+import SpecialAbilityData from "../item/special-ability.mjs";
+import ActorEd from "../../documents/actor.mjs";
 
 /**
  * System data definition for PCs.
@@ -139,7 +141,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         );
         const additionalKarma = generation.availableAttributePoints;
 
-        const newActor = await this.constructor.create( {
+        const newActor = await ActorEd.create( {
             name: "Rename me! I was just created",
             type: "character",
             system: {
