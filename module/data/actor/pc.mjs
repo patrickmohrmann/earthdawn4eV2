@@ -4,6 +4,7 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, su
 import LpTransactionData from "../advancement/lp-transaction.mjs";
 import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
 import LpTrackingData from "../advancement/lp-tracking.mjs";
+import ActorEd from "../../documents/actor.mjs";
 
 /**
  * System data definition for PCs.
@@ -139,7 +140,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         );
         const additionalKarma = generation.availableAttributePoints;
 
-        const newActor = await this.constructor.create( {
+        const newActor = await ActorEd.create( {
             name: "Rename me! I was just created",
             type: "character",
             system: {
@@ -154,7 +155,9 @@ export default class PcData extends NamegiverTemplate.mixin(
         const classDocument = await generation.classDocument;
         const abilities = ( await generation.abilityDocuments ).map(
           documentData => {
-              documentData.system.source.class = namegiverDocument.uuid;
+              if ( documentData.type !== "specialAbility" ) {
+                  documentData.system.source.class = namegiverDocument.uuid;
+              }
               return documentData;
           }
         );
@@ -166,7 +169,8 @@ export default class PcData extends NamegiverTemplate.mixin(
         ] );
 
         const actorApp = newActor.sheet.render( true, {focus: true} );
-        actorApp.activateTab("actor-notes-tab");
+        // we have to wait until the app is rendered to activate a tab
+        requestAnimationFrame( () => actorApp.activateTab("actor-notes-tab") );
 
         return newActor;
     }
