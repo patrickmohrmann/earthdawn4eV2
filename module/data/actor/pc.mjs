@@ -4,7 +4,6 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, su
 import LpTransactionData from "../advancement/lp-transaction.mjs";
 import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
 import LpTrackingData from "../advancement/lp-tracking.mjs";
-import SpecialAbilityData from "../item/special-ability.mjs";
 import ActorEd from "../../documents/actor.mjs";
 
 /**
@@ -156,7 +155,9 @@ export default class PcData extends NamegiverTemplate.mixin(
         const classDocument = await generation.classDocument;
         const abilities = ( await generation.abilityDocuments ).map(
           documentData => {
-              documentData.system.source.class = namegiverDocument.uuid;
+              if ( documentData.type !== "specialAbility" ) {
+                  documentData.system.source.class = namegiverDocument.uuid;
+              }
               return documentData;
           }
         );
