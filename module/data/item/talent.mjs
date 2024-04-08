@@ -15,7 +15,7 @@ export default class TalentData extends AbilityTemplate.mixin(
                 required: true,
                 nullable: false,
                 blank: false,
-                initial: "Discipline",
+                initial: "discipline",
                 label: 'localize: Talent Type',
                 hint: 'localize: Type of the Talent',
               } ),
