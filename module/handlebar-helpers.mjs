@@ -60,11 +60,4 @@ export default function registerHandlebarHelpers() {
   Handlebars.registerHelper( "gettalentCategory", ( talents, type ) => {
     return talents.filter( ( talent ) => talent.system.talentCategory === type );
   } );  
-
-  Handlebars.registerHelper( "getKnackName", ( talent, knacks ) => {
-    if ( talent === undefined || knacks === undefined ) {
-      return;
-    }
-    return knacks.filter( ( knack ) => knack.system.sourceTalentName === talent.name );
-  } );
 }

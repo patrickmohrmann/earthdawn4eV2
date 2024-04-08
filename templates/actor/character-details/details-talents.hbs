@@ -5,9 +5,6 @@
     {{#each (gettalentCategory actor.itemTypes.talent 'discipline') as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
-            {{#each (getKnackName talent ../knacks) as |knack id|}}
-                {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" knack}}
-            {{/each}}
         </div>
     {{/each}}
     <h3>
@@ -16,9 +13,6 @@
     {{#each (gettalentCategory actor.itemTypes.talent "optional") as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
-            {{#each (getKnackName talent ../knacks) as |knack id|}}
-                {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" knack}}
-            {{/each}}
         </div>
     {{/each}}
     <h3>
@@ -27,9 +21,6 @@
     {{#each (gettalentCategory actor.itemTypes.talent "free") as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
-            {{#each (getKnackName talent ../knacks) as |knack id|}}
-                {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" knack}}
-            {{/each}}
         </div>
     {{/each}}
     <h3>
@@ -38,9 +29,6 @@
     {{#each (gettalentCategory actor.itemTypes.talent "versatility") as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
-            {{#each (getKnackName talent ../knacks) as |knack id|}}
-                {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" knack}}
-            {{/each}}
         </div>
     {{/each}}
 
