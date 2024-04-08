@@ -141,7 +141,6 @@ export default class ActorEd extends Actor {
   }
 
   async getTarget( ability ) {
-
     let difficulty = 0;
     let currentTarget = game.user.targets.first()?.actor;
     let currentTargets = [...game.user.targets.map( ( t ) => t.actor )];
@@ -156,16 +155,10 @@ export default class ActorEd extends Actor {
       } else {
         difficulty = 0; 
       }
-      
     } else {
       let baseDifficulty = 0;
       let additionalTargetDifficulty = 0;
-
-      if ( fixedDifficultySetting > 0 ) {
-        difficulty = fixedDifficultySetting;
-      }
-      else if ( groupDiffciultySetting !== "none" ) {
-        switch ( groupDiffciultySetting ) {
+      switch ( groupDiffciultySetting ) {
           case 'hightestX':
             additionalTargetDifficulty = numTargets - 1;
           case 'highestOfGroup':
@@ -176,13 +169,10 @@ export default class ActorEd extends Actor {
           case 'lowestOfGroup':
             baseDifficulty = _getAggregatedDefense(currentTargets, targetDifficultySetting, Math.min);
             break;
+          default: 
+            baseDifficulty = currentTarget?.system.characteristics.defenses[targetDifficultySetting].value ?? 0;
         }
         difficulty = baseDifficulty + additionalTargetDifficulty;
-      } else {
-        difficulty = currentTarget?.system.characteristics.defenses[targetDifficultySetting].value ?? 0;
-      }
-
-        
       }
 
       /**
