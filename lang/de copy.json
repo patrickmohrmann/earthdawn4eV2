@@ -13,270 +13,608 @@
             "vehicle":                                              "Transportmittel"
         },
         "Item": {
-            "armor":                                                "Rüstung",
-            "attack":                                               "Angriff",
-            "cursemark":                                            "Fluch / Dämonenmal",
-            "devotion":                                             "Weihekraft",
-            "discipline":                                           "Disziplin",
-            "effect":                                               "Effekt",
-            "equipment":                                            "Ausrüstung",
-            "knack":                                                "Kniff",
-            "maneuver":                                             "Manöver",
-            "mask":                                                 "Maske",
-            "namegiver":                                            "Namensgeber",
-            "path":                                                 "Pfad",
-            "poisonDisease":                                        "Gift / Krankheit",
-            "power":                                                "Kraft",
-            "questor":                                              "Questor",
-            "shield":                                               "Schild",
-            "skill":                                                "Fertigkeit",
-            "specialAbility":                                       "Sonstige Fähigkeit",
-            "spell":                                                "Zauberspruch",
-            "talent":                                               "Talent",
-            "thread":                                               "Permanenter Faden",
-            "weapon":                                               "Waffe",
-            "shipWeapon":                                           "Schiffswaffe"
+            "armor":                                            "Rüstung",
+            "attack":                                           "Angriff",
+            "bindingSecret":                                    "Bindungsgeheimnis",
+            "cursemark":                                        "Fluch / Dämonenmal",
+            "devotion":                                         "Weihekraft",
+            "discipline":                                       "Disziplin",
+            "effect":                                           "Effekt",
+            "equipment":                                        "Ausrüstung",
+            "knackAbility":                                            "Kniff",
+            "knackKarma":                                       "Karma Kniff",
+            "knackManeuver":                                    "Maneuver Kniff",
+            "maneuver":                                         "Manöver",
+            "mask":                                             "Maske",
+            "matrix":                                           "Matrix",
+            "namegiver":                                        "Namensgeber",
+            "path":                                             "Pfad",
+            "poisonDisease":                                    "Gift / Krankheit",
+            "power":                                            "Kraft",
+            "questor":                                          "Questor",
+            "shield":                                           "Schild",
+            "skill":                                            "Fertigkeit",
+            "specialAbility":                                   "Sonstige Fähigkeit",
+            "spell":                                            "Zauberspruch",
+            "spellKnack":                                       "Zauberkniff",
+            "talent":                                           "Talent",
+            "thread":                                           "Permanenter Faden",
+            "weapon":                                           "Waffe",
+            "shipWeapon":                                       "Schiffswaffe"
         }
     },
     "ED": {
-        "Globals": {
-            "ItemControls": {
-                "delete":                                           "Löschen",
-                "toChat":                                           "Im Chat anzeigen",     
-                "edit":                                             "Editieren",
-                "levelUp":                                          "Rang erhöhen",
-                "levelDown":                                        "Rang senken"                                
+        "Action": {
+            "action":                                               "Aktion",      
+            "free":                                                 "Frei",
+            "simple":                                               "Einfach",
+            "standard":                                             "Standard",
+            "sustained":                                            "Aufrechterhaltend"
+        },
+        "Attributes": {
+            "attribute":                                            "Attribut",
+            "attributes":                                           "Attribute",
+            "charisma":                                             "Charisma",
+            "charismaAbbr":                                         "CHA",
+            "dexterity":                                            "Geschicklichkeit",
+            "dexterityAbbr":                                        "GES",
+            "perception":                                           "Wahrnehmung",
+            "perceptionAbbr":                                       "WAH",
+            "rollAttribute":                                        "Klicke um eine Attributsprobe abzulegen",
+            "strength":                                             "Stärke",
+            "strengthAbbr":                                         "STÄ",
+            "toughness":                                            "Zähigkeit",
+            "toughnessAbbr":                                        "ZÄH",
+            "willpower":                                            "Willenskraft",
+            "willpowerAbbr":                                        "WIL"
+        },
+        "Advancement": {
+            "Pools": {
+                "class":                                            "Disziplin-Talente",
+                "free":                                             "Kostenlose Talente",
+                "special":                                          "Besondere Fähigkeiten"
             }
         },
-        "ActorSheets": {
-            "Globals": {
-                "Buttons": {
-                    "jumpUp":                                       "Aufspringen",
-                    "knockDownTest":                                "Niederschlagtest",
-                    "takeDamage":                                   "Schaden nehmen",
-                    "halfMagic":                                    "Halbmagie"
+        "Buttons": {
+            "halfMagic":                                            "Halbmagie",
+            "jumpUp":                                               "Aufspringen",
+            "knockDownTest":                                        "Niederschlag",
+            "takeDamage":                                           "Schaden"
+        },
+        "Conditions": {
+            "aggressiveAttack":                                     "Aggressiver Angriff",
+            "blindsided":                                           "Angriff aus dem Toten Winkel",
+            "coverPartial":                                         "Teilweise Deckung",
+            "coverFull":                                            "Volle Deckung",
+            "darknessPartial":                                      "Teilweise Dunkelheit",
+            "darknessFull":                                         "Volle Dunkelheit",
+            "defensiveStance":                                      "Verteidigungshaltung",
+            "Encumbrance": {
+                "notEncumbered":                                    "Nicht Überlastet",
+                "light":                                            "Wenig überlastet",
+                "heavy":                                            "Stark überlastet",
+                "tooHeavy":                                         "Du kannst das nicht alles tragen!"
+            },
+            "fury":                                                 "Zorn",
+            "harried":                                              "Bedrängt",
+            "impairedMovementPartial":                              "Teil. Bewegung",
+            "impairedMovementFull":                                 "Beschränkte Bewegung",
+            "knockedDown":                                          "Niedergeschlagen",
+            "overwhelmed":                                          "Überwältigt",
+            "surprised":                                            "Überrascht"
+        },
+        "Denomination": {
+            "copper":                                               "Kupfer",
+            "gold":                                                 "Gold",
+            "silver":                                               "Silber"
+        },
+        "Errors": {
+            "IdentifierError":                                      "Identifier can only contain letters (a-z), numbers (0-9), dashes (-), and underscores (_). Identifier können nur Kleinbuchstaben (a-b), Zahlen (0-9), Bindestriche (-) und Unterstriche (_) enthalten."
+        },
+        "General": {
+            "A":                                                "A",
+
+            "B":                                                "B",
+
+            "C":                                                "C",
+                "circle":                                           "Kreis",
+                "current":                                          "Aktuell",
+                "coreData":                                         "Basis Informationen",
+
+            "D":                                                "D",
+                "dice":                                             "Würfel",
+                "discipline":                                       "Disziplin",
+                "die":                                              "Würfel",
+                "durability":                                       "Unempfindlichkeit",
+
+            "E":                                                "E",
+                "equipped":                                         "Ausgerüsted",
+
+            "F":                                                "F",
+
+            "G":                                                "G",
+
+            "H":                                                "H",
+
+            "I":                                                "I",
+                "initiative":                                      "Initiative",
+
+            "J":                                                "J",
+
+            "K":                                                "K",
+                "karma":                                            "Karma",
+                "karmaAlways":                                      "Benutze Karma bei jedem Wurf?",
+                "karmaRitualTooltip":                               "Karmaritual",
+
+            "L":                                                "L",
+
+            "M":                                                "M",
+                "maximum":                                          "Maximum",
+                "max":                                              "Max",
+
+            "N":                                                "N",
+                "none":                                             "NA",
+
+            "O":                                                "O",
+
+            "P":                                                "P",
+                "path":                                             "Pfad",  
+
+            "Q":                                                "Q",
+                "questor":                                          "Questor",
+
+            "R":                                                "R",
+                "rank":                                             "Rang",          
+
+            "S":                                                "S",
+                "step":                                             "Stufe",
+                "strain":                                           "Überanstrengung",
+                "strainShort":                                      "Anstrengung",
+                "size":                                             "Größe",             
+            "T":                                                "T",
+                "type":                                             "Typ",
+
+            "U":                                                "U",
+
+            "V":                                                "V",
+                "value":                                            "Wert",
+
+            "W":                                                "W",
+
+            "X":                                                "X",
+
+            "Y":                                                "Y",
+
+            "Z":                                                "Z"
+        },
+        "Item": {
+            "Ability": {
+                "action":                                       "Aktion",
+                "attribute":                                    "Attribute",
+                "rank":                                         "Rang",
+                "strain":                                       "Überanstrengung",
+                "tier":                                         "Stufe"
+            },
+            "AmmunitionType": {
+                "arrow":                                            "Pfeile",
+                "bolt":                                             "Bolzen",
+                "needle":                                           "Nadeln",
+                "stone":                                            "Steine"
+            },
+            "Armor": {
+                "initiativePenalty":                            "Initiative Malus",
+                "forgeBonusMystical":                           "Mystischer Schmiede Bonus",
+                "forgeBonusMysticalShort":                      "Myst. Schmiede Bonus",
+                "forgeBonusPhysical":                           "Physischer Schmiede Bonus",
+                "forgeBonusPhysicalShort":                      "Phy. Schmiede Bonus",
+                "mysticalArmor":                                "Mystische Rüstung",
+                "physicalArmor":                                "Physische Rüstung",
+                "piecemealArmorSize":                           "Größe",
+                "piecemealArmor":                               "Zusammengesetzte Rüstung"
+            },
+            "Availability": {
+                "availability":                                     "Verfügbarkeit",
+                "average":                                          "Gewöhnlich",
+                "everyday":                                         "Alltäglich",
+                "rare":                                             "Selten",
+                "unique":                                           "Einzigartig",
+                "unusual":                                          "Ungewöhnlich",
+                "veryRare":                                         "Sehr Selten"
+            },
+            "Class": {
+                "durability":                                   "Unempfindlichkeit",
+                "source":                                       "Ursprung der Fähigkeit",
+                "sourceDiscipline":                             "Disziplin"
+            },
+            "Curse": {
+                "curseActive":                                  "Aktive",
+                "curseDetected":                                "Entdeckt",
+                "curseStep":                                    "Stufe",
+                "curseType":                                    "Typ",
+                "minor":                                        "Schwach",
+                "major":                                        "Stark",
+                "horror":                                       "Dämonenfluch"            
+            },
+            "Devotion":
+            {
+                "devotionRequired":                                     "Erfordert Weihepunkt"
+            },
+            "Equipment": {
+                "consumable":                                   "Verbrauchsgut",
+                "ammoType":                                     "Munitionstyp"
+            },
+            "General": {       
+                "action":                                       "Aktion", 
+                "amount":                                       "Menge",
+                "arbitraryStep":                                "Basisstufe",
+                "availability":                                 "Verfügbarkeit",
+                "bloodMagicDamage":                             "Blutmagie Schaden", 
+                "denomination":                                 "Münzen",
+                "description":                                  "Beschreibung",
+                "details":                                      "Details",
+                "price":                                        "Kosten",   
+                "usableItem":                                   "Benutzbar --- TBD",
+                "value":                                        "Wert",
+                "weight":                                       "Gewicht",
+                "weightMultiplier":                             "Gewichtsfaktor",
+                "recoveryPropertyValue":                        "Erholungs-Typ"
+            },
+            "RecoveryPropertyValue": {
+                "0":"0",
+                "1":"1",
+                "2":"2",
+                "3":"3",
+                "4":"4",
+                "5":"5",
+                "6":"6"
+            },
+            "Knack": {
+                "extraSuccesses":                               "Nötige Extra Erfolge",
+                "maneuver":                                     "Manöver",
+                "requirements":                                 "Voraussetzungen",
+                "restrictions":                                 "Ristriktionen",
+                "sourceTalent":                                 "Ursprungs Talent??",
+                "standardEffect":                               "Standardeffekt"
+            },
+            "Masks": {
+                "attacksModifier":                               "Modifikation der Angriffsanzahl",
+                "attackStepsBonusModifier":                      "Angriffsstufen Modifikation",
+                "burrowModifier":                                "Graben Modifikation",
+                "challengingRateModifier":                       "Herausforderungsgrad Modifikation",
+                "charismaStepModifier":                          "Charismastufen Modifikation",
+                "climbModifier":                                 "Klettern Modifikation",
+                "damageStepsBonusModifier":                      "Schadensstufen Modifikation",
+                "deathThresholdModifier":                        "Todesschwellen Modifikation",
+                "dexterityStepModifier":                         "Geschicklichkeitsstufen Modifikation",
+                "flyModifier":                                   "Fligen Modifikation",
+                "initiativeStepModifier":                        "Initiativestufe Modifikation",
+                "knockDownStepModifier":                         "Niederschlagsstufe Modifikation",
+                "movementModifier":                              "Bewegungs Modifikation",
+                "mysticarmorModifier":                           "Mystische Rüstungs Modifikation",
+                "mysticdefenseModifier":                         "Mystische Verteidigungs Modifikation",
+                "perceptionStepModifier":                        "Wahrnehmungsstufen Modifikation",
+                "physicalarmorModifier":                         "Physische Rüstungs Modifikation",
+                "physicaldefenseModifier":                       "Physische Verteidigungs Modifikation",
+                "powersModifier":                                "Kräfte Modifikation",
+                "recoverytestsModifier":                         "Modifikation der Erholungsprobenanzahl",
+                "socialdefenseModifier":                         "Soziale Verteidiungs Modifikation",
+                "strengthStepModifier":                          "Stärkestufe Modifikation",
+                "swimModifier":                                  "Schwimmen Modifikation",
+                "toughnessStepModifier":                         "Zähigkeitsstufe Modifikation",
+                "unconsciousThresholdModifier":                  "Bewußtlosigkeitsschwelle Modifikation",
+                "walkModifier":                                  "Gehen Modifikation",
+                "willpowerStepModifier":                         "Willenskraftstufe Modifikation",
+                "woundThresholdModifier":                        "Wundschwelle Modifikation"
+            },
+            "Namegiver": {
+                "burrow":                                       "Graben---TOBEREMOVED",
+                "charismaValue":                                "Charismawert",
+                "climb":                                        "Klettern---TOBEREMOVED",
+                "dexterityValue":                               "Geschicklichkeitswert",
+                "fly":                                          "Fliegen---TOBEREMOVED",
+                "karmamodifier":                                "Karmamodifikator",
+                "movement":                                     "Bewegung ---TOBEREMOVED",
+                "perceptionValue":                              "Wahrnehmungswert",
+                "strengthValue":                                "Stärkewert",
+                "swim":                                         "Schwimmen---TOBEREMOVED",
+                "toughnessValue":                               "Zähigkeitswert",
+                "walk":                                         "Gehen---TOBEREMOVED",
+                "willpowerValue":                               "Willenskraftwert"
+            },
+            "Path": {
+                "sourceDiscipline":                             "Herkunfts Disziplin"              
+            },
+            "PoisonDisease": {
+                "activation":                                   "Aktivierung",
+                "damageStep":                                   "Schadensstufe",
+                "death":                                        "Tödlich",
+                "debilitationStep":                             "Schwächungsstufe",
+                "duration":                                     "Wirkungsdauer",
+                "effect":                                       "Wirkung",
+                "interval":                                     "Intervall",
+                "paralysisStep":                                "Lähmungsstufe",
+                "onsetTime":                                    "Verzögerung",
+                "timeInBetween":                                "Zeit zwischen den Wirkungen",
+                "timeInBetweenShort":                           "Wirkungsintervall",
+                "totalEffects":                                 "Maximale Wirkungen"
+            },
+            "Power": {
+                "action":                                       "Aktion",
+                "strain":                                       "Überanstrengung",
+                "attackStep":                                   "Angriffsstufe",
+                "powerStep":                                    "Kraftstufe",
+                "damageStep":                                   "Schadensstufe"
+            },
+            "Shield": {
+                "Label": {
+                    "defenseBonusPhysical":                     "Phy. Verteidigung Bonus",
+                    "defenseBonusMystical":                     "Myst. Verteidigung Bonus",
+                    "initiativePenalty":                        "Ini Malus",
+                    "shatterThreshold":                         "Bruch",
+                    "broken":                                   "Unbrauchbar"
+                },
+                "Hint": {
+                    "defenseBonusPhysical":                     "Physische Verteidigungs Bonus",
+                    "defenseBonusMystical":                     "Mystische Verteidigungs Bonus",
+                    "initiativePenalty":                        "Initiative Malus",
+                    "shatterThreshold":                         "Bruchschwelle"
                 }
             },
-            "character": {
-                "Characteristics": {
-                    "Defenses": {
-                        "defenses":                                 "Verteidigungen",
-                        "physical":                                 "Körperlich",
-                        "mystical":                                 "Mystisch",
-                        "social":                                   "Sozial"
-                    },
-                    "health": {
-                        "healthRating":                             "Gesundheitswerte",
-
-                        "woundThreshold":                           "Wundschwelle",
-                        "unconsciousThreshold":                     "Bewußtlosigkeit",
-                        "deathTheshold":                            "Tod"
-                    },
-                    "Armor": {
-                        "armor":                                    "Rüstung",
-                        
-                        "physical":                                 "Körperlich",
-                        "mystical":                                 "Mystisch"
-                    },
-                    "Movement": {
-                        "movement":                                 "Bewegung",
-
-                        "climb":                                    "Klettern",
-                        "swim":                                     "Schwimmen",
-                        "burrow":                                   "Graben",
-                        "fly":                                      "Fliegen",
-                        "walk":                                     "Laufen"
-                    }, 
-                    "Damage": {
-                        "damage":                                   "Schaden",
-                        "current":                                  "Aktuell",
-                        "wounds":                                   "Wunden",
-                        "subdual":                                  "Betäubung"
-                    },
-                    "Recovery": {
-                        "recoverytests":                            "Erholungsproben",
-                        "current":                                  "Aktuell",
-                        "daily":                                    "Täglich"     
-                    }
+            "ShipWeapon": {
+                "charakterDamage":                              "Schaden für Lebewesen",
+                "crewWeapon":                                   "Benötigte Mannschaft",
+                "firePowerPoints":                              "Feuerkraft",
+                "rangeLong":                                    "Lange Reichweite",
+                "rangeShort":                                   "Kurze Reichweite",
+                "salvoCost":                                    "Salven Kosten"
+            },
+            "Spell": {      
+                "binding":                                      "Bindung",
+                "castingdifficulty":                            "Schwierigkeit",
+                "circle":                                       "Kreis",
+                "concentration":                                "Konzentration",    
+                "duration":                                     "Dauer",
+                "effect":                                       "Wirkung",
+                "elementType":                                  "Element Typ",              
+                "elementSubtype":                               "Unter-Element",           
+                "extraSuccessesList":                           "Extra Erfolge",                    
+                "extraThreadsList":                             "Extra Fäden",
+                "illusionType":                                 "Illusions Typ",                                                  
+                "range":                                        "Reichweite",                                 
+                "reattunedifficulty":                           "Neuabstimmungs Schwierigkeit",                           
+                "reattunedifficultyShort":                      "Neuabstimmung",
+                "resist":                                       "Widerstehen",                                         
+                "sensingDifficulty":                            "Durchschauen Schwierigkeit", 
+                "shape":                                        "Wirkungsform",     
+                "spellArea":                                    "Wirkungsbereich",
+                "spellElement":                                 "Element",  
+                "spellIllustion":                               "Illusion",                        
+                "spirit":                                       "Geist", 
+                "summoning":                                    "Beschwörung", 
+                "sourceDiscipline":                             "Disziplin",
+                "threadsrequired":                              "Benötigte Fäden",  
+                "uom":                                          "Einheit",  
+                "value":                                        "Wert",                                       
+                "weavingdifficulty":                            "Webschwierigkeit"
+            },
+            "Weapon": {
+                "Hint": {
+                    "damageAttribute":                          "Schadensattribut",
+                    "damageBaseStep":                           "Schadensstufe",
+                    "dexterityMinimum":                         "Minimale Geschicklichkeit",
+                    "forgeBonus":                               "Schmiedebonus",
+                    "rangeLong":                                "Lange Reichweite",
+                    "rangeShort":                               "Kurze Reichweite",
+                    "size":                                     "Waffengröße",
+                    "strengthMinimum":                          "Minimale Stärke",
+                    "weaponType":                               "Waffenkategorie"
                 },
-                "Navigator": {
-                    "navigator":                                        "Navigator",
-                    
-                    "devotions":                                        "Weihekräfte",
-                    "classes":                                          "Berufung",
-                    "equipment":                                        "Ausrüstung",
-                    "familarsReputation":                               "Verbindungen",
-                    "general":                                          "Allgemein",
-                    "legend":                                           "Legende",
-                    "notes":                                            "Notizen",
-                    "skills":                                           "Fertigkeiten",
-                    "spells":                                           "Zauber",
-                    "specials":                                         "Besonderheiten",
-                    "talents":                                          "Talente"
-                },
-                "Tabs": {
-                    "Devotions": {
-
-                    },
-                    "Classes": {
-
-                    },
-                    "Equipment": {
-
-                    },
-                    "FamilarsReputation": {
-
-                    },
-                    "General": {
-
-                    },
-                    "Legend": {
-
-                    },
-                    "Notes": {
-
-                    },
-                    "Skills": {
-
-                    },
-                    "Spells": {
-
-                    },
-                    "Specials": {
-
-                    },
-                    "Talents": {
-
-                    }        
-                }
-            },
-            "creature": {
-
-            },
-            "dragon": {
-
-            },
-            "group": {
-
-            },
-            "horror": {
-
-            },
-            "loot": {
-
-            },
-            "npc": {
-
-            },
-            "spirit": {
-
-            },
-            "trap": {
-
-            },
-            "vehicle":  {
-
-            }
-        },
-        "ItemSheets": {
-            "armor": {
-
-            },
-            "attack": {
-
-            },
-            "cursemark": {
-
-            },
-            "devotion": {
-
-            },
-            "discipline": {
-
-            },
-            "effect": {
-
-            },
-            "equipment": {
-
-            },
-            "knack": {
-
-            },
-            "maneuver": {
-
-            },
-            "mask": {
-
-            },
-            "namegiver": {
-
-            },
-            "path": {
-
-            },
-            "poisonDisease": {
-
-            },
-            "power": {
-
-            },
-            "questor": {
-
-            },
-            "shield": {
-
-            },
-            "skill": {
-
-            },
-            "specialAbility": {
-
-            },
-            "spell": {
-
-            },
-            "talent": {
-
-            },
-            "thread": {
-
-            },
-            "weapon": {
-
-            },
-            "shipWeapon": {
-
-            }
-        },
-        "JournalSheets": {
-            "AdventureLog": {
-
-            }
-        },
-        "SystemSettings": {
-            "Configurations": {
-                "StepsTable": {
-
-                },
-                "DarkMode": {
-
-                },
-                "LpTracking": {
-
-                },
-                "Encumbrance": {
-
+                "Label": {
+                    "ammunition":                               "Munition",
+                    "damageAttribute":                          "Attribute",
+                    "damageBaseStep":                           "Schaden",
+                    "dexterityMinimum":                         "Min. Geschick",
+                    "forgeBonus":                               "Geschmiedet",
+                    "rangeLong":                                "L. Reichweite",
+                    "rangeShort":                               "K. Reichweite",
+                    "size":                                     "Größe",
+                    "strengthMinimum":                          "Min Str",
+                    "weaponType":                               "Kategorie"
                 }
             }
         },
-        "Gui": {
-            "Controls": {
-
+        "LpTracking": {
+            "attributeImprovement":                                 "Attribute erhöhen"
+        },
+        "Relations": {
+            "relation":                                             "Beziehung",
+            "relations":                                            "Beziehungen"
+        },
+        "Rolls": {
+            "formulaStep":                                          "Stufe {step}",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "Chat": {
+                "rollTypeHeading":                                  "{rollType} von {roller}",
+                "stepModifiers":                                    "Stufe {step}",
+                "targetModifiers":                                  "Schwierigkeit {target}",
+                "baseValue":                                        "Basis",
+                "difficulty":                                       "Schwierigkeit",
+                "successesAchieved":                                "{numSuccesses} ({numExtraSuccesses} extra)",
+                "buttonApplyDamage":                                "Schaden geben",
+                "buttonTakeDamage":                                 "Schaden nehmen",
+                "buttonEffect":                                     "Hier passiert was tolles"
+            }
+        },
+        "Sheet": {
+            "Descriptions": {
+                "burrow":                                           "Graben",                
+                "climb":                                            "Klettern",
+                "current":                                          "Aktuell", 
+                "daily":                                            "täglich",           
+                "deathTheshold":                                    "Todesschwelle",
+                "deathThesholdShort":                               "Tod",
+                "fly":                                               "Fliegen",          
+                "mystical":                                         "Mystisch",
+                "mysticalArmor":                                    "Mystische Rüstung",
+                "mysticalArmorAbbr":                                "MA",
+                "mysticalArmorShort":                               "M. Rüst.",
+                "mysticalDefense":                                  "Mystische Verteidigung",
+                "mysticalDefenseAbbr":                              "MV",
+                "mysticalDefenseShort":                             "M. Vert.",
+                "physical":                                         "Körperlich",
+                "physicalArmor":                                    "Körperliche Rüstung",
+                "physicalArmorAbbr":                                "KA",
+                "physicalArmorShort":                               "K. Rüst.",
+                "physicalDefense":                                  "Körperliche Verteidigung",
+                "physicalDefenseAbbr":                              "KV",
+                "physicalDefenseShort":                             "k. Vert.",
+                "social":                                           "Sozial",
+                "socialDefense":                                    "Soziale Verteidigung",
+                "socialDefenseAbbr":                                "SV",
+                "socialDefenseShort":                               "S. Vert.",
+                "swim":                                             "Schwimmen",       
+                "run":                                              "Laufen",
+                "unconsciousThreshold":                             "Bewußtlosigkeitsschwelle",
+                "unconsciousThresholdShort":                        "Bewußtlosigkeit",
+                "woundsThreshold":                                  "Wundschwelle",
+                "wounds":                                           "Wunden",
+                "walk":                                             "Gehen"
             },
-            "Sidebar": {
+            "Header": {
+                "armor":                                            "Rüstung",
+                "attributes":                                       "Attribute",
+                "carryingCapacity":                                 "Tragkraft",
+                "characteristics":                                  "Eigenschaften",
+                "conditions":                                       "Zustände",
+                "damage":                                           "Schaden",
+                "defenses":                                         "Verteidigungen",
+                "devotionPoints":                                   "Weihepunkte",
+                "disciplines":                                      "Disziplinen",
+                "encumbrance":                                      "Belastung",
+                "equipment":                                        "Ausrüstung",
+                "healthRating":                                     "Gesundheitswerte",
+                "movement":                                         "Bewegung",
+                "navigator":                                        "Navigator",
+                "paths":                                            "Pfade",
+                "questor":                                          "Questor",        
+                "recoveryTest":                                     "Erholungproben",
+                "shields":                                          "Schilde",
+                "weapons":                                          "Waffen"     
+            },
+            "Navigator": {
+                "devotions":                                        "Weihekräfte",
+                "classes":                                          "Berufung",
+                "equipment":                                        "Ausrüstung",
+                "familarsReputation":                               "Verbindungen",
+                "general":                                          "Allgemein",
+                "legend":                                           "Legende",
+                "notes":                                            "Notizen",
+                "skills":                                           "Fertigkeiten",
+                "spells":                                           "Zauber",
+                "specials":                                         "Besonderheiten",
+                "talents":                                          "Talente"
 
+            }
+        },
+        "Tier": {
+            "journeyman":                                           "Geselle",
+            "master":                                               "Meister",
+            "novice":                                               "Novize",
+            "tier":                                                 "Stufe",     
+            "warden":                                               "Hüter"
+            
+        },
+        "WeaponCategory":{
+            "melee":                                                "Nahkampfwaffe",
+            "missle":                                               "Projektilwaffe",
+            "thrown":                                               "Wurfwaffe",
+            "unarmed":                                              "Waffenlos"
+        },
+        "Settings": {
+            "Chat": {
+                "chatAvatar":                                       "Chat Avatar",
+                "chatAvatarHeader":                                 "Chat Avatar (nur SL)",
+                "chatAvatarHint":                                   "Wähle, welcher Avatar im Chat angezeigt werden soll. Spielerkonfiguration oder ausgewählter Token?",
+                "chatAvatarConfiguration":                          "Avatar der Konfiguration",
+                "chatAvatarToken":                                  "Avatar des Token"
+            },
+            "StepTable": {
+                "editionClassic":                                   "Klassik Edition",
+                "editionfirst":                                     "Erste Edition",
+                "editionFourth":                                    "Vierte Edition",
+                "editionThird":                                     "Dritte Edition",
+                "hint":                                             "Wähle die Stufentabelle zur Konvertierung der Stufen in Würfel",
+                "stepTable":                                        "Stufen-Tabelle",
+                "stepTableHeader":                                  "Stufen-Tabelle (Global)"
+            },
+            "DarkMode": {
+                "darkModeHeader":                                   "Anzeige Modus - Dark Mode (pro Client)",
+                "darkMode":                                         "Anzeige Modus",
+                "hint":                                             "Benutzte den Schieber um das Farbschema anzupassen. Die Anpassung erfordert ein Neuladen des Browsers (F5)."     
+            },
+            "LpTracking": {
+                "allTalents":                                       "Alle Talente",
+                "allTalentsHouseRule":                              "Alle Talente - Hausregel",
+                "automaticSilverReduction":                         "Silber wird automatisch verrechnet",
+                "disciplineTalents":                                "Nur Disciplin Talente",
+                "freePerCircle":                                    "Eine kostenlose Steigerung pro Kreis.",
+                "hintAttributesOption":                             "Welche option soll für die Steigerung von Attributen gewählt werden?",
+                "hintUsed":                                         "Soll Legendenpunkt Verwaltung vom System unterstütz werden?",
+                "hintTalents":                                      "Die Auswahl legt die Voraussetzungen für einen Möglichen Kreisaufstieg fest.",
+                "hintAutomaticSilverOption":                        "Soll Silber automatische beim erhöhen abgezogen werden?",
+                "lpTalentsRequirement":                             "Talentvoraussetzungen für den Kreisaufstieg",
+                "lpTrackingAttributeOptions":                       "Attribut Steigerung",
+                "lpTrackingHeader":                                 "Legendenpunkte Optionen (Global)",
+                "lpTrackingUsed":                                   "Legendenpunkte Verwaltung",
+                "lpTrackingRemoveSilverOption":                     "Automatische Silber Reduzierung",
+                "notAutomaticSilverReduction":                      "Silber wird nicht automatische verrechnet",
+                "noTracking":                                       "keine Legendenpunkte Verrechnung",
+                "spendLp":                                          "Kostenpflichtige Steigerung (Standard)",
+                "spendLpPerCircle":                                 "Eine kostenpflichtige Steigerung pro Kreis.",
+                "useTracking":                                      "Automatische Legendenpunkte Verrechnung"
+            },
+            "Encumbrance": {
+                "encumbrance":                                      "Belastung",
+                "encumberedHeader":                                 "Belastung (Global)",
+                "encumbranceVisualizeOnly":                         "Belastung wird nur angezeigt, hat jedoch keine Bewandnis",
+                "encumbranceWithEffects":                           "Belastung wird berechnet und hat Auswirkungen auf den Akteur",
+                "encumbranceHint":                                  "Soll die Belastung der Spielercharaktere nur angezeigt werden, oder soll Belastung genutzt werden."
+            },
+            "SpecificSettingOptions": {
+                "changelog":                                        "Änderungsprotokoll",
+                "help":                                             "Hilfe",
+                "troubleshooting":                                  "Einen Fehler melden",
+                "title":                                            "Earthdawneinstellungen"           
+            }
+        },
+        "Tours": {
+            "Settings": {
+                
+                "ed4eSpecificSettingsTitle":                        "Systemeinstellungstour",
+                "description":                                      "Beschreibung der Earthdawnspezifischen Systemeinstellungen",
+                "Intro": {
+                    "title":                                        "Systemeinstellungen",
+                    "text":                                         "Systemspezifische Einstellungen"
+                },
+                "Changelog": {
+                    "title":                                        "Änderungsprotokoll",
+                    "text":                                         "Hier stehen die letzten Systemänderungen"
+                },
+                "Help": {
+                    "title":                                        "Hilfe",
+                    "text":                                         "Hier gelangst du zum System Wiki, wo alle funktionen beschrieben werden."
+                },
+                "Troubleshooting": {
+                    "title":                                        "Fehler!",
+                    "text":                                         "Fehler können direkt über diesen Button gemeldet werden."
+                }
+                
+                
+                
             }
         }
     }
+    
 }

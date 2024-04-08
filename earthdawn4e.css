@@ -71,11 +71,29 @@
 .input--centered {
   text-align: center;
 }
+.one-line__vertical-align > * {
+  line-height: 35px;
+  vertical-align: middle;
+}
 .itemControlGroup {
   float: right;
 }
 .icons__small {
   font-size: small;
+}
+#logo {
+  content: url('assets/foundry/earthdawn-logo.png');
+  width: 120px;
+  height: auto;
+  padding-right: 10px;
+}
+#pause img {
+  content: url('assets/foundry/pause.png');
+  width: 128px;
+  height: auto;
+  opacity: 0.5;
+  position: absolute;
+  left: calc(50% - 64px);
 }
 .body .actor-section__top {
   height: 158px;
@@ -116,9 +134,11 @@
   width: 40%;
   margin-right: 50px;
 }
+.body .item-section__top {
+  height: 158px;
+}
 .body .item-section__top img {
   width: 158px;
-  height: 158px;
   border: none;
 }
 .app.window-app.earthdawn4e.sheet {
@@ -206,4 +226,30 @@
 }
 .app.window-app.earthdawn4e.sheet .window-resizable-handle {
   z-index: 5;
+}
+.ability-card__grid--container {
+  display: grid;
+  grid-template-columns: 40px 250px 100px 75px 75px 75px 100px 75px;
+}
+.ability-card__grid--container .ability-card__grid--item {
+  width: 25px;
+}
+.ability-card__grid--container .ability-card__grid--item .roll-icon__hover,
+.ability-card__grid--container .ability-card__grid--item .roll-icon__pointer {
+  display: none;
+}
+.ability-card__grid--container:hover .roll-icon__hover {
+  display: block;
+}
+.ability-card__grid--container:hover .ability-icon {
+  display: none;
+}
+.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer {
+  display: block;
+}
+.ability-card__grid--container:hover .ability-card__grid--item:hover .ability-icon {
+  display: none;
+}
+.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover {
+  display: none;
 }

@@ -1,0 +1,44 @@
+.ability-card__grid--container {
+    display: grid;
+    grid-template-columns: 
+    // 790 px available
+    40px    // Icon
+    250px   // Name
+    100px    // Action
+    75px    // Rank
+    75px    // Step
+    75px    // Strain
+    100px    // Attribute
+    75px   // Control Icons
+    ;
+
+    .ability-card__grid--item {
+        width: 25px;
+        .roll-icon__hover,
+        .roll-icon__pointer {
+            display: none;
+        }
+    }
+}
+
+.ability-card__grid--container:hover {
+    .roll-icon__hover {
+        display: block;
+    }
+    .ability-icon {
+        display: none;
+    }
+
+    .ability-card__grid--item:hover {
+        .roll-icon__pointer {
+            display: block;
+        }
+        .ability-icon {
+            display: none;
+        }
+        .roll-icon__hover {
+            display: none;
+        }
+    }
+}
+

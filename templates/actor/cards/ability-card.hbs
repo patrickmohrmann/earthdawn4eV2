@@ -1,4 +1,21 @@
-<div class="card__ability one-line__vertical-align">
+<div class="ability-card__grid--container">
+    <div class="ability-card__grid--item">
+        <img class="ability-icon" src="{{img}}" data-edit="img" title="{{name}}" />
+        <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
+        <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+    </div>
+    <div class="ability-card__grid--item">name</div>
+    <div class="ability-card__grid--item">action</div>
+    <div class="ability-card__grid--item">Rank</div>
+    <div class="ability-card__grid--item">Step</div>
+    <div class="ability-card__grid--item">Strain</div>
+    <div class="ability-card__grid--item">Attribute</div>
+    <div class="ability-card__grid--item">Control Icons</div>
+</div>
+
+
+{{!-- OLD ABILITY CARD BELOW --}}
+{{!-- <div class="card__ability one-line__vertical-align">
     <span class="card__icon rollable-icons">
         <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
         <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
@@ -40,5 +57,5 @@
         {{#each this.effects as |effects id|}}
             {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
         {{/each}}
-    </span> --}}
-</div>
+    </span> 
+</div> --}}
