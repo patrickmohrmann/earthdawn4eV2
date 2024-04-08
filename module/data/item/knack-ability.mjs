@@ -1,6 +1,6 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-import TalentData from "./talent.mjs";
+import { KnackTemplate } from "./_module.mjs";
 
 /**
  * Data model template with information on Knack items.
@@ -11,17 +11,14 @@ import TalentData from "./talent.mjs";
  * @property {boolean} maneuver             maneuver knack
  * @property {number} extraSuccesses        extra successes to trigger the maneuver
  */
-export default class KnackAbilityData extends AbilityTemplate.mixin(
+export default class KnackAbilityData extends KnackTemplate.mixin(
+    AbilityTemplate, 
     ItemDescriptionTemplate
 )  {
 
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            sourceTalent: new foundry.data.fields.ForeignDocumentField( TalentData, {
-                idOnly: true,
-                label: "ED.Item.Knack.sourceTalent"
-            } ),
             // TODO @Chris how do we do this
             // restrictions: [], // there will be several options possible see issue #212
             // requirements: [], // there will be several options possible see issue #212 

@@ -1,9 +1,12 @@
 import SystemDataModel from "../../abstract.mjs";
+import TargetTemplate from "./targeting.mjs";
 
 /**
  * Data model template with information on items that are used to represent custom active effects.
  */
-export default class MagicTemplate extends SystemDataModel {
+export default class MagicTemplate extends SystemDataModel .mixin( 
+    TargetTemplate 
+) {
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {

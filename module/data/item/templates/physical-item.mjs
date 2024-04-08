@@ -1,4 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
+import TargetTemplate from "./targeting.mjs";
 
 /**
  * Data model template with information on physical items.
@@ -14,7 +15,9 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {string} usableItem.action                     action type of usable item
  * @property {number} usableItem.recoveryPropertyValue      recovery type value
  */
-export default class PhysicalItemTemplate extends SystemDataModel {
+export default class PhysicalItemTemplate extends SystemDataModel .mixin( 
+    TargetTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {
@@ -95,13 +98,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
                     initial: 0,
                     integer: true,
                     label: "ED.Item.General.arbitraryStep"
-                } ),
-                action: new foundry.data.fields.StringField( {
-                    required: true,
-                    nullable: false,
-                    blank: false,
-                    initial: "standard",
-                    label: "ED.Item.General.action"
                 } ),
                 // recovery property value shall be a drop down menu with several options discribed in #26
                 recoveryPropertyValue: new foundry.data.fields.NumberField( {

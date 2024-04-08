@@ -1,22 +1,21 @@
 import SystemDataModel from "../../abstract.mjs";
+import TargetTemplate from "./targeting.mjs";
 
 /**
- * Data model template with information on "class"-like items: paths, disciplines, and questors.
- * @property {number} level         either circle or rank of the class 
- * @property {string} identifier    type of class
+ * Data model template for Knacks
+ * @property {string} knackSource     UUID of Source the knack derives from
  */
-export default class KnackTemplate extends SystemDataModel{
+export default class KnackTemplate extends SystemDataModel.mixin( 
+    TargetTemplate 
+) {
 
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            level: new foundry.data.fields.NumberField( {
+            knackSource: new foundry.data.fields.DocumentUUIDField( {
                 required: true,
                 nullable: false,
-                min: 1,
-                initial: 1,
-                positive: true,
-                integer: true
+                label: "ED.Item.Knack.source"
             } ), 
         } );
     }
