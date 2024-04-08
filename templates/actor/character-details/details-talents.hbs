@@ -2,7 +2,7 @@
     <h3>
         {{localize "X-DisciplineTalents"}}
     </h3>
-    {{#each (getTalentType actor.itemTypes.talent 'discipline') as |talent i|}}
+    {{#each (gettalentCategory actor.itemTypes.talent 'discipline') as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
             {{#each (getKnackName talent ../knacks) as |knack id|}}
@@ -13,7 +13,7 @@
     <h3>
         {{localize "X-OptionalTalents"}}
     </h3>
-    {{#each (getTalentType actor.itemTypes.talent "optional") as |talent i|}}
+    {{#each (gettalentCategory actor.itemTypes.talent "optional") as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
             {{#each (getKnackName talent ../knacks) as |knack id|}}
@@ -24,7 +24,7 @@
     <h3>
         {{localize "X-FreeTalents"}}
     </h3>
-    {{#each (getTalentType actor.itemTypes.talent "free") as |talent i|}}
+    {{#each (gettalentCategory actor.itemTypes.talent "free") as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
             {{#each (getKnackName talent ../knacks) as |knack id|}}
@@ -35,7 +35,7 @@
     <h3>
         {{localize "X-VersatilityTalents"}}
     </h3>
-    {{#each (getTalentType actor.itemTypes.talent "versatility") as |talent i|}}
+    {{#each (gettalentCategory actor.itemTypes.talent "versatility") as |talent i|}}
         <div class="item-name item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
             {{#each (getKnackName talent ../knacks) as |knack id|}}

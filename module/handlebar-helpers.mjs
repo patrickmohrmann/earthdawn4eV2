@@ -57,8 +57,8 @@ export default function registerHandlebarHelpers() {
 
   Handlebars.registerHelper( 'ed-diceFormulaForStep', getDice );
 
-  Handlebars.registerHelper( "getTalentType", ( talents, type ) => {
-    return talents.filter( ( talent ) => talent.system.talentType === type );
+  Handlebars.registerHelper( "gettalentCategory", ( talents, type ) => {
+    return talents.filter( ( talent ) => talent.system.talentCategory === type );
   } );  
 
   Handlebars.registerHelper( "getKnackName", ( talent, knacks ) => {

@@ -221,16 +221,16 @@ ED4E.tier = {
 preLocalize( "tier" );
 
 /**
- * talentType
+ * talentCategory
  * @enum {string}
  */
-ED4E.talentType = {
-	discipline: 			"ED.TalentType.discipline",
-	optional: 				"ED.TalentType.optional",
-	free: 					"ED.TalentType.free",
-	versatility: 			"ED.TalentType.versatility"
+ED4E.talentCategory = {
+	discipline: 			"ED.talentCategory.discipline",
+	optional: 				"ED.talentCategory.optional",
+	free: 					"ED.talentCategory.free",
+	versatility: 			"ED.talentCategory.versatility"
 }
-preLocalize( "talentType" );
+preLocalize( "talentCategory" );
 
 /**
  * Type of grantable abilities for a class level

@@ -11,7 +11,7 @@ export default class TalentData extends AbilityTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            talentType: new foundry.data.fields.StringField( {
+            talentCategory: new foundry.data.fields.StringField( {
                 required: true,
                 nullable: false,
                 blank: false,
