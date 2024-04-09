@@ -5,11 +5,11 @@
     <div class="">
         <div class="padding__top-small">
             <div id="characteristics-defenses" class="partial__two">
-                <h4 class="header--centered">{{localize "ED.Sheet.Header.defenses"}}</h4>
+                <h4 class="header--centered">{{localize "ED.Actor.Header.defenses"}}</h4>
                 <div class="input--centered">
-                    <label class="partial__three">{{localize "ED.Sheet.Descriptions.physical"}}</label>
-                    <label class="partial__three">{{localize "ED.Sheet.Descriptions.mystical"}}</label>
-                    <label class="partial__three">{{localize "ED.Sheet.Descriptions.social"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.physicalDefense"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.mysticalDefense"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.socialDefense"}}</label>
                 </div>
                 <div class="input--centered partial__three">
                     <input id="characteristic-defense-physcial" class="input__circle-input--centered"
@@ -28,12 +28,12 @@
                 </div>
             </div>
             <div id="characteristics-health-rating" class="partial__two">
-                <h4 class="header--centered">{{localize "ED.Sheet.Header.healthRating"}}</h4>
+                <h4 class="header--centered">{{localize "ED.Actor.Header.healthRating"}}</h4>
                 <div class="input--centered">
-                    <label class="partial__three">{{localize "ED.Sheet.Descriptions.woundsThreshold"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.woundsThreshold"}}</label>
                     <label class="partial__three">{{localize
-                        "ED.Sheet.Descriptions.unconsciousThresholdShort"}}</label>
-                    <label class="partial__three">{{localize "ED.Sheet.Descriptions.deathThesholdShort"}}</label>
+                        "ED.Actor.Characteristics.unconsciousThresholdShort"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.deathThesholdShort"}}</label>
                 </div>
                 <div class="input--centered partial__three">
                     <input id="characteristic-health-rating-wounds" class="input__circle-input--centered"
@@ -55,10 +55,10 @@
 
         <div class="padding__top-small">
             <div id="characteristics-armor" class="partial__four">
-                <h4 class="header--centered">{{localize "ED.Sheet.Header.armor"}}</h4>
+                <h4 class="header--centered">{{localize "ED.Actor.Header.armor"}}</h4>
                 <div class="input--centered">
-                    <label class="partial__two">{{localize "ED.Sheet.Descriptions.physical"}}</label>
-                    <label class="partial__two">{{localize "ED.Sheet.Descriptions.mystical"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.physicalArmor"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.mysticalArmor"}}</label>
                 </div>
                 <div class="input--centered partial__two">
                     <input id="characteristic-armor-physical" class="input__circle-input--centered"
@@ -73,14 +73,14 @@
             </div>
 
             <div id="characteristics-damage" class="partial__four">
-                <h4 class="header--centered">{{localize "ED.Sheet.Header.movement"}}
+                <h4 class="header--centered">{{localize "ED.Actor.Header.movement"}}
                     <a class="fas fa-cogs" title="other movement types inside a pop up"></a>
                 </h4>
                 <div class="input--centered">
-                    <label>{{localize "ED.Sheet.Descriptions.walk"}}</label>
-                    {{!-- <label class="partial__four">climb</label>
-                    <label class="partial__four">Mount</label>
-                    <label class="partial__four">Fly</label> --}}
+                    <label>{{localize "ED.Actor.Characteristics.walkMovement"}}</label>
+                    {{!-- <label class="partial__four">{{localize "ED.Actor.Characteristics.runMovement"}}</label>
+                    <label class="partial__four">{{localize "ED.Actor.Characteristics.mountMovement"}}</label>
+                    <label class="partial__four">{{localize "ED.Actor.Characteristics.Movement"}}</label> --}}
                 </div>
                 <div class="input--centered">
                     <input id="characteristic-movement-run" class="input__circle-input--centered"
@@ -101,12 +101,12 @@
                 </div> --}}
             </div>
             <div id="characteristics-damage" class="partial__four">
-                <h4 class="header--centered">{{localize "ED.Sheet.Header.damage"}}
+                <h4 class="header--centered">{{localize "ED.Actor.Header.damage"}}
                     <a class="fas fa-cogs" title="a prompt will show option for Blood magic"></a>
                 </h4>
                 <div class="input--centered">
-                    <label class="partial__two">{{localize "ED.Sheet.Descriptions.current"}}</label>
-                    <label class="partial__two">{{localize "ED.Sheet.Descriptions.wounds"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.currentDamage"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.woundsDamage"}}</label>
                 </div>
                 <div class="input--centered partial__two">
                     <input id="characteristic-damage" class="input__circle-input--centered"
@@ -120,13 +120,13 @@
                 </div>
             </div>
             <div id="characteristics-damage" class="partial__four">
-                <h4 class="header--centered">{{localize "ED.Sheet.Header.recoveryTest"}}
+                <h4 class="header--centered">{{localize "ED.Actor.Header.recovery"}}
                     <a class="fas fa-medkit" title="take a rest"></a>
                 </h4>
                 <div class="input--centered">
-                    <label class="partial__two">{{localize "ED.Sheet.Descriptions.current"}}
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.currentRecoveryTests"}}
                     </label>
-                    <label class="partial__two">{{localize "ED.Sheet.Descriptions.daily"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.dailyRecoveryTests"}}</label>
                 </div>
                 <div class="input--centered partial__two">
                     <input id="characteristic-recovery-current" class="input__circle-input--centered"

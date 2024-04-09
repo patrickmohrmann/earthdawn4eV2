@@ -1,16 +1,18 @@
-<div class="details__area left-part">
+<div class="left-part">
     {{!-- Attribute --}}
     <div>
         <h3>
-            <label class="character__attribute">{{localize "ED.Sheet.Header.attributes"}}</label>
-            <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
-                ED.LpTracking.attributeImprovement"}}"></a>
+            <label>{{localize "ED.Actor.Header.attributes"}}</label>
+            <a class="icon__position--right fa-regular fa-circle-up" 
+            title="{{localize "ED.Actor.LpTracking.attributeImprovement"}}"></a>
         </h3>
+
+        hier sollte ein Grid her
         <table class="table__attribute">
             <tr>
-                <th class="text__alignment--left">{{localize "ED.Attributes.attribute"}}</th>
-                <th class="text__alignment--left">{{localize "ED.General.value"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
+                <th class="text__alignment--left">{{localize "ED.Actor.Attributes.attributeName"}}</th>
+                <th class="text__alignment--left">{{localize "ED.Actor.Attributes.attributeValue"}}</th>
+                <th class="text__alignment--center">{{localize "ED.Actor.Attributes.attribueStep"}}</th>
             </tr>
             {{#each actor.system.attributes }}
             <tr  class="table-row__attribute">
@@ -123,7 +125,7 @@
     </div>
     {{!-- Devotion --}}
     <div>
-        <h4>{{localize "ED.Sheet.Header.devotionPoints"}}</h4>
+        <h4>{{localize "ED.Actor.Header.devotionPoints"}}</h4>
         <table class="table__devotion">
             <tr>
                 <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
@@ -156,7 +158,7 @@
 {{!-- Conditions --}}
 <div class="right-part">
     <div class="partial__two">
-        <h3>{{localize "ED.Sheet.Header.conditions"}}</h3>
+        <h3>{{localize "ED.Actor.Header.conditions"}}</h3>
         <div>
             <div>
                 <div class="partial__two">

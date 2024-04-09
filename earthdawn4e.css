@@ -75,7 +75,8 @@
   line-height: 35px;
   vertical-align: middle;
 }
-.itemControlGroup {
+.itemControlGroup,
+.icon__position--right {
   float: right;
 }
 .icons__small {
@@ -111,6 +112,13 @@
 }
 .body .actor-section__top .padding__top-small {
   height: 80px;
+}
+.main .actor-sheet-body .tab__general .left-part {
+  float: left;
+  width: 250px;
+}
+.main .actor-sheet-body .tab__general .right-part {
+  float: right;
 }
 .action--buttons {
   padding-top: 5px;
@@ -197,6 +205,7 @@
   padding-left: 5px;
 }
 .app.window-app.earthdawn4e.sheet .window-content .body .main {
+  padding-top: 1px;
   height: 440px;
   overflow-y: auto;
   padding-left: 5px;

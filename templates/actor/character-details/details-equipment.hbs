@@ -1,12 +1,12 @@
-{{localize "ED.Sheet.Header.carryingCapacity"}}  
+{{localize "ED.Actor.Header.carryingCapacity"}}  
 <div>
     <input class="input__number-input" type="number" name="system.encumbrance.max" value="{{actor.system.encumbrance.max}}">
 </div>
-{{localize "ED.Sheet.Header.encumbrance"}} 
+{{localize "ED.Actor.Header.encumbrance"}} 
 <div>
     <input class="input__number-input" type="number" name="system.encumbrance.value" value="{{actor.system.encumbrance.value}}">
 </div>
-<h4>{{localize "ED.Sheet.Header.equipment"}}</h4>
+<h4>{{localize "ED.Actor.Header.equipment"}}</h4>
 <div>
     {{#each actor.itemTypes.equipment}}
     <div class="item-name item-name__card" data-item-id="{{_id}}">
@@ -14,7 +14,7 @@
     </div>
     {{/each}}
 </div>
-<h4>{{localize "ED.Sheet.Header.weapons"}}</h4>
+<h4>{{localize "ED.Actor.Header.weapons"}}</h4>
 <div>
     {{#each actor.itemTypes.weapon}}
     <div class="item-name item-name__card" data-item-id="{{_id}}">
@@ -22,7 +22,7 @@
     </div>
     {{/each}}
 </div>
-<h4>{{localize "ED.Sheet.Header.armor"}}</h4>
+<h4>{{localize "ED.Actor.Header.armor"}}</h4>
 <div>
     {{#each actor.itemTypes.armor}}
     <div class="item-name item-name__card" data-item-id="{{_id}}">
@@ -30,7 +30,7 @@
     </div>
     {{/each}}
 </div>
-<h4>{{localize "ED.Sheet.Header.shields"}}</h4>
+<h4>{{localize "ED.Actor.Header.shields"}}</h4>
 <div>
     {{#each actor.itemTypes.shield}}
     <div class="item-name item-name__card" data-item-id="{{_id}}">

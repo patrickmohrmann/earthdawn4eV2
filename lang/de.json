@@ -13,61 +13,115 @@
             "vehicle":                                              "Transportmittel"
         },
         "Item": {
-            "armor":                                            "Rüstung",
-            "attack":                                           "Angriff",
-            "bindingSecret":                                    "Bindungsgeheimnis",
-            "cursemark":                                        "Fluch / Dämonenmal",
-            "devotion":                                         "Weihekraft",
-            "discipline":                                       "Disziplin",
-            "effect":                                           "Effekt",
-            "equipment":                                        "Ausrüstung",
-            "knackAbility":                                            "Kniff",
-            "knackKarma":                                       "Karma Kniff",
-            "knackManeuver":                                    "Maneuver Kniff",
-            "maneuver":                                         "Manöver",
-            "mask":                                             "Maske",
-            "matrix":                                           "Matrix",
-            "namegiver":                                        "Namensgeber",
-            "path":                                             "Pfad",
-            "poisonDisease":                                    "Gift / Krankheit",
-            "power":                                            "Kraft",
-            "questor":                                          "Questor",
-            "shield":                                           "Schild",
-            "skill":                                            "Fertigkeit",
-            "specialAbility":                                   "Sonstige Fähigkeit",
-            "spell":                                            "Zauberspruch",
-            "spellKnack":                                       "Zauberkniff",
-            "talent":                                           "Talent",
-            "thread":                                           "Permanenter Faden",
-            "weapon":                                           "Waffe",
-            "shipWeapon":                                       "Schiffswaffe"
+            "armor":                                                "Rüstung",
+            "attack":                                               "Angriff",
+            "bindingSecret":                                        "Bindungsgeheimnis",
+            "cursemark":                                            "Fluch / Dämonenmal",
+            "devotion":                                             "Weihekraft",
+            "discipline":                                           "Disziplin",
+            "effect":                                               "Effekt",
+            "equipment":                                            "Ausrüstung",
+            "knackAbility":                                         "Kniff",
+            "knackKarma":                                           "Karma Kniff",
+            "knackManeuver":                                        "Maneuver Kniff",
+            "maneuver":                                             "Manöver",
+            "mask":                                                 "Maske",
+            "matrix":                                               "Matrix",
+            "namegiver":                                            "Namensgeber",
+            "path":                                                 "Pfad",
+            "poisonDisease":                                        "Gift / Krankheit",
+            "power":                                                "Kraft",
+            "questor":                                              "Questor",
+            "shield":                                               "Schild",
+            "skill":                                                "Fertigkeit",
+            "specialAbility":                                       "Sonstige Fähigkeit",
+            "spell":                                                "Zauberspruch",
+            "spellKnack":                                           "Zauberkniff",
+            "talent":                                               "Talent",
+            "thread":                                               "Permanenter Faden",
+            "weapon":                                               "Waffe",
+            "shipWeapon":                                           "Schiffswaffe"
         }
     },
-    "ED-SHEET": {
+    "ED": {
         "Actor": {
             "Abilities": {
-
+                
             },
             "Attributes": {
-
+                "attributeName":                                    "Attribut",
+                "attribueStep":                                     "Stufe",
+                "attributeValue":                                   "Wert",
+                "charisma":                                         "Charisma",
+                "charismaAbbr":                                     "Cha",
+                "dexterity":                                        "Geschick",
+                "dexterityAbbr":                                    "Ges",
+                "perception":                                       "Wahrnehmung",
+                "perceptionAbbr":                                   "Wah",
+                "strength":                                         "Stärke",
+                "strengthAbbr":                                     "Stä",
+                "toughness":                                        "Zähigkeit",
+                "toughnessAbbr":                                    "Zäh",
+                "willpower":                                        "Willenskraft",
+                "willpowerAbbr":                                    "Wil"
             },
             "Characteristics": {
-
+                "currentDamage":                                    "Schaden",
+                "currentRecoveryTests":                             "Aktuell",
+                "dailyRecoveryTests":                               "Täglich",
+                "deathThesholdShort":                               "Todesschwelle",
+                "mysticalArmor":                                    "Mystisch",
+                "mysticalDefense":                                  "Mystisch",
+                "physicalArmor":                                    "Körperlich",
+                "physicalDefense":                                  "Körperlich",
+                "socialDefense":                                    "Sozial",
+                "unconsciousThresholdShort":                        "Bewußtlosigkeit",
+                "walkMovement":                                     "Zu Fuss",
+                "woundsDamage":                                     "Wounden",
+                "woundsThreshold":                                  "Wundschwelle"
             },
             "Header": {
-
+                "armor":                                            "Rüstung",
+                "attributes":                                       "Attribute",
+                "damage":                                           "Schaden",
+                "defenses":                                         "Verteidigung",
+                "healthRating":                                     "Gesundheit",
+                "movement":                                         "Bewegung",
+                "navigator":                                        "Navigator",  
+                "recovery":                                         "Erholung"
+            },
+            "LpTracking": {
+                "attributeImprovement":                             "Attribut Erhöhung"
             },
             "Navigator": {
-
+                "classes":                                          "Berufung",
+                "devotions":                                        "Weihekräfte",
+                "equipment":                                        "Ausrüstung",
+                "general":                                          "Allgemein",
+                "information":                                      "Informationen",
+                "legend":                                           "Legende",
+                "reputation":                                       "Ruf",
+                "skills":                                           "Fertigkeiten",
+                "specials":                                         "Besonders",
+                "spells":                                           "Zauber",
+                "talents":                                          "Talente"
             },
             "Tooltips": {
 
             },
             "Cards": {
-
+                "chat":                                             "Zeige Item Informationan als Chat Nachricht",
+                "delete":                                           "Lösche Item",
+                "edit":                                             "Editiere Item"
             }
         },
         "Item": {
+            "Navigator": {
+                "advancement":                                      "Fortschritt",
+                "details":                                          "Details",
+                "effects":                                          "Effekte",
+                "general":                                          "Allgemein"
+            }
 
         }
     }

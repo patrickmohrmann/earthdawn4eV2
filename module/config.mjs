@@ -48,28 +48,28 @@ ED4E.typeGroups = {
  */
 ED4E.attributes = {
 	dex: {
-		label: 			"ED.Attributes.dexterity",
-		abbreviation: 	"ED.Attributes.dexterityAbbr"
+		label: 			"ED.Actor.Attributes.dexterity",
+		abbreviation: 	"ED.Actor.Attributes.dexterityAbbr"
 	},
 	str: {
-		label: 			"ED.Attributes.strength",
+		label: 			"ED.Actor.Attributes.strength",
 		abbreviation: 	"ED.Attribute.strengthAbbr"
 	},
 	tou: {
-		label: 			"ED.Attributes.toughness",
-		abbreviation: 	"ED.Attributes.toughnessAbbr"
+		label: 			"ED.Actor.Attributes.toughness",
+		abbreviation: 	"ED.Actor.Attributes.toughnessAbbr"
 	},
 	per: {
-		label: 			"ED.Attributes.perception",
-		abbreviation: 	"ED.Attributes.perceptionAbbr"
+		label: 			"ED.Actor.Attributes.perception",
+		abbreviation: 	"ED.Actor.Attributes.perceptionAbbr"
 	},
 	wil: {
-		label: 			"ED.Attributes.willpower",
-		abbreviation: 	"ED.Attributes.willpowerAbbr"
+		label: 			"ED.Actor.Attributes.willpower",
+		abbreviation: 	"ED.Actor.Attributes.willpowerAbbr"
 	},
 	cha: {
-		label: 			"ED.Attributes.charisma",
-		abbreviation: 	"ED.Attributes.charismaAbbr"
+		label: 			"ED.Actor.Attributes.charisma",
+		abbreviation: 	"ED.Actor.Attributes.charismaAbbr"
 	}
 };
 preLocalize( "attributes", {keys: ["label", "abbreviation"]} );
@@ -224,7 +224,7 @@ preLocalize( "languages" );
  * @enum {string}
  */
 ED4E.tier = {
-	//none: 				"ED.General.none",
+	// none: 				"ED.General.none",
 	novice: 			"ED.Tier.novice",
 	journeyman: 		"ED.Tier.journeyman",
 	warden: 			"ED.Tier.warden",
