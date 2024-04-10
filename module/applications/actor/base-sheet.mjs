@@ -55,7 +55,7 @@ export default class ActorSheetEd extends ActorSheet {
     if ( !this.isEditable ) return;
 
     // Attribute tests
-    html.find( "table.table__attribute .rollable" ).click( this._onRollAttribute.bind( this ) );
+    html.find( ".attribute-card__grid--item .rollable" ).click( this._onRollAttribute.bind( this ) );
 
     // Attribute tests
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );

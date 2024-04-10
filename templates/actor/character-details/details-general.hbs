@@ -26,82 +26,10 @@
                     {{localize "ED.Actor.Attributes.attribueStep"}}
                 </label>
             </div>
-
         </div>
-        {{#each actor.system.attributes }}
         {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
-        {{/each}}
     </div>
 
-    {{#each actor.system.attributes }}
-            <tr  class="table-row__attribute">
-                <td class="attribute__name--content">
-                    <div class="rollable-icons">
-                        <div class="roll-icon partial__six">
-                            <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
-                            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-                        </div>
-                        <div class="attribute-label partial__two">
-                            <label> {{#with (lookup ../config.attributes @key)}}
-                            {{label}}
-                            {{/with}}</label>
-                        </div>
-                    </div>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.{{@key}}.value"
-                                value="{{value}}">
-                        </span>
-                        {{#if (eq timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.{{@key}}.step"
-                                value="{{this.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-            <tr>
-                <td class="attribute__name--content">
-                    <div class="rollable-icons">
-                        <div class="roll-icon partial__six">
-                            <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
-                            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-                        </div>
-                        <div class="attribute-label partial__two">
-                            <label class="roll__step--hover">{{localize "ED.General.initiative"}}</label>
-                        </div>
-                    </div>
-                </td>
-                <td></td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.initiative"
-                                value="{{actor.system.initiative}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
     {{!-- Karma --}}
     <div class="character-karma">
         <h4>

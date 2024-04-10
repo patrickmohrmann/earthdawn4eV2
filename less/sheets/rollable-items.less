@@ -1,19 +1,22 @@
 .ability-card__grid--container {
+    text-align: center;
+    align-items: center;
     display: grid;
-    grid-template-columns: 
-    // 790 px available
-    40px    // Icon
-    250px   // Name
-    100px    // Action
-    75px    // Rank
-    75px    // Step
-    75px    // Strain
-    100px    // Attribute
-    75px   // Control Icons
+    grid-template-columns:
+        // 790 px available
+        40px // Icon
+        250px // Name
+        100px // Action
+        75px // Rank
+        75px // Step
+        75px // Strain
+        100px // Attribute
+        75px // Control Icons
     ;
 
     .ability-card__grid--item {
         width: 25px;
+
         .roll-icon__hover,
         .roll-icon__pointer {
             display: none;
@@ -22,20 +25,44 @@
 }
 
 .attribute-card__grid--container {
+    text-align: center;
+    align-items: center;
+    height: 30px;
     display: grid;
-    grid-template-columns: 
-    // 790 px available
-    25px    // Icon
-    100px   // Name
-    50px   // value
-    50px    // enhancement
-    50px    // Step
+    grid-template-columns:
+        // 250 px available
+        30px // Icon
+        110px // Name
+        38px // value
+        38px // enhancement
+        38px // Step
     ;
 
     .attribute-card__grid--item {
         width: 25px;
-        .roll-icon__hover,
+
         .roll-icon__pointer {
+            display: none;
+        }
+    }
+}
+
+.roll-icon__hover,
+.roll-icon__pointer,
+.ability-icon,
+.attribute-icon {
+    border: none;
+}
+
+.attribute-card__grid--container:hover {
+    .roll-icon__hover {
+        display: block;
+    }
+    .attribute-card__grid--item:hover {
+        .roll-icon__pointer {
+            display: block;
+        }
+        .attribute-icon {
             display: none;
         }
     }
@@ -45,6 +72,7 @@
     .roll-icon__hover {
         display: block;
     }
+
     .ability-icon {
         display: none;
     }
@@ -53,12 +81,13 @@
         .roll-icon__pointer {
             display: block;
         }
+
         .ability-icon {
             display: none;
         }
+
         .roll-icon__hover {
             display: none;
         }
     }
 }
-
