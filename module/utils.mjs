@@ -418,6 +418,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/cards/spell-card.hbs",
     "systems/ed4e/templates/actor/cards/class-card.hbs",
     "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",
+    "systems/ed4e/templates/actor/cards/attribute-card.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/item-section-name.hbs",

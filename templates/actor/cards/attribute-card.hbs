@@ -1,0 +1,43 @@
+<div class="attribute-card__grid--container">
+    <div class="attribute-card__grid--item">
+        <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
+        <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+    </div>
+    <div class="attribute-card__grid--item">
+        <label>
+            
+            {{#with (lookup ../config.attributes @key)}}
+            {{log label}}
+            {{label}}
+            {{/with}}
+        </label>
+    </div>
+    <div class="attribute-card__grid--item">
+        <input class="input__number-input" type="number" name="system.attributes.{{@key}}.value" value="{{value}}">
+    </div>
+    <div class="attribute-card__grid--item">
+        {{#if (eq timesIncreased 1)}}
+        <i class="enhancemente-1 fa fa-star"></i>
+        {{/if}}
+        {{#if (eq timesIncreased 2)}}
+        <i class="enhancemente-1 fa fa-star"></i>
+        <i class="enhancemente-2 fa fa-star"></i>
+        {{/if}}
+        {{#if (eq timesIncreased 3)}}
+        <i class="enhancemente-1 fa fa-star"></i>
+        <i class="enhancemente-2 fa fa-star"></i>
+        <i class="enhancemente-3 fa fa-star"></i>
+        {{/if}}
+    </div>
+    <div class="attribute-card__grid--item">
+        <input class="input__number-input" type="number" name="system.attributes.dex.step" value="{{this.baseStep}}"
+            readonly>
+    </div>
+</div>
+
+
+
+
+
+                        
+            

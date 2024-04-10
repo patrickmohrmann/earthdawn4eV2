@@ -75,6 +75,15 @@
   line-height: 35px;
   vertical-align: middle;
 }
+.text__alignment--left {
+  text-align: left;
+}
+.text__alignment--right {
+  text-align: right;
+}
+.text__alignment--center {
+  text-align: center;
+}
 .itemControlGroup,
 .icon__position--right {
   float: right;
@@ -245,6 +254,17 @@
 }
 .ability-card__grid--container .ability-card__grid--item .roll-icon__hover,
 .ability-card__grid--container .ability-card__grid--item .roll-icon__pointer {
+  display: none;
+}
+.attribute-card__grid--container {
+  display: grid;
+  grid-template-columns: 25px 100px 50px 50px 50px;
+}
+.attribute-card__grid--container .attribute-card__grid--item {
+  width: 25px;
+}
+.attribute-card__grid--container .attribute-card__grid--item .roll-icon__hover,
+.attribute-card__grid--container .attribute-card__grid--item .roll-icon__pointer {
   display: none;
 }
 .ability-card__grid--container:hover .roll-icon__hover {

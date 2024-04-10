@@ -3,18 +3,37 @@
     <div>
         <h3>
             <label>{{localize "ED.Actor.Header.attributes"}}</label>
-            <a class="icon__position--right fa-regular fa-circle-up" 
-            title="{{localize "ED.Actor.LpTracking.attributeImprovement"}}"></a>
+            <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
+                ED.Actor.LpTracking.attributeImprovement"}}"></a>
         </h3>
+        <div class="attribute-card__grid--container">
+            <div class="attribute-card__grid--item"></div>
+            <div class="attribute-card__grid--item">
+                <label>{{localize "ED.Actor.Attributes.attributeName"}}</label>
+            </div>
+            <div class="attribute-card__grid--item">
+                <label>
+                    {{localize "ED.Actor.Attributes.attributeValue"}}
+                </label>
+            </div>
+             <div class="attribute-card__grid--item">
+                <label>
+                    {{localize "ED.Actor.Attributes.increase"}}
+                </label>
+            </div>
+            <div class="attribute-card__grid--item">
+                <label>
+                    {{localize "ED.Actor.Attributes.attribueStep"}}
+                </label>
+            </div>
 
-        hier sollte ein Grid her
-        <table class="table__attribute">
-            <tr>
-                <th class="text__alignment--left">{{localize "ED.Actor.Attributes.attributeName"}}</th>
-                <th class="text__alignment--left">{{localize "ED.Actor.Attributes.attributeValue"}}</th>
-                <th class="text__alignment--center">{{localize "ED.Actor.Attributes.attribueStep"}}</th>
-            </tr>
-            {{#each actor.system.attributes }}
+        </div>
+        {{#each actor.system.attributes }}
+        {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
+        {{/each}}
+    </div>
+
+    {{#each actor.system.attributes }}
             <tr  class="table-row__attribute">
                 <td class="attribute__name--content">
                     <div class="rollable-icons">

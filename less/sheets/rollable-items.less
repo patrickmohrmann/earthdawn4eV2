@@ -21,6 +21,26 @@
     }
 }
 
+.attribute-card__grid--container {
+    display: grid;
+    grid-template-columns: 
+    // 790 px available
+    25px    // Icon
+    100px   // Name
+    50px   // value
+    50px    // enhancement
+    50px    // Step
+    ;
+
+    .attribute-card__grid--item {
+        width: 25px;
+        .roll-icon__hover,
+        .roll-icon__pointer {
+            display: none;
+        }
+    }
+}
+
 .ability-card__grid--container:hover {
     .roll-icon__hover {
         display: block;
