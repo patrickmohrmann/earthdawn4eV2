@@ -91,6 +91,11 @@
 .icons__small {
   font-size: small;
 }
+.roll-icon__hover,
+.roll-icon__pointer,
+.attribute-icon {
+  width: 25px;
+}
 #logo {
   content: url('assets/foundry/earthdawn-logo.png');
   width: 120px;
@@ -133,19 +138,6 @@
   text-align: left;
   padding-left: 2px;
   margin-bottom: 15px;
-}
-.main .actor-sheet-body .tab__general .left-part .attribute__increases .enhancemente-1 {
-  position: absolute;
-  padding-left: 2px;
-}
-.main .actor-sheet-body .tab__general .left-part .attribute__increases .enhancemente-2 {
-  position: absolute;
-  padding-top: 9px;
-  padding-left: 2px;
-}
-.main .actor-sheet-body .tab__general .left-part .attribute__increases .enhancemente-3 {
-  position: absolute;
-  padding-left: 9px;
 }
 .main .actor-sheet-body .tab__general .right-part {
   float: right;
@@ -280,14 +272,14 @@
   display: none;
 }
 .attribute-card__grid--container {
-  text-align: center;
   align-items: center;
   height: 30px;
   display: grid;
   grid-template-columns: 30px 110px 38px 38px 38px;
 }
-.attribute-card__grid--container .attribute-card__grid--item {
-  width: 25px;
+.attribute-card__grid--container .attribute__name {
+  padding-left: 2px;
+  text-align: left;
 }
 .attribute-card__grid--container .attribute-card__grid--item .roll-icon__pointer {
   display: none;
@@ -298,27 +290,41 @@
 .attribute-icon {
   border: none;
 }
+.attribute-card__grid--item.icons__dice:hover + div,
+.ability-card__grid--item.icons__dice:hover + div {
+  cursor: pointer;
+  color: #000;
+  text-shadow: 0 0 10px red;
+}
+.ability-card__grid--container:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .roll-icon__hover {
   display: block;
 }
+.ability-card__grid--container:hover .ability-icon,
+.attribute-card__grid--container:hover .ability-icon {
+  display: none;
+}
+.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer,
+.attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer,
+.ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer {
   display: block;
 }
+.ability-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
+.attribute-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
+.ability-card__grid--container:hover .attribute-card__grid--item:hover .attribute-icon,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .attribute-icon {
   display: none;
 }
-.ability-card__grid--container:hover .roll-icon__hover {
-  display: block;
-}
-.ability-card__grid--container:hover .ability-icon {
+.ability-card__grid--container:hover .ability-card__grid--item:hover .ability-icon,
+.attribute-card__grid--container:hover .ability-card__grid--item:hover .ability-icon,
+.ability-card__grid--container:hover .attribute-card__grid--item:hover .ability-icon,
+.attribute-card__grid--container:hover .attribute-card__grid--item:hover .ability-icon {
   display: none;
 }
-.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer {
-  display: block;
-}
-.ability-card__grid--container:hover .ability-card__grid--item:hover .ability-icon {
-  display: none;
-}
-.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover {
+.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
+.attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
+.ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
+.attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover {
   display: none;
 }

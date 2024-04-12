@@ -25,7 +25,6 @@
 }
 
 .attribute-card__grid--container {
-    text-align: center;
     align-items: center;
     height: 30px;
     display: grid;
@@ -38,9 +37,12 @@
         38px // Step
     ;
 
-    .attribute-card__grid--item {
-        width: 25px;
+    .attribute__name {
+        padding-left: 2px;
+        text-align: left;
+    }
 
+    .attribute-card__grid--item {
         .roll-icon__pointer {
             display: none;
         }
@@ -54,21 +56,15 @@
     border: none;
 }
 
-.attribute-card__grid--container:hover {
-    .roll-icon__hover {
-        display: block;
-    }
-    .attribute-card__grid--item:hover {
-        .roll-icon__pointer {
-            display: block;
-        }
-        .attribute-icon {
-            display: none;
-        }
-    }
+.attribute-card__grid--item.icons__dice:hover+div,
+.ability-card__grid--item.icons__dice:hover+div {
+    cursor: pointer;
+    color: #000;
+    text-shadow: 0 0 10px red;
 }
 
-.ability-card__grid--container:hover {
+.ability-card__grid--container:hover,
+.attribute-card__grid--container:hover {
     .roll-icon__hover {
         display: block;
     }
@@ -77,9 +73,14 @@
         display: none;
     }
 
-    .ability-card__grid--item:hover {
+    .ability-card__grid--item:hover,
+    .attribute-card__grid--item:hover {
         .roll-icon__pointer {
             display: block;
+        }
+
+        .attribute-icon {
+            display: none;
         }
 
         .ability-icon {
