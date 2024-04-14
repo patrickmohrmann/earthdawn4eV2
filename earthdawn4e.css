@@ -84,6 +84,21 @@
 .text__alignment--center {
   text-align: center;
 }
+.font__bold {
+  font-weight: bold;
+}
+.text-break__auto {
+  word-break: normal;
+}
+.display__inline-block {
+  display: inline-block;
+}
+.space__small {
+  padding-top: 10px;
+}
+.undefined {
+  background-color: red;
+}
 .itemControlGroup,
 .icon__position--right {
   float: right;
@@ -131,6 +146,9 @@
   float: left;
   width: 250px;
 }
+.main .actor-sheet-body .tab__general .left-part .margin__none {
+  margin-bottom: 0;
+}
 .main .actor-sheet-body .tab__general .left-part .fa-star {
   font-size: 7px;
 }
@@ -139,8 +157,33 @@
   padding-left: 2px;
   margin-bottom: 15px;
 }
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
+  height: 30px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
+  align-items: center;
+  text-align: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 83px 83px 83px;
+}
 .main .actor-sheet-body .tab__general .right-part {
   float: right;
+  width: 520px;
+}
+.main .actor-sheet-body .tab__general .right-part .margin__right {
+  margin-right: 20px;
+}
+.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
+  align-items: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 40px 220px;
 }
 .action--buttons {
   padding-top: 5px;
@@ -259,17 +302,17 @@
   z-index: 5;
 }
 .ability-card__grid--container {
-  text-align: center;
   align-items: center;
   display: grid;
-  grid-template-columns: 40px 250px 100px 75px 75px 75px 100px 75px;
-}
-.ability-card__grid--container .ability-card__grid--item {
-  width: 25px;
+  height: 30px;
+  grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 100px;
 }
 .ability-card__grid--container .ability-card__grid--item .roll-icon__hover,
 .ability-card__grid--container .ability-card__grid--item .roll-icon__pointer {
   display: none;
+}
+.ability-icon {
+  width: 25px;
 }
 .attribute-card__grid--container {
   align-items: center;
@@ -296,9 +339,30 @@
   color: #000;
   text-shadow: 0 0 10px red;
 }
+.ability-card__grid--container:hover .icons__dice img,
+.attribute-card__grid--container:hover .icons__dice img {
+  box-shadow: 0 0 10px red;
+  border-radius: 50%;
+  background-image: radial-gradient(#5a0000, #dd5656, #ddcfcd);
+}
 .ability-card__grid--container:hover .roll-icon__hover,
-.attribute-card__grid--container:hover .roll-icon__hover {
+.attribute-card__grid--container:hover .roll-icon__hover,
+.ability-card__grid--container:hover .attribute-icon,
+.attribute-card__grid--container:hover .attribute-icon {
+  margin-top: -4px;
   display: block;
+  animation-duration: 3s;
+  animation-name: example;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes example {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .ability-card__grid--container:hover .ability-icon,
 .attribute-card__grid--container:hover .ability-icon {
@@ -309,6 +373,7 @@
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer {
   display: block;
+  margin-top: -4px;
 }
 .ability-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
@@ -326,5 +391,8 @@
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover {
+  display: none;
+}
+.card__description--toggle {
   display: none;
 }

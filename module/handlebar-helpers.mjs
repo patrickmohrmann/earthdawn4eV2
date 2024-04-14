@@ -39,6 +39,13 @@ export default function registerHandlebarHelpers() {
     }
   } );
 
+  Handlebars.registerHelper( 'edGetAttributeValue', ( attributes, attribute ) => {
+    if ( attribute === undefined || attribute === '' ) {
+      return 0;
+    }
+    return attribute[attributes].step;
+  } );
+
   /**
    * For use in option elements. If the supplied value is truthy, add the "selected" property, otherwise add nothing.
    * @returns {string}

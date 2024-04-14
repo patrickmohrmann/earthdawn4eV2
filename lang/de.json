@@ -46,7 +46,6 @@
     "ED": {
         "Actor": {
             "Abilities": {
-                
             },
             "Attributes": {
                 "attributeName":                                    "Attribut",
@@ -66,6 +65,18 @@
                 "willpower":                                        "Willenskraft",
                 "willpowerAbbr":                                    "Wil"
             },
+            "Buttons": {
+                "halfMagic":                                        "Halbmagie",
+                "initiative":                                       "Initiative",
+                "jumpUp":                                           "Aufspringen",
+                "knockDownTest":                                    "Niederschlag",
+                "takeDamage":                                       "Schaden"
+            },
+            "Cards": {
+                "chat":                                             "Zeige Item Informationan als Chat Nachricht",
+                "delete":                                           "Lösche Item",
+                "edit":                                             "Editiere Item"
+            },
             "Characteristics": {
                 "currentDamage":                                    "Schaden",
                 "currentRecoveryTests":                             "Aktuell",
@@ -81,15 +92,58 @@
                 "woundsDamage":                                     "Wounden",
                 "woundsThreshold":                                  "Wundschwelle"
             },
+            "Conditions": {
+                "aggressiveAttack":                                 "Aggressiver Angriff",
+                "blindsided":                                       "Angriff aus dem Toten Winkel",
+                "coverPartial":                                     "Teilweise Deckung",
+                "coverFull":                                        "Volle Deckung",
+                "darknessPartial":                                  "Teilweise Dunkelheit",
+                "darknessFull":                                     "Volle Dunkelheit",
+                "defensiveStance":                                  "Verteidigungshaltung",
+                "Encumbrance": {
+                    "notEncumbered":                                "Nicht Überlastet",
+                    "light":                                        "Wenig überlastet",
+                    "heavy":                                        "Stark überlastet",
+                    "tooHeavy":                                     "Du kannst das nicht alles tragen!"
+                },
+                "fury":                                             "Zorn",
+                "harried":                                          "Bedrängt",
+                "impairedMovementPartial":                          "Teil. Bewegung",
+                "impairedMovementFull":                             "Beschränkte Bewegung",
+                "knockedDown":                                      "Niedergeschlagen",
+                "overwhelmed":                                      "Überwältigt",
+                "surprised":                                        "Überrascht"
+            },
+            "Devotion": {
+                "current":                                          "Aktuell",
+                "max":                                              "Max",
+                "step":                                             "Stufe"   
+            },
             "Header": {
+                "action":                                           "Aktion",
                 "armor":                                            "Rüstung",
+                "attribute":                                        "Attribut",
                 "attributes":                                       "Attribute",
+                "conditions":                                       "Zustände",
+                "controlIcons":                                     "Bedienung",
                 "damage":                                           "Schaden",
                 "defenses":                                         "Verteidigung",
+                "devotion":                                         "Weihekraft",
                 "healthRating":                                     "Gesundheit",
+                "karma":                                            "Karma",
                 "movement":                                         "Bewegung",
-                "navigator":                                        "Navigator",  
-                "recovery":                                         "Erholung"
+                "name":                                             "Name",
+                "navigator":                                        "Navigator", 
+                "rank":                                             "Rang", 
+                "recovery":                                         "Erholung",
+                "specialAbility":                                   "Sonstige Fähigkeit",
+                "step":                                             "Stufe",
+                "strain":                                           "Überan-strenung"
+            },
+            "Karma": {
+                "current":                                          "Aktuell",
+                "max":                                              "Max",
+                "step":                                             "Stufe"   
             },
             "LpTracking": {
                 "attributeImprovement":                             "Attribut Erhöhung"
@@ -108,12 +162,8 @@
                 "talents":                                          "Talente"
             },
             "Tooltips": {
-
-            },
-            "Cards": {
-                "chat":                                             "Zeige Item Informationan als Chat Nachricht",
-                "delete":                                           "Lösche Item",
-                "edit":                                             "Editiere Item"
+                "karmaAlways":                                      "Benutze immer Karma",
+                "karmaRitualTooltip":                               "Karmaritual"
             }
         },
         "Item": {

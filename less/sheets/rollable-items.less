@@ -1,7 +1,7 @@
 .ability-card__grid--container {
-    text-align: center;
     align-items: center;
     display: grid;
+    height: 30px;
     grid-template-columns:
         // 790 px available
         40px // Icon
@@ -10,18 +10,21 @@
         75px // Rank
         75px // Step
         75px // Strain
-        100px // Attribute
-        75px // Control Icons
+        75px // Attribute
+        100px // Control Icons
     ;
 
     .ability-card__grid--item {
-        width: 25px;
 
         .roll-icon__hover,
         .roll-icon__pointer {
             display: none;
         }
     }
+}
+
+.ability-icon {
+    width: 25px;
 }
 
 .attribute-card__grid--container {
@@ -63,10 +66,33 @@
     text-shadow: 0 0 10px red;
 }
 
+
 .ability-card__grid--container:hover,
 .attribute-card__grid--container:hover {
-    .roll-icon__hover {
+    .icons__dice img{
+        box-shadow: 0 0 10px red;
+        border-radius: 50%;
+        background-image: radial-gradient(rgb(90, 0, 0), rgb(221, 86, 86), rgb(221, 207, 205));
+    }
+    .roll-icon__hover,
+    .attribute-icon {
+        margin-top: -4px;
         display: block;
+        animation-duration: 3s;
+        animation-name: example;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+        @keyframes example {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
     }
 
     .ability-icon {
@@ -77,6 +103,7 @@
     .attribute-card__grid--item:hover {
         .roll-icon__pointer {
             display: block;
+            margin-top: -4px;
         }
 
         .attribute-icon {
@@ -91,4 +118,8 @@
             display: none;
         }
     }
+}
+
+.card__description--toggle {
+    display: none;
 }

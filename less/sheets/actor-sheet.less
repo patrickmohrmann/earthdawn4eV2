@@ -30,68 +30,64 @@
             .left-part {
                 float: left;
                 width: 250px;
-
+                .margin__none {
+                    margin-bottom: 0;
+                }
                 .fa-star {
                     font-size: 7px;
                   }
-                  //###########################################################
-                    //    das sollte noch schöner sein
-                //###########################################################
                 .attribute__increases{
                     text-align: left;
                     padding-left: 2px;
                     margin-bottom: 15px;
                 }
-                
+                .karma-devotion__header {
+                    height: 30px;
+
+                    .button__Karma-refresh {
+                        width: 25px;
+                        height: 25px;
+                        border: none;
+                    }
+                } 
+                .karma-devotion__grid--container {
+                    align-items: center;
+                    text-align: center;
+                    display: grid;
+                    height: 30px;
+                    grid-template-columns:
+                        // 250 px available
+                        83px // current
+                        83px // max
+                        83px // step
+                    ;
+                }
             }
             .right-part {
-                float: right;
-                
+                float: right; 
+                width: 520px;
+                .margin__right {
+                    margin-right: 20px;
+                }
+
+                .conditions__grid--container {
+                    align-items: center;
+                    display: grid;
+                    height: 30px;
+                    grid-template-columns:
+                        // 260 px available
+                        40px // checkbox
+                        220px // Name
+                    ;
+                }
             }
         }
     }
 }
     
-
-//     .left-part {
-//         float: left;
-//         position: inherit;
-//         width: 250px;
-//         left: 0px;
-//         height: 100%;
-
-//         .button__Karma-refresh {
-//             width: 25px;
-//             height: 25px;
-//             border: none;
-//             padding: none;
-//         }
-//     }
-
-//     .right-part {
-//         float: right;
-//         position: inherit;
-//         left: 200px;
-//         width: calc(100% - 270px);
-//         height: 100%;
-
-//         .item-data__input--line {
-//             line-height: 35px;
-//             vertical-align: middle;
-//         }
-//     }
-
-//     div.right-part {
-//         margin: 4px, 4px;
-//         padding: 4px;
-//         height: 420px;
-//         overflow-x: hidden;
-//         overflow-y: auto;
-//         text-align: justify;
-//     }
-// }
-
-
+//###########################################################
+//                       Action Button
+//###########################################################
 .action--buttons {
     padding-top: 5px;
     position: relative;

@@ -66,6 +66,18 @@
                 "willpower":                                        "Willpower",
                 "willpowerAbbr":                                    "Wil"
             },
+            "Buttons": {
+                "halfMagic":                                        "Half Magic",
+                "initiative":                                       "Initiative",
+                "jumpUp":                                           "Jump Up",
+                "knockDownTest":                                    "Knock down",
+                "takeDamage":                                       "Take Damage"
+            },
+            "Cards": {
+                "chat":                                             "show information in as Chat message",
+                "delete":                                           "Delete Item",
+                "edit":                                             "Edit Item"
+            },
             "Characteristics": {
                 "currentDamage":                                    "Schaden",
                 "currentRecoveryTests":                             "Aktuell",
@@ -81,15 +93,58 @@
                 "woundsDamage":                                     "Wounden",
                 "woundsThreshold":                                  "Wundschwelle"
             },
+            "Conditions": {
+                "aggressiveAttack":                                     "Aggressiver Angriff",
+                "blindsided":                                           "Angriff aus dem Toten Winkel",
+                "coverPartial":                                         "Teilweise Deckung",
+                "coverFull":                                            "Volle Deckung",
+                "darknessPartial":                                      "Teilweise Dunkelheit",
+                "darknessFull":                                         "Volle Dunkelheit",
+                "defensiveStance":                                      "Verteidigungshaltung",
+                "Encumbrance": {
+                    "notEncumbered":                                    "Nicht Überlastet",
+                    "light":                                            "Wenig überlastet",
+                    "heavy":                                            "Stark überlastet",
+                    "tooHeavy":                                         "Du kannst das nicht alles tragen!"
+                },
+                "fury":                                                 "Zorn",
+                "harried":                                              "Bedrängt",
+                "impairedMovementPartial":                              "Teil. Bewegung",
+                "impairedMovementFull":                                 "Beschränkte Bewegung",
+                "knockedDown":                                          "Niedergeschlagen",
+                "overwhelmed":                                          "Überwältigt",
+                "surprised":                                            "Überrascht"
+            },
+            "Devotion": {
+                "current":                                          "Current",
+                "max":                                              "Max",
+                "step":                                             "Step"   
+            },
             "Header": {
+                "action":                                           "Action",
                 "armor":                                            "Armor",
+                "attribute":                                        "Attribute",
                 "attributes":                                       "Attributes",
+                "conditions":                                       "Conditions",
+                "controlIcons":                                     "Controls",
                 "damage":                                           "Damage",
                 "defenses":                                         "Defenses",
+                "devotion":                                         "Devotion",                          
                 "healthRating":                                     "Health Rating",
+                "karma":                                            "Karma",
                 "movement":                                         "Movement",
-                "navigator":                                        "Navigator",  
-                "recovery":                                         "Recovery"
+                "naem":                                             "Name",
+                "navigator":                                        "Navigator", 
+                "rank":                                             "Rank", 
+                "recovery":                                         "Recovery",
+                "specialAbility":                                   "Special Abilities",
+                "step":                                             "Step",
+                "strain":                                           "Strain"
+            },
+            "Karma": {
+                "current":                                          "Current",
+                "max":                                              "Max",
+                "step":                                             "Step"   
             },
             "LpTracking": {
                 "attributeImprovement":                             "Attribute increase"
@@ -108,12 +163,8 @@
                 "talents":                                          "Talents"
             },
             "Tooltips": {
-
-            },
-            "Cards": {
-                "chat":                                             "show information in as Chat message",
-                "delete":                                           "Delete Item",
-                "edit":                                             "Edit Item"
+                "karmaAlways":                                      "Use Karma always",
+                "karmaRitualTooltip":                               "Karma Ritual"
             }
         },
         "Item": {

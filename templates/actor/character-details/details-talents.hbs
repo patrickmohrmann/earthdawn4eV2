@@ -1,11 +1,16 @@
 <div>
-    <h3>
-        {{localize "X-DisciplineTalents"}}
-    </h3>
-    {{#each (gettalentCategory actor.itemTypes.talent 'discipline') as |talent i|}}
-        <div class="item-name item-name__card" data-item-id="{{_id}}">
-            {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" talent}}
-        </div>
+    <div class="ability-card__grid--container font__bold text-break__auto">
+        <div class="ability-card__grid--item"></div>
+        <div class="ability-card__grid--item">{{localize "ED.Actor.Header.name"}}</div>
+        <div class="ability-card__grid--item">{{localize "ED.Actor.Header.action"}}</div>
+        <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.rank"}}</div>
+        <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.step"}}</div>
+        <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.strain"}}</div>
+        <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.attribute"}}</div>
+        <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.controlIcons"}}</div>
+    </div>
+    {{#each actor.itemTypes.talent}}
+    {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
     {{/each}}
     <h3>
         {{localize "X-OptionalTalents"}}
