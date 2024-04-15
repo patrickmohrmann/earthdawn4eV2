@@ -9,6 +9,9 @@
         <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.attribute"}}</div>
         <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.controlIcons"}}</div>
     </div>
+    <div class="undefined">
+                <p>Sortiere Skills nach typ</p>
+            </div>
     {{#each actor.itemTypes.skill}}
     {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
     {{/each}}

@@ -20,6 +20,11 @@ export default class ActorSheetEd extends ActorSheet {
           contentSelector: '.actor-sheet-body',
           initial: 'main',
         },
+        {
+          navSelector: '.actor-sheet-spell-tabs',
+          contentSelector: '.actor-sheet-spell-body',
+          initial: 'spell-matrix-tab',
+        },
       ],
     } );
   }

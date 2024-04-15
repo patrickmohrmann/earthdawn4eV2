@@ -125,11 +125,14 @@
                 "armor":                                            "Armor",
                 "attribute":                                        "Attribute",
                 "attributes":                                       "Attributes",
+                "carryingCapacity":                                 "Carrying Capacity",
                 "conditions":                                       "Conditions",
                 "controlIcons":                                     "Controls",
                 "damage":                                           "Damage",
                 "defenses":                                         "Defenses",
-                "devotion":                                         "Devotion",                          
+                "devotion":                                         "Devotion",   
+                "encumbrance":                                      "Encumbrance",
+                "equipment":                                        "Equipment",                                               
                 "healthRating":                                     "Health Rating",
                 "karma":                                            "Karma",
                 "movement":                                         "Movement",
@@ -137,9 +140,11 @@
                 "navigator":                                        "Navigator", 
                 "rank":                                             "Rank", 
                 "recovery":                                         "Recovery",
+                "shields":                                          "Shields",
                 "specialAbility":                                   "Special Abilities",
                 "step":                                             "Step",
-                "strain":                                           "Strain"
+                "strain":                                           "Strain",
+                "weapons":                                          "Weapons"
             },
             "Karma": {
                 "current":                                          "Current",
@@ -162,9 +167,20 @@
                 "spells":                                           "Spells",
                 "talents":                                          "Talents"
             },
+            "Spellcasting": {
+                "elementalist":                                     "Elemetnatalist",
+                "illusionist":                                     "Illusionist",
+                "matrix":                                           "Matrix",
+                "nethermancer":                                     "Nethermancer",   
+                "shaman":                                           "Shaman",
+                "wizard":                                           "Wizard"
+            },
             "Tooltips": {
                 "karmaAlways":                                      "Use Karma always",
-                "karmaRitualTooltip":                               "Karma Ritual"
+                "karmaRitualTooltip":                               "Karma Ritual",
+                "loaded":                                           "Loaded",
+                "loadedHeavy":                                      "Heavyly Loaded",
+                "loadedOver":                                       "Overloaded"
             }
         },
         "Item": {

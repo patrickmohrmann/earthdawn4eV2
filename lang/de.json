@@ -124,11 +124,14 @@
                 "armor":                                            "Rüstung",
                 "attribute":                                        "Attribut",
                 "attributes":                                       "Attribute",
+                "carryingCapacity":                                 "Tragkraft",
                 "conditions":                                       "Zustände",
                 "controlIcons":                                     "Bedienung",
                 "damage":                                           "Schaden",
                 "defenses":                                         "Verteidigung",
                 "devotion":                                         "Weihekraft",
+                "encumbrance":                                      "Belastung",
+                "equipment":                                        "Ausrüstung",
                 "healthRating":                                     "Gesundheit",
                 "karma":                                            "Karma",
                 "movement":                                         "Bewegung",
@@ -136,9 +139,11 @@
                 "navigator":                                        "Navigator", 
                 "rank":                                             "Rang", 
                 "recovery":                                         "Erholung",
+                "shields":                                          "Schilde",
                 "specialAbility":                                   "Sonstige Fähigkeit",
                 "step":                                             "Stufe",
-                "strain":                                           "Überan-strenung"
+                "strain":                                           "Überan-strenung",
+                "weapons":                                          "Waffen"    
             },
             "Karma": {
                 "current":                                          "Aktuell",
@@ -161,9 +166,20 @@
                 "spells":                                           "Zauber",
                 "talents":                                          "Talente"
             },
+            "Spellcasting": {
+                "elementalist":                                     "Elementarist",
+                "illusionist":                                     "Illusionist",
+                "matrix":                                           "Matrix",
+                "nethermancer":                                     "Geisterbeschwörer",   
+                "shaman":                                           "Schamane",
+                "wizard":                                           "Magier"
+            },
             "Tooltips": {
                 "karmaAlways":                                      "Benutze immer Karma",
-                "karmaRitualTooltip":                               "Karmaritual"
+                "karmaRitualTooltip":                               "Karmaritual",
+                "loaded":                                           "Belastet",
+                "loadedHeavy":                                      "Stark Belastet",
+                "loadedOver":                                       "Überlasted"
             }
         },
         "Item": {

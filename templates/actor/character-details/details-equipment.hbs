@@ -1,10 +1,18 @@
 {{localize "ED.Actor.Header.carryingCapacity"}}  
+
 <div>
     <input class="input__number-input" type="number" name="system.encumbrance.max" value="{{actor.system.encumbrance.max}}">
 </div>
 {{localize "ED.Actor.Header.encumbrance"}} 
 <div>
     <input class="input__number-input" type="number" name="system.encumbrance.value" value="{{actor.system.encumbrance.value}}">
+</div>
+<p class="undefined">DIe Bar soll anhand der encumbrance verfärbt werden.</p>
+<div id="encumbrance-bar">
+    <div class="encumbrance-bar"></div>
+    <div class="encumbrance-circle__loaded"></div> 
+    <div class="encumbrance-circle__heavy"></div>
+    <div class="encumbrance-circle__overloaded"></div>
 </div>
 <h4>{{localize "ED.Actor.Header.equipment"}}</h4>
 <div>
