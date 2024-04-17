@@ -17,17 +17,18 @@ _______________________________`;
  */
 ED4E.typeGroups = {
 	Item: {
-		Equipment: ['armor', 'equipment', 'shield', 'weapon'],
-		Abilities: ['attack', 'devotion', 'knack', 'maneuver', 'power', 'skill', 'specialAbility', 'talent'],
+		Equipment: 	['armor', 'equipment', 'shield', 'weapon'],
+		Powers:		['attack', 'maneuver', 'power'],
+		Abilities: 	['devotion', 'knackAbility', 'knackManeuver','knackKarma', 'skill', 'specialAbility', 'talent'],
 		Conditions: ['cursemark', 'effect', 'poisonDisease'],
-		Magic: ['spell', 'thread'],
-		Classes: ['discipline', 'path', 'questor'],
-		Other: ['mask', 'namegiver', 'shipWeapon']
+		Magic: 		['spell', 'thread', 'spellKnack', 'bindingSecret', 'matrix'],
+		Classes: 	['discipline', 'path', 'questor'],
+		Other: 		['mask', 'namegiver', 'shipWeapon']
 	},
 	Actor: {
 		Namegivers: ['character', 'npc'],
-		Creatures: ['creature', 'spirit', 'horror', 'dragon'],
-		Other: ['group', 'vehicle', 'trap', 'loot']
+		Creatures: 	['creature', 'spirit', 'horror', 'dragon'],
+		Other: 		['group', 'vehicle', 'trap', 'loot']
 	}
 }
 
@@ -157,6 +158,31 @@ ED4E.action = {
 preLocalize( "action" );
 
 /**
+ * Target Difficulty
+ * @enum {string}
+ */
+ED4E.targetDifficulty = {
+	none: 				"ED.General.none",
+	mystical: 			"ED.Defenses.mystical",
+	physical: 			"ED.Defenses.physical",
+	social: 			"ED.Defenses.social",
+}
+preLocalize( "targetDifficulty" );
+
+/**
+ * Group  Difficulty
+ * @enum {string}
+ */
+ED4E.groupDifficulty = {
+	none: 				"ED.General.none",
+	highestOfGroup: 	"ED.Defenses.highestOfGroup",
+	lowestOfGroup: 		"ED.Defenses.lowestOfGroup",
+	hightestX: 			"ED.Defenses.hightestX",
+	lowestX:			"ED.Defenses.lowestX"
+}
+preLocalize( "groupDifficulty" );
+
+/**
  * Armor
  * @enum {string}
  */
@@ -193,6 +219,18 @@ ED4E.tier = {
 	master: 			"ED.Tier.master"
 }
 preLocalize( "tier" );
+
+/**
+ * talentCategory
+ * @enum {string}
+ */
+ED4E.talentCategory = {
+	discipline: 			"ED.talentCategory.discipline",
+	optional: 				"ED.talentCategory.optional",
+	free: 					"ED.talentCategory.free",
+	versatility: 			"ED.talentCategory.versatility"
+}
+preLocalize( "talentCategory" );
 
 /**
  * Type of grantable abilities for a class level

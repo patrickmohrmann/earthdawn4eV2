@@ -1,27 +1,23 @@
-import SystemDataModel from "../../abstract.mjs";
 import ClassTemplate from './class.mjs';
 import { DocumentUUIDField } from "../../fields.mjs";
+import TargetTemplate from "./targeting.mjs";
+import ActionTemplate from "./action.mjs";
 
 /**
  * Data model template with information on Ability items.
- * @property {string} action action type
  * @property {string} attribute attribute
- * @property {string} tier talent tier
- * @property {number} strain strain
+ * @property {object} source Class Source
+ * @property {string} source.class class
+ * @property {string} source.tier talent tier
  * @property {number} level rank
  */
-export default class AbilityTemplate extends SystemDataModel {
+export default class AbilityTemplate extends ActionTemplate.mixin( 
+    TargetTemplate 
+) {
     /** @inheritDoc */
     static defineSchema() {
         const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            action: new fields.StringField( {
-                required: true,
-                nullable: false,
-                blank: false,
-                initial: "standard",
-                label: "ED.Item.Ability.action"
-            } ),
             attribute: new fields.StringField( {
                 required: false,
                 nullable: true,
@@ -51,14 +47,6 @@ export default class AbilityTemplate extends SystemDataModel {
                 initial: 0,
                 integer: true,
                 label: "ED.Item.Ability.rank"
-            } ),
-            strain: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Ability.strain"
             } ),
         } );
     }

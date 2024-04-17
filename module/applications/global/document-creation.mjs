@@ -37,8 +37,8 @@ export class DocumentCreateDialog extends FormApplication {
       closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: false,
-      height: "auto",
-      width: "auto",
+      height: 900,
+      width: 800,
       resizable: true,
       classes: [...options.classes, "earthdawn4e", "create-document"],
     };

@@ -1,39 +1,45 @@
 <div class="item__left--main">
-  <h3>{{localize "ED.General.coreData"}}</h3>
-  {{!-- Rank --}}
-  <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.General.rank"}}:</label>
-    <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
-           data-dtype="Number">
-  </div>
-  {{!-- Strain --}}
-  <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
-    <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
-           data-dtype="Number">
-  </div>
-  {{!-- Attribute --}}
-  <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
-    <select name="system.attribute">
-      <option value="" {{ed-selected (eq item.system.attribute "")}}>---</option>
-      {{selectOptions config.attributes selected=item.system.attribute labelAttr="label" localize=true }}
-    </select>
-  </div>
-  {{!-- Action --}}
-  <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Action.action"}}:</label>
-    <select name="system.action">
-      {{selectOptions config.action selected=item.system.action localize=true }}
-    </select>
-  </div>
-  {{!-- Tier --}}
-  <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
-    <select name="system.tier">
-      {{selectOptions config.tier selected=item.system.tier localize=true }}
-    </select>
-  </div>
+    <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Rank --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.rank"}}:</label>
+        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Strain --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
+        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Attribute --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
+        <select name="system.attribute">
+            {{selectOptions config.attributes selected=item.system.attribute labelAttr="label" localize=true }}
+        </select>
+    </div>
+    {{!-- Action --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Action.action"}}:</label>
+        <select name="system.action">
+            {{selectOptions config.action selected=item.system.action localize=true }}
+        </select>
+    </div>
+    {{!-- Tier --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
+        <select name="system.tier">
+            {{selectOptions config.tier selected=item.system.tier localize=true }}
+        </select>
+    </div>
+    {{!-- talent Category --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Tier.talentCategory"}}:</label>
+        <select name="system.talentCategory">
+            {{selectOptions config.talentCategory selected=item.system.talentCategory localize=true }}
+        </select>
+    </div>
 </div>
 <div class="item__right--main item-sheet__editor">
   <h3>{{localize "ED.Item.General.description"}}</h3>

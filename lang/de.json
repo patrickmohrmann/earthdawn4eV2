@@ -103,6 +103,15 @@
             "overwhelmed":                                          "Überwältigt",
             "surprised":                                            "Überrascht"
         },
+        "Defenses": {
+            "mystical":                                             "Mystisch",
+            "physical":                                             "Körperlich",
+            "social":                                               "Sozial",
+            "highestOfGroup":                                       "Höchster Widerstand der Gruppe",
+            "lowestOfGroup":                                        "Niedrigster Widerstand der Gruppe",
+            "hightestX":                                            "Höchster Widerstand + Anzahl der Ziele",
+            "lowestX":                                              "Niedrigster Wiederstand + Anzhal der Ziele"
+        },
         "Denomination": {
             "copper":                                               "Kupfer",
             "gold":                                                 "Gold",
@@ -517,6 +526,12 @@
                 "talents":                                          "Talente"
 
             }
+        },
+        "talentCategory": {
+            "discipline":                                            "Diszipline",
+            "optional":                                             "Optional",
+            "free":                                                 "Frei",
+            "versatility":                                          "Vielseitigkeit"
         },
         "Tier": {
             "journeyman":                                           "Geselle",

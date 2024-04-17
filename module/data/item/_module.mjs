@@ -64,6 +64,7 @@ export {default as ItemDescriptionTemplate} from "./templates/item-description.m
 export {default as NoneNamegiverPowerData} from "./templates/none-namegiver-power.mjs";
 export {default as MagicTemplate} from "./templates/sorcery-item.mjs";
 export {default as KnackTemplate} from "./templates/knack-item.mjs";
+export {default as TargetTemplate} from "./templates/targeting.mjs";
 
 export const config = {
     armor: ArmorData,

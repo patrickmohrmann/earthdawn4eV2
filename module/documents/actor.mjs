@@ -74,6 +74,33 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @summary                     Ability rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
+   * @description                 Roll an Ability. use {@link RollPrompt} for further input data.
+   * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
+   * @param {object} options      Any additional options for the {@link EdRoll}.
+   */
+  async rollAbility( ability, options = {} ) {
+    const attributeStep = this.system.attributes[ability.system.attribute].step;
+    const abilityFinalStep = attributeStep + ability.system.level;
+    const difficulty = await ability.system.getDifficulty();
+    if ( difficulty === undefined || difficulty === null ) {
+      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
+      return;
+    }
+    const edRollOptions = new EdRollOptions( {
+      rollType: "action",
+      step: { base: abilityFinalStep },
+      strain: { base: ability.system.strain},
+      target: { base: difficulty },
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { pointsUsed: ability.system.devotionRequired ? 1: 0, pointsRequired: ability.system.devotionRequired, available: this.system.devotion.value, step: this.system.devotion.step },
+      chatFlavor: ability.name + " Test",
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    this.#processRoll( roll );
+  }
+
+  /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
    * damage according to the parameters.
    * @param {number} amount                                     The unaltered amount of damage this actor should take.
@@ -82,14 +109,15 @@ export default class ActorEd extends Actor {
    *                                                            'physical', 'mystical', or 'none'.
    * @param {boolean} [ignoreAmor]                                Whether armor should be ignored when applying this damage.
    */
+  // eslint-disable-next-line max-params
   takeDamage( amount, damageType = "standard", armorType, ignoreAmor ) {
     const finalAmount = amount - (
         ( ignoreAmor || !armorType )
             ? 0
             : this.system.characteristics.armor[armorType].value
     );
-    const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount;
-    this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
+      const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
+      this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
   }
 
   /**
@@ -120,12 +148,12 @@ export default class ActorEd extends Actor {
       return;
     }
     // Check if this uses karma or strain at all
-    if ( roll.options.strain.total ) this.takeDamage( roll.options.strain.total, "standard" );
+    this.takeDamage( roll.totalStrain, "standard", undefined, true );
     if (
         !this.#useResource( 'karma', roll.options.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
-      ui.notifications.warn("Localize: Not enough karma or devotion. Used all that was available.");
+      ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
     }
     roll.toMessage();
   }

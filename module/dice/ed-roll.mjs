@@ -134,6 +134,17 @@ export default class EdRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * the number of total strain in this roll
+   * @type {number}
+   */
+  get totalStrain() {
+    if ( !this.validEdRoll ) return undefined;
+    return this.options.strain.total
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The number of successes in this roll. Only available if a target number is specified and the roll is evaluated.
    * @type {number}
    */
