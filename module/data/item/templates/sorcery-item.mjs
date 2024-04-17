@@ -9,8 +9,9 @@ export default class MagicTemplate extends SystemDataModel .mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            level: new foundry.data.fields.NumberField( {
+            level: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -19,7 +20,7 @@ export default class MagicTemplate extends SystemDataModel .mixin(
                 positive: true,
                 label: "ED.Item.Spell.circle"
             } ), 
-            threadsrequired: new foundry.data.fields.NumberField( {
+            threadsrequired: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -27,7 +28,7 @@ export default class MagicTemplate extends SystemDataModel .mixin(
                 integer: true,
                 label: "ED.Item.Spell.threadsrequired"
             } ),
-            weavingdifficulty: new foundry.data.fields.NumberField( {
+            weavingdifficulty: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -35,7 +36,7 @@ export default class MagicTemplate extends SystemDataModel .mixin(
                 integer: true,
                 label: "ED.Item.Spell.weavingdifficulty"
             } ),
-            reattunedifficulty: new foundry.data.fields.NumberField( {
+            reattunedifficulty: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -43,57 +44,57 @@ export default class MagicTemplate extends SystemDataModel .mixin(
                 integer: true,
                 label: "ED.Item.Spell.threadsrreattunedifficultyequired"
             } ),
-            castingdifficulty: new foundry.data.fields.StringField( {
+            castingdifficulty: new fields.StringField( {
                 required: true,
                 blank: true,
                 initial: "mystic defense",
                 label: "ED.Item.Spell.castingdifficulty"
             } ),
-            effect: new foundry.data.fields.StringField( {
+            effect: new fields.StringField( {
                 required: true,
                 blank: true,
                 initial: "",
                 label: "ED.Item.Spell.effect"
             } ),
-            sourceDiscipline: new foundry.data.fields.StringField( {
+            sourceDiscipline: new fields.StringField( {
                 required: true,
                 blank: false,
                 initial: "elementalist",
                 label: "ED.Item.Spell.sourceDiscipline"
             } ),
-            concentration: new foundry.data.fields.BooleanField( {
+            concentration: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Spell.concentration"
             } ),
-            binding: new foundry.data.fields.BooleanField( {
+            binding: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Spell.binding"
             } ),
-            spirit: new foundry.data.fields.BooleanField( {
+            spirit: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Spell.spirit"
             } ),
-            summoning: new foundry.data.fields.BooleanField( {
+            summoning: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Spell.summoning"
             } ),
-            resist: new foundry.data.fields.BooleanField( {
+            resist: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Spell.resist"
             } ),
-            duration: new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.StringField( {
+            duration: new fields.SchemaField( {
+                value: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "0",
                     label: "ED.Item.Spell.value"
                 } ),
-                uom: new foundry.data.fields.StringField( {
+                uom: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "yard",
@@ -103,14 +104,14 @@ export default class MagicTemplate extends SystemDataModel .mixin(
             {
                 label: "ED.Item.Spell.duration"
             } ),
-            range: new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.StringField( {
+            range: new fields.SchemaField( {
+                value: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "0",
                     label: "ED.Item.Spell.shape"
                 } ),
-                uom: new foundry.data.fields.StringField( {
+                uom: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "yard",
@@ -120,20 +121,20 @@ export default class MagicTemplate extends SystemDataModel .mixin(
             {
                 label: "ED.Item.Spell.range"
             } ),
-            spellArea: new foundry.data.fields.SchemaField( {
-                shape: new foundry.data.fields.StringField( {
+            spellArea: new fields.SchemaField( {
+                shape: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "0",
                     label: "ED.Item.Spell.shape"
                 } ),
-                value: new foundry.data.fields.StringField( {
+                value: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "0",
                     label: "ED.Item.Spell.shape"
                 } ),
-                uom: new foundry.data.fields.StringField( {
+                uom: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "yard",
@@ -143,14 +144,14 @@ export default class MagicTemplate extends SystemDataModel .mixin(
             {
                 label: "ED.Item.Spell.spellArea"
             } ),
-            spellIllustion: new foundry.data.fields.SchemaField( {
-                illusionType: new foundry.data.fields.StringField( {
+            spellIllustion: new fields.SchemaField( {
+                illusionType: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "figment",
                     label: "ED.Item.Spell.illusionType"
                 } ),
-                sensingDifficulty: new foundry.data.fields.NumberField( {
+                sensingDifficulty: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -162,14 +163,14 @@ export default class MagicTemplate extends SystemDataModel .mixin(
             {
                 label: "ED.Item.Spell.spellIllustion"
             } ),
-            spellElement: new foundry.data.fields.SchemaField( {
-                elementType: new foundry.data.fields.StringField( {
+            spellElement: new fields.SchemaField( {
+                elementType: new fields.StringField( {
                     required: true,
                     blank: true,
                     initial: "",
                     label: "ED.Item.Spell.elementType"
                 } ),
-                elementSubtype: new foundry.data.fields.StringField( {
+                elementSubtype: new fields.StringField( {
                     required: true,
                     blank: true,
                     initial: "",

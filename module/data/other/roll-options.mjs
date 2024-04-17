@@ -5,10 +5,11 @@ import getDice from '../../dice/step-tables.mjs';
 export default class EdRollOptions extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
+    const fields = foundry.data.fields;
     return {
-      step: new foundry.data.fields.SchemaField(
+      step: new fields.SchemaField(
         {
-          base: new foundry.data.fields.NumberField( {
+          base: new fields.NumberField( {
             required: true,
             nullable: false,
             initial: 1,
@@ -19,7 +20,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             integer: true,
           } ),
           modifiers: new MappingField(
-            new foundry.data.fields.NumberField( {
+            new fields.NumberField( {
               required: true,
               nullable: false,
               initial: 1,
@@ -36,7 +37,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               hint: 'keys are localizable labels of the given step modifying value',
             },
           ),
-          total: new foundry.data.fields.NumberField( {
+          total: new fields.NumberField( {
             required: true,
             nullable: false,
             initial: this.initTotalStep,
@@ -56,7 +57,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
       ),
       karma: this.#bonusResource,
       devotion: this.#bonusResource,
-      extraDice: new MappingField( new foundry.data.fields.NumberField( {
+      extraDice: new MappingField( new fields.NumberField( {
         required: true,
         nullable: false,
         initial: 1,
@@ -71,9 +72,9 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'extra Steps apart from step, karma and devotion',
         hint: 'keys are localized labels of the given extra step',
       } ),
-      target: new foundry.data.fields.SchemaField(
+      target: new fields.SchemaField(
         {
-          base: new foundry.data.fields.NumberField( {
+          base: new fields.NumberField( {
             required: true,
             nullable: false,
             initial: 0,
@@ -83,7 +84,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             step: 1,
           } ),
           modifiers: new MappingField(
-            new foundry.data.fields.NumberField( {
+            new fields.NumberField( {
               required: true,
               nullable: true,
               initial: 0,
@@ -99,7 +100,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               hint: 'keys are localizable labels of the given difficulty modifying value',
             },
           ),
-          total: new foundry.data.fields.NumberField( {
+          total: new fields.NumberField( {
             required: true,
             nullable: false,
             initial: this.initTotalTarget,
@@ -109,7 +110,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             step: 1,
             integer: true,
           } ),
-          public: new foundry.data.fields.BooleanField( {
+          public: new fields.BooleanField( {
             required: true,
             nullable: false,
             initial: true,
@@ -124,9 +125,9 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           hint: 'localize: all data about how the difficulty is composed',
         },
       ),
-      strain: new foundry.data.fields.SchemaField(
+      strain: new fields.SchemaField(
         {
-          base: new foundry.data.fields.NumberField( {
+          base: new fields.NumberField( {
             required: true,
             nullable: false,
             min: 0,
@@ -135,7 +136,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
             label: 'earthdawn.strain',
           } ),
           modifiers: new MappingField(
-            new foundry.data.fields.NumberField( {
+            new fields.NumberField( {
               required: true,
               nullable: false,
               initial: 1,
@@ -152,7 +153,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               hint: 'keys are localizable labels of the given step modifying value',
             },
           ),
-          total: new foundry.data.fields.NumberField( {
+          total: new fields.NumberField( {
             required: true,
             nullable: false,
             initial: this.initTotalStrain,
@@ -170,7 +171,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           hint: 'localize: all data about how the step is composed',
         },
       ),
-      chatFlavor: new foundry.data.fields.StringField( {
+      chatFlavor: new fields.StringField( {
         required: true,
         nullable: false,
         blank: true,
@@ -178,14 +179,21 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'localize: roll chat flavour',
         hint: 'localize: text that is added to the chatmessage when this call is put to chat',
       } ),
-      rollType: new foundry.data.fields.StringField( {
-
+      testType: new fields.StringField( {
         required: true,
         nullable: false,
         blank: true,
         initial: 'arbitrary',
+        label: 'localize: test type',
+        hint: 'localize: type of this roll test, like action or effect test, or arbitrary step roll',
+      } ),
+      rollType: new fields.StringField( {
+        required: false,
+        nullable: true,
+        blank: true,
+        initial: '',
         label: 'localize: roll type',
-        hint: 'localize: type of this roll, like action or effect test, or arbitrary step roll',
+        hint: 'localize: type of this roll, like attackMelee, or threadWeaving',
       } ),
     };
   }
@@ -238,9 +246,10 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
    * @property {number} something Value of the global bonus
    */
   static get #bonusResource() {
-    return new foundry.data.fields.SchemaField(
+    const fields = foundry.data.fields;
+    return new fields.SchemaField(
       {
-        pointsUsed: new foundry.data.fields.NumberField( {
+        pointsUsed: new fields.NumberField( {
           required: true,
           nullable: false,
           initial: 0,
@@ -250,7 +259,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           step: 1,
           integer: true,
         } ),
-        available: new foundry.data.fields.NumberField( {
+        available: new fields.NumberField( {
           required: true,
           nullable: false,
           initial: 0,
@@ -260,7 +269,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           step: 1,
           integer: true,
         } ),
-        step: new foundry.data.fields.NumberField( {
+        step: new fields.NumberField( {
           required: true,
           nullable: false,
           initial: 4,

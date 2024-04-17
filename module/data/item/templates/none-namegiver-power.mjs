@@ -14,8 +14,9 @@ export default class NoneNamegiverPowerData extends ActionTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            powerStep: new foundry.data.fields.NumberField( {
+            powerStep: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -23,7 +24,7 @@ export default class NoneNamegiverPowerData extends ActionTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Power.powerStep"
             } ),
-            damageStep: new foundry.data.fields.NumberField( {
+            damageStep: new fields.NumberField( {
                 required: false,
                 nullable: false,
                 min: 0,

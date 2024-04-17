@@ -25,9 +25,10 @@ export default class NamegiverData extends SystemDataModel.mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
             attributeValues: new MappingField(
-              new foundry.data.fields.NumberField( {
+              new fields.NumberField( {
                   required: true,
                   nullable: false,
                   min: 1,
@@ -39,7 +40,7 @@ export default class NamegiverData extends SystemDataModel.mixin(
                   initialKeysOnly: true,
                   label: "ED.items.namegiver.attributes"
               } ),
-            karmamodifier: new foundry.data.fields.NumberField( {
+            karmamodifier: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -48,13 +49,18 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 label: "ED.Item.Namegiver.karmamodifier"
             } ),
             ...MovementFields.movement,
-            weightMultiplier: new foundry.data.fields.NumberField( {
+            weightMultiplier: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 initial: 1,
                 integer: false,
                 positive: true,
                 label: "ED.Item.Namegiver.weightMultiplier"
+            } ),
+            tailAttack: new fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "X-TailAttack"
             } ),
         } );
     }

@@ -1,7 +1,10 @@
 import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
-import { getArmorFromAttribute, getAttributeStep, getDefenseValue, sum, sumProperty } from "../../utils.mjs";
+import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, sum, sumProperty } from "../../utils.mjs";
 import LpTransactionData from "../advancement/lp-transaction.mjs";
+import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
+import LpTrackingData from "../advancement/lp-tracking.mjs";
+import ActorEd from "../../documents/actor.mjs";
 
 /**
  * System data definition for PCs.
@@ -22,9 +25,10 @@ export default class PcData extends NamegiverTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         const superSchema = super.defineSchema();
         this.mergeSchema( superSchema.attributes.model.fields,  {
-            initialValue: new foundry.data.fields.NumberField( {
+            initialValue: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -33,7 +37,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 positive: true
             } ),
-            baseValue: new foundry.data.fields.NumberField( {
+            baseValue: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -42,12 +46,12 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 positive: true
             } ),
-            valueModifier: new foundry.data.fields.NumberField( {
+            valueModifier: new fields.NumberField( {
                 required: true,
                 step: 1,
                 initial: 0,
             } ),
-            value: new foundry.data.fields.NumberField( {
+            value: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 1,
@@ -56,7 +60,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 positive: true
             } ),
-            timesIncreased: new foundry.data.fields.NumberField( {
+            timesIncreased: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -65,15 +69,16 @@ export default class PcData extends NamegiverTemplate.mixin(
                 initial: 0,
                 integer: true
             } ),
-            lp: new foundry.data.fields.EmbeddedDataField(
+            lp: new fields.EmbeddedDataField(
                 LpTransactionData,
                 {
                     required: true,
                 }
             ),
         } );
+        
         this.mergeSchema( superSchema, {
-            durabilityBonus: new foundry.data.fields.NumberField( {
+            durabilityBonus: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 step: 1,
@@ -81,6 +86,14 @@ export default class PcData extends NamegiverTemplate.mixin(
                 integer: true,
                 label: "ED.General.durabilityBonus"
             } ),
+            lp: new foundry.data.fields.EmbeddedDataField(
+                LpTrackingData,
+                {
+                    required: true,
+                    initial: new LpTrackingData(),
+                }
+                
+            ),
             legendPointsEarned: new foundry.data.fields.ArrayField(
                 new foundry.data.fields.SchemaField( {
                     date: new foundry.data.fields.StringField( {
@@ -110,6 +123,59 @@ export default class PcData extends NamegiverTemplate.mixin(
     }
 
     /* -------------------------------------------- */
+    /*  Character Generation                        */
+    /* -------------------------------------------- */
+
+    /**
+     *
+     * @return {Promise<ActorEd|void>}
+     */
+    static async characterGeneration () {
+        const generation = await CharacterGenerationPrompt.waitPrompt();
+        if ( !generation ) return;
+
+        const attributeData = mapObject(
+          await generation.getFinalAttributeValues(),
+          ( attribute, value ) => [attribute, {initialValue: value}]
+        );
+        const additionalKarma = generation.availableAttributePoints;
+
+        const newActor = await ActorEd.create( {
+            name: "Rename me! I was just created",
+            type: "character",
+            system: {
+                attributes: attributeData,
+                karma: {
+                    freeAttributePoints: additionalKarma,
+                },
+            },
+        } );
+
+        const namegiverDocument = await generation.namegiverDocument;
+        const classDocument = await generation.classDocument;
+        const abilities = ( await generation.abilityDocuments ).map(
+          documentData => {
+              if ( documentData.type !== "specialAbility" ) {
+                  documentData.system.source.class = namegiverDocument.uuid;
+              }
+              return documentData;
+          }
+        );
+
+        await newActor.createEmbeddedDocuments( "Item", [
+            namegiverDocument,
+            classDocument,
+            ...abilities,
+        ] );
+
+        const actorApp = newActor.sheet.render( true, {focus: true} );
+        // we have to wait until the app is rendered to activate a tab
+        requestAnimationFrame( () => actorApp.activateTab("actor-notes-tab") );
+
+        return newActor;
+    }
+
+    /* -------------------------------------------- */
     /*  Data Preparation                            */
     /* -------------------------------------------- */
 
@@ -130,6 +196,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         this.#prepareDerivedEncumbrance();
         this.#prepareDerivedKarma();
         this.#prepareDerivedDevotion();
+        // this.#prepareDerivedCurrentLp();
     }
 
     /* -------------------------------------------- */
@@ -260,7 +327,8 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedBloodMagic() {
         const bloodDamageItems = this.parent.items.filter(
-            ( item ) => item.system.hasOwnProperty( "bloodMagicDamage" ) && item.system.itemStatus.equipped,
+            ( item ) => ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type !== "path" && item.system.itemStatus.equipped ) || 
+            ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type === "path" ),
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );
@@ -277,7 +345,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
-        const mysticalBonus = sumProperty(shieldItems, 'system.defenseBonus.mystical');
+        const mysticalBonus = sumProperty( shieldItems, 'system.defenseBonus.mystical' );
 
         this.characteristics.defenses.physical.value = this.characteristics.defenses.physical.baseValue + physicalBonus;
         this.characteristics.defenses.mystical.value = this.characteristics.defenses.mystical.baseValue + mysticalBonus;
@@ -409,6 +477,29 @@ export default class PcData extends NamegiverTemplate.mixin(
             this.devotion.max = questor.system.level * 10;
         }
     }
+
+    // /**
+    //  * Prepare Legendpoint infromation calculation
+    //  */
+
+    // #prepareDerivedCurrentLp() {
+    //     const stingTotalLp = this.legendPoints.total;
+    //     const stringSpendLp = this.legendPoints.spend;
+    //     // const stringcurrentLp = this.legendPoints.current;
+
+    //     const totalLp = stingTotalLp.replaceAll( ".","" )
+    //     const totalLpNumber = Number( totalLp )
+    //     this.legendPoints.current = totalLpNumber - Number( stringSpendLp.replaceAll( ".","" ) );
+    //     if ( totalLp < 10000 ) {
+    //         this.legendPoints.status = 1
+    //     } else if ( totalLp >= 10000 && totalLp < 100000 ) {
+    //         this.legendPoints.status = 2
+    //     } else if ( totalLp >= 100000 && totalLp < 1000000 ) {
+    //         this.legendPoints.status = 3
+    //     } else if ( totalLp >= 1000000 ) {
+    //         this.legendPoints.status = 4
+    //     } 
+    // }
 
     /* -------------------------------------------- */
 

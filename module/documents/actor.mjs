@@ -2,11 +2,12 @@ import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
-import CharacterGenerationPrompt from "../applications/actor/character-generation-prompt.mjs";
-import { mapObject } from "../utils.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/legend-point-history-earned-prompt.mjs"
-
+import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
+import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
+import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
+import LpTrackingData from "../data/advancement/lp-tracking.mjs";
+// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -45,60 +46,14 @@ export default class ActorEd extends Actor {
     currentItemElement.classList.toggle( "d-none" )
   }
 
-  async characterGeneration () {
-    const generation = await CharacterGenerationPrompt.waitPrompt();
-    if ( !generation ) return;
-
-    const attributeData = mapObject(
-      await generation.getFinalAttributeValues(),
-      ( attribute, value ) => [attribute, {initialValue: value}]
-    );
-    const additionalKarma = generation.availableAttributePoints;
-
-    const newActor = await this.constructor.create( {
-      name: "Rename me! I was just created",
-      type: "character",
-      system: {
-        attributes: attributeData,
-        karma: {
-          freeAttributePoints: additionalKarma,
-        },
-      },
-    } );
-
-    const namegiverDocument = await generation.namegiverDocument;
-    const classDocument = await generation.classDocument;
-    const abilities = ( await generation.abilityDocuments ).map(
-      documentData => {
-        documentData.system.source.class = namegiverDocument.uuid;
-        return documentData;
-      }
-    );
-
-    await newActor.createEmbeddedDocuments( "Item", [
-      namegiverDocument,
-      classDocument,
-      ...abilities,
-    ] );
-
-    const actorApp = newActor.sheet.render( true, {focus: true} );
-    // actorApp.activateTab("actor-notes-tab");
-  }
-
   /**
    * Legend point History earned prompt trigger
    */
-  async legendPointHistoryEarned() {
-    const historyEarned = await LegendPointHistoryEarnedPrompt.waitPrompt();
-    this.#processHistoryEarned ( historyEarned );
+  async legendPointHistoryEarned( ) {
+    // let history = await getLegendPointHistoryData( actor );
+    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), {actor: this} );
+    return this.update( {system: { lp: lpUpdateData }} )
   }
-
-  #processHistoryEarned( historyEarned ) {
-    if ( historyEarned ) {
-      return;
-    }
-  }
-
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
@@ -108,7 +63,7 @@ export default class ActorEd extends Actor {
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const edRollOptions = new EdRollOptions( {
-      rollType: "action",
+      testType: "action",
       step: { base: attributeStep },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
@@ -256,5 +211,15 @@ export default class ActorEd extends Actor {
           } )
       );
     }
+  }
+
+  async addLpTransaction( type, transactionData ) {
+    const oldTransactions = this.system.lp[type];
+    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new transactionModel( transactionData )
+
+    return this.update( { 
+      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
+    } )
   }
 }

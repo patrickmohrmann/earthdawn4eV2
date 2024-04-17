@@ -10,14 +10,15 @@ export default class DevotionData extends AbilityTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            devotionRequired: new foundry.data.fields.BooleanField( {
+            devotionRequired: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Devotion.label.devotionRequired",
                 hint: "ED.Item.Devotion.hint.devotionRequired"
             } ),
-            durability: new foundry.data.fields.NumberField( {
+            durability: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

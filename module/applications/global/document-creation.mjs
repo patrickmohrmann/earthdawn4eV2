@@ -1,3 +1,5 @@
+import PcData from "../../data/actor/pc.mjs";
+
 /**
  * Derivate of Foundry's Item.createDialog() functionality.
  */
@@ -119,15 +121,23 @@ export class DocumentCreateDialog extends FormApplication {
     createData.name ||= this.documentCls.implementation.defaultName();
     createData = new this.documentCls.implementation( createData ).toObject();
 
-    const options = {};
-    if ( this.pack ) options.pack = this.pack;
-    if ( this.parent ) options.parent = this.parent;
-    options.renderSheet = true;
+    let promise;
 
-    const promise = this.documentCls.implementation.create( createData, options );
+    if ( createData.type === "character"
+      && game.settings.get( "ed4e", "autoOpenCharGen" )
+    ) {
+      promise = PcData.characterGeneration();
+    } else {
+      const options = {};
+      if ( this.pack ) options.pack = this.pack;
+      if ( this.parent ) options.parent = this.parent;
+      options.renderSheet = true;
+
+      promise = this.documentCls.implementation.create( createData, options );
+    }
 
     this.resolve?.( promise );
-    this.close();
+    return this.close();
   }
 
   close( options = {} ) {

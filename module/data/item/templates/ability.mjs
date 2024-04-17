@@ -16,18 +16,20 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            attribute: new foundry.data.fields.StringField( {
+            attribute: new fields.StringField( {
                 required: false,
                 nullable: true,
                 blank: true,
+                initial: "",
                 label: "ED.Item.Ability.attribute"
             } ),
-            source: new foundry.data.fields.SchemaField( {
+            source: new fields.SchemaField( {
                     class: new DocumentUUIDField( ClassTemplate, {
                         label: "ED.Item.Class.source"
                     } ),
-                    tier: new foundry.data.fields.StringField( {
+                    tier: new fields.StringField( {
                         nullable: false,
                         blank: false,
                         initial: "novice",
@@ -38,7 +40,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                     required: false
                 }
             ),
-            level: new foundry.data.fields.NumberField( {
+            level: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,

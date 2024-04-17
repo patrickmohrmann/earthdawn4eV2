@@ -321,10 +321,10 @@ preLocalize( "lpSpendingTypes" );
 /* -------------------------------------------- */
 
 /**
- * The available types of rolls for {@link EdRollOptions}.
+ * The available types of (roll) tests for {@link EdRollOptions}.
  * @enum {string}
  */
-ED4E.rollTypes = {
+ED4E.testTypes = {
 	arbitrary: {
 		label: "X.arbitraryStepRoll",
 		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/arbitrary-roll-flavor.hbs",
@@ -342,7 +342,7 @@ ED4E.rollTypes = {
 		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/damage-roll-flavor.hbs",
 	},
 }
-preLocalize( "rollTypes", { key: "label" } );
+preLocalize( "testTypes", { key: "label" } );
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */

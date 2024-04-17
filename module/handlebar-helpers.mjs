@@ -39,6 +39,19 @@ export default function registerHandlebarHelpers() {
     }
   } );
 
+  /**
+   * For use in option elements. If the supplied value is truthy, add the "selected" property, otherwise add nothing.
+   * @returns {string}
+   *
+   * @example
+   * ```hbs
+   * <option value="something" {{selected myValue}}>Option 1</button>
+   * ```
+   */
+  Handlebars.registerHelper( 'ed-selected', value => {
+    return value ? "selected" : "";
+  } );
+
   Handlebars.registerHelper( 'getProperty', foundry.utils.getProperty );
 
   Handlebars.registerHelper( 'ed-hasOwnProperty', ( obj, prop ) => {

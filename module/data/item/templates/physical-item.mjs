@@ -21,16 +21,17 @@ export default class PhysicalItemTemplate extends SystemDataModel .mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            price: new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.NumberField( {
+            price: new fields.SchemaField( {
+                value: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
                     label: "ED.Item.General.value"
                 } ),
-                denomination: new foundry.data.fields.StringField( {
+                denomination: new fields.StringField( {
                     required: true,
                     blank: false,
                     initial: "silver",
@@ -41,36 +42,36 @@ export default class PhysicalItemTemplate extends SystemDataModel .mixin(
             {
                 label: "ED.Item.General.price"
             } ),
-            weight: new foundry.data.fields.SchemaField( {
-                value: new foundry.data.fields.NumberField( {
+            weight: new fields.SchemaField( {
+                value: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
                     label: "ED.Item.General.weight"
                 } ),
-                weightMultiplier: new foundry.data.fields.NumberField( {
+                weightMultiplier: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 1,
                     initial: 1,
                     label: "ED.Item.General.weightMultiplier"
                 } ),
-                weightCalculated: new foundry.data.fields.BooleanField( {
+                weightCalculated: new fields.BooleanField( {
                     required: true,
                     initial: false,
                     label: "ED.Item.General.weightCalculated"
                 } ),
             } ),
             // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
-            availability: new foundry.data.fields.StringField( {
+            availability: new fields.StringField( {
                 required: true,
                 blank: false,
                 initial: "average",
                 label:  "ED.Item.General.availability"
 
             } ),
-            amount: new foundry.data.fields.NumberField( {
+            amount: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -78,7 +79,7 @@ export default class PhysicalItemTemplate extends SystemDataModel .mixin(
                 integer: true,
                 label: "ED.Item.General.amount"
             } ),
-            bloodMagicDamage: new foundry.data.fields.NumberField( {
+            bloodMagicDamage: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -86,12 +87,12 @@ export default class PhysicalItemTemplate extends SystemDataModel .mixin(
                 integer: true,
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
-            usableItem: new foundry.data.fields.SchemaField( {
-                usableItemSelector: new foundry.data.fields.BooleanField( {
+            usableItem: new fields.SchemaField( {
+                usableItemSelector: new fields.BooleanField( {
                     required: true,
                     label: "ED.Item.General.usableItem"
                 } ),
-                arbitraryStep: new foundry.data.fields.NumberField( {
+                arbitraryStep: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -100,7 +101,7 @@ export default class PhysicalItemTemplate extends SystemDataModel .mixin(
                     label: "ED.Item.General.arbitraryStep"
                 } ),
                 // recovery property value shall be a drop down menu with several options discribed in #26
-                recoveryPropertyValue: new foundry.data.fields.NumberField( {
+                recoveryPropertyValue: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -117,18 +118,18 @@ export default class PhysicalItemTemplate extends SystemDataModel .mixin(
             // a toggle shall be show either equipped, carried or owned.
             // all equipped and carried items count as owned as well
             // all equipped items count as carried as well
-            itemStatus: new foundry.data.fields.SchemaField( {
-                equipped: new foundry.data.fields.BooleanField( {
+            itemStatus: new fields.SchemaField( {
+                equipped: new fields.BooleanField( {
                     required: true,
                     initial: false,
                     label: "ED.Item.General.equipped"
                 } ),
-                carried: new foundry.data.fields.BooleanField( {
+                carried: new fields.BooleanField( {
                     required: true,
                     initial: true,
                     label: "ED.Item.General.carried"
                 } ),
-                owned: new foundry.data.fields.BooleanField( {
+                owned: new fields.BooleanField( {
                     required: true,
                     initial: false,
                     label: "ED.Item.General.owned"

@@ -40,7 +40,7 @@ export default class RollPrompt extends FormApplication {
     static rollArbitraryPrompt() {
         RollPrompt.waitPrompt(
             new EdRollOptions( {
-                rollType: "arbitrary",
+                testType: "arbitrary",
                 chatFlavor: game.i18n.localize( "X.ThisIsTheCustomFlavorTextFromArbitraryPrompt" ),
             } )
         ).then(
@@ -113,7 +113,7 @@ export default class RollPrompt extends FormApplication {
         const newValue = event.currentTarget.value;
         const resource = event.currentTarget.dataset.resource;
         if (
-            this.edRollOptions.rollType !== CONFIG.ED4E.rollTypes.arbitrary
+            this.edRollOptions.testType !== CONFIG.ED4E.testTypes.arbitrary
             && newValue > this.edRollOptions[resource].available
         ) {
             ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );

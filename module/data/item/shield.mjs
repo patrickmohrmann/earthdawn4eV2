@@ -14,9 +14,10 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
 ) {
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            defenseBonus: new foundry.data.fields.SchemaField( {
-                physical: new foundry.data.fields.NumberField( {
+            defenseBonus: new fields.SchemaField( {
+                physical: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -25,7 +26,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                     hint: "ED.Item.Shield.Label.defenseBonusPhysical",
                     label: "ED.Item.Shield.Hint.defenseBonusPhysical"
                 } ),
-                mystical: new foundry.data.fields.NumberField( {
+                mystical: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
@@ -35,7 +36,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                     label: "ED.Item.Shield.Hint.defenseBonusMystical"
                 } ),
             } ),
-            initiativePenalty: new foundry.data.fields.NumberField( {
+            initiativePenalty: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -44,7 +45,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 hint: "ED.Item.Shield.Label.initiativePenalty",
                 label: "ED.Item.Shield.Hint.initiativePenalty"
             } ),
-            shatterThreshold: new foundry.data.fields.NumberField( {
+            shatterThreshold: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
@@ -53,7 +54,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 hint: "ED.Item.Shield.Label.shatterThreshold",
                 label: "ED.Item.Shield.Hint.shatterThreshold"
             } ),
-            broken: new foundry.data.fields.BooleanField( {
+            broken: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Shield.Label.broken"

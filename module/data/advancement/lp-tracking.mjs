@@ -9,18 +9,21 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
         return {
             earnings: new fields.ArrayField(
-                LpEarningTransactionData,
+                new fields.EmbeddedDataField( LpEarningTransactionData ),
                 {
                     required: true,
                     nullable: false,
+                    initial: [],
                     label: "X.Earned Legend Points",
-                    hint: "X.All LP this character earned"
+                    hint: "X.All LP this character earned",
+                    
                 } ),
             spendings: new fields.ArrayField(
-                LpSpendingTransactionData,
+                new fields.EmbeddedDataField( LpSpendingTransactionData ),
                 {
                     required: true,
                     nullable: false,
+                    initial: [],
                     label: "X.Earned Legend Points",
                     hint: "X.All LP this character earned"
                 } ),
@@ -32,7 +35,17 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
      * @type {number} A number from 1 through 4 indicating their status.
      */
     get status() {
-        return 4;
+        let status = 0;
+        if ( this.total < 10000 ) {
+            status = 1
+        } else if ( this.total > 10000 && this.total <= 100000 ) {
+            status = 2
+        } else if ( this.total > 100000 && this.total <= 1000000 ) {
+            status = 3
+        } else if ( this.total > 1000000 ) {
+            status = 4
+        }  
+        return status;
     }
 
     /**

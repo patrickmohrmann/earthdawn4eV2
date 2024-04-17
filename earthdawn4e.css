@@ -150,6 +150,11 @@ input.input__number-input {
   padding-top: 5px;
   height: 20px;
 }
+input.input__number-input--wide {
+  width: 100px;
+  padding-top: 5px;
+  height: 20px;
+}
 .one-line__vertical-align > * {
   line-height: 35px;
   vertical-align: middle;
@@ -198,6 +203,16 @@ ul.no-bullets {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+.card__ability .card__icon .item__image,
+.card__ability .card__icon--visible .item__image,
+.card__ability .card__icon .item__image--visible,
+.card__ability .card__icon--visible .item__image--visible,
+.card__ability .card__icon .roll-icon__hover,
+.card__ability .card__icon--visible .roll-icon__hover,
+.card__ability .card__icon .roll-icon__pointer,
+.card__ability .card__icon--visible .roll-icon__pointer {
+  border: none;
 }
 @font-face {
   font-family: 'ArnoPro Bold';
@@ -1489,6 +1504,14 @@ form#document-create .checkbox:hover {
 }
 .character-sheet .details__section {
   padding-right: 20px;
+}
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons {
+  position: absolute;
+  bottom: 0;
+  margin-left: 450px;
+}
+.app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons .button-group {
+  width: 100px;
 }
 .bookmarks-combat-modifier {
   top: 0;

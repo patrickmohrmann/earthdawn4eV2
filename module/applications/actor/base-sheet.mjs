@@ -74,16 +74,8 @@ export default class ActorSheetEd extends ActorSheet {
     // item card description shown on item click
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
-    // Character Generation
-    html.find( ".character-generation" ).click( this._onCharacterGeneration.bind( this ) );
-
     // Legend point History (Earned)
     html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
-  }
-
-  _onCharacterGeneration( event ) {
-    event.preventDefault();
-    this.actor.characterGeneration( );
   }
 
   /**
@@ -93,9 +85,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onLegendPointHistoryEarned( event ) {
     event.preventDefault();
-    this.actor.legendPointHistoryEarned();
+    this.actor.legendPointHistoryEarned( this.actor );
   }
-
   /**
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
@@ -194,7 +185,6 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.karmaRitual();
   }
 
-
   _onCardExpand( event ) {
     event.preventDefault();
 
@@ -205,5 +195,4 @@ export default class ActorSheetEd extends ActorSheet {
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
-
 }

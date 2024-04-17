@@ -73,6 +73,16 @@ export default function registerSystemSettings() {
         config: true,
     } );
 
+    // Auto open char gen on PC document creation
+    game.settings.register( "ed4e", "autoOpenCharGen", {
+        name: "ED.Settings.CharGen.autoOpenCharGen",
+        hint: "ED.Settings.CharGen.hintAutoOpenCharGen",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true,
+    } );
+
     // Starting attribute points to spend
     game.settings.register( "ed4e", "charGenAttributePoints", {
         name: "ED.Settings.CharGen.attributePoints",

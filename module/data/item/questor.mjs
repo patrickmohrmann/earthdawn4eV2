@@ -11,7 +11,6 @@ export default class QuestorData extends ClassTemplate.mixin(
     /** @inheritDoc */
     static defineSchema() {
         return this.mergeSchema( super.defineSchema(), {
-            
         } );
     }
 

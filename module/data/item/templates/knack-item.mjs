@@ -12,6 +12,7 @@ export default class KnackTemplate extends SystemDataModel.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
             knackSource: new DocumentUUIDField( {
                 required: true,

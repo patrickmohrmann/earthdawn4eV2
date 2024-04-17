@@ -44,7 +44,7 @@ export default class EdRoll extends Roll {
         }]`;
     super( baseTerm, data, edRollOptions );
 
-    this.flavorTemplate = ED4E.rollTypes[this.options.rollType]?.flavorTemplate ?? ED4E.rollTypes.arbitrary.flavorTemplate;
+    this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
 
     if ( !this.options.extraDiceAdded ) this.#addExtraDice();
     if ( !this.options.configured ) this.#configureModifiers();
@@ -60,6 +60,17 @@ export default class EdRoll extends Roll {
   /* -------------------------------------------- */
   /*  Getter and Setter                           */
   /* -------------------------------------------- */
+
+  /**
+   * Return the total result of the Roll expression if it has been evaluated. This
+   * always evaluates to at least 1.
+   * @type {number}
+   */
+  get total() {
+    return this.options.hasOwnProperty( "rollType" )
+      ? Math.max( super.total, 1 )
+      : super.total;
+  }
 
   /**
    * Is this roll a valid Earthdawn test?
@@ -91,7 +102,7 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isSuccess() {
-    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
     return this.numSuccesses > 0;
   }
 
@@ -102,7 +113,7 @@ export default class EdRoll extends Roll {
    * @type { boolean|undefined }
    */
   get isFailure() {
-    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.rollType ) ) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
     return this.numSuccesses <= 0;
   }
 
@@ -312,7 +323,7 @@ export default class EdRoll extends Roll {
     templateData.result = this.total;
     templateData.step = this.options.step;
     templateData.target = this.options.target;
-    templateData.rollType = ED4E.rollTypes[this.options.rollType].label;
+    templateData.testType = ED4E.testTypes[this.options.testType].label;
     templateData.success = this.isSuccess;
     templateData.failure = this.isFailure;
     templateData.ruleOfOne = this.isRuleOfOne;

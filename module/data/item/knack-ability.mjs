@@ -16,11 +16,12 @@ export default class KnackAbilityData extends KnackTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
+        const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
             // TODO @Chris how do we do this
             // restrictions: [], // there will be several options possible see issue #212
             // requirements: [], // there will be several options possible see issue #212 
-            standardEffect: new foundry.data.fields.BooleanField( {
+            standardEffect: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Item.Knack.standardEffect"
