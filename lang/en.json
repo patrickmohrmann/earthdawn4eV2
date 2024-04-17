@@ -94,26 +94,26 @@
                 "woundsThreshold":                                  "Wundschwelle"
             },
             "Conditions": {
-                "aggressiveAttack":                                     "Aggressiver Angriff",
-                "blindsided":                                           "Angriff aus dem Toten Winkel",
-                "coverPartial":                                         "Teilweise Deckung",
-                "coverFull":                                            "Volle Deckung",
-                "darknessPartial":                                      "Teilweise Dunkelheit",
-                "darknessFull":                                         "Volle Dunkelheit",
-                "defensiveStance":                                      "Verteidigungshaltung",
+                "aggressiveAttack":                                 "Aggressive Attack",
+                "blindsided":                                       "Blindsided",
+                "coverPartial":                                     "Partial Cover",
+                "coverFull":                                        "Full Cover",
+                "darknessPartial":                                  "Partial Darkness",
+                "darknessFull":                                     "Full Darkness",
+                "defensiveStance":                                  "Defensive Stance",
                 "Encumbrance": {
-                    "notEncumbered":                                    "Nicht Überlastet",
-                    "light":                                            "Wenig überlastet",
-                    "heavy":                                            "Stark überlastet",
-                    "tooHeavy":                                         "Du kannst das nicht alles tragen!"
+                    "notEncumbered":                                "Not Encumbered",
+                    "light":                                        "Lightly Encumbered",
+                    "heavy":                                        "HEavily Encumbered",
+                    "tooHeavy":                                     "Too Heavy, you can't move"
                 },
-                "fury":                                                 "Zorn",
-                "harried":                                              "Bedrängt",
-                "impairedMovementPartial":                              "Teil. Bewegung",
-                "impairedMovementFull":                                 "Beschränkte Bewegung",
-                "knockedDown":                                          "Niedergeschlagen",
-                "overwhelmed":                                          "Überwältigt",
-                "surprised":                                            "Überrascht"
+                "fury":                                             "Fury",
+                "harried":                                          "Harried",
+                "impairedMovementPartial":                          "Partial Impaired Movement",
+                "impairedMovementFull":                             "Fully Impaired Movement",
+                "knockedDown":                                      "Knocked Down",
+                "overwhelmed":                                      "overwhelmed",
+                "surprised":                                        "Surprised"
             },
             "Devotion": {
                 "current":                                          "Current",
