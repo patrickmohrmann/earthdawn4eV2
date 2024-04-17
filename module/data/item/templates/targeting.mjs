@@ -40,6 +40,57 @@ export default class TargetTemplate extends SystemDataModel {
     /* -------------------------------------------- */
     /*  Migrations                                  */
     /* -------------------------------------------- */
+    getDifficulty() {
+        let difficulty = 0;
+        let currentTarget = game.user.targets.first()?.actor;
+        let currentTargets = [...game.user.targets.map( ( t ) => t.actor )];
+        let numTargets = game.user.targets.size;
+        let targetDifficultySetting = this.difficulty.target
+        let groupDiffciultySetting = this.difficulty.group
+        let fixedDifficultySetting = this.difficulty.fixed
+    
+        if ( numTargets <= 0 || targetDifficultySetting === "none" ) {
+          if ( fixedDifficultySetting > 0 ) {
+            difficulty = fixedDifficultySetting;
+          } else {
+            difficulty = 0; 
+          }
+        } else {
+          let baseDifficulty = 0;
+          let additionalTargetDifficulty = 0;
+          switch ( groupDiffciultySetting ) {
+              case 'hightestX':
+                additionalTargetDifficulty = numTargets - 1;
+              case 'highestOfGroup':
+                baseDifficulty = TargetTemplate._getAggregatedDefense(currentTargets, targetDifficultySetting, Math.max);
+                break;
+              case 'lowestX':
+                additionalTargetDifficulty = numTargets - 1;
+              case 'lowestOfGroup':
+                baseDifficulty = TargetTemplate._getAggregatedDefense(currentTargets, targetDifficultySetting, Math.min);
+                break;
+              default: 
+                baseDifficulty = currentTarget?.system.characteristics.defenses[targetDifficultySetting].value ?? 0;
+            }
+            difficulty = baseDifficulty + additionalTargetDifficulty;
+          }
+          
+          return difficulty;
+        }
+
+
+        /**
+           * @param { Array } targets array of all targets
+           * @param { string } targetDefenseType defense 
+           * @param { any } aggregate ???
+           * @returns { number} return  
+           */
+        static _getAggregatedDefense( targets, targetDefenseType, aggregate = Math.max ) {
+            return targets.length > 0 ? aggregate( ...targets.map( ( t ) => t.system.characteristics.defenses[targetDefenseType].value ) ) : 0;
+          }
+    /* -------------------------------------------- */
+    /*  Migrations                                  */
+    /* -------------------------------------------- */
 
     /** @inheritDoc */
     static migrateData( source ) {

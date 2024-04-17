@@ -250,13 +250,6 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           step: 1,
           integer: true,
         } ),
-        pointsRequired: new foundry.data.fields.BooleanField( {
-          required: true,
-          nullable: false,
-          initial: false,
-          label: "X.pointsRequired",
-          hint: "X.necessaryPointsToUseThisAbility",
-        } ),
         available: new foundry.data.fields.NumberField( {
           required: true,
           nullable: false,

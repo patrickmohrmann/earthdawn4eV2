@@ -119,14 +119,19 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @summary                     Ability rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
    * @description                 Roll an Ability. use {@link RollPrompt} for further input data.
-   * @param {object} ability      ability.
+   * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
   async rollAbility( ability, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityFinalStep = attributeStep + ability.system.level;
-    const difficulty = await this.getTarget( ability );
+    const difficulty = await ability.system.getDifficulty();
+    if ( difficulty === undefined || difficulty === null ) {
+      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
+      return;
+    }
     const edRollOptions = new EdRollOptions( {
       rollType: "action",
       step: { base: abilityFinalStep },
@@ -139,54 +144,6 @@ export default class ActorEd extends Actor {
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
-
-  async getTarget( ability ) {
-    let difficulty = 0;
-    let currentTarget = game.user.targets.first()?.actor;
-    let currentTargets = [...game.user.targets.map( ( t ) => t.actor )];
-    let numTargets = game.user.targets.size;
-    let targetDifficultySetting = ability.system.difficulty.target
-    let groupDiffciultySetting = ability.system.difficulty.group
-    let fixedDifficultySetting = ability.system.difficulty.fixed
-
-    if ( numTargets <= 0 || targetDifficultySetting === "none" ) {
-      if ( fixedDifficultySetting > 0 ) {
-        difficulty = fixedDifficultySetting;
-      } else {
-        difficulty = 0; 
-      }
-    } else {
-      let baseDifficulty = 0;
-      let additionalTargetDifficulty = 0;
-      switch ( groupDiffciultySetting ) {
-          case 'hightestX':
-            additionalTargetDifficulty = numTargets - 1;
-          case 'highestOfGroup':
-            baseDifficulty = _getAggregatedDefense(currentTargets, targetDifficultySetting, Math.max);
-            break;
-          case 'lowestX':
-            additionalTargetDifficulty = numTargets - 1;
-          case 'lowestOfGroup':
-            baseDifficulty = _getAggregatedDefense(currentTargets, targetDifficultySetting, Math.min);
-            break;
-          default: 
-            baseDifficulty = currentTarget?.system.characteristics.defenses[targetDifficultySetting].value ?? 0;
-        }
-        difficulty = baseDifficulty + additionalTargetDifficulty;
-      }
-
-      /**
-       * @param { Array } targets array of all targets
-       * @param { string } targetDefenseType defense 
-       * @param { any } aggregate ???
-       * @returns { number} return  
-       */
-      function _getAggregatedDefense( targets, targetDefenseType, aggregate = Math.max ) {
-        return targets.length > 0 ? aggregate( ...targets.map( ( t ) => t.system.characteristics.defenses[targetDefenseType].value ) ) : 0;
-      }
-      return difficulty;
-    }
-      
 
   /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
@@ -236,16 +193,12 @@ export default class ActorEd extends Actor {
       return;
     }
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.options.strain.total, "standard", undefined, true );
+    this.takeDamage( roll.totalStrain, "standard", undefined, true );
     if (
         !this.#useResource( 'karma', roll.options.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
       ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
-    }
-    if ( roll.options.devotion.pointsUsed < 1 && roll.options.devotion.pointsRequired ) {
-      ui.notifications.warn( "Localize: This ability requires the use of one devotion point." );
-      return;
     }
     roll.toMessage();
   }
