@@ -1,10 +1,10 @@
 
 <div class="card__ability">
-    <div class="ability-card__grid--container item-name" data-item-id="{{_id}}">
+    <div class="ability-card__grid--container item-id" data-item-id="{{_id}}">
         <div class="ability-card__grid--item icons__dice">
-            <img class="ability-icon" src="{{img}}" data-edit="img" title="{{name}}" />
+            <img class="ability-icon" src="{{img}}"/>
             <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
-            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg">
         </div>
         <div class="ability-card__grid--item card__name">{{name}}</div>
         <div class="ability-card__grid--item">{{system.action}}</div>
@@ -20,7 +20,6 @@
         </span>
         <span>
             {{#each this.effects as |effects id|}}
-
             {{> "systems/ed4e/templates/actor/cards/effect-card-link.hbs" effects }}
             {{/each}}
         </span>

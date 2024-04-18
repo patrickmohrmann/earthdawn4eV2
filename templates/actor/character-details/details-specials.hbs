@@ -1,32 +1,61 @@
+<div class="effects space-smaller">
+    <table>
+        <h3 class="headerLine">
+            <div>
+                {{localize "earthdawn.e.effects"}}
+            </div>
+            <a class="effect-add align-right-button" data-type="effect" title="{{localize " earthdawn.n.newItem" }}">
+                <I class="fas fa-plus"></I>
+            </a>
+        </h3>
+        <tr>
+            <div class="item-list effects-list">
+                {{#each actor.effects as |effects id|}}
+                {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
+                {{/each}}
+            </div>
+            {{#each actor.itemTypes.effect}}
+            <div class="item-id one-line__vertical-align" data-item-id="{{_id}}">
+                <div class="partial__two one-line__vertical-align">
+                    <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                    {{name}}
+                </div>
+                <div class="partial__two one-line__vertical-align">
+                    {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
+                </div>
+            </div>
+            {{/each}}
+        </tr>
+    </table>
+</div>
+
+
+
 <div>
-    {{#each actor.itemTypes.effect}}
-    <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
-        <div class="partial__two one-line__vertical-align">
-            <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-            {{name}}
+    <div>
+        <h3>
+            {{localize "ED.Actor.Header.permanentEffects"}}
+            <a class="effect-add align-right-button" data-type="effect" title="{{localize " earthdawn.n.newItem" }}">
+                <I class="fas fa-plus"></I>
+            </a>
+        </h3>
+        <div>
+            {{#each actor.effects as |effects id|}}
+                {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
+            {{/each}}
         </div>
-        <div class="partial__two one-line__vertical-align">
-            {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
+        <div>
+            {{#each actor.itemTypes.effect as |effects id|}}
+                {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
+            {{/each}}
         </div>
     </div>
-    {{/each}}
+    <div>
+        <h3>{{localize "ED.Actor.Header.temporaryEffects"}}
+            <a class="effect-add align-right-button" data-type="effect" title="{{localize " earthdawn.n.newItem" }}">
+                <I class="fas fa-plus"></I>
+            </a>
+        </h3>
+
+    </div>
 </div>
-<div class="effects space-smaller">  
-            <table>
-                <h3 class="headerLine">
-                    <div>
-                        {{localize "earthdawn.e.effects"}}
-                    </div>
-                    <a class="effect-add align-right-button" data-type="effect" title="{{localize "earthdawn.n.newItem" }}">
-                        <I class="fas fa-plus"></I>
-                    </a>
-                </h3>
-                <tr>
-                    <div class="item-list effects-list">
-                        {{#each actor.effects as |effects id|}}
-                        {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
-                        {{/each}}
-                    </div>
-                </tr>
-            </table> 
-        </div>

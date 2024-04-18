@@ -62,8 +62,11 @@ export default class ActorSheetEd extends ActorSheet {
     // Attribute tests
     html.find( ".attribute-card__grid--item .rollable" ).click( this._onRollAttribute.bind( this ) );
 
-    // Attribute tests
+    // Ability tests
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
+
+    // Item tests
+    html.find( ".card__equipment .rollable" ).click( this._onRollItem.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -110,9 +113,20 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onRollAbility( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
+    const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
     this.actor.rollAbility( ability, {event: event} );
+  }
+
+  /**
+   * Handle rolling an item test.
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+  _onRollItem( event ) {
+    event.preventDefault();
+    ui.notifications.error( "not implemented Yet" )
+    return
   }
 
   /**
@@ -139,8 +153,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onEffectDelete( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const effect = this.actor.effects.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const effect = this.actor.items.get( itemId );
     if ( !effect ) return;
     return effect.deleteDialog();
   }
@@ -154,9 +168,9 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onEffectEdit( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const effect = this.actor.effects.get( li.dataset.itemId );
-    return effect.sheet?.render( true );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const effect = this.actor.items.get( itemId );
+    return effect.sheet.render( true );
   }
 
   /**
@@ -167,8 +181,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   async _onItemDelete( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const item = this.actor.items.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const item = this.actor.items.get( itemId );
     if ( !item ) return;
     return item.deleteDialog();
   }
@@ -181,8 +195,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onItemEdit( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const item = this.actor.items.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const item = this.actor.items.get( itemId );
     return item.sheet?.render( true );
   }
 
@@ -194,7 +208,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
 
     const itemDescription = $( event.currentTarget )
-    .parent( ".item-name" )
+    .parent( ".item-id" )
     .parent( ".card__ability" )
     .children( ".card__description" );
 

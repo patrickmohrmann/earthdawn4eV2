@@ -379,6 +379,7 @@ export async function preloadHandlebarsTemplates() {
     // Global Templates
     "systems/ed4e/templates/global/editor.hbs",
     "systems/ed4e/templates/global/card-options-chat.hbs",
+    "systems/ed4e/templates/global/card-options-effect.hbs",
     "systems/ed4e/templates/global/card-options-enhance.hbs",
 
     // Character Generation
@@ -412,9 +413,6 @@ export async function preloadHandlebarsTemplates() {
     // Actor cards
     "systems/ed4e/templates/actor/cards/ability-card.hbs",
     "systems/ed4e/templates/actor/cards/equipment-card.hbs",
-    "systems/ed4e/templates/actor/cards/weapon-card.hbs",
-    "systems/ed4e/templates/actor/cards/armor-card.hbs",
-    "systems/ed4e/templates/actor/cards/shield-card.hbs",
     "systems/ed4e/templates/actor/cards/spell-card.hbs",
     "systems/ed4e/templates/actor/cards/class-card.hbs",
     "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",

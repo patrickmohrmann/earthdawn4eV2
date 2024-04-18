@@ -1,41 +1,57 @@
-<div class="card__ability one-line__vertical-align">
-    {{#if (eq this.system.usableItem.usableItemSelector true)}}
-    
-    <span class="card__icon rollable-icons">
-        <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-        <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
-        <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-    </span>
-    {{else}}
-    <span class="card__icon--visible">
-        <img class="item__image--visible" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-    </span>
-    {{/if }}
-    <span class="card__name">
-        {{name}}
-    </span>
-    <span class="card__number">
-        <label>{{localize "X-amount"}}:</label>
-        {{system.amount}}
-    </span>
-    {{#if (eq this.system.usableItem.usableItemSelector true)}}
-    <span class="card__action">
-        <i class="fa-solid fa-dice"></i>
-        <label>{{localize "X-Action"}}:</label>
-        {{system.usableItem.action}}
-    </span>
-    {{/if }}
-    <span class="card__control">
-        {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
-    </span>
-</div>
-<div class="card__description card__description--toggle">
-    <span class="card__description--content">
-        {{{system.description.value}}}
-    </span>
-    {{!-- <span class="card__description--effects">
-        {{#each this.effects as |effects id|}}
-        {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
-        {{/each}}
-    </span> --}}
+<div class="card__equipment">
+    <div class="equipment-card__grid--container item-id" data-item-id="{{_id}}">
+        {{#if (eq this.system.usableItem.usableItemSelector true)}}
+        <div class="equipment-card__grid--item icons__dice">
+            <img class="equipment-icon" src="{{img}}"/>
+            <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
+            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg">
+       </div>
+        {{else}}
+        <div class="equipment-card__grid--item icons__equipment">
+            <img class="equipment-icon__visible" src="{{img}}" height="25" width="25" />
+        </div>
+        {{/if}}
+        <div class="equipment-card__grid--item">{{name}}</div>
+        {{log this}}
+        {{#if (eq this.type "armor")}}
+        <div class="equipment-card__grid--item text__alignment--center">{{add system.physical.armor system.physical.forgeBonus}}</div>
+        <div class="equipment-card__grid--item text__alignment--center">{{add system.mystical.armor system.mystical.forgeBonus}}</div>
+        <div class="equipment-card__grid--item text__alignment--center">{{system.initiativePenalty}}</div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        {{/if}}
+        {{#if (eq this.type "equipment")}}
+        <div class="equipment-card__grid--item text__alignment--center">{{system.amount}}</div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        {{/if}}
+        {{#if (eq this.type "shield")}}
+        <div class="equipment-card__grid--item text__alignment--center">{{system.defenseBonus.physical}}</div>
+        <div class="equipment-card__grid--item text__alignment--center">{{system.defenseBonus.mystical}}</div>
+        <div class="equipment-card__grid--item text__alignment--center">{{system.initiativePenalty}}</div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        {{/if}}
+        {{#if (eq this.type "weapon")}}
+        <div class="equipment-card__grid--item text__alignment--center">{{system.amount}}</div>
+        <div class="equipment-card__grid--item text__alignment--center undefined">{{add system.damage.baseStep (edGetAttributeValue system.damage.attribute this.actor.system.attributes)}}</div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center"></div>
+        {{/if}}
+        
+        <div class="equipment-card__grid--item">{{> "systems/ed4e/templates/global/card-options-chat.hbs"}}</div>
+    </div>
+    <div class="card__description card__description--toggle display__inline-block">
+        <span class="card__description--content">
+            {{{system.description.value}}}
+        </span>
+        <span>
+            {{#each this.effects as |effects id|}}
+            {{> "systems/ed4e/templates/actor/cards/effect-card-link.hbs" effects }}
+            {{/each}}
+        </span>
+    </div>
 </div>

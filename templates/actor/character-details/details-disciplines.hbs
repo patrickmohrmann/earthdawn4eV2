@@ -2,7 +2,7 @@
     <h3>{{localize "ED.Actor.Header.disciplines"}}</h3>
     <div>
         {{#each actor.itemTypes.discipline}}
-        <div class="item-name item-name__card" data-item-id="{{_id}}">
+        <div class="item-id item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
         </div>
         {{/each}}
@@ -10,7 +10,7 @@
     <h3>{{localize "ED.Actor.Header.paths"}}</h3>
     <div>
         {{#each actor.itemTypes.path}}
-        <div class="item-name item-name__card" data-item-id="{{_id}}">
+        <div class="item-id item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
         </div>
         {{/each}}
@@ -18,7 +18,7 @@
     <h3>{{localize "ED.Actor.Header.questor"}}</h3>
     <div>
         {{#each actor.itemTypes.questor}}
-        <div class="item-name item-name__card" data-item-id="{{_id}}">
+        <div class="item-id item-name__card" data-item-id="{{_id}}">
             {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
         </div>
         {{/each}}

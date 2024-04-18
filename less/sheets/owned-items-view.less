@@ -23,7 +23,8 @@
     }
 }
 
-.ability-icon {
+.ability-icon,
+.equipment-icon {
     width: 25px;
 }
 
@@ -52,15 +53,61 @@
     }
 }
 
+.equipment-card__grid--container {
+    align-items: center;
+    display: grid;
+    height: 30px;
+    grid-template-columns:
+        // 790 px available
+        40px // Icon
+        250px // Name
+        100px // Action
+        75px // Rank
+        75px // Step
+        75px // Strain
+        75px // Attribute
+        100px // Control Icons
+    ;
+
+    .equipment-card__grid--item {
+
+        .roll-icon__hover,
+        .roll-icon__pointer {
+            display: none;
+        }
+    }
+}
+
+.equipment-card__grid--container-Header {
+    align-items: center;
+    display: grid;
+    height: 30px;
+    grid-template-columns:
+        // 790 px available
+        290px // Name
+        100px // Action
+        75px // Rank
+        75px // Step
+        75px // Strain
+        75px // Attribute
+        100px // Control Icons
+    ;
+}
+
+
 .roll-icon__hover,
 .roll-icon__pointer,
 .ability-icon,
-.attribute-icon {
+.attribute-icon, 
+.equipment-icon,
+.equipment-icon__visible {
     border: none;
 }
 
+
+.ability-card__grid--item.icons__dice:hover+div,
 .attribute-card__grid--item.icons__dice:hover+div,
-.ability-card__grid--item.icons__dice:hover+div {
+.equipment-card__grid--item.icons__dice:hover+div {
     cursor: pointer;
     color: #000;
     text-shadow: 0 0 10px red;
@@ -68,14 +115,16 @@
 
 
 .ability-card__grid--container:hover,
-.attribute-card__grid--container:hover {
+.attribute-card__grid--container:hover,
+.equipment-card__grid--container:hover {
     .icons__dice img{
         box-shadow: 0 0 10px red;
         border-radius: 50%;
         background-image: radial-gradient(rgb(90, 0, 0), rgb(221, 86, 86), rgb(221, 207, 205));
     }
     .roll-icon__hover,
-    .attribute-icon {
+    .attribute-icon,
+    .equipment-icon {
         margin-top: -4px;
         display: block;
         animation-duration: 3s;
@@ -95,22 +144,22 @@
         }
     }
 
-    .ability-icon {
+    .ability-icon,
+    .equipment-icon {
         display: none;
     }
 
     .ability-card__grid--item:hover,
-    .attribute-card__grid--item:hover {
+    .attribute-card__grid--item:hover,
+    .equipment-card__grid--item:hover {
         .roll-icon__pointer {
             display: block;
             margin-top: -4px;
         }
 
-        .attribute-icon {
-            display: none;
-        }
-
-        .ability-icon {
+        .attribute-icon,
+        .ability-icon,
+        .equipment-icon {
             display: none;
         }
 
