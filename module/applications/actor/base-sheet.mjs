@@ -154,7 +154,7 @@ export default class ActorSheetEd extends ActorSheet {
   _onEffectDelete( event ) {
     event.preventDefault();
     const itemId = event.currentTarget.parentElement.dataset.itemId;
-    const effect = this.actor.items.get( itemId );
+    const effect = this.actor.effects.get( itemId );
     if ( !effect ) return;
     return effect.deleteDialog();
   }
@@ -169,8 +169,8 @@ export default class ActorSheetEd extends ActorSheet {
   _onEffectEdit( event ) {
     event.preventDefault();
     const itemId = event.currentTarget.parentElement.dataset.itemId;
-    const effect = this.actor.items.get( itemId );
-    return effect.sheet.render( true );
+    const effect = this.actor.effects.get( itemId );
+    return effect.sheet?.render( true );
   }
 
   /**

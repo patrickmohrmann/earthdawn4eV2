@@ -381,6 +381,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global/card-options-chat.hbs",
     "systems/ed4e/templates/global/card-options-effect.hbs",
     "systems/ed4e/templates/global/card-options-enhance.hbs",
+    "systems/ed4e/templates/global/effect-card.hbs",
 
     // Character Generation
     "systems/ed4e/templates/actor/generation/namegiver-selection.hbs",
@@ -486,9 +487,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-thread.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-weapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-shipWeapon.hbs",
-
-    // cards
-    "systems/ed4e/templates/item/cards/effect-card.hbs",
 
     // Dice partials
     "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs",

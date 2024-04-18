@@ -131,6 +131,8 @@
                 "damage":                                           "Schaden",
                 "defenses":                                         "Verteidigung",
                 "devotion":                                         "Weihekraft",
+                "effectsPermanent":                                 "Permanente Effekte",
+                "effectsTemporary":                                 "Temporäre Effekte",  
                 "encumbrance":                                      "Belastung",
                 "equipment":                                        "Ausrüstung",
                 "healthRating":                                     "Gesundheit",
