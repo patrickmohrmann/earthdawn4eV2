@@ -1,61 +1,62 @@
 <div>
-    <h3>Legend Point Tracking</h3>
-    <div>
-        <h4>
-            Legend Points and Status
-        </h4>
-        <button class="legend-point__history--earned">{{localize "ED.Buttons.X-Legend Point History"}}</button>
-        <table>
-            <tr>
-                <th>Current LP</th>
-                <th>spend LP</th>
-                <th>total LP</th>
-                <th>Legend Status</th>
-            </tr>
-            <tr class="legend-point__info">
-                <td>
-                    <input class="input__number-input--wide" type="text" name="system.lp.current" value="{{actor.system.lp.current}}">
-                </td>
-                <td>
-                    <input class="input__number-input--wide" type="text" name="system.lp.spend" value="{{actor.system.lp.spend}}">
-                </td>
-                <td>
-                    <input class="input__number-input--wide" type="text" name="system.lp.total" value="{{actor.system.lp.total}}">
-                </td>
-                <td>
-                    <input class="input__number-input--wide" type="text" name="system.lp.status" value="{{actor.system.lp.status}}">
-                </td>
-            </tr>
-        </table>
+    <div class="legend-card__grid--container font__bold text-break__auto">
+        <div class="legend-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.legendCurrent"}}</div>
+        <div class="legend-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.legendSpend"}}</div>
+        <div class="legend-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.legendTotal"}}</div>
+        <div class="legend-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.legendStatus"}}</div>
+        <div class="legend-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.legendHistory"}}</div>
     </div>
-    <div>
-        <h4>
-            Attributes
-        </h4>
-        <div>
-            <table>
-                <tr>
-                    <th>
-                        Attribute
-                    </th>
-                    <th>
-                        steigerung
-                    </th>
-                </tr>
-                {{#each actor.system.attributes }}
-                <tr>
-                    <td class="attribute__name--content">
-                        <a>
-                            <label>{{@key}}</label>
-                        </a>
-                    </td>
-                    <td>
-                        <input class="input__number-input" type="text" name="system.attributes.{{@key}}.timesIncreased"
-                            value="{{timesIncreased}}">
-                    </td>
-                </tr>
-                {{/each}}
-            </table>
+    <div class="legend-card__grid--container font__bold text-break__auto">
+        <div class="legend-card__grid--item text__alignment--center">
+            <input class="input__number-input--wide" type="text" name="system.lp.current"
+                value="{{actor.system.lp.current}}">
+        </div>
+        <div class="legend-card__grid--item text__alignment--center">
+            <input class="input__number-input--wide" type="text" name="system.lp.spend"
+                value="{{actor.system.lp.spend}}">
+        </div>
+        <div class="legend-card__grid--item text__alignment--center">
+            <input class="input__number-input--wide" type="text" name="system.lp.total"
+                value="{{actor.system.lp.total}}">
+        </div>
+        <div class="legend-card__grid--item text__alignment--center">
+            <input class="input__number-input--wide" type="text" name="system.lp.status"
+                value="{{actor.system.lp.status}}">
+        </div>
+        <div class="legend-card__grid--item text__alignment--center">
+            <button class="legend-point__history--earned">{{localize "ED.Actor.Buttons.legendHistory"}}</button>
         </div>
     </div>
+</div>
+
+<div class="undefined">
+    <h4>
+        Attributes
+    </h4>
+    <div>
+        <table>
+            <tr>
+                <th>
+                    Attribute
+                </th>
+                <th>
+                    steigerung
+                </th>
+            </tr>
+            {{#each actor.system.attributes }}
+            <tr>
+                <td class="attribute__name--content">
+                    <a>
+                        <label>{{@key}}</label>
+                    </a>
+                </td>
+                <td>
+                    <input class="input__number-input" type="text" name="system.attributes.{{@key}}.timesIncreased"
+                        value="{{timesIncreased}}">
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
 </div>

@@ -191,6 +191,13 @@ input.input__number-input {
   height: 30px;
   grid-template-columns: 40px 220px;
 }
+.main .actor-sheet-body .tab__legend .legend-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 158px 158px 158px 158px 158px;
+}
 .action--buttons {
   padding-top: 5px;
   position: relative;
@@ -212,6 +219,10 @@ input.input__number-input {
   float: left;
   width: 40%;
   margin-right: 50px;
+}
+.legend-point__history--earned {
+  height: 26px;
+  line-height: 22px;
 }
 .body .item-section__top {
   height: 158px;
@@ -318,7 +329,8 @@ input.input__number-input {
   display: none;
 }
 .ability-icon,
-.equipment-icon {
+.equipment-icon,
+.effect-icon {
   width: 25px;
 }
 .attribute-card__grid--container {
@@ -349,6 +361,16 @@ input.input__number-input {
   display: grid;
   height: 30px;
   grid-template-columns: 290px 100px 75px 75px 75px 75px 100px;
+}
+.effect-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  grid-template-columns: 40px 250px 200px 100px 100px 100px;
+}
+.effect-card__grid--container .effect {
+  padding-left: 2px;
+  text-align: left;
 }
 .roll-icon__hover,
 .roll-icon__pointer,

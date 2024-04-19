@@ -83,6 +83,23 @@
                 }
             }
         }
+        .tab__legend {
+            .legend-card__grid--container {
+                    align-items: center;
+                    height: 30px;
+                    display: grid;
+                    padding-left: 2px;
+                    grid-template-columns:
+                        // 790 px available
+                        158px // current
+                        158px // spend
+                        158px // total
+                        158px // status
+                        158px // History
+                    ;
+                }
+            }
+        
     }
 }
 
@@ -111,4 +128,9 @@
         width: 40%;
         margin-right: 50px;
     }
+}
+
+.legend-point__history--earned {
+    height: 26px;
+    line-height: 22px;
 }

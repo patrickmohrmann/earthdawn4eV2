@@ -24,7 +24,8 @@
 }
 
 .ability-icon,
-.equipment-icon {
+.equipment-icon,
+.effect-icon {
     width: 25px;
 }
 
@@ -92,6 +93,26 @@
         75px // Attribute
         100px // Control Icons
     ;
+}
+
+.effect-card__grid--container {
+    align-items: center;
+    height: 30px;
+    display: grid;
+    grid-template-columns:
+        // 790 px available
+        40px // Icon
+        250px // Name
+        200px // Origin
+        100px // active
+        100px // duration
+        100px // Control Icons
+    ;
+
+    .effect {
+        padding-left: 2px;
+        text-align: left;
+    }
 }
 
 
