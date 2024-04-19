@@ -402,7 +402,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/character-details/details-general.hbs",
     "systems/ed4e/templates/actor/character-details/details-specials.hbs",
     "systems/ed4e/templates/actor/character-details/details-legend.hbs",
-    "systems/ed4e/templates/actor/character-details/details-disciplines.hbs",
+    "systems/ed4e/templates/actor/character-details/details-class.hbs",
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/actor-section-navigator.hbs",

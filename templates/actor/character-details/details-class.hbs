@@ -1,4 +1,5 @@
 <div>
+
     <h3>{{localize "ED.Actor.Header.disciplines"}}</h3>
     <div>
         {{#each actor.itemTypes.discipline}}
@@ -24,3 +25,11 @@
         {{/each}}
     </div>
 </div>
+
+{{#each actor.itemTypes.discipline}}
+<div class="item-id item-name__card" data-item-id="{{_id}}">
+
+    {{> "systems/ed4e/templates/actor/cards/class-card.hbs"}}
+</div>
+{{/each}}
+
