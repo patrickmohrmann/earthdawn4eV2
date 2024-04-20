@@ -39,9 +39,9 @@ export default class EdRoll extends Roll {
     const baseTerm = formula
       ? formula
       : // : ( `${getDice( step )}[${game.i18n.localize( "ED.General.S.step" )} ${step}]` );
-        `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.General.S.step" )} ${
-          edRollOptions.step.total
-        }]`;
+      `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.General.S.step" )} ${
+        edRollOptions.step.total
+      }]`;
     super( baseTerm, data, edRollOptions );
 
     this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
@@ -277,10 +277,10 @@ export default class EdRoll extends Roll {
       for ( let i = 1; i <= pointsUsed; i++ ) {
         diceTerm = getDice( this.options[type].step );
         newTerms = Roll.parse(
-          `+ (${diceTerm})[${game.i18n.localize( `ED.General.${type[0]}.${type}` )} ${i}]`,
+          `(${diceTerm})[${game.i18n.localize( `ED.General.${type[0]}.${type}` )} ${i}]`,
           {}
         );
-        this.terms.push( ...newTerms );
+        this.terms.push( new foundry.dice.terms.OperatorTerm( {operator: "+"} ), ...newTerms );
       }
       this.resetFormula();
     }
@@ -296,10 +296,10 @@ export default class EdRoll extends Roll {
       Object.entries( this.options.extraDice ).forEach( ( [label, step] ) => {
         const diceTerm = getDice( step );
         const newTerms = Roll.parse(
-          `+ (${diceTerm})[${label}]`,
+          `(${diceTerm})[${label}]`,
           {}
         );
-        this.terms.push( ...newTerms );
+        this.terms.push( new foundry.dice.terms.OperatorTerm( {operator: "+"} ), ...newTerms );
       } );
       this.resetFormula();
     }
@@ -426,6 +426,6 @@ export default class EdRoll extends Roll {
 
     messageData.flavor = await this.chatFlavor;
 
-   return super.toMessage( messageData, options );
+    return super.toMessage( messageData, options );
   }
 }
