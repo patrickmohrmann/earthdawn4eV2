@@ -292,7 +292,7 @@ export default class EdRoll extends Roll {
    * Add the dice from extra steps (like "Flame Weapon" or "Night's Edge").
    */
   #addExtraSteps() {
-    if ( !isEmpty( this.options?.extraDice ) ) {
+    if ( !foundry.utils.isEmpty( this.options?.extraDice ) ) {
       Object.entries( this.options.extraDice ).forEach( ( [label, step] ) => {
         const diceTerm = getDice( step );
         const newTerms = Roll.parse(
@@ -407,7 +407,7 @@ export default class EdRoll extends Roll {
    * @returns {Promise<string>}                    The rendered HTML template as a string
    */
   async render( {flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={} ) {
-    if ( !this._evaluated ) await this.evaluate( {async: true} );
+    if ( !this._evaluated ) await this.evaluate();
     const chatData = {
       formula: isPrivate ? "???" : this.#stepsFormula,
       flavor: isPrivate ? null : flavor,
@@ -422,7 +422,7 @@ export default class EdRoll extends Roll {
 
   /** @inheritDoc */
   async toMessage( messageData = {}, options = {} ) {
-    if ( !this._evaluated ) await this.evaluate( { async: true } );
+    if ( !this._evaluated ) await this.evaluate();
 
     messageData.flavor = await this.chatFlavor;
 

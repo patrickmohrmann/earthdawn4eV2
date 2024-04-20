@@ -20,7 +20,7 @@ export default class ItemSheetEd extends ItemSheet {
    * @override
    */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['earthdawn4e', 'sheet', 'item', 'item-sheet'],
       width: 800,
       height: 800,
@@ -63,7 +63,7 @@ export default class ItemSheetEd extends ItemSheet {
       async: true,
       secrets: this.item.isOwner,
     } );
-    return expandObject( enrichment );
+    return foundry.utils.expandObject( enrichment );
   }
 
   async getData() {

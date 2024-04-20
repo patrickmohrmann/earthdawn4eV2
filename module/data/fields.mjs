@@ -36,7 +36,7 @@ export class DocumentUUIDField extends foundry.data.fields.StringField {
 
   /** @override */
   _validateType(value) {
-    const p = parseUuid(value);
+    const p = foundry.utils.parseUuid(value);
     if (
       !(Object.keys(game.documentTypes).includes(p.documentType)
       && ed4e.utils.validators.isValidIdentifier(p.documentId))
