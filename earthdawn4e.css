@@ -198,6 +198,17 @@ input.input__number-input {
   padding-left: 2px;
   grid-template-columns: 158px 158px 158px 158px 158px;
 }
+.main .actor-sheet-body .tab__class .class-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 40px 450px 200px 100px;
+}
+.main .actor-sheet-body .tab__class .item__image {
+  width: 25px;
+  border: none;
+}
 .action--buttons {
   padding-top: 5px;
   position: relative;

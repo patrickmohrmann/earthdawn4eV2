@@ -1,25 +1,6 @@
-<div class="card__ability one-line__vertical-align">
-    <span class="card__icon--visible">
-        <img class="item__image--visible" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-    </span>
-    <span class="card__name">
-        {{name}}
-    </span>
-    <span class="card__number">
-        <label>{{localize "X-Rank"}}:</label>
-        {{system.level}}
-    </span> 
-    <span class="card__control">
-        {{> "systems/ed4e/templates/global/card-options-enhance.hbs"}}
-    </span>
-</div>
-<div class="card__description card__description--toggle">
-    <span class="card__description--content">
-        {{{system.description.value}}}
-    </span>
-    {{!-- <span class="card__description--effects">
-        {{#each this.effects as |effects id|}}
-            {{> "systems/ed4e/templates/global/effect-card.hbs" effects }}
-        {{/each}}
-    </span> --}}
-</div>
+<div class="class-card__grid--container font__bold text-break__auto">
+        <div class="class-card__grid--item"><img class="item__image" src="{{img}}"/></div>
+        <div class="class-card__grid--item">{{name}}</div>
+        <div class="class-card__grid--item text__alignment--center">{{system.level}}</div>
+        <div class="class-card__grid--item text__alignment--center">{{> "systems/ed4e/templates/global/card-options-enhance.hbs"}}</div>
+    </div>

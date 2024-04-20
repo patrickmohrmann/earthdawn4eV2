@@ -4,17 +4,21 @@
 .body {
     .actor-section__top {
         height: 158px;
+
         .actor__image {
             width: 20%;
             float: left;
         }
+
         .actor__characteristics {
             width: 80%;
             float: left;
         }
+
         img {
             border: none;
         }
+
         .padding__top-small {
             height: 80px;
         }
@@ -26,22 +30,27 @@
 //###########################################################
 .main {
     .actor-sheet-body {
+
         // General Section
         .tab__general {
             .left-part {
                 float: left;
                 width: 250px;
+
                 .margin__none {
                     margin-bottom: 0;
                 }
+
                 .fa-star {
                     font-size: 7px;
-                  }
-                .attribute__increases{
+                }
+
+                .attribute__increases {
                     text-align: left;
                     padding-left: 2px;
                     margin-bottom: 15px;
                 }
+
                 .karma-devotion__header {
                     height: 30px;
 
@@ -50,7 +59,8 @@
                         height: 25px;
                         border: none;
                     }
-                } 
+                }
+
                 .karma-devotion__grid--container {
                     align-items: center;
                     text-align: center;
@@ -64,9 +74,11 @@
                     ;
                 }
             }
+
             .right-part {
-                float: right; 
+                float: right;
                 width: 520px;
+
                 .margin__right {
                     margin-right: 20px;
                 }
@@ -83,23 +95,45 @@
                 }
             }
         }
+
         .tab__legend {
             .legend-card__grid--container {
-                    align-items: center;
-                    height: 30px;
-                    display: grid;
-                    padding-left: 2px;
-                    grid-template-columns:
-                        // 790 px available
-                        158px // current
-                        158px // spend
-                        158px // total
-                        158px // status
-                        158px // History
-                    ;
-                }
+                align-items: center;
+                height: 30px;
+                display: grid;
+                padding-left: 2px;
+                grid-template-columns:
+                    // 790 px available
+                    158px // current
+                    158px // spend
+                    158px // total
+                    158px // status
+                    158px // History
+                ;
             }
-        
+        }
+        .tab__class {
+            .class-card__grid--container {
+                align-items: center;
+                height: 30px;
+                display: grid;
+                padding-left: 2px;
+                grid-template-columns:
+                    // 790 px available
+                    40px // Icon
+                    450px // Name
+                    200px // Rank
+                    100px // Control Icons
+                ;
+            }
+
+            .item__image {
+                width: 25px;
+                border: none;
+            }
+
+        }
+
     }
 }
 
@@ -112,17 +146,20 @@
     position: relative;
     width: 100%;
     z-index: -6;
-    button { 
+
+    button {
         position: relative;
         z-index: 4;
         width: 100px;
     }
+
     .buttons--left {
-        margin-left:45px;
+        margin-left: 45px;
         margin-right: 50px;
         float: left;
         width: 40%;
     }
+
     .buttons--right {
         float: left;
         width: 40%;
