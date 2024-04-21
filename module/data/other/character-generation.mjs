@@ -173,6 +173,30 @@ export default class CharacterGenerationData extends SparseDataModel {
     )
   }
 
+  /**
+   * Get all documents and adapt their level according to `this.abilities`.
+   * @return {Promise<Awaited<Document|null>[]>}  A Promise that resolves to an
+   *                                              array of ability documents.
+   */
+  get abilityDocuments() {
+    const allAbilities = Object.entries( this.abilities ).reduce( ( accumulator, [category, abilities] ) => {
+
+      const abilities_modded = Object.entries( abilities ).map( async ( [uuid, level] ) => {
+        const itemDocument = ( await fromUuid( uuid ) ).toObject();
+
+        if ( Object.keys( ED4E.talentCategory ).includes( category ) ) itemDocument.system.talentCategory = category;
+        if ( level === 0 && category === "free" ) level = 1;
+        if ( category !== "special" ) itemDocument.system.level = level;
+
+        return itemDocument;
+      } );
+
+      return accumulator.concat( abilities_modded );
+    }, [] );
+
+    return Promise.all( allAbilities );
+  }
+
   set abilityOption( abilityUuid ) {
     this.updateSource( {
       abilities: {
@@ -195,23 +219,6 @@ export default class CharacterGenerationData extends SparseDataModel {
         special: Object.fromEntries(selectedClassDocument.system.advancement.levels[0].abilities.special.map( ability => [ability, 0] )),
       }
     } );
-  }
-
-  /**
-   * Get all documents and adapt their level according to `this.abilities`.
-   * @return {Promise<Awaited<Document|null>[]>}  A Promise that resolves to an
-   *                                              array of ability documents.
-   */
-  get abilityDocuments() {
-    const allAbilityEntries = Object.assign( {}, ...Object.values( this.abilities ) );
-    const allAbilities = Object.entries( allAbilityEntries ).map(
-      async ( [uuid, level] ) => {
-        const itemDocument = (await fromUuid( uuid )).toObject();
-        itemDocument.system.level = level;
-        return itemDocument;
-      }
-    );
-    return Promise.all( allAbilities );
   }
 
   async getCharacteristicsPreview() {
