@@ -1,3 +1,132 @@
+{{!-- <div class="top">
+    <div class="image-characteristics__grid-container">
+            <div class="image__grid-item">
+                <img class="actor-image" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+            </div>
+            <div class="characteristics-defenses__grid-item">
+                <h4 class="header--centered">{{localize "ED.Actor.Header.defenses"}}</h4>
+                <div class="input--centered">
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.physicalDefense"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.mysticalDefense"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.socialDefense"}}</label>
+                </div>
+                <div class="input--centered partial__three">
+                    <input id="characteristic-defense-physcial" class="input__circle-input--centered"
+                        name="system.characteristics.defenses.physical.value"
+                        value="{{actor.system.characteristics.defenses.physical.value}}">
+                </div>
+                <div class="input--centered partial__three">
+                    <input id="characteristic-defense-mystical" class="input__circle-input--centered"
+                        name="system.characteristics.defenses.mystical.value"
+                        value="{{actor.system.characteristics.defenses.mystical.value}}">
+                </div>
+                <div class="input--centered partial__three">
+                    <input id="characteristic-defense-social" class="input__circle-input--centered"
+                        name="system.characteristics.defenses.social.value"
+                        value="{{actor.system.characteristics.defenses.social.value}}">
+                </div>
+            </div>
+            <div class="characteristics-health__grid-item">
+                <h4 class="header--centered">{{localize "ED.Actor.Header.healthRating"}}</h4>
+                <div class="input--centered">
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.woundsThreshold"}}</label>
+                    <label class="partial__three">{{localize
+                        "ED.Actor.Characteristics.unconsciousThresholdShort"}}</label>
+                    <label class="partial__three">{{localize "ED.Actor.Characteristics.deathThesholdShort"}}</label>
+                </div>
+                <div class="input--centered partial__three">
+                    <input id="characteristic-health-rating-wounds" class="input__circle-input--centered"
+                        name="system.characteristics.health.woundThreshold"
+                        value="{{actor.system.characteristics.health.woundThreshold}}">
+                </div>
+                <div class="input--centered partial__three">
+                    <input id="characteristic-health-rating-unconscious" class="input__circle-input--centered"
+                        name="system.characteristics.health.unconscious"
+                        value="{{actor.system.characteristics.health.unconscious}}">
+                </div>
+                <div class="input--centered partial__three">
+                    <input id="characteristic-health-rating-death" class="input__circle-input--centered"
+                        name="system.characteristics.health.death"
+                        value="{{actor.system.characteristics.health.death}}">
+                </div>
+            </div>
+            <div class="characteristics-armor__grid-item">
+                <h4 class="header--centered">{{localize "ED.Actor.Header.armor"}}</h4>
+                <div class="input--centered">
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.physicalArmor"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.mysticalArmor"}}</label>
+                </div>
+                <div class="input--centered partial__two">
+                    <input id="characteristic-armor-physical" class="input__circle-input--centered"
+                        name="system.characteristics.armor.physical.value"
+                        value="{{actor.system.characteristics.armor.physical.value}}">
+                </div>
+                <div class="input--centered partial__two">
+                    <input id="characteristic-armor-mystic" class="input__circle-input--centered"
+                        name="system.characteristics.armor.mystical.value"
+                        value="{{actor.system.characteristics.armor.mystical.value}}">
+                </div>
+            </div>
+            <div class="characteristics-movement__grid-item">
+                <h4 class="header--centered">{{localize "ED.Actor.Header.movement"}}
+                    <a class="fas fa-cogs" title="other movement types inside a pop up"></a>
+                </h4>
+                <div class="input--centered">
+                    <label>{{localize "ED.Actor.Characteristics.walkMovement"}}</label>
+                    {{!-- <label class="partial__four">{{localize "ED.Actor.Characteristics.runMovement"}}</label>
+                    <label class="partial__four">{{localize "ED.Actor.Characteristics.mountMovement"}}</label>
+                    <label class="partial__four">{{localize "ED.Actor.Characteristics.Movement"}}</label>
+                </div>
+                <div class="input--centered">
+                    <input id="characteristic-movement-run" class="input__circle-input--centered"
+                        name="system.characteristics.movement.walk" value="{{actor.system.characteristics.movement.walk}}">
+                </div>
+            </div>
+            <div class="characteristics-damage__grid-item">
+                <h4 class="header--centered">{{localize "ED.Actor.Header.damage"}}
+                    <a class="fas fa-cogs" title="a prompt will show option for Blood magic"></a>
+                </h4>
+                <div class="input--centered">
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.currentDamage"}}</label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.woundsDamage"}}</label>
+                </div>
+                <div class="input--centered partial__two">
+                    <input id="characteristic-damage" class="input__circle-input--centered"
+                        name="system.characteristics.health.damage.total"
+                        value="{{actor.system.characteristics.health.damage.total}}">
+                </div>
+                <div class="input--centered partial__two">
+                    <input id="characteristic-wounds" class="input__circle-input--centered"
+                        name="system.characteristics.health.wounds"
+                        value="{{actor.system.characteristics.health.wounds}}">
+                </div>
+            </div>
+            <div class="characteristics-recovery__grid-item">
+                <h4 class="header--centered">{{localize "ED.Actor.Header.recovery"}}
+                    <a class="fas fa-medkit" title="take a rest"></a>
+                </h4>
+                <div class="input--centered">
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.currentRecoveryTests"}}
+                    </label>
+                    <label class="partial__two">{{localize "ED.Actor.Characteristics.dailyRecoveryTests"}}</label>
+                </div>
+                <div class="input--centered partial__two">
+                    <input id="characteristic-recovery-current" class="input__circle-input--centered"
+                        name="system.characteristics.recoveryTests.value"
+                        value="{{actor.system.characteristics.recoveryTests.value}}">
+                </div>
+                <div class="input--centered partial__two">
+                    <input id="characteristic-recovery-daily" class="input__circle-input--centered"
+                        name="system.characteristics.recoveryTests.max"
+                        value="{{actor.system.characteristics.recoveryTests.max}}">
+                </div>
+            </div>
+    </div>
+</div> --}}
+
+
+
+
 <div class="actor__image">
     <img class="" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
 </div>
@@ -5,6 +134,7 @@
     <div class="">
         <div class="padding__top-small">
             <div id="characteristics-defenses" class="partial__two">
+
                 <h4 class="header--centered">{{localize "ED.Actor.Header.defenses"}}</h4>
                 <div class="input--centered">
                     <label class="partial__three">{{localize "ED.Actor.Characteristics.physicalDefense"}}</label>
