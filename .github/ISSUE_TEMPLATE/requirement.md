@@ -2,7 +2,7 @@
 name: Requirement
 about: create a system requirement
 title: ''
-labels: Requirement
+labels: ''
 assignees: ''
 
 ---
