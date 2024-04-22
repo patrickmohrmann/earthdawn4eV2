@@ -200,12 +200,12 @@ export default class ActorEd extends Actor {
       async: true,
       secrets: this.isOwner,
     } );
-    return expandObject( enrichment );
+    return foundry.utils.expandObject( enrichment );
   }
 
   async _enableHTMLEnrichmentEmbeddedItems( ) {
     for ( const item of this.items ) {
-      item.system.description.value = expandObject( await TextEditor.enrichHTML( item.system.description.value, {
+      item.system.description.value = foundry.utils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
             async: true,
             secrets: this.isOwner,
           } )

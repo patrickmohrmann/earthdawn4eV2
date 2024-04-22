@@ -98,7 +98,7 @@ export class DocumentCreateDialog extends FormApplication {
     // Fill in default type if missing
     data.type ||= CONFIG[this.documentType].defaultType || game.documentTypes[this.documentType][1];
 
-    this.createData = mergeObject( this.initialData, data, { inplace: false } );
+    this.createData = foundry.utils.mergeObject( this.initialData, data, { inplace: false } );
     this.createData.system ??= {};
 
     // Clean up data

@@ -226,7 +226,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
   /** @inheritDoc */
   updateSource( changes = {}, options = {} ) {
     return super.updateSource(
-      mergeObject( changes, {
+      foundry.utils.mergeObject( changes, {
         "step.total": this.totalStep,
         "target.total": this.totalTarget,
         "karma.dice": getDice( this.karma.step ),
