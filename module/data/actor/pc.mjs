@@ -155,9 +155,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         const classDocument = await generation.classDocument;
         const abilities = ( await generation.abilityDocuments ).map(
           documentData => {
-              if ( documentData.type !== "specialAbility" ) {
-                  documentData.system.source.class = namegiverDocument.uuid;
-              }
+              if ( documentData.type !== "specialAbility" ) documentData.system.source.class = classDocument.uuid;
               return documentData;
           }
         );
