@@ -116,8 +116,10 @@
       "loop": false
     }
   ],
-  "gridDistance": 2,
-  "gridUnits": "yd",
+  "grid": {
+    "distance": 2,
+    "units": "yd"
+  },
   "socket": true,
   "relationships": {
     "requires": [
