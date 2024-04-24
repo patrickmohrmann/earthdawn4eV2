@@ -24,7 +24,7 @@
                             <label> {{#with (lookup ../config.attributes @key)}}
                             {{label}}
                             {{/with}}</label>
-                        </div>                      
+                        </div>
                     </div>
                 </td>
                 <td class="attribute__value--content">
@@ -50,13 +50,13 @@
                 <td class="attribute__step--content">
                     <div>
                         <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.dex.step"
+                            <input class="input__number-input" type="number" name="system.attributes.{{@key}}.step"
                                 value="{{this.baseStep}}" readonly>
                         </span>
                     </div>
                 </td>
             </tr>
-            {{/each}} 
+            {{/each}}
             <tr>
                 <td class="attribute__name--content">
                     <div class="rollable-icons">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="attribute-label partial__two">
                             <label class="roll__step--hover">{{localize "ED.General.initiative"}}</label>
-                        </div>                      
+                        </div>
                     </div>
                 </td>
                 <td></td>
