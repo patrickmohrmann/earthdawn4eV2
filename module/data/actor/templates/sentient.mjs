@@ -1,6 +1,7 @@
 import CommonTemplate from "./common.mjs";
 import { MappingField } from "../../fields.mjs";
 import MovementFields from './movement.mjs';
+import ED4E from "../../../config.mjs";
 
 /**
  * A template for all actors that represent sentient beings and have such stats.
@@ -32,7 +33,7 @@ export default class SentientTemplate extends CommonTemplate {
                     positive: true
                 } )
             } ), {
-                initialKeys: CONFIG.ED4E.attributes,
+                initialKeys: ED4E.attributes,
                 initialKeysOnly: true,
                 label: "ED.Attributes.attributes"
             } ),
