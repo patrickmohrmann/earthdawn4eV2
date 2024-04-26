@@ -1,8 +1,12 @@
+import ED4E from "./config.mjs";
+
 /**
  * Register all the system's settings.
  */
 export default function registerSystemSettings() {
-// export async function registerSystemSettings() {
+
+    const fields = foundry.data.fields;
+
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */
@@ -180,6 +184,35 @@ export default function registerSystemSettings() {
         config: true,
         default: true,
         type: Boolean
+    } );
+
+    /* -------------------------------------------------------------------------------- */
+    /*                                LORE / IN-GAME                                    */
+    /* -------------------------------------------------------------------------------- */
+
+    // Lore/In-Game settings Header
+    /*
+    game.settings.register( "ed4e", "loreHeader", {
+        name: "ED.Settings.Lore.loreHeader",
+        config: true,
+    } );
+    */
+
+    // Languages
+    game.settings.register( "ed4e", "languages", {
+        name: "ED.Settings.Lore.languages",
+        hint: "ED.Settings.Lore.languagesHint",
+        scope: "world",
+        config: true,
+        type: new fields.SetField(
+          new fields.StringField( {
+              blank: false,
+          } ),
+          {
+              empty: false,
+              initial: new Set( Object.values( ED4E.languages ) ),
+          }
+        ),
     } );
 
      /* -------------------------------------------------------------------------------- */

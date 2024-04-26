@@ -617,6 +617,11 @@
                 "help":                                             "Hilfe",
                 "troubleshooting":                                  "Einen Fehler melden",
                 "title":                                            "Earthdawneinstellungen"           
+            },
+            "Lore": {
+                "loreHeader":                                       "Spielwelt",
+                "languages":                                        "Sprachen",
+                "languagesHint":                                    "Die Sprachen die in dieser Welt gesprochen werden."
             }
         },
         "Tours": {
@@ -646,5 +651,4 @@
             }
         }
     }
-    
 }
