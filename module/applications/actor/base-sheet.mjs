@@ -139,7 +139,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
       label: `New Effect`,
-      icon: 'systems/earthdawn4e/assets/effect.png',
+      icon: 'icons/svg/item-bag.svg',
       duration: { rounds: 1 },
       origin: this.actor.uuid
     }] );
