@@ -432,6 +432,16 @@
                 }
             }
         },
+        "Languages": {
+            "dwarf":                                                "Zwergisch",
+            "elf":                                                  "Sperethiel",
+            "human":                                                "Menschlich",
+            "obsidiman":                                            "Obsidianisch",
+            "ork":                                                  "Or'zet",
+            "troll":                                                "Trollisch",
+            "tskrang":                                              "T'skrang",
+            "windling":                                             "Windling"
+        },
         "LpTracking": {
             "attributeImprovement":                                 "Attribute erhöhen"
         },

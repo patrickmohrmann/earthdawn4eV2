@@ -203,6 +203,18 @@ ED4E.damageType = {
 }
 preLocalize( "damageType" );
 
+ED4E.languages = {
+	dwarf: "ED.Languages.dwarf",
+	elf: "ED.Languages.elf",
+	human: "ED.Languages.human",
+	obsidiman: "ED.Languages.obsidiman",
+	ork: "ED.Languages.ork",
+	troll: "ED.Languages.troll",
+	tskrang: "ED.Languages.tskrang",
+	windling: "ED.Languages.windling",
+};
+preLocalize( "languages" );
+
 /* -------------------------------------------- */
 /*  Advancement & Char Gen                      */
 /* -------------------------------------------- */
