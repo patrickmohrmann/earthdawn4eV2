@@ -57,53 +57,90 @@
                     padding-left: 5px;
                 }
             }
-            // .top {
-            //     .image__grid-item { 
-            //         width: 160px;
-            //         grid-area: image; 
-            //     }
-            //     .characteristics-defenses__grid-item { 
-            //         grid-area: defenses; 
-            //     }
-            //     .characteristics-health__grid-item { 
-            //         grid-area: health; 
-            //     }
-            //     .characteristics-armor__grid-item { 
-            //         grid-area: armor; 
-            //     }
-            //     .characteristics-movement__grid-item { 
-            //         grid-area: movement; 
-            //     }
-            //     .characteristics-damage__grid-item { 
-            //         grid-area: damage; 
-            //     }
-            //     .characteristics-recovery__grid-item { 
-            //         grid-area: recovery; 
-            //     }
+            .top {
+                .image__grid-item { 
+                    grid-area: image; 
+                }
+                .characteristics-defenses-header__grid-item { 
+                    grid-area: defensesHeader; 
+                }
+                .characteristics-defenses-physical__grid-item { 
+                    grid-area: defensePhyscial; 
+                }
+                .characteristics-defenses-mystical__grid-item { 
+                    grid-area: defenseMystical; 
+                }
+                .characteristics-defenses-social__grid-item { 
+                    grid-area: defenseSocial; 
+                }
+                .characteristics-health-header__grid-item { 
+                    grid-area: healthHeader; 
+                }
+                .characteristics-health-wound__grid-item { 
+                    grid-area: healthWound; 
+                }
+                .characteristics-health-unconscious__grid-item { 
+                    grid-area: healthUnconscious; 
+                }
+                .characteristics-health-death__grid-item { 
+                    grid-area: healthDeath; 
+                }
+                .characteristics-armor-header__grid-item { 
+                    grid-area: armorHeader; 
+                }
+                .characteristics-armor-physical__grid-item { 
+                    grid-area: armorPhysical; 
+                }
+                .characteristics-armor-mystical__grid-item { 
+                    grid-area: armorMystical; 
+                }
+                .characteristics-movement-header__grid-item { 
+                    grid-area: movementHeader; 
+                }
+                .characteristics-movement__grid-item { 
+                    grid-area: movement; 
+                }
+                .characteristics-damage-header__grid-item { 
+                    grid-area: damageHeader; 
+                }
+                .characteristics-damage-damage__grid-item { 
+                    grid-area: damageDamage;
+                }
+                .characteristics-damage-wounds__grid-item { 
+                    grid-area: damageWounds;
 
-            //     .image-characteristics__grid-container {
-            //         display: grid;
-            //         grid-template-areas: 
-            //         'image defenses defenses defenses health health health'
-            //         'image armor armor movement damage damage recovery'
-            //         ;
+                }
+                .characteristics-recovery-header__grid-item { 
+                    grid-area: recoveryHeader; 
+                }
+                .characteristics-recovery__grid-item { 
+                    grid-area: recovery; 
+                }
 
-            //         background-color: #2196F3;
+                .image-characteristics__grid-container {
+                    display: grid;
+                    grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
+                    grid-column-gap: 4px;
+                    grid-template-areas: 
+                    'image defensesHeader defensesHeader defensesHeader healthHeader healthHeader healthHeader'
+                    'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath'
+                    'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath'
+                    'image armorHeader armorHeader movementHeader damageHeader damageHeader recoveryHeader'
+                    'image armorPhysical armorMystical movement damageDamage damageWounds recovery'
+                    'image armorPhysical armorMystical movement damageDamage damageWounds recovery'
+                    ;
+                }
 
-            //     }
-
-            //     .image-characteristics__grid-container > div {
-            //         background-color: rgba(255, 255, 255, 0.8);
-            //         text-align: center;
-
-            //       }
+                .image-characteristics__grid-container > div {
+                    text-align: center;
+                  }
 
 
-            //     .actor-image {
-            //         width: 160px;
-            //     }
+                .actor-image {
+                    width: 160px;
+                }
 
-            // }
+            }
             .main {
                 padding-top: 1px;
                 height: 440px;
