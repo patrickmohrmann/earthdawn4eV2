@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { DocumentUUIDField, IdentifierField, MappingField } from "../fields.mjs";
+import { IdentifierField, MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 
@@ -38,7 +38,7 @@ export default class AdvancementLevelData extends SparseDataModel {
       } ),
       abilities: new MappingField(
         new fields.ArrayField(
-          new DocumentUUIDField(
+          new fields.DocumentUUIDField(
             AbilityTemplate,
             {
               label: "ED.Ability",
@@ -61,7 +61,7 @@ export default class AdvancementLevelData extends SparseDataModel {
         }
       ),
       effects: new fields.ArrayField(
-        new DocumentUUIDField(
+        new fields.DocumentUUIDField(
           ActiveEffect,
           {
             label: "ED.ActiveEffect",

@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { DocumentUUIDField, MappingField } from "../fields.mjs";
+import { MappingField } from "../fields.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 import AdvancementLevelData from "./advancement-level.mjs";
 
@@ -30,7 +30,7 @@ export default class AdvancementData extends SparseDataModel {
         } ),
       abilityOptions: new MappingField(
         new fields.ArrayField(
-          new DocumentUUIDField(
+          new fields.DocumentUUIDField(
             AbilityTemplate,
             {
               label: "An Ability in this options pool.",
