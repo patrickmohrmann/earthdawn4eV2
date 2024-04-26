@@ -60,7 +60,7 @@ export default function () {
         /*  System Setting Initialization               */
         /* -------------------------------------------- */
 
-        registerSystemSettings()
+        // registerSystemSettings()
 
         /* -------------------------------------------- */
         /*  Bundled Module Exports                      */
