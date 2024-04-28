@@ -12,7 +12,6 @@
         </div>
         {{/if}}
         <div class="equipment-card__grid--item">{{name}}</div>
-        {{log this}}
         {{#if (eq this.type "armor")}}
         <div class="equipment-card__grid--item text__alignment--center">{{add system.physical.armor system.physical.forgeBonus}}</div>
         <div class="equipment-card__grid--item text__alignment--center">{{add system.mystical.armor system.mystical.forgeBonus}}</div>
