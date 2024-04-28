@@ -211,6 +211,8 @@ export default class CharacterGenerationData extends SparseDataModel {
   set classAbilities( selectedClassDocument ) {
     // Only update data if namegiver changes
     if ( !selectedClassDocument || ( this.selectedClass === selectedClassDocument.uuid ) ) return;
+    // Don't do anything if the class no abilities/levels
+    if ( selectedClassDocument.system.advancement.levels.length < 1 ) return;
 
     this.updateSource( {
       abilities: {
