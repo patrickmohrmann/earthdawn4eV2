@@ -39,11 +39,11 @@ export default function registerHandlebarHelpers() {
     }
   } );
 
-  Handlebars.registerHelper( 'edGetAttributeValue', ( attributes, attribute ) => {
+  Handlebars.registerHelper( 'edGetAttributeValue', ( attribute, attributes ) => {
     if ( attribute === undefined || attribute === '' ) {
       return 0;
     }
-    return attribute[attributes].step;
+    return attributes[attribute].step;
   } );
 
   /**

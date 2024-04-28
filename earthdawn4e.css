@@ -179,7 +179,7 @@ p {
 .main .actor-sheet-body .tab__general .left-part .attribute__increases {
   text-align: left;
   padding-left: 2px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 .main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
   height: 30px;
@@ -376,6 +376,7 @@ p {
   display: grid;
   grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
   grid-column-gap: 4px;
+  margin-left: 4px;
   grid-template-areas: 'image defensesHeader defensesHeader defensesHeader healthHeader healthHeader healthHeader' 'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath' 'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath' 'image armorHeader armorHeader movementHeader damageHeader damageHeader recoveryHeader' 'image armorPhysical armorMystical movement damageDamage damageWounds recovery' 'image armorPhysical armorMystical movement damageDamage damageWounds recovery';
 }
 .app.window-app.earthdawn4e.sheet .window-content .body .top .image-characteristics__grid-container > div {
@@ -432,6 +433,7 @@ p {
   width: 25px;
 }
 .attribute-card__grid--container {
+  margin-bottom: 3px;
   align-items: center;
   height: 30px;
   display: grid;
@@ -477,6 +479,7 @@ p {
 .equipment-icon,
 .equipment-icon__visible {
   border: none;
+  display: block;
 }
 .ability-card__grid--item.icons__dice:hover + div,
 .attribute-card__grid--item.icons__dice:hover + div,
