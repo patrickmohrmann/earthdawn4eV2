@@ -432,6 +432,16 @@
                 }
             }
         },
+        "Languages": {
+            "dwarf":                                                "Zwergisch",
+            "elf":                                                  "Sperethiel",
+            "human":                                                "Menschlich",
+            "obsidiman":                                            "Obsidianisch",
+            "ork":                                                  "Or'zet",
+            "troll":                                                "Trollisch",
+            "tskrang":                                              "T'skrang",
+            "windling":                                             "Windling"
+        },
         "LpTracking": {
             "attributeImprovement":                                 "Attribute erhöhen"
         },
@@ -607,6 +617,11 @@
                 "help":                                             "Hilfe",
                 "troubleshooting":                                  "Einen Fehler melden",
                 "title":                                            "Earthdawneinstellungen"           
+            },
+            "Lore": {
+                "loreHeader":                                       "Spielwelt",
+                "languages":                                        "Sprachen",
+                "languagesHint":                                    "Die Sprachen die in dieser Welt gesprochen werden."
             }
         },
         "Tours": {
@@ -636,5 +651,4 @@
             }
         }
     }
-    
 }
