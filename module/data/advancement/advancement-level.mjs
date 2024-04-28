@@ -85,6 +85,8 @@ export default class AdvancementLevelData extends SparseDataModel {
         min: 1,
         positive: true,
         initial: this.initResourceStep,
+        label: "ED.advancement.levelResourceStep",
+        hint: "ED.advancement.hintLevelResourceStep",
       } ),
     }
   }

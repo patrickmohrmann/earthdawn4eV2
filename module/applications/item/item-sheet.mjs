@@ -70,7 +70,7 @@ export default class ItemSheetEd extends ItemSheet {
     const systemData = super.getData();
 
     systemData.fields = this.item.schema.fields;
-    systemData.systemFields = this.item.system.fields;
+    systemData.systemFields = this.item.system.schema.fields;
 
     systemData.enrichment = await this._enableHTMLEnrichment();
     systemData.isPlayer = !game.user.isGM;

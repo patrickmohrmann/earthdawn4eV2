@@ -68,27 +68,10 @@
           </div>
 
           <!-- Tier -->
-          <p class="flexrow">
-            <label>{{localize "X-Tier"}}</label>
-            <span>
-              <select class="" name="system.advancement.levels.{{@index}}.tier" type="text" value="{{this.tier}}"
-                      data-dtype="String">
-                <option value="">{{localize "ED.General.none"}}</option>
-                {{selectOptions ../config.tier selected=this.tier sort=false}}
-              </select>
-            </span>
-          </p>
+          {{formField this.schema.fields.tier name=(concat "system.advancement.levels." @index ".tier") value=this.tier required=true}}
 
           <!-- Resource Step -->
-          <div class="resource-step">
-            <p class="flexrow">
-              <label>{{localize "X-Resource Step"}}</label>
-              <span title="{{ed-diceFormulaForStep this.resourceStep}}">
-                {{numberInput this.resourceStep name=(concat "system.advancement.levels." @index ".resourceStep") step=1
-                              min=1}}
-              </span>
-            </p>
-          </div>
+          {{formField this.schema.fields.resourceStep name=(concat "system.advancement.levels." @index ".resourceStep") value=this.resourceStep required=true}}
 
           <!-- Class Talents -->
           <div class="form-group class-abilities">
