@@ -37,7 +37,7 @@ export default class AdvancementLevelData extends SparseDataModel {
         hint: "ED.The tier to which this level belongs to"
       } ),
       abilities: new MappingField(
-        new fields.ArrayField(
+        new fields.SetField(
           new fields.DocumentUUIDField(
             AbilityTemplate,
             {
@@ -47,6 +47,8 @@ export default class AdvancementLevelData extends SparseDataModel {
           ),
           {
             required: true,
+            empty: true,
+            initial: [],
             label: "ED.advancement.abilityPoolLevel",
             hint: "ED.TheSetOfAbilitiesGrantedOnThisLevel"
           }
@@ -60,7 +62,7 @@ export default class AdvancementLevelData extends SparseDataModel {
           hint: "good stoff"
         }
       ),
-      effects: new fields.ArrayField(
+      effects: new fields.SetField(
         new fields.DocumentUUIDField(
           ActiveEffect,
           {
@@ -70,6 +72,8 @@ export default class AdvancementLevelData extends SparseDataModel {
         ),
         {
           required: true,
+          empty: true,
+          initial: [],
           label: "ED.advancement.levelActiveEffects",
           hint: "ED.TheSetOfActiveAbilitiesGrantedOnThisLevel"
         }

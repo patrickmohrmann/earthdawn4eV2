@@ -72,5 +72,9 @@ export default function registerHandlebarHelpers() {
 
   Handlebars.registerHelper( "gettalentCategory", ( talents, type ) => {
     return talents.filter( ( talent ) => talent.system.talentCategory === type );
-  } );  
+  } );
+
+  Handlebars.registerHelper( "ed-commaList", ( iterable ) => {
+    return Array.from( iterable ).join( "," );
+  } );
 }

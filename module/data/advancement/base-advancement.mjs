@@ -26,10 +26,10 @@ export default class AdvancementData extends SparseDataModel {
         {
           required: true,
           nullable: true,
-          initial: [new AdvancementLevelData( {level: 1} )],
+          initial: [],
         } ),
       abilityOptions: new MappingField(
-        new fields.ArrayField(
+        new fields.SetField(
           new fields.DocumentUUIDField(
             AbilityTemplate,
             {
@@ -39,6 +39,7 @@ export default class AdvancementData extends SparseDataModel {
           ),
           {
             required: true,
+            empty: true,
             label: "ED.advancement.abilityPool",
             hint: "The set of available abilities at the given tier."
           } ),
