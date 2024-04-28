@@ -11,11 +11,11 @@ export default function registerSystemSettings() {
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // Step Table settings Header
-    game.settings.register( "ed4e", "stepTableHeader", {
-        name: "ED.Settings.StepTable.stepTableHeader",
-        config: true,
-    } );
+    // // Step Table settings Header
+    // game.settings.register( "ed4e", "stepTableHeader", {
+    //     name: "ED.Settings.StepTable.stepTableHeader",
+    //     config: true,
+    // } );
 
     // Step Table used for step to dice conversion
     game.settings.register( "ed4e", "stepTable", {
@@ -37,11 +37,11 @@ export default function registerSystemSettings() {
     /*                                  DARK MODE                                       */
     /* -------------------------------------------------------------------------------- */
 
-    // Dark Mode settings Header
-    game.settings.register( "ed4e", "darkModeHeader", {
-        name: "ED.Settings.DarkMode.darkModeHeader",
-        config: true,
-    } );
+    // // Dark Mode settings Header
+    // game.settings.register( "ed4e", "darkModeHeader", {
+    //     name: "ED.Settings.DarkMode.darkModeHeader",
+    //     config: true,
+    // } );
 
     /**
      * dark mode. Css adjustements are located in the dark-theme.less file.
@@ -71,11 +71,11 @@ export default function registerSystemSettings() {
     /*                              CHARACTER GENERATION                                */
     /* -------------------------------------------------------------------------------- */
 
-    // Legend point settings Header
-    game.settings.register( "ed4e", "charGenHeader", {
-        name: "ED.Settings.CharGen.charGenHeader",
-        config: true,
-    } );
+    // // Legend point settings Header
+    // game.settings.register( "ed4e", "charGenHeader", {
+    //     name: "ED.Settings.CharGen.charGenHeader",
+    //     config: true,
+    // } );
 
     // Auto open char gen on PC document creation
     game.settings.register( "ed4e", "autoOpenCharGen", {
@@ -111,11 +111,11 @@ export default function registerSystemSettings() {
     /*                                  LP TRACKING                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // Legend point settings Header
-    game.settings.register( "ed4e", "lpTrackingHeader", {
-        name: "ED.Settings.LpTracking.lpTrackingHeader",
-        config: true,
-    } );
+    // // Legend point settings Header
+    // game.settings.register( "ed4e", "lpTrackingHeader", {
+    //     name: "ED.Settings.LpTracking.lpTrackingHeader",
+    //     config: true,
+    // } );
   
     // LP Tracking On/Off
     game.settings.register( "ed4e", "lpTrackingUsed", {
@@ -170,11 +170,11 @@ export default function registerSystemSettings() {
     /*                                  ENCUMBRANCE                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // Encumbrance settings Header
-    game.settings.register( "ed4e", "encumberedHeader", {
-        name: "ED.Settings.Encumbrance.encumberedHeader",
-        config: true,
-    } );
+    // // Encumbrance settings Header
+    // game.settings.register( "ed4e", "encumberedHeader", {
+    //     name: "ED.Settings.Encumbrance.encumberedHeader",
+    //     config: true,
+    // } );
 
     // Encumbrance options
     game.settings.register( "ed4e", "encumbrance", {
@@ -219,11 +219,11 @@ export default function registerSystemSettings() {
     /*                                  GM Chat Avatar                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // Chat Avatar settings Header
-    game.settings.register( "ed4e", "chatAvatarHeader", {
-        name: "ED.Settings.Chat.chatAvatarHeader",
-        config: true,
-    } );
+    // // Chat Avatar settings Header
+    // game.settings.register( "ed4e", "chatAvatarHeader", {
+    //     name: "ED.Settings.Chat.chatAvatarHeader",
+    //     config: true,
+    // } );
 
     // Chat Avater Options
     game.settings.register( "ed4e", "chatAvatar", {
