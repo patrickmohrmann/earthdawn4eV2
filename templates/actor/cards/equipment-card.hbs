@@ -35,7 +35,9 @@
         {{/if}}
         {{#if (eq this.type "weapon")}}
         <div class="equipment-card__grid--item text__alignment--center">{{system.amount}}</div>
-        <div class="equipment-card__grid--item text__alignment--center undefined">{{add system.damage.baseStep (edGetAttributeValue system.damage.attribute this.actor.system.attributes)}}</div>
+        {{log this}}
+        {{!-- <div class="equipment-card__grid--item text__alignment--center undefined">{{add system.damage.baseStep (edGetAttributeValue system.damage.attribute this.actor.system.attributes)}}</div> --}}
+        <div class="equipment-card__grid--item text__alignment--center undefined">TODO</div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
