@@ -10,10 +10,10 @@ export default class ItemSheetEd extends ItemSheet {
     super(options);
 
     // mapping of drop event target classes to handling function
-    this._dropCallbackMapping = {
+    /*this._dropCallbackMapping = {
       'abilities-pool': this._onDropAdvancementAbility.bind( this ),
       'delete-pool-ability': this._onDeletePoolAbility.bind( this ),
-    };
+    };*/
   }
 
   /**
@@ -68,6 +68,9 @@ export default class ItemSheetEd extends ItemSheet {
 
   async getData() {
     const systemData = super.getData();
+
+    systemData.fields = this.item.schema.fields;
+    systemData.systemFields = this.item.system.schema.fields;
 
     systemData.enrichment = await this._enableHTMLEnrichment();
     systemData.isPlayer = !game.user.isGM;
@@ -177,7 +180,7 @@ export default class ItemSheetEd extends ItemSheet {
   /*                          Drag & Drop Handler                            */
   /* ----------------------------------------------------------------------- */
 
-  _onDragStart( event) {
+  /*_onDragStart( event) {
     const currentTarget = event.currentTarget;
     const target = event.target;
 
@@ -240,7 +243,7 @@ export default class ItemSheetEd extends ItemSheet {
     const level = transferData["ed-advancementLevel"];
 
     this.item.removeAdvancementAbility( transferData.uuid, poolType, level );
-  }
+  }*/
 
   /* ----------------------------------------------------------------------- */
   /*                Auto calculation for equipments weight                   */

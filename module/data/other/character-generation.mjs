@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { DocumentUUIDField, MappingField } from "../fields.mjs";
+import { MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import { filterObject, mapObject, renameKeysWithPrefix } from "../../utils.mjs";
 
@@ -20,7 +20,7 @@ export default class CharacterGenerationData extends SparseDataModel {
     return {
 
       // Namegiver
-      namegiver: new DocumentUUIDField( {
+      namegiver: new fields.DocumentUUIDField( {
         required: true,
         nullable: true,
         initial: null,
@@ -36,7 +36,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         label: "X.CharGenModel.isAdept",
         hint: "X.CharGenModel.Choose discipline if true, questor otherwise.",
       } ),
-      selectedClass: new DocumentUUIDField( {
+      selectedClass: new fields.DocumentUUIDField( {
         required: true,
         nullable: true,
         initial: null,
@@ -211,6 +211,8 @@ export default class CharacterGenerationData extends SparseDataModel {
   set classAbilities( selectedClassDocument ) {
     // Only update data if namegiver changes
     if ( !selectedClassDocument || ( this.selectedClass === selectedClassDocument.uuid ) ) return;
+    // Don't do anything if the class no abilities/levels
+    if ( selectedClassDocument.system.advancement.levels.length < 1 ) return;
 
     this.updateSource( {
       abilities: {

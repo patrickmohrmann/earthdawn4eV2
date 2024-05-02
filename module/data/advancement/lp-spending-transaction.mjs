@@ -1,6 +1,5 @@
 import LpTransactionData from "./lp-transaction.mjs";
 import SystemDataModel from "../abstract.mjs";
-import { DocumentUUIDField } from "../fields.mjs";
 
 export default class LpSpendingTransactionData extends LpTransactionData {
 
@@ -38,7 +37,7 @@ export default class LpSpendingTransactionData extends LpTransactionData {
                     hint: "X.The value of the corresponding entity after it was changed",
                 } ),
             } ),
-            itemUuid: new DocumentUUIDField(
+            itemUuid: new fields.DocumentUUIDField(
                 {
                     label: "X.ItemDocumentReference",
                     hint: "X.Reference to the affected item, if applicable (no attributes)",

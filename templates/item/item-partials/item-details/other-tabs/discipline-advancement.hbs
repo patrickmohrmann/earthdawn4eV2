@@ -1,19 +1,21 @@
 <div id="advancement-information-class-item" class="advancement__level">
+
+  <!-- Button controls -->
   <div class="item-controls flexrow">
     <a class="advancement__title class__add-level" data-type="add-class-level" title="{{localize "X-Levels"}}">
       <b>{{localize "X-Add-Level"}}</b>
       <i class="fas fa-plus"></i>
     </a>
-    <!--a class="item-control item-display" title="{{localize "X-Display-Item"}}">
-        <i class="fas fa-comments"></i>
-      </a-->
     <a class="item-control class__delete-level text-align-middle" title="{{localize "X-Delete-Item"}}"
        data-drop-function="delete-pool-ability">
+      <b>{{localize "X-Delete-Last-Level"}}</b>
       <i class="fas fa-trash" data-drop-function="delete-pool-ability"></i>
-      <label>{{localize "X-drag pool items on this bin icon to remove"}}</label>
     </a>
   </div>
+
+  <!-- Content -->
   <section class="content flexrow">
+
     <div class="advancement__navigator">
       <nav class="item-advancement-tabs flexcol">
         <ul class="no-bullets">
@@ -32,23 +34,25 @@
         </ul>
       </nav>
     </div>
+
     <div class="advancement__content item-advancement-body">
+
+      <!-- Ability Options -->
+
       <div id="ability-list"  class="tab advancement-options-pools flexcol" data-tab="item-advancement-options-pools">
         {{#each item.system.advancement.abilityOptions}}
-        <!-- Ability Options -->
         <div class="{{@key}}-abilities">
-          <h3>{{lookup @root.config.tier @key}}</h3>
-          <div class="abilities-list abilities-pool {{@key}}-pool" data-drop-function="abilities-pool" data-pool-type="{{@key}}">
-            {{#each this}}
-              {{{ed-linkForUuid this}}}
-            {{else}}
-              {{localize
-                "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
-            {{/each}}
+          <div class="form-group {{@key}}-pool">
+            <label>{{lookup @root.config.tier @key}}</label>
+            <div class="form-fields">
+              <document-tags name="system.advancement.abilityOptions.{{@key}}" value="{{ed-commaList this}}" placeholder="{{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}"></document-tags>
+            </div>
+            <p class="hint">{{localize (concat "X-Talent options for " @key)}}</p>
           </div>
         </div>
         {{/each}}
       </div>
+
       <!-- Level Contents -->
       {{#each item.system.advancement.levels}}
         <div id="level-{{this.level}}" class="tab item-name advancement-level" name="system.advancement.level.{{@index}}.id"
@@ -57,93 +61,52 @@
 
           <!-- Level Number -->
           <div class="title-level-number">
-            {{!--<!--input class="" name="system.advancement.levels[{{this.level}}].level" type="number"
-                   value="{{this.level}}" data-dtype="Number" /-->--}}
-            {{!--numberInput this.level name=(concat "system.advancement.levels[" this.level "].level") step=1 min=1--}}
             {{localize "ED.Circle"}}&nbsp;{{this.level}}
           </div>
 
           <!-- Tier -->
-          <p class="flexrow">
-            <label>{{localize "X-Tier"}}</label>
-            <span>
-              <select class="" name="system.advancement.levels[{{@index}}].tier" type="text" value="{{this.tier}}"
-                      data-dtype="String">
-                <option value="">{{localize "ED.General.none"}}</option>
-                {{selectOptions ../config.tier selected=this.tier sort=false}}
-              </select>
-            </span>
-          </p>
+          {{formField this.schema.fields.tier name=(concat "system.advancement.levels." @index ".tier") value=this.tier required=true}}
 
           <!-- Resource Step -->
-          <div class="resource-step">
-            <p class="flexrow">
-              <label>{{localize "X-Resource Step"}}</label>
-              <span title="{{ed-diceFormulaForStep this.resourceStep}}">
-                {{numberInput this.resourceStep name=(concat "system.advancement.levels[" this.level "].resourceStep") step=1
-                              min=1}}
-              </span>
-            </p>
-          </div>
+          {{formField this.schema.fields.resourceStep name=(concat "system.advancement.levels." @index ".resourceStep") value=this.resourceStep required=true}}
 
           <!-- Class Talents -->
-          <div class="class-abilities">
-            <p class="flexrow">
-              <label>{{localize "X-Talents"}}</label>
-              <span class="abilities-list abilities-pool class-pool" data-drop-function="abilities-pool" data-pool-type="class">
-                {{#each this.abilities.class}}
-                  {{{ed-linkForUuid this}}}
-                {{else}}
-                  {{localize
-                    "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
-                {{/each}}
-              </span>
-            </p>
+          <div class="form-group class-abilities">
+            <label>{{localize "X-Talents"}}</label>
+            <div class="form-fields">
+              <document-tags name="system.advancement.levels.{{@index}}.abilities.class" value="{{ed-commaList this.abilities.class}}" placeholder="{{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}"></document-tags>
+            </div>
+            <p class="hint">{{localize "X-Talents you get for sure"}}</p>
           </div>
 
+
           <!-- Free Abilities -->
-          <div class="free-abilities">
-            <p class="flexrow">
-              <label>{{localize "X-Free Abilities"}}</label>
-              <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="free">
-                {{#each this.abilities.free}}
-                  {{{ed-linkForUuid this}}}
-                {{else}}
-                  {{localize
-                    "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
-                {{/each}}
-              </span>
-            </p>
+          <div class="form-group free-abilities">
+            <label>{{localize "X-Free"}}</label>
+            <div class="form-fields">
+              <document-tags name="system.advancement.levels.{{@index}}.abilities.free" value="{{ed-commaList this.abilities.free}}" placeholder="{{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}"></document-tags>
+            </div>
+            <p class="hint">{{localize "X-Abilities you get for free"}}</p>
           </div>
 
           <!-- Special Abilities -->
-          <div class="special-abilities">
-            <p class="flexrow">
-              <label>{{localize "X-Special Abilities"}}</label>
-              <span class="abilities-list abilities-pool" data-drop-function="abilities-pool" data-pool-type="special">
-                {{#each this.abilities.special}}
-                  {{{ed-linkForUuid this}}}
-                {{else}}
-                  {{localize
-                    "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
-                {{/each}}
-              </span>
-            </p>
+          <div class="form-group special-abilities">
+            <label>{{localize "X-Special"}}</label>
+            <div class="form-fields">
+              <document-tags name="system.advancement.levels.{{@index}}.abilities.special" value="{{ed-commaList this.abilities.special}}" placeholder="{{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}"></document-tags>
+            </div>
+            <p class="hint">{{localize "X-Special abilities you get here"}}</p>
           </div>
 
           <!-- Effects -->
-          <div class="class-effects">
-            <p class="flexrow">
-              <label>{{localize "X-Effects"}}</label>
-              <span class="abilities-list effect-pool">
-                {{#each this.effects}}
-                  {{{ed-linkForUuid this}}}
-                {{else}}
-                  {{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}
-                {{/each}}
-              </span>
-            </p>
+          <div class="form-group class-effects">
+            <label>{{localize "X-Effects"}}</label>
+            <div class="form-fields">
+              <document-tags name="system.advancement.levels.{{@index}}.effects" value="{{ed-commaList this.effects}}" placeholder="{{localize "X-No abilities added yet. You can do it by just dragging and dropping them onto this field"}}"></document-tags>
+            </div>
+            <p class="hint">{{localize "X-Effects that are applied automatically when reaching this circle"}}</p>
           </div>
+
         </div>
       {{else}}
         {{localize "X-No levels added yet. Click the plus sign above to add some. Go ahead, just try. You can do it!"}}
