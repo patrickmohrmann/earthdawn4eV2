@@ -101,6 +101,18 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @summary                       Abilities which are not rollable might still require strain damage
+   * @param {ItemEd} ability        Ability must be of type AbilityTemplate
+   * @param {object} options        Any additional options for the {@link EdRoll}.
+   */
+  async takeStrain( ability ) {
+    const strain = ability.system.strain;
+    this.takeDamage( strain, "standard", undefined, true );
+  }
+
+
+
+  /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
    * damage according to the parameters.
    * @param {number} amount                                     The unaltered amount of damage this actor should take.

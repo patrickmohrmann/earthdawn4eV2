@@ -61,6 +61,9 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
 
     // Owned Item management
+    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+
+    // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
     // Effect Management
@@ -109,6 +112,19 @@ export default class ActorSheetEd extends ActorSheet {
     const ability = this.actor.items.get( li.dataset.itemId );
     this.actor.rollAbility( ability, {event: event} );
   }
+
+  /**
+   * @description Take strain is used for non rollable abilities which requires strain. player can click on the icon to take the strain damage
+   * @param {Event} event     The originating click event
+   * @private
+   */
+  _takeStrain( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-name" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    this.actor.takeStrain( ability, {event: event} );
+  }
+
 
   /**
    * Handle creating an owned ActiveEffect for the Actor.

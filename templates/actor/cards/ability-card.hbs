@@ -1,10 +1,24 @@
 <div class="card__ability one-line__vertical-align">
+    {{log this}}
+    {{#if (uneq this.system.attribute "")}}
     <span class="card__icon rollable-icons">
         <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
         <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
         <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-
-    </span>
+        </span>
+    {{else}} 
+        {{#if (uneq this.system.strain 0)}}
+        <span class="card__icon">
+            <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+            <img class="roll-icon__hover blood" src="icons/svg/blood.svg">
+            <img class="roll-icon__pointer take-strain" src="systems/ed4e/assets/icons/red-blood.svg" data-attribute="{{@key}}">
+        </span>
+        {{else}}
+        <span class="card__icon">
+            <img class="item__image--visible" src="{{img}}" title="{{name}}" height="25" width="25" />
+        </span>
+        {{/if}}
+    {{/if}}
     <span class="card__name">
         {{name}}
     </span>

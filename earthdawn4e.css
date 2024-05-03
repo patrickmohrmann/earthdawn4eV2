@@ -1505,6 +1505,9 @@ form#document-create .checkbox:hover {
 .character-sheet .details__section {
   padding-right: 20px;
 }
+.legend-point__info {
+  text-align: center;
+}
 .app.window-app.form.earthdawn4e.legend-point__history--earned .window-content form .buttons {
   position: absolute;
   bottom: 0;
@@ -1671,8 +1674,12 @@ form#document-create .checkbox:hover {
   height: 25px;
   display: none;
 }
-.item-name__card .card__ability .card__icon .item__image {
+.item-name__card .card__ability .card__icon .item__image,
+.item-name__card .card__ability .card__icon .item__image--visible {
   display: block;
+}
+.item-name__card .card__ability .card__icon .blood {
+  height: 25px;
 }
 .item-name__card .card__ability .card__name {
   min-width: 150px;
