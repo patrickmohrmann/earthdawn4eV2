@@ -100,6 +100,31 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
+   /**
+   * @summary                     Equipment rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
+   * @description                 Roll an Equipment. use {@link RollPrompt} for further input data.
+   * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
+   * @param {object} options      Any additional options for the {@link EdRoll}.
+   */
+   async rollEquipment( equipment, options = {} ) {
+    const arbitraryStep = equipment.system.usableItem.arbitraryStep
+    const difficulty = await equipment.system.getDifficulty();
+    if ( difficulty === undefined || difficulty === null ) {
+      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
+      return;
+    }
+    const edRollOptions = new EdRollOptions( {
+      rollType: "action",
+      step: { base: arbitraryStep },
+      target: { base: difficulty },
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      chatFlavor: equipment.name + " Equipment Test",
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    this.#processRoll( roll );
+  }
+
   /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
    * damage according to the parameters.
