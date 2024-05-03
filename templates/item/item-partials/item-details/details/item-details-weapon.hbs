@@ -7,9 +7,27 @@
             value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
     </div>
     {{!-- usable Item --}}
-    <div>
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.General.usableItem"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
+            item.system.usableItem.usableItemSelector}}>
+        {{#if (eq item.system.usableItem.usableItemSelector true)}}
+        <label>{{localize "ED.Item.General.arbitraryStep"}}:</label>
+        <input class="input__number-input" name="system.usableItem.arbitraryStep" type="text" value="{{item.system.usableItem.arbitraryStep}}"
+            data-dtype="Number">
+        <label>{{localize "ED.Item.General.action"}}:</label>
+        <select class="input__select-input" name="system.action" value="{{item.system.usableItem.action}}" {{#select
+            item.system.usableItem.action}}>
+            <option value="none">{{localize "ED.General.none"}}</option>
+            <option value="free">{{localize "ED.Action.free"}}</option>
+            <option value="simple">{{localize "ED.Action.simple"}}</option>
+            <option value="standard">{{localize "ED.Action.standard"}}</option>
+            <option value="sustained">{{localize "ED.Action.sustained"}}</option>
+            {{/select}}
+        </select>
         <label>{{localize "ED.Item.General.recoveryPropertyValue"}}:</label>
-        <select class="input__select-input" name="system.recoveryPropertyValue" value="{{item.system.usableItem.recoveryPropertyValue}}" {{#select
+        <select class="input__select-input" name="system.recoveryPropertyValue"
+            value="{{item.system.usableItem.recoveryPropertyValue}}" {{#select
             item.system.usableItem.recoveryPropertyValue}}>
             <option value="0">{{localize "ED.Item.RecoveryPropertyValue.0"}}</option>
             <option value="1">{{localize "ED.Item.RecoveryPropertyValue.1"}}</option>
@@ -20,6 +38,27 @@
             <option value="6">{{localize "ED.Item.RecoveryPropertyValue.6"}}</option>
             {{/select}}
         </select>
+        {{!-- Target Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-FixedDifficulty"}}:</label>
+        <input class="input__number-input" name="system.difficulty.fixed" type="text"
+            value="{{item.system.difficulty.fixed}}" data-dtype="Number">
+    </div>
+    {{!-- Target Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
+        <select name="system.difficulty.target">
+            {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
+        </select>
+    </div>
+    {{!-- Group Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-GroupDifficulty"}}:</label>
+        <select name="system.difficulty.group">
+            {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
+        </select>
+    </div>
+        {{/if}}
     </div>
         {{!-- equipped --}}
     <div class="item-data__input--line">
