@@ -1,5 +1,7 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import PcData from "../data/actor/pc.mjs";
+import LpTransactionData from "../data/advancement/lp-transaction.mjs";
+
 
 const cmdMapping = {
   char: triggerCharGen,
@@ -36,8 +38,8 @@ export default function () {
     const cmdRegExp = /(?<command>\/\w+)(?<arguments>.*)/;
     const commandMatches = content.match(cmdRegExp);
 
-    return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments.trim());
-  });
+    return cmdMapping[commandMatches.groups.command.substring( 1 )]( commandMatches.groups.arguments.trim());
+  } );
 
   Hooks.on( "renderChatMessage", ( msg, html, msgData ) => {
     // Add character portrait to message
@@ -60,14 +62,14 @@ function triggerCharGen(argString) {
 /* -------------------------------------------- */
 
 function triggerCoinAward(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }
 
 /* -------------------------------------------- */
 
 function triggerCrCalc(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }
 
@@ -95,7 +97,9 @@ function triggerHelp(argString) {
 /* -------------------------------------------- */
 
 function triggerLPAward(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  const actors = game.users.filter(u => u.active).map(u => u.character)
+  LpTransactionData.AssignLpPrompt();
+  // ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }
 
