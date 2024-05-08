@@ -1,10 +1,29 @@
 <form>
+  {{log this}}
   <div>
-    {{log this}}
-    {{#each game.actors}}
-    {{this.actors}}
-    teste
-    {{/each}}
+    <div>
+      <h3>
+        <label>{{localize "ED.Header.activeUser"}}</label>
+      </h3>
+      {{#each actorUserActive}}
+      <div>
+        {{log this}}
+        <input type="checkbox" name="{{this.atorId}}" {{checked this.actorId}}>
+        {{this.actorName}}/{{this.playerName}}
+      </div>
+      {{/each}}
+    </div>
+    <div>
+      <h3>
+        <label>{{localize "ED.Header.inactiveUser"}}</label>
+      </h3>
+      {{#each actorUserInactive}}
+      <div>
+        <input type="checkbox" name="{{this.atorId}}">
+        {{this.actorName}}/{{this.playerName}}
+      </div>
+      {{/each}}
+    </div>
   </div>
   <div>
     <label> 'X-LPAmount' </label>
@@ -14,4 +33,15 @@
     <label> 'X-Description'</label>
     <input type='string' id='description'></input>
   </div>
+
+
+  <!-- Buttons -->
+    <div class="buttons legend-point__history--earned-buttons flexcol">
+        <div class="button-group buttons-navigation flexrow">
+            <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
+                {{ localize 'X-ok' }}
+            </button>
+        </div>
+
+    </div>
 </form>

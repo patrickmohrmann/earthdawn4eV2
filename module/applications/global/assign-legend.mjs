@@ -60,8 +60,34 @@ export default class AssignLpPrompt extends FormApplication {
 
   async getData( options = {} ) {
     const context = super.getData( options );
-    context.actorsActive = game.users.filter( u => u.active ).map( u => u.character )
-    context.actorsInactive = game.users.filter( u => !u.active ).map( u => u.character )
+    const activeUser = game.users.filter( u => u.active )
+    const inactiveUser = game.users.filter( u => !u.active )
+    context.user = game.users.filter( u => u.active )
+    context.actorUserActive = [];
+    context.actorUserInactive = [];
+    for ( let i = 0; i < activeUser.length; i++ ) {
+      let user = activeUser[i]
+      if ( user.character ){
+        context.actorUserActive.push(
+          {
+          actorName: user.character.name,
+          playerName: user.name,
+          actorId: user.character._id,
+          }
+        )
+      }
+    }
+    for ( let i = 0; i < inactiveUser.length; i++ ) {
+      let user = inactiveUser[i]
+      if ( user.character ){
+        context.actorUserInactive.push(
+          {
+          actorName: user.character.name,
+          playerName: user.name
+          }
+        )
+      }
+    }
     return context;
   }
 
@@ -86,6 +112,28 @@ export default class AssignLpPrompt extends FormApplication {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
+
+
+      // variable -- getting result from input field
+      const resultLp = document.getElementById("legendPoints").value;
+      const resultDescription = document.getElementById("description").value;
+      
+      if (resultLp !== ''){
+
+        const actors = canvas.tokens.controlled.map(token => token.actor);
+      // find all selected tokens and map them to the actor
+      const context = this.getData()
+      const actors1 = game.actors.map( key => key.context.object.actorUserActive.actorId )
+      // const actors = game.actors.get(context.object.)
+      // update the legendpoint total of the actor with the result of the pop up input
+      const transactionData = {
+          amount: Number( resultLp ),
+          lpBefore: actors.system.lp.current,
+          lpAfter: actors.system.lp.current + Number( resultLp ),
+          description: resultDescription,
+      }
+      actors.addLpTransaction( "earnings", transactionData)
+    }
 
     await this.submit( {preventRender: true} );
 
