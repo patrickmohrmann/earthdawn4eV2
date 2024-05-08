@@ -17,16 +17,16 @@
   <section class="content flexrow">
 
     <div class="advancement__navigator">
-      <nav class="item-advancement-tabs flexcol">
+      <nav class="item-advancement-tabs flexcol" data-group="advancement">
         <ul class="no-bullets">
           <li>
-            <a data-tab="item-advancement-options-pools">
+            <a data-tab="item-advancement-options-pools" data-group="advancement">
               {{localize "ED.AbilityPools"}}
             </a>
           </li>
           {{#each item.system.advancement.levels}}
             <li>
-              <a data-tab="item-advancement-level-tab-{{this.level}}">
+              <a data-tab="item-advancement-level-tab-{{this.level}}" data-group="advancement">
                 {{localize "ED.CircleNumber" level=this.level}}
               </a>
             </li>
@@ -36,10 +36,7 @@
     </div>
 
     <div class="advancement__content item-advancement-body">
-
-      <!-- Ability Options -->
-
-      <div id="ability-list"  class="tab advancement-options-pools flexcol" data-tab="item-advancement-options-pools">
+      <div id="ability-list"  class="tab advancement-options-pools flexcol" data-group="advancement" data-tab="item-advancement-options-pools">
         {{#each item.system.advancement.abilityOptions}}
         <div class="{{@key}}-abilities">
           <div class="form-group {{@key}}-pool">
@@ -55,8 +52,8 @@
 
       <!-- Level Contents -->
       {{#each item.system.advancement.levels}}
-        <div id="level-{{this.level}}" class="tab item-name advancement-level" name="system.advancement.level.{{@index}}.id"
-             data-tab="item-advancement-level-tab-{{this.level}}" value="{{@index}}" data-level-index="{{@index}}"
+        <div id="level-{{this.level}}" class="tab item-id advancement-level" name="system.advancement.level.{{@index}}.id"
+             data-tab="item-advancement-level-tab-{{this.level}}" data-group="advancement" value="{{@index}}" data-level-index="{{@index}}"
              data-level="{{this.level}}">
 
           <!-- Level Number -->

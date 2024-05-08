@@ -1,287 +1,209 @@
-<div class="details__area left-part">
+<div class="left-part">
     {{!-- Attribute --}}
     <div>
-        <h3>
-            <label class="character__attribute">{{localize "ED.Sheet.Header.attributes"}}</label>
+        <h3 class="margin__none">
+            <label>{{localize "ED.Actor.Header.attributes"}}</label>
             <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
-                ED.LpTracking.attributeImprovement"}}"></a>
+                ED.Actor.LpTracking.attributeImprovement"}}"></a>
         </h3>
-        <table class="table__attribute">
-            <tr>
-                <th class="text__alignment--left">{{localize "ED.Attributes.attribute"}}</th>
-                <th class="text__alignment--left">{{localize "ED.General.value"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
-            </tr>
-            {{#each actor.system.attributes }}
-            <tr  class="table-row__attribute">
-                <td class="attribute__name--content">
-                    <div class="rollable-icons">
-                        <div class="roll-icon partial__six">
-                            <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
-                            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-                        </div>
-                        <div class="attribute-label partial__two">
-                            <label> {{#with (lookup ../config.attributes @key)}}
-                            {{label}}
-                            {{/with}}</label>
-                        </div>
-                    </div>
-                </td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.attributes.{{@key}}.value"
-                                value="{{value}}">
-                        </span>
-                        {{#if (eq timesIncreased 1)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq timesIncreased 2)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        {{/if}}
-                        {{#if (eq timesIncreased 3)}}
-                        <i class="enhancemente-1 fa fa-star"></i>
-                        <i class="enhancemente-2 fa fa-star"></i>
-                        <i class="enhancemente-3 fa fa-star"></i>
-                        {{/if}}
-                    </div>
-                </td>
-                <td class="attribute__step--content">
-                    <div>
-                        <span class="attribute__step">
-                            <input class="input__number-input" type="number" name="system.attributes.{{@key}}.step"
-                                value="{{this.baseStep}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-            <tr>
-                <td class="attribute__name--content">
-                    <div class="rollable-icons">
-                        <div class="roll-icon partial__six">
-                            <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
-                            <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
-                        </div>
-                        <div class="attribute-label partial__two">
-                            <label class="roll__step--hover">{{localize "ED.General.initiative"}}</label>
-                        </div>
-                    </div>
-                </td>
-                <td></td>
-                <td class="attribute__value--content">
-                    <div>
-                        <span class="attribute__value">
-                            <input class="input__number-input" type="number" name="system.initiative"
-                                value="{{actor.system.initiative}}" readonly>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="attribute-card__grid--container font__bold">
+            <div class="attribute-card__grid--item"></div>
+            <div class="attribute-card__grid--item">
+                <label>{{localize "ED.Actor.Attributes.attributeName"}}</label>
+            </div>
+            <div class="attribute-card__grid--item">
+                <label>
+                    {{localize "ED.Actor.Attributes.attributeValue"}}
+                </label>
+            </div>
+             <div class="attribute-card__grid--item">
+                <label>
+                    {{localize "ED.Actor.Attributes.increase"}}
+                </label>
+            </div>
+            <div class="attribute-card__grid--item">
+                <label>
+                    {{localize "ED.Actor.Attributes.attribueStep"}}
+                </label>
+            </div>
+        </div>
+        {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
     </div>
+
     {{!-- Karma --}}
-    <div class="character-karma">
-        <h4>
-            <label>{{localize "ED.General.karma"}}</label>
-            <span class="icon__position--right">
-                <input type="checkbox" class="input__checkbox karma__usage--always" name="system.karma.useAlways"
-                    {{checked actor.system.karma.useAlways}} title="{{localize "ED.General.karmaAlways"}}">
+    <div class="space__small1">
+        <h3 class="one-line__vertical-align karma-devotion__header margin__none">
+            <label>{{localize "ED.Actor.Header.karma"}}</label>
+            <span class="icon__position--right one-line__vertical-align">
+                <input type="checkbox" name="system.karma.useAlways" {{checked actor.system.karma.useAlways}} title="{{localize "ED.Actor.Tooltips.karmaAlways"}}">
                 <a class="karma__ritual">
-                    <button class="button__Karma-refresh" title="Karma-Ritual"><i class="fa-solid fa-person-rays" title="{{localize "ED.General.karmaRitualTooltip"}}"></i></button>
+                    <button class="button__Karma-refresh" title="Karma-Ritual">
+                        <i class="fa-solid fa-person-rays" title="{{localize "ED.Actor.Tooltips.karmaRitualTooltip"}}"></i>
+                    </button>
                 </a>
             </span>
-        </h4>
-        <table class="table__karma">
-            <tr>
-                <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
-                <th class="text__alignment--left">{{localize "ED.General.max"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
-            </tr>
-            <tr>
-                <td class="karma__current--content">
-                    <div>
-                        <input class="input__number-input" type="number" name="system.karma.value"
-                            value="{{actor.system.karma.value}}" readonly>
-                    </div>
-                </td>
-                <td class="karma__maximum--content">
-                    <div>
-                        <input class="input__number-input" type="number" name="system.karma.max"
+        </h3>
+        <div class="karma-devotion__grid--container font__bold">
+            <div class="karma-devotion__grid--item">{{localize "ED.Actor.Karma.current"}}</div>
+            <div class="karma-devotion__grid--item">{{localize "ED.Actor.Karma.max"}}</div>
+            <div class="karma-devotion__grid--item">{{localize "ED.Actor.Karma.step"}}</div>
+        </div>
+        <div class="karma-devotion__grid--container font__bold">
+            <div class="karma-devotion__grid--item">
+                <input class="input__circle-input--centered"  name="system.karma.value"
+                            value="{{actor.system.karma.value}}">
+            </div>
+            <div class="karma-devotion__grid--item">
+                <input class="input__circle-input--centered" name="system.karma.max"
                             value="{{actor.system.karma.max}}" readonly>
-                    </div>
-                </td>
-                <td class="karma__step--content">
-                    <div>
-                        <input class="input__number-input" type="number" name="system.karma.step"
+            </div>
+            <div class="karma-devotion__grid--item">
+                <input class="input__circle-input--centered" name="system.karma.step"
                             value="{{actor.system.karma.step}}">
-                    </div>
-                </td>
-            </tr>
-        </table>
+            </div>
+        </div>
     </div>
     {{!-- Devotion --}}
-    <div>
-        <h4>{{localize "ED.Sheet.Header.devotionPoints"}}</h4>
-        <table class="table__devotion">
-            <tr>
-                <th class="text__alignment--left">{{localize "ED.General.current"}}</th>
-                <th class="text__alignment--left">{{localize "ED.General.max"}}</th>
-                <th class="text__alignment--center">{{localize "ED.General.step"}}</th>
-            </tr>
-            <tr>
-                <td class="devotion__current--content">
-                    <div>
-                        <input class="input__number-input" type="number" name="system.devotion.value"
+    <div class="space__small1">
+        <h3 class="one-line__vertical-align karma-devotion__header margin__none">
+            <label>{{localize "ED.Actor.Header.devotion"}}</label>
+        </h3>
+        <div class="karma-devotion__grid--container font__bold">
+            <div class="karma-devotion__grid--item">{{localize "ED.Actor.Devotion.current"}}</div>
+            <div class="karma-devotion__grid--item">{{localize "ED.Actor.Devotion.max"}}</div>
+            <div class="karma-devotion__grid--item">{{localize "ED.Actor.Devotion.step"}}</div>
+        </div>
+        <div class="karma-devotion__grid--container font__bold">
+            <div class="karma-devotion__grid--item">
+                <input class="input__circle-input--centered"  name="system.devotion.value"
                             value="{{actor.system.devotion.value}}">
-                    </div>
-                </td>
-                <td class="devotion__maximum--content">
-                    <div>
-                        <input class="input__number-input" type="number" name="system.devotion.max"
+            </div>
+            <div class="karma-devotion__grid--item">
+                <input class="input__circle-input--centered" name="system.devotion.max"
                             value="{{actor.system.devotion.max}}" readonly>
-                    </div>
-                </td>
-                <td class="devotion__step--content">
-                    <div>
-                        <input class="input__number-input" type="number" name="system.devotion.step"
+            </div>
+            <div class="karma-devotion__grid--item">
+                <input class="input__circle-input--centered" name="system.devotion.step"
                             value="{{actor.system.devotion.step}}">
-                    </div>
-                </td>
-            </tr>
-        </table>
+            </div>
+        </div>
     </div>
 </div>
 {{!-- Conditions --}}
 <div class="right-part">
     <div class="partial__two">
-        <h3>{{localize "ED.Sheet.Header.conditions"}}</h3>
-        <div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.aggressiveAttack"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.aggressiveAttack" {{checked
+        <h3 class="margin__right">{{localize "ED.Actor.Header.conditions"}}</h3>
+        {{!-- aggressiveAttack --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.aggressiveAttack" {{checked
                         actor.system.condition.aggressiveAttack}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.coverPartial"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.cover.partial" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.aggressiveAttack"}}</div>
+        </div>
+        {{!-- coverPartial --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.cover.partial" {{checked
                         actor.system.condition.cover.partial}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.coverFull"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.cover.full" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.coverPartial"}}</div>
+        </div>
+        {{!-- coverFull --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.cover.full" {{checked
                         actor.system.condition.cover.full}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.darknessPartial"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.darkness.partial" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.coverFull"}}</div>
+        </div>
+        {{!-- darknessPartial --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.darkness.partial" {{checked
                         actor.system.condition.darkness.partial}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.darknessFull"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.darkness.full" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.darknessPartial"}}</div>
+        </div>
+        {{!-- darknessFull --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.darkness.full" {{checked
                         actor.system.condition.darkness.full}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.defensiveStance"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.defensiveStance" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.darknessFull"}}</div>
+        </div>
+        {{!-- defensiveStance --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.defensiveStance" {{checked
                         actor.system.condition.defensiveStance}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.fury"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.fury" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.defensiveStance"}}</div>
+        </div>
+        {{!-- fury --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.fury" {{checked
                         actor.system.condition.fury}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.harried"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.harried" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.fury"}}</div>
+        </div>
+        {{!-- harried --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.harried" {{checked
                         actor.system.condition.harried}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.impairedMovementPartial"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.impairedMovement.partial"
-                        {{checked actor.system.condition.impairedMovement.partial}}>
-                </div>
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.harried"}}</div>
+        </div>
+        {{!-- impairedMovementPartial --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.impairedMovement.partial" {{checked
+                        actor.system.condition.impairedMovement.partial}}>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.impairedMovementFull"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.impairedMovement.full"
-                        {{checked actor.system.condition.impairedMovement.full}}>
-                </div>
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.impairedMovementPartial"}}</div>
+        </div>
+        {{!-- impairedMovementFull --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.impairedMovement.full" {{checked
+                        actor.system.condition.impairedMovement.full}}>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.knockedDown"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.knockedDown" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.impairedMovementFull"}}</div>
+        </div>
+        {{!-- knockedDown --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.knockedDown" {{checked
                         actor.system.condition.knockedDown}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.surprised"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="checkbox" class="input__checkbox" name="system.condition.surprised" {{checked
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.knockedDown"}}</div>
+        </div>
+        {{!-- surprised --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input type="checkbox" class="input__checkbox" name="system.condition.surprised" {{checked
                         actor.system.condition.surprised}}>
-                </div>
             </div>
-            <div>
-                <div class="partial__two">
-                    <label>{{localize "ED.Conditions.overwhelmed"}}</label>
-                </div>
-                <div class="partial__two">
-                    <input type="Number" class="input__number-input" name="system.condition.overwhelmed"
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.surprised"}}</div>
+        </div>
+        {{!-- overwhelmed --}}
+        <div class="conditions__grid--container">
+            <div class="conditions__grid--item">
+                <input class="input__number-input input__circle-input--centered" name="system.condition.overwhelmed"
                         value="{{actor.system.condition.overwhelmed}}">
-                </div>
             </div>
+            <div class="conditions__grid--item">{{localize "ED.Actor.Conditions.overwhelmed"}}</div>
         </div>
     </div>
-    <div class="partial__two">
-        <h3>{{localize "ED.specialAbility"}}</h3>
+    <div class="partial__two undefined">
+        <h3>{{localize "ED.Actor.Header.specialAbility"}}</h3>
         <div>
+            wie soll diese ansicht aussehen, wie Rollable items oder nicht?
             {{#each actor.itemTypes.specialAbility}}
-            <div class="item-name one-line__vertical-align" data-item-id="{{_id}}">
+            <div class="item-id one-line__vertical-align" data-item-id="{{_id}}">
                 <div class="partial__two one-line__vertical-align">
                     <img src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
                     {{name}}

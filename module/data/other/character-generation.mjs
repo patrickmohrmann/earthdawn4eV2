@@ -80,7 +80,7 @@ export default class CharacterGenerationData extends SparseDataModel {
             required: true,
             initial: 0,
             min: 0,
-            max: game.settings.get("ed4e", "charGenHeader" ),
+            max: game.settings.get("ed4e", "charGenMaxRank" ),
             integer: true,
             label: "X.CharGenModel.abilityLevel",
             hint: "X.CharGenModel.The assigned level of the ability"

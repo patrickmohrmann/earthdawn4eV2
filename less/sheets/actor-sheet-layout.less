@@ -1,0 +1,182 @@
+// basic sheet layout for all actor- and item-sheets
+// individual settings will be found in the respective sheet.less files
+.app.window-app.earthdawn4e.sheet{
+    background-image: url('assets/sheet/background.png');
+    background-size: cover;
+    header {
+        position: relative;
+        z-index: 3;
+        border: none;
+        .window-title {
+            padding-left: 80px;
+            margin-top: -4px;
+            
+        }
+        .header-button {
+            margin-top: -4px;
+        }
+        .close {
+            padding-right: 80px;
+        }
+    }
+    .window-content {
+        background-image: url('assets/sheet/background.png');
+        background-size: cover;
+        padding: 0; 
+        .header__frame {
+            position:absolute;
+            margin-top: -70px;
+            z-index: 2;
+            img {
+                border: none;  
+            }
+            .section__name {
+                position: relative;
+                z-index: 4;
+                margin-top: -22px;
+
+                .sheet-header__indent--left {
+                    width: 45%;
+                    float: left;
+                    padding-left: 5px;
+                }
+
+                .sheet-header__indent--right {
+                    width: 45%;
+                    float: right;
+                    padding-right: 10px;
+                }
+            }
+        }
+        .body {
+            position: relative;
+            z-index: 4;
+            margin-top: 30px;
+            .navigator__flex {
+                .navigator__tab {
+                    padding-left: 5px;
+                }
+            }
+            .top {
+                .image__grid-item { 
+                    grid-area: image; 
+                }
+                .characteristics-defenses-header__grid-item { 
+                    grid-area: defensesHeader; 
+                }
+                .characteristics-defenses-physical__grid-item { 
+                    grid-area: defensePhyscial; 
+                }
+                .characteristics-defenses-mystical__grid-item { 
+                    grid-area: defenseMystical; 
+                }
+                .characteristics-defenses-social__grid-item { 
+                    grid-area: defenseSocial; 
+                }
+                .characteristics-health-header__grid-item { 
+                    grid-area: healthHeader; 
+                }
+                .characteristics-health-wound__grid-item { 
+                    grid-area: healthWound; 
+                }
+                .characteristics-health-unconscious__grid-item { 
+                    grid-area: healthUnconscious; 
+                }
+                .characteristics-health-death__grid-item { 
+                    grid-area: healthDeath; 
+                }
+                .characteristics-armor-header__grid-item { 
+                    grid-area: armorHeader; 
+                }
+                .characteristics-armor-physical__grid-item { 
+                    grid-area: armorPhysical; 
+                }
+                .characteristics-armor-mystical__grid-item { 
+                    grid-area: armorMystical; 
+                }
+                .characteristics-movement-header__grid-item { 
+                    grid-area: movementHeader; 
+                }
+                .characteristics-movement__grid-item { 
+                    grid-area: movement; 
+                }
+                .characteristics-damage-header__grid-item { 
+                    grid-area: damageHeader; 
+                }
+                .characteristics-damage-damage__grid-item { 
+                    grid-area: damageDamage;
+                }
+                .characteristics-damage-wounds__grid-item { 
+                    grid-area: damageWounds;
+
+                }
+                .characteristics-recovery-header__grid-item { 
+                    grid-area: recoveryHeader; 
+                }
+                .characteristics-recovery__grid-item { 
+                    grid-area: recovery; 
+                }
+
+                .image-characteristics__grid-container {
+                    display: grid;
+                    grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
+                    grid-column-gap: 4px;
+                    margin-left: 4px;
+                    grid-template-areas: 
+                    'image defensesHeader defensesHeader defensesHeader healthHeader healthHeader healthHeader'
+                    'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath'
+                    'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath'
+                    'image armorHeader armorHeader movementHeader damageHeader damageHeader recoveryHeader'
+                    'image armorPhysical armorMystical movement damageDamage damageWounds recovery'
+                    'image armorPhysical armorMystical movement damageDamage damageWounds recovery'
+                    ;
+                }
+
+                .image-characteristics__grid-container > div {
+                    text-align: center;
+                  }
+
+
+                .actor-image {
+                    width: 160px;
+                }
+
+            }
+            .main {
+                padding-top: 1px;
+                height: 440px;
+                overflow-y: auto;
+                padding-left: 5px;
+                padding-right: 5px;
+                
+                .sheet__editor {
+                    min-height: 400px;
+                    max-height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                
+                    .editor,
+                    .prosemirror,
+                    .editor-container,
+                    .editor-content {
+                        min-height: 350px;
+                        max-height: 100%;
+                    }
+                }
+            }
+        }
+        
+        .footer__frame {
+            position: absolute;
+            transform: rotate(180deg);
+            bottom: -45px;
+            z-index: 2;
+            img {
+                border: none;  
+            }
+        }
+    }
+    .window-resizable-handle {
+        z-index: 5;
+    }
+}

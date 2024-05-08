@@ -20,6 +20,11 @@ export default class ActorSheetEd extends ActorSheet {
           contentSelector: '.actor-sheet-body',
           initial: 'main',
         },
+        {
+          navSelector: '.actor-sheet-spell-tabs',
+          contentSelector: '.actor-sheet-spell-body',
+          initial: 'spell-matrix-tab',
+        },
       ],
     } );
   }
@@ -55,10 +60,13 @@ export default class ActorSheetEd extends ActorSheet {
     if ( !this.isEditable ) return;
 
     // Attribute tests
-    html.find( "table.table__attribute .rollable" ).click( this._onRollAttribute.bind( this ) );
+    html.find( ".attribute-card__grid--item .rollable" ).click( this._onRollAttribute.bind( this ) );
 
-    // Attribute tests
+    // Ability tests
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
+
+    // Item tests
+    html.find( ".card__equipment .rollable" ).click( this._onRollItem.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -105,9 +113,20 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onRollAbility( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
+    const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
     this.actor.rollAbility( ability, {event: event} );
+  }
+
+  /**
+   * Handle rolling an item test.
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+  _onRollItem( event ) {
+    event.preventDefault();
+    ui.notifications.error( "not implemented Yet" )
+    return
   }
 
   /**
@@ -120,7 +139,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
       label: `New Effect`,
-      icon: 'systems/earthdawn4e/assets/effect.png',
+      icon: 'icons/svg/item-bag.svg',
       duration: { rounds: 1 },
       origin: this.actor.uuid
     }] );
@@ -134,8 +153,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onEffectDelete( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const effect = this.actor.effects.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const effect = this.actor.effects.get( itemId );
     if ( !effect ) return;
     return effect.deleteDialog();
   }
@@ -149,8 +168,8 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onEffectEdit( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const effect = this.actor.effects.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const effect = this.actor.effects.get( itemId );
     return effect.sheet?.render( true );
   }
 
@@ -162,8 +181,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   async _onItemDelete( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const item = this.actor.items.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const item = this.actor.items.get( itemId );
     if ( !item ) return;
     return item.deleteDialog();
   }
@@ -176,8 +195,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onItemEdit( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
-    const item = this.actor.items.get( li.dataset.itemId );
+    const itemId = event.currentTarget.parentElement.dataset.itemId;
+    const item = this.actor.items.get( itemId );
     return item.sheet?.render( true );
   }
 
@@ -189,8 +208,8 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
 
     const itemDescription = $( event.currentTarget )
+    .parent( ".item-id" )
     .parent( ".card__ability" )
-    .parent( ".item-name" )
     .children( ".card__description" );
 
     itemDescription.toggleClass( "card__description--toggle" );

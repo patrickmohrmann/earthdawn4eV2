@@ -34,7 +34,6 @@ export default class ItemSheetEd extends ItemSheet {
           navSelector: '.item-advancement-tabs',
           contentSelector: '.item-advancement-body',
           initial: 'item-advancement-options-pools',
-          group: "advancement",
         },
       ],
       dragDrop: [
@@ -142,7 +141,7 @@ export default class ItemSheetEd extends ItemSheet {
     return this.item.createEmbeddedDocuments('ActiveEffect', [
       {
         label: `New Effect`,
-        icon: 'systems/earthdawn4e/assets/effect.png',
+        icon: 'icons/svg/item-bag.svg',
         duration: { rounds: 1 },
         origin: this.item.uuid,
       },
