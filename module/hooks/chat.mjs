@@ -97,7 +97,6 @@ function triggerHelp(argString) {
 /* -------------------------------------------- */
 
 function triggerLPAward(argString) {
-  const actors = game.users.filter(u => u.active).map(u => u.character)
   LpTransactionData.AssignLpPrompt();
   // ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
