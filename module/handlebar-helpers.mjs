@@ -9,8 +9,17 @@ export default function registerHandlebarHelpers() {
 
   // General Handlebars
 
-  Handlebars.registerHelper( 'hasItems', ( array ) => {
-    return array.length > 0;
+  Handlebars.registerHelper( 'hasItems', ( collection ) => {
+    if (!collection || typeof collection[Symbol.iterator] !== 'function' ) {
+      // Check if collection is iterable
+      return false;
+    }
+
+    for (const _ of collection) {
+      return true; // Only returns if at least on element exists
+    }
+
+    return false; // If no elements found, return false
   } );
 
   Handlebars.registerHelper( 'add', ( value1, value2 ) => {
@@ -79,5 +88,9 @@ export default function registerHandlebarHelpers() {
 
   Handlebars.registerHelper( "gettalentCategory", ( talents, type ) => {
     return talents.filter( ( talent ) => talent.system.talentCategory === type );
-  } );  
+  } );
+
+  Handlebars.registerHelper( "ed-commaList", ( iterable ) => {
+    return Array.from( iterable ).join( "," );
+  } );
 }

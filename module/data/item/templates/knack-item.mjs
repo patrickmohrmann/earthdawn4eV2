@@ -1,5 +1,4 @@
 import SystemDataModel from "../../abstract.mjs";
-import { DocumentUUIDField } from "../../fields.mjs";
 import TargetTemplate from "./targeting.mjs";
 
 /**
@@ -14,7 +13,7 @@ export default class KnackTemplate extends SystemDataModel.mixin(
     static defineSchema() {
         const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            knackSource: new DocumentUUIDField( {
+            knackSource: new fields.DocumentUUIDField( {
                 required: true,
                 nullable: true,
                 label: "ED.Item.Knack.source"

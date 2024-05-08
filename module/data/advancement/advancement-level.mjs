@@ -1,5 +1,5 @@
 import { SparseDataModel } from "../abstract.mjs";
-import { DocumentUUIDField, IdentifierField, MappingField } from "../fields.mjs";
+import { IdentifierField, MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import AbilityTemplate from "../item/templates/ability.mjs";
 
@@ -37,8 +37,8 @@ export default class AdvancementLevelData extends SparseDataModel {
         hint: "ED.The tier to which this level belongs to"
       } ),
       abilities: new MappingField(
-        new fields.ArrayField(
-          new DocumentUUIDField(
+        new fields.SetField(
+          new fields.DocumentUUIDField(
             AbilityTemplate,
             {
               label: "ED.Ability",
@@ -47,6 +47,8 @@ export default class AdvancementLevelData extends SparseDataModel {
           ),
           {
             required: true,
+            empty: true,
+            initial: [],
             label: "ED.advancement.abilityPoolLevel",
             hint: "ED.TheSetOfAbilitiesGrantedOnThisLevel"
           }
@@ -60,8 +62,8 @@ export default class AdvancementLevelData extends SparseDataModel {
           hint: "good stoff"
         }
       ),
-      effects: new fields.ArrayField(
-        new DocumentUUIDField(
+      effects: new fields.SetField(
+        new fields.DocumentUUIDField(
           ActiveEffect,
           {
             label: "ED.ActiveEffect",
@@ -70,6 +72,8 @@ export default class AdvancementLevelData extends SparseDataModel {
         ),
         {
           required: true,
+          empty: true,
+          initial: [],
           label: "ED.advancement.levelActiveEffects",
           hint: "ED.TheSetOfActiveAbilitiesGrantedOnThisLevel"
         }
@@ -81,6 +85,8 @@ export default class AdvancementLevelData extends SparseDataModel {
         min: 1,
         positive: true,
         initial: this.initResourceStep,
+        label: "ED.advancement.levelResourceStep",
+        hint: "ED.advancement.hintLevelResourceStep",
       } ),
     }
   }

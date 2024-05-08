@@ -1,5 +1,4 @@
 import ClassTemplate from './class.mjs';
-import { DocumentUUIDField } from "../../fields.mjs";
 import TargetTemplate from "./targeting.mjs";
 import ActionTemplate from "./action.mjs";
 
@@ -26,7 +25,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 label: "ED.Item.Ability.attribute"
             } ),
             source: new fields.SchemaField( {
-                    class: new DocumentUUIDField( ClassTemplate, {
+                    class: new fields.DocumentUUIDField( ClassTemplate, {
                         label: "ED.Item.Class.source"
                     } ),
                     tier: new fields.StringField( {
