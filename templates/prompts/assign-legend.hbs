@@ -1,5 +1,5 @@
 <form>
-  {{log this}}
+  <img src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
   <div>
     <div>
       <h3>
@@ -7,7 +7,6 @@
       </h3>
       {{#each actorUserActive}}
       <div>
-        {{log this}}
         <input type="checkbox" name="{{this.atorId}}" {{checked this.actorId}}>
         {{this.actorName}}/{{this.playerName}}
       </div>
@@ -21,6 +20,17 @@
       <div>
         <input type="checkbox" name="{{this.atorId}}">
         {{this.actorName}}/{{this.playerName}}
+      </div>
+      {{/each}}
+    </div>
+    <div>
+      <h3>
+        <label>{{localize "ED.Header.actorsNoUserConfigured"}}</label>
+      </h3>
+      {{#each actorsNoUserConfigured}}
+      <div>
+        <input type="checkbox" name="{{this.atorId}}">
+        {{this.actorName}}
       </div>
       {{/each}}
     </div>
@@ -44,4 +54,5 @@
         </div>
 
     </div>
+    <img src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
 </form>

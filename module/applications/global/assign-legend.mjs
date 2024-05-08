@@ -29,8 +29,8 @@ export default class AssignLpPrompt extends FormApplication {
     return {
 
       ...options,
-      height: 850,
-      width: 1000,
+      height: 800,
+      width: 500,
       resizable: true,
       classes: [...options.classes, 'earthdawn4e', 'assign-legend'],
       tabs: [
@@ -60,32 +60,47 @@ export default class AssignLpPrompt extends FormApplication {
 
   async getData( options = {} ) {
     const context = super.getData( options );
-    const activeUser = game.users.filter( u => u.active )
-    const inactiveUser = game.users.filter( u => !u.active )
+    const userAll = game.users.filter( u => u.character )
     context.user = game.users.filter( u => u.active )
     context.actorUserActive = [];
     context.actorUserInactive = [];
-    for ( let i = 0; i < activeUser.length; i++ ) {
-      let user = activeUser[i]
-      if ( user.character ){
+    context.actorsNoUserConfigured = [];
+
+    for ( let i = 0; i < userAll.length; i++ ) {
+      if ( userAll[i].active === true ) {
         context.actorUserActive.push(
           {
-          actorName: user.character.name,
-          playerName: user.name,
-          actorId: user.character._id,
+          actorName: userAll[i].character.name,
+          playerName: userAll[i].name,
+          actorId: userAll[i].character._id,
           }
         )
-      }
-    }
-    for ( let i = 0; i < inactiveUser.length; i++ ) {
-      let user = inactiveUser[i]
-      if ( user.character ){
+      } else if ( userAll[i].active === false ) {
         context.actorUserInactive.push(
           {
-          actorName: user.character.name,
-          playerName: user.name
+          actorName: userAll[i].character.name,
+          playerName: userAll[i].name,
+          actorId: userAll[i].character._id,
           }
         )
+      } 
+    }
+    const ownedCharacters = game.actors.filter( a => a.type === 'character' && a.hasPlayerOwner )
+    for ( let i = 0; i < ownedCharacters.length; i++ ) {
+      for ( let x = 0; x < context.actorUserActive.length; x++ ) {
+        if ( ownedCharacters[i].id !== context.actorUserActive[x].actorId ) {
+          for ( let y = 0; y < context.actorUserInactive.length; y++ ) { 
+            if ( ownedCharacters[i].id !== context.actorUserInactive[y].actorId ) {
+
+              context.actorsNoUserConfigured.push(
+                {
+                actorName: ownedCharacters[i].name,
+                actorId: ownedCharacters[i]._id,
+                }
+              )
+            } 
+          }
+        }
       }
     }
     return context;
