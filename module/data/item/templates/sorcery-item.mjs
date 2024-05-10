@@ -1,5 +1,6 @@
 import SystemDataModel from "../../abstract.mjs";
 import TargetTemplate from "./targeting.mjs";
+import ED4E from "../../../config.mjs";
 
 /**
  * Data model template with information on items that are used to represent custom active effects.
@@ -11,6 +12,15 @@ export default class MagicTemplate extends SystemDataModel .mixin(
     static defineSchema() {
         const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
+            magicType: new fields.StringField( {
+                required: true,
+                nullable: true,
+                blank: true,
+                trim: true,
+                choices: ED4E.spellcastingTypes,
+                label: "X.magicType",
+                hint: "X.the type of thread weaving this talent belongs to",
+            } ),
             level: new fields.NumberField( {
                 required: true,
                 nullable: false,
