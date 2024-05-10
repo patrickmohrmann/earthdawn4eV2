@@ -107,6 +107,23 @@ export default function registerSystemSettings() {
         default: 3,
     } );
 
+    // Maximum circle for learnable spells at character generation
+    game.settings.register( "ed4e", "charGenMaxSpellCircle", {
+        name: "ED.Settings.CharGen.maxSpellCircle",
+        hint: "ED.Settings.CharGen.hintMaxSpellCircle",
+        scope: "world",
+        config: true,
+        type: new fields.NumberField( {
+            required: true,
+            nullable: false,
+            min: 1,
+            step: 1,
+            integer: true,
+            positive: true,
+            initial: 2,
+        } ),
+    } );
+
     /* -------------------------------------------------------------------------------- */
     /*                                  LP TRACKING                                     */
     /* -------------------------------------------------------------------------------- */
