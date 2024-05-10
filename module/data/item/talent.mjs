@@ -39,9 +39,11 @@ export default class TalentData extends AbilityTemplate.mixin(
                 magicType: new fields.StringField( {
                     required: true,
                     nullable: true,
-                    blank: false,
+                    blank: true,
                     trim: true,
                     choices: ED4E.spellcastingTypes,
+                    label: "X.magicType",
+                    hint: "X.the type of thread weaving this talent belongs to",
                 } ),
             }, {
                 required: true,
