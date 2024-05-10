@@ -222,7 +222,7 @@ ED4E.spellcastingTypes = {
 	shamanism: "X.Shamanism",
 	wizardry: "X.Wizardry",
 };
-preLocalize( "spellcastingType" );
+preLocalize( "spellcastingTypes" );
 
 /* -------------------------------------------- */
 /*  Advancement & Char Gen                      */
