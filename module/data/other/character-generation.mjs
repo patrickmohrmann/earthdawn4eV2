@@ -1,7 +1,7 @@
 import { SparseDataModel } from "../abstract.mjs";
 import { MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
-import { filterObject, mapObject, renameKeysWithPrefix } from "../../utils.mjs";
+import { filterObject, getAttributeStep, mapObject, renameKeysWithPrefix } from "../../utils.mjs";
 
 /**
  * The data used during character generation. Also used as the object of the
@@ -152,6 +152,9 @@ export default class CharacterGenerationData extends SparseDataModel {
         label: "X.CharGenModel.AssignableRanks",
         hint: "X.CharGenModel.How ranks are left to assign to abilities",
       } ),
+
+      // Spells
+      spells: new fields.SetField( new fields.DocumentUUIDField() ),
     };
   }
 
@@ -265,6 +268,10 @@ export default class CharacterGenerationData extends SparseDataModel {
     };
   }
 
+  async getFinalAttributeValue( attribute ) {
+    return await this.getBaseAttributeValue( attribute ) + this.attributes[attribute].change;
+  }
+
   async getFinalAttributeValues() {
     const updateData = {};
     for ( const attribute of Object.keys( this.attributes ) ){
@@ -277,6 +284,28 @@ export default class CharacterGenerationData extends SparseDataModel {
   async getBaseAttributeValue( attribute ) {
     const document = await this.namegiverDocument;
     return document?.system?.attributeValues[attribute] ?? 10;
+  }
+
+  async getMaxSpellPoints() {
+    return getAttributeStep( await this. getFinalAttributeValue( "per" ) );
+  }
+
+  async getAvailableSpellPoints() {
+    const currentSpellLevels = await Promise.all(
+      Array.from(
+        this.spells,
+        async spellUuid => ( await fromUuid( spellUuid ) ).level
+      )
+    );
+    return ( await this.getMaxSpellPoints() ) - currentSpellLevels;
+  }
+  
+  async getMagicType() {
+    for ( const abilityUuid of Object.keys( this.abilities.class ) ) {
+      const ability = await fromUuid( abilityUuid );
+      if ( ability?.system.magic?.threadWeaving ) return ability.system.magic.magicType;
+    }
+    return undefined;
   }
 
   async addAbility( abilityUuid, abilityType ) {
