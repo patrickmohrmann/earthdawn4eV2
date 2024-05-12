@@ -168,6 +168,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     // Spells
     context.spells = this.spells.filter( spell => spell.system.magicType === this.magicType );
+    context.spellsByCircle = context.spells?.reduce( ( acc, spell ) => {
+      const { system: { level } } = spell;
+      acc[level] ??= [];
+      acc[level].push(spell);
+      return acc;
+    }, {} );
 
     // Dialog Config
     context.hasNextStep = this._hasNextStep();
