@@ -20,14 +20,25 @@
       </tr>
       </thead>
       <tbody>
-      {{#each spells}}
+        {{#each spellsByCircle}}
       <tr>
-        {{log this}}
-        <td class="spell-name" data-skill-uuid="{{this.uuid}}" title="{{this.system.description}}">
-          {{this.name}}
-        </td>
-        <td></td>
+        <th colspan="2">{{localize (concat "X.Circle " @key) level=@key}}</th>
       </tr>
+        {{#each this}}
+          <tr>
+            {{#if this.[0]}}
+              <td class="spell-name" data-spell-uuid="{{this.0.uuid}}" data-spell-selected="{{ifThen this.[0] "false" "true"}}" title="{{this.0.system.description}}">
+                {{this.0.name}}
+              </td>
+              <td></td>
+            {{else}}
+              <td></td>
+              <td class="spell-name" data-spell-uuid="{{this.1.uuid}}" data-spell-selected="{{ifThen this.[1] "true" "false"}}" title="{{this.1.system.description}}">
+                {{this.1.name}}
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
       {{/each}}
       </tbody>
     </table>

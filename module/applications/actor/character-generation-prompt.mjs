@@ -127,6 +127,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
     $(this.form.querySelectorAll( 'span.attribute-change-icon' )).on(
       'click', this._onChangeAttributeModifier.bind(this)
     );
+    $( this.form.querySelectorAll( 'td.spell-name' ) ).on(
+      'click', this._onClickSpell.bind( this )
+    );
     $(this.form.querySelectorAll( 'button.reset-points' )).on('click', this._onReset.bind(this));
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
     $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
@@ -168,10 +171,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     // Spells
     context.spells = this.spells.filter( spell => spell.system.magicType === this.magicType );
-    context.spellsByCircle = context.spells?.reduce( ( acc, spell ) => {
-      const { system: { level } } = spell;
+    context.spellsBifurcated = context.spells.map(
+      spell => this.object.spells.has( spell.uuid ) ? [ null, spell ] : [ spell, null ]
+    );
+    context.spellsByCircle = context.spellsBifurcated?.reduce( ( acc, spellTuple ) => {
+      const { system: { level } } = spellTuple[0] ?? spellTuple[1];
       acc[level] ??= [];
-      acc[level].push(spell);
+      acc[level].push(spellTuple);
       return acc;
     }, {} );
 
@@ -252,6 +258,19 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _onSelectTalentOption( event ) {
     event.currentTarget.querySelector( 'input[type="radio"]' ).click();
+  }
+
+  _onClickSpell( event ) {
+    const spellSelected = event.currentTarget.dataset.spellSelected;
+    let result;
+    if ( spellSelected === "false" ) {
+      // add the spell
+      result = this.object.addSpell( event.currentTarget.dataset.spellUuid );
+    } else if ( spellSelected === "true" ) {
+      // unselect the spell
+      result = this.object.removeSpell( event.currentTarget.dataset.spellUuid );
+    }
+    result.then( _ => this.render() );
   }
 
   _onChangeTab( event, tabs, active ) {
