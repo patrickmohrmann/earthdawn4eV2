@@ -422,6 +422,20 @@ export default class CharacterGenerationData extends SparseDataModel {
     } );
   }
 
+  async addSpell( spellUuid ) {
+    if ( !spellUuid ) return {};
+    return this.updateSource( {
+      spells: ( new Set( this.spells ) ).add( spellUuid )
+    } );
+  }
+
+  async removeSpell( spellUuid ) {
+    if ( !spellUuid ) return {};
+    const newSpellSet = new Set( this.spells );
+    newSpellSet.delete( spellUuid );
+    return this.updateSource( { spells: newSpellSet } );
+  }
+
   async resetPoints( type ) {
     const updateData = this.getResetData( type );
     this.updateSource( updateData );
