@@ -170,6 +170,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.previews = await context.object.getCharacteristicsPreview();
 
     // Spells
+    context.availableSpellPoints = await this.object.getAvailableSpellPoints();
+    context.maxSpellPoints = await this.object.getMaxSpellPoints();
     context.spells = this.spells.filter( spell => spell.system.magicType === this.magicType );
     context.spellsBifurcated = context.spells.map(
       spell => this.object.spells.has( spell.uuid ) ? [ null, spell ] : [ spell, null ]

@@ -6,11 +6,21 @@
   <p class="explainer-text">
     {{localize "X. Below you find all spells available to your selected discipline. You have points available equal to your Perception step. Each spell costs points equal to it's level. Spells can have a maximum level of game.settings."}}
   </p>
-  <button class="reset-points" id="char-gen-clear-spell-selection-button" type="button"
-          title="X.Reset all selected spells." data-reset-type="spells">
-    <i class="fa-light fa-arrows-rotate"></i>
-    {{localize "X.Reset"}}
-  </button>
+
+  <section class="rank-assignment">
+
+    <div class="availability-meter available-talent-ranks flexrow">
+      <button class="reset-points" id="char-gen-clear-spell-selection-button" type="button"
+              title="X.Reset all selected spells." data-reset-type="spells">
+        <i class="fa-light fa-arrows-rotate"></i>
+        {{localize "X.Reset"}}
+      </button>
+      <label>{{localize "X.Available Spell Points: "}}{{availableSpellPoints}}{{!--format "X.availablePointsKarma" points=... --}}</label>
+      <meter value="{{availableSpellPoints}}" min="0" max="{{maxSpellPoints}}">
+      </meter>
+    </div>
+
+  </section>
 
   <div class="flexcol spell-selection">
     <table style="table-layout: fixed;text-align: center">
@@ -21,10 +31,10 @@
       </tr>
       </thead>
       <tbody>
-        {{#each spellsByCircle}}
-      <tr>
-        <th colspan="2">{{localize (concat "X.Circle " @key) level=@key}}</th>
-      </tr>
+      {{#each spellsByCircle}}
+        <tr>
+          <th colspan="2">{{localize (concat "X.Circle " @key) level=@key}}</th>
+        </tr>
         {{#each this}}
           <tr>
             {{#if this.[0]}}

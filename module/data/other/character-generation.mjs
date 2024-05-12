@@ -1,7 +1,7 @@
 import { SparseDataModel } from "../abstract.mjs";
 import { MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
-import { filterObject, getAttributeStep, mapObject, renameKeysWithPrefix } from "../../utils.mjs";
+import { filterObject, getAttributeStep, mapObject, renameKeysWithPrefix, sum } from "../../utils.mjs";
 
 /**
  * The data used during character generation. Also used as the object of the
@@ -294,10 +294,10 @@ export default class CharacterGenerationData extends SparseDataModel {
     const currentSpellLevels = await Promise.all(
       Array.from(
         this.spells,
-        async spellUuid => ( await fromUuid( spellUuid ) ).level
+        async spellUuid => ( await fromUuid( spellUuid ) ).system.level
       )
     );
-    return ( await this.getMaxSpellPoints() ) - currentSpellLevels;
+    return ( await this.getMaxSpellPoints() ) - sum( currentSpellLevels );
   }
   
   async getMagicType() {
@@ -424,9 +424,19 @@ export default class CharacterGenerationData extends SparseDataModel {
 
   async addSpell( spellUuid ) {
     if ( !spellUuid ) return {};
-    return this.updateSource( {
-      spells: ( new Set( this.spells ) ).add( spellUuid )
-    } );
+
+    const spellLevel = ( await fromUuid( spellUuid ) ).system.level;
+    const availablePoints = await this.getAvailableSpellPoints();
+    if ( spellLevel <= availablePoints ) {
+      return this.updateSource( {
+        spells: ( new Set( this.spells ) ).add( spellUuid )
+      } );
+    } else {
+      ui.notifications.warn( game.i18n.localize(
+        "X.No more points available. The spells level is to high for your available points."
+      ) );
+      return {};
+    }
   }
 
   async removeSpell( spellUuid ) {
