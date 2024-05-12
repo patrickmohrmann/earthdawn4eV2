@@ -507,6 +507,9 @@ export default class CharacterGenerationData extends SparseDataModel {
           availableRanks: availableSkillRanksPayload,
         };
         break;
+
+      case "spells":
+        updateData = { spells: new Set() };
     }
 
     return updateData;
