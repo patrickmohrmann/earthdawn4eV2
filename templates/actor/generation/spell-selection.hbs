@@ -1,80 +1,58 @@
 <div class="tab spell-tab" data-group="primary" data-tab="spell-tab">
-  <div>
-    Spells
+
+  <h3>{{localize "X.Spells"}}</h3>
+
+  <!-- Skills explainer -->
+  <p class="explainer-text">
+    {{localize "X. Below you find all spells available to your selected discipline. You have points available equal to your Perception step. Each spell costs points equal to it's level. Spells can have a maximum level of game.settings."}}
+  </p>
+
+  <section class="rank-assignment">
+
+    <div class="availability-meter available-talent-ranks flexrow">
+      <button class="reset-points" id="char-gen-clear-spell-selection-button" type="button"
+              title="X.Reset all selected spells." data-reset-type="spells">
+        <i class="fa-light fa-arrows-rotate"></i>
+        {{localize "X.Reset"}}
+      </button>
+      <label>{{localize "X.Available Spell Points: "}}{{availableSpellPoints}}{{!--format "X.availablePointsKarma" points=... --}}</label>
+      <meter value="{{availableSpellPoints}}" min="0" max="{{maxSpellPoints}}">
+      </meter>
+    </div>
+
+  </section>
+
+  <div class="flexcol spell-selection">
+    <table style="table-layout: fixed;text-align: center">
+      <thead>
+      <tr>
+        <th >{{localize "X.Options"}}</th>
+        <th >{{localize "X.Selected"}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#each spellsByCircle}}
+        <tr>
+          <th colspan="2">{{localize (concat "X.Circle " @key) level=@key}}</th>
+        </tr>
+        {{#each this}}
+          <tr>
+            {{#if this.[0]}}
+              <td class="spell-name" data-spell-uuid="{{this.0.uuid}}" data-spell-selected="{{ifThen this.[0] "false" "true"}}" title="{{this.0.system.description}}">
+                {{this.0.name}}
+              </td>
+              <td></td>
+            {{else}}
+              <td></td>
+              <td class="spell-name" data-spell-uuid="{{this.1.uuid}}" data-spell-selected="{{ifThen this.[1] "true" "false"}}" title="{{this.1.system.description}}">
+                {{this.1.name}}
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
+      {{/each}}
+      </tbody>
+    </table>
   </div>
-  <div>
-    doppel click schiebt die Ability in die andere Tabelle
-  </div>
-  <div>
-    <Table>
-      <tr>
-        <th>Optionen</th>
-        <th>Gewählt</th>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 1
-        </td>
-        <td class="input--centered">
-          gewählter Zauber
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 1
-        </td>
-        <td class="input--centered">
-          gewählter Zauber
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 1
-        </td>
-        <td class="input--centered">
-          gewählter Zauber
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 1
-        </td>
-        <td class="input--centered">
 
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 1
-        </td>
-        <td class="input--centered">
-
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 2
-        </td>
-        <td class="input--centered">
-
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 2
-        </td>
-        <td class="input--centered">
-
-        </td>
-      </tr>
-      <tr>
-        <td class="input--centered">
-          Zauber Kreis 2
-        </td>
-        <td class="input--centered">
-
-        </td>
-      </tr>
-    </Table>
-  </div>
 </div>

@@ -93,4 +93,8 @@ export default function registerHandlebarHelpers() {
   Handlebars.registerHelper( "ed-commaList", ( iterable ) => {
     return Array.from( iterable ).join( "," );
   } );
+
+  Handlebars.registerHelper( "ed-includes", ( collection, element ) => {
+    return Array.from( collection ).includes( element );
+  } );
 }

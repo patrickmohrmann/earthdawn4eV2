@@ -215,6 +215,15 @@ ED4E.languages = {
 };
 preLocalize( "languages" );
 
+ED4E.spellcastingTypes = {
+	elementalism: "X.Elementalism",
+	illusionism: "X.Illusionism",
+	nethermancy: "X.Nethermancy",
+	shamanism: "X.Shamanism",
+	wizardry: "X.Wizardry",
+};
+preLocalize( "spellcastingTypes" );
+
 /* -------------------------------------------- */
 /*  Advancement & Char Gen                      */
 /* -------------------------------------------- */

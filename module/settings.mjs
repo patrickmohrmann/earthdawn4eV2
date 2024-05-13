@@ -107,6 +107,23 @@ export default function registerSystemSettings() {
         default: 3,
     } );
 
+    // Maximum circle for learnable spells at character generation
+    game.settings.register( "ed4e", "charGenMaxSpellCircle", {
+        name: "ED.Settings.CharGen.maxSpellCircle",
+        hint: "ED.Settings.CharGen.hintMaxSpellCircle",
+        scope: "world",
+        config: true,
+        type: new fields.NumberField( {
+            required: true,
+            nullable: false,
+            min: 1,
+            step: 1,
+            integer: true,
+            positive: true,
+            initial: 2,
+        } ),
+    } );
+
     /* -------------------------------------------------------------------------------- */
     /*                                  LP TRACKING                                     */
     /* -------------------------------------------------------------------------------- */
@@ -187,10 +204,10 @@ export default function registerSystemSettings() {
     } );
 
     /* -------------------------------------------------------------------------------- */
-    /*                                LORE / IN-GAME                                    */
+    /*                                GAME MECHANICS                                    */
     /* -------------------------------------------------------------------------------- */
 
-    // Lore/In-Game settings Header
+    // Game Mechanics settings Header
     /*
     game.settings.register( "ed4e", "loreHeader", {
         name: "ED.Settings.Lore.loreHeader",
@@ -200,8 +217,8 @@ export default function registerSystemSettings() {
 
     // Languages
     game.settings.register( "ed4e", "languages", {
-        name: "ED.Settings.Lore.languages",
-        hint: "ED.Settings.Lore.languagesHint",
+        name: "ED.Settings.Mechanics.languages",
+        hint: "ED.Settings.Mechanics.languagesHint",
         scope: "world",
         config: true,
         type: new fields.SetField(
@@ -213,6 +230,23 @@ export default function registerSystemSettings() {
               initial: new Set( Object.values( ED4E.languages ) ),
           }
         ),
+    } );
+
+    // Spellcasting / Thread Weaving Types
+    game.settings.register( "ed4e", "spellcastingTypes", {
+        name: "ED.Settings.Mechanics.spellcastingTypes",
+        hint: "ED.Settings.Mechanics.spellcastingTypesHint",
+        scope: "world",
+        config: true,
+        type: new fields.SetField(
+          new fields.StringField( {
+              blank: false,
+          } ),
+          {
+              empty: false,
+              initial: new Set( Object.values( ED4E.spellcastingTypes ) ),
+          }
+        )
     } );
 
      /* -------------------------------------------------------------------------------- */

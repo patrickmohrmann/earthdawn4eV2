@@ -125,6 +125,23 @@ export async function getAllDocuments(
     : Promise.all( allDocuments.map( doc => fromUuid( doc.uuid ) ) );
 
 }
+
+/**
+ * Takes an array of documents and returns an object that can be used by Foundry's
+ * {@link selectOptions} Handlebar helper as choices. The keys are a document's
+ * UUID, the values it's name, which is rendered as representation in the HTML.
+ * @param {foundry.abstract.Document[]} documents An array of documents that should
+ * be the choices.
+ * @return {{}} An object in the form of the `choices` parameter of the
+ * {@link selectOptions} Handlebar helper.
+ */
+export function documentsToSelectChoices( documents ) {
+  return documents.reduce(
+    ( obj, doc ) => ( { ...obj, [doc.uuid]: doc.name } ),
+    {}
+  );
+}
+
 /* -------------------------------------------- */
 /*  View Helper                                 */
 /* -------------------------------------------- */

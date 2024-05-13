@@ -1,7 +1,7 @@
 import { SparseDataModel } from "../abstract.mjs";
 import { MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
-import { filterObject, mapObject, renameKeysWithPrefix } from "../../utils.mjs";
+import { filterObject, getAttributeStep, mapObject, renameKeysWithPrefix, sum } from "../../utils.mjs";
 
 /**
  * The data used during character generation. Also used as the object of the
@@ -152,6 +152,9 @@ export default class CharacterGenerationData extends SparseDataModel {
         label: "X.CharGenModel.AssignableRanks",
         hint: "X.CharGenModel.How ranks are left to assign to abilities",
       } ),
+
+      // Spells
+      spells: new fields.SetField( new fields.DocumentUUIDField() ),
     };
   }
 
@@ -195,6 +198,12 @@ export default class CharacterGenerationData extends SparseDataModel {
     }, [] );
 
     return Promise.all( allAbilities );
+  }
+
+  get spellDocuments() {
+    const allSpells = this.spells.map( async ( spell ) => await fromUuid( spell ) );
+
+    return Promise.all( allSpells );
   }
 
   set abilityOption( abilityUuid ) {
@@ -265,6 +274,10 @@ export default class CharacterGenerationData extends SparseDataModel {
     };
   }
 
+  async getFinalAttributeValue( attribute ) {
+    return await this.getBaseAttributeValue( attribute ) + this.attributes[attribute].change;
+  }
+
   async getFinalAttributeValues() {
     const updateData = {};
     for ( const attribute of Object.keys( this.attributes ) ){
@@ -277,6 +290,28 @@ export default class CharacterGenerationData extends SparseDataModel {
   async getBaseAttributeValue( attribute ) {
     const document = await this.namegiverDocument;
     return document?.system?.attributeValues[attribute] ?? 10;
+  }
+
+  async getMaxSpellPoints() {
+    return getAttributeStep( await this. getFinalAttributeValue( "per" ) );
+  }
+
+  async getAvailableSpellPoints() {
+    const currentSpellLevels = await Promise.all(
+      Array.from(
+        this.spells,
+        async spellUuid => ( await fromUuid( spellUuid ) ).system.level
+      )
+    );
+    return ( await this.getMaxSpellPoints() ) - sum( currentSpellLevels );
+  }
+  
+  async getMagicType() {
+    for ( const abilityUuid of Object.keys( this.abilities.class ) ) {
+      const ability = await fromUuid( abilityUuid );
+      if ( ability?.system.magic?.threadWeaving ) return ability.system.magic.magicType;
+    }
+    return undefined;
   }
 
   async addAbility( abilityUuid, abilityType ) {
@@ -393,6 +428,30 @@ export default class CharacterGenerationData extends SparseDataModel {
     } );
   }
 
+  async addSpell( spellUuid ) {
+    if ( !spellUuid ) return {};
+
+    const spellLevel = ( await fromUuid( spellUuid ) ).system.level;
+    const availablePoints = await this.getAvailableSpellPoints();
+    if ( spellLevel <= availablePoints ) {
+      return this.updateSource( {
+        spells: ( new Set( this.spells ) ).add( spellUuid )
+      } );
+    } else {
+      ui.notifications.warn( game.i18n.localize(
+        "X.No more points available. The spells level is to high for your available points."
+      ) );
+      return {};
+    }
+  }
+
+  async removeSpell( spellUuid ) {
+    if ( !spellUuid ) return {};
+    const newSpellSet = new Set( this.spells );
+    newSpellSet.delete( spellUuid );
+    return this.updateSource( { spells: newSpellSet } );
+  }
+
   async resetPoints( type ) {
     const updateData = this.getResetData( type );
     this.updateSource( updateData );
@@ -464,6 +523,9 @@ export default class CharacterGenerationData extends SparseDataModel {
           availableRanks: availableSkillRanksPayload,
         };
         break;
+
+      case "spells":
+        updateData = { spells: new Set() };
     }
 
     return updateData;

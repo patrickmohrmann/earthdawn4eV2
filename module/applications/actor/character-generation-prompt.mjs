@@ -1,4 +1,4 @@
-import { filterObject, getAllDocuments } from "../../utils.mjs";
+import { documentsToSelectChoices, filterObject, getAllDocuments } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
 import CharacterGenerationData from "../../data/other/character-generation.mjs";
 
@@ -15,6 +15,9 @@ import CharacterGenerationData from "../../data/other/character-generation.mjs";
  *      document subtypes to arrays of the available documents of that type.
  */
 export default class CharacterGenerationPrompt extends FormApplication {
+
+  magicType;
+  
   constructor(charGen, options = {}, documentCollections) {
     charGen ??= new CharacterGenerationData();
     super(charGen);
@@ -25,6 +28,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     this.disciplines = documentCollections.disciplines;
     this.questors = documentCollections.questors;
     this.skills = documentCollections.skills;
+    this.spells = documentCollections.spells;
 
     this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
 
@@ -56,7 +60,15 @@ export default class CharacterGenerationPrompt extends FormApplication {
         false,
         'OBSERVER',
         ['system.source.tier'],
-        (x) => x.system.source.tier === 'novice',
+        ( x ) => x.system.source.tier === 'novice',
+      ),
+      spells: await getAllDocuments(
+        'Item',
+        'spell',
+        false,
+        'OBSERVER',
+        ['system.level'],
+        ( x ) => x.system.level <= game.settings.get( "ed4e", "charGenMaxSpellCircle" ),
       ),
     };
     return new Promise((resolve) => {
@@ -115,6 +127,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
     $(this.form.querySelectorAll( 'span.attribute-change-icon' )).on(
       'click', this._onChangeAttributeModifier.bind(this)
     );
+    $( this.form.querySelectorAll( 'td.spell-name' ) ).on(
+      'click', this._onClickSpell.bind( this )
+    );
     $(this.form.querySelectorAll( 'button.reset-points' )).on('click', this._onReset.bind(this));
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
     $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
@@ -133,13 +148,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     // Class
     context.disciplines = this.disciplines;
-    context.disciplineRadioChoices = this.disciplines.reduce(
-      ( obj, discipline ) => ( { ...obj, [discipline.uuid]: discipline.name} ),
-      {} );
+    context.disciplineRadioChoices = documentsToSelectChoices( this.disciplines );
     context.questors = this.questors;
-    context.questorRadioChoices = this.questors.reduce(
-      ( obj, questor ) => ( { ...obj, [questor.uuid]: questor.name} ),
-      {} );
+    context.questorRadioChoices = documentsToSelectChoices( this.questors );
     context.classDocument = await context.object.classDocument;
 
     // Talents & Devotions
@@ -158,6 +169,20 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.maxAttributePoints = game.settings.get( "ed4e", "charGenAttributePoints" );
     context.previews = await context.object.getCharacteristicsPreview();
 
+    // Spells
+    context.availableSpellPoints = await this.object.getAvailableSpellPoints();
+    context.maxSpellPoints = await this.object.getMaxSpellPoints();
+    context.spells = this.spells.filter( spell => spell.system.magicType === this.magicType );
+    context.spellsBifurcated = context.spells.map(
+      spell => this.object.spells.has( spell.uuid ) ? [ null, spell ] : [ spell, null ]
+    );
+    context.spellsByCircle = context.spellsBifurcated?.reduce( ( acc, spellTuple ) => {
+      const { system: { level } } = spellTuple[0] ?? spellTuple[1];
+      acc[level] ??= [];
+      acc[level].push(spellTuple);
+      return acc;
+    }, {} );
+
     // Dialog Config
     context.hasNextStep = this._hasNextStep();
     context.hasNoNextStep = !context.hasNextStep;
@@ -173,13 +198,21 @@ export default class CharacterGenerationPrompt extends FormApplication {
     data.namegiver ??= null;
 
     // Reset selected class if class type changed
-    if ( data.isAdept !== this.object.isAdept ) data.selectedClass = null;
-    if ( data.selectedClass ) this.object.classAbilities = await fromUuid( data.selectedClass );
+    if (data.isAdept !== this.object.isAdept) data.selectedClass = null;
+    
+    // Set class specifics
+    if ( data.selectedClass ) {
+      const classDocument = await fromUuid(data.selectedClass);
+      this.object.classAbilities = classDocument;
+    }
 
     // process selected class option ability
     if ( data.abilityOption ) this.object.abilityOption = data.abilityOption;
 
     this.object.updateSource( data );
+
+    // wait for the update so we can use the data models method
+    this.magicType = await this.object.getMagicType();
 
     // Re-render sheet with updated values
     this.render();
@@ -227,6 +260,19 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _onSelectTalentOption( event ) {
     event.currentTarget.querySelector( 'input[type="radio"]' ).click();
+  }
+
+  _onClickSpell( event ) {
+    const spellSelected = event.currentTarget.dataset.spellSelected;
+    let result;
+    if ( spellSelected === "false" ) {
+      // add the spell
+      result = this.object.addSpell( event.currentTarget.dataset.spellUuid );
+    } else if ( spellSelected === "true" ) {
+      // unselect the spell
+      result = this.object.removeSpell( event.currentTarget.dataset.spellUuid );
+    }
+    result.then( _ => this.render() );
   }
 
   _onChangeTab( event, tabs, active ) {

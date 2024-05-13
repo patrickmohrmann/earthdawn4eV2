@@ -1,5 +1,7 @@
 <div class="item__left--main">
     <h3>{{localize "ED.General.coreData"}}</h3>
+    {{!-- Magic Type --}}
+    {{formField systemFields.magicType name="system.magicType" value=item.system.magicType}}
     {{!-- Circle --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Spell.circle"}}:</label>
