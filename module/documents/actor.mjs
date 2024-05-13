@@ -108,13 +108,13 @@ export default class ActorEd extends Actor {
    */
    async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
-    const difficulty = await equipment.system.getDifficulty();
-    if ( difficulty === undefined || difficulty === null ) {
-      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
+    const difficulty = equipment.system.getDifficulty();
+    if ( !difficulty ) {
+      ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
       return;
     }
     const edRollOptions = new EdRollOptions( {
-      rollType: "action",
+      testType: "action",
       step: { base: arbitraryStep },
       target: { base: difficulty },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
