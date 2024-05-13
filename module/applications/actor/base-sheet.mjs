@@ -122,7 +122,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-name" );
     const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.takeStrain( ability, {event: event} );
+    this.actor.takeStrain( ability.system.strain );
   }
 
 
