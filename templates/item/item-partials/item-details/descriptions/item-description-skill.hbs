@@ -13,7 +13,7 @@
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
         <select name="system.attribute">
-            {{selectOptions config.attributes selected=item.system.attribute labelAttr="label" localize=true }}
+            {{selectOptions config.attributes selected=item.system.attribute blank="" labelAttr="label" localize=true }}
         </select>
     </div>
     {{!-- Action --}}

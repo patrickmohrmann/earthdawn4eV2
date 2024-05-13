@@ -424,6 +424,7 @@ p {
   grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 100px;
 }
 .ability-card__grid--container .ability-card__grid--item .roll-icon__hover,
+.ability-card__grid--container .ability-card__grid--item .roll-icon__hover-fixed,
 .ability-card__grid--container .ability-card__grid--item .roll-icon__pointer {
   display: none;
 }
@@ -473,6 +474,7 @@ p {
   text-align: left;
 }
 .roll-icon__hover,
+.roll-icon__hover-fixed,
 .roll-icon__pointer,
 .ability-icon,
 .attribute-icon,
@@ -518,6 +520,13 @@ p {
   to {
     transform: rotate(360deg);
   }
+}
+.ability-card__grid--container:hover .roll-icon__hover-fixed,
+.attribute-card__grid--container:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .roll-icon__hover-fixed {
+  margin-top: -4px;
+  display: block;
+  width: 25px;
 }
 .ability-card__grid--container:hover .ability-icon,
 .attribute-card__grid--container:hover .ability-icon,
@@ -576,7 +585,16 @@ p {
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
-.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover {
+.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
+.ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
+.attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
+.ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
+.attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
+.ability-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed,
+.attribute-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed {
   display: none;
 }
 .card__description--toggle {

@@ -126,6 +126,28 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @summary                       Take the given amount of strain as damage.
+   * @param {number} strain         The amount of strain damage take
+   */
+  takeStrain( strain ) {
+    if ( !strain ) return;
+    this.takeDamage( strain, "standard", undefined, true );
+  }
+
+
+
+  /**
+   * @summary                       Take the given amount of strain as damage.
+   * @param {number} strain         The amount of strain damage take
+   */
+  takeStrain( strain ) {
+    if ( !strain ) return;
+    this.takeDamage( strain, "standard", undefined, true );
+  }
+
+
+
+  /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of
    * damage according to the parameters.
    * @param {number} amount                                     The unaltered amount of damage this actor should take.
