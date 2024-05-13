@@ -72,6 +72,9 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
 
     // Owned Item management
+    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+
+    // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
     // Effect Management
