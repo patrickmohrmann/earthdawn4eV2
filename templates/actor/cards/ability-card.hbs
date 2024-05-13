@@ -8,8 +8,8 @@
                 <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg">
             {{else}} 
             {{#if (uneq this.system.strain 0)}}
-                <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
-                <img class="roll-icon__hover blood" src="icons/svg/blood.svg">
+                <img class="ability-icon" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+                <img class="roll-icon__hover-fixed blood" src="icons/svg/blood.svg">
                 <img class="roll-icon__pointer take-strain" src="systems/ed4e/assets/icons/red-blood.svg" data-attribute="{{@key}}">
             {{else}}
                     <img class="item__image--visible" src="{{img}}" title="{{name}}" height="25" width="25" />

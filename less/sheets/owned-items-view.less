@@ -17,6 +17,7 @@
     .ability-card__grid--item {
 
         .roll-icon__hover,
+        .roll-icon__hover-fixed,
         .roll-icon__pointer {
             display: none;
         }
@@ -119,6 +120,7 @@
 
 
 .roll-icon__hover,
+.roll-icon__hover-fixed,
 .roll-icon__pointer,
 .ability-icon,
 .attribute-icon, 
@@ -167,6 +169,11 @@
 
         }
     }
+    .roll-icon__hover-fixed {
+            margin-top: -4px;
+            display: block;
+            width: 25px;
+    }
 
     .ability-icon,
     .equipment-icon {
@@ -187,7 +194,8 @@
             display: none;
         }
 
-        .roll-icon__hover {
+        .roll-icon__hover, 
+        .roll-icon__hover-fixed {
             display: none;
         }
     }
