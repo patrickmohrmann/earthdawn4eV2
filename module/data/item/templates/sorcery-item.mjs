@@ -66,12 +66,6 @@ export default class MagicTemplate extends SystemDataModel .mixin(
                 initial: "",
                 label: "ED.Item.Spell.effect"
             } ),
-            sourceDiscipline: new fields.StringField( {
-                required: true,
-                blank: false,
-                initial: "elementalist",
-                label: "ED.Item.Spell.sourceDiscipline"
-            } ),
             concentration: new fields.BooleanField( {
                 required: true,
                 initial: false,
