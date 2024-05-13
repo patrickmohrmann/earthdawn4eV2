@@ -200,6 +200,12 @@ export default class CharacterGenerationData extends SparseDataModel {
     return Promise.all( allAbilities );
   }
 
+  get spellDocuments() {
+    const allSpells = this.spells.map( async ( spell ) => await fromUuid( spell ) );
+
+    return Promise.all( allSpells );
+  }
+
   set abilityOption( abilityUuid ) {
     this.updateSource( {
       abilities: {
