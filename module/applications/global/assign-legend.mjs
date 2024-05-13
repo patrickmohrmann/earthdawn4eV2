@@ -60,49 +60,55 @@ export default class AssignLpPrompt extends FormApplication {
 
   async getData( options = {} ) {
     const context = super.getData( options );
-    const userAll = game.users.filter( u => u.character )
+
+    // actorUserActive = game.users.filter( u => u.active && u.character )
+    // const userAll = game.users.filter( u => u.character )
     context.user = game.users.filter( u => u.active )
-    context.actorUserActive = [];
-    context.actorUserInactive = [];
-    context.actorsNoUserConfigured = [];
+    const actorUserActive = game.users.filter( u => u.active && u.character ).map( user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} ) )
+    const actorUserInactive =  game.users.filter( u => !u.active && u.character ).map( user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} ) )
+    const notGMs = game.users.filter( user => !user.isGM ) 
+    const actorsOwnedNotConfigured = game.actors.filter( actor => notGMs.map( user => actor.testUserPermission( user,"OWNER" ) && user.character?.id !== actor.id ).some( Boolean ) ).map( actor => ( {actorId: actor.id, actorName: actor.name} ) )
+    context.actorUserActive = actorUserActive;
+    context.actorUserInactive = actorUserInactive;
+    context.actorsNoUserConfigured = actorsOwnedNotConfigured;
 
-    for ( let i = 0; i < userAll.length; i++ ) {
-      if ( userAll[i].active === true ) {
-        context.actorUserActive.push(
-          {
-          actorName: userAll[i].character.name,
-          playerName: userAll[i].name,
-          actorId: userAll[i].character._id,
-          }
-        )
-      } else if ( userAll[i].active === false ) {
-        context.actorUserInactive.push(
-          {
-          actorName: userAll[i].character.name,
-          playerName: userAll[i].name,
-          actorId: userAll[i].character._id,
-          }
-        )
-      } 
-    }
-    const ownedCharacters = game.actors.filter( a => a.type === 'character' && a.hasPlayerOwner )
-    for ( let i = 0; i < ownedCharacters.length; i++ ) {
-      for ( let x = 0; x < context.actorUserActive.length; x++ ) {
-        if ( ownedCharacters[i].id !== context.actorUserActive[x].actorId ) {
-          for ( let y = 0; y < context.actorUserInactive.length; y++ ) { 
-            if ( ownedCharacters[i].id !== context.actorUserInactive[y].actorId ) {
+    // for ( let i = 0; i < userAll.length; i++ ) {
+    //   if ( userAll[i].active === true ) {
+    //     context.actorUserActive.push(
+    //       {
+    //       actorName: userAll[i].character.name,
+    //       playerName: userAll[i].name,
+    //       actorId: userAll[i].character._id,
+    //       }
+    //     )
+    //   } else if ( userAll[i].active === false ) {
+    //     context.actorUserInactive.push(
+    //       {
+    //       actorName: userAll[i].character.name,
+    //       playerName: userAll[i].name,
+    //       actorId: userAll[i].character._id,
+    //       }
+    //     )
+    //   } 
+    // }
+    // const ownedCharacters = game.actors.filter( a => a.type === 'character' && a.hasPlayerOwner )
+    // for ( let i = 0; i < ownedCharacters.length; i++ ) {
+    //   for ( let x = 0; x < context.actorUserActive.length; x++ ) {
+    //     if ( ownedCharacters[i].id !== context.actorUserActive[x].actorId ) {
+    //       for ( let y = 0; y < context.actorUserInactive.length; y++ ) { 
+    //         if ( ownedCharacters[i].id !== context.actorUserInactive[y].actorId ) {
 
-              context.actorsNoUserConfigured.push(
-                {
-                actorName: ownedCharacters[i].name,
-                actorId: ownedCharacters[i]._id,
-                }
-              )
-            } 
-          }
-        }
-      }
-    }
+    //           context.actorsNoUserConfigured.push(
+    //             {
+    //             actorName: ownedCharacters[i].name,
+    //             actorId: ownedCharacters[i]._id,
+    //             }
+    //           )
+    //         } 
+    //       }
+    //     }
+    //   }
+    // }
     return context;
   }
 
