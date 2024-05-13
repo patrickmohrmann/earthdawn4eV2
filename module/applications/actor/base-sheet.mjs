@@ -119,13 +119,13 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * Handle rolling a test from a rollable equipment.
+   * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
    * @private
    */
   _onRollEquipment( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
+    const li = event.currentTarget.closest( ".item-id" );
     const equipment = this.actor.items.get( li.dataset.itemId );
     this.actor.rollEquipment( equipment, {event: event} );
   }
