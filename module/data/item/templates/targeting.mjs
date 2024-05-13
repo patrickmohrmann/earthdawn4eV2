@@ -46,7 +46,7 @@ export default class TargetTemplate extends SystemDataModel {
         let currentTargets = [...game.user.targets.map( ( t ) => t.actor )];
         let numTargets = game.user.targets.size;
         let targetDifficultySetting = this.difficulty.target
-        let groupDiffciultySetting = this.difficulty.group
+        let groupDifficultySetting = this.difficulty.group
         let fixedDifficultySetting = this.difficulty.fixed
     
         if ( numTargets <= 0 || targetDifficultySetting === "none" ) {
@@ -58,7 +58,7 @@ export default class TargetTemplate extends SystemDataModel {
         } else {
           let baseDifficulty = 0;
           let additionalTargetDifficulty = 0;
-          switch ( groupDiffciultySetting ) {
+          switch ( groupDifficultySetting ) {
               case 'hightestX':
                 additionalTargetDifficulty = numTargets - 1;
               case 'highestOfGroup':
