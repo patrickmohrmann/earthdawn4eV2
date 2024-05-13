@@ -119,7 +119,7 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * Handle rolling an attribute test.
+   * Handle rolling a test from a rollable equipment.
    * @param {Event} event      The originating click event.
    * @private
    */
