@@ -13,7 +13,7 @@
             item.system.usableItem.usableItemSelector}}>
         {{#if (eq item.system.usableItem.usableItemSelector true)}}
         <label>{{localize "ED.Item.General.arbitraryStep"}}:</label>
-        <input class="input__number-input" name="system.arbitraryStep" type="text" value="{{item.system.arbitraryStep}}"
+        <input class="input__number-input" name="system.usableItem.arbitraryStep" type="text" value="{{item.system.usableItem.arbitraryStep}}"
             data-dtype="Number">
         <label>{{localize "ED.Item.General.action"}}:</label>
         <select class="input__select-input" name="system.action" value="{{item.system.usableItem.action}}" {{#select
@@ -38,6 +38,26 @@
             <option value="6">{{localize "ED.Item.RecoveryPropertyValue.6"}}</option>
             {{/select}}
         </select>
+        {{!-- Target Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-FixedDifficulty"}}:</label>
+        <input class="input__number-input" name="system.difficulty.fixed" type="text"
+            value="{{item.system.difficulty.fixed}}" data-dtype="Number">
+    </div>
+    {{!-- Target Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
+        <select name="system.difficulty.target">
+            {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
+        </select>
+    </div>
+    {{!-- Group Difficulty --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "X-GroupDifficulty"}}:</label>
+        <select name="system.difficulty.group">
+            {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
+        </select>
+    </div>
         {{/if}}
     </div>
     {{!-- consumable Item --}}

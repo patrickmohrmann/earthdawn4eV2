@@ -65,8 +65,8 @@ export default class ActorSheetEd extends ActorSheet {
     // Ability tests
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
 
-    // Item tests
-    html.find( ".card__equipment .rollable" ).click( this._onRollItem.bind( this ) );
+    // Equipment tests
+    html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -119,14 +119,15 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * Handle rolling an item test.
+   * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
    * @private
    */
-  _onRollItem( event ) {
+  _onRollEquipment( event ) {
     event.preventDefault();
-    ui.notifications.error( "not implemented Yet" )
-    return
+    const li = event.currentTarget.closest( ".item-id" );
+    const equipment = this.actor.items.get( li.dataset.itemId );
+    this.actor.rollEquipment( equipment, {event: event} );
   }
 
   /**

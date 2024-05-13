@@ -1,0 +1,49 @@
+<div class="card__equipment one-line__vertical-align">
+    {{#if (eq this.system.usableItem.usableItemSelector true)}}
+    <span class="card__icon rollable-icons">
+        <img class="item__image" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+        <img class="roll-icon__hover rollable" src="icons/svg/d20-grey.svg">
+        <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+    </span>
+    {{else}}
+    <span class="card__icon--visible">
+        <img class="item__image--visible" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
+    </span>
+    {{/if }}
+    <span class="card__name">
+        {{name}}
+    </span>
+    {{#if (eq system.usabelItem.usableItemSelector true )}}
+    <span class="card__action">
+        <i class="fa-solid fa-dice"></i>
+        <label>{{localize "X-Action"}}:</label>
+        {{system.action}}
+    </span>
+    {{/if }}
+    <span class="card__number">
+        <label>{{localize "X-phy-armor"}}:</label>
+        {{system.physical.armor}}
+    </span>
+    <span class="card__number">
+        <label>{{localize "X-My-armor"}}:</label>
+        {{system.mystical.armor}}
+    </span>
+    </span>
+    <span class="card__number">
+        <label>{{localize "X-Penalty"}}:</label>
+        {{system.initiativePenalty}}
+    </span>
+    <span class="card__control">
+        {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
+    </span>
+</div>
+<div class="card__description card__description--toggle">
+    <span class="card__description--content">
+        {{{system.description.value}}}
+    </span>
+    {{!-- <span class="card__description--effects">
+        {{#each this.effects as |effects id|}}
+        {{> "systems/ed4e/templates/item/cards/effect-card.hbs" effects }}
+        {{/each}}
+    </span> --}}
+</div>

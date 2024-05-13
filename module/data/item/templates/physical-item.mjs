@@ -15,7 +15,7 @@ import TargetTemplate from "./targeting.mjs";
  * @property {string} usableItem.action                     action type of usable item
  * @property {number} usableItem.recoveryPropertyValue      recovery type value
  */
-export default class PhysicalItemTemplate extends SystemDataModel .mixin( 
+export default class PhysicalItemTemplate extends SystemDataModel.mixin( 
     TargetTemplate
 ) {
 
