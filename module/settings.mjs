@@ -249,6 +249,16 @@ export default function registerSystemSettings() {
         )
     } );
 
+    // Split Talents
+    game.settings.register( "ed4e", "talentsSplit", {
+        name: "ED.Settings.talentsSplit",
+        hint: "ED.Settings.talentsSplitHint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    } );
+
      /* -------------------------------------------------------------------------------- */
     /*                                  GM Chat Avatar                                     */
     /* -------------------------------------------------------------------------------- */

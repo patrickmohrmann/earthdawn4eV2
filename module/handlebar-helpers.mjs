@@ -9,6 +9,10 @@ export default function registerHandlebarHelpers() {
 
   // General Handlebars
 
+  Handlebars.registerHelper( 'ed-getTalentSort', ( value ) => {
+    return value === game.settings.get( "ed4e", "talentsSplit" );
+  } );
+
   Handlebars.registerHelper( 'hasItems', ( collection ) => {
     if (!collection || typeof collection[Symbol.iterator] !== 'function' ) {
       // Check if collection is iterable
