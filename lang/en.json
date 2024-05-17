@@ -275,6 +275,10 @@
         },
         "Rolls": {
             "baseValue":                                            "Base Step",
+            "formulaDevotion":                                      "{amount}x Devotion (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaStep":                                          "Step {step}",
             "Labels": {
                 "arbitraryTestRoll":                                "Arbitrary Test",
                 "actionTestRoll":                                   "Action Test",

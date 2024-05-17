@@ -270,6 +270,10 @@
         },
         "Rolls": {
             "baseValue":                                            "Basis Stufe",
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaStep":                                          "Stufe {step}",
             "Labels": {
                 "arbitraryTestRoll":                                "Willkürlicher Test",
                 "actionTestRoll":                                   "Aktionsprobe",
