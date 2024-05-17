@@ -208,6 +208,25 @@
                 "loadedOver":                                       "Overloaded"
             }
         },
+        "Chat": {
+            "Button": {
+                "applyDamage":                                      "Assign Damage",
+                "applyDamageTitle":                                 "Assign the Damage to the Targets!",
+                "applyEffect":                                      "Assign Effect",
+                "applyEffectTitle":                                 "Assign the Effect to the Targets!",
+                "rollEffect":                                       "Roll Effect",
+                "rollEffectTitle":                                  "Roll the Effect",
+                "rollDamage":                                       "Roll Damage",
+                "rollDamageTitle":                                  "Roll for Damage",
+                "takeDamage":                                       "Take Damage",
+                "takeDamageTitle":                                  "Take the damage for your Actor"
+            },
+            "Header": {
+                "actionTest":                                       "Action Test",
+                "arbitraryTest":                                    "arbitrary Test",
+                "effectTest":                                       "Effect Test"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},
@@ -254,20 +273,44 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Rolls": {
+            "baseValue":                                            "Base Step",
+            "Labels": {
+                "arbitraryTestRoll":                                "Arbitrary Test",
+                "actionTestRoll":                                   "Action Test",
+                "effectTestRoll":                                   "Effect Test",
+                "abilityRoll":                                      "Ability Test",
+                "arbitraryRoll":                                    "Arbitrary Test",
+                "attackRoll":                                       "Attack Test",
+                "attributeRoll":                                    "Attribute Test",
+                "damageRoll":                                       "Damage Test",
+                "effectRoll":                                       "Effect Test",
+                "halfmagicRoll":                                    "Half-magic Test",
+                "initiativeRoll":                                   "Initiative Test",
+                "recoveryRoll":                                     "Recovery Test",
+                "spellcastingRoll":                                 "Spellcasting Test",
+                "threadWeavingRoll":                                "Thread weaving Test"
+            },
+            "rollResult":                                           "Roll Result",
+            "stepModifiers":                                        "Step Modifier",
+            "successesAchieved":                                    "Total Successes",
+            "targetDifficulty":                                     "Difficulty",
+            "targetModifiers":                                      "Target Modifier"  
+        },
         "Settings": {
-            "talentsSplit":                                         "Sort Talents by Kategory",
-            "talentsSplitHint":                                     "Sort Talents",
             "Edid": {
-                "languageRW": "ED-ID for Read/Write Language",
-                "languageRWHint": "ED-ID for the Read/Write Language ability",
-                "languageSpeak": "ED-ID for Speak Language",
-                "languageSpeakHint": "ED-ID for the Speak Language ability",
-                "spellCasting": "ED-ID for Spellcasting",
-                "spellCastingHint": "Identifies a talent that is used for spellcasting",
-                "threadWeaving": "ED-ID for Thread Weaving",
-                "threadWeavingHint": "Identifies a talent that is used for thread weaving"
-            }
+                "languageRW":                                       "ED-ID for Read/Write Language",
+                "languageRWHint":                                   "ED-ID for the Read/Write Language ability",
+                "languageSpeak":                                    "ED-ID for Speak Language",
+                "languageSpeakHint":                                "ED-ID for the Speak Language ability",
+                "spellCasting":                                     "ED-ID for Spellcasting",
+                "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
+                "threadWeaving":                                    "ED-ID for Thread Weaving",
+                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+            },
+            "talentsSplit":                                         "Sort Talents by Kategory",
+            "talentsSplitHint":                                     "Sort Talents"
         }
-    }
-    
+        
+    }   
 }

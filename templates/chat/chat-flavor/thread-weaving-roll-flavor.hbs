@@ -1,0 +1,10 @@
+<div class="custom-flavor">{{ customFlavor }}</div>
+{{#if (uneq target.total 0)}}
+{{> "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs"}}
+{{/if}}
+<div class="modifier-lists flexrow">
+  {{> "systems/ed4e/templates/chat/dice-partials/roll-step-modifier.hbs"}}
+  {{#if target.public}}
+    {{> "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs"}}
+  {{/if}}
+</div>

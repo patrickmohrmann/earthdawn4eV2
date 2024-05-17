@@ -121,6 +121,7 @@ p {
 }
 .undefined {
   background-color: red;
+  color: black;
 }
 .itemControlGroup,
 .icon__position--right {
