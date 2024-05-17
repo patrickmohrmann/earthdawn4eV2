@@ -41,7 +41,7 @@ export default class RollPrompt extends FormApplication {
         RollPrompt.waitPrompt(
             new EdRollOptions( {
                 testType: "arbitrary",
-                chatFlavor: game.i18n.localize( "X.ThisIsTheCustomFlavorTextFromArbitraryPrompt" ),
+                chatFlavor: game.i18n.localize( "ED.Chat.Header.arbitraryTest" ),
             } )
         ).then(
             ( roll ) => roll?.toMessage()
@@ -74,7 +74,7 @@ export default class RollPrompt extends FormApplication {
     }
 
     get template() {
-        return 'systems/ed4e/templates/global/roll-prompt.hbs';
+        return 'systems/ed4e/templates/prompts-popups/roll-prompt.hbs';
     }
 
     /** @type {EdRollOptions} */

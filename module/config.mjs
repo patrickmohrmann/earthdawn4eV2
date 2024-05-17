@@ -348,19 +348,19 @@ preLocalize( "lpSpendingTypes" );
 ED4E.testTypes = {
 	arbitrary: {
 		label: "X.arbitraryStepRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/arbitrary-roll-flavor.hbs",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
 	},
 	action: {
 		label: "X.actionTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/action-roll-flavor.hbs",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
 	effect: {
 		label: "X.effectTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/effect-roll-flavor.hbs",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
 	damage: {
 		label: "X.damageTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/damage-roll-flavor.hbs",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
 	},
 }
 preLocalize( "testTypes", { key: "label" } );

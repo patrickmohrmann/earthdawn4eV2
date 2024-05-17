@@ -116,7 +116,7 @@ export default class ActorEd extends Actor {
       return;
     }
     const edRollOptions = new EdRollOptions( {
-      rollType: "action",
+      testType: "action",
       step: { base: abilityFinalStep },
       strain: { base: ability.system.strain},
       target: { base: difficulty },

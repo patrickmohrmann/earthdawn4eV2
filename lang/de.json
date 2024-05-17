@@ -207,6 +207,25 @@
                 "loadedOver":                                       "Überlasted"
             }
         },
+        "Chat": {
+            "Button": {
+                "applyDamage":                                      "Schaden zufügen",
+                "applyDamageTitle":                                 "Füge den Schaden den ausgewählten Zielen zu!",
+                "applyEffect":                                      "Effekt zufügen",
+                "applyEffectTitle":                                 "Füge den Effect den ausgewählten Zielen zu!",
+                "rollEffect":                                       "Effektwurf",
+                "rollEffectTitle":                                  "Würfel den Effect",
+                "rollDamage":                                       "Effektwurf",
+                "rollDamageTitle":                                  "Würfel den Effect",
+                "takeDamage":                                       "Schaden nehmen",
+                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter"
+            },
+            "Header": {
+                "actionTest":                                       "Aktions Test",
+                "arbitraryTest":                                    "Willkürlicher Test",
+                "effectTest":                                       "Effect Test"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},
@@ -248,6 +267,14 @@
             "troll":                                                "Trollisch",
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
+        },
+        "Rolls": {
+            "baseValue":                                            "Basis Stufe",
+            "rollResult":                                           "Würfelergebnis",
+            "stepModifiers":                                        "Stufen Modifikatoren",
+            "successesAchieved":                                    "Gesamt Erfolge",
+            "targetDifficulty":                                     "Schwierigkeit",
+            "targetModifiers":                                      "Ziel Modifikatoren"
         },
         "Settings": {
             "talentsSplit":                                         "Talente nach Kategorie gruppieren",

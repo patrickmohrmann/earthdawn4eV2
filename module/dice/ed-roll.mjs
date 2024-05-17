@@ -55,7 +55,7 @@ export default class EdRoll extends Roll {
   /**
    * @inheritDoc
    */
-  static TOOLTIP_TEMPLATE = "systems/ed4e/templates/dice/tooltip.hbs";
+  static TOOLTIP_TEMPLATE = "systems/ed4e/templates/chat/tooltip.hbs";
 
   /* -------------------------------------------- */
   /*  Getter and Setter                           */
