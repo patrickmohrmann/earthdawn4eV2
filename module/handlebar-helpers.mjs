@@ -22,10 +22,6 @@ export default function registerHandlebarHelpers() {
     return false; // If no elements found, return false
   } );
 
-  Handlebars.registerHelper( "ed-hasEffect", ( item ) => {
-    return item.effects.size;
-  } );
-
   Handlebars.registerHelper( 'add', ( value1, value2 ) => {
     return value1 + value2;
   } );
