@@ -130,7 +130,7 @@ function addUserPortrait( msg, jquery ) {
   const chatAvatarSetting = game.settings.get( "ed4e", "chatAvatar" );
   const isGM = msg.author.isGM;
   const avatar_img = msg.author.avatar;
-  const token = canvas.tokens.controlled[0];
+  const token = canvas.tokens?.controlled[0];
   const token_img =  ( isGM || token?.document.isOwner ) ? token?.document.texture.src : undefined;
   const is_config_setting = chatAvatarSetting === "configuration";
 
