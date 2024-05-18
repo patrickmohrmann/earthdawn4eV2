@@ -39,7 +39,7 @@ export default class EdRoll extends Roll {
     const baseTerm = formula
       ? formula
       : // : ( `${getDice( step )}[${game.i18n.localize( "ED.General.S.step" )} ${step}]` );
-      `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.General.S.step" )} ${
+      `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.Rolls.step" )} ${
         edRollOptions.step.total
       }]`;
     super( baseTerm, data, edRollOptions );
@@ -277,7 +277,7 @@ export default class EdRoll extends Roll {
       for ( let i = 1; i <= pointsUsed; i++ ) {
         diceTerm = getDice( this.options[type].step );
         newTerms = Roll.parse(
-          `(${diceTerm})[${game.i18n.localize( `ED.General.${type[0]}.${type}` )} ${i}]`,
+          `(${diceTerm})[${game.i18n.localize( `ED.Rolls.${type}` )} ${i}]`,
           {}
         );
         this.terms.push( new foundry.dice.terms.OperatorTerm( {operator: "+"} ), ...newTerms );

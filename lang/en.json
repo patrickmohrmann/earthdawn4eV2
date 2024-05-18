@@ -275,10 +275,12 @@
         },
         "Rolls": {
             "baseValue":                                            "Base Step",
+            "devotion":                                             "Devotion",
             "formulaDevotion":                                      "{amount}x Devotion (St {step})",
             "formulaExtraStep":                                     "{label} (St {step})",
             "formulaKarma":                                         "{amount}x Karma (St {step})",
             "formulaStep":                                          "Step {step}",
+            "karma":                                                "Karma",
             "Labels": {
                 "arbitraryTestRoll":                                "Arbitrary Test",
                 "actionTestRoll":                                   "Action Test",
@@ -296,6 +298,7 @@
                 "threadWeavingRoll":                                "Thread weaving Test"
             },
             "rollResult":                                           "Roll Result",
+            "step":                                                 "Step",
             "stepModifiers":                                        "Step Modifier",
             "successesAchieved":                                    "Total Successes",
             "targetDifficulty":                                     "Difficulty",
@@ -313,8 +316,12 @@
                 "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
             },
             "talentsSplit":                                         "Sort Talents by Kategory",
-            "talentsSplitHint":                                     "Sort Talents"
-        }
-        
+            "talentsSplitHint":                                     "Sort Talents",
+            "SpecificSettingOptions":{
+                "changelog":                                        "Changelog",
+                "help":                                             "help",
+                "troubleshooting":                                  "troubleshooting"
+            }
+        }  
     }   
 }

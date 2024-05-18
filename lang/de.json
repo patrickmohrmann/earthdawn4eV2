@@ -270,10 +270,12 @@
         },
         "Rolls": {
             "baseValue":                                            "Basis Stufe",
+            "devotion":                                             "Weihekraft",                
             "formulaDevotion":                                      "{amount}x Weihe (St {step})",
             "formulaExtraStep":                                     "{label} (St {step})",
             "formulaKarma":                                         "{amount}x Karma (St {step})",
             "formulaStep":                                          "Stufe {step}",
+            "karma":                                                "Karma",
             "Labels": {
                 "arbitraryTestRoll":                                "Willkürlicher Test",
                 "actionTestRoll":                                   "Aktionsprobe",
@@ -291,6 +293,7 @@
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
             "rollResult":                                           "Würfelergebnis",
+            "step":                                                 "Stufe",     
             "stepModifiers":                                        "Stufen Modifikatoren",
             "successesAchieved":                                    "Gesamt Erfolge",
             "targetDifficulty":                                     "Schwierigkeit",
@@ -306,6 +309,11 @@
                 "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
                 "threadWeaving":                                    "ED-ID für Fadenweben",
                 "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+            },
+            "SpecificSettingOptions":{
+                "changelog":                                        "Änderungsprotokoll",
+                "help":                                             "Hilfe",
+                "troubleshooting":                                  "Fehlermeldung"
             },
             "talentsSplit":                                         "Talente nach Kategorie gruppieren",
             "talentsSplitHint":                                     "Talente Gruppieren"
