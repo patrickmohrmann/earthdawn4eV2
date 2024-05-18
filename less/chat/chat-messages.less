@@ -1,8 +1,64 @@
 .chat-message {
+  background-image: url('assets/sheet/background.png');
+
+  .message-sender {
+    font-size: larger;
+    padding-top: 12px;
+    padding-left: 5px;
+  }
+  .message-metadata {
+    padding-top: 12px;
+    .message-delete {
+      font-size: larger;
+    }
+  }
   img.avatar {
-    border: unset;
+    border: none;
     object-fit: scale-down;
-    max-height: 2em;
-    margin-bottom: 0.7em;
+    max-height: 40px;
+  }
+  .custom-flavor {
+    margin: 0.5em 0;
+    font-size: medium;
+  }
+  .roll-successes {
+    margin: 0.5em 0;
+    text-align: center;
+    font-size: large;
+  }
+  .modifier-lists {
+    margin-bottom: 5px;
+    padding: 0 0.3em;
+    font-size: medium;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-border-light-2);
+    border-radius: 3px;
+    box-shadow:  0 0 2px #FFF inset;
+    li {
+      text-transform: capitalize;
+    }
+  }
+  .dice-formula {
+    word-break: unset;
+  }
+  .dice-total {
+    &.roll-success {
+      background-color: darkseagreen;
+    }
+    &.roll-failure {
+      background-color: indianred;
+    }
+  }
+  .message-buttons {
+    margin: 1em 0;
+    &.flexrow {
+      button:first-child {
+        margin-left: 0;
+      }
+
+      button:last-child {
+        margin-right: 0;
+      }
+    }
   }
 }
