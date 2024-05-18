@@ -269,6 +269,7 @@
             "windling":                                             "Windling"
         },
         "Rolls": {
+            "against":                                              "gegen",
             "baseValue":                                            "Basis Stufe",
             "devotion":                                             "Weihekraft",                
             "formulaDevotion":                                      "{amount}x Weihe (St {step})",
@@ -276,6 +277,8 @@
             "formulaKarma":                                         "{amount}x Karma (St {step})",
             "formulaStep":                                          "Stufe {step}",
             "karma":                                                "Karma",
+            "moreTargets":                                          "und weitere Ziele",
+            "rolls":                                                "würfelt",
             "Labels": {
                 "arbitraryTestRoll":                                "Willkürlicher Test",
                 "actionTestRoll":                                   "Aktionsprobe",

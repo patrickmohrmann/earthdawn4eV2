@@ -90,12 +90,15 @@ export default class ActorEd extends Actor {
    */
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
+    const attribute = `${game.i18n.localize( ED4E.attributes[attributeId].label )} Test`
+    const sourceActor = this.name;
+    let targetActors = this.targetNames()
     const edRollOptions = new EdRollOptions( {
       testType: "action",
       step: { base: attributeStep },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
-      chatFlavor: `${game.i18n.localize( ED4E.attributes[attributeId].label )} Test`,
+      chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + attribute + targetActors,
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -111,6 +114,8 @@ export default class ActorEd extends Actor {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityFinalStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
+    const sourceActor = this.name;
+    let targetActors = this.targetNames()
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
@@ -122,7 +127,7 @@ export default class ActorEd extends Actor {
       target: { base: difficulty },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { pointsUsed: ability.system.devotionRequired ? 1: 0, pointsRequired: ability.system.devotionRequired, available: this.system.devotion.value, step: this.system.devotion.step },
-      chatFlavor: ability.name + " Test",
+      chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + ability.name + " Test" + targetActors,
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -136,6 +141,8 @@ export default class ActorEd extends Actor {
    */
    async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
+    const sourceActor = this.name;
+    let targetActors = this.targetNames()
     const difficulty = equipment.system.getDifficulty();
     if ( !difficulty ) {
       ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
@@ -147,11 +154,27 @@ export default class ActorEd extends Actor {
       target: { base: difficulty },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
-      chatFlavor: equipment.name + " Equipment Test",
+      chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + equipment.name + " Test" + targetActors,
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
+
+    /**
+   * @summary                       get the Target of the action.
+   * @param {string} name           The name of the target
+   * @returns {string}              Returns a string of target actors
+   */
+    targetNames( ) {
+      const userTargetActors = game.users.current.targets
+      let targetActors = "";
+      if ( userTargetActors.size === 1 ) {
+        targetActors = " " + game.i18n.localize( "ED.Rolls.against" ) + " " + userTargetActors.first().document.name
+      } else if ( userTargetActors.size > 1 ) {
+        targetActors = " " + game.i18n.localize( "ED.Rolls.against" ) + " " + userTargetActors.first().document.name + " " + game.i18n.localize( "ED.Rolls.moreTargets" )
+      }
+      return targetActors
+    }
 
   /**
    * @summary                       Take the given amount of strain as damage.
