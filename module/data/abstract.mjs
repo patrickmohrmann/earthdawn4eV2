@@ -114,6 +114,19 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
         return Base;
     }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Get the localization keys for the label or hint property of a {@link foundry.data.fields.DataField}.
+     * @param {string}  documentType    The type of document of the data model, like "Actor", "Item", or "ActiveEffect".
+     * @param {boolean}  hint           `True`, if the key is made for the `hint` field, otherwise for `label` field.
+     * @param {string}  name            The final part of the localization key, the actual name.
+     * @returns {string}                A localization key in the form of `ED.Data.<DocumentType>.<Labels|Hints>.<name>`.
+     */
+    static getLocalizeKey( documentType, hint, name ) {
+        return `ED.Data.${documentType}.${hint ? 'Hints' : 'Labels'}.${name}`;
+    }
 }
 
 /* -------------------------------------------- */
