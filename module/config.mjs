@@ -384,7 +384,7 @@ ED4E.reserved_edid = {
 
 /**
  * The available chat commands with their corresponding help text.
- * @type {string}
+ * @enum {string}
  */
 ED4E.chatCommands = {
 	char: 'X.chatCommandCharHelp no parameters, trigger char gen',
