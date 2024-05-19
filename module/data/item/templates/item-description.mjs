@@ -1,6 +1,3 @@
-import ED4E from "../../../config.mjs";
-import { validateEdid } from "../../../utils.mjs";
-import { getLocalizeKey } from "../../abstract.mjs";
 import { EdIdField } from "../../fields.mjs";
 
 /**
