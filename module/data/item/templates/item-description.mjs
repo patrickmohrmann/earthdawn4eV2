@@ -1,6 +1,7 @@
 import ED4E from "../../../config.mjs";
 import { validateEdid } from "../../../utils.mjs";
 import { getLocalizeKey } from "../../abstract.mjs";
+import { EdIdField } from "../../fields.mjs";
 
 /**
  * Data model template with item description
@@ -19,14 +20,7 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
                     label: "ED.Description"
                 } ), 
             } ),
-            edid: new fields.StringField( {
-                initial: ED4E.reserved_edid.DEFAULT,
-                blank: false,
-                required: true,
-                validate: ( value, _ ) => validateEdid( value ),
-                label: getLocalizeKey( "Item", false, "edid" ),
-                hints: getLocalizeKey( "Item", true, "edid" ),
-            } ),
+            edid: new EdIdField(),
         };
     }
 
