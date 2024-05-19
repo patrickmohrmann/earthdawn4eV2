@@ -33,6 +33,29 @@ export function getDefenseValue( attributeValue ) {
 /*  Foundry                                     */
 /* -------------------------------------------- */
 
+/** Taken from SWADE system ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID}). Takes an input
+ * and returns the slugged string of it.
+ * From {@link https://itnext.io/whats-a-slug-f7e74b6c23e0}:
+ * A slug is a human-readable, unique identifier, used to identify a resource instead of a less human-readable
+ * identifier like an id. You use a slug when you want to refer to an item while preserving the ability to
+ * see, at a glance, what the item is.
+ * @param { * }   input The input that will be converted to a string and slugified.
+ * @returns { string }  The sluggified string.
+ */
+export function slugify( input ) {
+  const slugged = String( input )
+    .normalize('NFKD') // split accented characters into their base characters and diacritical marks
+    .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+    .toLowerCase() // convert to lowercase
+    .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+    .replace(/-+/g, '-') // remove consecutive hyphens
+    .replace(/^-+/g, '') //remove leading hyphens
+    .replace(/-+$/g, '') //remove trailing hyphens
+    .trim(); // trim leading or trailing whitespace
+  return slugged;
+}
+
 /**
  * Search all documents in the game, including world and packs, according to the
  * given constraints and return them in an array.
