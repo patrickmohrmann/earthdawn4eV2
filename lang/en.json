@@ -204,6 +204,30 @@
                 "loadedOver":                                       "Overloaded"
             }
         },
+        "Data": {
+            "ActiveEffect": {
+                "Labels": {},
+                "Hints": {}
+            },
+            "Actor": {
+                "Labels": {
+                    "toughness": "bla"
+                },
+                "Hints": {}
+            },
+            "Item": {
+                "Labels": {
+                    "edid": "ED-ID"
+                },
+                "Hints": {
+                    "edid": "An ID to identify an item without considering its name"
+                }
+            },
+            "Journal": {
+                "Labels": {},
+                "Hints": {}
+            }
+        },
         "Item": {
             "Header": {
                 "navigator":                                        "Navigator"                                       

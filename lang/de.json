@@ -203,6 +203,30 @@
                 "loadedOver":                                       "Überlasted"
             }
         },
+        "Data": {
+            "ActiveEffect": {
+                "Labels": {},
+                "Hints": {}
+            },
+            "Actor": {
+                "Labels": {
+                    "toughness": "bla"
+                },
+                "Hints": {}
+            },
+            "Item": {
+                "Labels": {
+                    "edid": "ED-ID"
+                },
+                "Hints": {
+                    "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+                }
+            },
+            "Journal": {
+                "Labels": {},
+                "Hints": {}
+            }
+        },
         "Item": {
             "Navigator": {
                 "advancement":                                      "Fortschritt",

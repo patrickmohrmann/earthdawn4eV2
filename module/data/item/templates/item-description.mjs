@@ -1,5 +1,6 @@
 import ED4E from "../../../config.mjs";
 import { validateEdid } from "../../../utils.mjs";
+import { getLocalizeKey } from "../../abstract.mjs";
 
 /**
  * Data model template with item description
@@ -23,8 +24,8 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
                 blank: false,
                 required: true,
                 validate: ( value, _ ) => validateEdid( value ),
-                label: "X.ED-ID",
-                hints: "X.Earthdawn ID to identify an item without considering the name",
+                label: getLocalizeKey( "Item", false, "edid" ),
+                hints: getLocalizeKey( "Item", true, "edid" ),
             } ),
         };
     }
