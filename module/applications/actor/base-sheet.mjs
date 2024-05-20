@@ -42,6 +42,7 @@ export default class ActorSheetEd extends ActorSheet {
     systemData.enrichment = await this.actor._enableHTMLEnrichment();
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
+    systemData.splitTalents = game.settings.get("ed4e", "talentsSplit" );
     return systemData;
   }
 
