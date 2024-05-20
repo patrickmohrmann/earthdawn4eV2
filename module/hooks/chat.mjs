@@ -97,7 +97,7 @@ function triggerHelp(argString) {
 /* -------------------------------------------- */
 
 function triggerLPAward(argString) {
-  LpTransactionData.AssignLpPrompt();
+  LpTransactionData.assignLpPrompt();
   // ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }

@@ -50,7 +50,7 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
         throw new Error( `The ${this["name"]} subclass of LpTransactionData must define its displayString` );
     }
 
-    static async AssignLpPrompt () {
+    static async assignLpPrompt () {
         const generation = await AssignLpPrompt.waitPrompt();
         if ( !generation ) return;
     }
