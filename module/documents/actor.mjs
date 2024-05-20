@@ -27,6 +27,34 @@ export default class ActorEd extends Actor {
     return this.items.filter( item => item.type === 'namegiver' )[0];
   }
 
+  /**
+   * Taken from the ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
+   * Returns an array of items that match a given EDID and optionally an item type.
+   * @param {string} edid           The SWID of the item(s) which you want to retrieve
+   * @param {string} type           Optionally, a type name to restrict the search
+   * @returns {Item[]|undefined}    An array containing the found items
+   */
+  getItemsByEdid( edid, type) {
+    const edidFilter = ( item ) => item.system.edid === edid;
+    if ( !type ) return this.items.filter( edidFilter );
+
+    const itemTypes = this.itemTypes;
+    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error(`Type ${type} is invalid!`);
+
+    return itemTypes[type].filter( edidFilter );
+  }
+
+  /**
+   * Taken from the ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
+   * Fetch an item that matches a given EDID and optionally an item type.
+   * @param {string} edid         The EDID of the item(s) which you want to retrieve
+   * @param {string} type         Optionally, a type name to restrict the search
+   * @returns {Item|undefined}    The matching item, or undefined if none was found.
+   */
+  getSingleItemByEdid( edid, type ) {
+    return this.getItemsByEdid(edid, type)[0];
+  }
+
   /** 
    * Perform the karma ritual for this actor to set the current karma points to maximum.
    * Only to be used for namegivers with a discipline.
@@ -133,19 +161,6 @@ export default class ActorEd extends Actor {
     if ( !strain ) return;
     this.takeDamage( strain, "standard", undefined, true );
   }
-
-
-
-  /**
-   * @summary                       Take the given amount of strain as damage.
-   * @param {number} strain         The amount of strain damage take
-   */
-  takeStrain( strain ) {
-    if ( !strain ) return;
-    this.takeDamage( strain, "standard", undefined, true );
-  }
-
-
 
   /**
    * Only for actors of type Sentient (character, npc, creature, spirits, horror, dragon). Take the given amount of

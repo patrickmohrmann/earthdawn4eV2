@@ -366,12 +366,25 @@ ED4E.testTypes = {
 preLocalize( "testTypes", { key: "label" } );
 
 /* -------------------------------------------- */
+/*  System			                                */
+/* -------------------------------------------- */
+
+/**
+ * Reserved earthdawn ids.
+ * @enum {string}
+ */
+ED4E.reserved_edid = {
+	DEFAULT: 'none',
+	ANY: 'any',
+}
+
+/* -------------------------------------------- */
 /*  Chat Commands                               */
 /* -------------------------------------------- */
 
 /**
  * The available chat commands with their corresponding help text.
- * @type {string}
+ * @enum {string}
  */
 ED4E.chatCommands = {
 	char: 'X.chatCommandCharHelp no parameters, trigger char gen',

@@ -2,6 +2,8 @@
 /*  Earthdawn                                   */
 /* -------------------------------------------- */
 
+import ED4E from "./config.mjs";
+
 /**
  * Calculate the armor value for the given attribute value.
  * @param { number } attributeValue Willpower value for mystical armor
@@ -32,6 +34,30 @@ export function getDefenseValue( attributeValue ) {
 /* -------------------------------------------- */
 /*  Foundry                                     */
 /* -------------------------------------------- */
+
+/**
+ * Taken from the ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}). Takes an input
+ * and returns the slugged string of it.
+ * From {@link https://itnext.io/whats-a-slug-f7e74b6c23e0}:
+ * A slug is a human-readable, unique identifier, used to identify a resource instead of a less human-readable
+ * identifier like an id. You use a slug when you want to refer to an item while preserving the ability to
+ * see, at a glance, what the item is.
+ * @param { * }   input The input that will be converted to a string and slugified.
+ * @returns { string }  The sluggified string.
+ */
+export function slugify( input ) {
+  const slugged = String( input )
+    .normalize('NFKD') // split accented characters into their base characters and diacritical marks
+    .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+    .toLowerCase() // convert to lowercase
+    .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+    .replace(/-+/g, '-') // remove consecutive hyphens
+    .replace(/^-+/g, '') //remove leading hyphens
+    .replace(/-+$/g, '') //remove trailing hyphens
+    .trim(); // trim leading or trailing whitespace
+  return slugged;
+}
 
 /**
  * Search all documents in the game, including world and packs, according to the
@@ -301,8 +327,37 @@ function isValidIdentifier( identifier ){
   return /^([a-z0-9_-]+)$/i.test( identifier );
 }
 
+/** Source for regex: {@link https://ihateregex.io/expr/url-slug/} */
+export const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/g;
+
+/**
+ * Taken from the ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
+ * Ensure the provided string is a valid earthdawn id (a strictly slugged string).
+ * @param { string }  value The string to be checked for validity
+ * @returns {void|DataModelValidationFailure} A validation failure in case of an invalid value.
+ */
+export function validateEdid( value ) {
+  //`any` is a reserved word
+  if ( value === ED4E.reserved_edid.ANY ) {
+    return new foundry.data.validation.DataModelValidationFailure( {
+      unresolved: true,
+      invalidValue: value,
+      message: 'any is a reserved EDID!',
+    } );
+  }
+  //if the value matches the regex we have likely a valid swid
+  if ( !value.match( SLUG_REGEX ) ) {
+    return new foundry.data.validation.DataModelValidationFailure( {
+      unresolved: true,
+      invalidValue: value,
+      message: value + ' is not a valid EDID',
+    } );
+  }
+}
+
 export const validators = {
-  isValidIdentifier: isValidIdentifier
+  isValidIdentifier: isValidIdentifier,
+  validateEdid: validateEdid,
 }
 
 

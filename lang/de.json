@@ -203,6 +203,30 @@
                 "loadedOver":                                       "Überlasted"
             }
         },
+        "Data": {
+            "ActiveEffect": {
+                "Labels": {},
+                "Hints": {}
+            },
+            "Actor": {
+                "Labels": {
+                    "toughness": "bla"
+                },
+                "Hints": {}
+            },
+            "Item": {
+                "Labels": {
+                    "edid": "ED-ID"
+                },
+                "Hints": {
+                    "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+                }
+            },
+            "Journal": {
+                "Labels": {},
+                "Hints": {}
+            }
+        },
         "Item": {
             "Navigator": {
                 "advancement":                                      "Fortschritt",
@@ -221,6 +245,18 @@
             "troll":                                                "Trollisch",
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
+        },
+        "Settings": {
+            "Edid": {
+                "languageRW": "ED-ID für Lesen/Schreiben",
+                "languageRWHint": "Identifiziert die Fähigkeit Lesen/Schreiben",
+                "languageSpeak": "ED-ID für Fremdsprachen",
+                "languageSpeakHint": "Identifiziert die Fähigkeit Fremdsprachen",
+                "spellCasting": "ED-ID für Spruchzauberei",
+                "spellCastingHint": "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
+                "threadWeaving": "ED-ID für Fadenweben",
+                "threadWeavingHint": "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+            }
         }
     }
 }
