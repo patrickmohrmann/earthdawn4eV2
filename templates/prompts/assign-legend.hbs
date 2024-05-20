@@ -1,15 +1,15 @@
 <form>
   <img src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
-  <div>
+  <!--div>
     <div>
       <h3>
         <label>{{localize "ED.Header.activeUser"}}</label>
       </h3>
       {{#each actorUserActive}}
-      <div>
-        <input type="checkbox" name="{{this.atorId}}" {{checked this.actorId}}>
-        {{this.actorName}}/{{this.playerName}}
-      </div>
+        <div>
+          <input type="checkbox" name="{{this.atorId}}" {{checked this.actorId}}>
+          {{this.actorName}}/{{this.playerName}}
+        </div>
       {{/each}}
     </div>
     <div>
@@ -17,10 +17,10 @@
         <label>{{localize "ED.Header.inactiveUser"}}</label>
       </h3>
       {{#each actorUserInactive}}
-      <div>
-        <input type="checkbox" name="{{this.atorId}}">
-        {{this.actorName}}/{{this.playerName}}
-      </div>
+        <div>
+          <input type="checkbox" name="{{this.atorId}}">
+          {{this.actorName}}/{{this.playerName}}
+        </div>
       {{/each}}
     </div>
     <div>
@@ -28,13 +28,13 @@
         <label>{{localize "ED.Header.actorsNoUserConfigured"}}</label>
       </h3>
       {{#each actorsNoUserConfigured}}
-      <div>
-        <input type="checkbox" name="{{this.atorId}}">
-        {{this.actorName}}
-      </div>
+        <div>
+          <input type="checkbox" name="{{this.atorId}}">
+          {{this.actorName}}
+        </div>
       {{/each}}
     </div>
-  </div>
+  </div-->
   <div>
     <label> 'X-LPAmount' </label>
     <input type='number' id='legendPoints'></input>
@@ -44,15 +44,37 @@
     <input type='string' id='description'></input>
   </div>
 
+  <div>
+    <multi-checkbox name="selectedActors">
+      <optgroup label="{{localize "ED.Header.activeUser"}}">
+        {{#each actorUserActive}}
+          <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+        {{/each}}
+      </optgroup>
+      <optgroup label="{{localize "ED.Header.inactiveUser"}}">
+        {{#each actorUserInactive}}
+          <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+        {{/each}}
+      </optgroup>
+      <optgroup label="{{localize "ED.Header.actorsNoUserConfigured"}}">
+        {{#each actorsNoUserConfigured}}
+          <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+        {{/each}}
+      </optgroup>
+    </multi-checkbox>
+  </div>
+
 
   <!-- Buttons -->
-    <div class="buttons legend-point__history--earned-buttons flexcol">
-        <div class="button-group buttons-navigation flexrow">
-            <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
-                {{ localize 'X-ok' }}
-            </button>
-        </div>
-
+  <div class="buttons legend-point__history--earned-buttons flexcol">
+    <div class="button-group buttons-navigation flexrow">
+      <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
+        {{ localize 'X-ok' }}
+      </button>
+      <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
+        {{ localize 'X-cancel' }}
+      </button>
     </div>
-    <img src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
+  </div>
+  <img src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
 </form>
