@@ -1,51 +1,16 @@
 <form>
   <img src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
-  <!--div>
-    <div>
-      <h3>
-        <label>{{localize "ED.Header.activeUser"}}</label>
-      </h3>
-      {{#each actorUserActive}}
-        <div>
-          <input type="checkbox" name="{{this.atorId}}" {{checked this.actorId}}>
-          {{this.actorName}}/{{this.playerName}}
-        </div>
-      {{/each}}
-    </div>
-    <div>
-      <h3>
-        <label>{{localize "ED.Header.inactiveUser"}}</label>
-      </h3>
-      {{#each actorUserInactive}}
-        <div>
-          <input type="checkbox" name="{{this.atorId}}">
-          {{this.actorName}}/{{this.playerName}}
-        </div>
-      {{/each}}
-    </div>
-    <div>
-      <h3>
-        <label>{{localize "ED.Header.actorsNoUserConfigured"}}</label>
-      </h3>
-      {{#each actorsNoUserConfigured}}
-        <div>
-          <input type="checkbox" name="{{this.atorId}}">
-          {{this.actorName}}
-        </div>
-      {{/each}}
-    </div>
-  </div-->
   <div>
     <label> 'X-LPAmount' </label>
-    <input type='number' id='legendPoints'></input>
+    <input type='number' name="amount" value="{{object.amount}}"></input>
   </div>
   <div>
     <label> 'X-Description'</label>
-    <input type='string' id='description'></input>
+    <input type='string' name="description" value="{{object.description}}"></input>
   </div>
 
   <div>
-    <multi-checkbox name="selectedActors">
+    <multi-checkbox name="selectedActors" value="{{object.selectedActors}}">
       <optgroup label="{{localize "ED.Header.activeUser"}}">
         {{#each actorUserActive}}
           <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>

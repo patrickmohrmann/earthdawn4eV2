@@ -51,7 +51,10 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
     }
 
     static async assignLpPrompt () {
-        const generation = await AssignLpPrompt.waitPrompt();
-        if ( !generation ) return;
+        const transactionsPerUser = await AssignLpPrompt.waitPrompt();
+        if ( !transactionsPerUser ) return;
+        for ( const [ actorId, transactionData ] of Object.entries( transactionsPerUser ) ) {
+            game.actors.get( actorId ).addLpTransaction( "earnings", transactionData );
+        }
     }
 }
