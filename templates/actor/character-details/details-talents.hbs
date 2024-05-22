@@ -10,11 +10,56 @@
         <div class="ability-card__grid--item text__alignment--center">{{localize "ED.Actor.Header.controlIcons"}}</div>
     </div>
     <div class="undefined">
-                <p>sortiere talente nach type (discipline, frei, etc.) </p>
                 <p>füge Knacks eingerückt ein</p>
             </div>
-    {{#each actor.itemTypes.talent}}
-    {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
-    {{/each}}
+    {{#if splitTalents}}
+        <div>
+            <div>
+                <h3>{{localize "ED.Actor.Header.talentsDiscipline"}}</h3>
+            </div>
+            <div>
+                {{#each (gettalentCategory actor.itemTypes.talent "discipline") }}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                {{/each}}
+            </div>
+        </div> 
+        <div>
+            <div>
+                <h3>{{localize "ED.Actor.Header.talentsOptional"}}</h3>
+            </div>
+            <div>
+                {{#each (gettalentCategory actor.itemTypes.talent "optional") }}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                {{/each}}
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{localize "ED.Actor.Header.talentsFreeRacial"}}</h3>
+            </div>
+            <div>
+                {{#each (gettalentCategory actor.itemTypes.talent "free") }}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                {{/each}}
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{localize "ED.Actor.Header.talentsVersatility"}}</h3>
+            </div>
+            <div>
+                {{#each (gettalentCategory actor.itemTypes.talent "versatility") }}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                {{/each}}
+            </div>
+        </div>
+        
+        
+     
+    {{else}}
+        {{#each actor.itemTypes.talent}}
+        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
+        {{/each}}
+    {{/if}}
     
 </div>

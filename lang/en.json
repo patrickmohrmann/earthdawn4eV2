@@ -165,6 +165,10 @@
                 "specialAbility":                                   "Special Abilities",
                 "step":                                             "Step",
                 "strain":                                           "Strain",
+                "talentsDiscipline":                                "Discipline Talents",
+                "talentsFreeRacial":                                "Free and other Talents",
+                "talentsOptional":                                  "Optional Talents",
+                "talentsVersatility":                               "Versatility Talents",
                 "weapons":                                          "Weapons"
             },
             "Karma": {
@@ -239,9 +243,20 @@
                 "effects":                                          "Effects",
                 "general":                                          "General"
             }
-
+        },
+        "Languages": {
+            "dwarf":                                                "Dwarven",
+            "elf":                                                  "Sperethiel",
+            "human":                                                "Human",
+            "obsidiman":                                            "Obsidimen",
+            "ork":                                                  "Or'zet",
+            "troll":                                                "Troll",
+            "tskrang":                                              "T'skrang",
+            "windling":                                             "Windling"
         },
         "Settings": {
+            "talentsSplit":                                         "Sort Talents by Kategory",
+            "talentsSplitHint":                                     "Sort Talents",
             "Edid": {
                 "languageRW": "ED-ID for Read/Write Language",
                 "languageRWHint": "ED-ID for the Read/Write Language ability",

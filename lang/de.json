@@ -164,6 +164,10 @@
                 "specialAbility":                                   "Sonstige Fähigkeit",
                 "step":                                             "Stufe",
                 "strain":                                           "Überan-strenung",
+                "talentsDiscipline":                                "Disziplintalente",
+                "talentsFreeRacial":                                "Freie- und andere Talente",
+                "talentsOptional":                                  "Optionale Talente",
+                "talentsVersatility":                               "Vielseitigkeitstalente",
                 "weapons":                                          "Waffen"    
             },
             "Karma": {
@@ -234,7 +238,6 @@
                 "effects":                                          "Effekte",
                 "general":                                          "Allgemein"
             }
-
         },
         "Languages": {
             "dwarf":                                                "Zwergisch",
@@ -247,6 +250,8 @@
             "windling":                                             "Windling"
         },
         "Settings": {
+            "talentsSplit":                                         "Talente nach Kategorie gruppieren",
+            "talentsSplitHint":                                     "Talente Gruppieren",
             "Edid": {
                 "languageRW": "ED-ID für Lesen/Schreiben",
                 "languageRWHint": "Identifiziert die Fähigkeit Lesen/Schreiben",

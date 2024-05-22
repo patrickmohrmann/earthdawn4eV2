@@ -421,7 +421,7 @@ p {
   align-items: center;
   display: grid;
   height: 30px;
-  grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 100px;
+  grid-template-columns: 40px 250px 100px 70px 70px 70px 70px 100px;
 }
 .ability-card__grid--container .ability-card__grid--item .roll-icon__hover,
 .ability-card__grid--container .ability-card__grid--item .roll-icon__hover-fixed,
