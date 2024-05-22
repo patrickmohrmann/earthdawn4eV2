@@ -13,7 +13,7 @@
     <multi-checkbox name="selectedActors" value="{{object.selectedActors}}">
       <optgroup label="{{localize "ED.Header.activeUser"}}">
         {{#each actorUserActive}}
-          <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+          <option value="{{checked this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
         {{/each}}
       </optgroup>
       <optgroup label="{{localize "ED.Header.inactiveUser"}}">
@@ -23,7 +23,7 @@
       </optgroup>
       <optgroup label="{{localize "ED.Header.actorsNoUserConfigured"}}">
         {{#each actorsNoUserConfigured}}
-          <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+          <option value="{{this.actorId}}">{{this.actorName}}</option>
         {{/each}}
       </optgroup>
     </multi-checkbox>
