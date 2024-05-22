@@ -6,9 +6,14 @@ Arbitrary Flavor contains:
 - Optinoal: Assign damage if Damage type is set to true
 --}}
 <div class="custom-flavor">{{ customFlavor }}</div>
+{{#if (eq ruleOfOne true)}}
+  <div class="roll-failure">{{localize "ED.Rolls.ruleOfOne"}}</div>
+{{else}}
 {{#if (uneq target.total 0)}}
 {{> "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs"}}
 {{/if}}
+{{/if}}
+
 {{!-- 
 not sure why arbitrary rolls shall hold target modifieres. the type of a roll is unclear isn't it?
   maybe for equipment rolls???
@@ -16,5 +21,4 @@ not sure why arbitrary rolls shall hold target modifieres. the type of a roll is
   {{> "systems/ed4e/templates/chat/dice-partials/roll-step-modifier.hbs"}}
   {{#if target.public}}
   {{> "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs"}}
-  {{/if}} 
-</div>--}}
+  {{/if}} --}}

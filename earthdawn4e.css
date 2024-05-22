@@ -199,6 +199,13 @@ p {
 .chat-message .dice-total.roll-failure {
   background-color: indianred;
 }
+.chat-message .roll-failure {
+  background-color: indianred;
+  color: black;
+  font-size: large;
+  padding-top: 5px;
+  text-align: center;
+}
 .chat-message .message-buttons {
   margin: 1em 0;
 }

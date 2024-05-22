@@ -274,6 +274,7 @@
             "windling":                                             "Windling"
         },
         "Rolls": {
+            "against":                                              "against",
             "baseValue":                                            "Base Step",
             "devotion":                                             "Devotion",
             "formulaDevotion":                                      "{amount}x Devotion (St {step})",
@@ -297,7 +298,10 @@
                 "spellcastingRoll":                                 "Spellcasting Test",
                 "threadWeavingRoll":                                "Thread weaving Test"
             },
+            "moreTargets":                                          "and other targets",
+            "rolls":                                                "rolls",
             "rollResult":                                           "Roll Result",
+            "ruleOfOne":                                            "Failue, Rule of One",
             "step":                                                 "Step",
             "stepModifiers":                                        "Step Modifier",
             "successesAchieved":                                    "Total Successes",

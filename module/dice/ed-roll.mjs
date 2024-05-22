@@ -103,6 +103,9 @@ export default class EdRoll extends Roll {
    */
   get isSuccess() {
     if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
+    if ( this.isRuleOfOne === true ) {
+      return false
+    }
     return this.numSuccesses > 0;
   }
 
@@ -114,6 +117,7 @@ export default class EdRoll extends Roll {
    */
   get isFailure() {
     if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
+    if ( this.isRuleOfOne === true ) return true
     return this.numSuccesses <= 0;
   }
 
@@ -324,12 +328,16 @@ export default class EdRoll extends Roll {
     templateData.step = this.options.step;
     templateData.target = this.options.target;
     templateData.testType = ED4E.testTypes[this.options.testType].label;
+    templateData.ruleOfOne = this.isRuleOfOne;
     templateData.success = this.isSuccess;
     templateData.failure = this.isFailure;
-    templateData.ruleOfOne = this.isRuleOfOne;
+    
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
 
+    if ( templateData.ruleOfOne === true ) {
+      console.log( "template data", templateData.ruleOfOne )
+    }
     return templateData;
   }
 

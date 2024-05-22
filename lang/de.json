@@ -277,8 +277,6 @@
             "formulaKarma":                                         "{amount}x Karma (St {step})",
             "formulaStep":                                          "Stufe {step}",
             "karma":                                                "Karma",
-            "moreTargets":                                          "und weitere Ziele",
-            "rolls":                                                "würfelt",
             "Labels": {
                 "arbitraryTestRoll":                                "Willkürlicher Test",
                 "actionTestRoll":                                   "Aktionsprobe",
@@ -295,7 +293,10 @@
                 "spellcastingRoll":                                 "Spruchzaubereiprobe",
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
+            
+            "rolls":                                                "würfelt",
             "rollResult":                                           "Würfelergebnis",
+            "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
             "step":                                                 "Stufe",     
             "stepModifiers":                                        "Stufen Modifikatoren",
             "successesAchieved":                                    "Gesamt Erfolge",

@@ -1,7 +1,10 @@
 <div class="custom-flavor">{{ customFlavor }}</div>
-{{#if (uneq target.total 0)}}
-{{> "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs"}}
-{{/if}}
+{{#if (eq ruleOfOne true)}}
+  <div class="roll-failure">{{localize "ED.Rolls.ruleOfOne"}}</div>
+{{else}}
+  {{#if (uneq target.total 0)}}
+  {{> "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs"}}
+  {{/if}}
 {{!-- <div>
   <p class="undefined">to be reworked with #284</p>
   {{> "systems/ed4e/templates/chat/chat-buttons/assign-effect.hbs"}}
@@ -10,6 +13,7 @@
   {{> "systems/ed4e/templates/chat/dice-partials/roll-step-modifier.hbs"}}
   {{#if target.public}}
     {{> "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs"}}
+  {{/if}}
   {{/if}}
 </div>
 

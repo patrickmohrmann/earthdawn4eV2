@@ -1,4 +1,7 @@
 <div class="custom-flavor">{{ customFlavor }}</div>
+{{#if (eq ruleOfOne true)}}
+  <div class="roll-failure">{{localize "ED.Rolls.ruleOfOne"}}</div>
+{{else}}
 {{#if (uneq target.total 0)}}
 {{> "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs"}}
 {{/if}}
@@ -7,8 +10,9 @@
   {{#if target.public}}
     {{> "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs"}}
   {{/if}}
+  
 </div>
-
+{{/if}}
 {{!-- 
 todo:
 #711 show target actor name if a target is chosen 
