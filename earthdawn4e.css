@@ -215,117 +215,6 @@ p {
 .chat-message .message-buttons.flexrow button:last-child {
   margin-right: 0;
 }
-.body .actor-section__top {
-  height: 158px;
-}
-.body .actor-section__top .actor__image {
-  width: 20%;
-  float: left;
-}
-.body .actor-section__top .actor__characteristics {
-  width: 80%;
-  float: left;
-}
-.body .actor-section__top img {
-  border: none;
-}
-.body .actor-section__top .padding__top-small {
-  height: 80px;
-}
-.main .actor-sheet-body .tab__general .left-part {
-  float: left;
-  width: 250px;
-}
-.main .actor-sheet-body .tab__general .left-part .margin__none {
-  margin-bottom: 0;
-}
-.main .actor-sheet-body .tab__general .left-part .fa-star {
-  font-size: 7px;
-}
-.main .actor-sheet-body .tab__general .left-part .attribute__increases {
-  text-align: left;
-  padding-left: 2px;
-  margin-bottom: 12px;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
-  height: 30px;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
-  width: 25px;
-  height: 25px;
-  border: none;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
-  align-items: center;
-  text-align: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 83px 83px 83px;
-}
-.main .actor-sheet-body .tab__general .right-part {
-  float: right;
-  width: 520px;
-}
-.main .actor-sheet-body .tab__general .right-part .margin__right {
-  margin-right: 20px;
-}
-.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
-  align-items: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 40px 220px;
-}
-.main .actor-sheet-body .tab__legend .legend-card__grid--container {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding-left: 2px;
-  grid-template-columns: 158px 158px 158px 158px 158px;
-}
-.main .actor-sheet-body .tab__class .class-card__grid--container {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding-left: 2px;
-  grid-template-columns: 40px 450px 200px 100px;
-}
-.main .actor-sheet-body .tab__class .item__image {
-  width: 25px;
-  border: none;
-}
-.action--buttons {
-  padding-top: 5px;
-  position: relative;
-  width: 100%;
-  z-index: -6;
-}
-.action--buttons button {
-  position: relative;
-  z-index: 4;
-  width: 100px;
-}
-.action--buttons .buttons--left {
-  margin-left: 45px;
-  margin-right: 50px;
-  float: left;
-  width: 40%;
-}
-.action--buttons .buttons--right {
-  float: left;
-  width: 40%;
-  margin-right: 50px;
-}
-.legend-point__history--earned {
-  height: 26px;
-  line-height: 22px;
-}
-.body .item-section__top {
-  height: 158px;
-}
-.body .item-section__top img {
-  width: 158px;
-  border: none;
-}
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
   background-size: cover;
@@ -665,4 +554,115 @@ p {
 }
 .card__description--toggle {
   display: none;
+}
+.body .actor-section__top {
+  height: 158px;
+}
+.body .actor-section__top .actor__image {
+  width: 20%;
+  float: left;
+}
+.body .actor-section__top .actor__characteristics {
+  width: 80%;
+  float: left;
+}
+.body .actor-section__top img {
+  border: none;
+}
+.body .actor-section__top .padding__top-small {
+  height: 80px;
+}
+.main .actor-sheet-body .tab__general .left-part {
+  float: left;
+  width: 250px;
+}
+.main .actor-sheet-body .tab__general .left-part .margin__none {
+  margin-bottom: 0;
+}
+.main .actor-sheet-body .tab__general .left-part .fa-star {
+  font-size: 7px;
+}
+.main .actor-sheet-body .tab__general .left-part .attribute__increases {
+  text-align: left;
+  padding-left: 2px;
+  margin-bottom: 12px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
+  height: 30px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
+  align-items: center;
+  text-align: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 83px 83px 83px;
+}
+.main .actor-sheet-body .tab__general .right-part {
+  float: right;
+  width: 520px;
+}
+.main .actor-sheet-body .tab__general .right-part .margin__right {
+  margin-right: 20px;
+}
+.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
+  align-items: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 40px 220px;
+}
+.main .actor-sheet-body .tab__legend .legend-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 158px 158px 158px 158px 158px;
+}
+.main .actor-sheet-body .tab__class .class-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 40px 450px 200px 100px;
+}
+.main .actor-sheet-body .tab__class .item__image {
+  width: 25px;
+  border: none;
+}
+.action--buttons {
+  padding-top: 5px;
+  position: relative;
+  width: 100%;
+  z-index: -6;
+}
+.action--buttons button {
+  position: relative;
+  z-index: 4;
+  width: 100px;
+}
+.action--buttons .buttons--left {
+  margin-left: 45px;
+  margin-right: 50px;
+  float: left;
+  width: 40%;
+}
+.action--buttons .buttons--right {
+  float: left;
+  width: 40%;
+  margin-right: 50px;
+}
+.legend-point__history--earned {
+  height: 26px;
+  line-height: 22px;
+}
+.body .item-section__top {
+  height: 158px;
+}
+.body .item-section__top img {
+  width: 158px;
+  border: none;
 }

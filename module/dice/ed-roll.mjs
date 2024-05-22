@@ -331,13 +331,9 @@ export default class EdRoll extends Roll {
     templateData.ruleOfOne = this.isRuleOfOne;
     templateData.success = this.isSuccess;
     templateData.failure = this.isFailure;
-    
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
 
-    if ( templateData.ruleOfOne === true ) {
-      console.log( "template data", templateData.ruleOfOne )
-    }
     return templateData;
   }
 
