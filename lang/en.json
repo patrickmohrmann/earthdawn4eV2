@@ -208,6 +208,30 @@
                 "loadedOver":                                       "Overloaded"
             }
         },
+        "Data": {
+            "ActiveEffect": {
+                "Labels": {},
+                "Hints": {}
+            },
+            "Actor": {
+                "Labels": {
+                    "toughness": "bla"
+                },
+                "Hints": {}
+            },
+            "Item": {
+                "Labels": {
+                    "edid": "ED-ID"
+                },
+                "Hints": {
+                    "edid": "An ID to identify an item without considering its name"
+                }
+            },
+            "Journal": {
+                "Labels": {},
+                "Hints": {}
+            }
+        },
         "Item": {
             "Header": {
                 "navigator":                                        "Navigator"                                       
@@ -232,7 +256,17 @@
         },
         "Settings": {
             "talentsSplit":                                         "Sort Talents by Kategory",
-            "talentsSplitHint":                                     "Sort Talents"
+            "talentsSplitHint":                                     "Sort Talents",
+            "Edid": {
+                "languageRW": "ED-ID for Read/Write Language",
+                "languageRWHint": "ED-ID for the Read/Write Language ability",
+                "languageSpeak": "ED-ID for Speak Language",
+                "languageSpeakHint": "ED-ID for the Speak Language ability",
+                "spellCasting": "ED-ID for Spellcasting",
+                "spellCastingHint": "Identifies a talent that is used for spellcasting",
+                "threadWeaving": "ED-ID for Thread Weaving",
+                "threadWeavingHint": "Identifies a talent that is used for thread weaving"
+            }
         }
     }
     

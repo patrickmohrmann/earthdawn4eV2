@@ -1,4 +1,5 @@
 import ED4E from "./config.mjs";
+import { EdIdField } from "./data/fields.mjs";
 
 /**
  * Register all the system's settings.
@@ -6,6 +7,50 @@ import ED4E from "./config.mjs";
 export default function registerSystemSettings() {
 
     const fields = foundry.data.fields;
+
+    /* -------------------------------------------------------------------------------- */
+    /*                                      ED-IDs                                      */
+    /* -------------------------------------------------------------------------------- */
+
+    // edid for thread weaving
+    game.settings.register( "ed4e", "edidThreadWeaving", {
+        name: "ED.Settings.Edid.threadWeaving",
+        hint: "ED.Settings.Edid.threadWeavingHint",
+        scope: "world",
+        config: true,
+        default: "thread-weaving",
+        type: new EdIdField(),
+    } );
+
+    // edid for spellcasting
+    game.settings.register( "ed4e", "edidSpellcasting", {
+        name: "ED.Settings.Edid.spellCasting",
+        hint: "ED.Settings.Edid.spellCastingHint",
+        scope: "world",
+        config: true,
+        default: "spellcasting",
+        type: new EdIdField(),
+    } );
+
+    // edid for speak language
+    game.settings.register( "ed4e", "edidLanguageSpeak", {
+        name: "ED.Settings.Edid.languageSpeak",
+        hint: "ED.Settings.Edid.languageSpeakHint",
+        scope: "world",
+        config: true,
+        default: "language-speak",
+        type: new EdIdField(),
+    } );
+
+    // edid for read/write language
+    game.settings.register( "ed4e", "edidLanguageRW", {
+        name: "ED.Settings.Edid.languageRW",
+        hint: "ED.Settings.Edid.languageRWHint",
+        scope: "world",
+        config: true,
+        default: "language-rw",
+        type: new EdIdField(),
+    } );
 
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */

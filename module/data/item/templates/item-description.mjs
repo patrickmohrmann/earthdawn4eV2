@@ -1,3 +1,5 @@
+import { EdIdField } from "../../fields.mjs";
+
 /**
  * Data model template with item description
  * @mixin
@@ -14,7 +16,8 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
                     nullable: true, 
                     label: "ED.Description"
                 } ), 
-            } )
+            } ),
+            edid: new EdIdField(),
         };
     }
 
