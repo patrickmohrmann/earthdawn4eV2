@@ -231,6 +231,20 @@
                 "Hints": {}
             }
         },
+        "Dialogs": {
+            "AssignLp": {
+                "legendPoints":                                     "Legendenpunkte",
+                "description":                                      "Beschreibung"
+            },
+            "Header": {
+                "activeUser":                                       "Aktive Spieler",
+                "inactiveUser":                                     "Inaktive Spieler",
+                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
+            },
+            "Title": {
+                "assignLp":                                         "Legendenpunkte zuweisen"
+            }
+        },
         "Item": {
             "Navigator": {
                 "advancement":                                      "Fortschritt",

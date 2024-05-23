@@ -221,15 +221,29 @@
             },
             "Item": {
                 "Labels": {
-                    "edid": "ED-ID"
+                    "edid":                                         "ED-ID"
                 },
                 "Hints": {
-                    "edid": "An ID to identify an item without considering its name"
+                    "edid":                                         "An ID to identify an item without considering its name"
                 }
             },
             "Journal": {
                 "Labels": {},
                 "Hints": {}
+            }
+        },
+        "Dialogs": {
+            "AssignLp": {
+                "legendPoints":                                     "Legend Points",
+                "description":                                      "Description"
+            },
+            "Header": {
+                "activeUser":                                       "Active User",
+                "inactiveUser":                                     "Inactive User",
+                "actorsNoUserConfigured":                           "Not Configured, Owned Actors"
+            },
+            "Title": {
+                "assignLp":                                         "Assign Legend Points"
             }
         },
         "Item": {
