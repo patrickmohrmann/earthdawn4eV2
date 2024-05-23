@@ -47,7 +47,7 @@ export default class AssignLpPrompt extends FormApplication {
   }
 
   get title() {
-    return game.i18n.localize( 'X-Assign LP' );
+    return game.i18n.localize( 'ED.Dialogs.Title.assignLp' );
   }
 
   get template() {
@@ -79,9 +79,8 @@ export default class AssignLpPrompt extends FormApplication {
 
   async _updateObject( event, formData ) {
     this.object = foundry.utils.expandObject( formData );
-
     // Re-render sheet with updated values
-    this.render();
+    this.render( );
   }
 
   /** @inheritDoc */

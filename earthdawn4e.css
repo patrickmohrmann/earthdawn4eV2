@@ -153,6 +153,108 @@ p {
 .chat-message {
   background-image: url('assets/sheet/background.png');
 }
+
+.app.window-app.form.earthdawn4e .roll-prompt header,
+.assign-legend header {
+  position: relative;
+  z-index: 3;
+  border: none;
+}
+.app.window-app.form.earthdawn4e .roll-prompt header .window-title,
+.assign-legend header .window-title {
+  padding-left: 35px;
+  margin-top: 0px;
+}
+.app.window-app.form.earthdawn4e .roll-prompt header .header-button,
+.assign-legend header .header-button {
+  margin-top: 0px;
+}
+.app.window-app.form.earthdawn4e .roll-prompt header .close,
+.assign-legend header .close {
+  padding-right: 35px;
+}
+.app.window-app.form.earthdawn4e .roll-prompt .window-content,
+.assign-legend .window-content {
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  color: black;
+  background-repeat: repeat;
+}
+.app.window-app.form.earthdawn4e .roll-prompt .window-content .frame__dialog--small,
+.assign-legend .window-content .frame__dialog--small {
+  border: none;
+  position: absolute;
+  margin-left: -8px;
+  margin-top: -80px;
+  z-index: 2;
+}
+.app.window-app.form.earthdawn4e .roll-prompt .window-content .frame__bottom,
+.assign-legend .window-content .frame__bottom {
+  transform: rotate(180deg);
+  bottom: -45px;
+}
+.app.window-app.form.earthdawn4e .roll-prompt .window-resizable-handle,
+.assign-legend .window-resizable-handle {
+  z-index: 5;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input-area {
+  margin-top: 10px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input {
+  position: relative;
+  z-index: 5;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input .assign-lp__amount {
+  z-index: 5;
+  width: 75px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input .assign-lp__description {
+  z-index: 5;
+  width: 480px;
+  height: var(--form-field-height);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0;
+  color: var(--color-text-dark-primary);
+  font-family: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 3px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area {
+  display: block;
+  margin-top: 25px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area multi-checkbox {
+  display: flex;
+  flex-direction: column;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area .checkbox::after {
+  content: "\a";
+  white-space: pre;
+}
+.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons {
+  position: absolute;
+  bottom: 50px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons button {
+  position: relative;
+  z-index: 5;
+  width: 200px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons .button-ok {
+  margin-left: 8px;
+  margin-right: 45px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons .button-cancel {
+  margin-left: 45px;
+  margin-right: 15px;
+}
+.body .actor-section__top {
+  height: 158px;
+}
 .chat-message .message-sender {
   font-size: larger;
   padding-top: 12px;
