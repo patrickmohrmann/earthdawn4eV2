@@ -149,47 +149,85 @@ p {
   position: absolute;
   left: calc(50% - 64px);
 }
-.app.window-app.form.earthdawn4e .roll-prompt header,
-.assign-legend header {
+.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons {
+  position: absolute;
+  bottom: 50px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons button {
+  position: relative;
+  z-index: 5;
+  width: 200px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons .button-ok {
+  margin-left: 8px;
+  margin-right: 45px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons .button-cancel {
+  margin-left: 45px;
+  margin-right: 15px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header,
+.app.window-app.form.earthdawn4e.assign-legend header {
   position: relative;
   z-index: 3;
   border: none;
 }
-.app.window-app.form.earthdawn4e .roll-prompt header .window-title,
-.assign-legend header .window-title {
+.app.window-app.form.earthdawn4e.roll-prompt header .window-title,
+.app.window-app.form.earthdawn4e.assign-legend header .window-title {
   padding-left: 35px;
   margin-top: 0px;
 }
-.app.window-app.form.earthdawn4e .roll-prompt header .header-button,
-.assign-legend header .header-button {
+.app.window-app.form.earthdawn4e.roll-prompt header .header-button,
+.app.window-app.form.earthdawn4e.assign-legend header .header-button {
   margin-top: 0px;
 }
-.app.window-app.form.earthdawn4e .roll-prompt header .close,
-.assign-legend header .close {
+.app.window-app.form.earthdawn4e.roll-prompt header .close,
+.app.window-app.form.earthdawn4e.assign-legend header .close {
   padding-right: 35px;
 }
-.app.window-app.form.earthdawn4e .roll-prompt .window-content,
-.assign-legend .window-content {
+.app.window-app.form.earthdawn4e.roll-prompt .window-content,
+.app.window-app.form.earthdawn4e.assign-legend .window-content {
   background-image: url('assets/sheet/background.png');
   background-size: cover;
   color: black;
   background-repeat: repeat;
 }
-.app.window-app.form.earthdawn4e .roll-prompt .window-content .frame__dialog--small,
-.assign-legend .window-content .frame__dialog--small {
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .frame__dialog--small,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .frame__dialog--small {
   border: none;
   position: absolute;
   margin-left: -8px;
   margin-top: -80px;
   z-index: 2;
 }
-.app.window-app.form.earthdawn4e .roll-prompt .window-content .frame__bottom,
-.assign-legend .window-content .frame__bottom {
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .frame__bottom,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .frame__bottom {
   transform: rotate(180deg);
   bottom: -45px;
 }
-.app.window-app.form.earthdawn4e .roll-prompt .window-resizable-handle,
-.assign-legend .window-resizable-handle {
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons {
+  position: absolute;
+  bottom: 50px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons button,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons button {
+  position: relative;
+  z-index: 5;
+  width: 200px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons .button-ok,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons .button-ok {
+  margin-left: 8px;
+  margin-right: 45px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons .button-cancel,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons .button-cancel {
+  margin-left: 45px;
+  margin-right: 15px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-resizable-handle,
+.app.window-app.form.earthdawn4e.assign-legend .window-resizable-handle {
   z-index: 5;
 }
 .app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input-area {
@@ -229,23 +267,6 @@ p {
 .app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area .checkbox::after {
   content: "\a";
   white-space: pre;
-}
-.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons {
-  position: absolute;
-  bottom: 50px;
-}
-.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons button {
-  position: relative;
-  z-index: 5;
-  width: 200px;
-}
-.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons .button-ok {
-  margin-left: 8px;
-  margin-right: 45px;
-}
-.app.window-app.form.earthdawn4e.assign-legend .legend-point__history--earned-buttons .button-cancel {
-  margin-left: 45px;
-  margin-right: 15px;
 }
 .body .actor-section__top {
   height: 158px;
