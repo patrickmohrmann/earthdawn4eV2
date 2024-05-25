@@ -55,8 +55,8 @@ export default class RollPrompt extends FormApplication {
             closeOnSubmit: false,
             submitOnChange: true,
             submitOnClose: false,
-            height: 'auto',
-            width: 'auto',
+            height: 800,
+            width: 500,
             resizable: true,
             classes: [...options.classes, 'earthdawn4e', 'roll-prompt'],
             tabs: [
@@ -74,7 +74,7 @@ export default class RollPrompt extends FormApplication {
     }
 
     get template() {
-        return 'systems/ed4e/templates/prompts-popups/roll-prompt.hbs';
+        return 'systems/ed4e/templates/prompts/roll-prompt.hbs';
     }
 
     /** @type {EdRollOptions} */
