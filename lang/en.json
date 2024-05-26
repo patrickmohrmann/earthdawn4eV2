@@ -243,7 +243,8 @@
                 "actorsNoUserConfigured":                           "Not Configured, Owned Actors"
             },
             "Title": {
-                "assignLp":                                         "Assign Legend Points"
+                "assignLp":                                         "Assign Legend Points",
+                "rollPrompt":                                       "Roll Options"
             }
         },
         "Item": {

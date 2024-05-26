@@ -149,22 +149,22 @@ p {
   position: absolute;
   left: calc(50% - 64px);
 }
-.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons {
-  position: absolute;
-  bottom: 50px;
-}
-.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons button {
+.app.window-app.form.earthdawn4e.roll-prompt .navigator-section {
   position: relative;
   z-index: 5;
-  width: 200px;
+  margin-top: 10px;
+  padding-bottom: 10px;
 }
-.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons .button-ok {
-  margin-left: 8px;
-  margin-right: 45px;
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
 }
-.app.window-app.form.earthdawn4e.roll-prompt .legend-point__history--earned-buttons .button-cancel {
-  margin-left: 45px;
-  margin-right: 15px;
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column label {
+  display: block;
+  height: max-content;
+  padding-top: 8px;
+  padding-bottom: 4px;
 }
 .app.window-app.form.earthdawn4e.roll-prompt header,
 .app.window-app.form.earthdawn4e.assign-legend header {

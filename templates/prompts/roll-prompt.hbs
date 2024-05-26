@@ -1,134 +1,119 @@
 <form class="roll-prompt" id="roll-prompt-form" autocomplete="off">
-    <img class="frame__dialog--small frame__top"
-        src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
-    <div class="body roll-prompt-body">
-        <div>
-            <!-- navigator left -->
-            <div class="navigator-section input--centered">
+        <img class="frame__dialog--small frame__top"
+                src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
+        <!-- navigator left -->
+        <div class="navigator-section input--centered">
                 <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
-                    <a class="roll-prompt-tab" data-tab="base-input">{{localize "base input"}}</a>
-                    <a class="roll-prompt-tab" data-tab="other-tab">{{localize "some other tab"}}</a>
+                        <a class="roll-prompt-tab" data-tab="base-input">{{localize "base input"}}</a>
+                        <a class="roll-prompt-tab" data-tab="other-tab">{{localize "some other tab"}}</a>
                 </nav>
-            </div>
-            <div class="tab-body">
-                <!-- tab1: base input -->
-                <div class="tab base-input" data-group="primary" data-tab="base-input">
+        </div>
+        <hr>
+        <div class="body roll-prompt-body">
+                <div class="flex-column">
+                        <div class="step partial__two">
+                                <div class="partial__two">
+                                        <label class="modifier-description">{{localize "X-Step"}}: </label>
+                                </div>
+                                <div class="partial__two">
+                                        <input class="input__circle-input--centered" id="step-mod-input"
+                                                value={{step.base}} name="step.base" data-type="number" autofocus />
+                                </div>
+                        </div>
+                </div>
 
-                    <!-- 30/20 -->
-                    <div>
-                        <div class="roll-modifier form-group partial__three">
-                            <label class="modifier-description">{{localize "X-Step"}}: </label>
+                {{#if ( uneq testType "arbitrary") }}
+                <div class="flex-column">
+                        <div class="modifier partial__two">
+                                <div class="partial__two">
+                                        <label class="modifier-description">{{localize "X-Modifier"}}:</label>
+                                </div>
+                                <div class="partial__two">
+                                        <input class="input__circle-input--centered" id="step-mod-input"
+                                                value={{step.modifiers.manual}} name="step.modifiers.manual"
+                                                data-type="number" autofocus />
+                                </div>
                         </div>
-                        <div class="partial__four">
-                            <input class="input__circle-input--centered" id="step-mod-input" value={{step.base}}
-                                name="step.base" data-type="number" autofocus />
-                        </div>
-                    </div>
-
-
-                    <!-- 30/20 -->
-                    {{#if ( uneq testType "arbitrary") }}
-                    <div>
-                        <div class="roll-modifier form-group partial__three">
-                            <label class="modifier-description">{{localize "X-Modifier"}}: </label>
-                        </div>
-                        <div class="partial__four">
-                            <input class="input__circle-input--centered" id="step-mod-input"
-                                value={{step.modifiers.manual}} name="step.modifiers.manual" data-type="number"
-                                autofocus />
-                        </div>
-                    </div>
-                    <div class="partial__four">
-                        <input class="input__circle-input--centered" id="step-mod-input" value={{step.modifiers.manual}}
-                            name="step.modifiers.manual" data-type="number" autofocus />
-                    </div>
                 </div>
                 {{/if}}
 
-                <!-- 30/20 -->
-                <div>
-                    <div class="roll-modifier form-group partial__three">
-                        <label class="modifier-description">{{localize "X-Difficulty"}}: </label>
-                    </div>
-                    <div class="partial__four">
-                        <input class="input__circle-input--centered" id="difficulty-input" value={{target.base}}
-                            name="target.base" data-type="number" />
-                    </div>
+                <div class="flex-column">
+                        <div class="modifier partial__two">
+                                <div class="partial__two">
+                                        <label class="modifier-description">{{localize "X-Difficulty"}}:</label>
+                                </div>
+                                <div class="partial__two">
+                                        <input class="input__circle-input--centered" id="difficulty-input"
+                                                value={{target.base}} name="target.base" data-type="number" />
+                                </div>
+                        </div>
                 </div>
 
-                <!-- 30/20 -->
                 {{#if ( uneq testType "arbitrary") }}
-                <div>
-                    <div class="roll-modifier form-group partial__three">
-                        <label class="modifier-description">{{localize "X-Strain"}}:</label>
-                    </div>
-                    <div class="partial__four">
-                        <input class="input__circle-input--centered" id="strain-input" value={{strain.total}}
-                            name="strain.total" data-type="number" />
-                    </div>
+                <div class="flex-column">
+                        <div class="modifier partial__two">
+                                <div class="partial__two">
+                                        <label class="modifier-description">{{localize "X-Strain"}}:</label>
+                                </div>
+                                <div class="partial__two">
+                                        <input class="input__circle-input--centered" id="strain-input"
+                                                value={{strain.total}} name="strain.total" data-type="number" />
+                                </div>
+                        </div>
+                </div>
+                {{/if}}
+
+
+                <div class="flex-column">
+                        <div class="partial__four">
+                                <label class="modifier-description">{{localize "X-Karma"}}: </label>
+                        </div>
+                        <div class="partial__four">
+                                <input class="input__circle-input--centered" id="karma-input" value={{karma.pointsUsed}}
+                                        name="karma.pointsUsed" data-type="number" data-resource="karma" />
+                        </div>
+                        <div class="partial__four">
+                                <label class="modifier-description" title="{{localize "
+                                        X-karma-Dice:"}}+{{karma.dice}}">{{localize
+                                        "X-Karma-Step"}}: </label>
+                        </div>
+                        <div class="partial__four">
+                                <input class="input__circle-input--centered" id="karma-step" value={{karma.step}}
+                                        name="karma.step" data-type="number" />
+                        </div>
+                </div>
+                <div class="flex-column">
+                        <div class="partial__four">
+                                <label class="modifier-description">{{localize "X-Devotion"}}: </label>
+                        </div>
+                        <div class="partial__four">
+                                <input class="input__circle-input--centered" id="devotion-input"
+                                        value={{devotion.pointsUsed}} name="devotion.pointsUsed" data-type="number"
+                                        data-resource="devotion" />
+                        </div>
+
+                <div class="partial__four">
+                        <label class="modifier-description" title="{{localize "
+                                X-devotion-Dice:"}}+{{devotion.dice}}">{{localize "X-Dev-Step"}}:</label>
                 </div>
                 <div class="partial__four">
-                    <input class="input__circle-input--centered" id="strain-input" value={{strain.total}}
-                        name="strain.total" data-type="number" />
+                        <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
+                                name="devotion.step" data-type="number" />
                 </div>
-            </div>
-            {{/if}}
-
-            <!-- 30/20 30/20 -->
-            <div class="roll-modifier form-group partial__three">
-                <label class="modifier-description">{{localize "X-Karma"}}: </label>
-            </div>
-            <div class="partial__sixteen-percent">
-                <input class="input__circle-input--centered" id="karma-input" value={{karma.pointsUsed}}
-                    name="karma.pointsUsed" data-type="number" data-resource="karma" />
-            </div>
-            <div class="partial__three prompt__right">
-                <label class="modifier-description" title="{{localize " X-karma-Dice:"}}+{{karma.dice}}">{{localize
-                    "X-Karma-Step"}}: </label>
-            </div>
-            <div class="partial__sixteen-percent">
-                <input class="input__circle-input--centered" id="karma-step" value={{karma.step}} name="karma.step"
-                    data-type="number" />
-            </div>
-
-
-
-            <!-- 30/20 30/20 -->
-            <div class="roll-modifier form-group partial__three">
-                <label class="modifier-description">{{localize "X-Devotion"}}: </label>
-            </div>
-            <div class="partial__sixteen-percent">
-                <input class="input__circle-input--centered" id="devotion-input" value={{devotion.pointsUsed}}
-                    name="devotion.pointsUsed" data-type="number" data-resource="devotion" />
-            </div>
-            <div class="partial__three prompt__right">
-                <label class="modifier-description" title="{{localize "
-                    X-devotion-Dice:"}}+{{devotion.dice}}">{{localize "X-Dev-Step"}}: </label>
-            </div>
-            <div class="partial__sixteen-percent">
-                <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
-                    name="devotion.step" data-type="number" />
-            </div>
+                </div>
         </div>
-        <!-- tab2: other inputs -->
-        <div class="tab other-tab" data-group="primary" data-tab="other-tab">
         </div>
-
-
-
-    </div>
-    </div>
-    <!-- Buttons -->
-    <div class="buttons small-dialog__buttons flexcol">
-        <div class="button-group buttons-navigation flexrow">
-            <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
-                {{ localize 'X-ok' }}
-            </button>
-            <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
-                {{ localize 'X-cancel' }}
-            </button>
+        <!-- Buttons -->
+        <div class="buttons small-dialog__buttons flexcol">
+                <div class="button-group buttons-navigation flexrow">
+                        <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
+                                {{ localize 'X-ok' }}
+                        </button>
+                        <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
+                                {{ localize 'X-cancel' }}
+                        </button>
+                </div>
         </div>
-    </div>
-    <img class="frame__dialog--small frame__bottom"
-        src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
+        <img class="frame__dialog--small frame__bottom"
+                src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
 </form>

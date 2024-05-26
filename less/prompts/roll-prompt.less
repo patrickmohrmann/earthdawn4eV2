@@ -1,27 +1,24 @@
 .app.window-app.form.earthdawn4e.roll-prompt {
-    .window-content {
+    .navigator-section {
+        position: relative;
+        z-index: 5;
+        margin-top: 10px;
+        padding-bottom: 10px;
 
-    } 
-    .legend-point__history--earned-buttons {
-        position: absolute;
-        bottom: 50px;
-
-        button {
-            position: relative;
-            z-index: 5;
-            width: 200px;
-        }
-
-        .button-ok {
-            margin-left: 8px;
-            margin-right: 45px;
-        }
-
-        .button-cancel {
-            margin-left: 45px;
-            margin-right: 15px
-        }
     }
-
+        .roll-prompt-body {
+            .flex-column {
+                display: flex;
+                flex-direction: row;
+                padding-bottom: 5px;
+                label {
+                    display: block;
+                    height:max-content;
+                    padding-top: 8px;
+                    padding-bottom: 4px
+                }
+            }
+        }
+    
 
 }
