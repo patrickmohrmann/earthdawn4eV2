@@ -4,8 +4,9 @@
         <!-- navigator left -->
         <div class="navigator-section input--centered">
                 <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
-                        <a class="roll-prompt-tab" data-tab="base-input">{{localize "base input"}}</a>
-                        <a class="roll-prompt-tab" data-tab="other-tab">{{localize "some other tab"}}</a>
+                        <a class="roll-prompt-tab" data-tab="base-input">{{localize
+                                "ED.Dialogs.Navigator.baseInput"}}</a>
+                        <a class="roll-prompt-tab" data-tab="other-tab">{{localize "ED.Dialogs.Navigator.options"}}</a>
                 </nav>
         </div>
         <hr>
@@ -92,16 +93,18 @@
                                         data-resource="devotion" />
                         </div>
 
-                <div class="partial__four">
-                        <label class="modifier-description" title="{{localize "
-                                X-devotion-Dice:"}}+{{devotion.dice}}">{{localize "X-Dev-Step"}}:</label>
-                </div>
-                <div class="partial__four">
-                        <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
-                                name="devotion.step" data-type="number" />
-                </div>
+                        <div class="partial__four">
+                                <label class="modifier-description" title="{{localize "
+                                        X-devotion-Dice:"}}+{{devotion.dice}}">{{localize "X-Dev-Step"}}:</label>
+                        </div>
+                        <div class="partial__four">
+                                <input class="input__circle-input--centered" id="devotion-step" value={{devotion.step}}
+                                        name="devotion.step" data-type="number" />
+                        </div>
                 </div>
         </div>
+        <div class="undefined">
+                clickable options like "attack to stun"
         </div>
         <!-- Buttons -->
         <div class="buttons small-dialog__buttons flexcol">

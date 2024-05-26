@@ -18,18 +18,18 @@
       <div class="actor-area">
         <multi-checkbox name="selectedActors" value="{{object.selectedActors}}">
           {{log this}}
-          <optgroup label="{{localize " ED.Dialogs.Header.activeUser"}}">
+          <optgroup label="{{localize "ED.Dialogs.Header.activeUser"}}">
             {{#each actorUserActive}}
             {{log this}}
             <option value="{{checked this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
             {{/each}}
           </optgroup>
-          <optgroup label="{{localize " ED.Dialogs.Header.inactiveUser"}}">
+          <optgroup label="{{localize "ED.Dialogs.Header.inactiveUser"}}">
             {{#each actorUserInactive}}
             <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
             {{/each}}
           </optgroup>
-          <optgroup label="{{localize " ED.Dialogs.Header.actorsNoUserConfigured"}}">
+          <optgroup label="{{localize "ED.Dialogs.Header.actorsNoUserConfigured"}}">
             {{#each actorsNoUserConfigured}}
             <option value="{{this.actorId}}">{{this.actorName}}</option>
             {{/each}}
