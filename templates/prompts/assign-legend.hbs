@@ -1,52 +1,54 @@
 <form>
-  <img class="frame__dialog--small frame__top" src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
+  <img class="frame__dialog--small frame__top"
+    src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
   <div class="assign-legend-point__body">
-  <div class="assing-lp__input">
-    <div class="assing-lp__input-area">
-      <h4>
-        {{localize "ED.Dialogs.AssignLp.legendPoints"}}
-      </h4>
-      <input class="assign-lp__amount" type='number' name="amount" value="{{object.amount}}"></input>
+    <div class="assing-lp__input">
+      <div class="assing-lp__input-area">
+        <h4>
+          {{localize "ED.Dialogs.AssignLp.legendPoints"}}
+        </h4>
+        <input class="assign-lp__amount" type='number' name="amount" value="{{object.amount}}"></input>
+      </div>
+      <div class="assing-lp__input-area">
+        <h4>
+          {{localize "ED.Dialogs.AssignLp.description"}}
+        </h4>
+        <input class="assign-lp__description" type='string' name="description" value="{{object.description}}"></input>
+      </div>
+      <div class="actor-area">
+        <multi-checkbox name="selectedActors" value="{{object.selectedActors}}">
+          {{log this}}
+          <optgroup label="{{localize " ED.Dialogs.Header.activeUser"}}">
+            {{#each actorUserActive}}
+            {{log this}}
+            <option value="{{checked this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+            {{/each}}
+          </optgroup>
+          <optgroup label="{{localize " ED.Dialogs.Header.inactiveUser"}}">
+            {{#each actorUserInactive}}
+            <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+            {{/each}}
+          </optgroup>
+          <optgroup label="{{localize " ED.Dialogs.Header.actorsNoUserConfigured"}}">
+            {{#each actorsNoUserConfigured}}
+            <option value="{{this.actorId}}">{{this.actorName}}</option>
+            {{/each}}
+          </optgroup>
+        </multi-checkbox>
+      </div>
     </div>
-    <div class="assing-lp__input-area">
-      <h4>
-        {{localize "ED.Dialogs.AssignLp.description"}}
-      </h4>
-      <input class="assign-lp__description" type='string' name="description" value="{{object.description}}"></input>
-    </div>
-    <div class="actor-area">
-    <multi-checkbox name="selectedActors" value="{{object.selectedActors}}">
-      {{log this}}
-      <optgroup label="{{localize "ED.Dialogs.Header.activeUser"}}">
-        {{#each actorUserActive}}
-        {{log this}}
-          <option value="{{checked this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
-        {{/each}}
-      </optgroup>
-      <optgroup label="{{localize "ED.Dialogs.Header.inactiveUser"}}">
-        {{#each actorUserInactive}}
-          <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
-        {{/each}}
-      </optgroup>
-      <optgroup label="{{localize "ED.Dialogs.Header.actorsNoUserConfigured"}}">
-        {{#each actorsNoUserConfigured}}
-          <option value="{{this.actorId}}">{{this.actorName}}</option>
-        {{/each}}
-      </optgroup>
-    </multi-checkbox>
-  </div>
-  </div>
-
-  <!-- Buttons -->
-  <div class="buttons small-dialog__buttons flexcol">
-    <div class="button-group buttons-navigation flexrow">
-      <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
-        {{ localize 'X-ok' }}
-      </button>
-      <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
-        {{ localize 'X-cancel' }}
-      </button>
+    <!-- Buttons -->
+    <div class="buttons small-dialog__buttons flexcol">
+      <div class="button-group buttons-navigation flexrow">
+        <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
+          {{ localize 'X-ok' }}
+        </button>
+        <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
+          {{ localize 'X-cancel' }}
+        </button>
+      </div>
     </div>
   </div>
-  <img class="frame__dialog--small frame__bottom" src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
+    <img class="frame__dialog--small frame__bottom"
+      src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">
 </form>

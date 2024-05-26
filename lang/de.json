@@ -284,7 +284,8 @@
                 "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
             },
             "Title": {
-                "assignLp":                                         "Legendenpunkte zuweisen"
+                "assignLp":                                         "Legendenpunkte zuweisen",
+                "rollPrompt":                                       "Würfelübersicht"
             }
         },
         "Item": {
