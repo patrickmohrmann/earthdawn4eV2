@@ -283,6 +283,10 @@
                 "inactiveUser":                                     "Inaktive Spieler",
                 "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
             },
+            "Navigator":{
+                "baseInput":                                        "Standard Optionen",
+                "options":                                          "Sonstige Optionen"
+            },  
             "Title": {
                 "assignLp":                                         "Legendenpunkte zuweisen",
                 "rollPrompt":                                       "Würfelübersicht"
