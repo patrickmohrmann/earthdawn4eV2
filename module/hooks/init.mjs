@@ -22,6 +22,7 @@ export default function () {
         // record configuration values
         CONFIG.ED4E = ED4E;
         CONFIG.Actor.documentClass = documents.ActorEd;
+        CONFIG.Actor.documentClass = documents.CharacterEd;
         CONFIG.Item.documentClass = documents.ItemEd;
         CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
 

@@ -144,7 +144,7 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _takeStrain( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-name" );
+    const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
     this.actor.takeStrain( ability.system.strain );
   }
