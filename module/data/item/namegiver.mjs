@@ -2,7 +2,6 @@ import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import MovementFields from '../actor/templates/movement.mjs';
 import { MappingField } from "../fields.mjs";
-
 /**
  * Data model template with information on namegiver items.
  * @property {object} attributeValues                           Attribute Schema Object
@@ -62,13 +61,49 @@ export default class NamegiverData extends SystemDataModel.mixin(
                 initial: false,
                 label: "X-TailAttack"
             } ),
+            weaponSize: new fields.SchemaField( {
+                oneHanded: new fields.SchemaField( {
+                    min: new fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        initial: 1,
+                        integer: false,
+                        positive: true,
+                        label: "ED.Item.Namegiver.WeaponSize.OneHanded.min"
+                    } ),
+                    max: new fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        initial: 3,
+                        integer: false,
+                        positive: true,
+                        label: "ED.Item.Namegiver.WeaponSize.OneHanded.max"
+                    } ),
+                } ),
+                twoHanded: new fields.SchemaField( {
+                    min: new fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        initial: 4,
+                        integer: false,
+                        positive: true,
+                        label: "ED.Item.Namegiver.WeaponSize.TwoHanded.min"
+                    } ),
+                    max: new fields.NumberField( {
+                        required: true,
+                        nullable: false,
+                        initial: 6,
+                        integer: false,
+                        positive: true,
+                        label: "ED.Item.Namegiver.WeaponSize.TwoHanded.max"
+                    } )
+                } )
+            } )
         } );
     }
-
     /* -------------------------------------------- */
     /*  Migrations                                  */
     /* -------------------------------------------- */
-
     /** @inheritDoc */
     static migrateData( source ) {
         super.migrateData( source );
