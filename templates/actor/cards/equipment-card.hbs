@@ -17,7 +17,15 @@
         <div class="equipment-card__grid--item text__alignment--center">{{add system.mystical.armor system.mystical.forgeBonus}}</div>
         <div class="equipment-card__grid--item text__alignment--center">{{system.initiativePenalty}}</div>
         <div class="equipment-card__grid--item text__alignment--center">
-            
+            {{#if (eq this.holdingType 1)}}
+                <img class="equipment-card__grid--item" src="icons/owned-icon.png">
+            {{else if (eq this.holdingType 2)}}
+                <img class="equipment-card__grid--item" src="icons/carried-icon.png">
+            {{else if (eq this.holdingType 3)}}
+                <img class="equipment-card__grid--item" src="icons/equipped-icon.png">
+            {{else if (eq this.holdingType 4)}}
+                <img class="equipment-card__grid--item" src="icons/idk-icon.png">
+            {{/if}}
         </div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
         {{/if}}
