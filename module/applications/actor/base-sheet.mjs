@@ -70,11 +70,11 @@ export default class ActorSheetEd extends ActorSheet {
     // Equipment tests
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
-    // Owned Item management
+    // take strain
     html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
 
-    // Owned Item management
-    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+    // toggle holding Tpye of an owned item
+    html.find( ".item-hold" ).click( this._onChangeHoldingType.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -93,6 +93,20 @@ export default class ActorSheetEd extends ActorSheet {
     // Legend point History (Earned)
     html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
   }
+
+  /**
+    * Handle changing the holding type of an owned item.
+    * @param {Event} event      The originating click event.
+    * @private
+    */
+    _onChangeHoldingType(event) {
+     event.preventDefault();
+     const li = event.currentTarget.closest(".item-id");
+     const item = this.actor.items.get(li.dataset.itemId);
+     const currentHoldingType = item.system.holdingType;
+     const newHoldingType = currentHoldingType === 4 ? 1 : currentHoldingType + 1;
+     item.update({ "system.holdingType": newHoldingType });
+    }
 
   /**
    * Legend Point history earned
