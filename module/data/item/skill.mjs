@@ -16,7 +16,7 @@ export default class SkillData extends AbilityTemplate.mixin(
             skillType: new fields.StringField( {
                 required: true,
                 initial: "general",
-                options: ED4E.skillType,
+                options: ED4E.skillTypes,
                 label: "ED.Item.Skill.skillType"
             } ),
         } );
