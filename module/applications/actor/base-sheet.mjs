@@ -103,8 +103,26 @@ export default class ActorSheetEd extends ActorSheet {
      const li = event.currentTarget.closest(".item-id");
      const item = this.actor.items.get(li.dataset.itemId);
      const currentHoldingType = item.system.holdingType;
-     const newHoldingType = currentHoldingType === 4 ? 1 : currentHoldingType + 1;
-     item.update({ "system.holdingType": newHoldingType });
+     
+     if ( item.system.type === "weapon") {
+      const maxHoldingType = 6
+      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
+      item.update({ "system.holdingType": newHoldingType });
+     } else if ( item.system.type === "armor") {
+      const maxHoldingType = 4
+      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
+      item.update({ "system.holdingType": newHoldingType });
+     } else if ( item.system.type === "shield") {
+      const maxHoldingType = 5
+      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
+      item.update({ "system.holdingType": newHoldingType });
+     } else if ( item.system.type === "equipment") {
+      const maxHoldingType = 3
+      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
+      item.update({ "system.holdingType": newHoldingType });
+     } 
+      
+     
     }
 
   /**
