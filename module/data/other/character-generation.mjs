@@ -95,7 +95,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         ), {
           required: true,
           initialKeysOnly: true,
-          initialKeys: ["option", "class", "free", "special", "artisan", "knowledge", "general"],
+          initialKeys: ["option", "class", "free", "special", "artisan", "knowledge", "general", "language"],
         } ),
       availableRanks: new fields.SchemaField( {
         talent: new fields.NumberField( {
