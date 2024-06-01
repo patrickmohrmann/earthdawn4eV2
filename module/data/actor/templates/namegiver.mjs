@@ -22,7 +22,7 @@ export default class NamegiverTemplate extends SentientTemplate {
         return new fields.SetField(
           new fields.StringField( {
               blank: false,
-              choices: game.settings.get( "ed4e", "languages"),
+              choices: () => game.settings.get( "ed4e", "languages"),
           } ),
           {
               required: true,
