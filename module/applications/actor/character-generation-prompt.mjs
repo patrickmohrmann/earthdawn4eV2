@@ -80,14 +80,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
     // add the language skills manually, so we can localize them and assert the correct edid
     const edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
     const edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
-    const skillLanguageSpeak = docCollections.skills.find( skill => skill.edid === edidLanguageSpeak );
-    const skillLanguageRW = docCollections.skills.find( skill => skill.edid === edidLanguageRW );
+    const skillLanguageSpeak = docCollections.skills.find( skill => skill.system.edid === edidLanguageSpeak );
+    const skillLanguageRW = docCollections.skills.find( skill => skill.system.edid === edidLanguageRW );
     if ( !skillLanguageSpeak ) {
       docCollections.skills.push(
         await ItemEd.create(
           foundry.utils.mergeObject(
             ED4E.documentData.Item.skill.languageSpeak,
-            { level: 2 },
+            { system: { level: 2, edid: edidLanguageSpeak } },
             { inplace: false } ),
         ),
       );
@@ -97,7 +97,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
         await ItemEd.create(
           foundry.utils.mergeObject(
             ED4E.documentData.Item.skill.languageRW,
-            { level: 1 },
+            { system: { level: 1, edid: edidLanguageRW } },
             { inplace: false } ),
         ),
       );
