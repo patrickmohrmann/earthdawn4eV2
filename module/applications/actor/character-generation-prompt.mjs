@@ -42,6 +42,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
       'attribute-tab',
       'spell-tab',
       'skill-tab',
+      'language-tab',
       'equipment-tab'
     ];
     this._currentStep = 0;
