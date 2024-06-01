@@ -82,14 +82,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
     const edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
     let skillLanguageSpeak = docCollections.skills.find( skill => skill.system.edid === edidLanguageSpeak );
     let skillLanguageRW = docCollections.skills.find( skill => skill.system.edid === edidLanguageRW );
-    const startLevelLanguageSpeak = 2;
-    const startLevelLanguageRW = 1;
 
     if ( !skillLanguageSpeak ) {
       skillLanguageSpeak = await ItemEd.create(
         foundry.utils.mergeObject(
           ED4E.documentData.Item.skill.languageSpeak,
-          { system: { level: startLevelLanguageSpeak, edid: edidLanguageSpeak } },
+          { system: { level: ED4E.availableRanks.speak, edid: edidLanguageSpeak } },
           { inplace: false } ),
       );
       docCollections.skills.push( skillLanguageSpeak );
@@ -98,7 +96,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
       skillLanguageRW = await ItemEd.create(
         foundry.utils.mergeObject(
           ED4E.documentData.Item.skill.languageRW,
-          { system: { level: startLevelLanguageRW, edid: edidLanguageRW } },
+          { system: { level: ED4E.availableRanks.readWrite, edid: edidLanguageRW } },
           { inplace: false } ),
       );
       docCollections.skills.push( skillLanguageRW );
