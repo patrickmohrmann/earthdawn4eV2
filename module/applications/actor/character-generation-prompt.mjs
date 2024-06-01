@@ -1,6 +1,7 @@
 import { documentsToSelectChoices, filterObject, getAllDocuments } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
 import CharacterGenerationData from "../../data/other/character-generation.mjs";
+import ItemEd from "../../documents/item.mjs";
 
 /**
  * The application responsible for handling character generation
@@ -32,6 +33,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
 
+    this.edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
+    this.edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
+
     this._steps = [
       'namegiver-tab',
       'class-tab',
@@ -50,6 +54,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
    */
   static async waitPrompt(data, options = {}) {
     data ??= new CharacterGenerationData();
+
     const docCollections = {
       namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
       disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
@@ -71,6 +76,34 @@ export default class CharacterGenerationPrompt extends FormApplication {
         ( x ) => x.system.level <= game.settings.get( "ed4e", "charGenMaxSpellCircle" ),
       ),
     };
+
+    // add the language skills manually, so we can localize them and assert the correct edid
+    const edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
+    const edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
+    const skillLanguageSpeak = docCollections.skills.find( skill => skill.edid === edidLanguageSpeak );
+    const skillLanguageRW = docCollections.skills.find( skill => skill.edid === edidLanguageRW );
+    if ( !skillLanguageSpeak ) {
+      docCollections.skills.push(
+        await ItemEd.create(
+          foundry.utils.mergeObject(
+            ED4E.documentData.Item.skill.languageSpeak,
+            { level: 2 },
+            { inplace: false } ),
+        ),
+      );
+    }
+    if ( !skillLanguageRW ) {
+      docCollections.skills.push(
+        await ItemEd.create(
+          foundry.utils.mergeObject(
+            ED4E.documentData.Item.skill.languageRW,
+            { level: 1 },
+            { inplace: false } ),
+        ),
+      );
+    }
+
+
     return new Promise((resolve) => {
       options.resolve = resolve;
       new this(data, options, docCollections).render(true, { focus: true });
@@ -161,6 +194,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
       general: this.skills.filter( skill => skill.system.skillType === 'general' ),
       artisan: this.skills.filter( skill => skill.system.skillType === 'artisan' ),
       knowledge: this.skills.filter( skill => skill.system.skillType === 'knowledge' ),
+      language: this.skills.filter( skill => [ this.edidLanguageRW, this.edidLanguageSpeak ].includes( skill.system.edid ) ),
     };
 
     // Attributes
