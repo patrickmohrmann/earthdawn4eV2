@@ -1,12 +1,14 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ED4E from "../../config.mjs";
+import MatrixTemplate from "./templates/matrix.mjs";
 
 /**
  * Data model template with information on talent items.
  */
 export default class TalentData extends AbilityTemplate.mixin(
-    ItemDescriptionTemplate
+    ItemDescriptionTemplate,
+    MatrixTemplate
 ) {
 
     /** @inheritDoc */

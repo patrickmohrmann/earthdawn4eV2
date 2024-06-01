@@ -1,0 +1,36 @@
+<div class="card__item">
+    <div class="matrix-card__grid--container item-id" data-item-id="{{_id}}">
+        <div class="matrix-card__grid--item icons__dice">
+            {{#if (eq this.system.testing.attuned true)}}
+            {{#if (eq this.system.testing.readyToCast false)}}
+            <img class="matrix-icon undefined" src="systems/ed4e/assets/icons/weave-threads.svg" data-attribute="{{@key}}">
+            {{/if}}
+            {{else}}
+            {{#if (eq this.system.testing.readyToCast true)}}
+            <img class="matrix-icon undefined" src="systems/ed4e/assets/icons/cast-matrix.svg" data-attribute="{{@key}}">
+            {{else}}
+            <img class="matrix-icon undefined" src="systems/ed4e/assets/icons/attune.svg" data-attribute="{{@key}}">
+            {{/if}}
+            {{/if}}
+        </div>
+        <div class="matrix-card__grid--item card__name text__alignment--left">{{name}}</div>
+        <div class="matrix-card__grid--item undefined">{{system.matrixAttuned}} test</div>
+        <div class="matrix-card__grid--item text__alignment--center">{{system.spellLevel}}</div>
+        <div class="matrix-card__grid--item text__alignment--center">{{system.wovenThreads}} / {{system.requiredThreads}}</div>
+        <div class="matrix-card__grid--item text__alignment--center">{{system.characteristics.armor.mystical.value}}</div>
+        <div class="matrix-card__grid--item text__alignment--center">{{system.characteristics.damage.standard}} / {{system.characteristics.health.death}}</div>
+        <div class="matrix-card__grid--item text__alignment--center">
+            {{> "systems/ed4e/templates/global/card-options-chat.hbs"}}
+        </div>
+    </div>
+    <div class="card__description card__description--toggle display__inline-block">
+        <span class="card__description--content">
+            {{{system.description.value}}}
+        </span>
+        <span>
+            {{#each this.effects as |effects id|}}
+            {{> "systems/ed4e/templates/actor/cards/effect-card-link.hbs" effects }}
+            {{/each}}
+        </span>
+    </div>
+</div>

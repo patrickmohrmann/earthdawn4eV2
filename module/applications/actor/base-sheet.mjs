@@ -230,7 +230,7 @@ export default class ActorSheetEd extends ActorSheet {
 
     const itemDescription = $( event.currentTarget )
     .parent( ".item-id" )
-    .parent( ".card__ability" )
+    .parent( ".card__item" )
     .children( ".card__description" );
 
     itemDescription.toggleClass( "card__description--toggle" );

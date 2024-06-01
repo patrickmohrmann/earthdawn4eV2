@@ -31,4 +31,15 @@
         <input class="input__number-input" name="system.spellIllustion.sensingDifficulty" type="text" value="{{item.system.spellIllustion.sensingDifficulty}}"
             data-dtype="Number">
     </div>
-</div>
+
+    {{!-- TEST --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.Spell.testing.attuned"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.testing.attuned" {{checked item.system.testing.attuned}}>
+    </div>
+    {{!-- resist --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.Spell.testing.readyToCast"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.testing.readyToCast" {{checked item.system.testing.readyToCast}}>
+    </div>
+

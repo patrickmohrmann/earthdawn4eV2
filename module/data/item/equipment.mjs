@@ -1,5 +1,6 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import MatrixTemplate from "./templates/matrix.mjs";
 
 /**
  * Data model template with information on equipment items.
@@ -7,7 +8,8 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} ammoType which type of ammo it is.
  */
 export default class EquipmentData extends PhysicalItemTemplate.mixin(
-    ItemDescriptionTemplate
+    ItemDescriptionTemplate,
+    MatrixTemplate
 ) {
 
     /** @inheritDoc */

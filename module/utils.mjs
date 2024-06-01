@@ -485,12 +485,13 @@ export async function preloadHandlebarsTemplates() {
 
     // Actor cards
     "systems/ed4e/templates/actor/cards/ability-card.hbs",
-    "systems/ed4e/templates/actor/cards/equipment-card.hbs",
-    "systems/ed4e/templates/actor/cards/spell-card.hbs",
-    "systems/ed4e/templates/actor/cards/class-card.hbs",
-    "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",
     "systems/ed4e/templates/actor/cards/attribute-card.hbs",
+    "systems/ed4e/templates/actor/cards/class-card.hbs",
     "systems/ed4e/templates/actor/cards/effect-card-link.hbs",
+    "systems/ed4e/templates/actor/cards/equipment-card.hbs",
+    "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",
+    "systems/ed4e/templates/actor/cards/matrix-card.hbs",
+    "systems/ed4e/templates/actor/cards/spell-card.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/item-section-name.hbs",
