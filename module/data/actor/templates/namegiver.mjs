@@ -8,7 +8,28 @@ export default class NamegiverTemplate extends SentientTemplate {
 
     /** @inheritDoc */
     static defineSchema() {
-        return super.defineSchema();
+        const fields = foundry.data.fields;
+        return this.mergeSchema(super.defineSchema(), {
+            languages: new fields.SchemaField( {
+                speak: this.getLanguageDataField(),
+                readWrite: this.getLanguageDataField(),
+            } ),
+        } );
+    }
+
+    static getLanguageDataField() {
+        const fields = foundry.data.fields;
+        return new fields.SetField(
+          new fields.StringField( {
+              blank: false,
+              choices: game.settings.get( "ed4e", "languages"),
+          } ),
+          {
+              required: true,
+              nullable: false,
+              initial: [],
+          }
+        )
     }
 
     /**
