@@ -22,7 +22,12 @@ export default class NamegiverTemplate extends SentientTemplate {
         return new fields.SetField(
           new fields.StringField( {
               blank: false,
-              choices: () => game.settings.get( "ed4e", "languages"),
+              // choices need to be in the form of an object with the same key and value
+              // for the `formField` Handlebars helper to work correctly and have the name
+              // as the value attribute of the option tag
+              choices: () => Object.fromEntries(
+                game.settings.get( "ed4e", "languages" ).map( lang => [ lang, lang ] )
+              ),
           } ),
           {
               required: true,
