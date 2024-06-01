@@ -80,30 +80,40 @@ export default class CharacterGenerationPrompt extends FormApplication {
     // add the language skills manually, so we can localize them and assert the correct edid
     const edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
     const edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
-    const skillLanguageSpeak = docCollections.skills.find( skill => skill.system.edid === edidLanguageSpeak );
-    const skillLanguageRW = docCollections.skills.find( skill => skill.system.edid === edidLanguageRW );
+    let skillLanguageSpeak = docCollections.skills.find( skill => skill.system.edid === edidLanguageSpeak );
+    let skillLanguageRW = docCollections.skills.find( skill => skill.system.edid === edidLanguageRW );
+    const startLevelLanguageSpeak = 2;
+    const startLevelLanguageRW = 1;
+
     if ( !skillLanguageSpeak ) {
-      docCollections.skills.push(
-        await ItemEd.create(
-          foundry.utils.mergeObject(
-            ED4E.documentData.Item.skill.languageSpeak,
-            { system: { level: 2, edid: edidLanguageSpeak } },
-            { inplace: false } ),
-        ),
+      skillLanguageSpeak = await ItemEd.create(
+        foundry.utils.mergeObject(
+          ED4E.documentData.Item.skill.languageSpeak,
+          { system: { level: startLevelLanguageSpeak, edid: edidLanguageSpeak } },
+          { inplace: false } ),
       );
+      docCollections.skills.push( skillLanguageSpeak );
     }
     if ( !skillLanguageRW ) {
-      docCollections.skills.push(
-        await ItemEd.create(
-          foundry.utils.mergeObject(
-            ED4E.documentData.Item.skill.languageRW,
-            { system: { level: 1, edid: edidLanguageRW } },
-            { inplace: false } ),
-        ),
+      skillLanguageRW = await ItemEd.create(
+        foundry.utils.mergeObject(
+          ED4E.documentData.Item.skill.languageRW,
+          { system: { level: startLevelLanguageRW, edid: edidLanguageRW } },
+          { inplace: false } ),
       );
+      docCollections.skills.push( skillLanguageRW );
     }
 
+    data.updateSource( {
+      abilities: {
+        language: {
+          [skillLanguageSpeak.uuid]: skillLanguageSpeak.system.level,
+          [skillLanguageRW.uuid]: skillLanguageRW.system.level,
+        }
+      }
+    } );
 
+    // create the prompt
     return new Promise((resolve) => {
       options.resolve = resolve;
       new this(data, options, docCollections).render(true, { focus: true });
