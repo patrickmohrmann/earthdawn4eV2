@@ -492,6 +492,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/generation/attribute-assignment.hbs",
     "systems/ed4e/templates/actor/generation/spell-selection.hbs",
     "systems/ed4e/templates/actor/generation/skill-selection.hbs",
+    "systems/ed4e/templates/actor/generation/language-selection.hbs",
     "systems/ed4e/templates/actor/generation/equipment.hbs",
 
     // Character details section partials
