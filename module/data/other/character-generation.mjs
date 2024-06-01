@@ -3,13 +3,13 @@ import { MappingField } from "../fields.mjs";
 import ED4E from "../../config.mjs";
 import {
   filterObject,
-  getAllDocuments,
   getAttributeStep,
   getSingleGlobalItemByEdid,
   mapObject,
   renameKeysWithPrefix,
   sum
 } from "../../utils.mjs";
+import NamegiverTemplate from "../actor/templates/namegiver.mjs";
 
 /**
  * The data used during character generation. Also used as the object of the
@@ -163,6 +163,12 @@ export default class CharacterGenerationData extends SparseDataModel {
 
       // Spells
       spells: new fields.SetField( new fields.DocumentUUIDField() ),
+
+      // Languages
+      languages: new fields.SchemaField( {
+        speak: NamegiverTemplate.getLanguageDataField(),
+        readWrite: NamegiverTemplate.getLanguageDataField(),
+      } ),
     };
   }
 
@@ -313,7 +319,7 @@ export default class CharacterGenerationData extends SparseDataModel {
     );
     return ( await this.getMaxSpellPoints() ) - sum( currentSpellLevels );
   }
-  
+
   async getMagicType() {
     for ( const abilityUuid of Object.keys( this.abilities.class ) ) {
       const ability = await fromUuid( abilityUuid );
