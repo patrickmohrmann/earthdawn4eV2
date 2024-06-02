@@ -442,7 +442,8 @@ p {
 .ability-icon,
 .attribute-icon,
 .equipment-icon,
-.equipment-icon__visible {
+.equipment-icon__visible,
+.item__status {
   border: none;
   display: block;
 }
