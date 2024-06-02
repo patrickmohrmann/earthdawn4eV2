@@ -236,25 +236,40 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    const data = foundry.utils.expandObject( formData );
+    const data = foundry.utils.expandObject(formData);
 
     data.namegiver ??= null;
 
     // Reset selected class if class type changed
     if (data.isAdept !== this.object.isAdept) data.selectedClass = null;
-    
+
     // Set class specifics
-    if ( data.selectedClass ) {
+    if (data.selectedClass) {
       const classDocument = await fromUuid(data.selectedClass);
       this.object.classAbilities = classDocument;
     }
 
     // process selected class option ability
-    if ( data.abilityOption ) this.object.abilityOption = data.abilityOption;
+    if (data.abilityOption) this.object.abilityOption = data.abilityOption;
 
-    this.object.updateSource( data );
+    // Check the maximum selectable number of languages by comparing the array length
+    // of the selected languages with the rank of the corresponding language skill
+    const languageSkills = await this.object.getLanguageDocuments();
+    // always use the stored ranks, since we never have a rank assignment in `_updateObject`
+    const languageSkillRanks = await this.object.getLanguageSkillRanks();
+    if (data.languages.speak.length > languageSkillRanks.speak ) {
+      delete data.languages.speak;
+      ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to speak (your rank in that skill." ) );
+    }
+    if (data.languages.readWrite.length > languageSkillRanks.readWrite ) {
+      delete data.languages.readWrite;
+      ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to read / write (your rank in that skill." ) );
+    }
+    if (foundry.utils.isEmpty(data.languages)) delete data.languages;
 
-    // wait for the update so we can use the data models method
+    this.object.updateSource(data);
+
+    // wait for the update, so we can use the data models method
     this.magicType = await this.object.getMagicType();
 
     // Re-render sheet with updated values
