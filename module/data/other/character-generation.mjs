@@ -562,6 +562,11 @@ export default class CharacterGenerationData extends SparseDataModel {
         updateData = {
           abilities: skillsPayload,
           availableRanks: availableSkillRanksPayload,
+          // reset selected languages as well, since they might be more than the default ranks
+          languages: {
+            speak: [],
+            readWrite: [],
+          },
         };
         break;
 
