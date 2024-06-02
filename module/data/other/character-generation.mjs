@@ -328,6 +328,14 @@ export default class CharacterGenerationData extends SparseDataModel {
     return undefined;
   }
 
+  async getLanguageDocuments() {
+    const languageSkills = await Promise.all( Object.keys( this.abilities.language ).map( async ( languageUuid ) => fromUuid( languageUuid ) ) );
+    return {
+      speak: languageSkills.find( skill => skill.system.edid === game.settings.get( "ed4e", "edidLanguageSpeak" ) ),
+      readWrite: languageSkills.find( skill => skill.system.edid === game.settings.get( "ed4e", "edidLanguageRW" ) ),
+    };
+  }
+
   async addAbility( abilityUuid, abilityType ) {
     const abilityData = this.abilities[abilityType];
     abilityData[abilityUuid] = 0;
