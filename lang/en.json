@@ -249,6 +249,15 @@
                 "ranged":                                           "Ranged Combat",
                 "throwing":                                         "Throwing Combat",
                 "unarmed":                                          "unarmed Combat"
+            },
+            "ItemStatus": {
+                "owned":                                            "Owned",
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "mainHand":                                         "Main Hand",
+                "offHand":                                          "Off Hand",
+                "twoHands":                                         "Two Hands",
+                "tail":                                             "Tail"
             }
         },
         "Data": {

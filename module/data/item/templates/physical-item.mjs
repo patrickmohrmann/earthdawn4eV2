@@ -1,4 +1,6 @@
+// import ED4E from "../../../config.mjs";
 import SystemDataModel from "../../abstract.mjs";
+// import { MappingField } from "../../fields.mjs";
 import TargetTemplate from "./targeting.mjs";
 
 /**
@@ -118,22 +120,34 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
             // a toggle shall be show either equipped, carried or owned.
             // all equipped and carried items count as owned as well
             // all equipped items count as carried as well
-            itemStatus: new fields.SchemaField( {
-                equipped: new fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Item.General.equipped"
-                } ),
-                carried: new fields.BooleanField( {
-                    required: true,
-                    initial: true,
-                    label: "ED.Item.General.carried"
-                } ),
-                owned: new fields.BooleanField( {
-                    required: true,
-                    initial: false,
-                    label: "ED.Item.General.owned"
-                } ),
+            // itemStaus: new MappingField( new fields.SchemaField( {
+            //     name: new fields.StringField( {
+            //         required: true,
+            //         blank: false,
+            //         // initial: "silver",
+            //         label: "ED.Item.General.denomination"
+            //     } ),
+            //     value: new fields.NumberField( {
+            //         required: true,
+            //         nullable: false,
+            //         min: 1,
+            //         step: 1,
+            //         initial: 1,
+            //         integer: true,
+            //         positive: true
+            //     } )
+            // } ), {
+            //     initialKeys: ED4E.itemStatus,
+            //     initialKeysOnly: true,
+            //     label: "ED.itemStatus.itemStatus"
+            // } ),
+            itemStatus: new fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 1,
+                initial: 1,
+                integer: true,
+                label: "ED.Item.General.recoveryPropertyValue"
             } ),
         } );
     }
