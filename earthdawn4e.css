@@ -430,7 +430,8 @@ p {
 }
 .ability-icon,
 .equipment-icon,
-.effect-icon {
+.effect-icon,
+.item__status {
   width: 25px;
 }
 .attribute-card__grid--container {
@@ -479,7 +480,8 @@ p {
 .ability-icon,
 .attribute-icon,
 .equipment-icon,
-.equipment-icon__visible {
+.equipment-icon__visible,
+.item__status {
   border: none;
   display: block;
 }
