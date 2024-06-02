@@ -209,6 +209,17 @@
                 "loadedOver":                                       "Overloaded"
             }
         },
+        "Config": {
+            "ItemStatus": {
+                "owned":                                            "Owned",
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "mainHand":                                         "Main Hand",
+                "offHand":                                          "Off Hand",
+                "twoHands":                                         "Two Hands",
+                "tail":                                             "Tail"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},

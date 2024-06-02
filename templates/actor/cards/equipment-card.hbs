@@ -13,35 +13,67 @@
         {{/if}}
         <div class="equipment-card__grid--item">{{name}}</div>
         {{#if (eq this.type "armor")}}
-        <div class="equipment-card__grid--item text__alignment--center">{{add system.physical.armor system.physical.forgeBonus}}</div>
-        <div class="equipment-card__grid--item text__alignment--center">{{add system.mystical.armor system.mystical.forgeBonus}}</div>
-        <div class="equipment-card__grid--item text__alignment--center">{{system.initiativePenalty}}</div>
-        <div class="equipment-card__grid--item text__alignment--center">
-            {{#if (eq this.holdingType 1)}}
-                <img class="equipment-card__grid--item" src="icons/owned-icon.png">
-            {{else if (eq this.holdingType 2)}}
-                <img class="equipment-card__grid--item" src="icons/carried-icon.png">
-            {{else if (eq this.holdingType 3)}}
-                <img class="equipment-card__grid--item" src="icons/equipped-icon.png">
-            {{else if (eq this.holdingType 4)}}
-                <img class="equipment-card__grid--item" src="icons/idk-icon.png">
-            {{/if}}
-        </div>
-        <div class="equipment-card__grid--item text__alignment--center"></div>
+            <div class="equipment-card__grid--item text__alignment--center">{{add system.physical.armor system.physical.forgeBonus}}</div>
+            <div class="equipment-card__grid--item text__alignment--center">{{add system.mystical.armor system.mystical.forgeBonus}}</div>
+            <div class="equipment-card__grid--item text__alignment--center">{{system.initiativePenalty}}</div>
+            <div class="equipment-card__grid--item text__alignment--center"></div>
+            <div class="equipment-card__grid--item text__alignment--center">
+                {{log this}}
+                {{#if (eq this.system.itemStatus 1 )}}
+                {{!-- carried --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/not-equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus  3)}}
+                {{!-- equipped --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/armor.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 2)}}
+                {{!-- owned --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/backpack.svg">
+                {{/if}}
+            </div>
         {{/if}}
         {{#if (eq this.type "equipment")}}
         <div class="equipment-card__grid--item text__alignment--center">{{system.amount}}</div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
-        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center">
+                {{log this}}
+                {{#if (eq this.system.itemStatus 1 )}}
+                {{!-- carried --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/not-equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus  3)}}
+                {{!-- equipped --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 2)}}
+                {{!-- owned --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/backpack.svg">
+                {{/if}}
+            </div>
         {{/if}}
         {{#if (eq this.type "shield")}}
         <div class="equipment-card__grid--item text__alignment--center">{{system.defenseBonus.physical}}</div>
         <div class="equipment-card__grid--item text__alignment--center">{{system.defenseBonus.mystical}}</div>
         <div class="equipment-card__grid--item text__alignment--center">{{system.initiativePenalty}}</div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
-        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center">
+                {{log this}}
+                {{#if (eq this.system.itemStatus 1 )}}
+                {{!-- carried --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/not-equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus  3)}}
+                {{!-- equipped --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 2)}}
+                {{!-- owned --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/backpack.svg">
+                {{/if}}
+            </div>
         {{/if}}
         {{#if (eq this.type "weapon")}}
         <div class="equipment-card__grid--item text__alignment--center">{{system.amount}}</div>
@@ -49,7 +81,37 @@
         <div class="equipment-card__grid--item text__alignment--center undefined">TODO</div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
-        <div class="equipment-card__grid--item text__alignment--center"></div>
+        <div class="equipment-card__grid--item text__alignment--center">
+                {{log this}}
+                {{#if (eq this.system.itemStatus 1 )}}
+                {{!-- carried --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/not-equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus  3)}}
+                {{!-- equipped --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/equipped.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 2)}}
+                {{!-- owned --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/backpack.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 4 )}}
+                {{!-- carried --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/main-hand.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus  5)}}
+                {{!-- equipped --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/off-hand.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 6)}}
+                {{!-- owned --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/two-handed.svg">
+                {{/if}}
+                {{#if (eq this.system.itemStatus 7)}}
+                {{!-- owned --}}
+                <img class="item__status" src="systems/ed4e/assets/icons/tail.svg">
+                {{/if}}
+            </div>
         {{/if}}
         
         <div class="equipment-card__grid--item">{{> "systems/ed4e/templates/global/card-options-chat.hbs"}}</div>

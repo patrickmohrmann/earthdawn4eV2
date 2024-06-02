@@ -74,7 +74,7 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
-    html.find( ".item-hold" ).click( this._onChangeHoldingType.bind( this ) );
+    html.find( ".item__status" ).click( this._onChangeItemStatus.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -99,31 +99,46 @@ export default class ActorSheetEd extends ActorSheet {
     * @param {Event} event      The originating click event.
     * @private
     */
-    _onChangeHoldingType(event) {
+    _onChangeItemStatus( event ) {
      event.preventDefault();
-     const li = event.currentTarget.closest(".item-id");
-     const item = this.actor.items.get(li.dataset.itemId);
-     const currentHoldingType = item.system.holdingType;
-     
-     if ( item.system.type === "weapon") {
-      const maxHoldingType = 6
-      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
-      item.update({ "system.holdingType": newHoldingType });
-     } else if ( item.system.type === "armor") {
-      const maxHoldingType = 4
-      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
-      item.update({ "system.holdingType": newHoldingType });
-     } else if ( item.system.type === "shield") {
-      const maxHoldingType = 5
-      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
-      item.update({ "system.holdingType": newHoldingType });
-     } else if ( item.system.type === "equipment") {
-      const maxHoldingType = 3
-      const newHoldingType = currentHoldingType === maxHoldingType ? 1 : currentHoldingType + 1;
-      item.update({ "system.holdingType": newHoldingType });
+     const li = event.currentTarget.closest( ".item-id" );
+     const item = this.actor.items.get( li.dataset.itemId );
+     const currentItemStatus = item.system.itemStatus;
+     let itemStatusNumber = 0;
+
+     if ( currentItemStatus === 1 ) {
+      itemStatusNumber = 1;
+     } else if ( currentItemStatus === 2 ) {
+      itemStatusNumber = 2;
+     } else if ( currentItemStatus === 3 ) {
+      itemStatusNumber = 3;
+     } else if ( currentItemStatus === 4 ) {
+      itemStatusNumber = 4;
+     } else if ( currentItemStatus === 5 ) {
+      itemStatusNumber = 5;
+     } else if ( currentItemStatus === 6 ) {
+      itemStatusNumber = 6;
+     } else if ( currentItemStatus === 7 ) {
+      itemStatusNumber = 7;
      } 
-      
-     
+
+     if ( item.type === "weapon" ) {
+      const maxItemStatus = 7
+      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      item.update( { "system.itemStatus": newItemStatus } );
+     } else if ( item.type === "armor" ) {
+      const maxItemStatus = 3
+      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      item.update( { "system.itemStatus": newItemStatus } );
+     } else if ( item.type === "shield" ) {
+      const maxItemStatus = 3
+      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      item.update( { "system.itemStatus": newItemStatus } );
+     } else if ( item.type === "equipment" ) {
+      const maxItemStatus = 3
+      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      item.update( { "system.itemStatus": newItemStatus } );
+     } 
     }
 
   /**

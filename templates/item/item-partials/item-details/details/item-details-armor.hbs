@@ -70,7 +70,9 @@
     {{!-- itemStatus.itemStatus.itemStatus.equipped --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.General.equipped"}}:</label>
-       <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
+       <select name="system.itemStatus">
+            {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
+        </select>
     </div>
     {{#if item.isOwned }}
     {{!-- automatic Weight Calculation --}}
