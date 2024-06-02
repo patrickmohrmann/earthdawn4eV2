@@ -512,12 +512,12 @@ export default class CharacterGenerationData extends SparseDataModel {
       case "classAbilities":
         const classOptions = Object.fromEntries(
           Object.entries(this.abilities.option).map(
-            ( [uuid, level] ) => [uuid, 0]
+            ( [uuid, _] ) => [uuid, 0]
           )
         );
         const classAbilities = Object.fromEntries(
           Object.entries(this.abilities.class).map(
-            ( [uuid, level] ) => [uuid, 0]
+            ( [uuid, _] ) => [uuid, 0]
           )
         );
 
@@ -541,7 +541,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         for ( const abilityType of ["artisan", "knowledge", "general", "readWrite", "speak"] ) {
           skillsPayload[abilityType] = mapObject(
             this.abilities[abilityType] ?? {},
-            ( uuid, level ) => [uuid, 0]
+            ( uuid, _ ) => [uuid, 0]
           );
         }
         const skillLanguageSpeak = await getSingleGlobalItemByEdid( game.settings.get( "ed4e", "edidLanguageSpeak" ) );

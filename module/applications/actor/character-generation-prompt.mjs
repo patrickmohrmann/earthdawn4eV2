@@ -248,8 +248,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     // Set class specifics
     if (data.selectedClass) {
-      const classDocument = await fromUuid(data.selectedClass);
-      this.object.classAbilities = classDocument;
+      this.object.classAbilities = await fromUuid(data.selectedClass);
     }
 
     // process selected class option ability
@@ -257,7 +256,6 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     // Check the maximum selectable number of languages by comparing the array length
     // of the selected languages with the rank of the corresponding language skill
-    const languageSkills = await this.object.getLanguageDocuments();
     // always use the stored ranks, since we never have a rank assignment in `_updateObject`
     const languageSkillRanks = await this.object.getLanguageSkillRanks();
     if (data.languages.speak.length > languageSkillRanks.speak ) {
@@ -434,7 +432,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   _validateSkills( errorLevel = "warn", displayNotification = false ) {
     const availableRanks = filterObject(
       this.object.availableRanks,
-      ( [key, value] ) => !["talent", "devotion"].includes( key )
+      ( [key, _] ) => !["talent", "devotion"].includes( key )
     );
     availableRanks[this.object.isAdept ? "devotion" : "talent"] = 0
     availableRanks["readWrite"] = 0;
