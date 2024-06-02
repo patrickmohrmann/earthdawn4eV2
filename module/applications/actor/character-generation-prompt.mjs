@@ -199,11 +199,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.maxAssignableRanks = game.settings.get("ed4e", "charGenMaxRank" );
 
     // Abilities
+    // remove language skills from general skills, otherwise they will be displayed twice
+    const languageSkills = this.skills.filter( skill => [ this.edidLanguageRW, this.edidLanguageSpeak ].includes( skill.system.edid ) );
+    const filteredSkills = this.skills.filter( skill => !languageSkills.includes( skill ) );
     context.skills = {
-      general: this.skills.filter( skill => skill.system.skillType === 'general' ),
-      artisan: this.skills.filter( skill => skill.system.skillType === 'artisan' ),
-      knowledge: this.skills.filter( skill => skill.system.skillType === 'knowledge' ),
-      language: this.skills.filter( skill => [ this.edidLanguageRW, this.edidLanguageSpeak ].includes( skill.system.edid ) ),
+      general: filteredSkills.filter( skill => skill.system.skillType === 'general' ),
+      artisan: filteredSkills.filter( skill => skill.system.skillType === 'artisan' ),
+      knowledge: filteredSkills.filter( skill => skill.system.skillType === 'knowledge' ),
+      language: languageSkills,
     };
 
     // Attributes
