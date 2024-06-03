@@ -358,10 +358,10 @@ ED4E.testTypes = {
 		label: "ED.Rolls.Labels.effectTestRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
-	damage: {
-		label: "ED.Rolls.Labels.damageRoll",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
-	},
+	// damage: {
+	// 	label: "ED.Rolls.Labels.damageRoll",
+	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
+	// },
 }
 preLocalize( "testTypes", { key: "label" } );
 
@@ -375,10 +375,10 @@ ED4E.rollTypes = {
 		label: "ED.Rolls.Labels.abilityRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
-	arbitrary: {
-		label: "ED.Rolls.Labels.arbitraryRoll",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
-	},
+	// arbitrary: {
+	// 	label: "ED.Rolls.Labels.arbitraryRoll",
+	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
+	// },
 	attack: {
 		label: "ED.Rolls.Labels.attackRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
