@@ -39,6 +39,7 @@ export default class ActorSheetEd extends ActorSheet {
   /* -------------------------------------------- */
   async getData() {
     const systemData = super.getData();
+    systemData.systemFields = this.document.system.schema.fields;
     systemData.enrichment = await this.actor._enableHTMLEnrichment();
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;

@@ -1,6 +1,7 @@
 import { documentsToSelectChoices, filterObject, getAllDocuments } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
 import CharacterGenerationData from "../../data/other/character-generation.mjs";
+import ItemEd from "../../documents/item.mjs";
 
 /**
  * The application responsible for handling character generation
@@ -32,12 +33,16 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
     this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
 
+    this.edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
+    this.edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
+
     this._steps = [
       'namegiver-tab',
       'class-tab',
       'attribute-tab',
       'spell-tab',
       'skill-tab',
+      'language-tab',
       'equipment-tab'
     ];
     this._currentStep = 0;
@@ -50,6 +55,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
    */
   static async waitPrompt(data, options = {}) {
     data ??= new CharacterGenerationData();
+
     const docCollections = {
       namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
       disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
@@ -71,6 +77,42 @@ export default class CharacterGenerationPrompt extends FormApplication {
         ( x ) => x.system.level <= game.settings.get( "ed4e", "charGenMaxSpellCircle" ),
       ),
     };
+
+    // add the language skills manually, so we can localize them and assert the correct edid
+    const edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
+    const edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
+    let skillLanguageSpeak = docCollections.skills.find( skill => skill.system.edid === edidLanguageSpeak );
+    let skillLanguageRW = docCollections.skills.find( skill => skill.system.edid === edidLanguageRW );
+
+    if ( !skillLanguageSpeak ) {
+      skillLanguageSpeak = await ItemEd.create(
+        foundry.utils.mergeObject(
+          ED4E.documentData.Item.skill.languageSpeak,
+          { system: { level: ED4E.availableRanks.speak, edid: edidLanguageSpeak } },
+          { inplace: false } ),
+      );
+      docCollections.skills.push( skillLanguageSpeak );
+    }
+    if ( !skillLanguageRW ) {
+      skillLanguageRW = await ItemEd.create(
+        foundry.utils.mergeObject(
+          ED4E.documentData.Item.skill.languageRW,
+          { system: { level: ED4E.availableRanks.readWrite, edid: edidLanguageRW } },
+          { inplace: false } ),
+      );
+      docCollections.skills.push( skillLanguageRW );
+    }
+
+    data.updateSource( {
+      abilities: {
+        language: {
+          [skillLanguageSpeak.uuid]: skillLanguageSpeak.system.level,
+          [skillLanguageRW.uuid]: skillLanguageRW.system.level,
+        }
+      }
+    } );
+
+    // create the prompt
     return new Promise((resolve) => {
       options.resolve = resolve;
       new this(data, options, docCollections).render(true, { focus: true });
@@ -157,10 +199,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.maxAssignableRanks = game.settings.get("ed4e", "charGenMaxRank" );
 
     // Abilities
+    // remove language skills from general skills, otherwise they will be displayed twice
+    const languageSkills = this.skills.filter( skill => [ this.edidLanguageRW, this.edidLanguageSpeak ].includes( skill.system.edid ) );
+    const filteredSkills = this.skills.filter( skill => !languageSkills.includes( skill ) );
     context.skills = {
-      general: this.skills.filter( skill => skill.system.skillType === 'general' ),
-      artisan: this.skills.filter( skill => skill.system.skillType === 'artisan' ),
-      knowledge: this.skills.filter( skill => skill.system.skillType === 'knowledge' ),
+      general: filteredSkills.filter( skill => skill.system.skillType === 'general' ),
+      artisan: filteredSkills.filter( skill => skill.system.skillType === 'artisan' ),
+      knowledge: filteredSkills.filter( skill => skill.system.skillType === 'knowledge' ),
+      language: languageSkills,
     };
 
     // Attributes
@@ -193,25 +239,38 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    const data = foundry.utils.expandObject( formData );
+    const data = foundry.utils.expandObject(formData);
 
     data.namegiver ??= null;
 
     // Reset selected class if class type changed
     if (data.isAdept !== this.object.isAdept) data.selectedClass = null;
-    
+
     // Set class specifics
-    if ( data.selectedClass ) {
-      const classDocument = await fromUuid(data.selectedClass);
-      this.object.classAbilities = classDocument;
+    if (data.selectedClass) {
+      this.object.classAbilities = await fromUuid(data.selectedClass);
     }
 
     // process selected class option ability
-    if ( data.abilityOption ) this.object.abilityOption = data.abilityOption;
+    if (data.abilityOption) this.object.abilityOption = data.abilityOption;
 
-    this.object.updateSource( data );
+    // Check the maximum selectable number of languages by comparing the array length
+    // of the selected languages with the rank of the corresponding language skill
+    // always use the stored ranks, since we never have a rank assignment in `_updateObject`
+    const languageSkillRanks = await this.object.getLanguageSkillRanks();
+    if (data.languages.speak.length > languageSkillRanks.speak ) {
+      delete data.languages.speak;
+      ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to speak (your rank in that skill." ) );
+    }
+    if (data.languages.readWrite.length > languageSkillRanks.readWrite ) {
+      delete data.languages.readWrite;
+      ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to read / write (your rank in that skill." ) );
+    }
+    if (foundry.utils.isEmpty(data.languages)) delete data.languages;
 
-    // wait for the update so we can use the data models method
+    this.object.updateSource(data);
+
+    // wait for the update, so we can use the data models method
     this.magicType = await this.object.getMagicType();
 
     // Re-render sheet with updated values
@@ -373,7 +432,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   _validateSkills( errorLevel = "warn", displayNotification = false ) {
     const availableRanks = filterObject(
       this.object.availableRanks,
-      ( [key, value] ) => !["talent", "devotion"].includes( key )
+      ( [key, _] ) => !["talent", "devotion"].includes( key )
     );
     availableRanks[this.object.isAdept ? "devotion" : "talent"] = 0
     availableRanks["readWrite"] = 0;
