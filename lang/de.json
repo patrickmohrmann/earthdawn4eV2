@@ -268,17 +268,6 @@
                 "tail":                                             "Schwanz"
             }
         },
-        "Config": {
-            "ItemStatus": {
-                "owned":                                            "Besitz",
-                "carried":                                          "Getragen",
-                "equipped":                                         "Ausgerüstet",
-                "mainHand":                                         "Haupthand",
-                "offHand":                                          "Nebenhand",
-                "twoHands":                                         "Beidhändig",
-                "tail":                                             "Schwanz"
-            }
-        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},

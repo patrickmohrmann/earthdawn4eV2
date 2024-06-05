@@ -115,7 +115,7 @@ export default class ActorSheetEd extends ActorSheet {
      event.preventDefault();
      const li = event.currentTarget.closest( ".item-id" );
      const item = this.actor.items.get( li.dataset.itemId );
-     const currentItemStatus = item.system.itemStatus;
+     const currentItemStatus = item.system.itemStatus.value;
      let itemStatusNumber = 0;
 
      if ( currentItemStatus === 1 ) {
@@ -136,20 +136,21 @@ export default class ActorSheetEd extends ActorSheet {
 
      if ( item.type === "weapon" ) {
       const maxItemStatus = 7
-      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus": newItemStatus } );
+      let newItemStatusPre = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      const newItemStatus = newItemStatusPre === 3 ? 4 : newItemStatusPre;
+      item.update( { "system.itemStatus.value": newItemStatus } );
      } else if ( item.type === "armor" ) {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus": newItemStatus } );
+      item.update( { "system.itemStatus.value": newItemStatus } );
      } else if ( item.type === "shield" ) {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus": newItemStatus } );
+      item.update( { "system.itemStatus.value": newItemStatus } );
      } else if ( item.type === "equipment" ) {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus": newItemStatus } );
+      item.update( { "system.itemStatus.value": newItemStatus } );
      } 
     }
 
