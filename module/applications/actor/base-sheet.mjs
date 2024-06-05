@@ -77,7 +77,10 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
-    html.find( ".item__status" ).click( this._onChangeItemStatus.bind( this ) );
+    html.find( ".item__status" ).click( this._onChangeItemStatus.bind( this, up) );
+    
+    // Find HTML element with class xxx and on right click call function yyyy
+    html.find('.item__status').on('contextmenu')( this._onChangeItemStatus.bind( this, down) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
