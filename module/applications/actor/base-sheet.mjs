@@ -111,6 +111,7 @@ export default class ActorSheetEd extends ActorSheet {
     * 
     * @private
     */
+    // eslint-disable-next-line complexity
     _onChangeItemStatus( event ) {
      event.preventDefault();
      const li = event.currentTarget.closest( ".item-id" );
