@@ -145,6 +145,7 @@ export default class ActorSheetEd extends ActorSheet {
       const weaponSizeTwoHandedMax = namegiver[0].system.weaponSize.twoHanded.max;
 
 
+      
 
       let newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
       // check any weapon becoming a equipped
