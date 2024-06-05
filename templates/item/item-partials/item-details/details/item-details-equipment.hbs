@@ -83,8 +83,8 @@
     {{!-- equipped --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.General.equipped"}}:</label>
-        <select name="system.itemStatus">
-            {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
+        <select name="system.itemStatus.value">
+            {{selectOptions config.itemStatus selected=item.system.itemStatus.value localize=true }}
         </select>
     </div>
     {{#if item.isOwned }}

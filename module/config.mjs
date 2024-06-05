@@ -246,45 +246,45 @@ preLocalize( "tier" );
  * Tier
  * @e5num {string}
  */
-ED4E.itemStatus = {
-	owned: {
-		name:				"ED.Config.ItemStatus.owned",
-		value:				1
-	},
-	carried: {
-		name:				"ED.Config.ItemStatus.carried",
-		value:				2
-	},			
-	equipped: {
-		name:				"ED.Config.ItemStatus.equipped",
-		value:				3
-	},		
-	mainHand: {
-		name:				"ED.Config.ItemStatus.mainHand",
-		value:				4
-	},		
-	offHand: {
-		name:				"ED.Config.ItemStatus.offHand",
-		value:				5
-	},		
-	twoHands: {
-		name:				"ED.Config.ItemStatus.twoHands",
-		value:				6
-	},		
-	tail: {
-		name:				"ED.Config.ItemStatus.tail",
-		value:				7
-	},			
-}
 // ED4E.itemStatus = {
-// 	1:1,
-// 	2:2,
-// 	3:3,
-// 	4:4,
-// 	5:5,
-// 	6:6,
-// 	7:7
+// 	owned: {
+// 		name:				"ED.Config.ItemStatus.owned",
+// 		value:				1
+// 	},
+// 	carried: {
+// 		name:				"ED.Config.ItemStatus.carried",
+// 		value:				2
+// 	},
+// 	equipped: {
+// 		name:				"ED.Config.ItemStatus.equipped",
+// 		value:				3
+// 	},
+// 	mainHand: {
+// 		name:				"ED.Config.ItemStatus.mainHand",
+// 		value:				4
+// 	},
+// 	offHand: {
+// 		name:				"ED.Config.ItemStatus.offHand",
+// 		value:				5
+// 	},
+// 	twoHands: {
+// 		name:				"ED.Config.ItemStatus.twoHands",
+// 		value:				6
+// 	},
+// 	tail: {
+// 		name:				"ED.Config.ItemStatus.tail",
+// 		value:				7
+// 	},
 // }
+ED4E.itemStatus = {
+	1:1,
+	2:2,
+	3:3,
+	4:4,
+	5:5,
+	6:6,
+	7:7
+}
 preLocalize( "tier" );
 
 /**
@@ -304,7 +304,7 @@ preLocalize( "talentCategory" );
  * WeaponType
  * @enum {string}
  */
-ED4E.talentCategory = {
+ED4E.weaponType = {
 	bow: 					"ED.Config.bow",
 	crosbow: 				"ED.Config.crossbow",
 	melee: 					"ED.Config.melee",
@@ -418,12 +418,58 @@ ED4E.testTypes = {
 		label: "X.effectTestRoll",
 		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/effect-roll-flavor.hbs",
 	},
-	damage: {
-		label: "X.damageTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/damage-roll-flavor.hbs",
+}
+preLocalize( "testTypes", { key: "label" } );
+
+
+/**
+ * The available sub-types of (roll) tests for {@link EdRollOptions}.
+ * @enum {string}
+ */
+ED4E.rollTypes = {
+	ability: {
+		label: "ED.Rolls.Labels.abilityRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
+	},
+	// arbitrary: {
+	// 	label: "ED.Rolls.Labels.arbitraryRoll",
+	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
+	// },
+	attack: {
+		label: "ED.Rolls.Labels.attackRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},
+	attribute: {
+		label: "ED.Rolls.Labels.attributeRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attribute-roll-flavor.hbs",
+	},
+	effect: {
+		label: "ED.Rolls.Labels.effectRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
+	},
+	halfmagic: {
+		label: "ED.Rolls.Labels.halfmagicRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/halfmagic-roll-flavor.hbs",
+	},
+	initiative: {
+		label: "ED.Rolls.Labels.initiativeRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
+	},
+	recovery: {
+		label: "ED.Rolls.Labels.recoveryRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/recovery-roll-flavor.hbs",
+	},
+	spellcasting: {
+		label: "ED.Rolls.Labels.spellcastingRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/spellcasting-roll-flavor.hbs",
+	},
+	threadWeaving: {
+		label: "ED.Rolls.Labels.threadWeavingRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/threadWeaving-roll-flavor.hbs",
 	},
 }
 preLocalize( "testTypes", { key: "label" } );
+
 
 /* -------------------------------------------- */
 /*  System			                                */

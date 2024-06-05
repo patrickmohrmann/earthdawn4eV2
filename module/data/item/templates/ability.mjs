@@ -47,6 +47,13 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Ability.rank"
             } ),
+            rollType: new fields.StringField( {
+                required: false,
+                nullable: true,
+                blank: true,
+                initial: "",
+                label: "ED.Item.Ability.type"
+            } ),
         } );
     }
 

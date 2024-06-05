@@ -21,6 +21,13 @@
     {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
   </select>
 </div>
+{{!-- abilty action type --}}
+<div class="item-data__input--line">
+  <label class="label__left">{{localize "RollType"}}:</label>
+  <select name="system.rollType">
+    {{selectOptions config.rollTypes selected=item.system.rollType localize=true }}
+  </select>
+</div>
 
 <div>
   <h3>{{localize "ED.Item.General.magic"}}</h3>

@@ -111,12 +111,26 @@ export default class ActorEd extends Actor {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityFinalStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
+    const rollType = ability.system.rollType
+    let attackWeapon = [];
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
     }
+
+    if ( rollType === "attack" ) {
+      const weapons = this.items.filter( item => item.type === "weapon" );
+      weapons.forEach( weapon => {
+        if ( weapon.system.itemStatus.value === 4 ) {
+          attackWeapon = weapon;
+        }
+      } );
+
+    }
     const edRollOptions = new EdRollOptions( {
-      rollType: "action",
+      testType: "action",
+      rollType: rollType,
+      attackWeapon: attackWeapon,
       step: { base: abilityFinalStep },
       strain: { base: ability.system.strain},
       target: { base: difficulty },
