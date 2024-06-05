@@ -78,12 +78,6 @@ export default class ActorSheetEd extends ActorSheet {
 
     // toggle holding Tpye of an owned item
     html.find( ".item__status" ).click( this._onChangeItemStatus.bind( this ) );
-    
-    // Find HTML element with class xxx and on right click call function yyyy
-    html.find('.item__status').on('contextmenu'), function(event) {
-      event.preventDefault();
-      _onChangeItemStatus(event, up);
-    }
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -144,6 +138,7 @@ export default class ActorSheetEd extends ActorSheet {
      if ( item.type === "weapon" ) {
       const namegiver = this.actor.items.filter( i => i.type === "namegiver" )
       let maxItemStatus = this.actor.items.filter( i => i.type === "namegiver" && i.system.tailAttack === true ).length > 0 ? 7 : 6;
+      const weapons = this.actor.items.filter(item => item.type === "weapon");
       const weaponSize = item.system.size;
       const weaponSizeOneHandedMin = namegiver[0].system.weaponSize.oneHanded.min;
       const weaponSizeTwoHandedMin = namegiver[0].system.weaponSize.twoHanded.min;
@@ -152,32 +147,59 @@ export default class ActorSheetEd extends ActorSheet {
 
 
       let newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      // check any weapon becoming a equipped
       if ( newItemStatus === 3 ) {
         // equipping a Weapon means either holding it in one or two hands
         if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin ) {
           newItemStatus = 4;
+          weapons.forEach(weapon => {
+            if (weapon.data.data.system.itemStatus.value === 4 || weapon.data.data.system.itemStatus.value === 6) {
+              weapon.update({ "system.itemStatus.value": 2 });
+            }
+          });
         } else 
         // two handed weapons can only be equipped in two hands
         if ( weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax
          ) {
           newItemStatus = 6;
+          weapons.forEach(weapon => {
+            if (weapon.data.data.system.itemStatus.value !== 1 && weapon.data.data.system.itemStatus.value !== 2 && weapon.data.data.system.itemStatus.value !== 7) {
+              weapon.update({ "system.itemStatus.value": 2 });
+            }
+          });
         } else {
           newItemStatus = 1;
         }
       } else 
+      // check any weapon becoming a Off hand weapon
+      if ( newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin ) {
+        weapons.forEach( weapon => {
+          if (weapon.data.data.system.itemStatus.value === 5 || weapon.data.data.system.itemStatus.value === 6) {
+            weapon.update({ "system.itemStatus.value": 2 });
+          } 
+        });
+      } else
+      // check any weapon becoming a two handed weapon
       // one handed weapons can only be hold in the main or off hand
       if ( newItemStatus === 6  && weaponSize < weaponSizeTwoHandedMin ) {
         if ( maxItemStatus === 7 && weaponSize <= 2 ) {
           newItemStatus = 7;
+          weapons.forEach( weapon => {
+            if (weapon.data.data.system.itemStatus.value === 7 ) {
+              weapon.update({ "system.itemStatus.value": 2 });
+            } 
+          });
         } else {
           newItemStatus = 1;
         }
       } else
+      // check any weapon becoming a tail weapon
       // tail weapons can only be of size 1 or 2
       if ( newItemStatus === 7 && weaponSize > 2 ) { 
         newItemStatus = 1;
       }
       item.update( { "system.itemStatus.value": newItemStatus } );
+
      } else if ( item.type === "armor" ) {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
