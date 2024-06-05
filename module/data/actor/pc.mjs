@@ -148,6 +148,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                 karma: {
                     freeAttributePoints: additionalKarma,
                 },
+                languages: generation.languages,
             },
         } );
 

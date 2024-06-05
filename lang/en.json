@@ -258,6 +258,14 @@
                 "navigator":                                        "Navigator"                                       
 
             },
+            "Namegiver":{
+                "WeaponSize": {
+                    "OneHanded.min":                                "Minimal One hand Weapon Size",
+                    "OneHanded.max":                                "Maximum One hand Weapon Size",
+                    "TwoHanded.min":                                "Minimal two hand Weapon Size",
+                    "TwoHanded.max":                                "Maximum two hand Weapon Size"
+                }
+            },
             "Navigator": {
                 "advancement":                                      "advancement",
                 "details":                                          "Details",

@@ -452,6 +452,41 @@ ED4E.attributePointsCost[-1] = -1;
 ED4E.attributePointsCost[-2] = -2;
 
 /* -------------------------------------------- */
+/*           Document Data                      */
+/* -------------------------------------------- */
+
+ED4E.documentData = {
+	Item: {
+		skill: {
+			languageSpeak: {
+				name: "ED.SpeakLanguage",
+				type: "skill",
+				system: {
+					description: { value: "ED.SpeakLanguage Skill Description" },
+					// edid needs to be set on creation since settings are not ready on init
+					// edid: game.settings.get( "ed4e", "edidLanguageSpeak" ),
+					attribute: "per",
+				},
+			},
+			languageRW: {
+				name: "ED.ReadWriteLanguage",
+				type: "skill",
+				system: {
+					description: { value: "ED.ReadWriteLanguage Skill Description" },
+					// edid needs to be set on creation since settings are not ready on init
+					// edid: game.settings.get( "ed4e", "edidLanguageRW" ),
+					attribute: "per",
+				},
+			},
+		},
+	},
+};
+preLocalize( "documentData.Item.skill.languageSpeak", { key: "name" } );
+preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: "value" } );
+preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
+preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
+
+/* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */
 /* -------------------------------------------- */
 

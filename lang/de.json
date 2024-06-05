@@ -253,6 +253,17 @@
             }
         },
         "Item": {
+            "Header": {
+                "navigator":                                        "Navigator"                                       
+            },
+            "Namegiver":{
+                "WeaponSize": {
+                    "OneHanded.min":                                "Minimale Einhandwaffengröße",
+                    "OneHanded.max":                                "Maximale Einhandwaffengröße",
+                    "TwoHanded.min":                                "Minimale Zweihandwaffengröße",
+                    "TwoHanded.max":                                "Maximale Zweihandwaffengröße"
+                }
+            },
             "Navigator": {
                 "advancement":                                      "Fortschritt",
                 "details":                                          "Details",
