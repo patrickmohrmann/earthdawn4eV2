@@ -78,12 +78,6 @@ export default class ActorSheetEd extends ActorSheet {
 
     // toggle holding Tpye of an owned item
     html.find( ".item__status" ).click( this._onChangeItemStatus.bind( this ) );
-    
-    // Find HTML element with class xxx and on right click call function yyyy
-    html.find('.item__status').on('contextmenu'), function(event) {
-      event.preventDefault();
-      _onChangeItemStatus(event, up);
-    }
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -148,6 +142,7 @@ export default class ActorSheetEd extends ActorSheet {
       let newItemStatusPre = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
       const newItemStatus = newItemStatusPre === 3 ? 4 : newItemStatusPre;
       item.update( { "system.itemStatus.value": newItemStatus } );
+
      } else if ( item.type === "armor" ) {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
