@@ -152,54 +152,61 @@ export default class ActorSheetEd extends ActorSheet {
       if ( newItemStatus === 3 ) {
         // equipping a Weapon means either holding it in one or two hands
         if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin ) {
-          newItemStatus = 4;
+          // newItemStatus = 4;
           weapons.forEach(weapon => {
             if (weapon.data.data.system.itemStatus.value === 4 || weapon.data.data.system.itemStatus.value === 6) {
-              weapon.update({ "system.itemStatus.value": 2 });
+              weapon.update({ "system.itemStatus": carried });
             }
           });
+          item.update( { "system.itemStatus": mainHand } );
         } else 
         // two handed weapons can only be equipped in two hands
         if ( weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax
          ) {
-          newItemStatus = 6;
+          // newItemStatus = 6;
           weapons.forEach(weapon => {
             if (weapon.data.data.system.itemStatus.value !== 1 && weapon.data.data.system.itemStatus.value !== 2 && weapon.data.data.system.itemStatus.value !== 7) {
-              weapon.update({ "system.itemStatus.value": 2 });
+              weapon.update({ "system.itemStatus": carried });
             }
           });
+          item.update( { "system.itemStatus": twoHands } );
         } else {
-          newItemStatus = 1;
+          // newItemStatus = 1;
+          item.update( { "system.itemStatus": owned } );
         }
       } else 
       // check any weapon becoming a Off hand weapon
       if ( newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin ) {
         weapons.forEach( weapon => {
           if (weapon.data.data.system.itemStatus.value === 5 || weapon.data.data.system.itemStatus.value === 6) {
-            weapon.update({ "system.itemStatus.value": 2 });
+            weapon.update({ "system.itemStatus": carried });
           } 
         });
+        item.update( { "system.itemStatus": offHand } );
       } else
       // check any weapon becoming a two handed weapon
       // one handed weapons can only be hold in the main or off hand
       if ( newItemStatus === 6  && weaponSize < weaponSizeTwoHandedMin ) {
         if ( maxItemStatus === 7 && weaponSize <= 2 ) {
-          newItemStatus = 7;
+          //newItemStatus = 7;
           weapons.forEach( weapon => {
             if (weapon.data.data.system.itemStatus.value === 7 ) {
-              weapon.update({ "system.itemStatus.value": 2 });
+              weapon.update({ "system.itemStatus": carried });
             } 
           });
+          item.update( { "system.itemStatus": tail } );
         } else {
-          newItemStatus = 1;
+          // newItemStatus = 1;
+          item.update( { "system.itemStatus": owned } );
         }
       } else
       // check any weapon becoming a tail weapon
       // tail weapons can only be of size 1 or 2
       if ( newItemStatus === 7 && weaponSize > 2 ) { 
-        newItemStatus = 1;
+        // newItemStatus = 1;
+        item.update( { "system.itemStatus": owned } );
       }
-      item.update( { "system.itemStatus.value": newItemStatus } );
+      // item.update( { "system.itemStatus.value": newItemStatus } );
 
      } else if ( item.type === "armor" ) {
       const maxItemStatus = 3
