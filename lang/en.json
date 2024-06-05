@@ -202,11 +202,20 @@
                 "wizard":                                           "Wizard"
             },
             "Tooltips": {
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "equippedArmor":                                    "Equipped Armor",
+                "equippedShield":                                   "Equipped Shield",
                 "karmaAlways":                                      "Use Karma always",
                 "karmaRitualTooltip":                               "Karma Ritual",
                 "loaded":                                           "Loaded",
                 "loadedHeavy":                                      "Heavyly Loaded",
-                "loadedOver":                                       "Overloaded"
+                "loadedOver":                                       "Overloaded",
+                "mainHand":                                         "Main Hand",
+                "notEquipped":                                      "Not equipped",
+                "offHand":                                          "Off Hand",
+                "tail":                                             "Tail",
+                "twoHanded":                                        "Two Handed"
             }
         },
         "Config": {
