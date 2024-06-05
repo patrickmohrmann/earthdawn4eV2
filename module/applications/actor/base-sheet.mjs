@@ -111,6 +111,7 @@ export default class ActorSheetEd extends ActorSheet {
     * 
     * @private
     */
+    // eslint-disable-next-line complexity
     _onChangeItemStatus( event ) {
      event.preventDefault();
      const li = event.currentTarget.closest( ".item-id" );
@@ -136,16 +137,16 @@ export default class ActorSheetEd extends ActorSheet {
 
      if ( item.type === "weapon" ) {
       const namegiver = this.actor.items.filter( i => i.type === "namegiver" )
-      let maxItemStatus = this.actor.items.filter( i => i.type === "namegiver" && i.system.tailAttack === true).length > 0 ? 7 : 6;
+      let maxItemStatus = this.actor.items.filter( i => i.type === "namegiver" && i.system.tailAttack === true ).length > 0 ? 7 : 6;
       const weaponSize = item.system.size;
-      const weaponSizeOneHandedMin = namegiver.system.weaponSize.oneHanded.min;
-      const weaponSizeTwoHandedMin = namegiver.system.weaponSize.twoHanded.min;
-      const weaponSizeTwoHandedMax = namegiver.system.weaponSize.twoHanded.max;
-      newItemStatus = 1;
+      const weaponSizeOneHandedMin = namegiver[0].system.weaponSize.oneHanded.min;
+      const weaponSizeTwoHandedMin = namegiver[0].system.weaponSize.twoHanded.min;
+      const weaponSizeTwoHandedMax = namegiver[0].system.weaponSize.twoHanded.max;
 
 
-      let newItemStatusPre = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      if ( newItemStatusPre === 3 ) {
+
+      let newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      if ( newItemStatus === 3 ) {
         // equipping a Weapon means either holding it in one or two hands
         if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin ) {
           newItemStatus = 4;
@@ -157,13 +158,19 @@ export default class ActorSheetEd extends ActorSheet {
         } else {
           newItemStatus = 1;
         }
-      } 
+      } else 
+      // one handed weapons can only be hold in the main or off hand
+      if ( newItemStatus === 6  && weaponSize < weaponSizeTwoHandedMin ) {
+        if ( maxItemStatus === 7 && weaponSize <= 2 ) {
+          newItemStatus = 7;
+        } else {
+          newItemStatus = 1;
+        }
+      } else
       // tail weapons can only be of size 1 or 2
-      if ( newItemStatusPre === 7 && weaponSize > 2 ) { 
+      if ( newItemStatus === 7 && weaponSize > 2 ) { 
         newItemStatus = 1;
       }
-
-      const newItemStatus = newItemStatusPre === 3 ? 4 : newItemStatusPre;
       item.update( { "system.itemStatus.value": newItemStatus } );
      } else if ( item.type === "armor" ) {
       const maxItemStatus = 3
