@@ -99,7 +99,16 @@ export default class ActorSheetEd extends ActorSheet {
 
   /**
     * Handle changing the holding type of an owned item.
+    * @description itemStatus.value = 
+    * 1: owned, 
+    * 2: carried, 
+    * 3: equipped, 
+    * 4: mainHand, 
+    * 5: offHand, 
+    * 6: twoHanded, 
+    * 7: tail
     * @param {Event} event      The originating click event.
+    * 
     * @private
     */
     _onChangeItemStatus( event ) {
@@ -126,10 +135,34 @@ export default class ActorSheetEd extends ActorSheet {
      } 
 
      if ( item.type === "weapon" ) {
+      const namegiver = this.actor.items.filter( i => i.type === "namegiver" )
+      let maxItemStatus = this.actor.items.filter( i => i.type === "namegiver" && i.system.tailAttack === true).length > 0 ? 7 : 6;
+      const weaponSize = item.system.size;
+      const weaponSizeOneHandedMin = namegiver.system.weaponSize.oneHanded.min;
+      const weaponSizeTwoHandedMin = namegiver.system.weaponSize.twoHanded.min;
+      const weaponSizeTwoHandedMax = namegiver.system.weaponSize.twoHanded.max;
+      newItemStatus = 1;
 
-      let maxItemStatus = 0
-      maxItemStatus = this.actor.items.filter(i => i.type === "namegiver" && i.system.tailAttack === true).length > 0 ? 7 : 6;
+
       let newItemStatusPre = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      if ( newItemStatusPre === 3 ) {
+        // equipping a Weapon means either holding it in one or two hands
+        if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin ) {
+          newItemStatus = 4;
+        } else 
+        // two handed weapons can only be equipped in two hands
+        if ( weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax
+         ) {
+          newItemStatus = 6;
+        } else {
+          newItemStatus = 1;
+        }
+      } 
+      // tail weapons can only be of size 1 or 2
+      if ( newItemStatusPre === 7 && weaponSize > 2 ) { 
+        newItemStatus = 1;
+      }
+
       const newItemStatus = newItemStatusPre === 3 ? 4 : newItemStatusPre;
       item.update( { "system.itemStatus.value": newItemStatus } );
      } else if ( item.type === "armor" ) {
