@@ -46,7 +46,7 @@ export default class ActorSheetEd extends ActorSheet {
     systemData.enrichment = await this.actor._enableHTMLEnrichment();
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
-    systemData.splitTalents = game.settings.get("ed4e", "talentsSplit" );
+    systemData.splitTalents = game.settings.get( "ed4e", "talentsSplit" );
     return systemData;
   }
 
@@ -160,33 +160,42 @@ export default class ActorSheetEd extends ActorSheet {
           if (armor.system.itemStatus.value === 3) {
             armor.update({ "system.itemStatus.value": 2 });
           }
-        });
-      }
-      item.update({ "system.itemStatus.value": newItemStatus });
-    } else if (item.type === "shield") {
-      const maxItemStatus = 5
-      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      if (newItemStatus === 3) {
-        newItemStatus = 5;
-        shields.forEach(shield => {
-          if (shield.system.itemStatus.value === 5) {
-            shield.update({ "system.itemStatus.value": 2 });
           }
-        });
-        weapons.forEach(weapon => {
-          if (weapon.system.itemStatus.value === 5) {
-            weapon.update({ "system.itemStatus.value": 2 });
+          item.update( { "system.itemStatus.value": newItemStatus } );
+        } else 
+        if ( item.type === "shield" ) {
+          maxItemStatus = 5
+          newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+          if ( newItemStatus === 3 ) {
+            newItemStatus = 5;
+            shields.forEach( shield => {
+              if ( shield.system.itemStatus.value === 5 ) {
+                shield.update( { "system.itemStatus.value": 2 } );
+              }
+            } );
+            weapons.forEach( weapon => {
+              if ( weapon.system.weaponType !== "bow" ) {
+                  if ( weapon.system.itemStatus.value === 5 || weapon.system.itemStatus.value === 6 ) {
+                    weapon.update( { "system.itemStatus.value": 2 } );
+                  }
+              } else if ( weapon.system.weaponType === "bow" ) {
+                if ( !item.system.bowUsage ) {
+                  if ( weapon.system.itemStatus.value === 5 || weapon.system.itemStatus.value === 6 ) {
+                    weapon.update( { "system.itemStatus.value": 2 } );
+                  }
+                }
+              }
+            } );
           }
-        });
-
+          item.update( { "system.itemStatus.value": newItemStatus } );
+        } else 
+        if ( item.type === "equipment" ) {
+          const maxItemStatus = 3
+          newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+          item.update( { "system.itemStatus.value": newItemStatus } );
+        }
       }
-      item.update({ "system.itemStatus.value": newItemStatus });
-    } else if (item.type === "equipment") {
-      const maxItemStatus = 3
-      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update({ "system.itemStatus.value": newItemStatus });
-    }
-  }
+    
 
   /**
    * Legend Point history earned

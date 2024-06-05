@@ -48,14 +48,13 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Ability.rank"
             } ),
-            // combatAbilityType: new fields.StringField( {
-            //     required: false,
-            //     nullable: true,
-            //     blank: true,
-            //     initial: "",
-            //     options: ED4E.combatType,
-            //     label: "ED.Item.Ability.combatAbilityType"
-            // } ),
+            rollType: new fields.StringField( {
+                required: false,
+                nullable: true,
+                blank: true,
+                initial: "",
+                label: "ED.Item.Ability.type"
+            } ),
         } );
     }
 
