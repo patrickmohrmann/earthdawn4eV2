@@ -150,7 +150,7 @@ export default class ActorSheetEd extends ActorSheet {
       // check any weapon becoming a equipped
       if (newItemStatus === 3) {
         // equipping a Weapon means either holding it in one or two hands
-        if (weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && item.system.weaponType !== "bow" ) {
+        if (weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && item.system.weaponType !== "bow" && item.system.weaponType !== "crossbow" ) {
           if (weapons = this.actor.items.filter(item => item.type === "weapon" && item.system.itemStatus === 4).length > 0) {
             newItemStatus = 5;
             weapons.forEach(weapon => {
@@ -168,7 +168,7 @@ export default class ActorSheetEd extends ActorSheet {
         }
         } else
           // two handed weapons can only be equipped in two hands
-          if (weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax && item.system.weaponType !== "bow" ) {
+          if (weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax && item.system.weaponType !== "bow" && item.system.weaponType !== "crossbow" ) {
             newItemStatus = 6;
             weapons.forEach(weapon => {
               if (weapon.system.itemStatus.value !== 1 && weapon.system.itemStatus.value !== 2 && weapon.system.itemStatus.value !== 7) {
@@ -182,8 +182,13 @@ export default class ActorSheetEd extends ActorSheet {
             });
           } else 
           // bows are considered two handed weapons independent of their size. is this right? have to check the rules and FASA forums
-          if ( item.system.weaponType === "bow" ) {
+          if ( item.system.weaponType === "bow" || item.system.weaponType === "crossbow" ) {
             newItemStatus = 6;
+            shields.forEach(shield => {
+              if ( shield.system.itemStatus.value === 5 && !shield.system.bowUsage ) {
+                shield.update({ "system.itemStatus.value": 2 });
+              }
+            });
           }
       } else
         // check any weapon becoming a Off hand weapon
