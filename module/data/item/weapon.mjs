@@ -24,8 +24,8 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
         return this.mergeSchema( super.defineSchema(), {
             weaponType: new fields.StringField( {
                 required: true,
-                nullable: false,
-                initial: "melee",
+                nullable: true,
+                initial: "",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
             } ), 

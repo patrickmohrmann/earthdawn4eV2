@@ -299,6 +299,20 @@ ED4E.talentCategory = {
 }
 preLocalize( "talentCategory" );
 
+
+/**
+ * WeaponType
+ * @enum {string}
+ */
+ED4E.talentCategory = {
+	bow: 					"ED.Config.bow",
+	crosbow: 				"ED.Config.crossbow",
+	melee: 					"ED.Config.melee",
+	unarmed: 				"ED.Config.unarmed"
+}
+preLocalize( "talentCategory" );
+
+
 /**
  * Type of grantable abilities for a class level
  * @enum {string}

@@ -112,117 +112,148 @@ export default class ActorSheetEd extends ActorSheet {
     * @private
     */
     // eslint-disable-next-line complexity
-    _onChangeItemStatus( event ) {
-     event.preventDefault();
-     const li = event.currentTarget.closest( ".item-id" );
-     const item = this.actor.items.get( li.dataset.itemId );
-     const currentItemStatus = item.system.itemStatus.value;
-     let itemStatusNumber = 0;
+  _onChangeItemStatus(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item-id");
+    const item = this.actor.items.get(li.dataset.itemId);
+    const currentItemStatus = item.system.itemStatus.value;
+    const namegiver = this.actor.items.filter(i => i.type === "namegiver")
+    let maxItemStatus = this.actor.items.filter(i => i.type === "namegiver" && i.system.tailAttack === true).length > 0 ? 7 : 6;
+    const weapons = this.actor.items.filter(item => item.type === "weapon");
+    const shields = this.actor.items.filter(item => item.type === "shield");
+    const armorItems = this.actor.items.filter(item => item.type === "armor");
+    const weaponSize = item.system.size;
+    const weaponSizeOneHandedMin = namegiver[0].system.weaponSize.oneHanded.min;
+    const weaponSizeTwoHandedMin = namegiver[0].system.weaponSize.twoHanded.min;
+    const weaponSizeTwoHandedMax = namegiver[0].system.weaponSize.twoHanded.max;
+    let itemStatusNumber = 0;
 
-     if ( currentItemStatus === 1 ) {
+    if (currentItemStatus === 1) {
       itemStatusNumber = 1;
-     } else if ( currentItemStatus === 2 ) {
+    } else if (currentItemStatus === 2) {
       itemStatusNumber = 2;
-     } else if ( currentItemStatus === 3 ) {
+    } else if (currentItemStatus === 3) {
       itemStatusNumber = 3;
-     } else if ( currentItemStatus === 4 ) {
+    } else if (currentItemStatus === 4) {
       itemStatusNumber = 4;
-     } else if ( currentItemStatus === 5 ) {
+    } else if (currentItemStatus === 5) {
       itemStatusNumber = 5;
-     } else if ( currentItemStatus === 6 ) {
+    } else if (currentItemStatus === 6) {
       itemStatusNumber = 6;
-     } else if ( currentItemStatus === 7 ) {
+    } else if (currentItemStatus === 7) {
       itemStatusNumber = 7;
-     } 
-
-     if ( item.type === "weapon" ) {
-      const namegiver = this.actor.items.filter( i => i.type === "namegiver" )
-      let maxItemStatus = this.actor.items.filter( i => i.type === "namegiver" && i.system.tailAttack === true ).length > 0 ? 7 : 6;
-      const weapons = this.actor.items.filter(item => item.type === "weapon");
-      const weaponSize = item.system.size;
-      const weaponSizeOneHandedMin = namegiver[0].system.weaponSize.oneHanded.min;
-      const weaponSizeTwoHandedMin = namegiver[0].system.weaponSize.twoHanded.min;
-      const weaponSizeTwoHandedMax = namegiver[0].system.weaponSize.twoHanded.max;
+    }
 
 
-      
-
+    if (item.type === "weapon") {
       let newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
       // check any weapon becoming a equipped
-      if ( newItemStatus === 3 ) {
+      if (newItemStatus === 3) {
         // equipping a Weapon means either holding it in one or two hands
-        if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin ) {
-          if ( weapons = this.actor.items.filter(item => item.type === "weapon" && item.system.itemStatus === 4).length > 0 ) {
+        if (weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin) {
+          if (weapons = this.actor.items.filter(item => item.type === "weapon" && item.system.itemStatus === 4).length > 0) {
             newItemStatus = 5;
             weapons.forEach(weapon => {
-              if (weapon.system.itemStatus.value === 5 ) {
-                weapon.update({ "system.itemStatus.value": 2});
+              if (weapon.system.itemStatus.value === 5) {
+                weapon.update({ "system.itemStatus.value": 2 });
               }
             });
-          } 
+          }
           newItemStatus = 4;
           weapons.forEach(weapon => {
             if (weapon.system.itemStatus.value === 4 || weapon.system.itemStatus.value === 6) {
-              weapon.update({ "system.itemStatus.value": 2});
+              weapon.update({ "system.itemStatus.value": 2 });
             }
           });
-        } else 
-        // two handed weapons can only be equipped in two hands
-        if ( weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax
-         ) {
-          newItemStatus = 6;
+        } else
+          // two handed weapons can only be equipped in two hands
+          if (weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax
+          ) {
+            newItemStatus = 6;
+            weapons.forEach(weapon => {
+              if (weapon.system.itemStatus.value !== 1 && weapon.system.itemStatus.value !== 2 && weapon.system.itemStatus.value !== 7) {
+                weapon.update({ "system.itemStatus.value": 2 });
+              }
+            });
+            if ( item.system.)
+            shields.forEach(shield => {
+              if ( shield.system.itemStatus.value === 5 ) {
+                shield.update({ "system.itemStatus.value": 2 });
+              }
+            });
+          } else {
+            newItemStatus = 1;
+          }
+      } else
+        // check any weapon becoming a Off hand weapon
+        if (newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin) {
           weapons.forEach(weapon => {
-            if (weapon.system.itemStatus.value !== 1 && weapon.system.itemStatus.value !== 2 && weapon.system.itemStatus.value !== 7) {
+            if (weapon.system.itemStatus.value === 5 || weapon.system.itemStatus.value === 6) {
               weapon.update({ "system.itemStatus.value": 2 });
             }
           });
-        } else {
-          newItemStatus = 1;
-        }
-      } else 
-      // check any weapon becoming a Off hand weapon
-      if ( newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin ) {
-        weapons.forEach( weapon => {
-          if (weapon.system.itemStatus.value === 5 || weapon.system.itemStatus.value === 6) {
-            weapon.update({ "system.itemStatus.value": 2 });
-          } 
-        });
-      } else
-      // check any weapon becoming a two handed weapon
-      // one handed weapons can only be hold in the main or off hand
-      if ( newItemStatus === 6  && weaponSize < weaponSizeTwoHandedMin ) {
-        if ( maxItemStatus === 7 && weaponSize <= 2 ) {
-          newItemStatus = 7;
-          weapons.forEach( weapon => {
-            if (weapon.system.itemStatus.value === 7 ) {
-              weapon.update({ "system.itemStatus.value": 2 });
-            } 
+          shields.forEach(shield => {
+            if (shield.system.itemStatus.value === 5) {
+              shield.update({ "system.itemStatus.value": 2 });
+            }
           });
-        } else {
-          newItemStatus = 1;
-        }
-      } else
-      // check any weapon becoming a tail weapon
-      // tail weapons can only be of size 1 or 2
-      if ( newItemStatus === 7 && weaponSize > 2 ) { 
-        newItemStatus = 1;
-      }
-      item.update( { "system.itemStatus.value": newItemStatus } );
+        } else
+          // check any weapon becoming a two handed weapon
+          // one handed weapons can only be hold in the main or off hand
+          if (newItemStatus === 6 && weaponSize < weaponSizeTwoHandedMin) {
+            if (maxItemStatus === 7 && weaponSize <= 2) {
+              newItemStatus = 7;
+              weapons.forEach(weapon => {
+                if (weapon.system.itemStatus.value === 7) {
+                  weapon.update({ "system.itemStatus.value": 2 });
+                }
+              });
+            } else {
+              newItemStatus = 1;
+            }
+          } else
+            // check any weapon becoming a tail weapon
+            // tail weapons can only be of size 1 or 2
+            if (newItemStatus === 7 && weaponSize > 2) {
+              newItemStatus = 1;
+            }
+      item.update({ "system.itemStatus.value": newItemStatus });
 
-     } else if ( item.type === "armor" ) {
+    } else if (item.type === "armor") {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus.value": newItemStatus } );
-     } else if ( item.type === "shield" ) {
+      if (newItemStatus === 3) {
+        armorItems.forEach(armor => {
+          if (armor.system.itemStatus.value === 3) {
+            armor.update({ "system.itemStatus.value": 2 });
+          }
+        });
+      }
+      item.update({ "system.itemStatus.value": newItemStatus });
+    } else if (item.type === "shield") {
+      const maxItemStatus = 5
+      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+      if (newItemStatus === 3) {
+        newItemStatus = 5;
+        shields.forEach(shield => {
+          if (shield.system.itemStatus.value === 5) {
+            shield.update({ "system.itemStatus.value": 2 });
+          }
+        });
+        weapons.forEach(weapon => {
+          if (weapon.system.itemStatus.value === 5) {
+            weapon.update({ "system.itemStatus.value": 2 });
+          }
+        });
+
+      }
+      item.update({ "system.itemStatus.value": newItemStatus });
+    } else if (item.type === "equipment") {
       const maxItemStatus = 3
       const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus.value": newItemStatus } );
-     } else if ( item.type === "equipment" ) {
-      const maxItemStatus = 3
-      const newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
-      item.update( { "system.itemStatus.value": newItemStatus } );
-     } 
+      item.update({ "system.itemStatus.value": newItemStatus });
     }
+  }
 
   /**
    * Legend Point history earned
