@@ -135,7 +135,9 @@ export default class ActorSheetEd extends ActorSheet {
      } 
 
      if ( item.type === "weapon" ) {
-      const maxItemStatus = 7
+
+      let maxItemStatus = 0
+      maxItemStatus = item.items.filter(i => i.type === "namegiver" && i.system.tailAttack === true).length > 0 ? 7 : 6;
       let newItemStatusPre = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
       const newItemStatus = newItemStatusPre === 3 ? 4 : newItemStatusPre;
       item.update( { "system.itemStatus.value": newItemStatus } );
