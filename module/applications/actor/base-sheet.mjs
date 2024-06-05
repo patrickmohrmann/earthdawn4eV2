@@ -152,20 +152,21 @@ export default class ActorSheetEd extends ActorSheet {
       if ( newItemStatus === 3 ) {
         // equipping a Weapon means either holding it in one or two hands
         if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin ) {
-          if ( weapons = this.actor.items.filter(item => item.type === "weapon" && item.system.itemStatus === 4).length > 0 ) {
+          if ( this.actor.items.filter(item => item.type === "weapon" && item.system.itemStatus.value === 4 ).length > 0 ) {
             newItemStatus = 5;
             weapons.forEach(weapon => {
               if (weapon.system.itemStatus.value === 5 ) {
                 weapon.update({ "system.itemStatus.value": 2});
               }
             });
-          } 
+          } else {
           newItemStatus = 4;
           weapons.forEach(weapon => {
             if (weapon.system.itemStatus.value === 4 || weapon.system.itemStatus.value === 6) {
               weapon.update({ "system.itemStatus.value": 2});
             }
           });
+          }
         } else 
         // two handed weapons can only be equipped in two hands
         if ( weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax
