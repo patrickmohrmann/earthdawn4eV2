@@ -201,11 +201,20 @@
                 "wizard":                                           "Magier"
             },
             "Tooltips": {
+                "carried":                                          "Getragen",
+                "equipped":                                         "Ausgerüstet",
+                "equippedArmor":                                    "Rüstung Ausgerüstet",
+                "equippedShield":                                   "Schild Ausgerüstet",
                 "karmaAlways":                                      "Benutze immer Karma",
                 "karmaRitualTooltip":                               "Karmaritual",
                 "loaded":                                           "Belastet",
                 "loadedHeavy":                                      "Stark Belastet",
-                "loadedOver":                                       "Überlasted"
+                "loadedOver":                                       "Überlasted",
+                "mainHand":                                         "Haupthand",
+                "notEquipped":                                      "Nicht Ausgerüstet",
+                "offHand":                                          "Nebenhand",
+                "tail":                                             "Schwanz",
+                "twoHanded":                                        "Zweihändig"
             }
         },
         "Chat": {
