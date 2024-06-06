@@ -256,6 +256,12 @@
         "Item": {
             "Ability": {
                 "damage":                                           "Damage",
+                "difficulty": {
+                    "fixed":                                        "Fixed Difficulty",
+                    "groupDifficulty":                              "Difficult Adjusted by Groups",
+                    "targetDifficulty":                             "Difficulty Type"
+                },
+                "rollType":                                         "Roll Type",
                 "substitute":                                       "Replaces Strength",
                 "relatedRollType":                                  "counts for Roll Type"
             },
