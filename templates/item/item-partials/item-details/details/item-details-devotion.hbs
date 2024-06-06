@@ -1,51 +1,6 @@
 <div>
     <h3>{{localize "ED.Item.General.details"}}</h3>
 </div>
-{{!-- Target Difficulty --}}
-<div class="item-data__input--line">
-    <label class="label__left">{{localize "X-FixedDifficulty"}}:</label>
-    <input class="input__number-input" name="system.difficulty.fixed" type="text"
-        value="{{item.system.difficulty.fixed}}" data-dtype="Number">
+<div>
+    {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
 </div>
-{{!-- Target Difficulty --}}
-<div class="item-data__input--line">
-    <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
-    <select name="system.difficulty.target">
-        {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
-    </select>
-</div>
-{{!-- Group Difficulty --}}
-<div class="item-data__input--line">
-    <label class="label__left">{{localize "X-GroupDifficulty"}}:</label>
-    <select name="system.difficulty.group">
-        {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
-    </select>
-</div>
-{{!-- abilty action type --}}
-<div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Item.Ability.rollType"}}:</label>
-    <select name="system.rollType">
-        {{selectOptions config.rollTypes selected=item.system.rollType localize=true }}
-    </select>
-</div>
-{{!-- Damage ability yes / now --}}
-<div class="item-data__input--line">
-    <label>{{localize "ED.Item.Ability.damage"}}:</label>
-    <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.damage" {{checked
-        item.system.damageAbilities.damage }}>
-</div>
-{{!-- Damage adder yes / now --}}
-<div class="item-data__input--line">
-    <label>{{localize "ED.Item.Ability.substitute"}}:</label>
-    <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.substitute" {{checked
-        item.system.damageAbilities.substitute }}>
-</div>
-{{#if (eq item.system.damageAbilities.substitute true)}}
-{{!-- Strength SUbstitute is based on the rolltype --}}
-<div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
-    <select name="system.damageAbilities.relatedRollType">
-        {{selectOptions config.rollTypes selected=item.system.damageAbilities.relatedRollType localize=true }}
-    </select>
-</div>
-{{/if}}

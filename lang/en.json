@@ -219,6 +219,12 @@
             }
         },
         "Config": {
+            "groupDifficulty": {
+                "highestOfGroup":                                   "Highest of Group",
+                "hightestX":                                        "Highest + Targets",
+                "lowestOfGroup":                                    "Lowest of Group",
+                "lowestX":                                          "Lowest + Targets"
+            },
             "ItemStatus": {
                 "owned":                                            "Owned",
                 "carried":                                          "Carried",
@@ -227,6 +233,30 @@
                 "offHand":                                          "Off Hand",
                 "twoHands":                                         "Two Hands",
                 "tail":                                             "Tail"
+            },
+            "rollType": {
+                "ability":                                          "Ability",
+                "AerialCombat":                                     "Aerial Combat",
+                "attack":                                           "Attack",
+                "attribute":                                        "Attribute",
+                "CloseCombat":                                      "Close Combat",
+                "effect":                                           "Effect",
+                "halfmagic":                                        "Half Magic",
+                "initiative":                                       "Initiative",
+                "meleeCombat":                                      "Melee Combat",
+                "MountedCombat":                                    "Mounted Combat",
+                "projectileCombat":                                 "Projectile Combat",
+                "rangedCombat":                                     "Ranged Combat",
+                "recovery":                                         "Recovery",
+                "spellcasting":                                     "Spell Casting",
+                "threadWeaving":                                    "Thread Weaving",
+                "throwingCombat":                                   "Throwing Combat",
+                "unarmedCombat":                                    "Unarmed Combat"
+            },
+            "targetDifficulty": {
+                "mystical":                                         "Mystical",
+                "physical":                                         "Physical",
+                "social":                                           "Social"
             }
         },
         "Data": {
