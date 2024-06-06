@@ -52,6 +52,16 @@ export default function registerSystemSettings() {
         type: new EdIdField(),
     } );
 
+    // edid for thread weaving
+    game.settings.register( "ed4e", "edidKnockDown", {
+        name: "ED.Settings.Edid.knockDown",
+        hint: "ED.Settings.Edid.knockDownHint",
+        scope: "world",
+        config: true,
+        default: "knock-down",
+        type: new EdIdField(),
+    } );
+
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */

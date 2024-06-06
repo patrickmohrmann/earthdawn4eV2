@@ -54,6 +54,27 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 initial: "",
                 label: "ED.Item.Ability.type"
             } ),
+            damageAbilities: new fields.SchemaField( {
+                damage: new fields.BooleanField( {
+                    required: false,
+                    nullable: false,
+                    initial: false,
+                    label: "ED.Item.Ability.damage"
+                } ),
+                substitute: new fields.BooleanField( {
+                    required: false,
+                    nullable: false,
+                    initial: false,
+                    label: "ED.Item.Ability.substitute"
+                } ),
+                relatedRollType: new fields.StringField( {  
+                    required: false,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
+                    label: "ED.Item.Ability.relatedRollType"
+                } ),
+            } ),
         } );
     }
 

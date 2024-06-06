@@ -253,6 +253,11 @@
             }
         },
         "Item": {
+            "Ability": {
+                "damage":                                           "Schaden",
+                "substitute":                                       "Ersetzt Stärke",
+                "relatedRollType":                                  "gilt für Würfeltyp"
+            },
             "Header": {
                 "navigator":                                        "Navigator"                                       
             },
@@ -285,14 +290,16 @@
             "talentsSplit":                                         "Talente nach Kategorie gruppieren",
             "talentsSplitHint":                                     "Talente Gruppieren",
             "Edid": {
-                "languageRW": "ED-ID für Lesen/Schreiben",
-                "languageRWHint": "Identifiziert die Fähigkeit Lesen/Schreiben",
-                "languageSpeak": "ED-ID für Fremdsprachen",
-                "languageSpeakHint": "Identifiziert die Fähigkeit Fremdsprachen",
-                "spellCasting": "ED-ID für Spruchzauberei",
-                "spellCastingHint": "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
-                "threadWeaving": "ED-ID für Fadenweben",
-                "threadWeavingHint": "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+                "knockDown":                                        "ED-ID für Niederschlag",
+                "knockDownHint":                                    "Identifiziert die Fähigkeit Niederschlag zu verwenden",
+                "languageRW":                                       "ED-ID für Lesen/Schreiben",
+                "languageRWHint":                                   "Identifiziert die Fähigkeit Lesen/Schreiben",
+                "languageSpeak":                                    "ED-ID für Fremdsprachen",
+                "languageSpeakHint":                                "Identifiziert die Fähigkeit Fremdsprachen",
+                "spellCasting":                                     "ED-ID für Spruchzauberei",
+                "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
+                "threadWeaving":                                    "ED-ID für Fadenweben",
+                "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
             }
         }
     }

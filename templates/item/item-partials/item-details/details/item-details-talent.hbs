@@ -23,15 +23,33 @@
 </div>
 {{!-- abilty action type --}}
 <div class="item-data__input--line">
-  <label class="label__left">{{localize "RollType"}}:</label>
+  <label class="label__left">{{localize "ED.RollType"}}:</label>
   <select name="system.rollType">
     {{selectOptions config.rollTypes selected=item.system.rollType localize=true }}
   </select>
 </div>
-
+{{!-- Damage ability yes / now --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.Ability.damage"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.damage" {{checked item.system.damageAbilities.damage }}>
+    </div>
+{{!-- Damage adder yes / now --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.Ability.substitute"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.substitute" {{checked item.system.damageAbilities.substitute }}>
+    </div>
+{{!-- Strength SUbstitute is based on the rolltype --}}
+<div class="item-data__input--line">
+  <label class="label__left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
+  <select name="system.damageAbilities.relatedRollType">
+    {{selectOptions config.rollTypes selected=item.system.damageAbilities.relatedRollType localize=true }}
+  </select>
+</div>
+{{! -- Magic Type -- }}
 <div>
   <h3>{{localize "ED.Item.General.magic"}}</h3>
 </div>
+
 {{formField systemFields.magic.fields.spellcasting name="system.magic.spellcasting" value=item.system.magic.spellcasting}}
 {{formField systemFields.magic.fields.threadWeaving name="system.magic.threadWeaving" value=item.system.magic.threadWeaving}}
 {{formField systemFields.magic.fields.magicType name="system.magic.magicType" value=item.system.magic.magicType required=false}}
