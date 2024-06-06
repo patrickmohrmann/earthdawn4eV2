@@ -162,7 +162,6 @@ preLocalize( "action" );
  * @enum {string}
  */
 ED4E.targetDifficulty = {
-	none: 				"ED.General.none",
 	mystical: 			"ED.Defenses.mystical",
 	physical: 			"ED.Defenses.physical",
 	social: 			"ED.Defenses.social",
@@ -174,7 +173,6 @@ preLocalize( "targetDifficulty" );
  * @enum {string}
  */
 ED4E.groupDifficulty = {
-	none: 				"ED.General.none",
 	highestOfGroup: 	"ED.Defenses.highestOfGroup",
 	lowestOfGroup: 		"ED.Defenses.lowestOfGroup",
 	hightestX: 			"ED.Defenses.hightestX",

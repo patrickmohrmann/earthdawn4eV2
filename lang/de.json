@@ -266,6 +266,30 @@
                 "offHand":                                          "Nebenhand",
                 "twoHands":                                         "Beidhändig",
                 "tail":                                             "Schwanz"
+            },
+            "rollType": {
+                "ability":                                          "Fähigkeit",
+                "AerialCombat":                                     "Luftkampf",
+                "attack":                                           "Angriff",
+                "attribute":                                        "Attribute",
+                "CloseCombat":                                      "Nahkampf",
+                "effect":                                           "Effekt",
+                "halfmagic":                                        "Halb Magie",
+                "initiative":                                       "Initiative",
+                "meleeCombat":                                      "Bewaffneter Nahkampf",
+                "MountedCombat":                                    "Berittener Kampf",
+                "projectileCombat":                                 "Projektil Fernkampf",
+                "rangedCombat":                                     "Fernkampf",
+                "recovery":                                         "Erholung",
+                "spellcasting":                                     "Spruchzauberei",
+                "threadWeaving":                                    "Fadenweben",
+                "throwingCombat":                                   "Wurfwaffen Fernkampf",
+                "unarmedCombat":                                    "Waffenloser Nahkampf"
+            },
+            "targetDifficulty": {
+                "mystical":                                         "Mystisch",
+                "physical":                                         "Körperlich",
+                "social":                                           "Sozial"
             }
         },
         "Data": {
