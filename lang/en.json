@@ -268,24 +268,26 @@
                 "twoHands":                                         "Two Hands",
                 "tail":                                             "Tail"
             },
-            "rollType": {
+            "combatTypes": {
+                "Aerial":                                     "Aerial Combat",
+                "Close":                                      "Close Combat",
+                "melee":                                      "Melee Combat",
+                "Mounted":                                    "Mounted Combat",
+                "projectile":                                 "Projectile Combat",
+                "ranged":                                     "Ranged Combat",
+                "throwing":                                   "Throwing Combat",
+                "unarmed":                                    "Unarmed Combat"
+            },
+            "rollTypes": {
                 "ability":                                          "Ability",
-                "AerialCombat":                                     "Aerial Combat",
                 "attack":                                           "Attack",
                 "attribute":                                        "Attribute",
-                "CloseCombat":                                      "Close Combat",
                 "effect":                                           "Effect",
                 "halfmagic":                                        "Half Magic",
                 "initiative":                                       "Initiative",
-                "meleeCombat":                                      "Melee Combat",
-                "MountedCombat":                                    "Mounted Combat",
-                "projectileCombat":                                 "Projectile Combat",
-                "rangedCombat":                                     "Ranged Combat",
                 "recovery":                                         "Recovery",
                 "spellcasting":                                     "Spell Casting",
-                "threadWeaving":                                    "Thread Weaving",
-                "throwingCombat":                                   "Throwing Combat",
-                "unarmedCombat":                                    "Unarmed Combat"
+                "threadWeaving":                                    "Thread Weaving"
             },
             "targetDifficulty": {
                 "mystical":                                         "Mystical",
