@@ -162,9 +162,9 @@ preLocalize( "action" );
  * @enum {string}
  */
 ED4E.targetDifficulty = {
-	mystical: 			"ED.Defenses.mystical",
-	physical: 			"ED.Defenses.physical",
-	social: 			"ED.Defenses.social",
+	mystical: 			"ED.Config.targetDifficulty.mystical",
+	physical: 			"ED.Config.targetDifficulty.physical",
+	social: 			"ED.Config.targetDifficulty.social",
 }
 preLocalize( "targetDifficulty" );
 
@@ -173,10 +173,10 @@ preLocalize( "targetDifficulty" );
  * @enum {string}
  */
 ED4E.groupDifficulty = {
-	highestOfGroup: 	"ED.Defenses.highestOfGroup",
-	lowestOfGroup: 		"ED.Defenses.lowestOfGroup",
-	hightestX: 			"ED.Defenses.hightestX",
-	lowestX:			"ED.Defenses.lowestX"
+	highestOfGroup: 	"ED.Config.groupDifficulty.highestOfGroup",
+	lowestOfGroup: 		"ED.Config.groupDifficulty.lowestOfGroup",
+	hightestX: 			"ED.Config.groupDifficulty.hightestX",
+	lowestX:			"ED.Config.groupDifficulty.lowestX"
 }
 preLocalize( "groupDifficulty" );
 
@@ -426,43 +426,43 @@ preLocalize( "testTypes", { key: "label" } );
  */
 ED4E.rollTypes = {
 	ability: {
-		label: "ED.Rolls.Labels.abilityRoll",
+		label: "ED.Config.Rolltype.abilityRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
 	// arbitrary: {
-	// 	label: "ED.Rolls.Labels.arbitraryRoll",
+	// 	label: "ED.Config.Rolltype.arbitraryRoll",
 	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
 	// },
 	attack: {
-		label: "ED.Rolls.Labels.attackRoll",
+		label: "ED.Config.Rolltype.attackRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
 	},
 	attribute: {
-		label: "ED.Rolls.Labels.attributeRoll",
+		label: "ED.Config.Rolltype.attributeRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attribute-roll-flavor.hbs",
 	},
 	effect: {
-		label: "ED.Rolls.Labels.effectRoll",
+		label: "ED.Config.Rolltype.effectRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
 	halfmagic: {
-		label: "ED.Rolls.Labels.halfmagicRoll",
+		label: "ED.Config.Rolltype.halfmagicRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/halfmagic-roll-flavor.hbs",
 	},
 	initiative: {
-		label: "ED.Rolls.Labels.initiativeRoll",
+		label: "ED.Config.Rolltype.initiativeRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
 	},
 	recovery: {
-		label: "ED.Rolls.Labels.recoveryRoll",
+		label: "ED.Config.Rolltype.recoveryRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/recovery-roll-flavor.hbs",
 	},
 	spellcasting: {
-		label: "ED.Rolls.Labels.spellcastingRoll",
+		label: "ED.Config.Rolltype.spellcastingRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/spellcasting-roll-flavor.hbs",
 	},
 	threadWeaving: {
-		label: "ED.Rolls.Labels.threadWeavingRoll",
+		label: "ED.Config.Rolltype.threadWeavingRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/threadWeaving-roll-flavor.hbs",
 	},
 }
