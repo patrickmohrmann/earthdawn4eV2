@@ -426,47 +426,88 @@ preLocalize( "testTypes", { key: "label" } );
  */
 ED4E.rollTypes = {
 	ability: {
-		label: "ED.Config.Rolltype.abilityRoll",
+		label: "ED.Config.rollTypes.ability",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
 	// arbitrary: {
-	// 	label: "ED.Config.Rolltype.arbitraryRoll",
+	// 	label: "ED.Config.rollTypes.arbitraryRoll",
 	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
 	// },
 	attack: {
-		label: "ED.Config.Rolltype.attackRoll",
+		label: "ED.Config.rollTypes.attack",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
 	},
 	attribute: {
-		label: "ED.Config.Rolltype.attributeRoll",
+		label: "ED.Config.rollTypes.attribute",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attribute-roll-flavor.hbs",
 	},
 	effect: {
-		label: "ED.Config.Rolltype.effectRoll",
+		label: "ED.Config.rollTypes.effect",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
 	halfmagic: {
-		label: "ED.Config.Rolltype.halfmagicRoll",
+		label: "ED.Config.rollTypes.halfmagic",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/halfmagic-roll-flavor.hbs",
 	},
 	initiative: {
-		label: "ED.Config.Rolltype.initiativeRoll",
+		label: "ED.Config.rollTypes.initiative",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
 	},
 	recovery: {
-		label: "ED.Config.Rolltype.recoveryRoll",
+		label: "ED.Config.rollTypes.recovery",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/recovery-roll-flavor.hbs",
 	},
 	spellcasting: {
-		label: "ED.Config.Rolltype.spellcastingRoll",
+		label: "ED.Config.rollTypes.spellcasting",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/spellcasting-roll-flavor.hbs",
 	},
 	threadWeaving: {
-		label: "ED.Config.Rolltype.threadWeavingRoll",
+		label: "ED.Config.rollTypes.threadWeaving",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/threadWeaving-roll-flavor.hbs",
-	},
+	},                   
 }
 preLocalize( "testTypes", { key: "label" } );
+
+/**
+ * The available sub-types of (combatTypes) tests
+ * @enum {string}
+ */
+ED4E.combatTypes = {
+	Aerial: {
+		label: "ED.Config.combatTypes.Aerial",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                    
+	Close: {
+		label: "ED.Config.combatTypes.Close",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                      
+	melee: {
+		label: "ED.Config.combatTypes.melee",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                     
+	Mounted: {
+		label: "ED.Config.combatTypes.Mounted",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                    
+	projectile: {
+		label: "ED.Config.combatTypes.projectile",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                 
+	ranged: {
+		label: "ED.Config.combatTypes.ranged",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                     
+	throwing: {
+		label: "ED.Config.combatTypes.throwing",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},     
+	unarmed: {
+		label: "ED.Config.combatTypes.unarmed",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                            
+}
+preLocalize( "testTypes", { key: "label" } );
+
 
 
 /* -------------------------------------------- */

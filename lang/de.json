@@ -233,24 +233,26 @@
                 "twoHands":                                         "Beidhändig",
                 "tail":                                             "Schwanz"
             },
-            "rollType": {
+            "combatTypes": {
+                "Aerial":                                           "Luftkampf",
+                "Close":                                            "Nahkampf",
+                "melee":                                            "Bewaffneter Nahkampf",
+                "Mounted":                                          "Berittener Kampf",
+                "projectile":                                       "Projektil Fernkampf",
+                "ranged":                                           "Fernkampf",
+                "throwing":                                         "Wurfwaffen Fernkampf",
+                "unarmed":                                          "Waffenloser Nahkampf"
+            },
+            "rollTypes": {
                 "ability":                                          "Fähigkeit",
-                "AerialCombat":                                     "Luftkampf",
                 "attack":                                           "Angriff",
-                "attribute":                                        "Attribute",
-                "CloseCombat":                                      "Nahkampf",
+                "attribute":                                        "Attribute",               
                 "effect":                                           "Effekt",
                 "halfmagic":                                        "Halb Magie",
                 "initiative":                                       "Initiative",
-                "meleeCombat":                                      "Bewaffneter Nahkampf",
-                "MountedCombat":                                    "Berittener Kampf",
-                "projectileCombat":                                 "Projektil Fernkampf",
-                "rangedCombat":                                     "Fernkampf",
                 "recovery":                                         "Erholung",
                 "spellcasting":                                     "Spruchzauberei",
-                "threadWeaving":                                    "Fadenweben",
-                "throwingCombat":                                   "Wurfwaffen Fernkampf",
-                "unarmedCombat":                                    "Waffenloser Nahkampf"
+                "threadWeaving":                                    "Fadenweben"
             },
             "targetDifficulty": {
                 "mystical":                                         "Mystisch",
