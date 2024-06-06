@@ -127,15 +127,16 @@ export default class ActorSheetEd extends ActorSheet {
       const weaponSizeOneHandedMin = namegiver[0].system.weaponSize.oneHanded.min;
       const weaponSizeTwoHandedMin = namegiver[0].system.weaponSize.twoHanded.min;
       const weaponSizeTwoHandedMax = namegiver[0].system.weaponSize.twoHanded.max;
-      const isBowOrCrossbow = item.system.weaponType === "bow" || item.system.weaponType === "crossbow";
-      const isOneHandedWeapon = weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && !isBowOrCrossbow;
-      const isTwoHandedWeapon = weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax && !isBowOrCrossbow;
+      const isBow = item.system.weaponType === "bow";
+      const isCrossBow = item.system.weaponType === "crossbow";
+      const isOneHandedWeapon = weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && !isBow && !isCrossBow;
+      const isTwoHandedWeapon = weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax && !isBow && !isCrossBow;
       let itemStatusNumber = currentItemStatus;
     
     
-      const updateItemStatus = (items, status) => {
+      const updateItemStatus = ( items, status ) => {
         items.forEach( item => {
-          if (item.system.itemStatus.value === status) {
+          if ( item.system.itemStatus.value === status ) {
             item.update( { "system.itemStatus.value": 2 } );
           }
         } );
@@ -146,7 +147,7 @@ export default class ActorSheetEd extends ActorSheet {
         // check any weapon becoming a equipped
         if ( newItemStatus === 3 ) {
           // equipping a Weapon means either holding it in one or two hands
-          if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && item.system.weaponType !== "bow" && item.system.weaponType !== "crossbow" ) {
+          if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && !isBow && !isCrossBow ) {
             /// hier sollte vermutlich ein forEach rein der auf waffen itemStatus 4 prüft
     
             if ( weapons.filter( i => i.system.itemStatus.value === 4 ).length > 0 ) {
@@ -162,8 +163,8 @@ export default class ActorSheetEd extends ActorSheet {
               //   }
               // } );
               newItemStatus = 5;
-              updateItemStatus(weapons, 5);
-              updateItemStatus(shields, 5);
+              updateItemStatus( weapons, 5 );
+              updateItemStatus( shields, 5 );
             } else {
               // newItemStatus = 4;
               // weapons.forEach( weapon => {
@@ -172,88 +173,52 @@ export default class ActorSheetEd extends ActorSheet {
               //   }
               // } );
               newItemStatus = 4;
-              updateItemStatus(weapons, 4);
-              updateItemStatus(weapons, 6);
+              updateItemStatus( weapons, 4 );
+              updateItemStatus( weapons, 6 );
             }
-          } else
-            // two handed weapons can only be equipped in two hands
-            // if ( weaponSize >= weaponSizeTwoHandedMin && weaponSize <= weaponSizeTwoHandedMax && item.system.weaponType !== "bow" && item.system.weaponType !== "crossbow" ) {
-            //   newItemStatus = 6;
-            //   weapons.forEach( weapon => {
-            //     if ( weapon.system.itemStatus.value !== 1 && weapon.system.itemStatus.value !== 2 && weapon.system.itemStatus.value !== 7 ) {
-            //       weapon.update( { "system.itemStatus.value": 2 } );
-            //     }
-            //   } );
-            //   shields.forEach( shield => {
-            //     if ( shield.system.itemStatus.value === 5 ) {
-            //       shield.update( { "system.itemStatus.value": 2 } );
-            //     }
-            //   } );
-            // } else
-            //   // bows are considered two handed weapons independent of their size. is this right? have to check the rules and FASA forums
-            //   if ( item.system.weaponType === "bow" || item.system.weaponType === "crossbow" ) {
-            //     newItemStatus = 6;
-            //     shields.forEach( shield => {
-            //       if ( shield.system.itemStatus.value === 5 && !shield.system.bowUsage ) {
-            //         shield.update( { "system.itemStatus.value": 2 } );
-            //       }
-            //     } );
-            //     weapons.forEach( weapon => {
-            //       if ( weapon.system.itemStatus.value !== 1 && weapon.system.itemStatus.value !== 2 && weapon.system.itemStatus.value !== 7 ) {
-            //         weapon.update( { "system.itemStatus.value": 2 } );
-            //       }
-            //     } );
-            //   } else {
-            //     newItemStatus = 1;
-            //   }
-            if (isTwoHandedWeapon || isBowOrCrossbow) {
+          } 
+          // two handed weapons can only be equipped in two hands same applies to bows and Crossbows independent of their size
+          else if ( isTwoHandedWeapon || isCrossBow ) {
               newItemStatus = 6;
-              updateItemStatus(weapons, 4);
-              updateItemStatus(weapons, 5);
-              updateItemStatus(weapons, 6);
+              updateItemStatus( weapons, 4 );
+              updateItemStatus( weapons, 5 );
+              updateItemStatus( weapons, 6 );
+              shields.forEach( shield => {
+                if ( shield.system.itemStatus.value === 5 ) {
+                  shield.update( { "system.itemStatus.value": 2 } );
+                }
+              } );
+            } else if ( isBow ) {
+              newItemStatus = 6;
+              updateItemStatus( weapons, 4 );
+              updateItemStatus( weapons, 5 );
+              updateItemStatus( weapons, 6 );
               shields.forEach( shield => {
                 if ( shield.system.itemStatus.value === 5 && !shield.system.bowUsage ) {
                   shield.update( { "system.itemStatus.value": 2 } );
                 }
               } );
-          } else {
-              newItemStatus = 1;
-          }
-        } else
+            } else {
+                newItemStatus = 1;
+            }
+        } 
           // check any weapon becoming a Off hand weapon
-          if ( newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin ) {
-            // weapons.forEach( weapon => {
-            //   if ( weapon.system.itemStatus.value === 5 || weapon.system.itemStatus.value === 6 ) {
-            //     weapon.update( { "system.itemStatus.value": 2 } );
-            //   }
-            // } );
-            // shields.forEach( shield => {
-            //   if ( shield.system.itemStatus.value === 5 ) {
-            //     shield.update( { "system.itemStatus.value": 2 } );
-            //   }
-            // } );
-            updateItemStatus(weapons, 5);
-            updateItemStatus(weapons, 6);
-            updateItemStatus(shields, 5);
-          } else
+        else if ( newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin ) {
+            updateItemStatus( weapons, 5 );
+            updateItemStatus( weapons, 6 );
+            updateItemStatus( shields, 5 );
+          } 
             // check any weapon becoming a two handed weapon
             // one handed weapons can only be hold in the main or off hand
-            if ( newItemStatus === 6 && weaponSize < weaponSizeTwoHandedMin ) {
+            else if ( newItemStatus === 6 && weaponSize < weaponSizeTwoHandedMin ) {
               if ( maxItemStatus === 7 && weaponSize <= 2 ) {
                 newItemStatus = 7;
-                // weapons.forEach( weapon => {
-                //   if ( weapon.system.itemStatus.value === 7 ) {
-                //     weapon.update( { "system.itemStatus.value": 2 } );
-                //   }
-                // } );
-                updateItemStatus(weapons, 7);
+                updateItemStatus( weapons, 7 );
               } else {
                 newItemStatus = 1;
               }
-            } else
-              // check any weapon becoming a tail weapon
-              // tail weapons can only be of size 1 or 2
-              if ( newItemStatus === 7 && weaponSize > 2 ) {
+            } 
+            else if ( newItemStatus === 7 && weaponSize > 2 ) {
                 newItemStatus = 1;
               }
     
