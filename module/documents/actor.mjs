@@ -115,16 +115,6 @@ export default class ActorEd extends Actor {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
     }
-
-    if ( rollType === "attack" ) {
-      const weapons = this.items.filter( item => item.type === "weapon" );
-      weapons.forEach( weapon => {
-        if ( weapon.system.itemStatus.value === 4 ) {
-          attackWeapon = weapon;
-        }
-      } );
-
-    }
     const edRollOptions = new EdRollOptions( {
       testType: "action",
       step: { base: abilityFinalStep },
