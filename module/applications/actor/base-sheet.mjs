@@ -98,19 +98,18 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-    * Handle changing the holding type of an owned item.
-    * @description itemStatus.value = 
-    * 1: owned, 
-    * 2: carried, 
-    * 3: equipped, 
-    * 4: mainHand, 
-    * 5: offHand, 
-    * 6: twoHanded, 
-    * 7: tail
-    * @param {Event} event      The originating click event.
-    * 
-    * @private
-    */
+   * Handle changing the holding type of an owned item.
+   * @description itemStatus.value = 
+   * 1: owned, 
+   * 2: carried, 
+   * 3: equipped, 
+   * 4: mainHand, 
+   * 5: offHand, 
+   * 6: twoHanded, 
+   * 7: tail
+   * @param {Event} event      The originating click event.
+   * @private
+   */
     // eslint-disable-next-line complexity
     _onChangeItemStatus( event ) {
       event.preventDefault();
@@ -123,7 +122,7 @@ export default class ActorSheetEd extends ActorSheet {
       const weapons = this.actor.items.filter( item => item.type === "weapon" );
       const shields = this.actor.items.filter( item => item.type === "shield" );
       const armorItems = this.actor.items.filter( item => item.type === "armor" );
-      const isPiecemealArmor = item.system.piecemealArmor.selector;
+      const isPiecemealArmor = item.type === "armor" ? item.system.piecemealArmor.selector : 0;
       const weaponSize = item.system.size;
       const weaponSizeOneHandedMin = namegiver[0].system.weaponSize.oneHanded.min;
       const weaponSizeTwoHandedMin = namegiver[0].system.weaponSize.twoHanded.min;
@@ -140,9 +139,9 @@ export default class ActorSheetEd extends ActorSheet {
       // status: the new status of the item to check for
       // specialSelection: if the item is a special selection 
       // (e.g. bowUsage for shields or PiecemealArmor for armorItems )
-      const updateItemStatus = ( items, status, specialSelection) => {
+      const updateItemStatus = ( items, status ) => {
         items.forEach( item => {
-          if ( item.system.itemStatus.value === status && specialSelection ) {	
+          if ( item.system.itemStatus.value === status ) {	
             item.update( { "system.itemStatus.value": 2 } );
           }
         } );
@@ -177,7 +176,11 @@ export default class ActorSheetEd extends ActorSheet {
               updateItemStatus( weapons, 4 );
               updateItemStatus( weapons, 5 );
               updateItemStatus( weapons, 6 );
-              updateItemStatus( shields, 5 , !bowUsage );
+              shields.forEach( shield => {
+                if ( shield.system.itemStatus.value === 5 && !bowUsage ) {	
+                  item.update( { "system.itemStatus.value": 2 } );
+                }
+              } );
             } else {
                 newItemStatus = 1;
             }
@@ -203,69 +206,46 @@ export default class ActorSheetEd extends ActorSheet {
           }
         item.update( { "system.itemStatus.value": newItemStatus } );
         } 
-        // Armor Handling
-        else if ( item.type === "armor" ) {
-          let piecemealSum = armorItems.reduce((sum, armor) => {
-            return sum + (armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ? armor.system.piecemealArmor.size : 0);
-        }, 0);
+      // Armor Handling
+      else if ( item.type === "armor" ) {
+        let piecemealSum = armorItems.reduce( ( sum, armor ) => {
+          return sum + ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ? armor.system.piecemealArmor.size : 0 );
+        }, 0 );
     
         let newPiecemealItemSize = item.system.piecemealArmor.size;
         maxItemStatus = 3;
         newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
     
-          if ( newItemStatus === 3 ) {
-            // set all other armor items to carried
-            if ( !isPiecemealArmor ) {
-              updateItemStatus(armorItems, 3);
+        if ( newItemStatus === 3 ) {
+          // set all other armor items to carried
+          if ( !isPiecemealArmor ) {
+            updateItemStatus( armorItems, 3 );
           } else {
-            // set all non-piecemeal armor items to carried
-            updateItemStatus(armorItems, 3, isPiecemealArmor);
-          }
-            // if ([3, 2, 1].includes(newPiecemealItemSize) && piecemealSum > newPiecemealItemSize + 1) {
-            //   armorItems.forEach(armor => {
-            //       if (piecemealSum <= newPiecemealItemSize + 1) {
-            //           return;
-            //       } else if (armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector) {
-            //           armor.update({ "system.itemStatus.value": 2 });
-            //           piecemealSum -= armor.system.piecemealArmor.size;
-            //       }
-            //   });
-            // }
-
+            armorItems.forEach( armor => {
+              if ( armor.system.itemStatus.value === 3 && !armor.system.piecemealArmor.selector ) {
+                armor.update( { "system.itemStatus.value": 2 } );
+              }
+            } );
+          
             if ( newPiecemealItemSize === 3 && piecemealSum > 2 ) {
               armorItems.forEach( armor => {
                 if ( piecemealSum <= 2 ) {
                   return
                 } else
-                if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
+                if ( armor.system.itemStatus.value === 3  ) {
                   armor.update( { "system.itemStatus.value": 2 } );
                   piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-                  if ( piecemealSum <= 5 ) {
-                    return
-                  }
                 }
               } );
             }
-
-
-
-
-
-
-
-          
-             
             else if ( newPiecemealItemSize === 2 && piecemealSum > 3 ) {
               armorItems.forEach( armor => {
                 if ( piecemealSum <= 3 ) {
                   return
                 } else
-                if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
+                if ( armor.system.itemStatus.value === 3 ) {
                   armor.update( { "system.itemStatus.value": 2 } );
                   piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-                  if ( piecemealSum <= 5 ) {
-                    return
-                  }
                 }
               } );
             } else if ( newPiecemealItemSize === 1 && piecemealSum > 4 ) {
@@ -273,21 +253,18 @@ export default class ActorSheetEd extends ActorSheet {
                 if ( piecemealSum <= 4 ) {
                   return
                 } else
-                if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
+                if ( armor.system.itemStatus.value === 3 ) {
                   armor.update( { "system.itemStatus.value": 2 } );
                   piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-                  if ( piecemealSum <= 5 ) {
-                    return
-                  }
                 }
               } );
             }
           }
-          }
-        }
-          item.update( { "system.itemStatus.value": newItemStatus } );
-        } else 
-        if ( item.type === "shield" ) {
+        } 
+        item.update( { "system.itemStatus.value": newItemStatus } );
+      } 
+      // Shield Handling
+      else if ( item.type === "shield" ) {
           maxItemStatus = 5
           newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
           if ( newItemStatus === 3 ) {
