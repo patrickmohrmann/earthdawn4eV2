@@ -208,10 +208,14 @@ export default class ActorSheetEd extends ActorSheet {
             //   }
             if (isTwoHandedWeapon || isBowOrCrossbow) {
               newItemStatus = 6;
-              updateItemStatus(weapons, 1);
-              updateItemStatus(weapons, 2);
-              updateItemStatus(weapons, 7);
-              updateItemStatus(shields, 5);
+              updateItemStatus(weapons, 4);
+              updateItemStatus(weapons, 5);
+              updateItemStatus(weapons, 6);
+              shields.forEach( shield => {
+                if ( shield.system.itemStatus.value === 5 && !shield.system.bowUsage ) {
+                  shield.update( { "system.itemStatus.value": 2 } );
+                }
+              } );
           } else {
               newItemStatus = 1;
           }
