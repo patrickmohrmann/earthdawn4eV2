@@ -295,10 +295,18 @@
         "Item": {
             "Ability": {
                 "damage":                                           "Schaden",
+                "difficulty": {
+                    "fixed":                                        "Fester Schwierigkeitsgrad",
+                    "groupDifficulty":                              "Schwierigkeitsanpassung für Gruppen",
+                    "targetDifficulty":                             "Schwierigkeitstyp"
+                },
+                "rollType":                                         "Aktionstyp",
                 "substitute":                                       "Ersetzt Stärke",
-                "relatedRollType":                                  "gilt für Würfeltyp"
+                "relatedRollType":                                  "gilt für Aktionstyp"
+
             },
             "Header": {
+                "details":                                          "Details",
                 "navigator":                                        "Navigator"                                       
             },
             "Namegiver":{

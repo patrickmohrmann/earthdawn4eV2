@@ -34,14 +34,17 @@
         <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.damage" {{checked item.system.damageAbilities.damage }}>
     </div>
 {{!-- Damage adder yes / now --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.Item.Ability.substitute"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.substitute" {{checked item.system.damageAbilities.substitute }}>
-    </div>
+<div class="item-data__input--line">
+    <label>{{localize "ED.Item.Ability.substitute"}}:</label>
+    <input class="item-data__checkbox--line" type="checkbox" name="system.damageAbilities.substitute" {{checked
+        item.system.damageAbilities.substitute }}>
+</div>
+{{#if (eq item.system.damageAbilities.substitute true)}}
 {{!-- Strength SUbstitute is based on the rolltype --}}
 <div class="item-data__input--line">
-  <label class="label__left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
-  <select name="system.damageAbilities.relatedRollType">
-    {{selectOptions config.rollTypes selected=item.system.damageAbilities.relatedRollType localize=true }}
-  </select>
+    <label class="label__left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
+    <select name="system.damageAbilities.relatedRollType">
+        {{selectOptions config.rollTypes selected=item.system.damageAbilities.relatedRollType localize=true }}
+    </select>
 </div>
+{{/if}}
