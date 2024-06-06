@@ -293,6 +293,11 @@
             }
         },
         "Item": {
+            "Ability": {
+                "damage":                                           "Schaden",
+                "substitute":                                       "Ersetzt Stärke",
+                "relatedRollType":                                  "gilt für Würfeltyp"
+            },
             "Header": {
                 "navigator":                                        "Navigator"                                       
             },
@@ -358,6 +363,8 @@
         },
         "Settings": {
             "Edid": {
+                "knockDown":                                        "ED-ID für Niederschlag",
+                "knockDownHint":                                    "Identifiziert die Fähigkeit Niederschlag zu verwenden",
                 "languageRW":                                       "ED-ID für Lesen/Schreiben",
                 "languageRWHint":                                   "Identifiziert die Fähigkeit Lesen/Schreiben",
                 "languageSpeak":                                    "ED-ID für Fremdsprachen",
