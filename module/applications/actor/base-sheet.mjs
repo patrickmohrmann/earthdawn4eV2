@@ -142,7 +142,7 @@ export default class ActorSheetEd extends ActorSheet {
       // (e.g. bowUsage for shields or PiecemealArmor for armorItems )
       const updateItemStatus = ( items, status, specialSelection) => {
         items.forEach( item => {
-          if ( item.system.itemStatus.value === status && !specialSelection ) {	
+          if ( item.system.itemStatus.value === status && specialSelection ) {	
             item.update( { "system.itemStatus.value": 2 } );
           }
         } );
@@ -177,7 +177,7 @@ export default class ActorSheetEd extends ActorSheet {
               updateItemStatus( weapons, 4 );
               updateItemStatus( weapons, 5 );
               updateItemStatus( weapons, 6 );
-              updateItemStatus( shields, 5 , bowUsage );
+              updateItemStatus( shields, 5 , !bowUsage );
             } else {
                 newItemStatus = 1;
             }
@@ -215,74 +215,75 @@ export default class ActorSheetEd extends ActorSheet {
     
           if ( newItemStatus === 3 ) {
             // set all other armor items to carried
-            if ( !item.system.piecemealArmor.selector ) {
+            if ( !isPiecemealArmor ) {
               updateItemStatus(armorItems, 3);
           } else {
             // set all non-piecemeal armor items to carried
             updateItemStatus(armorItems, 3, isPiecemealArmor);
           }
-            if ([3, 2, 1].includes(newPiecemealItemSize) && piecemealSum > newPiecemealItemSize + 1) {
-              armorItems.forEach(armor => {
-                  if (piecemealSum <= newPiecemealItemSize + 1) {
-                      return;
-                  } else if (armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector) {
-                      armor.update({ "system.itemStatus.value": 2 });
-                      piecemealSum -= armor.system.piecemealArmor.size;
+            // if ([3, 2, 1].includes(newPiecemealItemSize) && piecemealSum > newPiecemealItemSize + 1) {
+            //   armorItems.forEach(armor => {
+            //       if (piecemealSum <= newPiecemealItemSize + 1) {
+            //           return;
+            //       } else if (armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector) {
+            //           armor.update({ "system.itemStatus.value": 2 });
+            //           piecemealSum -= armor.system.piecemealArmor.size;
+            //       }
+            //   });
+            // }
+
+            if ( newPiecemealItemSize === 3 && piecemealSum > 2 ) {
+              armorItems.forEach( armor => {
+                if ( piecemealSum <= 2 ) {
+                  return
+                } else
+                if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
+                  armor.update( { "system.itemStatus.value": 2 } );
+                  piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
+                  if ( piecemealSum <= 5 ) {
+                    return
                   }
-              });
+                }
+              } );
+            }
+
+
+
+
+
+
+
+          
+             
+            else if ( newPiecemealItemSize === 2 && piecemealSum > 3 ) {
+              armorItems.forEach( armor => {
+                if ( piecemealSum <= 3 ) {
+                  return
+                } else
+                if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
+                  armor.update( { "system.itemStatus.value": 2 } );
+                  piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
+                  if ( piecemealSum <= 5 ) {
+                    return
+                  }
+                }
+              } );
+            } else if ( newPiecemealItemSize === 1 && piecemealSum > 4 ) {
+              armorItems.forEach( armor => {
+                if ( piecemealSum <= 4 ) {
+                  return
+                } else
+                if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
+                  armor.update( { "system.itemStatus.value": 2 } );
+                  piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
+                  if ( piecemealSum <= 5 ) {
+                    return
+                  }
+                }
+              } );
+            }
           }
-
-
-
-
-
-
-
-
-          //   // // 
-          //   // if ( newPiecemealItemSize === 3 && piecemealSum > 2 ) {
-          //   //   armorItems.forEach( armor => {
-          //   //     if ( piecemealSum <= 2 ) {
-          //   //       return
-          //   //     } else
-          //   //     if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
-          //   //       armor.update( { "system.itemStatus.value": 2 } );
-          //   //       piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-          //   //       if ( piecemealSum <= 5 ) {
-          //   //         return
-          //   //       }
-          //   //     }
-          //   //   } );
-          //   } else
-          //   if ( newPiecemealItemSize === 2 && piecemealSum > 3 ) {
-          //     armorItems.forEach( armor => {
-          //       if ( piecemealSum <= 3 ) {
-          //         return
-          //       } else
-          //       if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
-          //         armor.update( { "system.itemStatus.value": 2 } );
-          //         piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-          //         if ( piecemealSum <= 5 ) {
-          //           return
-          //         }
-          //       }
-          //     } );
-          //   } else if ( newPiecemealItemSize === 1 && piecemealSum > 4 ) {
-          //     armorItems.forEach( armor => {
-          //       if ( piecemealSum <= 4 ) {
-          //         return
-          //       } else
-          //       if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
-          //         armor.update( { "system.itemStatus.value": 2 } );
-          //         piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-          //         if ( piecemealSum <= 5 ) {
-          //           return
-          //         }
-          //       }
-          //     } );
-          //   }
-          // }
-          // }
+          }
         }
           item.update( { "system.itemStatus.value": newItemStatus } );
         } else 
