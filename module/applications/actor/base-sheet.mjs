@@ -134,9 +134,13 @@ export default class ActorSheetEd extends ActorSheet {
       let itemStatusNumber = currentItemStatus;
     
     
-      const updateItemStatus = ( items, status ) => {
+      // items: collection of items per type (weapons, shields, armorItems or equipment)
+      // status: the new status of the item to check for
+      // specialSelection: if the item is a special selection 
+      // (e.g. bowUsage for shields or PiecemealArmor for armorItems )
+      const updateItemStatus = ( items, status, specialSelection) => {
         items.forEach( item => {
-          if ( item.system.itemStatus.value === status ) {
+          if ( item.system.itemStatus.value === status && !specialSelection ) {	
             item.update( { "system.itemStatus.value": 2 } );
           }
         } );
@@ -147,31 +151,12 @@ export default class ActorSheetEd extends ActorSheet {
         // check any weapon becoming a equipped
         if ( newItemStatus === 3 ) {
           // equipping a Weapon means either holding it in one or two hands
-          if ( weaponSize >= weaponSizeOneHandedMin && weaponSize < weaponSizeTwoHandedMin && !isBow && !isCrossBow ) {
-            /// hier sollte vermutlich ein forEach rein der auf waffen itemStatus 4 prüft
-    
+          if ( isOneHandedWeapon && !isBow && !isCrossBow ) {
             if ( weapons.filter( i => i.system.itemStatus.value === 4 ).length > 0 ) {
-              // newItemStatus = 5;
-              // weapons.forEach( weapon => {
-              //   if ( weapon.system.itemStatus.value === 5 ) {
-              //     weapon.update( { "system.itemStatus.value": 2 } );
-              //   }
-              // } );
-              // shields.forEach( shield => {
-              //   if ( shield.system.itemStatus.value === 5 ) {
-              //     shield.update( { "system.itemStatus.value": 2 } );
-              //   }
-              // } );
               newItemStatus = 5;
               updateItemStatus( weapons, 5 );
               updateItemStatus( shields, 5 );
             } else {
-              // newItemStatus = 4;
-              // weapons.forEach( weapon => {
-              //   if ( weapon.system.itemStatus.value === 4 || weapon.system.itemStatus.value === 6 ) {
-              //     weapon.update( { "system.itemStatus.value": 2 } );
-              //   }
-              // } );
               newItemStatus = 4;
               updateItemStatus( weapons, 4 );
               updateItemStatus( weapons, 6 );
@@ -183,65 +168,57 @@ export default class ActorSheetEd extends ActorSheet {
               updateItemStatus( weapons, 4 );
               updateItemStatus( weapons, 5 );
               updateItemStatus( weapons, 6 );
-              shields.forEach( shield => {
-                if ( shield.system.itemStatus.value === 5 ) {
-                  shield.update( { "system.itemStatus.value": 2 } );
-                }
-              } );
+              updateItemStatus( shields, 5 );
             } else if ( isBow ) {
               newItemStatus = 6;
               updateItemStatus( weapons, 4 );
               updateItemStatus( weapons, 5 );
               updateItemStatus( weapons, 6 );
-              shields.forEach( shield => {
-                if ( shield.system.itemStatus.value === 5 && !shield.system.bowUsage ) {
-                  shield.update( { "system.itemStatus.value": 2 } );
-                }
-              } );
+              updateItemStatus( shields, 5 , item.system.bowUsage );
+              // shields.forEach( shield => {
+              //   if ( shield.system.itemStatus.value === 5 && !shield.system.bowUsage ) {
+              //     shield.update( { "system.itemStatus.value": 2 } );
+              //   }
+              // } );
             } else {
                 newItemStatus = 1;
             }
         } 
           // check any weapon becoming a Off hand weapon
-        else if ( newItemStatus === 5 && weaponSize < weaponSizeTwoHandedMin ) {
+        else if ( newItemStatus === 5 && isOneHandedWeapon ) {
             updateItemStatus( weapons, 5 );
             updateItemStatus( weapons, 6 );
             updateItemStatus( shields, 5 );
           } 
             // check any weapon becoming a two handed weapon
             // one handed weapons can only be hold in the main or off hand
-            else if ( newItemStatus === 6 && weaponSize < weaponSizeTwoHandedMin ) {
-              if ( maxItemStatus === 7 && weaponSize <= 2 ) {
-                newItemStatus = 7;
-                updateItemStatus( weapons, 7 );
-              } else {
-                newItemStatus = 1;
-              }
-            } 
-            else if ( newItemStatus === 7 && weaponSize > 2 ) {
-                newItemStatus = 1;
-              }
+        else if ( newItemStatus === 6 && isOneHandedWeapon ) {
+          if ( maxItemStatus === 7 && weaponSize <= 2 ) {
+            newItemStatus = 7;
+            updateItemStatus( weapons, 7 );
+          } else {
+            newItemStatus = 1;
+          }
+        } 
+        else if ( newItemStatus === 7 && weaponSize > 2 ) {
+            newItemStatus = 1;
+          }
     
         item.update( { "system.itemStatus.value": newItemStatus } );
     
         } else 
         if ( item.type === "armor" ) {
-          let piecemealSum = 0;
-          armorItems.forEach( armor => {
-            if ( armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ) {
-              piecemealSum = piecemealSum + armor.system.piecemealArmor.size;
-            }
-          } );
-          let newPiecemealItemSize = item.system.piecemealArmor.size
-          maxItemStatus = 3
-          newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+          let piecemealSum = armorItems.reduce((sum, armor) => {
+            return sum + (armor.system.itemStatus.value === 3 && armor.system.piecemealArmor.selector ? armor.system.piecemealArmor.size : 0);
+        }, 0);
+    
+        let newPiecemealItemSize = item.system.piecemealArmor.size;
+        maxItemStatus = 3;
+        newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
+    
           if ( newItemStatus === 3 ) {
             if ( !item.system.piecemealArmor.selector ) {
-            armorItems.forEach( armor => {
-              if ( armor.system.itemStatus.value === 3 ) {
-                armor.update( { "system.itemStatus.value": 2 } );
-              }
-            } );
+              updateItemStatus(armorItems, 3);
           } else {
             armorItems.forEach( armor => {
               if ( armor.system.itemStatus.value === 3 && !armor.system.piecemealArmor.selector ) {
