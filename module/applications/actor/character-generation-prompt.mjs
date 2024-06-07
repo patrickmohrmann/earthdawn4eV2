@@ -288,8 +288,6 @@ export default class CharacterGenerationPrompt extends FormApplication {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    await this.submit( {preventRender: true} );
-
     if ( !this._validateCompletion() ) {
       ui.notifications.error( game.i18n.localize( "X.No no no, You're not finished yet." ) );
       return;

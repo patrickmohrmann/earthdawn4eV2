@@ -103,7 +103,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         ), {
           required: true,
           initialKeysOnly: true,
-          initialKeys: ["option", "class", "free", "special", "artisan", "knowledge", "general", "language"],
+          initialKeys: ["optional", "class", "free", "special", "artisan", "knowledge", "general", "language"],
         } ),
       availableRanks: new fields.SchemaField( {
         talent: new fields.NumberField( {
@@ -223,9 +223,9 @@ export default class CharacterGenerationData extends SparseDataModel {
   set abilityOption( abilityUuid ) {
     this.updateSource( {
       abilities: {
-        option: {
+        optional: {
           [abilityUuid]: 0,
-          [`-=${Object.keys(this.abilities.option)[0]}`]: null,
+          [`-=${Object.keys(this.abilities.optional)[0]}`]: null,
         },
       },
     } );
@@ -511,7 +511,7 @@ export default class CharacterGenerationData extends SparseDataModel {
 
       case "classAbilities":
         const classOptions = Object.fromEntries(
-          Object.entries(this.abilities.option).map(
+          Object.entries(this.abilities.optional).map(
             ( [uuid, _] ) => [uuid, 0]
           )
         );
@@ -522,7 +522,7 @@ export default class CharacterGenerationData extends SparseDataModel {
         );
 
         const abilitiesPayload = {
-          option: classOptions,
+          optional: classOptions,
           class: classAbilities,
         };
         const availableRanksPayload = {
@@ -578,7 +578,7 @@ export default class CharacterGenerationData extends SparseDataModel {
   }
 
   _getAbilityClassType( abilityType ) {
-    const isClass = ["class", "option", "free"].includes( abilityType );
+    const isClass = ["class", "optional", "free"].includes( abilityType );
     if ( isClass && this.isAdept ) return "talent";
     if ( isClass && !this.isAdept ) return "devotion";
     if ( abilityType === "language" ) return "general";
