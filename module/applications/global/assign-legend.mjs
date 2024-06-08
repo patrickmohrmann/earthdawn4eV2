@@ -77,11 +77,37 @@ export default class AssignLpPrompt extends FormApplication {
     return context;
   }
 
-  async _updateObject( event, formData ) {
+  // async _updateObject( event, formData ) {
+  //   this.object = foundry.utils.expandObject( formData );
+  //   // Re-render sheet with updated values
+  //   this.render( );
+  // }
+
+  async _upda1teObject( event, formData ) {
+    console.log( "Form Data before expansion:", formData ); // Debugging line to see formData structure
+  
+    // Assuming formData should contain a property like 'selectedActor' or similar
+    // Ensure the formData is structured correctly and contains the expected properties
     this.object = foundry.utils.expandObject( formData );
+  
+    console.log( "Object after expansion:", this.object ); // Debugging line to see the expanded object
+  
+    // If the actor selection is not correctly updated, check the formData structure
+    // and ensure 'selectedActor' (or the correct property name) is present and correctly named
+  
     // Re-render sheet with updated values
-    this.render( );
+    this.render();
   }
+
+   /** @inheritDoc */
+   async _updateObject( event, formData ) {
+    return Promise.resolve( this._assignLpData( formData ) ).then( this.render( true ) );
+  }
+
+  _assignLpData( data = {} ) {
+    this.options.updateSource( data );
+    return this.options;
+}
 
   /** @inheritDoc */
   async close( options = {} ) {
