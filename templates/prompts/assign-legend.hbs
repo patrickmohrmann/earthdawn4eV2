@@ -21,7 +21,7 @@
           <optgroup label="{{localize "ED.Dialogs.Header.activeUser"}}">
             {{#each actorUserActive}}
             {{log this}}
-            <option value="{{checked this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
+            <option value="{{this.actorId}}">{{this.actorName}} / {{this.playerName}}</option>
             {{/each}}
           </optgroup>
           <optgroup label="{{localize "ED.Dialogs.Header.inactiveUser"}}">
