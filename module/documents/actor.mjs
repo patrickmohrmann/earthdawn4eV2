@@ -34,12 +34,12 @@ export default class ActorEd extends Actor {
    * @param {string} type           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid( edid, type) {
+  getItemsByEdid( edid, type ) {
     const edidFilter = ( item ) => item.system.edid === edid;
     if ( !type ) return this.items.filter( edidFilter );
 
     const itemTypes = this.itemTypes;
-    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error(`Type ${type} is invalid!`);
+    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${type} is invalid!` );
 
     return itemTypes[type].filter( edidFilter );
   }
@@ -52,7 +52,7 @@ export default class ActorEd extends Actor {
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
   getSingleItemByEdid( edid, type ) {
-    return this.getItemsByEdid(edid, type)[0];
+    return this.getItemsByEdid( edid, type )[0];
   }
 
   /** 
@@ -114,8 +114,55 @@ export default class ActorEd extends Actor {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityFinalStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
-    const sourceActor = this.name;
-    let targetActors = this.targetNames()
+    let targets = game.users.current.targets
+    let chatFlavor = "";
+    if ( !ability.system.combatAbilityType ) {
+      if ( targets.size === 0 ) {
+        chatFlavor= game.i18n.format( "ED.Chat.Flavor.rollAbilityWithoutTarget", {
+          sourceActor: this.name,
+          ability: ability.name,
+          abilityFinalStep: abilityFinalStep
+        } );
+      } else if ( targets.size === 1 ) {
+        chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbilitySingleTarget", {
+          sourceActor: this.name,
+          ability: ability.name,
+          abilityFinalStep: abilityFinalStep,
+          singleTarget: targets.first().document.name,
+        } );
+      } else if ( targets.size > 1 ) {
+        chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbilityMultipleTargets", {
+          sourceActor: this.name,
+          ability: ability.name,
+          abilityFinalStep: abilityFinalStep
+        } );
+      }
+    } else {
+      if ( targets.size === 0 ) {
+        chatFlavor= game.i18n.format( "ED.Chat.Flavor.rollAttackWithoutTarget", {
+          sourceActor: this.name,
+          ability: ability.name,
+          abilityFinalStep: abilityFinalStep,
+          weapon: "todo after weapon type link between ability and weapon is implemented"
+        } );
+      } else if ( targets.size === 1 ) {
+        chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttackSingleTarget", {
+          sourceActor: this.name,
+          ability: ability.name,
+          abilityFinalStep: abilityFinalStep,
+          singleTarget: targets.first().document.name,
+          weapon: "todo after weapon type link between ability and weapon is implemented"
+        } );
+      } else if ( targets.size > 1 ) {
+        chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttackMultipleTargets", {
+          sourceActor: this.name,
+          ability: ability.name,
+          abilityFinalStep: abilityFinalStep,
+          weapon: "todo after weapon type link between ability and weapon is implemented"
+        } );
+      }
+    }
+
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
@@ -127,7 +174,8 @@ export default class ActorEd extends Actor {
       target: { base: difficulty },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { pointsUsed: ability.system.devotionRequired ? 1: 0, pointsRequired: ability.system.devotionRequired, available: this.system.devotion.value, step: this.system.devotion.step },
-      chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + ability.name + " Test" + targetActors,
+      // chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + ability.name + " Test" + targetActors,
+      chatFlavor: chatFlavor,
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -141,40 +189,66 @@ export default class ActorEd extends Actor {
    */
    async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
-    const sourceActor = this.name;
-    let targetActors = this.targetNames()
+    let targets = game.users.current.targets
+    let chatFlavor = "";
+    if ( targets.size === 0 ) {
+      chatFlavor= game.i18n.format( 
+        "ED.Chat.Flavor.rollEquipmentWithoutTarget", {
+          sourceActor: this.name,
+          equipment: equipment.name,
+          arbitraryStep: arbitraryStep
+        } );
+    } else if ( targets.size === 1 ) {
+      chatFlavor = game.i18n.format( 
+        "ED.Chat.Flavor.rollEquipmentSingleTarget", {
+        sourceActor: this.name,
+        equipment: equipment.name,
+        arbitraryStep: arbitraryStep,
+        singleTarget: targets.first().document.name,
+      } );
+    } else if ( targets.size > 1 ) {
+      chatFlavor = game.i18n.format( 
+        "ED.Chat.Flavor.rollEquipmentMultipleTargets", {
+        sourceActor: this.name,
+        equipment: equipment.name,
+        arbitraryStep: arbitraryStep
+      } );
+    }
+    
     const difficulty = equipment.system.getDifficulty();
     if ( !difficulty ) {
       ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
       return;
     }
+
     const edRollOptions = new EdRollOptions( {
       testType: "action",
       step: { base: arbitraryStep },
       target: { base: difficulty },
       karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
-      chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + equipment.name + " Test" + targetActors,
-    } );
+      // chatFlavor: sourceActor + " " + game.i18n.localize( "ED.Rolls.rolls" ) + " " + equipment.name + " Test" + targetActors,
+      chatFlavor: chatFlavor
+        } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
 
-    /**
-   * @summary                       get the Target of the action.
-   * @param {string} name           The name of the target
-   * @returns {string}              Returns a string of target actors
-   */
-    targetNames( ) {
-      const userTargetActors = game.users.current.targets
-      let targetActors = "";
-      if ( userTargetActors.size === 1 ) {
-        targetActors = " " + game.i18n.localize( "ED.Rolls.against" ) + " " + userTargetActors.first().document.name
-      } else if ( userTargetActors.size > 1 ) {
-        targetActors = " " + game.i18n.localize( "ED.Rolls.against" ) + " " + userTargetActors.first().document.name + " " + game.i18n.localize( "ED.Rolls.moreTargets" )
-      }
-      return targetActors
-    }
+  //   /**
+  //  * @summary                       get the Target of the action.
+  //  * @param {string} name           The name of the target
+  //  * @returns {string}              Returns a string of target actors
+  //  */
+  //   targetNames( ) {
+  //     const userTargetActors = game.users.current.targets
+  //     let targetActors = "";
+  //     if ( userTargetActors.size === 1 ) {
+  //       targetActors = " " + game.i18n.localize( "ED.Rolls.against" ) + " " + userTargetActors.first().document.name
+  //     } else if ( userTargetActors.size > 1 ) {
+  //       targetActors = " " + game.i18n.localize( "ED.Rolls.against" ) + " " + userTargetActors.first().document.name + " " + game.i18n.localize( "ED.Rolls.moreTargets" )
+  //     }
+  //     return targetActors
+  //   }
 
   /**
    * @summary                       Take the given amount of strain as damage.

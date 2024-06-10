@@ -220,6 +220,17 @@
                 "takeDamage":                                       "Schaden nehmen",
                 "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter"
             },
+            "Flavor": {
+                "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
+                "rollEquipmentSingleTarget":                        "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen {singleTarget}",
+                "rollEquipmentMultipleTargets":                     "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen mehrere Ziele",
+                "rollAbilityWithoutTarget":                         "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
+                "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
+            },
             "Header": {
                 "actionTest":                                       "Aktions Test",
                 "arbitraryTest":                                    "Willkürlicher Test",

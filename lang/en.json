@@ -221,6 +221,17 @@
                 "takeDamage":                                       "Take Damage",
                 "takeDamageTitle":                                  "Take the damage for your Actor"
             },
+            "Flavor": {
+                "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
+                "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
+                "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
+                "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
+                "rollAttackWithoutTarget":                          "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against many Targets"
+            },
             "Header": {
                 "actionTest":                                       "Action Test",
                 "arbitraryTest":                                    "arbitrary Test",
