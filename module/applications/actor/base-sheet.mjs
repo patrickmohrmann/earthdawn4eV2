@@ -99,13 +99,13 @@ export default class ActorSheetEd extends ActorSheet {
 
   /**
    * Handle changing the holding type of an owned item.
-   * @description itemStatus.value = 
-   * 1: owned, 
-   * 2: carried, 
-   * 3: equipped, 
-   * 4: mainHand, 
-   * 5: offHand, 
-   * 6: twoHanded, 
+   * @description itemStatus.value =
+   * 1: owned,
+   * 2: carried,
+   * 3: equipped,
+   * 4: mainHand,
+   * 5: offHand,
+   * 6: twoHanded,
    * 7: tail
    * @param {Event} event      The originating click event.
    * @private
@@ -114,6 +114,9 @@ export default class ActorSheetEd extends ActorSheet {
   _onChangeItemStatus( event ) {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
+    const item = this.actor.items.get( li.dataset.itemId );
+    this.actor.rotateItemStatus( item.id ).then( _ => this.render() );
+    /*const li = event.currentTarget.closest( ".item-id" );
     const item = this.actor.items.get( li.dataset.itemId );
     const currentItemStatus = item.system.itemStatus.value;
     const namegiver = this.actor.items.filter( i => i.type === "namegiver" )
@@ -186,7 +189,7 @@ export default class ActorSheetEd extends ActorSheet {
         updateItemStatus( weapons, 6 );
         updateItemStatus( shields, 5 );
       }
-      // check any weapon becoming a two handed weapon
+        // check any weapon becoming a two handed weapon
       // one handed weapons can only be hold in the main or off hand
       else if ( newItemStatus === 6 && isOneHandedWeapon ) {
         if ( maxItemStatus === 7 && weaponSize <= 2 ) {
@@ -227,10 +230,10 @@ export default class ActorSheetEd extends ActorSheet {
               if ( piecemealSum <= 2 ) {
                 return
               } else
-                if ( armor.system.itemStatus.value === 3 ) {
-                  armor.update( { "system.itemStatus.value": 2 } );
-                  piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-                }
+              if ( armor.system.itemStatus.value === 3 ) {
+                armor.update( { "system.itemStatus.value": 2 } );
+                piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
+              }
             } );
           }
           else if ( newPiecemealItemSize === 2 && piecemealSum > 3 ) {
@@ -238,20 +241,20 @@ export default class ActorSheetEd extends ActorSheet {
               if ( piecemealSum <= 3 ) {
                 return
               } else
-                if ( armor.system.itemStatus.value === 3 ) {
-                  armor.update( { "system.itemStatus.value": 2 } );
-                  piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-                }
+              if ( armor.system.itemStatus.value === 3 ) {
+                armor.update( { "system.itemStatus.value": 2 } );
+                piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
+              }
             } );
           } else if ( newPiecemealItemSize === 1 && piecemealSum > 4 ) {
             armorItems.forEach( armor => {
               if ( piecemealSum <= 4 ) {
                 return
               } else
-                if ( armor.system.itemStatus.value === 3 ) {
-                  armor.update( { "system.itemStatus.value": 2 } );
-                  piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
-                }
+              if ( armor.system.itemStatus.value === 3 ) {
+                armor.update( { "system.itemStatus.value": 2 } );
+                piecemealSum = piecemealSum - armor.system.piecemealArmor.size;
+              }
             } );
           }
         }
@@ -290,7 +293,7 @@ export default class ActorSheetEd extends ActorSheet {
       const maxItemStatus = 3
       newItemStatus = itemStatusNumber === maxItemStatus ? 1 : itemStatusNumber + 1;
       item.update( { "system.itemStatus.value": newItemStatus } );
-    }
+    }*/
   }
 
 

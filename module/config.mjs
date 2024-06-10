@@ -241,9 +241,18 @@ preLocalize( "tier" );
 
 
 /**
- * Tier
- * @e5num {string}
+ * The possible states for a physical item that describe in which way they connect to an actor.
+ * @enum {string}
  */
+ED4E.itemStatus = {
+	owned:			"ED.Config.ItemStatus.owned",
+	carried: 		"ED.Config.ItemStatus.carried",
+	equipped: 	"ED.Config.ItemStatus.equipped",
+	mainHand: 	"ED.Config.ItemStatus.mainHand",
+	offHand: 		"ED.Config.ItemStatus.offHand",
+	twoHands: 	"ED.Config.ItemStatus.twoHands",
+	tail: 			"ED.Config.ItemStatus.tail",
+};
 // ED4E.itemStatus = {
 // 	owned: {
 // 		name:				"ED.Config.ItemStatus.owned",
@@ -274,7 +283,7 @@ preLocalize( "tier" );
 // 		value:				7
 // 	},
 // }
-ED4E.itemStatus = {
+/*ED4E.itemStatus = {
 	1:1,
 	2:2,
 	3:3,
@@ -282,8 +291,8 @@ ED4E.itemStatus = {
 	5:5,
 	6:6,
 	7:7
-}
-preLocalize( "tier" );
+}*/
+preLocalize( "itemStatus" );
 
 /**
  * talentCategory
@@ -303,8 +312,8 @@ preLocalize( "talentCategory" );
  * @enum {string}
  */
 ED4E.weaponType = {
-	bow: 					"ED.Config.bow",
-	crosbow: 				"ED.Config.crossbow",
+	bow: 						"ED.Config.bow",
+	crossbow: 			"ED.Config.crossbow",
 	melee: 					"ED.Config.melee",
 	unarmed: 				"ED.Config.unarmed"
 }
