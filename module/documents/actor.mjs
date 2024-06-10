@@ -7,6 +7,7 @@ import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mj
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
+import { sum } from "../utils.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -22,9 +23,19 @@ export default class ActorEd extends Actor {
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
    * @type {Item|undefined}
-   */ 
+   */
   get namegiver() {
     return this.items.filter( item => item.type === 'namegiver' )[0];
+  }
+
+  /**
+   * Checks if the actor is wearing any piece of armor that is part of a piecemeal armor set.
+   * Piecemeal armor is a type of armor that is made up of several different pieces.
+   * Returns true if the actor is wearing at least one piece of piecemeal armor, false otherwise.
+   * @type {boolean}
+   */
+  get wearsPiecemealArmor() {
+    return this.itemTypes.armor.some( armor => armor.system.piecemealArmor.piecemealArmorSelector );
   }
 
   /**
@@ -55,7 +66,7 @@ export default class ActorEd extends Actor {
     return this.getItemsByEdid(edid, type)[0];
   }
 
-  /** 
+  /**
    * Perform the karma ritual for this actor to set the current karma points to maximum.
    * Only to be used for namegivers with a discipline.
    */
@@ -129,13 +140,13 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
-   /**
+  /**
    * @summary                     Equipment rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
    * @description                 Roll an Equipment. use {@link RollPrompt} for further input data.
    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-   async rollEquipment( equipment, options = {} ) {
+  async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
     const difficulty = equipment.system.getDifficulty();
     if ( !difficulty ) {
@@ -152,6 +163,12 @@ export default class ActorEd extends Actor {
     } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
+  }
+
+  async rotateItemStatus( itemId ) {
+    const item = this.items.get( itemId );
+    const nextStatus = item.system.nextItemStatus;
+    return this._updateItemStates( item, nextStatus );
   }
 
   /**
@@ -175,12 +192,12 @@ export default class ActorEd extends Actor {
   // eslint-disable-next-line max-params
   takeDamage( amount, damageType = "standard", armorType, ignoreAmor ) {
     const finalAmount = amount - (
-        ( ignoreAmor || !armorType )
-            ? 0
-            : this.system.characteristics.armor[armorType].value
+      ( ignoreAmor || !armorType )
+        ? 0
+        : this.system.characteristics.armor[armorType].value
     );
-      const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
-      this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
+    const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
+    this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
   }
 
   /**
@@ -213,8 +230,8 @@ export default class ActorEd extends Actor {
     // Check if this uses karma or strain at all
     this.takeDamage( roll.totalStrain, "standard", undefined, true );
     if (
-        !this.#useResource( 'karma', roll.options.karma.pointsUsed )
-        || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
+      !this.#useResource( 'karma', roll.options.karma.pointsUsed )
+      || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
       ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
     }
@@ -235,13 +252,13 @@ export default class ActorEd extends Actor {
 
       return changes.concat(
 
-          e.changes.map( ( c ) => {
-            // eslint-disable-next-line no-param-reassign
-            c = foundry.utils.duplicate( c );
-            c.effect = e;
-            c.priority = c.priority ?? c.mode * 10;
-            return c;
-          } ),
+        e.changes.map( ( c ) => {
+          // eslint-disable-next-line no-param-reassign
+          c = foundry.utils.duplicate( c );
+          c.effect = e;
+          c.priority = c.priority ?? c.mode * 10;
+          return c;
+        } ),
       );
     }, [] );
 
@@ -269,9 +286,9 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichmentEmbeddedItems( ) {
     for ( const item of this.items ) {
       item.system.description.value = foundry.utils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
-            async: true,
-            secrets: this.isOwner,
-          } )
+          async: true,
+          secrets: this.isOwner,
+        } )
       );
     }
   }
@@ -281,8 +298,96 @@ export default class ActorEd extends Actor {
     const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
     const transaction = new transactionModel( transactionData )
 
-    return this.update( { 
+    return this.update( {
       [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
     } )
+  }
+
+  async _updateItemStates( itemToUpdate, nextStatus ) {
+    const updates = [];
+    const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };
+    const equippedWeapons = this.itemTypes.weapon.filter(
+      weapon => ["mainHand", "offHand", "twoHands"].includes( weapon.system.itemStatus )
+    );
+    const addUnequipItemUpdate = (itemType, statuses) => {
+      this.itemTypes[itemType].filter(
+        item => statuses.includes(item.system.itemStatus)
+      ).forEach(
+        item => updates.push({ _id: item.id, "system.itemStatus": "carried" })
+      );
+    }
+
+    switch ( itemToUpdate.system.type ) {
+      case "armor":
+
+        if ( itemToUpdate.piecemealArmor.selector ) {
+          if ( !this.wearsPiecemealArmor ) {
+            addUnequipItemUpdate( "armor", ["equipped"] );
+          } else {
+            // A complete set of piecemeal armor can have up to 5 size points.
+            // Armor pieces come in three sizes and cost a corresponding number
+            // of points: large (3), medium (2), and small (1). A set of
+            // piecemeal armor cannot have more than one size of a particular
+            // type.
+            const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
+            const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
+            if ( sameSizePiece ) {
+              updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
+            } else {
+
+              // Check if the total size of the equipped armor pieces and the size of the item to update
+              // exceeds the maximum allowed size for a piecemeal armor set (5 size points).
+              // If it does, break the operation to prevent equipping the item.
+              if (
+                sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
+                + itemToUpdate.system.piecemealArmor.size > 5
+              ) break;
+            }
+          }
+        } else {
+          // Unequip other armor
+          addUnequipItemUpdate( "armor", ["equipped"] );
+        }
+        updates.push( originalItemUpdate );
+        break;
+      case "weapon":
+
+        switch (nextStatus) {
+          case "twoHands":
+            addUnequipItemUpdate("weapon", ["mainHand", "offHand", "twoHands"]);
+            addUnequipItemUpdate("shield", ["equipped"]);
+            break;
+          case "mainHand":
+          case "offHand":
+            addUnequipItemUpdate("weapon", [nextStatus, "twoHands"]);
+            break;
+          case "tail":
+            addUnequipItemUpdate("weapon", ["tail"]);
+            break;
+        }
+
+        updates.push(originalItemUpdate);
+        break;
+      case "shield":
+
+        if ( nextStatus === "equipped") {
+          // Unequip other shields
+          addUnequipItemUpdate("shield", ["equipped"]);
+          // If there's a two-handed weapon or two one-handed weapons, unequip one
+          if (equippedWeapons.some(weapon => weapon.system.itemStatus === "twoHands") || equippedWeapons.length > 1) {
+            // Prefer to unequip off-hand weapon, if available
+            const weaponToUnequip = equippedWeapons.find(weapon => weapon.system.itemStatus === "offHand") || equippedWeapons[0];
+            updates.push({ _id: weaponToUnequip.id, "system.itemStatus": "carried" });
+          }
+        }
+
+        updates.push( originalItemUpdate );
+        break;
+      case "equipment":
+      default:
+        updates.push( originalItemUpdate );
+        break;
+    }
+    return this.updateEmbeddedDocuments( "Item", updates );
   }
 }

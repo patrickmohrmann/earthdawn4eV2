@@ -2,12 +2,13 @@
 import SystemDataModel from "../../abstract.mjs";
 // import { MappingField } from "../../fields.mjs";
 import TargetTemplate from "./targeting.mjs";
+import ED4E from "../../../config.mjs";
 
 /**
  * Data model template with information on physical items.
  * @property {object} price                                 price group object
  * @property {number} price.value                           item cost 
- * @property {string} price.denomination                         denomination type of the cost
+ * @property {string} price.denomination                    denomination type of the cost
  * @property {number} weight                                item weight
  * @property {number} amount                                amount of the item
  * @property {number} bloodMagicDamage                      number of Bloodmagic damage the actor is receiving
@@ -20,6 +21,14 @@ import TargetTemplate from "./targeting.mjs";
 export default class PhysicalItemTemplate extends SystemDataModel.mixin( 
     TargetTemplate
 ) {
+
+    /**
+     * The order in which this items status is cycled. Represents the default order.
+     * Should be defined in the extending class, if different.
+     * @type {[string]}
+     * @protected
+     */
+    static _itemStatusOrder = [ "owned", "carried", "equipped" ];
 
     /** @inheritDoc */
     static defineSchema() {
@@ -120,7 +129,17 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
             // a toggle shall be show either equipped, carried or owned.
             // all equipped and carried items count as owned as well
             // all equipped items count as carried as well
-            itemStatus: new fields.SchemaField( {
+            itemStatus: new fields.StringField( {
+                required: true,
+                nullable: true,
+                blank: false,
+                initial: "owned",
+                choices: Object.keys( ED4E.itemStatus ),
+                label: "ED.Item.General.itemStatus",
+                hint: "ED.Item.General.itemStatusHint",
+            } )
+
+            /*itemStatus: new fields.SchemaField( {
                 name: new fields.StringField( {
                     required: true,
                     blank: false,
@@ -136,7 +155,7 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
                     integer: true,
                     positive: true
                 } )
-            } )
+            } )*/
             // itemStatus: new fields.NumberField( {
             //     required: true,
             //     nullable: false,
@@ -174,4 +193,26 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
             this.parent.usableItem.labels.recoveryPropertyValue
         ];
     }
+
+    get statusIndex() {
+        return this.constructor._itemStatusOrder.indexOf( this.itemStatus );
+    }
+
+    /**
+     * Returns the next item status in the sequence. If the item status is undefined
+     * it will return the first in the sequence.
+     * @type {string}
+     */
+    get nextItemStatus() {
+        const statusOrder = this.constructor._itemStatusOrder;
+        // if itemStatus is null or undefined `currentStatusIndex + 1` will result in NaN (Not a Number)
+        // NaN || 0 will return 0
+        return statusOrder[ ( this.statusIndex + 1 || 0 ) % statusOrder.length ];
+    }
+
+    /* -------------------------------------------- */
+    /*  Methods                                     */
+    /* -------------------------------------------- */
+
+
 }
