@@ -1,0 +1,47 @@
+<form class="legend-point__history--earned flexcol" id="legend-point__history--earned-form" autocomplete="off">
+
+    <!-- Header -->
+    {{!-- <div class="header-item__frame">
+        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+    </div> --}}
+
+    <div>
+      
+       
+    <!-- Buttons -->
+    <div class="buttons legend-point__history--earned-buttons flexcol">
+
+        <div class="button-group buttons-navigation flexrow">
+            <button class='recovery default button-recovery' type="recovery" name="recovery" data-button='recovery'>
+                {{ localize "ED.Dialogs.Buttons.recovery" }}
+            </button>
+        </div>
+        {{log this}}
+        {{#if (eq actor.system.characteristics.recoveryTests.stun false)}}
+
+        <div class="button-group buttons-navigation flexrow">
+            <button class='nightRest default button-recoverStun' type="recoverStun" name="recoverStun" data-button='recoverStun'>
+                {{ localize "ED.Dialogs.Buttons.recoverStun" }}
+            </button>
+        </div>
+        {{/if}}
+        <div class="button-group buttons-navigation flexrow">
+            <button class='nightRest default button-nightRest' type="nightRest" name="nightRest" data-button='nightRest'>
+                {{ localize "ED.Dialogs.Buttons.nightRest" }}
+            </button>
+        </div>
+        
+        <div class="button-group buttons-navigation flexrow">
+            <button class='cancel default button-cancel' type="cancel" name="cancel" data-button='cancel'>
+                {{ localize "ED.Dialogs.Buttons.cancel" }}
+            </button>
+        </div>
+        
+    </div>
+
+    <!-- Footer -->
+    {{!-- <div class="footer-item__frame">
+        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
+    </div> --}}
+
+</form>

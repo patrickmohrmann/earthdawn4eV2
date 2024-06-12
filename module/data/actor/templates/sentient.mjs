@@ -135,7 +135,7 @@ export default class SentientTemplate extends CommonTemplate {
                             required: true,
                             nullable: false,
                             min: 0,
-                            step: 1,
+                            // step: 1,
                             initial: 0,
                             integer: true,
                             label: "ED.Actor.Characteristics.damageLethal"
@@ -153,9 +153,9 @@ export default class SentientTemplate extends CommonTemplate {
                             required: true,
                             nullable: false,
                             min: 0,
-                            step: 1,
+                            // step: 1,
                             initial: 0,
-                            integer: true,
+                            // integer: true,
                             label: "ED.Actor.Characteristics.damage"
                         } )
                       }, {
@@ -187,10 +187,15 @@ export default class SentientTemplate extends CommonTemplate {
                         required: true,
                         nullable: false,
                         min: 0,
-                        step: 1,
+                        //step: 1,
                         initial: 0,
                         integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
+                    } ),
+                    stun: new fields.BooleanField( {
+                        required: true,
+                        initial: false,
+                        label: "ED.Actor.Characteristics.recoveryTestsStun"
                     } ),
                 } ),
                 ...MovementFields.movement

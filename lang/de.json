@@ -71,6 +71,7 @@
                 "jumpUp":                                           "Aufspringen",
                 "knockDownTest":                                    "Niederschlag",
                 "legendHistory":                                    "LP Übersicht",
+                "recovery":                                         "Erholung",  
                 "takeDamage":                                       "Schaden"
             },
             "Cards": {
@@ -205,6 +206,8 @@
                 "equipped":                                         "Ausgerüstet",
                 "equippedArmor":                                    "Rüstung Ausgerüstet",
                 "equippedShield":                                   "Schild Ausgerüstet",
+                "damageSubdual":                                    "Betäubung",
+                "damagePhysical":                                   "Körperlich",
                 "karmaAlways":                                      "Benutze immer Karma",
                 "karmaRitualTooltip":                               "Karmaritual",
                 "loaded":                                           "Belastet",
@@ -239,6 +242,7 @@
                 "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
                 "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
                 "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}",
                 "rollAttackMultipleTargets":                        "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
             },
             "Header": {
@@ -307,16 +311,16 @@
             },
             "Actor": {
                 "Labels": {
-                    "toughness": "bla"
+                    "toughness":                                    "bla"
                 },
                 "Hints": {}
             },
             "Item": {
                 "Labels": {
-                    "edid": "ED-ID"
+                    "edid":                                         "ED-ID"
                 },
                 "Hints": {
-                    "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+                    "edid":                                         "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
                 }
             },
             "Journal": {
@@ -332,21 +336,14 @@
             "Errors": {
                 "noLp":                                            "Keine Legendenpunkte angegeben!"
             },
-            "Header": {
-                "activeUser":                                       "Aktive Spieler",
-                "inactiveUser":                                     "Inaktive Spieler",
-                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
-            },
-            "Navigator":{
-                "baseInput":                                        "Standard Optionen",
-                "options":                                          "Sonstige Optionen"
-            }, 
-            "Placeholder": {
-                "lpDescription":                                    "Trage hier eine Beschreibung ein"
-            },
             "Title": {
-                "assignLp":                                         "Legendenpunkte zuweisen",
-                "rollPrompt":                                       "Würfelübersicht"
+                "recovery":                                         "Erholungsprobe"
+            },
+            "Buttons": {
+                "cancel":                                            "Abbrechen",    
+                "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
+                "recovery":                                         "Erholungsprobe",    
+                "nightRest":                                        "Vollständige Rast" 
             }
         },
         "Item": {
@@ -363,8 +360,11 @@
 
             },
             "Header": {
+                "activeUser":                                       "Aktive Spieler",
+                "inactiveUser":                                     "Inaktive Spieler",
+                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure",
                 "details":                                          "Details",
-                "navigator":                                        "Navigator"                                       
+                "navigator":                                        "Navigator"  
             },
             "Namegiver":{
                 "WeaponSize": {
@@ -379,6 +379,13 @@
                 "details":                                          "Details",
                 "effects":                                          "Effekte",
                 "general":                                          "Allgemein"
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
+            "Title": {
+                "assignLp":                                         "Legendenpunkte zuweisen",
+                "rollPrompt":                                       "Würfelübersicht"
             }
         },
         "Languages": {

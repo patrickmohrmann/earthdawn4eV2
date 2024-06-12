@@ -82,6 +82,12 @@ export default class ActorSheetEd extends ActorSheet {
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
+     // recovery Test
+     html.find( ".roll-recovery" ).click( this._onRecoveryRoll.bind( this ) );
+
+    //  // Take Damage Test
+    //  html.find( ".roll-recovery" ).click( this._onTakeDamage.bind( this ) );
+
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
     html.find( ".effect-edit" ).click( this._onEffectEdit.bind( this ) );
@@ -176,17 +182,37 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.rollEquipment( equipment, { event: event } );
   }
 
-  /**
+    /**
    * @description Take strain is used for non rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private
    */
-  _takeStrain( event ) {
+    _takeStrain( event ) {
+        event.preventDefault();
+        const li = event.currentTarget.closest( ".item-id" );
+        const ability = this.actor.items.get( li.dataset.itemId );
+        this.actor.takeStrain( ability.system.strain );
+    }
+
+ /**
+  * Handles Recovery tests  
+  * @param {Event} event The originating click event.
+  * @private
+  */
+  _onRecoveryRoll( event ) { 
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-id" );
-    const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.takeStrain( ability.system.strain );
+    this.actor.rollRecovery( {event: event} );
   }
+
+  // /**
+  //  * Handles Recovery tests  
+  //  * @param {Event} event The originating click event.
+  //  */
+  // _onTakeDamage( event ) {
+  //   event.preventDefault();
+  //   this.actor.takeDamage( {event: event} );
+  // }
+
 
 
   /**
@@ -274,4 +300,5 @@ export default class ActorSheetEd extends ActorSheet {
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
+
 }
