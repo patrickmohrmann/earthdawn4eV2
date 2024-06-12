@@ -140,8 +140,8 @@
                 "effectsPermanent":                                 "Permanent Effects",
                 "effectsTemporary":                                 "Temporary Effects",  
                 "encumbrance":                                      "Encumbrance",
-                "equipment":                                        "Equipment",   
-                "equippedStatus":                                   "Equipped",                                            
+                "equipment":                                        "Equipment",
+                "equippedStatus":                                   "Equipped",
                 "healthRating":                                     "Health Rating",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Penalty",
@@ -353,7 +353,7 @@
             },
             "Placeholder": {
                 "lpDescription":                                    "Enter your description here"
-            }, 
+            },
             "Title": {
                 "assignLp":                                         "Assign Legend Points",
                 "rollPrompt":                                       "Roll Options",
@@ -362,7 +362,7 @@
             },
             "Buttons": {
                 "cancel":                                           "Cancel",
-                "nightRest":                                        "Nightly Rest",  
+                "nightRest":                                        "Nightly Rest",
                 "recoverStun":                                      "Stun Damage Recovery",
                 "recovery":                                         "Recovey Test",
                 "takeDamage":                                       "Take Damage"
@@ -451,7 +451,7 @@
             "stepModifiers":                                        "Step Modifier",
             "successesAchieved":                                    "Total Successes",
             "targetDifficulty":                                     "Difficulty",
-            "targetModifiers":                                      "Target Modifier"  
+            "targetModifiers":                                      "Target Modifier"
         },
         "Notifications": {
             "Info": {},
@@ -480,6 +480,6 @@
                 "help":                                             "help",
                 "troubleshooting":                                  "troubleshooting"
             }
-        }  
-    }   
+        }
+    }
 }

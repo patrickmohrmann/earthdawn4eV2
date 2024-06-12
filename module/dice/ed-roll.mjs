@@ -71,6 +71,7 @@ export default class EdRoll extends Roll {
       ? Math.max( super.total, 1 )
       : super.total;
   }
+  
 
   /**
    * Is this roll a valid Earthdawn test?

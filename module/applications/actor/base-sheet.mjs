@@ -207,17 +207,17 @@ export default class ActorSheetEd extends ActorSheet {
     }
 
  /**
-  * Handles Recovery tests  
+  * Handles Recovery tests
   * @param {Event} event The originating click event.
   * @private
   */
-  _onRecoveryRoll( event ) { 
+  _onRecoveryRoll( event ) {
     event.preventDefault();
     this.actor.rollRecovery( {event: event} );
   }
 
   /**
-   * Handles Recovery tests  
+   * Handles Recovery tests
    * @param {Event} event The originating click event.
    */
   // _onTakeDamage( event ) {
@@ -240,7 +240,7 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.jumpUp( {event: event} );
   }
 
-  _onInitiative( event ) { 
+  _onInitiative( event ) {
     event.preventDefault();
     this.actor.rollInitiative( {event: event} );
   }

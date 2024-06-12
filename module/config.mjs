@@ -296,7 +296,6 @@ ED4E.weaponType = {
 }
 preLocalize( "talentCategory" );
 
-
 /**
  * Type of grantable abilities for a class level
  * @enum {string}
@@ -450,7 +449,7 @@ ED4E.rollTypes = {
 	threadWeaving: {
 		label: "ED.Config.rollTypes.threadWeaving",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/threadWeaving-roll-flavor.hbs",
-	},                   
+	},
 }
 preLocalize( "testTypes", { key: "label" } );
 
@@ -462,35 +461,35 @@ ED4E.combatTypes = {
 	Aerial: {
 		label: "ED.Config.combatTypes.Aerial",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                    
+	},
 	Close: {
 		label: "ED.Config.combatTypes.Close",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                      
+	},
 	melee: {
 		label: "ED.Config.combatTypes.melee",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                     
+	},
 	Mounted: {
 		label: "ED.Config.combatTypes.Mounted",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                    
+	},
 	projectile: {
 		label: "ED.Config.combatTypes.projectile",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                 
+	},
 	ranged: {
 		label: "ED.Config.combatTypes.ranged",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                     
+	},
 	throwing: {
 		label: "ED.Config.combatTypes.throwing",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},     
+	},
 	unarmed: {
 		label: "ED.Config.combatTypes.unarmed",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                            
+	},
 }
 preLocalize( "testTypes", { key: "label" } );
 
@@ -571,22 +570,6 @@ preLocalize( "documentData.Item.skill.languageSpeak", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: "value" } );
 preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
-
-// /**
-//  * The available sub-types of (combatTypes) tests
-//  * @enum {string}
-//  */
-// ED4E.combatTypes = {
-// 	aerial: "ED.Config.CombatTypes.aerial",
-// 	close:  "ED.Config.CombatTypes.close",
-// 	melee:  "ED.Config.CombatTypes.melee",
-// 	mounted:  "ED.Config.CombatTypes.mounted",
-// 	projectile: "ED.Config.CombatTypes.projectile",
-// 	ranged:  "ED.Config.CombatTypes.ranged",
-// 	throwing: "ED.Config.CombatTypes.throwing",
-// 	unarmed:  "ED.Config.CombatTypes.unarmed",	                           
-// }
-// preLocalize( "combatTypes" );
 
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */

@@ -71,7 +71,7 @@
                 "jumpUp":                                           "Aufspringen",
                 "knockDownTest":                                    "Niederschlag",
                 "legendHistory":                                    "LP Übersicht",
-                "recovery":                                         "Erholung",  
+                "recovery":                                         "Erholung",
                 "takeDamage":                                       "Schaden"
             },
             "Cards": {
@@ -243,8 +243,8 @@
                 "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
                 "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
                 "rollAbility":                                      "{sourceActor} würfelt {attribute} mit Stufe {step}",
-                "rollAttribute":                                    "{sourceActor} würfelt {attribute} mit Stufe {step}",       
-                "rollEquipment":                                    "{sourceActor} würfelt {equipment} mit Stufe {step}",   
+                "rollAttribute":                                    "{sourceActor} würfelt {attribute} mit Stufe {step}",
+                "rollEquipment":                                    "{sourceActor} würfelt {equipment} mit Stufe {step}",
                 "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}",
                 "jumpUp":                                           "{sourceActor} springt auf mit Stufe {step}",
                 "knockdownTest":                                    "{sourceActor} versucht dem Niederschlag zu widerstehen {step}",
@@ -268,7 +268,7 @@
                 "unarmed":                                          "Unbewaffneter Nahkampf"
             },
             "groupDifficulty": {
-                "highestOfGroup":                                   "Höchster der Gruppe",  
+                "highestOfGroup":                                   "Höchster der Gruppe",
                 "hightestX":                                        "Höchster + Ziele",
                 "lowestOfGroup":                                    "Niedrigster der Gruppe",
                 "lowestX":                                          "Niedrigster + Ziele"
@@ -295,7 +295,7 @@
             "rollTypes": {
                 "ability":                                          "Fähigkeit",
                 "attack":                                           "Angriff",
-                "attribute":                                        "Attribute",               
+                "attribute":                                        "Attribute",
                 "effect":                                           "Effekt",
                 "halfmagic":                                        "Halb Magie",
                 "initiative":                                       "Initiative",
@@ -343,9 +343,9 @@
             },
             "armorType":                                            "Rüstungsart",
             "Buttons": {
-                "cancel":                                           "Abbrechen",    
+                "cancel":                                           "Abbrechen",
                 "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
-                "recovery":                                         "Erholungsprobe",    
+                "recovery":                                         "Erholungsprobe",
                 "nightRest":                                        "Vollständige Rast",
                 "takeDamage":                                       "Schaden nehmen"
                 },
@@ -381,7 +381,7 @@
                 "inactiveUser":                                     "Inaktive Spieler",
                 "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure",
                 "details":                                          "Details",
-                "navigator":                                        "Navigator"  
+                "navigator":                                        "Navigator"
             },
             "Namegiver":{
                 "WeaponSize": {
@@ -418,7 +418,7 @@
         "Rolls": {
             "against":                                              "gegen",
             "baseValue":                                            "Basis Stufe",
-            "devotion":                                             "Weihekraft",                
+            "devotion":                                             "Weihekraft",
             "formulaDevotion":                                      "{amount}x Weihe (St {step})",
             "formulaExtraStep":                                     "{label} (St {step})",
             "formulaKarma":                                         "{amount}x Karma (St {step})",
@@ -440,11 +440,11 @@
                 "spellcastingRoll":                                 "Spruchzaubereiprobe",
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
-            
+
             "rolls":                                                "würfelt",
             "rollResult":                                           "Würfelergebnis",
             "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
-            "step":                                                 "Stufe",     
+            "step":                                                 "Stufe",
             "stepModifiers":                                        "Stufen Modifikatoren",
             "successesAchieved":                                    "Gesamt Erfolge",
             "targetDifficulty":                                     "Schwierigkeit",

@@ -113,7 +113,7 @@ export default class ActorEd extends Actor {
       step: attributeStep,
       attribute: `${game.i18n.localize( ED4E.attributes[attributeId].label )}`
     } );
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
       testType: "action",
       rollType: "attribute",
@@ -152,7 +152,7 @@ export default class ActorEd extends Actor {
       step: abilityStep
     } );
     const abilityFinalStep = { base: abilityStep }
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
       testType: "action",
       rollType: "ability",
@@ -187,7 +187,7 @@ export default class ActorEd extends Actor {
       equipment: equipment.name,
       step: arbitraryStep
     } );
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
       testType: "action",
       rollType: "equipment",
@@ -292,7 +292,7 @@ export default class ActorEd extends Actor {
       step: recoveryStep
     } );
     const recoveryFinalStep = { base: recoveryStep }
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
       testType: "effect",
       rollType: "recovery",
@@ -397,7 +397,7 @@ export default class ActorEd extends Actor {
     } );
 
     const knockdownStepFinal = { base: knockdownStep + this.system.singleBonuses.knockdownEffects.value };
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
       testType: "action",
       rollType: "knockdown",
@@ -449,7 +449,7 @@ export default class ActorEd extends Actor {
     const difficulty = { base: 6 };
     const jumpUpStepFinal = { base: jumpUpStep };
     // const edRollOptions = await this.createEdRollOptions( "action", "jumpUp", strain, difficulty, jumpUpStepFinal, devotionRequired, chatFlavor );
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
       testType: "action",
       rollType: "jumpUp",
