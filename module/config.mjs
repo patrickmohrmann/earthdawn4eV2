@@ -113,6 +113,9 @@ ED4E.globalBonuses = {
 	allRangedDamage: {
 		label: 			"ED.Actor.GlobalBonus.allRangedDamage"
 	},
+	allRecoveryEffects: {
+		label: 			"ED.Actor.GlobalBonus.allRecoveryEffects"
+	},
 	allSpellEffects: {
 		label: 			"ED.Actor.GlobalBonus.allSpellEffects"
 	}

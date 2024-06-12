@@ -7,6 +7,8 @@ import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mj
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
+import RecoveryPrompt from "../applications/global/recovery-prompt.mjs";
+import EdRoll from "../dice/ed-roll.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -34,12 +36,12 @@ export default class ActorEd extends Actor {
    * @param {string} type           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid( edid, type) {
+  getItemsByEdid( edid, type ) {
     const edidFilter = ( item ) => item.system.edid === edid;
     if ( !type ) return this.items.filter( edidFilter );
 
     const itemTypes = this.itemTypes;
-    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error(`Type ${type} is invalid!`);
+    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${type} is invalid!` );
 
     return itemTypes[type].filter( edidFilter );
   }
@@ -52,7 +54,7 @@ export default class ActorEd extends Actor {
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
   getSingleItemByEdid( edid, type ) {
-    return this.getItemsByEdid(edid, type)[0];
+    return this.getItemsByEdid( edid, type )[0];
   }
 
   /** 
@@ -76,6 +78,7 @@ export default class ActorEd extends Actor {
 
   /**
    * Legend point History earned prompt trigger
+   * @returns {Promise<void>}
    */
   async legendPointHistoryEarned( ) {
     // let history = await getLegendPointHistoryData( actor );
@@ -153,6 +156,84 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
+  // async takeDamage( options = {} ) {
+  //   const takeDamage = await TakeDamagePrompt.waitPrompt( this );
+  //   console.log( "takeDamage", takeDamage )
+  // }
+
+  async rollRecovery( options = {} ) {
+    const recoveryMode = await RecoveryPrompt.waitPrompt( this );
+    let recoveryFinalStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
+    const stunDamage = this.system.characteristics.health.damage.stun;
+    const totalDamage = this.system.characteristics.health.damage.total;
+    const currentWounds = this.system.characteristics.health.wounds;
+    const newWounds = currentWounds > 0 ? currentWounds - 1 : 0;
+    const recoveryTestPerDay = this.system.characteristics.recoveryTests.max;
+    const woundsPath = `system.characteristics.health.wounds`;
+    const recoveryTestAvailablePath = `system.characteristics.recoveryTests.value`;
+    const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTests.stun`;
+
+    if ( recoveryMode === "recovery" ) {
+      if ( this.system.characteristics.recoveryTests.value < 1 ) {
+        ui.notifications.warn( "Localize: Not enough recovery tests available." );
+        return;
+      } else {
+        if ( totalDamage === 0 ) {
+          ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
+          return;
+        }
+      }
+    }
+    else if ( recoveryMode === "nightRest" ) {
+      if ( totalDamage === 0 && currentWounds === 0 ) {
+        this.update( {
+          [`${recoveryStunAvailabiltyPath}`]: false,
+          [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
+        } );
+        return;
+      } else if ( totalDamage === 0 && currentWounds > 0 ) {
+        this.update( {
+          [`${recoveryStunAvailabiltyPath}`]: false,
+          [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1,
+          [`${woundsPath}`]: newWounds
+        } );
+        return;
+      }
+    }
+    else if ( recoveryMode === "recoverStun" ) {
+      if ( this.system.characteristics.recoveryTests.value < 1 ) {
+        ui.notifications.warn( "Localize: Not enough recovery tests available." );
+        return;
+      } else {
+        if ( stunDamage === 0 ) {
+          ui.notifications.warn( "Localize: You don'T have Stun damage" );
+          return;
+        } else {
+          recoveryFinalStep += this.system.attributes.wil.step
+        }
+      }
+    }
+    else {
+      return
+    }
+
+    let chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollRecovery", { 
+        sourceActor: this.name,
+        step: recoveryFinalStep
+      } );
+
+    const edRollOptions = new EdRollOptions( {
+      testType: "effect",
+      rollType: "recovery",
+      step: { base: recoveryFinalStep},
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      chatFlavor: chatFlavor,
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    this.#processRoll( roll, recoveryMode );
+  }
+
   /**
    * @summary                       Take the given amount of strain as damage.
    * @param {number} strain         The amount of strain damage take
@@ -185,7 +266,7 @@ export default class ActorEd extends Actor {
   /**
    * Use a resource (karma, devotion) by deducting the amount. This will always happen, even if not enough is available.
    * Look out for the return value to see if that was the case.
-   * @param {"karma"|"devotion"} resourceType The type of resource to use. One of either "karma" or "devotion".
+   * @param {"karma"|"devotion"|"recovery"} resourceType The type of resource to use. One of either "karma" or "devotion".
    * @param {number} amount                   The amount to use of the resource.
    * @returns {boolean}                       Returns `true` if the full amount was deducted (enough available), 'false'
    *                                          otherwise.
@@ -204,7 +285,7 @@ export default class ActorEd extends Actor {
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
-  #processRoll( roll ) {
+  #processRoll( roll, recoveryMode ) {
     if ( !roll ) {
       // No roll available, do nothing.
       return;
@@ -215,9 +296,82 @@ export default class ActorEd extends Actor {
         !this.#useResource( 'karma', roll.options.karma.pointsUsed )
         || !this.#useResource( 'devotion', roll.options.devotion.pointsUsed )
     ) {
-      ui.notifications.warn( "Localize: Not enough karma or devotion. Used all that was available." );
+      ui.notifications.warn( "Localize: Not enough karma,devotion or recovery. Used all that was available." );
+    }
+
+    if ( roll.options.rollType === "recovery" ) {
+      this.#processRecoveryResult( roll, recoveryMode );
+    } else {
+    roll.toMessage();
+    }
+  }
+
+  /**
+   * Process the result of a recovery roll. This will reduce the damage taken by the amount rolled.
+   * @param {EdRoll} roll The roll to process.
+   * @returns {Promise<void>}
+   */
+  async #processRecoveryResult( roll, recoveryMode ) { 
+    await roll.evaluate();
+    if ( !roll._total ) {
+      return;
+    } else {
+      const rollTotal = roll._total;
+      const stunDamage = this.system.characteristics.health.damage.stun;
+      const standardDamage = this.system.characteristics.health.damage.standard;
+      const totalDamage = this.system.characteristics.health.damage.total;
+      const currentWounds = this.system.characteristics.health.wounds;
+      const healingRate = rollTotal - currentWounds > 0 ? rollTotal - currentWounds : 1;
+      const newWounds = currentWounds > 0 ? currentWounds - 1 : 0;
+      const newPhysicalDamage = standardDamage > 0 ? standardDamage - healingRate : 0;
+      const newStunDamage = stunDamage > 0 ? stunDamage - healingRate : 0 ;
+      const recoveryTestPerDay = this.system.characteristics.recoveryTests.max;
+      const recoveryTestsCurrent = this.system.characteristics.recoveryTests.value;
+      const woundsPath = `system.characteristics.health.wounds`;
+      const standardDamagePath = `system.characteristics.health.damage.standard`;
+      const stunDamagePath = `system.characteristics.health.damage.stun`;
+      const recoveryTestAvailablePath = `system.characteristics.recoveryTests.value`;
+      const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTests.stun`;
+    if ( recoveryMode === "recovery" ) {
+      this.update( {
+        [`${standardDamagePath}`]: newPhysicalDamage,
+        [`${stunDamagePath}`]: newStunDamage,
+        [`${recoveryStunAvailabiltyPath}`]: false,
+        [`${recoveryTestAvailablePath}`]: recoveryTestsCurrent - 1
+      } );
+    } else if ( recoveryMode === "nightRest" ) {
+      if ( currentWounds > 0  && totalDamage === 0 ) {
+        this.update( {
+          [`${woundsPath}`]: newWounds,
+          [`${recoveryStunAvailabiltyPath}`]: false,
+          [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1
+        } );
+      } else if ( totalDamage > 0 ) {
+      this.update( {
+        [`${standardDamagePath}`]: newPhysicalDamage,
+        [`${stunDamagePath}`]: newStunDamage,
+        [`${recoveryStunAvailabiltyPath}`]: false,
+        [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1
+      } );
+    } else if ( currentWounds === 0  && totalDamage === 0 ) {
+      this.update( {
+        [`${recoveryStunAvailabiltyPath}`]: false,
+        [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
+      } );
+    }
+    } else if ( recoveryMode === "recoverStun" ) {
+      this.update( {
+        [`${stunDamagePath}`]: newStunDamage,
+        [`${recoveryStunAvailabiltyPath}`]: true,
+        [`${recoveryTestAvailablePath}`]: recoveryTestsCurrent - 1
+      } );
+      console.log( "ACTORDATA STUN", this.system.characteristics.health.damage.stun )
+    } else {  
+      ui.notifications.warn( "Localize: No recovery type found." );
+      return;
     }
     roll.toMessage();
+  }
   }
 
   _applyBaseEffects( baseCharacteristics ) {

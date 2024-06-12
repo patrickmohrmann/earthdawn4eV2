@@ -71,6 +71,7 @@
                 "jumpUp":                                           "Aufspringen",
                 "knockDownTest":                                    "Niederschlag",
                 "legendHistory":                                    "LP Übersicht",
+                "recovery":                                         "Erholung",  
                 "takeDamage":                                       "Schaden"
             },
             "Cards": {
@@ -200,11 +201,18 @@
                 "wizard":                                           "Magier"
             },
             "Tooltips": {
+                "damageSubdual":                                    "Betäubung",
+                "damagePhysical":                                   "Körperlich",
                 "karmaAlways":                                      "Benutze immer Karma",
                 "karmaRitualTooltip":                               "Karmaritual",
                 "loaded":                                           "Belastet",
                 "loadedHeavy":                                      "Stark Belastet",
                 "loadedOver":                                       "Überlasted"
+            }
+        },
+        "Chat": {
+            "Flavor": {
+                "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}"
             }
         },
         "Data": {
@@ -229,6 +237,17 @@
             "Journal": {
                 "Labels": {},
                 "Hints": {}
+            }
+        },
+        "Dialogs": {
+            "Title": {
+                "recovery":                                         "Erholungsprobe"
+            },
+            "Buttons": {
+                "cancel":                                            "Abbrechen",    
+                "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
+                "recovery":                                         "Erholungsprobe",    
+                "nightRest":                                        "Vollständige Rast" 
             }
         },
         "Item": {

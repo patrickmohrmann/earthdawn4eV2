@@ -72,6 +72,7 @@
                 "jumpUp":                                           "Jump Up",
                 "knockDownTest":                                    "Knock down",
                 "legendHistory":                                    "LP History",
+                "recovery":                                         "Recovery",
                 "takeDamage":                                       "Take Damage"
             },
             "Cards": {
@@ -201,6 +202,8 @@
                 "wizard":                                           "Wizard"
             },
             "Tooltips": {
+                "damageSubdual":                                    "Subdual",
+                "damagePhysical":                                   "Physical",
                 "karmaAlways":                                      "Use Karma always",
                 "karmaRitualTooltip":                               "Karma Ritual",
                 "loaded":                                           "Loaded",
@@ -230,6 +233,17 @@
             "Journal": {
                 "Labels": {},
                 "Hints": {}
+            }
+        },
+        "Dialogs": {
+            "Title": {
+                "recovery":                                         "Recovery Test"
+            },
+            "Buttons": {
+                "cancel":                                           "Cancel",
+                "nightRest":                                        "Nightly Rest",  
+                "recoverStun":                                      "Stun Damage Recovery",
+                "recovery":                                         "Recovey Test"
             }
         },
         "Item": {
