@@ -45,12 +45,12 @@ export default class ActorEd extends Actor {
    * @param {string} type           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid( edid, type) {
+  getItemsByEdid( edid, type ) {
     const edidFilter = ( item ) => item.system.edid === edid;
     if ( !type ) return this.items.filter( edidFilter );
 
     const itemTypes = this.itemTypes;
-    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error(`Type ${type} is invalid!`);
+    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${type} is invalid!` );
 
     return itemTypes[type].filter( edidFilter );
   }
@@ -63,7 +63,7 @@ export default class ActorEd extends Actor {
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
   getSingleItemByEdid( edid, type ) {
-    return this.getItemsByEdid(edid, type)[0];
+    return this.getItemsByEdid( edid, type )[0];
   }
 
   /**
@@ -309,15 +309,15 @@ export default class ActorEd extends Actor {
     const equippedWeapons = this.itemTypes.weapon.filter(
       weapon => ["mainHand", "offHand", "twoHands"].includes( weapon.system.itemStatus )
     );
-    const addUnequipItemUpdate = (itemType, statuses) => {
+    const addUnequipItemUpdate = ( itemType, statuses ) => {
       this.itemTypes[itemType].filter(
-        item => statuses.includes(item.system.itemStatus)
+        item => statuses.includes( item.system.itemStatus )
       ).forEach(
-        item => updates.push({ _id: item.id, "system.itemStatus": "carried" })
+        item => updates.push( { _id: item.id, "system.itemStatus": "carried" } )
       );
     }
 
-    switch ( itemToUpdate.system.type ) {
+    switch ( itemToUpdate.type ) {
       case "armor":
 
         if ( itemToUpdate.piecemealArmor.selector ) {
@@ -352,32 +352,32 @@ export default class ActorEd extends Actor {
         break;
       case "weapon":
 
-        switch (nextStatus) {
+        switch ( nextStatus ) {
           case "twoHands":
-            addUnequipItemUpdate("weapon", ["mainHand", "offHand", "twoHands"]);
-            addUnequipItemUpdate("shield", ["equipped"]);
+            addUnequipItemUpdate( "weapon", ["mainHand", "offHand", "twoHands"] );
+            addUnequipItemUpdate( "shield", ["equipped"] );
             break;
           case "mainHand":
           case "offHand":
-            addUnequipItemUpdate("weapon", [nextStatus, "twoHands"]);
+            addUnequipItemUpdate( "weapon", [nextStatus, "twoHands"] );
             break;
           case "tail":
-            addUnequipItemUpdate("weapon", ["tail"]);
+            addUnequipItemUpdate( "weapon", ["tail"] );
             break;
         }
 
-        updates.push(originalItemUpdate);
+        updates.push( originalItemUpdate );
         break;
       case "shield":
 
-        if ( nextStatus === "equipped") {
+        if ( nextStatus === "equipped" ) {
           // Unequip other shields
-          addUnequipItemUpdate("shield", ["equipped"]);
+          addUnequipItemUpdate( "shield", ["equipped"] );
           // If there's a two-handed weapon or two one-handed weapons, unequip one
-          if (equippedWeapons.some(weapon => weapon.system.itemStatus === "twoHands") || equippedWeapons.length > 1) {
+          if ( equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1 ) {
             // Prefer to unequip off-hand weapon, if available
-            const weaponToUnequip = equippedWeapons.find(weapon => weapon.system.itemStatus === "offHand") || equippedWeapons[0];
-            updates.push({ _id: weaponToUnequip.id, "system.itemStatus": "carried" });
+            const weaponToUnequip = equippedWeapons.find( weapon => weapon.system.itemStatus === "offHand" ) || equippedWeapons[0];
+            updates.push( { _id: weaponToUnequip.id, "system.itemStatus": "carried" } );
           }
         }
 
