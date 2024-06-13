@@ -212,7 +212,8 @@
         },
         "Chat": {
             "Flavor": {
-                "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}"
+                "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}",
+                "knockdownTest":                                    "{sourceActor} versucht dem Niederschlag zu widerstehen {step}"
             }
         },
         "Data": {
@@ -240,14 +241,26 @@
             }
         },
         "Dialogs": {
-            "Title": {
-                "recovery":                                         "Erholungsprobe"
-            },
+            "armorType":                                            "Rüstungsart",
             "Buttons": {
-                "cancel":                                            "Abbrechen",    
+                "cancel":                                           "Abbrechen",    
                 "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
                 "recovery":                                         "Erholungsprobe",    
-                "nightRest":                                        "Vollständige Rast" 
+                "nightRest":                                        "Vollständige Rast",
+                "takeDamage":                                       "Schaden nehmen"
+                },
+            "damage":                                               "Schaden",
+            "damageStandard":                                       "Tödlicher Schaden",
+            "damageStun":                                           "Betäubungsschaden",
+            "damageType":                                           "Schadensart",
+            "ignoreArmor":                                          "Rüstung Ignoriere?",
+            "jumpUpChoice":                                         "Wähle die Fähigkeit um aufzuspringen",
+            "knockDownChoice":                                      "Wähle die Fähigkeit um dem Niederschlag zu widerstehen",
+            "mystical":                                             "Mystischer Schaden",
+            "physical":                                             "Körperlicher Schaden",
+            "Title": {
+                "recovery":                                         "Erholungsprobe",
+                "takeDamage":                                       "Schaden nehmen"
             }
         },
         "Item": {

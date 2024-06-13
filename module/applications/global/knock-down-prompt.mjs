@@ -1,12 +1,10 @@
 /**
- * The application responsible for handling Legend Point History of Earned Points
+ * The application responsible for handling test against being knocked down
  * @augments {FormApplication}
- * @param {RecoveryPrompt} recovery         The data model which is the
- *      target data structure to be updated by the form.
- * @param {FormApplicationOptions} [options={}]     Additional options which
- *      modify the rendering of the sheet.
+ * @param {KnockDownItemsPrompt} knockDownItems     a list of items to choose from to withstand knockdown
+ * @param {FormApplicationOptions} [options={}]     Additional options which modify the rendering of the sheet.
  */
-export default class RecoveryPrompt extends FormApplication {
+export default class KnockDownItemsPrompt extends FormApplication {
   constructor( actor, resolve, ...args ) {
     super( ...args );
     this.resolve = resolve;
@@ -24,7 +22,7 @@ export default class RecoveryPrompt extends FormApplication {
    */
   static async waitPrompt( actor ) {
     return new Promise( ( resolve ) => {
-      const prompt = new RecoveryPrompt( actor, resolve ) ;
+      const prompt = new KnockDownItemsPrompt( actor, resolve );
       prompt.render( true );
     } );
   }
@@ -39,34 +37,31 @@ export default class RecoveryPrompt extends FormApplication {
       height: 185,
       width: 280,
       resizable: true,
-      classes: [...options.classes, "earthdawn4e", "recovery-prompt"],
+      classes: [...options.classes, "earthdawn4e", "knock-down-prompt"],
     };
   }
   get title() {
-    return game.i18n.localize( "ED.Dialogs.Title.recovery" );
+    return game.i18n.localize( "ED.Dialogs.Title.knockDown" );
   }
   get template() {
-    return "systems/ed4e/templates/actor/prompts/recovery-prompt.hbs";
+    return "systems/ed4e/templates/actor/prompts/knock-down-prompt.hbs";
   }
 
   activateListeners( html ) {
     super.activateListeners( html );
+    $( document ).ready()
+    const buttons = html.find( '.knock-down-item button' );
+    buttons.each( ( index, button ) => {
+      const className = button.classList[0]; 
+      console.log( "className: ", className )
+      html.find( `.${className}` ).click( ( event ) => {
+        this.resolve( className );
+        this.close();
+      } );
 
-    html.find( ".button-recovery" ).click( ( event ) => {
-      this.resolve( "recovery" );
-      this.close();
-    } );
-
-    html.find( ".button-recoverStun" ).click( ( event ) => {
-      this.resolve( "recoverStun" );
-      this.close();
-    } );
-
-    html.find( ".button-nightRest" ).click( ( event ) => {
-      this.resolve( "nightRest" );
-      this.close();
     } );
   }
+
   async _updateObject( event, formData ) {
     event.preventDefault();
     event.stopPropagation();

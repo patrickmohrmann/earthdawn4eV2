@@ -79,8 +79,8 @@ export default class ActorSheetEd extends ActorSheet {
      // recovery Test
      html.find( ".roll-recovery" ).click( this._onRecoveryRoll.bind( this ) );
 
-    //  // Take Damage Test
-    //  html.find( ".roll-recovery" ).click( this._onTakeDamage.bind( this ) );
+     // Take Damage Test
+     html.find( ".roll-takeDamage" ).click( this._onTakeDamage.bind( this ) );
 
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
@@ -163,14 +163,14 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.rollRecovery( {event: event} );
   }
 
-  // /**
-  //  * Handles Recovery tests  
-  //  * @param {Event} event The originating click event.
-  //  */
-  // _onTakeDamage( event ) {
-  //   event.preventDefault();
-  //   this.actor.takeDamage( {event: event} );
-  // }
+  /**
+   * Handles Recovery tests  
+   * @param {Event} event The originating click event.
+   */
+  _onTakeDamage( event ) {
+    event.preventDefault();
+    this.actor.takeDamageManual( {event: event} );
+  }
 
 
 

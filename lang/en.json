@@ -211,6 +211,12 @@
                 "loadedOver":                                       "Overloaded"
             }
         },
+        "Chat": {
+            "Flavor": {
+                "rollRecovery":                                     "{sourceActor} recovers from Damage with Step {step}",
+                "knockdownTest":                                    "{sourceActor} tries to avoid being knocked down with {step}"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},
@@ -236,14 +242,25 @@
             }
         },
         "Dialogs": {
-            "Title": {
-                "recovery":                                         "Recovery Test"
-            },
             "Buttons": {
                 "cancel":                                           "Cancel",
                 "nightRest":                                        "Nightly Rest",  
                 "recoverStun":                                      "Stun Damage Recovery",
-                "recovery":                                         "Recovey Test"
+                "recovery":                                         "Recovey Test",
+                "takeDamage":                                       "Take Damage"
+                },
+            "damage":                                               "Damage",
+            "damageStandard":                                       "Deadly Damage",
+            "damageStun":                                           "Stun Damage",
+            "damageType":                                           "Damage Type",
+            "ignoreArmor":                                          "Ignore Armor?",
+            "jumpUpChoice":                                         "Chose the Ability to jump up",
+            "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
+            "mystical":                                             "Mystical Damage",
+            "physical":                                             "Physical Damage",
+            "Title": {
+                "recovery":                                         "Recovery Test",
+                "takeDamage":                                       "Take Damage"
             }
         },
         "Item": {
