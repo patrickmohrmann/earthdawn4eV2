@@ -195,7 +195,7 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.rollEquipment( equipment, { event: event } );
   }
 
-    /**
+  /**
    * @description Take strain is used for non rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private

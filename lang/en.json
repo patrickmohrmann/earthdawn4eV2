@@ -240,6 +240,7 @@
                 "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
                 "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
                 "rollRecovery":                                     "{sourceActor} recovers from Damage with Step {step}",
+                "jumpUp":                                           "{sourceActor} tries to jump up with Step {step}",
                 "knockdownTest":                                    "{sourceActor} tries to avoid being knocked down with {step}",
                 "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
                 "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
