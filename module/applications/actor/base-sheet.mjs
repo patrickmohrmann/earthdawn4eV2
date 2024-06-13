@@ -76,11 +76,24 @@ export default class ActorSheetEd extends ActorSheet {
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
+    // Actor Sheet Buttons
      // recovery Test
      html.find( ".roll-recovery" ).click( this._onRecoveryRoll.bind( this ) );
 
      // Take Damage Test
      html.find( ".roll-takeDamage" ).click( this._onTakeDamage.bind( this ) );
+
+     // Jump Up Test
+     html.find( ".roll-jumpUp" ).click( this._onJumpUp.bind( this ) );
+
+     // Initiative Test
+     html.find( ".roll-Initiative" ).click( this._onInitiative.bind( this ) );
+
+     // Half magic Test
+     html.find( ".roll-halfMagic" ).click( this._onHalfMagic.bind( this ) );
+
+     // Knock down Test
+     html.find( ".roll-knockDown" ).click( this._onKnockDown.bind( this ) );
 
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
@@ -172,6 +185,26 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.takeDamageManual( {event: event} );
   }
 
+  _onJumpUp( event ) {
+    event.preventDefault();
+    this.actor.jumpUp( {event: event} );
+  }
+
+  _onInitiative( event ) { 
+    event.preventDefault();
+    this.actor.rollInitiative( {event: event} );
+  }
+
+  _onHalfMagic( event ) {
+    event.preventDefault();
+    this.actor.rollHalfMagic( {event: event} );
+  }
+
+  _onKnockDown( event ) {
+    event.preventDefault();
+    const amount = 0
+    this.actor.knockdownTest( amount );
+  }
 
 
   /**

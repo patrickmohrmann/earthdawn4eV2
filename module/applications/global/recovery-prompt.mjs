@@ -1,10 +1,8 @@
 /**
- * The application responsible for handling Legend Point History of Earned Points
+ * The application is responsible for handling recovery tests
  * @augments {FormApplication}
- * @param {RecoveryPrompt} recovery         The data model which is the
- *      target data structure to be updated by the form.
- * @param {FormApplicationOptions} [options={}]     Additional options which
- *      modify the rendering of the sheet.
+ * @param {RecoveryPrompt} recovery   a list of Options to choose from to recover
+ * @param {FormApplicationOptions} [options={}]     Additional options which modify the rendering of the sheet.
  */
 export default class RecoveryPrompt extends FormApplication {
   constructor( actor, resolve, ...args ) {
@@ -15,7 +13,7 @@ export default class RecoveryPrompt extends FormApplication {
 
   getData() {
     const data = super.getData();
-    data.actor = this.actor; // Add actor data to the template data
+    data.actor = this.actor;
     return data;
   }
   /**
