@@ -1,12 +1,14 @@
+
+
 /**
  * The application responsible for handling Legend Point History of Earned Points
  * @augments {FormApplication}
- * @param {RecoveryPrompt} recovery         The data model which is the
+ * @param {TakeDamagePrompt} takeDamage         The data model which is the
  *      target data structure to be updated by the form.
  * @param {FormApplicationOptions} [options={}]     Additional options which
  *      modify the rendering of the sheet.
  */
-export default class RecoveryPrompt extends FormApplication {
+export default class TakeDamagePrompt extends FormApplication {
   constructor( actor, resolve, ...args ) {
     super( ...args );
     this.resolve = resolve;
@@ -15,15 +17,22 @@ export default class RecoveryPrompt extends FormApplication {
 
   getData() {
     const data = super.getData();
+    // const damage = {
+    //   damage: formData.damage,
+    //   type: formData.type,
+    //   ignoreArmor: formData.ignoreArmor,
+    // };
     data.actor = this.actor; // Add actor data to the template data
+
     return data;
   }
   /**
+   * @param {object} actor actor
    * @returns {Promise<string>}     A promise that resolves to the value of the
    */
   static async waitPrompt( actor ) {
     return new Promise( ( resolve ) => {
-      const prompt = new RecoveryPrompt( actor, resolve ) ;
+      const prompt = new TakeDamagePrompt( actor, resolve );
       prompt.render( true );
     } );
   }
@@ -35,43 +44,43 @@ export default class RecoveryPrompt extends FormApplication {
       closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: false,
-      height: 185,
-      width: 280,
+      height: 320,
+      width: 230,
       resizable: true,
-      classes: [...options.classes, "earthdawn4e", "recovery-prompt"],
+      classes: [...options.classes, "earthdawn4e", "take-damage-prompt"],
     };
   }
   get title() {
-    return game.i18n.localize( "ED.Dialogs.Title.recovery" );
+    return game.i18n.localize( "ED.Dialogs.Title.takeDamage" );
   }
   get template() {
-    return "systems/ed4e/templates/actor/prompts/recovery-prompt.hbs";
+    return "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs";
   }
-
   activateListeners( html ) {
     super.activateListeners( html );
 
-    html.find( ".button-recovery" ).click( ( event ) => {
-      this.resolve( "recovery" );
-      this.close();
-    } );
+    html.find( '.button__take-damage' ).click( async ( event ) => {
+      event.preventDefault();
 
-    html.find( ".button-recoverStun" ).click( ( event ) => {
-      this.resolve( "recoverStun" );
-      this.close();
-    } );
+      // Get the form data
+      const formData = new FormData( event.currentTarget.form );
 
-    html.find( ".button-nightRest" ).click( ( event ) => {
-      this.resolve( "nightRest" );
+      // Convert the form data to an object
+      const formObject = Object.fromEntries( formData );
+
+      // Resolve the Promise with the form data
+      this.resolve( formObject );
+
       this.close();
     } );
   }
+
   async _updateObject( event, formData ) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
     await this.submit( { preventRender: true } );
-    return this.close();
   }
+
 }

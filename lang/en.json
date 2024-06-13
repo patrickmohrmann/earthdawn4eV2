@@ -239,6 +239,8 @@
                 "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
                 "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
+                "rollRecovery":                                     "{sourceActor} recovers from Damage with Step {step}",
+                "knockdownTest":                                    "{sourceActor} tries to avoid being knocked down with {step}",
                 "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
                 "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
                 "rollAttackWithoutTarget":                          "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep}",
@@ -351,14 +353,25 @@
             "Title": {
                 "assignLp":                                         "Assign Legend Points",
                 "rollPrompt":                                       "Roll Options",
-                "recovery":                                         "Recovery Test"
+                "recovery":                                         "Recovery Test",
+                "takeDamage":                                       "Take Damage"
             },
             "Buttons": {
                 "cancel":                                           "Cancel",
                 "nightRest":                                        "Nightly Rest",  
                 "recoverStun":                                      "Stun Damage Recovery",
-                "recovery":                                         "Recovey Test"
-            }
+                "recovery":                                         "Recovey Test",
+                "takeDamage":                                       "Take Damage"
+                },
+            "damage":                                               "Damage",
+            "damageStandard":                                       "Deadly Damage",
+            "damageStun":                                           "Stun Damage",
+            "damageType":                                           "Damage Type",
+            "ignoreArmor":                                          "Ignore Armor?",
+            "jumpUpChoice":                                         "Chose the Ability to jump up",
+            "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
+            "mystical":                                             "Mystical Damage",
+            "physical":                                             "Physical Damage"
         },
         "Item": {
             "Ability": {

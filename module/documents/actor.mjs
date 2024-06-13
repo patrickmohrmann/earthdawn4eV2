@@ -11,6 +11,8 @@ import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import { sum } from "../utils.mjs";
 import RecoveryPrompt from "../applications/global/recovery-prompt.mjs";
 import EdRoll from "../dice/ed-roll.mjs";
+import TakeDamagePrompt from "../applications/global/take-damage-prompt.mjs";
+import KnockDownItemsPrompt from "../applications/global/knock-down-prompt.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -178,6 +180,16 @@ export default class ActorEd extends Actor {
   //   const takeDamage = await TakeDamagePrompt.waitPrompt( this );
   //   console.log( "takeDamage", takeDamage )
   // }
+  async takeDamageManual( options = {} ) {
+    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
+    const amount = takeDamage.damage;
+    const damageType = takeDamage.damageType;
+    const armorType = takeDamage.armorType;
+    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false; 
+
+    this.takeDamage( amount, damageType, armorType, ignoreArmor );
+    console.log( "takeDamage", takeDamage )
+  }
 
   async rollRecovery( options = {} ) {
     const recoveryMode = await RecoveryPrompt.waitPrompt( this );
@@ -277,10 +289,50 @@ export default class ActorEd extends Actor {
         ? 0
         : this.system.characteristics.armor[armorType].value
     );
-    const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
-    this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
+      const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
+      this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
+      if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "standard") {
+        const newWounds = this.system.characteristics.health.wounds + 1;
+        this.update( {[`system.characteristics.health.wounds`]: newWounds} );
+      } else if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "stun" ) {
+        this.update( {[`system.condition.harried`]: true} );
+      }
+      if ( finalAmount >= this.system.characteristics.health.woundThreshold + 5 && this.system.condition.knockedDown === false ) {
+        ui.notifications.warn( "Localize: You are down!- Knockdown test under Construction" );
+        this.knockdownTest( finalAmount );
+      }
   }
 
+  async knockdownTest( amount ) {
+    let  knockdownStep = this.system.attributes.str.step;
+    const knockdownItems = this.items.filter( item => item.system.edid === "knock-down" );
+    if ( knockdownItems.length > 0 ) {
+      const knockdownAbility = await KnockDownItemsPrompt.waitPrompt ( knockdownItems );
+      for ( const item of knockdownItems ) {
+        if ( item.name === knockdownAbility ) {
+          const attributeStep = this.system.attributes[item.system.attribute].step;
+          knockdownStep = attributeStep + item.system.level;
+        }
+      }
+    }
+    const difficulty = amount - this.system.characteristics.health.woundThreshold;
+    let chatFlavor = game.i18n.format( "ED.Chat.Flavor.knockdownTest", { 
+      sourceActor: this.name,
+      step: knockdownStep
+    } );
+    const edRollOptions = new EdRollOptions( {
+      testType: "action",
+      rollType: "knockdown",
+      target: { base: difficulty },
+      // step: { base: knockdownStep + this.system.globalBonuses.allKnockdownEffects.value }, 
+      step: { base: knockdownStep}, 
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      chatFlavor: chatFlavor,
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions );
+    this.#processRoll( roll );
+  }
   /**
    * Use a resource (karma, devotion) by deducting the amount. This will always happen, even if not enough is available.
    * Look out for the return value to see if that was the case.
@@ -300,6 +352,7 @@ export default class ActorEd extends Actor {
    * <ul>
    *     <li>taking strain damage</li>
    *     <li>reducing resources (karma, devotion)</li>
+   *     <li>recover from damage</li>
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
@@ -317,11 +370,26 @@ export default class ActorEd extends Actor {
       ui.notifications.warn( "Localize: Not enough karma,devotion or recovery. Used all that was available." );
     }
 
+    // catch recovery test before toMessage
     if ( roll.options.rollType === "recovery" ) {
       this.#processRecoveryResult( roll, recoveryMode );
+    } else if ( roll.options.rollType === "knockdown" ) {
+      this.#processKnockdownResult( roll );
     } else {
     roll.toMessage();
     }
+  }
+
+  async #processKnockdownResult ( roll )  {
+    await roll.evaluate();
+    if ( !roll._total ) {
+      return;
+    } else {
+      if ( roll.isSuccess === false ) {
+        this.update( {[`system.condition.knockedDown`]: true, } );
+      }
+    }
+    roll.toMessage();
   }
 
   /**
