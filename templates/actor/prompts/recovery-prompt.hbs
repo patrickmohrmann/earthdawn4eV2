@@ -1,13 +1,4 @@
 <form class="recovery-prompt flexcol" id="recovery-prompt" autocomplete="off">
-
-    <!-- Header -->
-    {{!-- <div class="header-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
-
-    <div>
-      
-       
     <!-- Buttons -->
     <div class="buttons recovery-prompt-buttons flexcol">
 
@@ -18,7 +9,6 @@
         </div>
         {{log this}}
         {{#if (eq actor.system.characteristics.recoveryTests.stun false)}}
-
         <div class="button-group buttons-navigation flexrow">
             <button class='nightRest default button-recoverStun' type="recoverStun" name="recoverStun" data-button='recoverStun'>
                 {{ localize "ED.Dialogs.Buttons.recoverStun" }}
@@ -30,18 +20,10 @@
                 {{ localize "ED.Dialogs.Buttons.nightRest" }}
             </button>
         </div>
-        
         <div class="button-group buttons-navigation flexrow">
             <button class='cancel default button-cancel' type="cancel" name="cancel" data-button='cancel'>
                 {{ localize "ED.Dialogs.Buttons.cancel" }}
             </button>
         </div>
-        
     </div>
-
-    <!-- Footer -->
-    {{!-- <div class="footer-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
-
 </form>

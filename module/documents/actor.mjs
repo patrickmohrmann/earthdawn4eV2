@@ -333,6 +333,10 @@ export default class ActorEd extends Actor {
     const roll = await RollPrompt.waitPrompt( edRollOptions );
     this.#processRoll( roll );
   }
+
+
+
+
   /**
    * Use a resource (karma, devotion) by deducting the amount. This will always happen, even if not enough is available.
    * Look out for the return value to see if that was the case.
