@@ -52,7 +52,6 @@ export default class JumpUpItemsPrompt extends FormApplication {
 
     $( document ).ready()
     
-
     const buttons = html.find( '.jump-up-item button' );
 
     buttons.each( ( index, button ) => {

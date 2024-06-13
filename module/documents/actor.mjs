@@ -270,10 +270,10 @@ export default class ActorEd extends Actor {
     );
       const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
       this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
-      if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "standard" ) {
+      if ( finalAmount > this.system.characteristics.health.woundThreshold && damageType === "standard" ) {
         const newWounds = this.system.characteristics.health.wounds + 1;
         this.update( {[`system.characteristics.health.wounds`]: newWounds} );
-      } else if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "stun" ) {
+      } else if ( finalAmount > this.system.characteristics.health.woundThreshold && damageType === "stun" ) {
         this.update( {[`system.condition.harried`]: true} );
       }
       if ( finalAmount >= this.system.characteristics.health.woundThreshold + 5 && this.system.condition.knockedDown === false ) {
