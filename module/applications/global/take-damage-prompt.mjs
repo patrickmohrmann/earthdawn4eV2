@@ -1,3 +1,5 @@
+
+
 /**
  * The application responsible for handling Legend Point History of Earned Points
  * @augments {FormApplication}
@@ -54,7 +56,6 @@ export default class TakeDamagePrompt extends FormApplication {
   get template() {
     return "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs";
   }
-
   activateListeners( html ) {
     super.activateListeners( html );
 
