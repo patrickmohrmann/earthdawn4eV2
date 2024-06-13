@@ -11,6 +11,7 @@ import RecoveryPrompt from "../applications/global/recovery-prompt.mjs";
 import EdRoll from "../dice/ed-roll.mjs";
 import TakeDamagePrompt from "../applications/global/take-damage-prompt.mjs";
 import KnockDownItemsPrompt from "../applications/global/knock-down-prompt.mjs";
+import JumpUpItemsPrompt from "../applications/global/jump-up-prompt.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -133,7 +134,7 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
-   /**
+  /**
    * @summary                     Equipment rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
    * @description                 Roll an Equipment. use {@link RollPrompt} for further input data.
    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
@@ -269,7 +270,7 @@ export default class ActorEd extends Actor {
     );
       const newDamage = this.system.characteristics.health.damage[damageType] + finalAmount ;
       this.update( {[`system.characteristics.health.damage.${damageType}`]: newDamage} );
-      if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "standard") {
+      if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "standard" ) {
         const newWounds = this.system.characteristics.health.wounds + 1;
         this.update( {[`system.characteristics.health.wounds`]: newWounds} );
       } else if ( newDamage > this.system.characteristics.health.woundThreshold && damageType === "stun" ) {
@@ -285,11 +286,13 @@ export default class ActorEd extends Actor {
     let  knockdownStep = this.system.attributes.str.step;
     const knockdownItems = this.items.filter( item => item.system.edid === "knock-down" );
     if ( knockdownItems.length > 0 ) {
-      const knockdownAbility = await KnockDownItemsPrompt.waitPrompt ( knockdownItems );
-      for ( const item of knockdownItems ) {
-        if ( item.name === knockdownAbility ) {
-          const attributeStep = this.system.attributes[item.system.attribute].step;
-          knockdownStep = attributeStep + item.system.level;
+      const knockdownAbilityId = await KnockDownItemsPrompt.waitPrompt ( knockdownItems );
+      if ( knockdownAbilityId ) {
+        for ( const item of knockdownItems ) {
+          if ( item.id === knockdownAbilityId ) {
+            const attributeStep = this.system.attributes[item.system.attribute].step;
+            knockdownStep = attributeStep + item.system.level;
+          }
         }
       }
     }
@@ -312,7 +315,36 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
-
+  async jumpUp() {
+    let jumpUpStep = this.system.attributes.dex.step;
+    const jumpUpItems = this.items.filter( item => item.system.edid === "jump-up" );
+    if ( jumpUpItems.length > 0 ) {
+      const jumpUpAbilityId = await JumpUpItemsPrompt.waitPrompt ( jumpUpItems );
+      if ( jumpUpAbilityId ) {
+        for ( const item of jumpUpItems ) {
+          if ( item.id === jumpUpAbilityId ) {
+            const attributeStep = this.system.attributes[item.system.attribute].step;
+            jumpUpStep = attributeStep + item.system.level;
+          }
+        }
+      }
+    }
+    let chatFlavor = game.i18n.format( "ED.Chat.Flavor.jumpUp", { 
+      sourceActor: this.name,
+      step: jumpUpStep
+    } );
+    const edRollOptions = new EdRollOptions( {
+      testType: "action",
+      rollType: "jumpUp",
+      target: { base: 6 },
+      step: { base: jumpUpStep },
+      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
+      chatFlavor: chatFlavor,
+    } );
+    const roll = await RollPrompt.waitPrompt( edRollOptions );
+    this.#processRoll( roll );
+  }
 
 
   /**
@@ -337,6 +369,7 @@ export default class ActorEd extends Actor {
    *     <li>recover from damage</li>
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
+   * @param {string} recoveryMode type of recovery
    */
   #processRoll( roll, recoveryMode ) {
     if ( !roll ) {
@@ -357,11 +390,24 @@ export default class ActorEd extends Actor {
       this.#processRecoveryResult( roll, recoveryMode );
     } else if ( roll.options.rollType === "knockdown" ) {
       this.#processKnockdownResult( roll );
+    } else if ( roll.options.rollType === "jumpUp" ) {
+      this.#processJumpUpResult( roll );
     } else {
     roll.toMessage();
     }
   }
 
+  async #processJumpUpResult ( roll ) {
+    await roll.evaluate();
+    if ( !roll._total ) {
+      return;
+    } else {
+      if ( roll.isSuccess === true ) {
+        this.update( {[`system.condition.knockedDown`]: false, } );
+      }
+    }
+    roll.toMessage();
+  }
   async #processKnockdownResult ( roll )  {
     await roll.evaluate();
     if ( !roll._total ) {
@@ -377,6 +423,7 @@ export default class ActorEd extends Actor {
   /**
    * Process the result of a recovery roll. This will reduce the damage taken by the amount rolled.
    * @param {EdRoll} roll The roll to process.
+   * @param {string} recoveryMode type of the recovery
    * @returns {Promise<void>}
    */
   async #processRecoveryResult( roll, recoveryMode ) { 
@@ -499,8 +546,8 @@ export default class ActorEd extends Actor {
 
   async addLpTransaction( type, transactionData ) {
     const oldTransactions = this.system.lp[type];
-    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
-    const transaction = new transactionModel( transactionData )
+    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new TransactionModel( transactionData )
 
     return this.update( { 
       [`system.lp.${type}`]: oldTransactions.concat( [transaction] )

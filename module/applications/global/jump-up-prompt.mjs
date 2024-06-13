@@ -1,10 +1,10 @@
 /**
- * The application responsible for handling test against being knocked down
+ * The application responsible for Jumping up from being knocked down
  * @augments {FormApplication}
- * @param {KnockDownItemsPrompt} knockDownItems     a list of items to choose from to withstand knockdown
+ * @param {JumpUpItemsPrompt} jumpUp    a list of items to choose from to jump up   
  * @param {FormApplicationOptions} [options={}]     Additional options which modify the rendering of the sheet.
  */
-export default class KnockDownItemsPrompt extends FormApplication {
+export default class JumpUpItemsPrompt extends FormApplication {
   constructor( actor, resolve, ...args ) {
     super( ...args );
     this.resolve = resolve;
@@ -13,7 +13,7 @@ export default class KnockDownItemsPrompt extends FormApplication {
 
   getData() {
     const data = super.getData();
-    data.actor = this.actor; // Add actor data to the template data
+    data.actor = this.actor;
     return data;
   }
   /**
@@ -22,7 +22,7 @@ export default class KnockDownItemsPrompt extends FormApplication {
    */
   static async waitPrompt( actor ) {
     return new Promise( ( resolve ) => {
-      const prompt = new KnockDownItemsPrompt( actor, resolve );
+      const prompt = new JumpUpItemsPrompt( actor, resolve );
       prompt.render( true );
     } );
   }
@@ -37,28 +37,32 @@ export default class KnockDownItemsPrompt extends FormApplication {
       height: 185,
       width: 280,
       resizable: true,
-      classes: [...options.classes, "earthdawn4e", "knock-down-prompt"],
+      classes: [...options.classes, "earthdawn4e", "jump-up-prompt"],
     };
   }
   get title() {
-    return game.i18n.localize( "ED.Dialogs.Title.knockDown" );
+    return game.i18n.localize( "ED.Dialogs.Title.jumpUp" );
   }
   get template() {
-    return "systems/ed4e/templates/actor/prompts/knock-down-prompt.hbs";
+    return "systems/ed4e/templates/actor/prompts/jump-up-prompt.hbs";
   }
 
   activateListeners( html ) {
     super.activateListeners( html );
+
+    $( document ).ready()
     
-    const buttons = html.find( '.knock-down-item button' );
-    
+
+    const buttons = html.find( '.jump-up-item button' );
+
     buttons.each( ( index, button ) => {
       const buttonData = button.dataset.button; 
       html.find( `button[data-button="${buttonData}"]` ).click( ( event ) => {
         this.resolve( buttonData );
         this.close();
     } );
-  } );
+
+    } );
   }
 
   async _updateObject( event, formData ) {
@@ -67,7 +71,7 @@ export default class KnockDownItemsPrompt extends FormApplication {
     event.stopImmediatePropagation();
 
     await this.submit( { preventRender: true } );
-    this.resolve( );
+    this.resolve( false )
     return this.close();
   }
 }
