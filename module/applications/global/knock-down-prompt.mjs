@@ -49,16 +49,16 @@ export default class KnockDownItemsPrompt extends FormApplication {
 
   activateListeners( html ) {
     super.activateListeners( html );
-    
+
     const buttons = html.find( '.knock-down-item button' );
-    
+
     buttons.each( ( index, button ) => {
-      const buttonData = button.dataset.button; 
+      const buttonData = button.dataset.button;
       html.find( `button[data-button="${buttonData}"]` ).click( ( event ) => {
         this.resolve( buttonData );
         this.close();
+      } );
     } );
-  } );
   }
 
   async _updateObject( event, formData ) {
@@ -67,7 +67,7 @@ export default class KnockDownItemsPrompt extends FormApplication {
     event.stopImmediatePropagation();
 
     await this.submit( { preventRender: true } );
-    this.resolve( );
+    this.resolve();
     return this.close();
   }
 }
