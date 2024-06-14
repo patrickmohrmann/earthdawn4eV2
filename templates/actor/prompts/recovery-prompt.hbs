@@ -1,19 +1,20 @@
 <form class="recovery-prompt flexcol" id="recovery-prompt" autocomplete="off">
     <!-- Buttons -->
     <div class="buttons recovery-prompt-buttons flexcol">
-
-        <div class="button-group buttons-navigation flexrow">
-            <button class='recovery default button-recovery' type="recovery" name="recovery" data-button='recovery'>
-                {{ localize "ED.Dialogs.Buttons.recovery" }}
-            </button>
-        </div>
-        {{log this}}
-        {{#if (eq actor.system.characteristics.recoveryTests.stun false)}}
-        <div class="button-group buttons-navigation flexrow">
-            <button class='nightRest default button-recoverStun' type="recoverStun" name="recoverStun" data-button='recoverStun'>
-                {{ localize "ED.Dialogs.Buttons.recoverStun" }}
-            </button>
-        </div>
+        {{#if (uneq actor.system.characteristics.recoveryTests.value 0)}}
+            <div class="button-group buttons-navigation flexrow">
+                <button class='recovery default button-recovery' type="recovery" name="recovery" data-button='recovery'>
+                    {{ localize "ED.Dialogs.Buttons.recovery" }}
+                </button>
+            </div>
+            {{log this}}
+            {{#if (eq actor.system.characteristics.recoveryTests.stun false)}}
+                <div class="button-group buttons-navigation flexrow">
+                    <button class='nightRest default button-recoverStun' type="recoverStun" name="recoverStun" data-button='recoverStun'>
+                        {{ localize "ED.Dialogs.Buttons.recoverStun" }}
+                    </button>
+                </div>
+            {{/if}}
         {{/if}}
         <div class="button-group buttons-navigation flexrow">
             <button class='nightRest default button-nightRest' type="nightRest" name="nightRest" data-button='nightRest'>

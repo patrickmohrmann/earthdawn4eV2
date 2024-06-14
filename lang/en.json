@@ -215,6 +215,9 @@
             "Flavor": {
                 "jumpUp":                                           "{sourceActor} tries to jump up with Step {step}",
                 "knockdownTest":                                    "{sourceActor} tries to avoid being knocked down with Step {step}",
+                "rollAbility":                                      "{sourceActor} rolls {ability} with Step {step}",
+                "rollAttribute":                                    "{sourceActor} rolls {attribute} with Step {step}",
+                "rollEquipment":                                    "{sourceActor} rolls {equipment} with Step {step}",
                 "rollRecovery":                                     "{sourceActor} recovers from Damage with Step {step}"
             }
         },

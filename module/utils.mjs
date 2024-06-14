@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 /* -------------------------------------------- */
 /*  Earthdawn                                   */
 /* -------------------------------------------- */
@@ -47,14 +48,14 @@ export function getDefenseValue( attributeValue ) {
  */
 export function slugify( input ) {
   const slugged = String( input )
-    .normalize('NFKD') // split accented characters into their base characters and diacritical marks
-    .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+    .normalize( 'NFKD' ) // split accented characters into their base characters and diacritical marks
+    .replace( /[\u0300-\u036f]/g, '' ) // remove all the accents, which happen to be all in the \u03xx UNICODE block.
     .toLowerCase() // convert to lowercase
-    .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
-    .replace(/\s+/g, '-') // replace spaces with hyphens
-    .replace(/-+/g, '-') // remove consecutive hyphens
-    .replace(/^-+/g, '') //remove leading hyphens
-    .replace(/-+$/g, '') //remove trailing hyphens
+    .replace( /[^a-z0-9 -]/g, '' ) // remove non-alphanumeric characters
+    .replace( /\s+/g, '-' ) // replace spaces with hyphens
+    .replace( /-+/g, '-' ) // remove consecutive hyphens
+    .replace( /^-+/g, '' ) // remove leading hyphens
+    .replace( /-+$/g, '' ) // remove trailing hyphens
     .trim(); // trim leading or trailing whitespace
   return slugged;
 }
@@ -87,7 +88,7 @@ export async function getGlobalItemsByEdid( edid, type ) {
  * @returns {Item|undefined}    The matching item, or undefined if none was found.
  */
 export async function getSingleGlobalItemByEdid( edid, type ) {
-  return getGlobalItemsByEdid(edid, type).then( item => item[0]);
+  return getGlobalItemsByEdid( edid, type ).then( item => item[0] );
 }
 
 /**
@@ -172,7 +173,7 @@ export async function getAllDocuments(
       if ( !pack.testUserPermission( game.user, minOwnerRole ) ) return [];
       const idx = await pack.getIndex( { fields: filterFields } );
       return  Array.from( idx.values() ).filter( i => i.type === documentType );
-    }),
+    } ),
   ).then( p => p.flat() );
 
   const allDocuments = [...documents, ...indices].filter( predicate );
@@ -303,10 +304,10 @@ export function mapObject( obj, mappingFunction ) {
  * @param {object} obj - The object whose keys are to be renamed.
  * @returns {object} A new object with keys renamed with the specified prefix.
  */
-export function renameKeysWithPrefix(obj) {
+export function renameKeysWithPrefix( obj ) {
   const renamedObj = {};
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
+  for ( let key in obj ) {
+    if ( obj.hasOwnProperty( key ) ) {
       renamedObj['-=' + key] = obj[key];
     }
   }
@@ -341,7 +342,7 @@ export function resolvePath( object, path, defaultValue ){
  * @param {string} uuid  UUID for which to produce the link.
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid(uuid) {
+export function linkForUuid( uuid ) {
   return TextEditor._createContentLink( ["", "UUID", uuid] ).outerHTML;
 }
 

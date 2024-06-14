@@ -214,6 +214,9 @@
             "Flavor": {
                 "jumpUp":                                           "{sourceActor} springt auf mit Stufe {step}",
                 "knockdownTest":                                    "{sourceActor} versucht dem Niederschlag zu widerstehen mit Stufe {step}",
+                "rollAbility":                                      "{sourceActor} würfelt {attribute} mit Stufe {step}",
+                "rollAttribute":                                    "{sourceActor} würfelt {attribute} mit Stufe {step}",       
+                "rollEquipment":                                    "{sourceActor} würfelt {equipment} mit Stufe {step}",   
                 "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}"
             }
         },

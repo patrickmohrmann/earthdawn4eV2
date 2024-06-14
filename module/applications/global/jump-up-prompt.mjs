@@ -51,15 +51,15 @@ export default class JumpUpItemsPrompt extends FormApplication {
     super.activateListeners( html );
 
     $( document ).ready()
-    
+
     const buttons = html.find( '.jump-up-item button' );
 
     buttons.each( ( index, button ) => {
-      const buttonData = button.dataset.button; 
+      const buttonData = button.dataset.button;
       html.find( `button[data-button="${buttonData}"]` ).click( ( event ) => {
         this.resolve( buttonData );
         this.close();
-    } );
+      } );
 
     } );
   }
