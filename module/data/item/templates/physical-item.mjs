@@ -1,6 +1,4 @@
-// import ED4E from "../../../config.mjs";
 import SystemDataModel from "../../abstract.mjs";
-// import { MappingField } from "../../fields.mjs";
 import TargetTemplate from "./targeting.mjs";
 import ED4E from "../../../config.mjs";
 
@@ -125,8 +123,8 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
             {
                 label: "ED.Item.General.usableItem"
             } ),
-            // item status is for differentiation each item. 
-            // a toggle shall be show either equipped, carried or owned.
+            // item status is for differentiation of the carried status of each item
+            // a toggle shall be show either equipped, carried or owned
             // all equipped and carried items count as owned as well
             // all equipped items count as carried as well
             itemStatus: new fields.StringField( {
@@ -138,32 +136,6 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
                 label: "ED.Item.General.itemStatus",
                 hint: "ED.Item.General.itemStatusHint",
             } )
-
-            /*itemStatus: new fields.SchemaField( {
-                name: new fields.StringField( {
-                    required: true,
-                    blank: false,
-                    initial: "owned",
-
-                } ),
-                value: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 1,
-                    step: 1,
-                    initial: 1,
-                    integer: true,
-                    positive: true
-                } )
-            } )*/
-            // itemStatus: new fields.NumberField( {
-            //     required: true,
-            //     nullable: false,
-            //     min: 1,
-            //     initial: 1,
-            //     integer: true,
-            //     label: "ED.Item.General.recoveryPropertyValue"
-            // } ),
         } );
     }
 
