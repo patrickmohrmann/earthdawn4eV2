@@ -1,6 +1,7 @@
 import ClassTemplate from './class.mjs';
 import TargetTemplate from "./targeting.mjs";
 import ActionTemplate from "./action.mjs";
+import ED4E from "../../../config.mjs";
 
 /**
  * Data model template with information on Ability items.
@@ -52,6 +53,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 nullable: true,
                 blank: true,
                 initial: "",
+                choices: Object.keys( ED4E.rollTypes ),
                 label: "ED.Item.Ability.type"
             } ),
             damageAbilities: new fields.SchemaField( {
@@ -72,6 +74,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                     nullable: true,
                     blank: true,
                     initial: "",
+                    choices: Object.keys( ED4E.rollTypes ),
                     label: "ED.Item.Ability.relatedRollType"
                 } ),
             } ),

@@ -76,10 +76,8 @@ export default class ActorEd extends Actor {
 
   /**
    * Expand Item Cards by clicking on the name span
-   * @param {object} item item
    */
-  expandItemCards( item ) {
-    console.log( "card wurde geklickt" )
+  expandItemCards() {
     const itemDescriptionDocument = document.getElementsByClassName( "card__description" );
     const currentItemElement = itemDescriptionDocument.nextElementSibling;
     currentItemElement.classList.toggle( "d-none" )
@@ -89,7 +87,6 @@ export default class ActorEd extends Actor {
    * Legend point History earned prompt trigger
    */
   async legendPointHistoryEarned( ) {
-    // let history = await getLegendPointHistoryData( actor );
     const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), {actor: this} );
     return this.update( {system: { lp: lpUpdateData }} )
   }
@@ -128,7 +125,6 @@ export default class ActorEd extends Actor {
     }
     const edRollOptions = new EdRollOptions( {
       testType: "action",
-      attackWeapon: attackWeapon,
       step: { base: abilityFinalStep },
       strain: { base: ability.system.strain},
       target: { base: difficulty },
