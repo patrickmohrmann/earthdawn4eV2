@@ -237,6 +237,18 @@
                 "effectTest":                                       "Effect Test"
             }
         },
+        "Config": {
+            "CombatTypes": {
+                "aerial":                                           "Luftkampf",
+                "close":                                            "Nahkampf",
+                "melee":                                            "Bewaffneter Nahkampf",
+                "mounted":                                          "Berittener Kampf",
+                "projectile":                                       "Projektil Fernkampf",
+                "ranged":                                           "Fernkampf",
+                "throwing":                                         "Wurfwaffen Fernkampf",
+                "unarmed":                                          "Unbewaffneter Nahkampf"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},

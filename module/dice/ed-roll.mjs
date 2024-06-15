@@ -103,9 +103,7 @@ export default class EdRoll extends Roll {
    */
   get isSuccess() {
     if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
-    if ( this.isRuleOfOne === true ) {
-      return false
-    }
+    if ( this.isRuleOfOne === true ) return false;
     return this.numSuccesses > 0;
   }
 

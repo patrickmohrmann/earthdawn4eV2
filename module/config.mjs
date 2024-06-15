@@ -358,10 +358,6 @@ ED4E.testTypes = {
 		label: "ED.Rolls.Labels.effectTestRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
-	// damage: {
-	// 	label: "ED.Rolls.Labels.damageRoll",
-	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
-	// },
 }
 preLocalize( "testTypes", { key: "label" } );
 
@@ -375,10 +371,6 @@ ED4E.rollTypes = {
 		label: "ED.Rolls.Labels.abilityRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
-	// arbitrary: {
-	// 	label: "ED.Rolls.Labels.arbitraryRoll",
-	// 	flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
-	// },
 	attack: {
 		label: "ED.Rolls.Labels.attackRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
@@ -459,69 +451,21 @@ ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15];
 ED4E.attributePointsCost[-1] = -1;
 ED4E.attributePointsCost[-2] = -2;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * The available sub-types of (combatTypes) tests
- * @enum {string}
- */
-ED4E.combatTypes = {
-	Aerial: {
-		label: "ED.Config.combatTypes.Aerial",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                    
-	Close: {
-		label: "ED.Config.combatTypes.Close",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                      
-	melee: {
-		label: "ED.Config.combatTypes.melee",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                     
-	Mounted: {
-		label: "ED.Config.combatTypes.Mounted",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                    
-	projectile: {
-		label: "ED.Config.combatTypes.projectile",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                 
-	ranged: {
-		label: "ED.Config.combatTypes.ranged",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                     
-	throwing: {
-		label: "ED.Config.combatTypes.throwing",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},     
-	unarmed: {
-		label: "ED.Config.combatTypes.unarmed",
-		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                            
-}
-preLocalize( "testTypes", { key: "label" } );
-
-
-
-
-
-
+// /**
+//  * The available sub-types of (combatTypes) tests
+//  * @enum {string}
+//  */
+// ED4E.combatTypes = {
+// 	aerial: "ED.Config.CombatTypes.aerial",
+// 	close:  "ED.Config.CombatTypes.close",
+// 	melee:  "ED.Config.CombatTypes.melee",
+// 	mounted:  "ED.Config.CombatTypes.mounted",
+// 	projectile: "ED.Config.CombatTypes.projectile",
+// 	ranged:  "ED.Config.CombatTypes.ranged",
+// 	throwing: "ED.Config.CombatTypes.throwing",
+// 	unarmed:  "ED.Config.CombatTypes.unarmed",	                           
+// }
+// preLocalize( "combatTypes" );
 
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */
