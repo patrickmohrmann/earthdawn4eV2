@@ -317,7 +317,7 @@ export default class ActorEd extends Actor {
     switch ( itemToUpdate.type ) {
       case "armor":
 
-        if ( itemToUpdate.piecemealArmor.selector ) {
+        if ( itemToUpdate.piecemealArmor?.selector ) {
           if ( !this.wearsPiecemealArmor ) {
             addUnequipItemUpdate( "armor", ["equipped"] );
           } else {
@@ -343,7 +343,7 @@ export default class ActorEd extends Actor {
           }
         } else {
           // Unequip other armor
-          addUnequipItemUpdate( "armor", ["equipped"] );
+          if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", ["equipped"] );
         }
         updates.push( originalItemUpdate );
         break;

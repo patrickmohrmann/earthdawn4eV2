@@ -79,6 +79,11 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
                     integer: true,
                     label: "ED.Item.Armor.piecemealArmorSize"
                 } ),
+            }, {
+                required: true,
+                nullable: false,
+                label: "ED.Data.Item.Labels.piecemealArmor",
+                hint: "ED.Data.Item.Hints.piecemealArmor",
             } ),
         } );
     }
