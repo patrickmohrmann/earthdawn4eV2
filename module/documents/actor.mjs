@@ -149,22 +149,25 @@ export default class ActorEd extends Actor {
       ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
       return;
     }
-
-    const edRollOptions = new EdRollOptions( {
-      testType: "action",
+    const edRollOptions = new EdRollOptions({
+      testType: 'action',
       step: { base: arbitraryStep },
       target: { base: difficulty },
-      karma: { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step },
+      karma: {
+        pointsUsed: this.system.karma.useAlways ? 1 : 0,
+        available: this.system.karma.value,
+        step: this.system.karma.step,
+      },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
-      chatFlavor: equipment.name + " Equipment Test",
-        } );
+      chatFlavor: equipment.name + ' Equipment Test',
+    });
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
 
-  async rotateItemStatus( itemId ) {
+  async rotateItemStatus( itemId, backwards = false ) {
     const item = this.items.get( itemId );
-    const nextStatus = item.system.nextItemStatus;
+    const nextStatus = backwards ? item.system.previousItemStatus : item.system.nextItemStatus;
     return this._updateItemStates( item, nextStatus );
   }
 
@@ -353,8 +356,9 @@ export default class ActorEd extends Actor {
 
         switch ( nextStatus ) {
           case "twoHands":
+            const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
             addUnequipItemUpdate( "weapon", ["mainHand", "offHand", "twoHands"] );
-            addUnequipItemUpdate( "shield", ["equipped"] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", ["equipped"] );
             break;
           case "mainHand":
           case "offHand":

@@ -77,7 +77,7 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
-    html.find( ".item__status" ).click( this._onChangeItemStatus.bind( this ) );
+    html.find(".item__status").mousedown(this._onChangeItemStatus.bind(this));
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -113,9 +113,22 @@ export default class ActorSheetEd extends ActorSheet {
   // eslint-disable-next-line complexity
   _onChangeItemStatus( event ) {
     event.preventDefault();
+
+    // if left click is used, rotate the item normally
+    const rotate = event.button === 0 || event.button === 2;
+    // if shift+left click is used, unequip the item
+    const unequip = rotate && event.shiftKey;
+    // middle click is used to deposit the item
+    const deposit = event.button === 1;
+    // if right click is used, rotate status backwards
+    const backwards = event.button === 2;
+
     const li = event.currentTarget.closest( ".item-id" );
     const item = this.actor.items.get( li.dataset.itemId );
-    this.actor.rotateItemStatus( item.id ).then( _ => this.render() );
+
+    if ( unequip ) return item.system.carry()?.then( _ => this.render() );
+    if ( rotate ) return this.actor.rotateItemStatus( item.id, backwards ).then( _ => this.render() );
+    if ( deposit ) return item.system.deposit()?.then( _ => this.render() );
   }
 
 

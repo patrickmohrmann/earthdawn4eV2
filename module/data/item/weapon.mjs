@@ -122,13 +122,22 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
 
     /** @override */
     get nextItemStatus() {
-        const statusOrder = this.constructor._itemStatusOrder;
         const namegiver = this.parent.parent?.namegiver;
         const weaponSizeLimits = namegiver?.system.weaponSize;
 
         // no limits or tail given, every status is okay
         if ( !weaponSizeLimits ) return super.nextItemStatus;
-        return this._rotateValidItemStatus( this.statusIndex );
+        return this._rotateValidItemStatus( this.statusIndex, false );
+    }
+
+    /** @override */
+    get previousItemStatus() {
+        const namegiver = this.parent.parent?.namegiver;
+        const weaponSizeLimits = namegiver?.system.weaponSize;
+
+        // no limits or tail given, every status is okay
+        if ( !weaponSizeLimits ) return super.previousItemStatus;
+        return this._rotateValidItemStatus( this.statusIndex, true );
     }
 
     /**
@@ -147,13 +156,25 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
     /**
      * Rotates the status of the item based on the current status.
      * The rotation follows the order defined in `_itemStatusOrder`.
+     *
+     * @param {number} currentStatusIndex - The index of the current status in `_itemStatusOrder`.
+     * @param {boolean} [backwards=false] - If true, rotates the status backwards. If false or not provided, rotates the status forwards.
+     * @returns {string} The next valid status for the item if rotating forwards, or the previous valid status if rotating backwards.
+     */
+    _rotateValidItemStatus( currentStatusIndex, backwards = false ) {
+        return backwards ? this._getPreviousItemStatus( currentStatusIndex ) : this._getNextItemStatus( currentStatusIndex );
+    }
+
+    /**
+     * Determines the next status of the item based on the current status.
+     * It follows the order defined in `_itemStatusOrder`.
      * If the item can be handled with the next status, it returns the next status.
      * If not, it recursively calls itself with the next status index until it finds a valid status.
      *
      * @param {number} currentStatusIndex - The index of the current status in `_itemStatusOrder`.
      * @returns {string} The next valid status for the item.
      */
-    _rotateValidItemStatus( currentStatusIndex ) {
+    _getNextItemStatus( currentStatusIndex ) {
         const statusOrder = this.constructor._itemStatusOrder;
         const namegiver = this.parent.parent?.namegiver;
 
@@ -163,18 +184,50 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
             case "carried":
                 return this.canBeHandledWith( "mainHand", namegiver )
                   ? "mainHand"
-                  : this._rotateValidItemStatus( ++currentStatusIndex );
+                  : this._getNextItemStatus( ++currentStatusIndex );
             case "mainHand":
                 return this.canBeHandledWith( "offHand", namegiver )
                   ? "offHand"
-                  : this._rotateValidItemStatus( ++currentStatusIndex );
+                  : this._getNextItemStatus( ++currentStatusIndex );
             case "offHand":
                 return this.canBeHandledWith( "twoHands", namegiver )
                   ? "twoHands"
-                  : this._rotateValidItemStatus( ++currentStatusIndex );
+                  : this._getNextItemStatus( ++currentStatusIndex );
             case "twoHands":
                 return this.canBeHandledWith( "tail", namegiver ) ? "tail" : "owned";
             case "tail":
+            default:
+                return "owned";
+        }
+    }
+
+    _getPreviousItemStatus( currentStatusIndex ) {
+        const statusOrder = this.constructor._itemStatusOrder;
+        const namegiver = this.parent.parent?.namegiver;
+
+        if ( currentStatusIndex < 0 ) currentStatusIndex = statusOrder.length - 1;
+
+        switch ( statusOrder[currentStatusIndex] ) {
+            case "tail":
+                return this.canBeHandledWith( "twoHands", namegiver )
+                  ? "twoHands"
+                  : this._getPreviousItemStatus( --currentStatusIndex );
+            case "twoHands":
+                return this.canBeHandledWith( "offHand", namegiver )
+                  ? "offHand"
+                  : this._getPreviousItemStatus( --currentStatusIndex );
+            case "offHand":
+                return this.canBeHandledWith( "mainHand", namegiver )
+                  ? "mainHand"
+                  : this._getPreviousItemStatus( --currentStatusIndex );
+            case "mainHand":
+                return "carried";
+            case "carried":
+                return "owned";
+            case "owned":
+                return this.canBeHandledWith( "tail", namegiver )
+                  ? "tail"
+                  : this._getPreviousItemStatus( --currentStatusIndex );
             default:
                 return "owned";
         }
