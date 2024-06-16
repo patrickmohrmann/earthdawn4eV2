@@ -592,10 +592,35 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-weapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-shipWeapon.hbs",
 
+    // ################################################
+    //                      CHAT
+    // ################################################
+    "systems/ed4e/templates/chat/tooltip.hbs",
+
+    // chat buttons
+    "systems/ed4e/templates/chat/chat-buttons/apply-damage.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/assign-effect.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/roll-damage.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/roll-effect.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/take-damage.hbs",
+
+    // chat Flavor
+    "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/attribute-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/halfmagic-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/recovery-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/spellcasting-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/thread-weaving-roll-flavor.hbs",
+
     // Dice partials
-    "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs",
-    "systems/ed4e/templates/dice/dice-partials/roll-target-modifier.hbs",
-    "systems/ed4e/templates/dice/dice-partials/roll-successes.hbs",
+    "systems/ed4e/templates/chat/dice-partials/roll-step-modifier.hbs",
+    "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs",
+    "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs",
 
     // other tabs
     "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",

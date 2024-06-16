@@ -66,7 +66,7 @@
   height: 30px;
   border-radius: 50%;
   padding-top: 5px;
-  background: lightgrey;
+  background: rgba(0, 0, 0, 0.1);
 }
 .input--centered {
   text-align: center;
@@ -121,6 +121,7 @@ p {
 }
 .undefined {
   background-color: red;
+  color: black;
 }
 .itemControlGroup,
 .icon__position--right {
@@ -149,116 +150,70 @@ p {
   position: absolute;
   left: calc(50% - 64px);
 }
-.body .actor-section__top {
-  height: 158px;
+.chat-message {
+  background-image: url('assets/sheet/background.png');
 }
-.body .actor-section__top .actor__image {
-  width: 20%;
-  float: left;
+.chat-message .message-sender {
+  font-size: larger;
+  padding-top: 12px;
+  padding-left: 5px;
 }
-.body .actor-section__top .actor__characteristics {
-  width: 80%;
-  float: left;
+.chat-message .message-metadata {
+  padding-top: 12px;
 }
-.body .actor-section__top img {
+.chat-message .message-metadata .message-delete {
+  font-size: larger;
+}
+.chat-message img.avatar {
   border: none;
+  object-fit: scale-down;
+  max-height: 40px;
 }
-.body .actor-section__top .padding__top-small {
-  height: 80px;
+.chat-message .custom-flavor {
+  margin: 0.5em 0;
+  font-size: medium;
 }
-.main .actor-sheet-body .tab__general .left-part {
-  float: left;
-  width: 250px;
-}
-.main .actor-sheet-body .tab__general .left-part .margin__none {
-  margin-bottom: 0;
-}
-.main .actor-sheet-body .tab__general .left-part .fa-star {
-  font-size: 7px;
-}
-.main .actor-sheet-body .tab__general .left-part .attribute__increases {
-  text-align: left;
-  padding-left: 2px;
-  margin-bottom: 12px;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
-  height: 30px;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
-  width: 25px;
-  height: 25px;
-  border: none;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
-  align-items: center;
+.chat-message .roll-successes {
+  margin: 0.5em 0;
   text-align: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 83px 83px 83px;
+  font-size: large;
 }
-.main .actor-sheet-body .tab__general .right-part {
-  float: right;
-  width: 520px;
+.chat-message .modifier-lists {
+  margin-bottom: 5px;
+  padding: 0 0.3em;
+  font-size: medium;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
 }
-.main .actor-sheet-body .tab__general .right-part .margin__right {
-  margin-right: 20px;
+.chat-message .modifier-lists li {
+  text-transform: capitalize;
 }
-.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
-  align-items: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 40px 220px;
+.chat-message .dice-formula {
+  word-break: unset;
 }
-.main .actor-sheet-body .tab__legend .legend-card__grid--container {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding-left: 2px;
-  grid-template-columns: 158px 158px 158px 158px 158px;
+.chat-message .dice-total.roll-success {
+  background-color: darkseagreen;
 }
-.main .actor-sheet-body .tab__class .class-card__grid--container {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding-left: 2px;
-  grid-template-columns: 40px 450px 200px 100px;
+.chat-message .dice-total.roll-failure {
+  background-color: indianred;
 }
-.main .actor-sheet-body .tab__class .item__image {
-  width: 25px;
-  border: none;
-}
-.action--buttons {
+.chat-message .roll-failure {
+  background-color: indianred;
+  color: black;
+  font-size: large;
   padding-top: 5px;
-  position: relative;
-  width: 100%;
-  z-index: -6;
+  text-align: center;
 }
-.action--buttons button {
-  position: relative;
-  z-index: 4;
-  width: 100px;
+.chat-message .message-buttons {
+  margin: 1em 0;
 }
-.action--buttons .buttons--left {
-  margin-left: 45px;
-  margin-right: 50px;
-  float: left;
-  width: 40%;
+.chat-message .message-buttons.flexrow button:first-child {
+  margin-left: 0;
 }
-.action--buttons .buttons--right {
-  float: left;
-  width: 40%;
-  margin-right: 50px;
-}
-.legend-point__history--earned {
-  height: 26px;
-  line-height: 22px;
-}
-.body .item-section__top {
-  height: 158px;
-}
-.body .item-section__top img {
-  width: 158px;
-  border: none;
+.chat-message .message-buttons.flexrow button:last-child {
+  margin-right: 0;
 }
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
@@ -599,4 +554,115 @@ p {
 }
 .card__description--toggle {
   display: none;
+}
+.body .actor-section__top {
+  height: 158px;
+}
+.body .actor-section__top .actor__image {
+  width: 20%;
+  float: left;
+}
+.body .actor-section__top .actor__characteristics {
+  width: 80%;
+  float: left;
+}
+.body .actor-section__top img {
+  border: none;
+}
+.body .actor-section__top .padding__top-small {
+  height: 80px;
+}
+.main .actor-sheet-body .tab__general .left-part {
+  float: left;
+  width: 250px;
+}
+.main .actor-sheet-body .tab__general .left-part .margin__none {
+  margin-bottom: 0;
+}
+.main .actor-sheet-body .tab__general .left-part .fa-star {
+  font-size: 7px;
+}
+.main .actor-sheet-body .tab__general .left-part .attribute__increases {
+  text-align: left;
+  padding-left: 2px;
+  margin-bottom: 12px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
+  height: 30px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
+  align-items: center;
+  text-align: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 83px 83px 83px;
+}
+.main .actor-sheet-body .tab__general .right-part {
+  float: right;
+  width: 520px;
+}
+.main .actor-sheet-body .tab__general .right-part .margin__right {
+  margin-right: 20px;
+}
+.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
+  align-items: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 40px 220px;
+}
+.main .actor-sheet-body .tab__legend .legend-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 158px 158px 158px 158px 158px;
+}
+.main .actor-sheet-body .tab__class .class-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 40px 450px 200px 100px;
+}
+.main .actor-sheet-body .tab__class .item__image {
+  width: 25px;
+  border: none;
+}
+.action--buttons {
+  padding-top: 5px;
+  position: relative;
+  width: 100%;
+  z-index: -6;
+}
+.action--buttons button {
+  position: relative;
+  z-index: 4;
+  width: 100px;
+}
+.action--buttons .buttons--left {
+  margin-left: 45px;
+  margin-right: 50px;
+  float: left;
+  width: 40%;
+}
+.action--buttons .buttons--right {
+  float: left;
+  width: 40%;
+  margin-right: 50px;
+}
+.legend-point__history--earned {
+  height: 26px;
+  line-height: 22px;
+}
+.body .item-section__top {
+  height: 158px;
+}
+.body .item-section__top img {
+  width: 158px;
+  border: none;
 }

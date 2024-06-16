@@ -39,7 +39,7 @@ export default class EdRoll extends Roll {
     const baseTerm = formula
       ? formula
       : // : ( `${getDice( step )}[${game.i18n.localize( "ED.General.S.step" )} ${step}]` );
-      `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.General.S.step" )} ${
+      `(${getDice( edRollOptions.step.total )})[${game.i18n.localize( "ED.Rolls.step" )} ${
         edRollOptions.step.total
       }]`;
     super( baseTerm, data, edRollOptions );
@@ -55,7 +55,7 @@ export default class EdRoll extends Roll {
   /**
    * @inheritDoc
    */
-  static TOOLTIP_TEMPLATE = "systems/ed4e/templates/dice/tooltip.hbs";
+  static TOOLTIP_TEMPLATE = "systems/ed4e/templates/chat/tooltip.hbs";
 
   /* -------------------------------------------- */
   /*  Getter and Setter                           */
@@ -103,6 +103,7 @@ export default class EdRoll extends Roll {
    */
   get isSuccess() {
     if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
+    if ( this.isRuleOfOne === true ) return false;
     return this.numSuccesses > 0;
   }
 
@@ -114,6 +115,7 @@ export default class EdRoll extends Roll {
    */
   get isFailure() {
     if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
+    if ( this.isRuleOfOne === true ) return true
     return this.numSuccesses <= 0;
   }
 
@@ -277,7 +279,7 @@ export default class EdRoll extends Roll {
       for ( let i = 1; i <= pointsUsed; i++ ) {
         diceTerm = getDice( this.options[type].step );
         newTerms = Roll.parse(
-          `(${diceTerm})[${game.i18n.localize( `ED.General.${type[0]}.${type}` )} ${i}]`,
+          `(${diceTerm})[${game.i18n.localize( `ED.Rolls.${type}` )} ${i}]`,
           {}
         );
         this.terms.push( new foundry.dice.terms.OperatorTerm( {operator: "+"} ), ...newTerms );
@@ -324,9 +326,9 @@ export default class EdRoll extends Roll {
     templateData.step = this.options.step;
     templateData.target = this.options.target;
     templateData.testType = ED4E.testTypes[this.options.testType].label;
+    templateData.ruleOfOne = this.isRuleOfOne;
     templateData.success = this.isSuccess;
     templateData.failure = this.isFailure;
-    templateData.ruleOfOne = this.isRuleOfOne;
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
 

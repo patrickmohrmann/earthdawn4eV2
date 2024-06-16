@@ -208,6 +208,48 @@
                 "loadedOver":                                       "Overloaded"
             }
         },
+        "Chat": {
+            "Button": {
+                "applyDamage":                                      "Assign Damage",
+                "applyDamageTitle":                                 "Assign the Damage to the Targets!",
+                "applyEffect":                                      "Assign Effect",
+                "applyEffectTitle":                                 "Assign the Effect to the Targets!",
+                "rollEffect":                                       "Roll Effect",
+                "rollEffectTitle":                                  "Roll the Effect",
+                "rollDamage":                                       "Roll Damage",
+                "rollDamageTitle":                                  "Roll for Damage",
+                "takeDamage":                                       "Take Damage",
+                "takeDamageTitle":                                  "Take the damage for your Actor"
+            },
+            "Flavor": {
+                "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
+                "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
+                "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
+                "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
+                "rollAttackWithoutTarget":                          "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against many Targets"
+            },
+            "Header": {
+                "actionTest":                                       "Action Test",
+                "arbitraryTest":                                    "arbitrary Test",
+                "effectTest":                                       "Effect Test"
+            }
+        },
+        "Config": {
+            "CombatTypes": {
+                "aerial":                                           "Aerial Combat",
+                "close":                                            "Close Combat",
+                "melee":                                            "Melee Combat",
+                "mounted":                                          "Mounted Combat",
+                "projectile":                                       "Projectil Combat",
+                "ranged":                                           "Ranged Combat",
+                "throwing":                                         "Throwing Combat",
+                "unarmed":                                          "unarmed Combat"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},
@@ -262,20 +304,59 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Rolls": {
+            "against":                                              "against",
+            "baseValue":                                            "Base Step",
+            "devotion":                                             "Devotion",
+            "formulaDevotion":                                      "{amount}x Devotion (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaStep":                                          "Step {step}",
+            "karma":                                                "Karma",
+            "Labels": {
+                "arbitraryTestRoll":                                "Arbitrary Test",
+                "actionTestRoll":                                   "Action Test",
+                "effectTestRoll":                                   "Effect Test",
+                "abilityRoll":                                      "Ability Test",
+                "arbitraryRoll":                                    "Arbitrary Test",
+                "attackRoll":                                       "Attack Test",
+                "attributeRoll":                                    "Attribute Test",
+                "damageRoll":                                       "Damage Test",
+                "effectRoll":                                       "Effect Test",
+                "halfmagicRoll":                                    "Half-magic Test",
+                "initiativeRoll":                                   "Initiative Test",
+                "recoveryRoll":                                     "Recovery Test",
+                "spellcastingRoll":                                 "Spellcasting Test",
+                "threadWeavingRoll":                                "Thread weaving Test"
+            },
+            "moreTargets":                                          "and other targets",
+            "rolls":                                                "rolls",
+            "rollResult":                                           "Roll Result",
+            "ruleOfOne":                                            "Failue, Rule of One",
+            "step":                                                 "Step",
+            "stepModifiers":                                        "Step Modifier",
+            "successesAchieved":                                    "Total Successes",
+            "targetDifficulty":                                     "Difficulty",
+            "targetModifiers":                                      "Target Modifier"  
+        },
         "Settings": {
+            "Edid": {
+                "languageRW":                                       "ED-ID for Read/Write Language",
+                "languageRWHint":                                   "ED-ID for the Read/Write Language ability",
+                "languageSpeak":                                    "ED-ID for Speak Language",
+                "languageSpeakHint":                                "ED-ID for the Speak Language ability",
+                "spellCasting":                                     "ED-ID for Spellcasting",
+                "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
+                "threadWeaving":                                    "ED-ID for Thread Weaving",
+                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+            },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",
-            "Edid": {
-                "languageRW": "ED-ID for Read/Write Language",
-                "languageRWHint": "ED-ID for the Read/Write Language ability",
-                "languageSpeak": "ED-ID for Speak Language",
-                "languageSpeakHint": "ED-ID for the Speak Language ability",
-                "spellCasting": "ED-ID for Spellcasting",
-                "spellCastingHint": "Identifies a talent that is used for spellcasting",
-                "threadWeaving": "ED-ID for Thread Weaving",
-                "threadWeavingHint": "Identifies a talent that is used for thread weaving"
+            "SpecificSettingOptions":{
+                "changelog":                                        "Changelog",
+                "help":                                             "help",
+                "troubleshooting":                                  "troubleshooting"
             }
-        }
-    }
-    
+        }  
+    }   
 }

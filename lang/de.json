@@ -207,6 +207,48 @@
                 "loadedOver":                                       "Überlasted"
             }
         },
+        "Chat": {
+            "Button": {
+                "applyDamage":                                      "Schaden zufügen",
+                "applyDamageTitle":                                 "Füge den Schaden den ausgewählten Zielen zu!",
+                "applyEffect":                                      "Effekt zufügen",
+                "applyEffectTitle":                                 "Füge den Effect den ausgewählten Zielen zu!",
+                "rollEffect":                                       "Effektwurf",
+                "rollEffectTitle":                                  "Würfel den Effect",
+                "rollDamage":                                       "Effektwurf",
+                "rollDamageTitle":                                  "Würfel den Effect",
+                "takeDamage":                                       "Schaden nehmen",
+                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter"
+            },
+            "Flavor": {
+                "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
+                "rollEquipmentSingleTarget":                        "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen {singleTarget}",
+                "rollEquipmentMultipleTargets":                     "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen mehrere Ziele",
+                "rollAbilityWithoutTarget":                         "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
+                "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
+            },
+            "Header": {
+                "actionTest":                                       "Aktions Test",
+                "arbitraryTest":                                    "Willkürlicher Test",
+                "effectTest":                                       "Effect Test"
+            }
+        },
+        "Config": {
+            "CombatTypes": {
+                "aerial":                                           "Luftkampf",
+                "close":                                            "Nahkampf",
+                "melee":                                            "Bewaffneter Nahkampf",
+                "mounted":                                          "Berittener Kampf",
+                "projectile":                                       "Projektil Fernkampf",
+                "ranged":                                           "Fernkampf",
+                "throwing":                                         "Wurfwaffen Fernkampf",
+                "unarmed":                                          "Unbewaffneter Nahkampf"
+            }
+        },
         "Data": {
             "ActiveEffect": {
                 "Labels": {},
@@ -260,19 +302,59 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Rolls": {
+            "against":                                              "gegen",
+            "baseValue":                                            "Basis Stufe",
+            "devotion":                                             "Weihekraft",                
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaStep":                                          "Stufe {step}",
+            "karma":                                                "Karma",
+            "Labels": {
+                "arbitraryTestRoll":                                "Willkürlicher Test",
+                "actionTestRoll":                                   "Aktionsprobe",
+                "effectTestRoll":                                   "Effektprobe",
+                "abilityRoll":                                      "Fähigkeitsprobe",
+                "arbitraryRoll":                                    "Willkürlicher Test",
+                "attackRoll":                                       "Angriffstprobe",
+                "attributeRoll":                                    "Attributsprobe",
+                "damageRoll":                                       "Schadensprobe",
+                "effectRoll":                                       "Effektprobe",
+                "halfmagicRoll":                                    "Halbmagieprobe",
+                "initiativeRoll":                                   "Initiativeprobe",
+                "recoveryRoll":                                     "Erholungsprobe",
+                "spellcastingRoll":                                 "Spruchzaubereiprobe",
+                "threadWeavingRoll":                                "Fadenwebenprobe"
+            },
+            
+            "rolls":                                                "würfelt",
+            "rollResult":                                           "Würfelergebnis",
+            "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
+            "step":                                                 "Stufe",     
+            "stepModifiers":                                        "Stufen Modifikatoren",
+            "successesAchieved":                                    "Gesamt Erfolge",
+            "targetDifficulty":                                     "Schwierigkeit",
+            "targetModifiers":                                      "Ziel Modifikatoren"
+        },
         "Settings": {
-            "talentsSplit":                                         "Talente nach Kategorie gruppieren",
-            "talentsSplitHint":                                     "Talente Gruppieren",
             "Edid": {
-                "languageRW": "ED-ID für Lesen/Schreiben",
-                "languageRWHint": "Identifiziert die Fähigkeit Lesen/Schreiben",
-                "languageSpeak": "ED-ID für Fremdsprachen",
-                "languageSpeakHint": "Identifiziert die Fähigkeit Fremdsprachen",
-                "spellCasting": "ED-ID für Spruchzauberei",
-                "spellCastingHint": "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
-                "threadWeaving": "ED-ID für Fadenweben",
-                "threadWeavingHint": "Identifiziert die Fähigkeit Fadenweben verwendet wird"
-            }
+                "languageRW":                                       "ED-ID für Lesen/Schreiben",
+                "languageRWHint":                                   "Identifiziert die Fähigkeit Lesen/Schreiben",
+                "languageSpeak":                                    "ED-ID für Fremdsprachen",
+                "languageSpeakHint":                                "Identifiziert die Fähigkeit Fremdsprachen",
+                "spellCasting":                                     "ED-ID für Spruchzauberei",
+                "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
+                "threadWeaving":                                    "ED-ID für Fadenweben",
+                "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+            },
+            "SpecificSettingOptions":{
+                "changelog":                                        "Änderungsprotokoll",
+                "help":                                             "Hilfe",
+                "troubleshooting":                                  "Fehlermeldung"
+            },
+            "talentsSplit":                                         "Talente nach Kategorie gruppieren",
+            "talentsSplitHint":                                     "Talente Gruppieren"
         }
     }
 }
