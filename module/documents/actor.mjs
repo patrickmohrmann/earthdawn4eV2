@@ -370,8 +370,11 @@ export default class ActorEd extends Actor {
         if ( nextStatus === "equipped" ) {
           // Unequip other shields
           addUnequipItemUpdate( "shield", ["equipped"] );
+          // If there's a bow and the shield allows it, no need to unequip the weapon
+          const bowAllowed = equippedWeapons[0]?.system.isTwoHandedRanged && itemToUpdate.system.bowUsage;
           // If there's a two-handed weapon or two one-handed weapons, unequip one
-          if ( equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1 ) {
+          const unequipSomeWeapon = equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1;
+          if ( !bowAllowed && unequipSomeWeapon ) {
             // Prefer to unequip off-hand weapon, if available
             const weaponToUnequip = equippedWeapons.find( weapon => weapon.system.itemStatus === "offHand" ) || equippedWeapons[0];
             updates.push( { _id: weaponToUnequip.id, "system.itemStatus": "carried" } );
