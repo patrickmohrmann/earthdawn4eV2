@@ -326,6 +326,13 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
+            },
+            "Error": {}
+        },
         "Settings": {
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",
@@ -343,5 +350,4 @@
             }
         }
     }
-    
 }

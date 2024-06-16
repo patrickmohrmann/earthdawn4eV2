@@ -326,6 +326,13 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
+            },
+            "Error": {}
+        },
         "Settings": {
             "talentsSplit":                                         "Talente nach Kategorie gruppieren",
             "talentsSplitHint":                                     "Talente Gruppieren",
