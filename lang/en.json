@@ -259,6 +259,12 @@
                 "throwing":                                         "Throwing Combat",
                 "unarmed":                                          "unarmed Combat"
             },
+            "groupDifficulty": {
+                "highestOfGroup":                                   "Highest of Group",
+                "hightestX":                                        "Highest + Targets",
+                "lowestOfGroup":                                    "Lowest of Group",
+                "lowestX":                                          "Lowest + Targets"
+            },
             "ItemStatus": {
                 "owned":                                            "Owned",
                 "carried":                                          "Carried",
@@ -424,5 +430,19 @@
             }
         }  
     }   
+            "Edid": {
+                "knockDown":                                        "ED-ID for Knock Down Test",
+                "knockDownHint":                                    "ED-ID for the Knock Down Test ability",
+                "languageRW":                                       "ED-ID for Read/Write Language",
+                "languageRWHint":                                   "ED-ID for the Read/Write Language ability",
+                "languageSpeak":                                    "ED-ID for Speak Language",
+                "languageSpeakHint":                                "ED-ID for the Speak Language ability",
+                "spellCasting":                                     "ED-ID for Spellcasting",
+                "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
+                "threadWeaving":                                    "ED-ID for Thread Weaving",
+                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+            }
+        }
+    }
 }
 

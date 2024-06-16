@@ -258,6 +258,12 @@
                 "throwing":                                         "Wurfwaffen Fernkampf",
                 "unarmed":                                          "Unbewaffneter Nahkampf"
             },
+            "groupDifficulty": {
+                "highestOfGroup":                                   "Höchster der Gruppe",  
+                "hightestX":                                        "Höchster + Ziele",
+                "lowestOfGroup":                                    "Niedrigster der Gruppe",
+                "lowestX":                                          "Niedrigster + Ziele"
+            },
             "ItemStatus": {
                 "owned":                                            "Besitz",
                 "carried":                                          "Getragen",
@@ -422,6 +428,7 @@
             },
             "talentsSplit":                                         "Talente nach Kategorie gruppieren",
             "talentsSplitHint":                                     "Talente Gruppieren"
+            }
         }
     }
 }
