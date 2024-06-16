@@ -395,6 +395,13 @@
             "targetDifficulty":                                     "Schwierigkeit",
             "targetModifiers":                                      "Ziel Modifikatoren"
         },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
+            },
+            "Error": {}
+        },
         "Settings": {
             "Edid": {
                 "knockDown":                                        "ED-ID für Niederschlag",

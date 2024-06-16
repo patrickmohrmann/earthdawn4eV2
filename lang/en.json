@@ -395,6 +395,13 @@
             "targetDifficulty":                                     "Difficulty",
             "targetModifiers":                                      "Target Modifier"  
         },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
+            },
+            "Error": {}
+        },
         "Settings": {
             "Edid": {
                 "knockDown":                                        "ED-ID for Knock Down Test",
@@ -415,7 +422,7 @@
                 "help":                                             "help",
                 "troubleshooting":                                  "troubleshooting"
             }
-            
         }  
     }   
 }
+
