@@ -322,19 +322,17 @@ export default class ActorEd extends Actor {
             if ( !this.wearsPiecemealArmor ) {
               addUnequipItemUpdate( "armor", ["equipped"] );
             } else {
-              // A complete set of piecemeal armor can have up to 5 size points.
-              // Armor pieces come in three sizes and cost a corresponding number
-              // of points: large (3), medium (2), and small (1). A set of
-              // piecemeal armor cannot have more than one size of a particular
-              // type.
+              // A complete set of piecemeal armor can have up to 5 size points. Armor pieces come in three sizes and
+              // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
+              // cannot have more than one size of a particular type.
               const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
               const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
               if ( sameSizePiece ) {
                 updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
               } else {
-                // Check if the total size of the equipped armor pieces and the size of the item to update
-                // exceeds the maximum allowed size for a piecemeal armor set (5 size points).
-                // If it does, break the operation to prevent equipping the item.
+                // Check if the total size of the equipped armor pieces and the size of the item to update exceeds the
+                // maximum allowed size for a piecemeal armor set (5 size points). If it does, break the operation to
+                // prevent equipping the item.
                 if (
                   sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
                   + itemToUpdate.system.piecemealArmor.size > 5
