@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
@@ -336,6 +337,7 @@ export default class ActorEd extends Actor {
                 // Check if the total size of the equipped armor pieces and the size of the item to update exceeds the
                 // maximum allowed size for a piecemeal armor set (5 size points). If it does, break the operation to
                 // prevent equipping the item.
+                // eslint-disable-next-line max-depth
                 if (
                   sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
                   + itemToUpdate.system.piecemealArmor.size > 5
@@ -343,6 +345,10 @@ export default class ActorEd extends Actor {
                   ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
                   break;
                 }
+              }
+              const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemealArmor?.selector );
+              if ( equippedNonPiecemealArmor ) {
+                updates.push( { _id: equippedNonPiecemealArmor.id, "system.itemStatus": "carried" } );
               }
             }
           } else {
