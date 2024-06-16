@@ -53,7 +53,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 nullable: true,
                 blank: true,
                 initial: "",
-                choices: Object.keys( ED4E.rollTypes ),
+                choices: ED4E.rollTypes,
                 label: "ED.Item.Ability.type"
             } ),
             damageAbilities: new fields.SchemaField( {
@@ -74,7 +74,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                     nullable: true,
                     blank: true,
                     initial: "",
-                    choices: Object.keys( ED4E.rollTypes ),
+                    choices: ED4E.rollTypes,
                     label: "ED.Item.Ability.relatedRollType"
                 } ),
             } ),
