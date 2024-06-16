@@ -86,18 +86,17 @@ export default class ActorEd extends Actor {
   async legendPointHistoryEarned() {
     // let history = await getLegendPointHistoryData( actor );
     const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), { actor: this } );
-    return this.update( { system: { lp: lpUpdateData } } )
+    return this.update( { system: { lp: lpUpdateData } } );
   }
 
   // eslint-disable-next-line max-params
   async createEdRollOptions( testType = "action", rollType, strain = {}, target = {}, step = {}, devotionRequired, chatFlavor ) {
-    let devotion = {}
-    if ( devotionRequired === true ) {
-      devotion = { pointsUsed: 1, available: this.system.devotion.value, step: this.system.devotion.step }
-    } else {
-      devotion = { pointsUsed: 0, available: this.system.devotion.value, step: this.system.devotion.step }
+    const devotion = { 
+      pointsUsed: devotionRequired ? 1: 0, 
+      available: this.system.devotion.value,
+      step: this.system.devotion.step,
     }
-    const karma = { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step }
+    const karma = { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step };
     return new EdRollOptions( {
       testType: testType,
       rollType: rollType,
@@ -118,7 +117,7 @@ export default class ActorEd extends Actor {
    */
   async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
-    const step = { base: attributeStep }
+    const step = { base: attributeStep };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
       sourceActor: this.name,
       step: attributeStep,
@@ -137,7 +136,7 @@ export default class ActorEd extends Actor {
    */
   async rollAbility( ability, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
-    const abilityFinalStep = attributeStep + ability.system.level;
+    const abilityStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
@@ -149,8 +148,9 @@ export default class ActorEd extends Actor {
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbility", {
       sourceActor: this.name,
       ability: ability.name,
-      step: abilityFinalStep
+      step: abilityStep
     } );
+    const abilityFinalStep = { base: abilityStep }
     const edRollOptions = await this.createEdRollOptions( "action", "ability", strain, difficultyFinal, abilityFinalStep, devotionRequired, chatFlavor );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -188,7 +188,6 @@ export default class ActorEd extends Actor {
     const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
 
     this.takeDamage( amount, false, damageType, armorType, ignoreArmor );
-    console.log( "takeDamage", takeDamage )
   }
 
   async rollRecovery( options = {} ) {

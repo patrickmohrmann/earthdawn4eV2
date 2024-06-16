@@ -78,22 +78,38 @@ export default class ActorSheetEd extends ActorSheet {
 
     // Actor Sheet Buttons
      // recovery Test
-     html.find( ".roll-recovery" ).click( this._onRecoveryRoll.bind( this ) );
+    //  html.find( ".roll-recovery" ).click( this._onRecoveryRoll.bind( this ) );
 
-     // Take Damage Test
-     html.find( ".roll-takeDamage" ).click( this._onTakeDamage.bind( this ) );
+    //  // Take Damage Test
+    //  html.find( ".roll-takeDamage" ).click( this._onTakeDamage.bind( this ) );
 
-     // Jump Up Test
-     html.find( ".roll-jumpUp" ).click( this._onJumpUp.bind( this ) );
+    //  // Jump Up Test
+    //  html.find( ".roll-jumpUp" ).click( this._onJumpUp.bind( this ) );
 
-     // Initiative Test
-     html.find( ".roll-Initiative" ).click( this._onInitiative.bind( this ) );
+    //  // Initiative Test
+    //  html.find( ".roll-Initiative" ).click( this._onInitiative.bind( this ) );
 
-     // Half magic Test
-     html.find( ".roll-halfMagic" ).click( this._onHalfMagic.bind( this ) );
+    //  // Half magic Test
+    //  html.find( ".roll-halfMagic" ).click( this._onHalfMagic.bind( this ) );
 
-     // Knock down Test
-     html.find( ".roll-knockDown" ).click( this._onKnockDown.bind( this ) );
+    //  // Knock down Test
+    //  html.find( ".roll-knockDown" ).click( this._onKnockDown.bind( this ) );
+
+    html.find( ".action-buttons" ).click( event => {
+      const action = event.currentTarget.dataset.action;
+      const actionMapping = {
+        "recovery": () => this._onRecoveryRoll( event ),
+        "takeDamage": () => this._onTakeDamage( event ),
+        "jumpUp": () => this._onJumpUp( event ),
+        "initiative": () => this._onInitiative( event ),
+        "halfMagic": () => this._onHalfMagic( event ),
+        "knockdownTest": () => this._onKnockDown( event ),
+      };
+      // Check if the action exists in the mapping and call it
+    if ( actionMapping.hasOwnProperty( action ) ) {
+    actionMapping[action]();
+  }
+    } );
 
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
