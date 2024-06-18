@@ -9,7 +9,7 @@ import LpSpendingTransactionData from "../data/advancement/lp-spending-transacti
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import RecoveryPrompt from "../applications/global/recovery-prompt.mjs";
 import EdRoll from "../dice/ed-roll.mjs";
-import TakeDamagePrompt from "../applications/global/take-damage-prompt.mjs";
+// import TakeDamagePrompt from "../applications/global/take-damage-prompt.mjs";
 import KnockDownItemsPrompt from "../applications/global/knock-down-prompt.mjs";
 import JumpUpItemsPrompt from "../applications/global/jump-up-prompt.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
@@ -79,36 +79,16 @@ export default class ActorEd extends Actor {
     currentItemElement.classList.toggle( "d-none" )
   }
 
-  /**
-   * Legend point History earned prompt trigger
-   * @returns {Promise<void>}
-   */
+/**
+ * Triggers a prompt for updating the Legend Point (LP) history of the actor.
+ * Updates the LPTrackingData of the actor based on the input from the prompt.
+ * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
+ */
   async legendPointHistoryEarned() {
     // let history = await getLegendPointHistoryData( actor );
     const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), { actor: this } );
     return this.update( { system: { lp: lpUpdateData } } );
   }
-
-  // eslint-disable-next-line max-params
-  async createEdRollOptions( testType = "action", rollType, strain = {}, target = {}, step = {}, devotionRequired, chatFlavor ) {
-    const devotion = { 
-      pointsUsed: devotionRequired ? 1: 0, 
-      available: this.system.devotion.value,
-      step: this.system.devotion.step,
-    }
-    const karma = { pointsUsed: this.system.karma.useAlways ? 1 : 0, available: this.system.karma.value, step: this.system.karma.step };
-    return new EdRollOptions( {
-      testType: testType,
-      rollType: rollType,
-      strain: strain,
-      target: target,
-      step: step,
-      karma: karma,
-      devotion: devotion,
-      chatFlavor: chatFlavor,
-    } );
-  }
-
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
@@ -123,7 +103,18 @@ export default class ActorEd extends Actor {
       step: attributeStep,
       attribute: `${game.i18n.localize( ED4E.attributes[attributeId].label )}`
     } );
-    const edRollOptions = await this.createEdRollOptions( "action", "attribute", 0, undefined, step, false, chatFlavor );
+    const edRollOptions = EdRollOptions.fromActor( 
+      {
+      testType: "action",
+      rollType: "attribute",
+      strain: 0,
+      target: undefined,
+      step: step,
+      devotionRequired: false,
+      chatFlavor: chatFlavor,
+      },
+      this,
+     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -151,7 +142,18 @@ export default class ActorEd extends Actor {
       step: abilityStep
     } );
     const abilityFinalStep = { base: abilityStep }
-    const edRollOptions = await this.createEdRollOptions( "action", "ability", strain, difficultyFinal, abilityFinalStep, devotionRequired, chatFlavor );
+    const edRollOptions = EdRollOptions.fromActor( 
+      {
+      testType: "action",
+      rollType: "ability",
+      strain: strain,
+      target: difficultyFinal,
+      step: abilityFinalStep,
+      devotionRequired: devotionRequired,
+      chatFlavor: chatFlavor,
+      },
+      this,
+     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -164,7 +166,7 @@ export default class ActorEd extends Actor {
    */
   async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
-    const difficulty = await equipment.system.getDifficulty();
+    const difficulty = await equipment.system.getDifficulty()
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
@@ -175,20 +177,31 @@ export default class ActorEd extends Actor {
       equipment: equipment.name,
       step: arbitraryStep
     } );
-    const edRollOptions = await this.createEdRollOptions( "action", "equipment", 0, difficultyFinal, arbitraryStep, false, chatFlavor );
+    const edRollOptions = EdRollOptions.fromActor( 
+      {
+      testType: "action",
+      rollType: "equipment",
+      strain: 0,
+      target: difficultyFinal,
+      step: arbitraryStep,
+      devotionRequired: false,
+      chatFlavor: chatFlavor,
+      },
+      this,
+     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
 
-  async takeDamageManual( options = {} ) {
-    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
-    const amount = takeDamage.damage;
-    const damageType = takeDamage.damageType;
-    const armorType = takeDamage.armorType;
-    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
+  // async takeDamageManual( options = {} ) {
+  //   const takeDamage = await TakeDamagePrompt.waitPrompt( this );
+  //   const amount = takeDamage.damage;
+  //   const damageType = takeDamage.damageType;
+  //   const armorType = takeDamage.armorType;
+  //   const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
 
-    this.takeDamage( amount, false, damageType, armorType, ignoreArmor );
-  }
+  //   this.takeDamage( amount, false, damageType, armorType, ignoreArmor );
+  // }
 
   async rollRecovery( options = {} ) {
     const recoveryMode = await RecoveryPrompt.waitPrompt( this );
@@ -197,14 +210,14 @@ export default class ActorEd extends Actor {
     const totalDamage = this.system.characteristics.health.damage.total;
     const currentWounds = this.system.characteristics.health.wounds;
     const newWounds = currentWounds > 0 ? currentWounds - 1 : 0;
-    const recoveryTestPerDay = this.system.characteristics.recoveryTests.max;
+    const recoveryTestPerDay = this.system.characteristics.recoveryTestsRecource.max;
     const woundsPath = `system.characteristics.health.wounds`;
-    const recoveryTestAvailablePath = `system.characteristics.recoveryTests.value`;
-    const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTests.stun`;
+    const recoveryTestAvailablePath = `system.characteristics.recoveryTestsRecource.value`;
+    const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty`;
 
     // logic which is not triggering a roll
     if ( recoveryMode === "recovery" ) {
-      if ( this.system.characteristics.recoveryTests.value < 1 ) {
+      if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
         ui.notifications.warn( "Localize: Not enough recovery tests available." );
         return;
       } else {
@@ -231,7 +244,7 @@ export default class ActorEd extends Actor {
       }
     }
     else if ( recoveryMode === "recoverStun" ) {
-      if ( this.system.characteristics.recoveryTests.value < 1 ) {
+      if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
         ui.notifications.warn( "Localize: Not enough recovery tests available." );
         return;
       } else {
@@ -252,9 +265,21 @@ export default class ActorEd extends Actor {
       step: recoveryStep
     } );
     const recoveryFinalStep = { base: recoveryStep }
-    const edRollOptions = await this.createEdRollOptions( "effect", "recovery", 0, undefined, recoveryFinalStep, false, chatFlavor );
+    const edRollOptions = EdRollOptions.fromActor( 
+      {
+      testType: "effect",
+      rollType: "recovery",
+      rollSubType: recoveryMode,
+      strain: 0,
+      target: undefined,
+      step: recoveryFinalStep,
+      devotionRequired: false,
+      chatFlavor: chatFlavor,
+      },
+      this,
+     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll, recoveryMode );
+    this.#processRoll( roll );
   }
 
 
@@ -344,8 +369,19 @@ export default class ActorEd extends Actor {
       step: knockdownStep
     } );
 
-    const knockdownStepFinal = { base: knockdownStep };
-    const edRollOptions = await this.createEdRollOptions( "action", "knockdown", strain, difficultyFinal, knockdownStepFinal, devotionRequired, chatFlavor );
+    const knockdownStepFinal = { base: knockdownStep + this.system.singleBonuses.knockdownEffects.value };
+    const edRollOptions = EdRollOptions.fromActor( 
+      {
+      testType: "action",
+      rollType: "knockdown",
+      strain: strain,
+      target: difficultyFinal,
+      step: knockdownStepFinal,
+      devotionRequired: devotionRequired,
+      chatFlavor: chatFlavor,
+      },
+      this,
+     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
 
     this.#processRoll( roll );
@@ -385,7 +421,19 @@ export default class ActorEd extends Actor {
 
     const difficulty = { base: 6 };
     const jumpUpStepFinal = { base: jumpUpStep };
-    const edRollOptions = await this.createEdRollOptions( "action", "jumpUp", strain, difficulty, jumpUpStepFinal, devotionRequired, chatFlavor );
+    // const edRollOptions = await this.createEdRollOptions( "action", "jumpUp", strain, difficulty, jumpUpStepFinal, devotionRequired, chatFlavor );
+    const edRollOptions = EdRollOptions.fromActor( 
+      {
+      testType: "action",
+      rollType: "jumpUp",
+      strain: strain,
+      target: difficulty,
+      step: jumpUpStepFinal,
+      devotionRequired: devotionRequired,
+      chatFlavor: chatFlavor,
+      },
+      this,
+     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
 
     this.#processRoll( roll );
@@ -416,7 +464,7 @@ export default class ActorEd extends Actor {
    * @param {EdRoll} roll The prepared Roll.
    * @param {string} recoveryMode type of recovery
    */
-  #processRoll( roll, recoveryMode ) {
+  #processRoll( roll ) {
     if ( !roll ) {
       // No roll available, do nothing.
       return;
@@ -433,7 +481,7 @@ export default class ActorEd extends Actor {
     }
 
     const rollTypeProcessors = {
-      "recovery": () => this.#processRecoveryResult( roll, recoveryMode ),
+      "recovery": () => this.#processRecoveryResult( roll ),
       "knockdown": () => this.#processKnockdownResult( roll ),
       "jumpUp": () => this.#processJumpUpResult( roll ),
     };
@@ -475,7 +523,7 @@ export default class ActorEd extends Actor {
    * @param {string} recoveryMode type of the recovery
    * @returns {Promise<void>}
    */
-  async #processRecoveryResult( roll, recoveryMode ) {
+  async #processRecoveryResult( roll ) {
     await roll.evaluate();
 
     if ( !roll._total ) {
@@ -483,7 +531,7 @@ export default class ActorEd extends Actor {
     }
 
     const { characteristics } = this.system;
-    const { health, recoveryTests } = characteristics;
+    const { health, recoveryTestsRecource } = characteristics;
     const { damage, wounds } = health;
     const { stun, standard, total } = damage;
 
@@ -493,20 +541,20 @@ export default class ActorEd extends Actor {
     const newPhysicalDamage = Math.max( standard - healingRate, 0 );
     const newStunDamage = Math.max( stun - healingRate, 0 );
 
-    const recoveryTestPerDay = recoveryTests.max;
-    const recoveryTestsCurrent = recoveryTests.value;
+    const recoveryTestPerDay = recoveryTestsRecource.max;
+    const recoveryTestsCurrent = recoveryTestsRecource.value;
 
     const updatePaths = {
       wounds: `system.characteristics.health.wounds`,
       standardDamage: `system.characteristics.health.damage.standard`,
       stunDamage: `system.characteristics.health.damage.stun`,
-      recoveryTestAvailable: `system.characteristics.recoveryTests.value`,
-      recoveryStunAvailability: `system.characteristics.recoveryTests.stun`,
+      recoveryTestAvailable: `system.characteristics.recoveryTestsRecource.value`,
+      recoveryStunAvailability: `system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty`,
     };
 
     const updateData = {};
 
-    switch ( recoveryMode ) {
+    switch ( roll.options.rollSubType ) {
       case "recovery":
         updateData[updatePaths.standardDamage] = newPhysicalDamage;
         updateData[updatePaths.stunDamage] = newStunDamage;

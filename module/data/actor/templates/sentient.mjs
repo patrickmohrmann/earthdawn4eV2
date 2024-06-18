@@ -173,7 +173,7 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.wounds"
                     } ),
                 } ),
-                recoveryTests: new fields.SchemaField( {
+                recoveryTestsRecource: new fields.SchemaField( {
                     max: new fields.NumberField( {
                         required: true,
                         nullable: false,
@@ -192,7 +192,7 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
-                    stun: new fields.BooleanField( {
+                    stunRecoveryAvailabilty: new fields.BooleanField( {
                         required: true,
                         initial: false,
                         label: "ED.Actor.Characteristics.recoveryTestsStun"

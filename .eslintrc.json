@@ -324,6 +324,7 @@
     "require-await": "off",
     "require-unicode-regexp": "off",
     "require-yield": "error",
+    "semi": ["error", "always"],
     "sort-imports": "off",
     "sort-keys": "off",
     "sort-vars": "off",

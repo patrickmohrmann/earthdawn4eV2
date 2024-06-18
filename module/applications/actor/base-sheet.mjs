@@ -1,4 +1,5 @@
 import ED4E from "../../config.mjs";
+import TakeDamagePrompt from "../global/take-damage-prompt.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -77,24 +78,6 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
 
     // Actor Sheet Buttons
-     // recovery Test
-    //  html.find( ".roll-recovery" ).click( this._onRecoveryRoll.bind( this ) );
-
-    //  // Take Damage Test
-    //  html.find( ".roll-takeDamage" ).click( this._onTakeDamage.bind( this ) );
-
-    //  // Jump Up Test
-    //  html.find( ".roll-jumpUp" ).click( this._onJumpUp.bind( this ) );
-
-    //  // Initiative Test
-    //  html.find( ".roll-Initiative" ).click( this._onInitiative.bind( this ) );
-
-    //  // Half magic Test
-    //  html.find( ".roll-halfMagic" ).click( this._onHalfMagic.bind( this ) );
-
-    //  // Knock down Test
-    //  html.find( ".roll-knockDown" ).click( this._onKnockDown.bind( this ) );
-
     html.find( ".action-buttons" ).click( event => {
       const action = event.currentTarget.dataset.action;
       const actionMapping = {
@@ -196,9 +179,19 @@ export default class ActorSheetEd extends ActorSheet {
    * Handles Recovery tests  
    * @param {Event} event The originating click event.
    */
-  _onTakeDamage( event ) {
-    event.preventDefault();
-    this.actor.takeDamageManual( {event: event} );
+  // _onTakeDamage( event ) {
+  //   event.preventDefault();
+  //   this.actor.takeDamageManual( {event: event} );
+  // }
+
+  async _onTakeDamage( event ) {
+    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
+    const amount = takeDamage.damage;
+    const damageType = takeDamage.damageType;
+    const armorType = takeDamage.armorType;
+    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
+
+    this.actor.takeDamage( amount, false, damageType, armorType, ignoreArmor );
   }
 
   _onJumpUp( event ) {
@@ -218,7 +211,7 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onKnockDown( event ) {
     event.preventDefault();
-    const amount = 0
+    const amount = 0;
     this.actor.knockdownTest( amount );
   }
 

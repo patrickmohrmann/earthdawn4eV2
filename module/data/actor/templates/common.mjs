@@ -23,6 +23,19 @@ export default class CommonTemplate extends SystemDataModel {
                 initialKeys: CONFIG.ED4E.globalBonuses,
                 initialKeysOnly: true,
                 label: "ED.Attributes.globalBonuses"
+            } ),
+            singleBonuses: new MappingField( new fields.SchemaField( {
+                value: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                } )
+            } ), {
+                initialKeys: CONFIG.ED4E.singleBonuses,
+                initialKeysOnly: true,
+                label: "ED.Config.Eae"
             } )
         } );
     }
