@@ -171,7 +171,7 @@ export default class PcData extends NamegiverTemplate.mixin(
 
         const actorApp = newActor.sheet.render( true, {focus: true} );
         // we have to wait until the app is rendered to activate a tab
-        requestAnimationFrame( () => actorApp.activateTab("actor-notes-tab") );
+        requestAnimationFrame( () => actorApp.activateTab( "actor-notes-tab" ) );
 
         return newActor;
     }
@@ -223,7 +223,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         this.#prepareBaseDefenses();
         this.#prepareBaseArmor();
         this.#prepareBaseHealth();
-        this.#prepareBaseRecoveryTests();
+        this.#prepareBaseRecoveryTestsRecource();
     }
 
     /**
@@ -235,7 +235,7 @@ export default class PcData extends NamegiverTemplate.mixin(
             physical: "dex",
             mystical: "per",
             social: "cha"
-        }
+        };
         for ( const defenseType of Object.keys( this.characteristics.defenses ) ) {
             this.characteristics.defenses[defenseType].baseValue = getDefenseValue(
               this.attributes[defenseAttributeMapping[defenseType]].value
@@ -274,8 +274,8 @@ export default class PcData extends NamegiverTemplate.mixin(
      * Prepare the available recovery tests based on attribute values.
      * @private
      */
-    #prepareBaseRecoveryTests() {
-        this.characteristics.recoveryTests.max = Math.ceil( this.attributes.tou.value / 6 );
+    #prepareBaseRecoveryTestsRecource() {
+        this.characteristics.recoveryTestsRecource.max = Math.ceil( this.attributes.tou.value / 6 );
     }
 
     /**

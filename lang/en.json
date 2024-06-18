@@ -82,8 +82,8 @@
             },
             "Characteristics": {
                 "currentDamage":                                    "Damage",
-                "currentRecoveryTests":                             "Current",
-                "dailyRecoveryTests":                               "Daily",
+                "currentrecoveryTestsRecource":                             "Current",
+                "dailyrecoveryTestsRecource":                               "Daily",
                 "deathThesholdShort":                               "Death Rating",
                 "mysticalArmor":                                    "Mystical",
                 "mysticalDefense":                                  "Mystical",
