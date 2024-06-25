@@ -89,7 +89,7 @@ async _updateFormData(formData) {
 
   async _assignLP(event) {
     event.preventDefault();
-    if ( !this.object.amount ) return ui.notifications.error(game.i18n.localize('ED.Dialogs.Errors.noAmount'));
+    if ( !this.object.amount ) return ui.notifications.error(game.i18n.localize('ED.Dialogs.Errors.noLp'));
     await this.submit({ preventRender: true });
 
 
