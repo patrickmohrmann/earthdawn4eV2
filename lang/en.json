@@ -237,6 +237,9 @@
                 "legendPoints":                                     "Legend Points",
                 "description":                                      "Description"
             },
+            "Errors": {
+                "noLp":                                            "No Legend Points entered!"
+            },
             "Header": {
                 "activeUser":                                       "Active User",
                 "inactiveUser":                                     "Inactive User",
@@ -245,6 +248,9 @@
             "Navigator":{
                 "baseInput":                                        "Base Options",
                 "options":                                          "Other Options"
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Enter your description here"
             }, 
             "Title": {
                 "assignLp":                                         "Assign Legend Points",

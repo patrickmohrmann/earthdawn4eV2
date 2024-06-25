@@ -236,6 +236,9 @@
                 "legendPoints":                                     "Legendenpunkte",
                 "description":                                      "Beschreibung"
             },
+            "Errors": {
+                "noLp":                                            "Keine Legendenpunkte angegeben!"
+            },
             "Header": {
                 "activeUser":                                       "Aktive Spieler",
                 "inactiveUser":                                     "Inaktive Spieler",
@@ -244,7 +247,10 @@
             "Navigator":{
                 "baseInput":                                        "Standard Optionen",
                 "options":                                          "Sonstige Optionen"
-            },  
+            }, 
+            "Placeholder": {
+                "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
             "Title": {
                 "assignLp":                                         "Legendenpunkte zuweisen",
                 "rollPrompt":                                       "Würfelübersicht"
