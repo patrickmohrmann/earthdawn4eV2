@@ -1,28 +1,22 @@
 import LpTransactionData from "../../data/advancement/lp-transaction.mjs";
 
-/**
- * The application responsible for assigning Legend Points to player characters
- * @param {object}     data                 The object this application edits.
- * @param {number}     data.amount          The LP amount to be assigned.
- * @param {string}     data.description     A description text for the LP transaction entry.
- * @param {string[]}   data.selectedActors  The IDs of the selected actors.
- */
 export default class AssignLpPrompt extends FormApplication {
-  constructor( data = {}, options = {} ) {
-    super( data );
+  constructor(object = {}, options = {}) {
+    super(object, options);
     this.resolve = options.resolve;
+    this.object = {
+      ...this.object,
+      selectedActors: object.selectedActors || [],
+      amount: object.amount || "",
+      description: object.description || ''
+    };
   }
 
-  /**
-   * Wait for dialog to be resolved.
-   * @param {object} [data]           Initial data to pass to the constructor.
-   * @param {object} [options]        Options to pass to the constructor.
-   */
-  static async waitPrompt( data = {}, options = {} ) {
-    return new Promise( ( resolve ) => {
+  static async waitPrompt(object = {}, options = {}) {
+    return new Promise((resolve) => {
       options.resolve = resolve;
-      new this( data, options ).render( true, { focus: true } );
-    } );
+      new this(object, options).render(true, { focus: true });
+    });
   }
 
   static get defaultOptions() {
@@ -47,102 +41,75 @@ export default class AssignLpPrompt extends FormApplication {
   }
 
   get title() {
-    return game.i18n.localize( 'ED.Dialogs.Title.assignLp' );
+    return game.i18n.localize('ED.Dialogs.Title.assignLp');
   }
 
   get template() {
     return 'systems/ed4e/templates/prompts/assign-legend.hbs';
   }
 
-  /** @inheritDoc */
-  activateListeners( html ) {
-    super.activateListeners( html );
-    $( this.form.querySelector( 'button.cancel' ) ).on( 'click', this.close.bind( this ) );
-    $( this.form.querySelector( 'button.ok' ) ).on( 'click', this._assignLP.bind( this ) );
+  activateListeners(html) {
+    super.activateListeners(html);
+    $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
+    $(this.form.querySelector('button.ok')).on('click', this._assignLP.bind(this));
   }
 
-  async getData( options = {} ) {
-    const context = super.getData( options );
-
+  async getData(options = {}) {
+    const context = super.getData(options);
     context.user = game.users.filter( u => u.active )
 
-    const actorUserActive = game.users.filter( u => u.active && u.character ).map( user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} ) )
-    const actorUserInactive =  game.users.filter( u => !u.active && u.character ).map( user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} ) )
-    const notGMs = game.users.filter( user => !user.isGM )
-    const actorsOwnedNotConfigured = game.actors.filter( actor => notGMs.map( user => actor.testUserPermission( user,"OWNER" ) && user.character?.id !== actor.id ).some( Boolean ) ).map( actor => ( {actorId: actor.id, actorName: actor.name} ) )
-    context.actorUserActive = actorUserActive;
-    context.actorUserInactive = actorUserInactive;
-    context.actorsNoUserConfigured = actorsOwnedNotConfigured;
-
+        const actorUserActive = game.users.filter( u => u.active && u.character ).map( user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} ) )
+        const actorUserInactive =  game.users.filter( u => !u.active && u.character ).map( user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} ) )
+        const notGMs = game.users.filter( user => !user.isGM )
+        const actorsOwnedNotConfigured = game.actors.filter( actor => notGMs.map( user => actor.testUserPermission( user,"OWNER" ) && user.character?.id !== actor.id ).some( Boolean ) ).map( actor => ( {actorId: actor.id, actorName: actor.name} ) )
+        context.actorUserActive = actorUserActive;
+        context.actorUserInactive = actorUserInactive;
+        context.actorsNoUserConfigured = actorsOwnedNotConfigured;   
+    
     return context;
   }
 
-  // async _updateObject( event, formData ) {
-  //   this.object = foundry.utils.expandObject( formData );
-  //   // Re-render sheet with updated values
-  //   this.render( );
-  // }
-
-  async _upda1teObject( event, formData ) {
-    console.log( "Form Data before expansion:", formData ); // Debugging line to see formData structure
-  
-    // Assuming formData should contain a property like 'selectedActor' or similar
-    // Ensure the formData is structured correctly and contains the expected properties
-    this.object = foundry.utils.expandObject( formData );
-  
-    console.log( "Object after expansion:", this.object ); // Debugging line to see the expanded object
-  
-    // If the actor selection is not correctly updated, check the formData structure
-    // and ensure 'selectedActor' (or the correct property name) is present and correctly named
-  
-    // Re-render sheet with updated values
-    this.render();
-  }
-
-   /** @inheritDoc */
-   async _updateObject( event, formData ) {
-    return Promise.resolve( this._assignLpData( formData ) ).then( this.render( true ) );
-  }
-
-  _assignLpData( data = {} ) {
-    this.options.updateSource( data );
-    return this.options;
+async _updateObject(event, formData) {
+  this._updateFormData(formData);
+  const selectedActorIds = formData.selectedActors || [];
+  return formData;
 }
 
-  /** @inheritDoc */
-  async close( options = {} ) {
-    this.resolve?.( null );
-    return super.close( options );
+async _updateFormData(formData) {
+  this.object.selectedActors = formData.selectedActors || [];
+  this.object.amount = formData.amount || 0;
+  this.object.description = formData.description || 'No description provided';
+  return this.object;
+}
+
+  async close(options = {}) {
+    this.resolve?.(null);
+    return super.close(options);
   }
 
-  async _assignLP( event ) {
+  async _assignLP(event) {
     event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
+    if ( !this.object.amount ) return ui.notifications.error(game.i18n.localize('ED.Dialogs.Errors.noAmount'));
+    await this.submit({ preventRender: true });
 
-    await this.submit( {preventRender: true} );
 
     const { selectedActors, amount, description } = this.object;
+    const transactionData = selectedActors.reduce((obj, actorId) => {
+      if (!actorId) return obj; // Skip if actorId is null
+  const actor = game.actors.get(actorId);
+  if (!actor) return obj; // Skip if actor is not found
+      return {
+        ...obj,
+        [actorId]: new LpTransactionData({
+          amount,
+          description,
+          lpBefore: actor.system.lp.current,
+          lpAfter: actor.system.lp.current + amount,
+        }),
+      };
+    }, {});
 
-    const transactionData = selectedActors.reduce(
-      ( obj, actorId ) => {
-        // can assume its only world actors
-        const actor = game.actors.get( actorId );
-        return {
-          ...obj,
-          [actorId]: new LpTransactionData( {
-            amount,
-            description,
-            lpBefore: actor.system.lp.current,
-            lpAfter: actor.system.lp.current + amount,
-          } ),
-        };
-      },
-      {}
-    );
-
-    this.resolve?.( transactionData );
+    this.resolve?.(transactionData);
     return this.close();
   }
-
 }
