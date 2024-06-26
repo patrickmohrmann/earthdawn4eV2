@@ -126,6 +126,34 @@ export default class ActorEd extends Actor {
     return this.update( { system: { lp: lpUpdateData } } );
   }
 
+
+  /**
+     * 
+     * @param {object} item         The item that was changed or added
+     * @param {object} actor        The actor that the item belongs to
+     * @param {boolean} free        If the item was freely added
+     * @param {boolean} addedNew    If the item was newly added
+     */
+  spendLp ( item, actor, free , addedNew) {
+    let description = "added" + item.name;
+    // add Flavortext based on the type of the transaction and item -- Later
+    // if ( addedNew === true ) {
+    //     i18n( "X.SpentLPForNewItem", { name: item.name } );
+    const requiredLp = free ? 0 : 50;
+    const spendingEntry = {
+        amount: requiredLp,
+        date: new Date().toISOString(), // Record the time of the transaction
+        itemUuid: item.uuid,
+        lpBefore: actor.system.lp.current,
+        lpAfter: actor.system.lp.current - requiredLp,
+        name: item.name,
+        description: description,
+    };
+
+    actor.system.lp.spendings.push(spendingEntry);
+
+}
+
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
