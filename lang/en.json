@@ -179,7 +179,19 @@
                 "step":                                             "Step"   
             },
             "LpTracking": {
-                "attributeImprovement":                             "Attribute increase"
+                "attributeImprovement":                             "Attribute increase",
+                "Header": {
+                    "advancement":                                  "Advancement",
+                    "date":                                         "Date",
+                    "description":                                  "Description",
+                    "legendPoints":                                 "Legend Points",
+                    "name":                                         "Name",
+                    "type":                                         "Type"
+                },
+                "Spendings": {
+                    "description":                                  "Enhancement from {previousLevel} to {newLevel}",
+                    "descriptionNewlyAdded":                        "Newly added item"
+                }
             },
             "Navigator": {
                 "classes":                                          "Vocation",

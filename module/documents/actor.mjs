@@ -11,8 +11,12 @@ import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import { sum } from "../utils.mjs";
 import PromptFactory from "../applications/global/prompt-factory.mjs";
 
+
+import LpTransactionData from "../data/advancement/lp-transaction.mjs";
+
 const futils = foundry.utils;
 
+// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -137,21 +141,31 @@ export default class ActorEd extends Actor {
   spendLp ( item, actor, free , addedNew) {
     let description = "added" + item.name;
     // add Flavortext based on the type of the transaction and item -- Later
-    // if ( addedNew === true ) {
-    //     i18n( "X.SpentLPForNewItem", { name: item.name } );
+
+    if (addedNew) {
+      description = game.i18n.localize( "ED.Actor.LpTracking.Spendings.descriptionNewlyAdded" );
+    } else {
+      description = game.i18n.format( "ED.Dialogs.LegendPoints.SpendLp", { 
+      previousLevel: item.system.level - 1,
+      newLevel: item.system.level,
+     } );
+    }
+
     const requiredLp = free ? 0 : 50;
-    const spendingEntry = {
+    // const currentDate = new Date().toISOString(); // Record the time of the transaction
+    const currentDate = 5552223365; // Record the time of the transaction
+    const transactionData = new LpSpendingTransactionData( {
+        entityType: item.type,
+        type: "spendings",
         amount: requiredLp,
-        date: new Date().toISOString(), // Record the time of the transaction
+        date: currentDate,
         itemUuid: item.uuid,
         lpBefore: actor.system.lp.current,
         lpAfter: actor.system.lp.current - requiredLp,
         name: item.name,
-        description: description,
-    };
-
-    actor.system.lp.spendings.push(spendingEntry);
-
+        description: description
+    } )
+    return this.addLpTransaction( "spendings", transactionData );
 }
 
   /**

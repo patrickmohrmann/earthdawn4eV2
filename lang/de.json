@@ -178,7 +178,19 @@
                 "step":                                             "Stufe"   
             },
             "LpTracking": {
-                "attributeImprovement":                             "Attribut Erhöhung"
+                "attributeImprovement":                             "Attribut Erhöhung",
+                "Header": {
+                    "advancement":                                  "Fortschritt",
+                    "date":                                         "Datum",
+                    "description":                                  "Beschreibung",
+                    "legendPoints":                                 "Legendenpunkte",
+                    "name":                                         "Name",
+                    "type":                                         "Typ"
+                },
+                "Spendings": {
+                    "description":                                  "Verbesserung von {previousLevel} auf {newLevel}",
+                    "descriptionNewlyAdded":                        "Neu hinzugefügt"
+                }
             },
             "Navigator": {
                 "classes":                                          "Berufung",

@@ -13,6 +13,12 @@ export default class LpSpendingTransactionData extends LpTransactionData {
                 label: "X.transactionType",
                 hint: "X.transaction Type",
             } ),
+            entityType: new fields.StringField( {
+                required: true,
+                blank: false,
+                label: "X.transactionEntityType",
+                hint: "X.Type of the changed item",
+            } ),
             name: new fields.StringField( {
                 required: true,
                 blank: false,
