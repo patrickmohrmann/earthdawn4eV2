@@ -78,6 +78,8 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
     super.activateListeners( html );
 
     $( this.form.querySelector( 'button.ok' ) ).on( 'click', this.ok.bind( this ) );
+    $( this.form.querySelector('button.close') ).on('click', this.close.bind( this ) );
+
 
   }
 
@@ -91,9 +93,16 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
   }
 
   /** @inheritDoc */
-  async close( options = {} ) {
+  async close1( options = {} ) {
     this.resolve?.( null );
     return super.close( options );
+  }
+
+  /** @inheritDoc */
+  async close( event ) {
+    await this.submit( { preventRender: true } );
+    this.resolve?.( this.object );
+    return this.close1( );
   }
 
   /** @inheritDoc */
@@ -104,7 +113,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
     await this.submit( { preventRender: true } );
     this.resolve?.( this.object );
-    return this.close( );
+    return this.close1( );
   }
 
 }
