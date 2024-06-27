@@ -774,21 +774,22 @@ export default class ActorEd extends Actor {
      * @param {boolean} free        If the item was freely added
      * @param {boolean} addedNew    If the item was newly added
      */
-  addAbility(item, free, addedNew) {
+  async addAbility(item, free, addedNew) {
     let requiredLp = 0;
-    // const legendPointsCostConfig = ED4E.legendPointsCost;
-    // const tier = ED4E.tier;
-    // // "knackAbility", "knackKarma", "knackManeuver", "spell", "spellKnack", "thread"
-    // if ( item.type === "knackAbility"
-    //   || item.type === "knackKarma"
-    //   || item.type === "knackManeuver"
-    // ) {
-    //   const knackMinLevel = item.system.source.minLevel;
-      
-    //   const knackTier = tier[item.system.tier];
-    //   requiredLp = legendPointsCostConfig[knackMinLevel];
-    // }
-  
+    const legendPointsCostConfig = ED4E.legendPointsCost;
+    const knackMinLevel = item.system.source.minLevel;
+    if (item.type === "knackAbility"
+      || item.type === "knackManeuver"
+      || item.type === "knackKarma" ) {
+      const knackSourceId = item.system.source.knackSource
+      const knackSource = this.items.filter(item => item.uuid === knackSourceId)[0];
+      if ( knackSource.system.level < knackMinLevel ) {
+        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotHighEnough"));
+        return;
+      } else {
+        requiredLp = legendPointsCostConfig[knackMinLevel];
+        }
+      }
     let description = "added" + item.name;
     if (addedNew) {
       description = game.i18n.localize("ED.Actor.LpTracking.Spendings.descriptionNewlyAdded");
@@ -798,6 +799,7 @@ export default class ActorEd extends Actor {
         newLevel: item.system.level,
       });
     }
+
 
     
     // const currentDate = new Date().toISOString(); // Record the time of the transaction
@@ -813,7 +815,10 @@ export default class ActorEd extends Actor {
       name: item.name,
       description: description
     })
-    return this.addLpTransaction("spendings", transactionData);
+  //   return this.addLpTransaction("spendings", transactionData);
+  // }
+    const transactionSuccess = await this.addLpTransaction("spendings", transactionData);
+    return transactionSuccess; // Return the success status
   }
 
   async addLpTransaction(type, transactionData) {

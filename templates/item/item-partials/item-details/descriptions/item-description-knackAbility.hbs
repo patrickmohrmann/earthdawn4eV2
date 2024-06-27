@@ -36,8 +36,14 @@
     {{!-- Source Talent --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Knack.sourceTalent"}}:</label>
-        <input class="input__text-input" name="system.sourceTalent" type="text" value="{{item.system.sourceTalent}}"
+        <input class="input__text-input" name="system.source.knackSource" type="text" value="{{item.system.source.knackSource}}"
             data-dtype="String">
+    </div>
+    {{!-- min Level Source Talent --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Knack.minLevel"}}:</label>
+        <input class="input__text-input" name="system.source.minLevel" type="text" value="{{item.system.source.minLevel}}"
+            data-dtype="Number">
     </div>
     {{!-- Standard Effect --}}
     <div class="item-data__input--line">

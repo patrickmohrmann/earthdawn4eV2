@@ -402,16 +402,30 @@ async _onAbilityEnhancement( event ) {
             free: {
               icon: '<i class="fas fa-check"></i>',
               label: "For Free",
-              callback: () => {
-                this.actor.addAbility( itemData, true, true);
+              callback: async () => {
+                // this.actor.addAbility( itemData, false, true );
+                const abilityAddedSuccessfully = await this.actor.addAbility(itemData, false, true);
+                if (!abilityAddedSuccessfully) {
+                  console.error("Failed to add LP transaction. Aborting item drop.");
+                  return; // Exit if the LP transaction was not successful
+                } else {
+                  super._onDropItem(event, data);
+                }
                 resolve(true);
               },
             },
             spendLP: {
               icon: '<i class="fas fa-check"></i>',
               label: "Spend LP",
-              callback: () => {
-                this.actor.addAbility( itemData, false, true );
+              callback: async () => {
+                // this.actor.addAbility( itemData, false, true );
+                const abilityAddedSuccessfully = await this.actor.addAbility(itemData, false, true);
+                if (!abilityAddedSuccessfully) {
+                  console.error("Failed to add LP transaction. Aborting item drop.");
+                  return; // Exit if the LP transaction was not successful
+                } else {
+                  super._onDropItem(event, data);
+                }
                 resolve(true);
               },
             },

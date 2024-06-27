@@ -18,8 +18,11 @@
                 <h3>{{localize "ED.Actor.Header.talentsDiscipline"}}</h3>
             </div>
             <div>
-                {{#each (gettalentCategory actor.itemTypes.talent "discipline") }}
+                {{#each (gettalentCategory actor.itemTypes.talent "discipline") as |talent i|}}
                         {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{#each (getSourceAbility talent actor.itemTypes.knackAbility) as |knack id|}}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{/each}}
                 {{/each}}
             </div>
         </div> 
@@ -30,6 +33,9 @@
             <div>
                 {{#each (gettalentCategory actor.itemTypes.talent "optional") }}
                         {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{#each (getSourceAbility talent actor.itemTypes.knackAbility) as |knack id|}}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{/each}}
                 {{/each}}
             </div>
         </div>
@@ -40,6 +46,9 @@
             <div>
                 {{#each (gettalentCategory actor.itemTypes.talent "free") }}
                         {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{#each (getSourceAbility talent actor.itemTypes.knackAbility) as |knack id|}}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{/each}}
                 {{/each}}
             </div>
         </div>
@@ -50,6 +59,9 @@
             <div>
                 {{#each (gettalentCategory actor.itemTypes.talent "versatility") }}
                         {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{#each (getSourceAbility talent actor.itemTypes.knackAbility) as |knack id|}}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{/each}}
                 {{/each}}
             </div>
         </div>
@@ -58,7 +70,10 @@
      
     {{else}}
         {{#each actor.itemTypes.talent}}
-        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs"}}
+        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{#each (getSourceAbility talent actor.itemTypes.knackAbility) as |knack id|}}
+                        {{> "systems/ed4e/templates/actor/cards/ability-card.hbs" }}
+                        {{/each}}
         {{/each}}
     {{/if}}
     

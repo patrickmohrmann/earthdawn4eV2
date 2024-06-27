@@ -2,3 +2,14 @@
     <h3>{{localize "ED.Item.General.description"}}</h3>
     {{> "systems/ed4e/templates/global/editor.hbs"}}
 </div>
+{{!-- min Level Source Talent --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Knack.minLevel"}}:</label>
+        <input class="input__text-input" name="system.source.minLevel" type="text" value="{{item.system.source.minLevel}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Standard Effect --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Knack.standardEffect"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.standardEffect">
+    </div>

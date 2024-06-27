@@ -13,11 +13,24 @@ export default class KnackTemplate extends SystemDataModel.mixin(
     static defineSchema() {
         const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-            knackSource: new fields.DocumentUUIDField( {
-                required: true,
-                nullable: true,
-                label: "ED.Item.Knack.source"
-            } ), 
+            source: new fields.SchemaField( {
+                knackSource: new fields.DocumentUUIDField( {
+                    required: true,
+                    nullable: true,
+                    label: "ED.Item.Knack.source"
+                } ),
+                minLevel:  new fields.NumberField( {
+                    required: false,
+                    nullable: true,
+                    positive: true,
+                    integer: true,
+                    min: 1,
+                    initial: 1,
+                } ),
+            },
+            {
+                required: false
+            }),
         } );
     }
 

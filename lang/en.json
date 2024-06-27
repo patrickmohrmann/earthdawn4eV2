@@ -193,6 +193,7 @@
                     "descriptionAttribute":                         "Enhanced {attributeName} from {previousLevel} to {newLevel}",
                     "descriptionAbility":                          "Enhanced {abilityName} from {previousLevel} to {newLevel}",
                     "descriptionNewlyAdded":                        "Newly added item",
+                    "knackSourceNotHighEnough":                     "The Rank of the Talent is not high enough",
                     "maxIncreaseReached":                           "Maximum increase reached"
                 }
             },

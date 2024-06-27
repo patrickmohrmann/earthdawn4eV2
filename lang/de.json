@@ -192,6 +192,7 @@
                     "descriptionAttribute":                         "Verbessert {attributeName} von {previousLevel} auf {newLevel}",
                     "descriptionAbility":                           "Verbessert {abilityName} von {previousLevel} auf {newLevel}",
                     "descriptionNewlyAdded":                        "Neu hinzugefügt",
+                    "knackSourceNotHighEnough":                     "Der Rank des Talents ist nicht hoch genug für diesen Kniff",
                     "maxIncreaseReached":                           "Maximale Steigerung erreicht"
                 }
             },

@@ -9,6 +9,16 @@ export default function registerHandlebarHelpers() {
 
   // General Handlebars
 
+  Handlebars.registerHelper('getSourceAbility', (talent, knacks) => {
+    if (talent === undefined || knacks === undefined) {
+      return;
+    }
+    //return knacks.filter((knack) => knack.data.sourceTalentName === talent.name);
+    // V10 changes
+    return knacks.filter((knack) => knack.system.source.knackSource === talent.uuid);
+		// change End
+  });
+
   Handlebars.registerHelper( 'hasItems', ( collection ) => {
     if (!collection || typeof collection[Symbol.iterator] !== 'function' ) {
       // Check if collection is iterable
