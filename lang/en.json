@@ -190,7 +190,10 @@
                 },
                 "Spendings": {
                     "description":                                  "Enhancement from {previousLevel} to {newLevel}",
-                    "descriptionNewlyAdded":                        "Newly added item"
+                    "descriptionAttribute":                         "Enhanced {attributeName} from {previousLevel} to {newLevel}",
+                    "descriptionAbility":                          "Enhanced {abilityName} from {previousLevel} to {newLevel}",
+                    "descriptionNewlyAdded":                        "Newly added item",
+                    "maxIncreaseReached":                           "Maximum increase reached"
                 }
             },
             "Navigator": {

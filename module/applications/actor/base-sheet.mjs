@@ -113,6 +113,11 @@ export default class ActorSheetEd extends ActorSheet {
     // Legend point History (Earned)
     html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
 
+    html.find( ".item-upgrade__attribute" ).click( this._onAttributeEnhancement.bind( this ) );
+
+    html.find( ".item-upgrade__ability" ).click( this._onAbilityEnhancement.bind( this ) );
+
+
 
      // NEW ######################################################
      html.on('click', '.group-header', event => {
@@ -177,6 +182,26 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     this.actor.legendPointHistoryEarned( this.actor );
   }
+
+/**
+ * @description This function is used to upgrade attributes
+ */
+async _onAttributeEnhancement( event ) {
+  event.preventDefault();
+  const attribute = event.currentTarget.dataset.attribute;
+  await this.actor.upgradeAttribute( attribute );
+}
+
+/**
+ * @description This function is used to upgrade attributes
+ */
+async _onAbilityEnhancement( event ) {
+  event.preventDefault();
+  const li = event.currentTarget.closest( ".item-id" );
+  const ability = this.actor.items.get( li.dataset.itemId );
+  this.actor.upgradeAbility( ability );
+}
+
   /**
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
@@ -358,7 +383,8 @@ export default class ActorSheetEd extends ActorSheet {
 
   async _onDropItem(event, data) {
     const itemData = await fromUuid(data.uuid);
-    const lpRelevantItemTypes = ["devotion", "knackAbility", "knackKarma", "knackManeuver", "skill", "spell", "spellKnack", "talent", "thread"];
+    // const lpRelevantItemTypes = ["devotion", "knackAbility", "knackKarma", "knackManeuver", "skill", "spell", "spellKnack", "talent", "thread"];
+    const lpRelevantItemTypes = ["knackAbility", "knackKarma", "knackManeuver", "spell", "spellKnack", "thread"];
     if (this.actor.type === "character" && lpRelevantItemTypes.includes(itemData.type)) {
   // Parse the dropped data
       try {
@@ -377,7 +403,7 @@ export default class ActorSheetEd extends ActorSheet {
               icon: '<i class="fas fa-check"></i>',
               label: "For Free",
               callback: () => {
-                this.actor.spendLp( itemData, this.actor, true, true);
+                this.actor.addAbility( itemData, true, true);
                 resolve(true);
               },
             },
@@ -385,7 +411,7 @@ export default class ActorSheetEd extends ActorSheet {
               icon: '<i class="fas fa-check"></i>',
               label: "Spend LP",
               callback: () => {
-                this.actor.spendLp( itemData, this.actor, false, true );
+                this.actor.addAbility( itemData, false, true );
                 resolve(true);
               },
             },

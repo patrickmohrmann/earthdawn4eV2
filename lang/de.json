@@ -189,7 +189,10 @@
                 },
                 "Spendings": {
                     "description":                                  "Verbesserung von {previousLevel} auf {newLevel}",
-                    "descriptionNewlyAdded":                        "Neu hinzugefügt"
+                    "descriptionAttribute":                         "Verbessert {attributeName} von {previousLevel} auf {newLevel}",
+                    "descriptionAbility":                           "Verbessert {abilityName} von {previousLevel} auf {newLevel}",
+                    "descriptionNewlyAdded":                        "Neu hinzugefügt",
+                    "maxIncreaseReached":                           "Maximale Steigerung erreicht"
                 }
             },
             "Navigator": {

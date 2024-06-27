@@ -54,6 +54,11 @@
                     <input class="input__number-input" type="text" name="system.attributes.{{@key}}.timesIncreased"
                         value="{{timesIncreased}}">
                 </td>
+                <td>
+                     <a class="item-control item-upgrade__attribute"  data-attribute="{{@key}}" title="{{localize 'earthdawn.u.upgrade'}}">
+                        <i class="fas fa-arrow-circle-up"></i>
+                    </a>
+                </td>
             </tr>
             {{/each}}
         </table>

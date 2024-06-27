@@ -78,14 +78,14 @@ export default class ActorEd extends Actor {
    * @param {string} [type]           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid( edid, type ) {
-    const edidFilter = ( item ) => item.system.edid === edid;
-    if ( !type ) return this.items.filter( edidFilter );
+  getItemsByEdid(edid, type) {
+    const edidFilter = (item) => item.system.edid === edid;
+    if (!type) return this.items.filter(edidFilter);
 
     const itemTypes = this.itemTypes;
     if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${ type } is invalid!` );
 
-    return itemTypes[type].filter( edidFilter );
+    return itemTypes[type].filter(edidFilter);
   }
 
   /**
@@ -95,8 +95,8 @@ export default class ActorEd extends Actor {
    * @param {string} [type]         Optionally, a type name to restrict the search
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
-  getSingleItemByEdid( edid, type ) {
-    return this.getItemsByEdid( edid, type )[0];
+  getSingleItemByEdid(edid, type) {
+    return this.getItemsByEdid(edid, type)[0];
   }
 
   /**
@@ -130,50 +130,12 @@ export default class ActorEd extends Actor {
     return this.update( { system: { lp: lpUpdateData } } );
   }
 
-
-  /**
-     * 
-     * @param {object} item         The item that was changed or added
-     * @param {object} actor        The actor that the item belongs to
-     * @param {boolean} free        If the item was freely added
-     * @param {boolean} addedNew    If the item was newly added
-     */
-  spendLp ( item, actor, free , addedNew) {
-    let description = "added" + item.name;
-    // add Flavortext based on the type of the transaction and item -- Later
-
-    if (addedNew) {
-      description = game.i18n.localize( "ED.Actor.LpTracking.Spendings.descriptionNewlyAdded" );
-    } else {
-      description = game.i18n.format( "ED.Dialogs.LegendPoints.SpendLp", { 
-      previousLevel: item.system.level - 1,
-      newLevel: item.system.level,
-     } );
-    }
-
-    const requiredLp = free ? 0 : 50;
-    // const currentDate = new Date().toISOString(); // Record the time of the transaction
-    const currentDate = new Date(); // Record the time of the transaction
-    const transactionData = new LpSpendingTransactionData( {
-        entityType: item.type,
-        type: "spendings",
-        amount: requiredLp,
-        date: currentDate,
-        itemUuid: item.uuid,
-        lpBefore: actor.system.lp.current,
-        lpAfter: actor.system.lp.current - requiredLp,
-        name: item.name,
-        description: description
-    } )
-    return this.addLpTransaction( "spendings", transactionData );
-}
-
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAttribute( attributeId, options = {} ) {
+  async rollAttribute(attributeId, options = {}) {
     const attributeStep = this.system.attributes[attributeId].step;
     const step = { base: attributeStep };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
@@ -203,7 +165,7 @@ export default class ActorEd extends Actor {
    * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAbility( ability, options = {} ) {
+  async rollAbility(ability, options = {}) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
@@ -524,7 +486,7 @@ export default class ActorEd extends Actor {
    * @returns {boolean}                       Returns `true` if the full amount was deducted (enough available), 'false'
    *                                          otherwise.
    */
-  #useResource( resourceType, amount ) {
+  #useResource(resourceType, amount) {
     const available = this.system[resourceType].value;
     this.update( { [`system.${ resourceType }.value`]: ( available - amount ) } );
     return amount <= available;
@@ -539,8 +501,8 @@ export default class ActorEd extends Actor {
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
-  #processRoll( roll ) {
-    if ( !roll ) {
+  #processRoll(roll) {
+    if (!roll) {
       // No roll available, do nothing.
       return;
     }
@@ -663,11 +625,11 @@ export default class ActorEd extends Actor {
     let overrides = {};
     // Organize non-disabled effects by their application priority
     // baseCharacteristics is list of attributes that need to have Effects applied before Derived Characteristics are calculated
-    const changes = this.effects.reduce( ( changes, e ) => {
-      if ( e.changes.length < 1 ) {
+    const changes = this.effects.reduce((changes, e) => {
+      if (e.changes.length < 1) {
         return changes;
       }
-      if ( e.disabled || e.isSuppressed || !baseCharacteristics.includes( e.changes[0].key ) ) {
+      if (e.disabled || e.isSuppressed || !baseCharacteristics.includes(e.changes[0].key)) {
         return changes;
       }
 
@@ -680,14 +642,14 @@ export default class ActorEd extends Actor {
           return c;
         } )
       );
-    }, [] );
+    }, []);
 
-    changes.sort( ( a, b ) => a.priority - b.priority );
+    changes.sort((a, b) => a.priority - b.priority);
 
     // Apply all changes
-    for ( let change of changes ) {
-      const result = change.effect.apply( this, change );
-      if ( result !== null ) overrides[change.key] = result[change.key];
+    for (let change of changes) {
+      const result = change.effect.apply(this, change);
+      if (result !== null) overrides[change.key] = result[change.key];
     }
 
     // Expand the set of final overrides
@@ -713,7 +675,148 @@ export default class ActorEd extends Actor {
     }
   }
 
-  async addLpTransaction( type, transactionData ) {
+  /** #############################################################
+   * Legend Point Tracking
+   * ############################################################# */
+
+
+  async upgradeAttribute(attribute) {
+    const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
+    // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
+    if (attributeOldIncrease >= 3) {
+      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      return
+    } else {
+      const attributeName = ED4E.attributes[attribute].label;
+      const legendPointsCostConfig = ED4E.legendPointsCost;
+      const requiredLp = legendPointsCostConfig[attributeOldIncrease + 4];
+      const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
+        previousLevel: attributeOldIncrease,
+        newLevel: attributeOldIncrease + 1,
+        attributeName: attributeName,
+      });
+      const transactionData = new LpSpendingTransactionData({
+        entityType: "attribute",
+        type: "spendings",
+        amount: requiredLp,
+        date: new Date(),
+        lpBefore: this.system.lp.current,
+        lpAfter: this.system.lp.current - requiredLp,
+        name: attributeName,
+        description: description
+      })
+
+      const newIncrease = attributeOldIncrease + 1
+      await this.update({ [`system.attributes.${attribute}.timesIncreased`]: newIncrease })
+      return this.addLpTransaction("spendings", transactionData);
+    }
+  }
+
+  
+  async upgradeAbility(ability) {
+    const abilityOldLevel = ability.system.level;
+    // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
+    if ( ability.type === "skill" && abilityOldLevel >= 10 ) {
+      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      return
+    } else if ( ability.type === "talent" && abilityOldLevel >= 15 ) {
+      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      return
+    } else if ( ability.type === "devotion" && abilityOldLevel >= 12 ) {
+      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      return
+    } 
+    const legendPointsCostConfig = ED4E.legendPointsCost;
+    let requiredLp = 0;
+    if (ability.type === "skill" ) {
+    requiredLp = legendPointsCostConfig[abilityOldLevel + 2];
+    } else {
+    requiredLp = legendPointsCostConfig[abilityOldLevel + 1];
+    }
+    const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
+      previousLevel: abilityOldLevel,
+      newLevel: abilityOldLevel + 1,
+      abilityName: ability.name,
+    });
+    const transactionData = new LpSpendingTransactionData({
+      entityType: ability.type,
+      type: "spendings",
+      amount: requiredLp,
+      date: new Date(),
+      itemUuid: ability.uuid,
+      lpBefore: this.system.lp.current,
+      lpAfter: this.system.lp.current - requiredLp,
+      name: ability.name,
+      description: description
+    })
+
+    const newIncrease = abilityOldLevel + 1
+    await ability.update({ [`system.level`]: newIncrease });
+    
+    return this.addLpTransaction("spendings", transactionData);
+  }
+  
+
+  /**
+   * Legend point History earned prompt trigger
+   */
+  async legendPointHistoryEarned() {
+    // let history = await getLegendPointHistoryData( actor );
+    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(new LpTrackingData(this.system.lp.toObject()), { actor: this });
+    return this.update({ system: { lp: lpUpdateData } })
+  }
+
+
+  /**
+     * 
+     * @param {object} item         The item that was changed or added
+     * @param {object} actor        The actor that the item belongs to
+     * @param {boolean} free        If the item was freely added
+     * @param {boolean} addedNew    If the item was newly added
+     */
+  addAbility(item, free, addedNew) {
+    let requiredLp = 0;
+    // const legendPointsCostConfig = ED4E.legendPointsCost;
+    // const tier = ED4E.tier;
+    // // "knackAbility", "knackKarma", "knackManeuver", "spell", "spellKnack", "thread"
+    // if ( item.type === "knackAbility"
+    //   || item.type === "knackKarma"
+    //   || item.type === "knackManeuver"
+    // ) {
+    //   const knackMinLevel = item.system.source.minLevel;
+      
+    //   const knackTier = tier[item.system.tier];
+    //   requiredLp = legendPointsCostConfig[knackMinLevel];
+    // }
+  
+    let description = "added" + item.name;
+    if (addedNew) {
+      description = game.i18n.localize("ED.Actor.LpTracking.Spendings.descriptionNewlyAdded");
+    } else {
+      description = game.i18n.format("ED.Dialogs.LegendPoints.SpendLp", {
+        previousLevel: item.system.level - 1,
+        newLevel: item.system.level,
+      });
+    }
+
+    
+    // const currentDate = new Date().toISOString(); // Record the time of the transaction
+    const currentDate = new Date(); // Record the time of the transaction
+    const transactionData = new LpSpendingTransactionData({
+      entityType: item.type,
+      type: "spendings",
+      amount: requiredLp,
+      date: new Date(),
+      itemUuid: item.uuid,
+      lpBefore: this.system.lp.current,
+      lpAfter: this.system.lp.current - requiredLp,
+      name: item.name,
+      description: description
+    })
+    return this.addLpTransaction("spendings", transactionData);
+  }
+
+  async addLpTransaction(type, transactionData) {
     const oldTransactions = this.system.lp[type];
     const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
     const transaction = new TransactionModel( transactionData );
