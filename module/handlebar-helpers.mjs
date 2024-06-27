@@ -48,6 +48,37 @@ export default function registerHandlebarHelpers() {
     }
   } );
 
+  /**
+   * @description Reduce and Map: The function uses reduce to group the spendings by itemUuid, 
+   * and then map to transform the grouped object into an array suitable for iteration in Handlebars templates.
+   * @description Return Value: The helper returns an array where each element is an object with itemUuid and spendings properties.
+   */
+  Handlebars.registerHelper('groupSpendingsByItemUuid', (spendings) => {
+    const grouped = spendings.reduce((accumulator, current) => {
+      const { itemUuid, name } = current;
+      if (!accumulator[itemUuid]) {
+        accumulator[itemUuid] = { spendings: [], names: new Set() };
+      }
+      accumulator[itemUuid].spendings.push(current);
+      accumulator[itemUuid].names.add(name);
+      return accumulator;
+    }, {});
+  
+    return Object.entries(grouped).map(([itemUuid, { spendings, names }]) => ({
+      itemUuid,
+      spendings,
+      names: Array.from(names) // Convert Set to Array for names
+    }));
+  });
+
+  Handlebars.registerHelper('formatDate', function(date, options) {
+    const locale = options.hash.locale || 'default'; // Use provided locale or default
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    }).format(new Date(date));
+  });
+
   // Handlebars.registerHelper( 'edGetAttributeValue', ( attribute, attributes ) => {
   //   if ( attribute === undefined || attribute === '' || attribute === "" ) {
   //     return 0;

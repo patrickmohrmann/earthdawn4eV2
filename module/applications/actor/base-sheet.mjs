@@ -112,6 +112,25 @@ export default class ActorSheetEd extends ActorSheet {
 
     // Legend point History (Earned)
     html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
+
+
+     // NEW ######################################################
+     html.on('click', '.group-header', event => {
+      const header = event.currentTarget;
+      const itemUuid = header.dataset.itemUuid;
+  
+      // Toggle the folded/unfolded state for each entry related to the clicked header
+      html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((index, entry) => {
+        if ($(entry).hasClass('folded')) {
+          $(entry).removeClass('folded').addClass('unfolded');
+        } else {
+          $(entry).removeClass('unfolded').addClass('folded');
+        }
+      });
+    });
+    // NEW ######################################################
+
+
   }
 
   /**

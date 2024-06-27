@@ -1,6 +1,6 @@
 <div class="tab earned-tab" data-group="primary" data-tab="earned-tab">
   <!-- Body -->
-  <div class="lp-history__earned-body">
+  <div class="lp-history__earned">
     <table class="input--centered">
       <thead>
         <tr>
@@ -19,13 +19,13 @@
         {{#each this.object.earnings}}
         <tr>
           <td>
-            <input class="" name={{concat "earnings." @index ".date"}} type="text" value="{{this.date}}" data-dtype="String" />
+            <input name={{concat "earnings." @index ".date"}} type="text" value="{{formatDate this.date}}" data-dtype="String"/>
           </td>
           <td>
-            <input class="" name={{concat "earnings." @index ".description"}} type="text" value="{{this.description}}" data-dtype="String" data-transaction-index="{{@index}}" />
+            <input name={{concat "earnings." @index ".description"}} type="text" value="{{this.description}}" data-dtype="String" data-transaction-index="{{@index}}" />
           </td>
           <td>
-            <input class="" name={{concat "earnings." @index ".amount"}} type="number" value="{{this.amount}}" data-dtype="Number" />
+            <input name={{concat "earnings." @index ".amount"}} type="number" value="{{this.amount}}" data-dtype="Number" />
           </td>
         </tr>
         {{/each}}

@@ -94,30 +94,31 @@ export default class PcData extends NamegiverTemplate.mixin(
               }
 
             ),
-            legendPointsEarned: new foundry.data.fields.ArrayField(
-              new foundry.data.fields.SchemaField( {
-                  date: new foundry.data.fields.StringField( {
-                      required: true,
-                      blank: false,
-                      nullable: false,
-                      initial: "date?"
-                  } ),
-                  description: new foundry.data.fields.StringField( {
-                      required: true,
-                      blank: true,
-                      nullable: false,
-                      initial: ""
-                  } ),
-                  lp: new foundry.data.fields.NumberField( {
-                      required: true,
-                      nullable: false,
-                      min: 0,
-                      step: 1,
-                      initial: 0,
-                      integer: true
-                  } ),
-              } )
-            )
+            // I believe this is a leftover from the previous implementation
+            // legendPointsEarned: new foundry.data.fields.ArrayField(
+            //   new foundry.data.fields.SchemaField( {
+            //       date: new foundry.data.fields.StringField( {
+            //           required: true,
+            //           blank: false,
+            //           nullable: false,
+            //           initial: "date?"
+            //       } ),
+            //       description: new foundry.data.fields.StringField( {
+            //           required: true,
+            //           blank: true,
+            //           nullable: false,
+            //           initial: ""
+            //       } ),
+            //       lp: new foundry.data.fields.NumberField( {
+            //           required: true,
+            //           nullable: false,
+            //           min: 0,
+            //           step: 1,
+            //           initial: 0,
+            //           integer: true
+            //       } ),
+            //   } )
+            // )
         } );
         return superSchema;
     }

@@ -16,7 +16,7 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
             } ),
             date: new fields.NumberField( {
                 required: true,
-                initial: Date.now,
+                initial: Date.now(),
                 label: "X.Datetime of transaction",
                 hint: "X.The date and time of this transaction",
             } ),

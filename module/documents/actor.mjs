@@ -153,7 +153,7 @@ export default class ActorEd extends Actor {
 
     const requiredLp = free ? 0 : 50;
     // const currentDate = new Date().toISOString(); // Record the time of the transaction
-    const currentDate = 5552223365; // Record the time of the transaction
+    const currentDate = new Date(); // Record the time of the transaction
     const transactionData = new LpSpendingTransactionData( {
         entityType: item.type,
         type: "spendings",

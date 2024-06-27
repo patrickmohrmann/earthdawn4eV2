@@ -51,7 +51,4 @@ export default class LpSpendingTransactionData extends LpTransactionData {
             ),
         } );
     }
-    
-    
-
 }

@@ -1,47 +1,62 @@
- <div class="tab spend-tab" data-group="primary" data-tab="spend-tab">
-    <!-- Body -->
-    <div class="lp-history__spend-body">
-      <table class="input--centered">
-        <thead>
-          <tr>
-            <th>
-              {{localize "ED.Actor.LpTracking.Header.date"}}
-            </th>
-            <th>
-              {{localize "ED.Actor.LpTracking.Header.type"}}
-            </th>
-            <th>
-              {{localize "ED.Actor.LpTracking.Header.name"}}
-            </th>
-            <th>
-              {{localize "ED.Actor.LpTracking.Header.description"}}
-            </th>
-            <th>
-              {{localize "ED.Actor.LpTracking.Header.legendPoints"}}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each this.object.spendings}}
-          <tr>
-            <td>
-              {{this.date}}
-            </td>
-            <td>
-              {{this.entityType}}
-            </td>
-            <td>
-              {{this.name}}
-            </td>
-            <td>
-              {{this.description}}
-            </td>
-            <td>
-              {{this.amount}}
-            </td>
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
- </div>
+<div class="tab spend-tab" data-group="primary" data-tab="spend-tab">
+  <!-- Body -->
+  <div class="lp-history__spend">
+    <table class="input--centered">
+      <thead>
+        <tr>
+          <th class="lp-history__date">
+            {{localize "ED.Actor.LpTracking.Header.date"}}
+          </th>
+          <th class="lp-history__type">
+            {{localize "ED.Actor.LpTracking.Header.type"}}
+          </th>
+          <th class="lp-history__name">
+            {{localize "ED.Actor.LpTracking.Header.name"}}
+          </th>
+          <th class="lp-history__description">
+            {{localize "ED.Actor.LpTracking.Header.description"}}
+          </th>
+          <th class="lp-history__amount">
+            {{localize "ED.Actor.LpTracking.Header.legendPoints"}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each (groupSpendingsByItemUuid this.object.spendings)}}
+        <tr>
+          <td class="toggle-details">
+            {{names}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div class="spendings-details">
+              <table>
+              {{#each spendings}}
+              <tr>
+                <td class="lp-history__date">
+                  {{formatDate this.date}}
+                </td>
+                <td class="lp-history__type">
+                  {{this.type}}
+                </td>
+                <td class="lp-history__name">
+                  {{this.name}}
+                </td>
+                <td class="lp-history__description">
+                  {{this.description}}
+                </td>
+                <td class="lp-history__amount">
+                  {{this.amount}}
+                </td>
+              </tr>
+              {{/each}}
+              </table>
+            </div>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
