@@ -275,6 +275,13 @@
             }
         },
         "Config": {
+            "Action": {
+                "free":                                             "Free",
+                "none":                                             "None",
+                "simple":                                           "Simple",   
+                "standard":                                         "Standard",
+                "sustained":                                        "Sustained"
+            },
             "CombatTypes": {
                 "aerial":                                           "Aerial Combat",
                 "close":                                            "Close Combat",
@@ -325,6 +332,35 @@
                 "mystical":                                         "Mystical",
                 "physical":                                         "Physical",
                 "social":                                           "Social"
+            },
+            "Defenses": {
+                "highestOfGroup":                                   "Highest of Group",
+                "hightestX":                                        "Highest of Group + Targets",
+                "lowestOfGroup":                                    "Lowest of Group",
+                "lowestX":                                          "Lowest of Group + Targets",
+                "mystical":                                         "Mystical",
+                "none":                                             "None",
+                "physical":                                         "Physical",
+                "social":                                           "Social"
+            },
+            "spellcastingTypes": {
+                "elementalism":                                     "Elementalist",
+                "illusionism":                                      "Illusionist",
+                "nethermancy":                                      "Nethermancer",
+                "shamanism":                                        "Shaman",
+                "wizardry":                                         "Wizard"
+            },
+            "talentCategory": {
+                "discipline":                                       "Discipline",
+                "free":                                             "Free",
+                "optional":                                         "Optional",
+                "versatility":                                      "Versatility"
+            },
+            "Tier": {
+                "journeyman":                                       "Journeyman",
+                "master":                                           "Master",  
+                "novice":                                           "Novice",
+                "warden":                                           "Warden"
             }
         },
         "Data": {
@@ -409,8 +445,13 @@
                 "relatedRollType":                                  "counts for Roll Type"
             },
             "Header": {
-                "navigator":                                        "Navigator"                                       
-
+                "details":                                          "Details",
+                "description":                                      "Description",
+                "effects":                                          "Effects",
+                "general":                                          "General",
+                "navigator":                                        "Navigator",
+                "magic":                                            "Magic",
+                "type":                                             "Type"
             },
             "Namegiver":{
                 "WeaponSize": {
@@ -425,6 +466,19 @@
                 "details":                                          "Details",
                 "effects":                                          "Effects",
                 "general":                                          "General"
+            },
+            "Talent": {
+                "action":                                           "Action",
+                "attribute":                                        "Attribute",
+                "talentCategory":                                         "Category",
+                "description":                                      "Description",
+                "difficultyFixed":                                  "Fixed Difficulty",
+                "difficultyGroup":                                  "Group Difficulty",
+                "difficultyTarget":                                 "Target Difficulty",
+                "rank":                                             "Rank",
+                "strain":                                           "Strain",
+                "talentIdentifier":                                 "Source Talent Identifier",
+                "tier":                                             "Tier"
             }
         },
         "Languages": {

@@ -830,3 +830,28 @@ p {
   width: 158px;
   border: none;
 }
+.item__left--main {
+  width: 35%;
+  float: left;
+}
+.item__right--main {
+  width: 60%;
+  float: right;
+}
+.item-data__input--line {
+  height: 30px;
+}
+.item-data__input--line label,
+.item-data__input--line input {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+.item-data__input--line .partial__30--left {
+  width: 30%;
+  float: left;
+}
+.item-data__input--line .partial__60--right {
+  width: 60%;
+  float: right;
+}

@@ -464,6 +464,7 @@ async _onAbilityEnhancement( event ) {
                 label: "Standard Talent",
                 callback: async () => {
                   resolve(true);
+                  super._onDropItem(event, data);
                 },
               },
               spendLP: {

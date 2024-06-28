@@ -274,6 +274,13 @@
             }
         },
         "Config": {
+            "Action": {
+                "free":                                             "Frei",
+                "none":                                             "Keine",
+                "simple":                                           "Einfach",   
+                "standard":                                         "Standard",
+                "sustained":                                        "Anhaltend"
+            },
             "CombatTypes": {
                 "aerial":                                           "Luftkampf",
                 "close":                                            "Nahkampf",
@@ -324,6 +331,35 @@
                 "mystical":                                         "Mystisch",
                 "physical":                                         "Körperlich",
                 "social":                                           "Sozial"
+            },
+            "Defenses": {
+                "highestOfGroup":                                   "Höchste der Gruppe",
+                "hightestX":                                        "Höchste der Gruppe + Ziele",
+                "lowestOfGroup":                                    "Niedrigste der Gruppe",
+                "lowestX":                                          "Niedrigste der Gruppe + Ziele",
+                "mystical":                                         "Mystisch",
+                "none":                                             "Keine",
+                "physical":                                         "Körperlich",
+                "social":                                           "Sozial"
+            },
+            "spellcastingTypes": {
+                "elementalism":                                     "Elementarist",
+                "illusionism":                                      "Illusionist",
+                "nethermancy":                                     "Geisterbeschwörer",
+                "shamanism":                                           "Schamane",
+                "wizardry":                                           "Magier"
+            },
+            "talentCategory": {
+                "discipline":                                       "Disziplin",
+                "free":                                             "Frei",
+                "optional":                                         "Optional",
+                "versatility":                                      "Vielseitigkeit"
+            },
+            "Tier": {
+                "journeyman":                                       "Geselle",
+                "master":                                           "Meister",  
+                "novice":                                           "Novize",
+                "warden":                                           "Wächter"
             }
         },
         "Data": {
@@ -398,8 +434,13 @@
                 "activeUser":                                       "Aktive Spieler",
                 "inactiveUser":                                     "Inaktive Spieler",
                 "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure",
-                "details":                                          "Details",
-                "navigator":                                        "Navigator"
+                "details":                                          "Details",                                     
+                "description":                                      "Beschreibung",
+                "effects":                                          "Effekte",
+                "general":                                          "Allgemein",
+                "navigator":                                        "Navigator",
+                "magic":                                            "Magie",
+                "type":                                             "Typ"
             },
             "Namegiver":{
                 "WeaponSize": {
@@ -421,6 +462,19 @@
             "Title": {
                 "assignLp":                                         "Legendenpunkte zuweisen",
                 "rollPrompt":                                       "Würfelübersicht"
+            },
+            "Talent": {
+                "action":                                           "Aktion",
+                "attribute":                                        "Attribut",
+                "talentCategory":                                   "Kategorie",
+                "description":                                      "Beschreibung",
+                "difficultyFixed":                                  "Feste Schwierigkeit",
+                "difficultyGroup":                                  "Schwierigkeit bei Gruppe",
+                "difficultyTarget":                                 "Ziel Schwierigkeit",
+                "rank":                                             "Rang",
+                "strain":                                           "Überanstrengung",
+                "talentIdentifier":                                 "Talent Identifikator",
+                "tier":                                             "Stufe"
             }
         },
         "Languages": {

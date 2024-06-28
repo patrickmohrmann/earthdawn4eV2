@@ -34,14 +34,14 @@ export default class TalentData extends AbilityTemplate.mixin(
                     required: true,
                     nullable: false,
                     initial: false,
-                    label: "X.threadWeavingTalent",
+                    label: "ED.Item.Talent.threadWeavingTalent",
                     hint: "X.does this talent represent a thread weaving talent"
                 } ),
                 spellcasting: new fields.BooleanField( {
                     required: true,
                     nullable: false,
                     initial: false,
-                    label: "X.spellcastingTalent",
+                    label: "ED.Item.Talent.Spellcasting",
                     hint: "X.does this talent represent the spellcasting talent"
                 } ),
                 magicType: new fields.StringField( {
@@ -50,13 +50,13 @@ export default class TalentData extends AbilityTemplate.mixin(
                     blank: true,
                     trim: true,
                     choices: ED4E.spellcastingTypes,
-                    label: "X.magicType",
+                    label: "ED.Item.Talent.magicType",
                     hint: "X.the type of thread weaving this talent belongs to",
                 } ),
             }, {
                 required: true,
                 nullable: false,
-                label: "X.Magic Talent",
+                label: "ED.Item.Header.magicTalent",
                 hint: "X.Talent information for spellcasting",
             } ),
         } );

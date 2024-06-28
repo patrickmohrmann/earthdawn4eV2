@@ -155,12 +155,12 @@ preLocalize( "availability" );
  * @enum {string}
  */
 ED4E.action = {
-	none: 				"ED.General.none",
-	free: 				"ED.Action.free",
-	simple: 			"ED.Action.simple",
-	standard: 			"ED.Action.standard",
-	sustained: 			"ED.Action.sustained"
-};
+	none: 				"ED.Config.Action.none",
+	free: 				"ED.Config.Action.free",
+	simple: 			"ED.Config.Action.simple",
+	standard: 			"ED.Config.Action.standard",
+	sustained: 			"ED.Config.Action.sustained"
+}
 preLocalize( "action" );
 
 /**
@@ -171,6 +171,10 @@ ED4E.targetDifficulty = {
 	mystical: 			"ED.Config.targetDifficulty.mystical",
 	physical: 			"ED.Config.targetDifficulty.physical",
 	social: 			"ED.Config.targetDifficulty.social",
+	none: 				"ED.Config.Defenses.none",
+	mystical: 			"ED.Config.Defenses.mystical",
+	physical: 			"ED.Config.Defenses.physical",
+	social: 			"ED.Config.Defenses.social",
 }
 preLocalize( "targetDifficulty" );
 
@@ -182,7 +186,12 @@ ED4E.groupDifficulty = {
 	highestOfGroup: 	"ED.Config.groupDifficulty.highestOfGroup",
 	lowestOfGroup: 		"ED.Config.groupDifficulty.lowestOfGroup",
 	hightestX: 			"ED.Config.groupDifficulty.hightestX",
-	lowestX:			"ED.Config.groupDifficulty.lowestX"
+	lowestX:			"ED.Config.groupDifficulty.lowestX",
+	none: 				"ED.Config.Defenses.none",
+	highestOfGroup: 	"ED.Config.Defenses.highestOfGroup",
+	lowestOfGroup: 		"ED.Config.Defenses.lowestOfGroup",
+	hightestX: 			"ED.Config.Defenses.hightestX",
+	lowestX:			"ED.Config.Defenses.lowestX"
 }
 preLocalize( "groupDifficulty" );
 
@@ -208,23 +217,23 @@ ED4E.damageType = {
 preLocalize( "damageType" );
 
 ED4E.languages = {
-	dwarf: "ED.Languages.dwarf",
-	elf: "ED.Languages.elf",
-	human: "ED.Languages.human",
-	obsidiman: "ED.Languages.obsidiman",
-	ork: "ED.Languages.ork",
-	troll: "ED.Languages.troll",
-	tskrang: "ED.Languages.tskrang",
-	windling: "ED.Languages.windling",
+	dwarf: 									"ED.Languages.dwarf",
+	elf: 									"ED.Languages.elf",
+	human: 									"ED.Languages.human",
+	obsidiman: 								"ED.Languages.obsidiman",
+	ork: 									"ED.Languages.ork",
+	troll: 									"ED.Languages.troll",
+	tskrang: 								"ED.Languages.tskrang",
+	windling: 								"ED.Languages.windling",
 };
 preLocalize( "languages" );
 
 ED4E.spellcastingTypes = {
-	elementalism: "X.Elementalism",
-	illusionism: "X.Illusionism",
-	nethermancy: "X.Nethermancy",
-	shamanism: "X.Shamanism",
-	wizardry: "X.Wizardry",
+	elementalism: 							"ED.Config.spellcastingTypes.elementalism",
+	illusionism: 							"ED.Config.spellcastingTypes.illusionism",
+	nethermancy:							"ED.Config.spellcastingTypes.nethermancy",
+	shamanism: 								"ED.Config.spellcastingTypes.shamanism",
+	wizardry: 								"ED.Config.spellcastingTypes.wizardry",
 };
 preLocalize( "spellcastingTypes" );
 
@@ -248,11 +257,11 @@ preLocalize( "spellcastingTypes" );
  */
 ED4E.tier = {
 	// none: 				"ED.General.none",
-	novice: 			"ED.Tier.novice",
-	journeyman: 		"ED.Tier.journeyman",
-	warden: 			"ED.Tier.warden",
-	master: 			"ED.Tier.master"
-};
+	novice: 			"ED.Config.Tier.novice",
+	journeyman: 		"ED.Config.Tier.journeyman",
+	warden: 			"ED.Config.Tier.warden",
+	master: 			"ED.Config.Tier.master"
+}
 preLocalize( "tier" );
 
 
@@ -276,11 +285,11 @@ preLocalize( "itemStatus" );
  * @enum {string}
  */
 ED4E.talentCategory = {
-	discipline: 			"ED.talentCategory.discipline",
-	optional: 				"ED.talentCategory.optional",
-	free: 					"ED.talentCategory.free",
-	versatility: 			"ED.talentCategory.versatility"
-};
+	discipline: 			"ED.Config.talentCategory.discipline",
+	optional: 				"ED.Config.talentCategory.optional",
+	free: 					"ED.Config.talentCategory.free",
+	versatility: 			"ED.Config.talentCategory.versatility"
+}
 preLocalize( "talentCategory" );
 
 

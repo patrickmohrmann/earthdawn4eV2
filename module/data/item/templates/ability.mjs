@@ -25,15 +25,15 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 initial: "",
                 label: "ED.Item.Ability.attribute"
             } ),
-            source: new fields.SchemaField( {
-                    class: new fields.DocumentUUIDField( ClassTemplate, {
-                        label: "ED.Item.Class.source"
-                    } ),
-                    tier: new fields.StringField( {
+            tier: new fields.StringField( {
                         nullable: false,
                         blank: false,
                         initial: "novice",
                         label: "ED.Item.Ability.tier"
+                    } ),
+            source: new fields.SchemaField( {
+                    class: new fields.DocumentUUIDField( ClassTemplate, {
+                        label: "ED.Item.Class.source"
                     } ),
                 },
                 {
