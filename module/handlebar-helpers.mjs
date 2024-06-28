@@ -15,7 +15,7 @@ export default function registerHandlebarHelpers() {
     }
     //return knacks.filter((knack) => knack.data.sourceTalentName === talent.name);
     // V10 changes
-    return knacks.filter((knack) => knack.system.source.knackSource === talent.uuid);
+    return knacks.filter((knack) => knack.system.source.knackSource === talent.system.talentIdentifier);
 		// change End
   });
 

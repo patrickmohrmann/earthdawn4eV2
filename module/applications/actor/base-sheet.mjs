@@ -383,10 +383,10 @@ async _onAbilityEnhancement( event ) {
 
   async _onDropItem(event, data) {
     const itemData = await fromUuid(data.uuid);
-    // const lpRelevantItemTypes = ["devotion", "knackAbility", "knackKarma", "knackManeuver", "skill", "spell", "spellKnack", "talent", "thread"];
+    // Items which cost LP once added to the actor
     const lpRelevantItemTypes = ["knackAbility", "knackKarma", "knackManeuver", "spell", "spellKnack", "thread"];
     if (this.actor.type === "character" && lpRelevantItemTypes.includes(itemData.type)) {
-  // Parse the dropped data
+      // Parse the dropped data
       try {
         data = JSON.parse(event.dataTransfer.getData('text/plain'));
       } catch (err) {
@@ -445,6 +445,73 @@ async _onAbilityEnhancement( event ) {
       } else {
         return false;
       }
+    } else if (itemData.type === "talent") {
+      if (this.actor.type === "character") {
+        // Parse the dropped data
+        try {
+          data = JSON.parse(event.dataTransfer.getData('text/plain'));
+        } catch (err) {
+          return false;
+        }
+        // Confirm dialog
+        const confirmed = await new Promise((resolve) => {
+          new Dialog({
+            title: "Confirm Item Drop",
+            content: "<p>Do you want to add this item to the actor?</p>",
+            buttons: {
+              free: {
+                icon: '<i class="fas fa-check"></i>',
+                label: "Standard Talent",
+                callback: async () => {
+                  resolve(true);
+                },
+              },
+              spendLP: {
+                icon: '<i class="fas fa-check"></i>',
+                label: "Versatility Talent",
+                callback: async () => {
+                  // this.actor.addAbility( itemData, false, true );
+                  const versatility = this.actor.items.find(i => i.type === "talent" && i.system.edid === "versatility");
+                  const versatilityTalentsCount = this.actor.items.filter(i => 
+                    i.type === "talent" && 
+                    i.system.edid === "versatility" && 
+                    i.system.talentCategory === "versatility"
+                  ).length;
+                  if (versatility) {
+                    const currentVersatilityTalents = this.actor.items.filter(i => i.type === "talent" && i.system.talentCategory === "versatility");
+                    if (currentVersatilityTalents.length >= versatility.system.level + versatilityTalentsCount) {
+                      ui.notifications.error("You already have the maximum number of Versatility Talents.");
+                      return
+                    } else {
+                      super._onDropItem(event, data);
+                    }
+                    resolve(true);
+                  } else if ( itemData.system.talentCategory === "versatility" && itemData.system.edid === "versatility") {
+                    super._onDropItem(event, data);
+                  } else {
+                    ui.notifications.error("You do not have the Versatility Talent.");
+                    return
+                  }
+                }
+              },
+              no: {
+                icon: '<i class="fas fa-times"></i>',
+                label: "No",
+                callback: () => resolve(false),
+              },
+            },
+            default: "no",
+            close: () => resolve(false),
+          }).render(true);
+        });
+
+        if (confirmed) {
+          // return super._onDropItem(event, data);
+        } else {
+          return false;
+        }
+      }
     } else return super._onDropItem(event, data);
+  
   }
 }

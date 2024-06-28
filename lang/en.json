@@ -191,8 +191,9 @@
                 "Spendings": {
                     "description":                                  "Enhancement from {previousLevel} to {newLevel}",
                     "descriptionAttribute":                         "Enhanced {attributeName} from {previousLevel} to {newLevel}",
-                    "descriptionAbility":                          "Enhanced {abilityName} from {previousLevel} to {newLevel}",
+                    "descriptionAbility":                           "Enhanced {abilityName} from {previousLevel} to {newLevel}",
                     "descriptionNewlyAdded":                        "Newly added item",
+                    "knackSourceNotFound":                          "The Knack is not referenced in any Talent of the Actor",
                     "knackSourceNotHighEnough":                     "The Rank of the Talent is not high enough",
                     "maxIncreaseReached":                           "Maximum increase reached"
                 }
@@ -489,7 +490,9 @@
                 "spellCasting":                                     "ED-ID for Spellcasting",
                 "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
                 "threadWeaving":                                    "ED-ID for Thread Weaving",
-                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving",
+                "Versatility":                                      "ED-ID for Versatility",
+                "VersatilityHint":                                  "Identifies a talent that is used for versatility"
             },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",

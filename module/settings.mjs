@@ -59,6 +59,15 @@ export default function registerSystemSettings() {
         scope: "world",
         config: true,
         default: "knock-down",
+    } );
+    
+    // edid for read/write language
+    game.settings.register( "ed4e", "edidVersatility", {
+        name: "ED.Settings.Edid.versatility",
+        hint: "ED.Settings.Edid.versatilityHint",
+        scope: "world",
+        config: true,
+        default: "versatility",
         type: new EdIdField(),
     } );
 

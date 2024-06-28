@@ -689,7 +689,7 @@ export default class ActorEd extends Actor {
     } else {
       const attributeName = ED4E.attributes[attribute].label;
       const legendPointsCostConfig = ED4E.legendPointsCost;
-      const requiredLp = legendPointsCostConfig[attributeOldIncrease + 4];
+      const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
       const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
         previousLevel: attributeOldIncrease,
         newLevel: attributeOldIncrease + 1,
@@ -728,10 +728,23 @@ export default class ActorEd extends Actor {
     } 
     const legendPointsCostConfig = ED4E.legendPointsCost;
     let requiredLp = 0;
+    let tier = 0;
+    if ( ability.system.tier === "novice" ) {
+      tier = 0;
+    } else if ( ability.system.tier === "journeyman" ) {
+      tier = 1;
+    } else if ( ability.system.tier === "warden" ) {
+      tier = 2;
+    } else if ( ability.system.tier === "master" ) {
+      tier = 3;
+    } 
+
+    const versatility = ability.type === "talent" && ability.system.talentCategory === "versatility" && ability.system.edid !== "versatility" ? 1 : 0;
+
     if (ability.type === "skill" ) {
-    requiredLp = legendPointsCostConfig[abilityOldLevel + 2];
+    requiredLp = legendPointsCostConfig[abilityOldLevel + 2 + tier];
     } else {
-    requiredLp = legendPointsCostConfig[abilityOldLevel + 1];
+    requiredLp = legendPointsCostConfig[abilityOldLevel + 1 + tier + versatility];
     }
     const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
       previousLevel: abilityOldLevel,
@@ -755,7 +768,7 @@ export default class ActorEd extends Actor {
     
     return this.addLpTransaction("spendings", transactionData);
   }
-  
+
 
   /**
    * Legend point History earned prompt trigger
@@ -777,19 +790,50 @@ export default class ActorEd extends Actor {
   async addAbility(item, free, addedNew) {
     let requiredLp = 0;
     const legendPointsCostConfig = ED4E.legendPointsCost;
-    const knackMinLevel = item.system.source.minLevel;
+    const actorTalents = this.items.filter(item => item.type === "talent");
+    
+    // calculate the required Legend Points of knacks
     if (item.type === "knackAbility"
       || item.type === "knackManeuver"
-      || item.type === "knackKarma" ) {
-      const knackSourceId = item.system.source.knackSource
-      const knackSource = this.items.filter(item => item.uuid === knackSourceId)[0];
-      if ( knackSource.system.level < knackMinLevel ) {
-        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotHighEnough"));
-        return;
+      || item.type === "knackKarma") {
+        let maxKnacksOfTalent = 0;
+        let knackSourceTalent = "";
+        const knackMinLevel = item.system.source.minLevel;
+        const actorKnacks = this.items.filter(item => item.type === "knackAbility" || item.type === "knackManeuver" || item.type === "knackKarma");
+      if (item.system.lpCost > 0) {
+        requiredLp = item.system.lpCost;
       } else {
-        requiredLp = legendPointsCostConfig[knackMinLevel];
+        const knackTalentIdentifier = item.system.source.knackSource;
+        for (const talent of actorTalents) {
+          if (talent.type === "talent" && talent.system.talentIdentifier === knackTalentIdentifier) {
+            knackSourceTalent = talent;
+          }
+        }
+        for (const knack of actorKnacks) {
+          if (knack.system.source.knackSource === knackSourceTalent.system.talentIdentifier) {
+            maxKnacksOfTalent += 1;
+            if (maxKnacksOfTalent >= knackSourceTalent.system.level) { 
+              ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxKnacksReached"));
+              return;
+            }
+          }
+        }
+        if (knackSourceTalent === "") {
+          ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotFound"));
+          return
+        } else {
+          if (knackSourceTalent.system.level < knackMinLevel) {
+            ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotHighEnough"));
+            return;
+          } else {
+            requiredLp = legendPointsCostConfig[knackMinLevel];
+          }
         }
       }
+    } else if ( item.type === "spell" ) {
+      requiredLp = legendPointsCostConfig[item.system.level];
+    }
+      
     let description = "added" + item.name;
     if (addedNew) {
       description = game.i18n.localize("ED.Actor.LpTracking.Spendings.descriptionNewlyAdded");
@@ -799,11 +843,8 @@ export default class ActorEd extends Actor {
         newLevel: item.system.level,
       });
     }
-
-
-    
-    // const currentDate = new Date().toISOString(); // Record the time of the transaction
-    const currentDate = new Date(); // Record the time of the transaction
+    // add Prompt for LP spending which can be skipped by a certain click (shift+RIghtclick or so)
+    // only after confirming the promt, this shall go on.
     const transactionData = new LpSpendingTransactionData({
       entityType: item.type,
       type: "spendings",
@@ -815,8 +856,6 @@ export default class ActorEd extends Actor {
       name: item.name,
       description: description
     })
-  //   return this.addLpTransaction("spendings", transactionData);
-  // }
     const transactionSuccess = await this.addLpTransaction("spendings", transactionData);
     return transactionSuccess; // Return the success status
   }
@@ -830,6 +869,8 @@ export default class ActorEd extends Actor {
       [`system.lp.${ type }`]: oldTransactions.concat( [ transaction ] )
     } );
   }
+    // const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
+    // const transaction = new transactionModel(transactionData);
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];

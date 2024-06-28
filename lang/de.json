@@ -192,6 +192,7 @@
                     "descriptionAttribute":                         "Verbessert {attributeName} von {previousLevel} auf {newLevel}",
                     "descriptionAbility":                           "Verbessert {abilityName} von {previousLevel} auf {newLevel}",
                     "descriptionNewlyAdded":                        "Neu hinzugefügt",
+                    "knackSourceNotFound":                          "Der Kniff verweißt auf kein Talent des Acteurs.",
                     "knackSourceNotHighEnough":                     "Der Rank des Talents ist nicht hoch genug für diesen Kniff",
                     "maxIncreaseReached":                           "Maximale Steigerung erreicht"
                 }
@@ -483,9 +484,11 @@
                 "languageSpeak":                                    "ED-ID für Fremdsprachen",
                 "languageSpeakHint":                                "Identifiziert die Fähigkeit Fremdsprachen",
                 "spellCasting":                                     "ED-ID für Spruchzauberei",
-                "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
+                "spellCastingHint":                                 "Identifiziert die Fähigkeit die für Spruchzauberei verwendet wird",
                 "threadWeaving":                                    "ED-ID für Fadenweben",
-                "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+                "threadWeavingHint":                                "Identifiziert die Fähigkeit die für Fadenweben verwendet wird",
+                "Versatility":                                      "ED-ID für Vielseitigkeit",
+                "VersatilityHint":                                  "Identifiziert die Fähigkeit die für Vielseitigkeit verwendet wird"
             },
             "SpecificSettingOptions":{
                 "changelog":                                        "Änderungsprotokoll",

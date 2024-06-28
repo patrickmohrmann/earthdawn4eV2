@@ -5,6 +5,13 @@
     {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
 </div>
 
+
+{{!-- TalentIdentifier --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.talentIdentifier"}}:</label>
+        <input name="system.talentIdentifier" type="text"
+            value="{{item.system.talentIdentifier}}" data-dtype="String">
+    </div>
 {{! -- Magic Type -- }}
 <div>
   <h3>{{localize "ED.Item.General.magic"}}</h3>

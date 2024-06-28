@@ -3,13 +3,19 @@
     {{!-- Maneuver --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.Knack.maneuver"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.maneuver">
+        <input class="item-data__checkbox--line" type="checkbox" name="system.maneuver" value="{{item.system.maneuver}}">
         {{#if (eq this.item.system.maneuver true)}}
         {{!-- extraSuccesses --}}
         <label>{{localize "ED.Item.Knack.extraSuccesses"}}:</label>
         <input class="input__number-input" name="system.extraSuccesses" type="text" value="{{item.system.extraSuccesses}}"
             data-dtype="Number">
         {{/if}}
+    </div>
+    {{!-- LP Cost if this is not calculated by min Level --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Knack.lpCost"}}:</label>
+        <input class="input__text-input" name="system.lpCost" type="text" value="{{item.system.lpCost}}"
+            data-dtype="Number">
     </div>
     {{!-- Target Difficulty --}}
     <div class="item-data__input--line">

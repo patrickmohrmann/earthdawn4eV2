@@ -21,6 +21,14 @@ export default class TalentData extends AbilityTemplate.mixin(
                 label: 'localize: Talent Type',
                 hint: 'localize: Type of the Talent',
               } ),
+            talentIdentifier: new fields.StringField( {
+                required: true,
+                nullable: true,
+                blank: true,
+                // prefill with the uuid of the talent on creation+talentname??? or just talentname will see    
+                label: 'localize: Talent identifier',
+                hint: 'localize: identifier of the Talent',
+              } ),
             magic: new fields.SchemaField( {
                 threadWeaving: new fields.BooleanField( {
                     required: true,

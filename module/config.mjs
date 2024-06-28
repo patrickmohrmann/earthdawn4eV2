@@ -534,7 +534,7 @@ preLocalize( "chatCommands" );
 ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15];
 ED4E.attributePointsCost[-1] = -1;
 ED4E.attributePointsCost[-2] = -2;
-ED4E.legendPointsCost = [100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100];
+ED4E.legendPointsCost = [0, 100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100]
 
 /* -------------------------------------------- */
 /*           Document Data                      */

@@ -33,6 +33,22 @@ export default class ItemEd extends Item {
         }
     }
 
+    async updateKnackSourceForItems( items, actorUuid ) {
+        const validTypes = ['knackAbility', 'knackKarma', 'knackManeuver'];
+        for (let item of items) {
+            if (validTypes.includes(item.type)) {
+          // Check if 'Actor' is not part of the item.system.source.knackSource
+          if (!item.system.source.knackSource.includes("Actor")) {
+            // Prepend this.uuid to the knackSource
+            item.system.source.knackSource = actorUuid + item.system.source.knackSource;
+            
+            // Assuming there's a method to save or update the item after modification
+            await item.save();
+          }
+        }
+      }
+    }
+
     async addAdvancementAbilities( abilityUUID, poolType, level ) {
         let changes;
         if ( level ) {
