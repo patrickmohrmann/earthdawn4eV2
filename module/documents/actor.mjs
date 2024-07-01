@@ -677,6 +677,15 @@ export default class ActorEd extends Actor {
 
   /** #############################################################
    * Legend Point Tracking
+   * UC: #UC_LPTracking
+   * Sub-UC: #UC_LPTracking_Attribute
+   * Sub-UC: #UC_LpTracking_Ability
+   * Sub-UC: #UC_LpTracking_History
+   * UF: #UF_LPTracking-addAbility
+   * UF: #UF_LPTracking-upgradeAttribute
+   * UF: #UF_LPTracking-legendPointHistoryEarned
+   * UF: #UF_LPTracking-upgradeAbility
+   * UF: #UF_LPTracking-addLpTransaction
    * ############################################################# */
 
 
@@ -793,7 +802,7 @@ export default class ActorEd extends Actor {
     const actorTalents = this.items.filter(item => item.type === "talent");
     
     // calculate the required Legend Points of knacks
-    if (item.type === "knackAbility"
+    if (item.type === "knackAbilityL"
       || item.type === "knackManeuver"
       || item.type === "knackKarma") {
         let maxKnacksOfTalent = 0;

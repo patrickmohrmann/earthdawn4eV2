@@ -33,6 +33,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
     /**
      * The legendary status of this actor based on their total earned LP.
      * @type {number} A number from 1 through 4 indicating their status.
+     * @UF UF_LpTracking-legendPointsCalculations
      */
     get status() {
         let status = 0;
@@ -51,6 +52,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
     /**
      *
      * @type {number}
+     * @UF UF_LpTracking-legendPointsCalculations
      */
     get current() {
         return this.total - sum( this.spendings.map( spending => spending.amount ) );
@@ -59,6 +61,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
     /**
      *
      * @type {number}
+     * @UF UF_LpTracking-legendPointsCalculations
      */
     get total() {
         return sum( this.earnings.map( earning => earning.amount ) );
