@@ -99,7 +99,7 @@ function triggerHelp(argString) {
  * /char triggers legend point assignment prompt 
  * @param {*} argString 
  * @returns 
- * @UF UF_LpTracking-assignLp
+ * @UF UF_LpTracking-triggerLPAward
  */
 function triggerLPAward(argString) {
   LpTransactionData.assignLpPrompt();
