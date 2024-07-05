@@ -802,43 +802,57 @@ export default class ActorEd extends Actor {
     const actorTalents = this.items.filter(item => item.type === "talent");
     
     // calculate the required Legend Points of knacks
-    if (item.type === "knackAbilityL"
+    if (item.type === "knackAbility"
       || item.type === "knackManeuver"
       || item.type === "knackKarma") {
         let maxKnacksOfTalent = 0;
         let knackSourceTalent = "";
         const knackMinLevel = item.system.source.minLevel;
         const actorKnacks = this.items.filter(item => item.type === "knackAbility" || item.type === "knackManeuver" || item.type === "knackKarma");
-      if (item.system.lpCost > 0) {
-        requiredLp = item.system.lpCost;
-      } else {
-        const knackTalentIdentifier = item.system.source.knackSource;
-        for (const talent of actorTalents) {
-          if (talent.type === "talent" && talent.system.talentIdentifier === knackTalentIdentifier) {
-            knackSourceTalent = talent;
-          }
+      // search for the knack source talent
+      const knackTalentIdentifier = item.system.source.knackSource;
+      for (const talent of actorTalents) {
+        let sourceTalentCount = 0;
+        if (talent.type === "talent" && talent.system.talentIdentifier === knackTalentIdentifier) {
+          knackSourceTalent = talent;
+          sourceTalentCount += 1;
         }
+        // it can only be one source talent
+        if (sourceTalentCount > 1) {
+          ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.multipleKnackSources"));
+          return;
+        }
+      }
+      if (knackSourceTalent === "") {
+        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotFound"));
+        return
+      } else {
+        // check if the source talent holds already to many knacks
         for (const knack of actorKnacks) {
           if (knack.system.source.knackSource === knackSourceTalent.system.talentIdentifier) {
             maxKnacksOfTalent += 1;
-            if (maxKnacksOfTalent >= knackSourceTalent.system.level) { 
+            if (maxKnacksOfTalent >= knackSourceTalent.system.level) {
               ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxKnacksReached"));
               return;
             }
           }
         }
-        if (knackSourceTalent === "") {
-          ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotFound"));
-          return
-        } else {
-          if (knackSourceTalent.system.level < knackMinLevel) {
-            ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotHighEnough"));
-            return;
-          } else {
-            requiredLp = legendPointsCostConfig[knackMinLevel];
-          }
+        // check if the source talent is high enough
+        if (knackSourceTalent.system.level < knackMinLevel) {
+          ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotHighEnough"));
+          return;
         }
-      }
+        // required LP for knack
+        if (item.system.lpCost > 0) {
+          requiredLp = item.system.lpCost;
+        } else {
+          requiredLp = legendPointsCostConfig[knackMinLevel];
+        }
+      }  
+
+
+
+
     } else if ( item.type === "spell" ) {
       requiredLp = legendPointsCostConfig[item.system.level];
     }

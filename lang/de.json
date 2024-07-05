@@ -442,6 +442,20 @@
                 "magic":                                            "Magie",
                 "type":                                             "Typ"
             },
+            "Knack": {
+                "action":                                           "Aktion",
+                "attribute":                                        "Attribut",
+                "description":                                      "Beschreibung",
+                "difficultyFixed":                                  "Feste Schwierigkeit",
+                "difficultyGroup":                                  "Schwierigkeit bei Gruppe",
+                "difficultyTarget":                                 "Ziel Schwierigkeit",
+                "minLevel":                                         "Min. Rang",
+                "lpCost":                                           "Feste LP Kosten",
+                "rank":                                             "Rang",
+                "sourceTalent":                                     "Kniff Quelle",
+                "standardEffect":                                   "Standard Effekt",
+                "strain":                                           "Überanstrengung"
+            },
             "Namegiver":{
                 "WeaponSize": {
                     "OneHanded.min":                                "Minimale Einhandwaffengröße",

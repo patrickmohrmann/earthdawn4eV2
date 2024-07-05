@@ -515,4 +515,24 @@ async _onAbilityEnhancement( event ) {
     } else return super._onDropItem(event, data);
   
   }
+
+  async _onDropItem(event, data) {
+    const itemData = await fromUuid(data.uuid);
+    // Items which cost LP once added to the actor
+    const knacks = ["knackAbility", "knackKarma", "knackManeuver"];
+    const spells = ["spell", "spellKnack"];
+    const abilities = ["talent", "skills", "devotions"];
+    const threads = ["thread"];
+    if ( this.actor.type === "character" ) {
+      if ( knacks.includes(itemData.type ) ) {
+
+      } else if ( spells.includes(itemData.type ) ) {
+          
+        } else if ( abilities.includes(itemData.type ) ) {
+          
+          } else if ( threads.includes(itemData.type ) ) {
+          
+            } else return super._onDropItem(event, data);
+    } else return super._onDropItem(event, data);
+  }
 }

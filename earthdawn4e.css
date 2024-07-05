@@ -847,11 +847,11 @@ p {
   display: flex;
   align-items: center;
 }
-.item-data__input--line .partial__30--left {
-  width: 30%;
+.item-data__input--line .partial__40--left {
+  width: 40%;
   float: left;
 }
-.item-data__input--line .partial__60--right {
-  width: 60%;
+.item-data__input--line .partial__55--right {
+  width: 55%;
   float: right;
 }

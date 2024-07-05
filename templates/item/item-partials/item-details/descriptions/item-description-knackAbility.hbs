@@ -1,54 +1,37 @@
 <div class="item__left--main">
-    <h3>{{localize "ED.General.coreData"}}</h3>
+    <h3>{{localize "ED.Item.Header.general"}}</h3>
     {{!-- Rank --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.rank"}}:</label>
-        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
+        <label class="partial__40--left">{{localize "ED.Item.Knack.rank"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.level" type="text" value="{{item.system.level}}"
             data-dtype="Number">
     </div>
     {{!-- Strain --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
-        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
+        <label class="partial__40--left">{{localize "ED.Item.Knack.strain"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.strain" type="text" value="{{item.system.strain}}"
             data-dtype="Number">
     </div>
     {{!-- Attribute --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
-        <select name="system.attribute">
+        <label class="partial__40--left">{{localize "ED.Item.Knack.attribute"}}:</label>
+        <select class="partial__55--right" name="system.attribute">
             {{selectOptions config.attributes selected=item.system.attribute blank="" labelAttr="label" localize=true }}
         </select>
     </div>
     {{!-- Action --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Action.action"}}:</label>
-        <select name="system.action">
+        <label class="partial__40--left">{{localize "ED.Item.Knack.action"}}:</label>
+        <select class="partial__55--right" name="system.action">
             {{selectOptions config.action selected=item.system.action localize=true }}
         </select>
     </div>
-    {{!-- Tier --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
-        <select name="system.tier">
-            {{selectOptions config.tier selected=item.system.tier localize=true }}
-        </select>
-    </div>
-    {{!-- Source Talent --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Knack.sourceTalent"}}:</label>
-        <input class="input__text-input" name="system.source.knackSource" type="text" value="{{item.system.source.knackSource}}"
-            data-dtype="String">
-    </div>
-    {{!-- min Level Source Talent --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Knack.minLevel"}}:</label>
-        <input class="input__text-input" name="system.source.minLevel" type="text" value="{{item.system.source.minLevel}}"
-            data-dtype="Number">
-    </div>
+
+
     {{!-- Standard Effect --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Knack.standardEffect"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.standardEffect">
+        <label class="partial__40--left">{{localize "ED.Item.Knack.standardEffect"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.standardEffect" type="checkbox" value="{{item.system.standardEffect}}">
     </div>
 </div>
 <div class="item__right--main sheet__editor">

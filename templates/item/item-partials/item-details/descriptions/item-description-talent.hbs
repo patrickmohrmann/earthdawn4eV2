@@ -2,41 +2,41 @@
     <h3>{{localize "ED.Item.Header.general"}}</h3>
     {{!-- Rank --}}
     <div class="item-data__input--line">
-        <label class="partial__30--left">{{localize "ED.Item.Talent.rank"}}:</label>
-        <input class="input__circle-input partial__60--right" name="system.level" type="text" value="{{item.system.level}}"
+        <label class="partial__40--left">{{localize "ED.Item.Talent.rank"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.level" type="text" value="{{item.system.level}}"
             data-dtype="Number">
     </div>
     {{!-- Strain --}}
     <div class="item-data__input--line">
-        <label class="partial__30--left">{{localize "ED.Item.Talent.strain"}}:</label>
-        <input class="input__circle-input partial__60--right" name="system.strain" type="text" value="{{item.system.strain}}"
+        <label class="partial__40--left">{{localize "ED.Item.Talent.strain"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.strain" type="text" value="{{item.system.strain}}"
             data-dtype="Number">
     </div>
     {{!-- Attribute --}}
     <div class="item-data__input--line">
-        <label class="partial__30--left">{{localize "ED.Item.Talent.attribute"}}:</label>
-        <select class="partial__60--right" name="system.attribute">
+        <label class="partial__40--left">{{localize "ED.Item.Talent.attribute"}}:</label>
+        <select class="partial__55--right" name="system.attribute">
             {{selectOptions config.attributes selected=item.system.attribute blank="" labelAttr="label" localize=true }}
         </select>
     </div>
     {{!-- Action --}}
     <div class="item-data__input--line">
-        <label class="partial__30--left">{{localize "ED.Item.Talent.action"}}:</label>
-        <select class="partial__60--right" name="system.action">
+        <label class="partial__40--left">{{localize "ED.Item.Talent.action"}}:</label>
+        <select class="partial__55--right" name="system.action">
             {{selectOptions config.action selected=item.system.action localize=true }}
         </select>
     </div>
     {{!-- Tier --}}
     <div class="item-data__input--line">
-        <label class="partial__30--left">{{localize "ED.Item.Talent.tier"}}:</label>
-        <select class="partial__60--right" name="system.tier">
+        <label class="partial__40--left">{{localize "ED.Item.Talent.tier"}}:</label>
+        <select class="partial__55--right" name="system.tier">
             {{selectOptions config.tier selected=item.system.tier localize=true }}
         </select>
     </div>
     {{!-- talent Category --}}
     <div class="item-data__input--line">
-        <label class="partial__30--left">{{localize "ED.Item.Talent.talentCategory"}}:</label>
-        <select class="partial__60--right" name="system.talentCategory">
+        <label class="partial__40--left">{{localize "ED.Item.Talent.talentCategory"}}:</label>
+        <select class="partial__55--right" name="system.talentCategory">
             {{selectOptions config.talentCategory selected=item.system.talentCategory localize=true }}
         </select>
     </div>
