@@ -35,3 +35,8 @@
 {{formField systemFields.magic.fields.spellcasting name="system.magic.spellcasting" value=item.system.magic.spellcasting}}
 {{formField systemFields.magic.fields.threadWeaving name="system.magic.threadWeaving" value=item.system.magic.threadWeaving}}
 {{formField systemFields.magic.fields.magicType name="system.magic.magicType" value=item.system.magic.magicType required=false}}
+
+<div>
+<label>{{localize "ED.Item.isMatrix"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.isMatrix" {{checked item.system.isMatrix}}>
+</div>

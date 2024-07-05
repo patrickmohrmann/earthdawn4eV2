@@ -11,7 +11,6 @@ import KnackKarmaData from "./knack-karma.mjs";
 import KnackManeuverData from "./knack-maneuver.mjs";
 import ManeuverData from "./maneuver.mjs";
 import MaskData from "./mask.mjs";
-import MatrixData from "./matrices.mjs"
 import NamegiverData from "./namegiver.mjs";
 import PathData from "./path.mjs";
 import PoisonDiseaseData from "./poison-disease.mjs";
@@ -41,7 +40,6 @@ export {
     KnackManeuverData,
     ManeuverData,
     MaskData,
-    MatrixData,
     NamegiverData,
     PathData,
     PoisonDiseaseData,
@@ -65,6 +63,7 @@ export {default as NoneNamegiverPowerData} from "./templates/none-namegiver-powe
 export {default as MagicTemplate} from "./templates/sorcery-item.mjs";
 export {default as KnackTemplate} from "./templates/knack-item.mjs";
 export {default as TargetTemplate} from "./templates/targeting.mjs";
+export {default as MatrixTemplate} from "./templates/matrix.mjs";
 
 export const config = {
     armor: ArmorData,
@@ -80,7 +79,6 @@ export const config = {
     knackManeuver: KnackManeuverData,
     maneuver: ManeuverData,
     mask: MaskData,
-    matrix: MatrixData,
     namegiver: NamegiverData,
     path: PathData,
     poisonDisease: PoisonDiseaseData,

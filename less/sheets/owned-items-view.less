@@ -1,7 +1,7 @@
 .ability-card__grid--container {
     align-items: center;
     display: grid;
-    height: 30px;
+    height: 33px;
     grid-template-columns:
         // 790 px available
         40px // Icon
@@ -24,9 +24,45 @@
     }
 }
 
+.spell-card__grid--container {
+    align-items: center;
+    display: grid;
+    height: 33px;
+    grid-template-columns:
+        // 790 px available
+        40px // Icon
+        250px // Name
+        70px // Threads
+        100px // Weaving Difficulty
+        100px // casting difficulty
+        70px // range
+        70px // duration
+        70px // Control Icons
+    ;
+}
+
+.matrix-card__grid--container {
+    align-items: center;
+    display: grid;
+    height: 33px;
+    grid-template-columns:
+        // 770 px available
+        40px // Icon
+        240px // Name
+        140px // Zauber
+        70px // level
+        70px // woven Threads / required threads
+        70px // hold threads 
+        70px // armor
+        70px // Control Icons
+    ;
+}
+
 .ability-icon,
 .equipment-icon,
-.effect-icon {
+.effect-icon,
+.spell-icon,
+.matrix-icon {
     width: 25px;
 }
 
@@ -34,11 +70,11 @@
 .attribute-card__grid--container {
     margin-bottom: 3px;
     align-items: center;
-    height: 30px;
+    height: 33px;
     display: grid;
     grid-template-columns:
         // 250 px available
-        30px // Icon
+        33px // Icon
         110px // Name
         38px // value
         38px // enhancement
@@ -60,7 +96,7 @@
 .equipment-card__grid--container {
     align-items: center;
     display: grid;
-    height: 30px;
+    height: 33px;
     grid-template-columns:
         // 790 px available
         40px // Icon
@@ -85,7 +121,7 @@
 .equipment-card__grid--container-Header {
     align-items: center;
     display: grid;
-    height: 30px;
+    height: 33px;
     grid-template-columns:
         // 790 px available
         290px // Name
@@ -100,7 +136,7 @@
 
 .effect-card__grid--container {
     align-items: center;
-    height: 30px;
+    height: 33px;
     display: grid;
     grid-template-columns:
         // 790 px available
@@ -125,23 +161,27 @@
 .ability-icon,
 .attribute-icon, 
 .equipment-icon,
-.equipment-icon__visible {
+.equipment-icon__visible,
+.spell-icon,
+.matrix-icon {
     border: none;
-    display: block;
+
 }
 
 
 .ability-card__grid--item.icons__dice:hover+div,
 .attribute-card__grid--item.icons__dice:hover+div,
-.equipment-card__grid--item.icons__dice:hover+div {
+.equipment-card__grid--item.icons__dice:hover+div,
+.spell-card__grid--item.icons__dice:hover+div
+ {
     cursor: pointer;
     color: #000;
     text-shadow: 0 0 10px red;
 }
 
-
 .ability-card__grid--container:hover,
 .attribute-card__grid--container:hover,
+.spell-card__grid--container:hover,
 .equipment-card__grid--container:hover {
     .icons__dice img{
         box-shadow: 0 0 10px red;
