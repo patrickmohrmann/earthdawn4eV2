@@ -26,6 +26,9 @@ export default class ActorSheetEd extends ActorSheet {
           initial: 'spell-matrix-tab',
         },
       ],
+      scrollY: [
+        ".main",
+      ],
     } );
   }
 
@@ -43,7 +46,7 @@ export default class ActorSheetEd extends ActorSheet {
     systemData.enrichment = await this.actor._enableHTMLEnrichment();
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
-    systemData.splitTalents = game.settings.get("ed4e", "talentsSplit" );
+    systemData.splitTalents = game.settings.get( "ed4e", "talentsSplit" );
     return systemData;
   }
 
@@ -70,11 +73,11 @@ export default class ActorSheetEd extends ActorSheet {
     // Equipment tests
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
-    // Owned Item management
+    // take strain
     html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
 
-    // Owned Item management
-    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+    // toggle holding Tpye of an owned item
+    html.find(".item__status").mousedown(this._onChangeItemStatus.bind(this));
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -95,6 +98,41 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
+   * Handle changing the holding type of an owned item.
+   * @description itemStatus.value =
+   * 1: owned,
+   * 2: carried,
+   * 3: equipped,
+   * 4: mainHand,
+   * 5: offHand,
+   * 6: twoHanded,
+   * 7: tail
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+  // eslint-disable-next-line complexity
+  _onChangeItemStatus( event ) {
+    event.preventDefault();
+
+    // if left click is used, rotate the item normally
+    const rotate = event.button === 0 || event.button === 2;
+    // if shift+left click is used, unequip the item
+    const unequip = rotate && event.shiftKey;
+    // middle click is used to deposit the item
+    const deposit = event.button === 1;
+    // if right click is used, rotate status backwards
+    const backwards = event.button === 2;
+
+    const li = event.currentTarget.closest( ".item-id" );
+    const item = this.actor.items.get( li.dataset.itemId );
+
+    if ( unequip ) return item.system.carry()?.then( _ => this.render() );
+    if ( rotate ) return this.actor.rotateItemStatus( item.id, backwards ).then( _ => this.render() );
+    if ( deposit ) return item.system.deposit()?.then( _ => this.render() );
+  }
+
+
+  /**
    * Legend Point history earned
    * @param { Event } event    The originating click event.
    * @private
@@ -111,7 +149,7 @@ export default class ActorSheetEd extends ActorSheet {
   _onRollAttribute( event ) {
     event.preventDefault();
     const attribute = event.currentTarget.dataset.attribute;
-    this.actor.rollAttribute( attribute, {event: event} );
+    this.actor.rollAttribute( attribute, { event: event } );
   }
 
   /**
@@ -123,7 +161,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.rollAbility( ability, {event: event} );
+    this.actor.rollAbility( ability, { event: event } );
   }
 
   /**
@@ -135,7 +173,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
     const equipment = this.actor.items.get( li.dataset.itemId );
-    this.actor.rollEquipment( equipment, {event: event} );
+    this.actor.rollEquipment( equipment, { event: event } );
   }
 
   /**
@@ -222,7 +260,7 @@ export default class ActorSheetEd extends ActorSheet {
     return item.sheet?.render( true );
   }
 
-  _onKarmaRefresh ( ) {
+  _onKarmaRefresh() {
     this.actor.karmaRitual();
   }
 
@@ -230,9 +268,9 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
 
     const itemDescription = $( event.currentTarget )
-    .parent( ".item-id" )
-    .parent( ".card__ability" )
-    .children( ".card__description" );
+      .parent( ".item-id" )
+      .parent( ".card__ability" )
+      .children( ".card__description" );
 
     itemDescription.toggleClass( "card__description--toggle" );
   }

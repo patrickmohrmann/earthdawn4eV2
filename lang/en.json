@@ -139,7 +139,8 @@
                 "effectsPermanent":                                 "Permanent Effects",
                 "effectsTemporary":                                 "Temporary Effects",  
                 "encumbrance":                                      "Encumbrance",
-                "equipment":                                        "Equipment",                                               
+                "equipment":                                        "Equipment",   
+                "equippedStatus":                                   "Equipped",                                            
                 "healthRating":                                     "Health Rating",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Penalty",
@@ -201,11 +202,20 @@
                 "wizard":                                           "Wizard"
             },
             "Tooltips": {
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "equippedArmor":                                    "Equipped Armor",
+                "equippedShield":                                   "Equipped Shield",
                 "karmaAlways":                                      "Use Karma always",
                 "karmaRitualTooltip":                               "Karma Ritual",
                 "loaded":                                           "Loaded",
                 "loadedHeavy":                                      "Heavyly Loaded",
-                "loadedOver":                                       "Overloaded"
+                "loadedOver":                                       "Overloaded",
+                "mainHand":                                         "Main Hand",
+                "notEquipped":                                      "Not equipped",
+                "offHand":                                          "Off Hand",
+                "tail":                                             "Tail",
+                "twoHanded":                                        "Two Handed"
             }
         },
         "Chat": {
@@ -248,6 +258,47 @@
                 "ranged":                                           "Ranged Combat",
                 "throwing":                                         "Throwing Combat",
                 "unarmed":                                          "unarmed Combat"
+            },
+            "groupDifficulty": {
+                "highestOfGroup":                                   "Highest of Group",
+                "hightestX":                                        "Highest + Targets",
+                "lowestOfGroup":                                    "Lowest of Group",
+                "lowestX":                                          "Lowest + Targets"
+            },
+            "ItemStatus": {
+                "owned":                                            "Owned",
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "mainHand":                                         "Main Hand",
+                "offHand":                                          "Off Hand",
+                "twoHands":                                         "Two Hands",
+                "tail":                                             "Tail"
+            },
+            "combatTypes": {
+                "Aerial":                                     "Aerial Combat",
+                "Close":                                      "Close Combat",
+                "melee":                                      "Melee Combat",
+                "Mounted":                                    "Mounted Combat",
+                "projectile":                                 "Projectile Combat",
+                "ranged":                                     "Ranged Combat",
+                "throwing":                                   "Throwing Combat",
+                "unarmed":                                    "Unarmed Combat"
+            },
+            "rollTypes": {
+                "ability":                                          "Ability",
+                "attack":                                           "Attack",
+                "attribute":                                        "Attribute",
+                "effect":                                           "Effect",
+                "halfmagic":                                        "Half Magic",
+                "initiative":                                       "Initiative",
+                "recovery":                                         "Recovery",
+                "spellcasting":                                     "Spell Casting",
+                "threadWeaving":                                    "Thread Weaving"
+            },
+            "targetDifficulty": {
+                "mystical":                                         "Mystical",
+                "physical":                                         "Physical",
+                "social":                                           "Social"
             }
         },
         "Data": {
@@ -275,6 +326,17 @@
             }
         },
         "Item": {
+            "Ability": {
+                "damage":                                           "Damage",
+                "difficulty": {
+                    "fixed":                                        "Fixed Difficulty",
+                    "groupDifficulty":                              "Difficult Adjusted by Groups",
+                    "targetDifficulty":                             "Difficulty Type"
+                },
+                "rollType":                                         "Roll Type",
+                "substitute":                                       "Replaces Strength",
+                "relatedRollType":                                  "counts for Roll Type"
+            },
             "Header": {
                 "navigator":                                        "Navigator"                                       
 
@@ -339,8 +401,17 @@
             "targetDifficulty":                                     "Difficulty",
             "targetModifiers":                                      "Target Modifier"  
         },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
+            },
+            "Error": {}
+        },
         "Settings": {
             "Edid": {
+                "knockDown":                                        "ED-ID for Knock Down Test",
+                "knockDownHint":                                    "ED-ID for the Knock Down Test ability",
                 "languageRW":                                       "ED-ID for Read/Write Language",
                 "languageRWHint":                                   "ED-ID for the Read/Write Language ability",
                 "languageSpeak":                                    "ED-ID for Speak Language",

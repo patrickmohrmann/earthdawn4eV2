@@ -1,7 +1,7 @@
 import ClassTemplate from './class.mjs';
 import TargetTemplate from "./targeting.mjs";
 import ActionTemplate from "./action.mjs";
-// import ED4E from '../../../config.mjs';
+import ED4E from "../../../config.mjs";
 
 /**
  * Data model template with information on Ability items.
@@ -48,14 +48,36 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Ability.rank"
             } ),
-            // combatAbilityType: new fields.StringField( {
-            //     required: false,
-            //     nullable: true,
-            //     blank: true,
-            //     initial: "",
-            //     options: ED4E.combatType,
-            //     label: "ED.Item.Ability.combatAbilityType"
-            // } ),
+            rollType: new fields.StringField( {
+                required: false,
+                nullable: true,
+                blank: true,
+                initial: "",
+                choices: ED4E.rollTypes,
+                label: "ED.Item.Ability.type"
+            } ),
+            damageAbilities: new fields.SchemaField( {
+                damage: new fields.BooleanField( {
+                    required: false,
+                    nullable: false,
+                    initial: false,
+                    label: "ED.Item.Ability.damage"
+                } ),
+                substitute: new fields.BooleanField( {
+                    required: false,
+                    nullable: false,
+                    initial: false,
+                    label: "ED.Item.Ability.substitute"
+                } ),
+                relatedRollType: new fields.StringField( {  
+                    required: false,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
+                    choices: ED4E.rollTypes,
+                    label: "ED.Item.Ability.relatedRollType"
+                } ),
+            } ),
         } );
     }
 

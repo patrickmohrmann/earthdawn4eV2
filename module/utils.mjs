@@ -238,6 +238,19 @@ export function sumProperty( arr, prop ) {
   return arr.reduce( ( partialSum, obj ) => partialSum + resolvePath( obj, prop ), 0 );
 }
 
+/**
+ * Checks if a value is within a specified range.
+ *
+ * @param {number} value - The value to check.
+ * @param {number} min - The lower limit of the range.
+ * @param {number} max - The upper limit of the range.
+ * @param {boolean} [includeLimits=true] - Whether to include the limits in the range. If true, checks if the value is greater than or equal to min and less than or equal to max. If false, checks if the value is strictly greater or less than the limits.
+ * @returns {boolean} Returns true if the value is within the range, and false otherwise.
+ */
+export function inRange( value, min, max, includeLimits = true ) {
+  return includeLimits ? value >= min && value <= max : value > min && value < max;
+}
+
 /* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
@@ -562,6 +575,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-thread.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-weapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-shipWeapon.hbs",
+    "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs",
 
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-armor.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-attack.hbs",

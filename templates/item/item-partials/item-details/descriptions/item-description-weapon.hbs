@@ -3,13 +3,8 @@
     {{!-- Weapon Type --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.weaponType"}}:</label>
-        <select class="input__select-input" name="system.weaponType" value="{{item.system.weaponType}}" 
-        {{#select item.system.weaponType}}>
-            <option value="0">{{localize "ED.WeaponCategory.melee"}}</option>
-            <option value="1">{{localize "ED.WeaponCategory.unarmed"}}</option>
-            <option value="2">{{localize "ED.WeaponCategory.missle"}}</option>
-            <option value="3">{{localize "ED.WeaponCategory.thrown"}}</option>
-            {{/select}}
+        <select name="system.weaponType">
+            {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
         </select>
     </div>
     {{!-- Damage Attribute --}}

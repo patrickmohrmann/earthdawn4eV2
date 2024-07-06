@@ -1,37 +1,15 @@
 <div>
-  <h3>{{localize "ED.Item.General.details"}}</h3>
+    <h3>{{localize "ED.Item.General.details"}}</h3>
 </div>
-{{!-- combat ability? --}}
-{{!-- <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
-    <select name="system.combatAbilityType">
-        {{selectOptions config.combatTypes selected=item.system.combatAbilityType labelAttr="label" blank="" localize=true }}
-    </select>
-</div> --}}
-{{!-- Target Difficulty --}}
-<div class="item-data__input--line">
-  <label class="label__left">{{localize "X-FixedDifficulty"}}:</label>
-  <input class="input__number-input" name="system.difficulty.fixed" type="text"
-         value="{{item.system.difficulty.fixed}}" data-dtype="Number">
-</div>
-{{!-- Target Difficulty --}}
-<div class="item-data__input--line">
-  <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
-  <select name="system.difficulty.target">
-    {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
-  </select>
-</div>
-{{!-- Group Difficulty --}}
-<div class="item-data__input--line">
-  <label class="label__left">{{localize "X-GroupDifficulty"}}:</label>
-  <select name="system.difficulty.group">
-    {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
-  </select>
+<div>
+    {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
 </div>
 
+{{! -- Magic Type -- }}
 <div>
   <h3>{{localize "ED.Item.General.magic"}}</h3>
 </div>
+
 {{formField systemFields.magic.fields.spellcasting name="system.magic.spellcasting" value=item.system.magic.spellcasting}}
 {{formField systemFields.magic.fields.threadWeaving name="system.magic.threadWeaving" value=item.system.magic.threadWeaving}}
 {{formField systemFields.magic.fields.magicType name="system.magic.magicType" value=item.system.magic.magicType required=false}}

@@ -113,6 +113,9 @@ h6 {
 p {
   font-size: large;
 }
+.font__no-underline {
+  border-bottom: none;
+}
 .display__inline-block {
   display: inline-block;
 }
@@ -385,8 +388,16 @@ p {
 }
 .ability-icon,
 .equipment-icon,
-.effect-icon {
+.effect-icon,
+.item__image--visible,
+.equipment-icon__visible {
   width: 25px;
+  height: 25px;
+  border: none;
+}
+.item__status {
+  width: 16px;
+  border: none;
 }
 .attribute-card__grid--container {
   margin-bottom: 3px;
@@ -406,17 +417,14 @@ p {
   align-items: center;
   display: grid;
   height: 30px;
-  grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 100px;
+  grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 75px;
 }
 .equipment-card__grid--container .equipment-card__grid--item .roll-icon__hover,
 .equipment-card__grid--container .equipment-card__grid--item .roll-icon__pointer {
   display: none;
 }
-.equipment-card__grid--container-Header {
-  align-items: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 290px 100px 75px 75px 75px 75px 100px;
+.equipment-card__grid--container .itemControlGroup {
+  float: none;
 }
 .effect-card__grid--container {
   align-items: center;
@@ -481,7 +489,7 @@ p {
 .equipment-card__grid--container:hover .roll-icon__hover-fixed {
   margin-top: -4px;
   display: block;
-  width: 25px;
+  width: 20px;
 }
 .ability-card__grid--container:hover .ability-icon,
 .attribute-card__grid--container:hover .ability-icon,

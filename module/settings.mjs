@@ -52,6 +52,16 @@ export default function registerSystemSettings() {
         type: new EdIdField(),
     } );
 
+    // edid for abilities that substitute for knockdown tests
+    game.settings.register( "ed4e", "edidKnockDownResist", {
+        name: "ED.Settings.Edid.knockDown",
+        hint: "ED.Settings.Edid.knockDownHint",
+        scope: "world",
+        config: true,
+        default: "knock-down",
+        type: new EdIdField(),
+    } );
+
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */

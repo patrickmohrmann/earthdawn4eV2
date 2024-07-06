@@ -26,8 +26,17 @@
 
 .ability-icon,
 .equipment-icon,
-.effect-icon {
+.effect-icon, 
+.item__image--visible,
+.equipment-icon__visible {
     width: 25px;
+    height: 25px;
+    border: none;
+}
+
+.item__status {
+    width: 16px;
+    border: none;
 }
 
 
@@ -70,32 +79,28 @@
         75px // Step
         75px // Strain
         75px // Attribute
-        100px // Control Icons
+        75px // Control Icons
     ;
+    // highlighting the equiped items.
+//     .equipment-card__grid--item:has(+ div) {
+//         background-color: brown;
+//         :has(div .item__highlighted) {
+//         background-color: aqua;
+//     }
+// }
 
     .equipment-card__grid--item {
-
         .roll-icon__hover,
         .roll-icon__pointer {
             display: none;
         }
-    }
-}
 
-.equipment-card__grid--container-Header {
-    align-items: center;
-    display: grid;
-    height: 30px;
-    grid-template-columns:
-        // 790 px available
-        290px // Name
-        100px // Action
-        75px // Rank
-        75px // Step
-        75px // Strain
-        75px // Attribute
-        100px // Control Icons
-    ;
+        
+    }
+
+    .itemControlGroup {
+        float:none;
+    }
 }
 
 .effect-card__grid--container {
@@ -172,7 +177,7 @@
     .roll-icon__hover-fixed {
             margin-top: -4px;
             display: block;
-            width: 25px;
+            width: 20px;
     }
 
     .ability-icon,

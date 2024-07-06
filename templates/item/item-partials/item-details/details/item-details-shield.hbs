@@ -6,6 +6,12 @@
         <input class="input__number-input" name="system.bloodMagicDamage" type="text"
             value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
     </div>
+    {{!-- tarsche - usable with a bow --}}
+    <div class="item-data__input--line">
+        <label>{{localize "ED.Item.General.bowUsage"}}:</label>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.bowUsage" {{checked
+            item.system.bowUsage}}>
+    </div>
     {{!-- usable Item --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.General.usableItem"}}:</label>
@@ -62,7 +68,9 @@
         {{!-- itemStatus.itemStatus.equipped --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.General.equipped"}}:</label>
-       <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
+       <select name="system.itemStatus">
+            {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
+        </select>
     </div>
     {{#if item.isOwned }}
     {{!-- automatic Weight Calculation --}}
