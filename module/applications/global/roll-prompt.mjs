@@ -55,8 +55,8 @@ export default class RollPrompt extends FormApplication {
             closeOnSubmit: false,
             submitOnChange: true,
             submitOnClose: false,
-            height: 'auto',
-            width: 'auto',
+            height: 500,
+            width: 500,
             resizable: true,
             classes: [...options.classes, 'earthdawn4e', 'roll-prompt'],
             tabs: [
@@ -70,11 +70,11 @@ export default class RollPrompt extends FormApplication {
     }
 
     get title() {
-        return game.i18n.localize( "TODO: LOCALIZE: Roll Prompt Title" );
+        return game.i18n.localize( "ED.Dialogs.Title.rollPrompt" );
     }
 
     get template() {
-        return 'systems/ed4e/templates/prompts-popups/roll-prompt.hbs';
+        return 'systems/ed4e/templates/prompts/roll-prompt.hbs';
     }
 
     /** @type {EdRollOptions} */

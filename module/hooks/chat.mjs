@@ -1,5 +1,7 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import PcData from "../data/actor/pc.mjs";
+import LpTransactionData from "../data/advancement/lp-transaction.mjs";
+
 
 const cmdMapping = {
   char: triggerCharGen,
@@ -36,8 +38,8 @@ export default function () {
     const cmdRegExp = /(?<command>\/\w+)(?<arguments>.*)/;
     const commandMatches = content.match(cmdRegExp);
 
-    return cmdMapping[commandMatches.groups.command.substring(1)](commandMatches.groups.arguments.trim());
-  });
+    return cmdMapping[commandMatches.groups.command.substring( 1 )]( commandMatches.groups.arguments.trim());
+  } );
 
   Hooks.on( "renderChatMessage", ( msg, html, msgData ) => {
     // Add character portrait to message
@@ -60,14 +62,14 @@ function triggerCharGen(argString) {
 /* -------------------------------------------- */
 
 function triggerCoinAward(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }
 
 /* -------------------------------------------- */
 
 function triggerCrCalc(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }
 
@@ -93,9 +95,15 @@ function triggerHelp(argString) {
 }
 
 /* -------------------------------------------- */
-
+/**
+ * /char triggers legend point assignment prompt 
+ * @param {*} argString 
+ * @returns 
+ * @UF UF_LpTracking-triggerLPAward
+ */
 function triggerLPAward(argString) {
-  ui.notifications.warn(game.i18n.localize('X.NotImplementedYet'));
+  LpTransactionData.assignLpPrompt();
+  // ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
   return false;
 }
 

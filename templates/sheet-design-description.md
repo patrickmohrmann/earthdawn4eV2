@@ -1,6 +1,6 @@
-## ACTOR SHEET
+# ACTOR SHEET
 
-### FRAMEWORK
+## FRAMEWORK
     Actor sheets are composed of 5 sections. 
         - Header: containing the Top image frame and the Actor name, Namegiver and Characteristics header
         - Image Characteristics: containing the Image and all Characteristics
@@ -8,7 +8,7 @@
         - Details: containing everything related to the actor, including items. Attributes, notes, links to other Actors etc. (see details for more information)
         - Action Button: containing action buttons for quick access and the bottom Image frame
 
-### Details
+## DETAILS
     the navigator and details section is different depending on the actor type. the following details extist
         - Devotion: containing all Devotions. Items can be sorted by drag and drop, and a System Setting shall split devotions by Tier.
         - Disciplines: containing all discipline, questor, Path items

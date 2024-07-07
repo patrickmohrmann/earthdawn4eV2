@@ -1,0 +1,72 @@
+// basic sheet layout for small - 500px wide - dialogs
+// individual settings will be found in the respective *.less files
+
+.app.window-app.form.earthdawn4e.roll-prompt,
+.app.window-app.form.earthdawn4e.assign-legend
+ {
+    header {
+        position: relative;
+        z-index: 3;
+        border: none;
+        .window-title {
+            padding-left: 35px;
+            margin-top: 0px;
+            
+        }
+        .header-button {
+            margin-top: 0px;
+        }
+        .close {
+            padding-right: 35px;
+        }
+    }
+    
+    .window-content {
+        background-image: url('assets/sheet/background.png');
+        background-size: cover;
+        //margin-top: -60px;
+        //padding: 60px 10px 75px 10px;
+        color: black;
+        background-repeat: repeat; 
+        
+
+        .frame__dialog--small {
+            border: none;
+            position: absolute;
+            margin-left: -8px;
+            margin-top: -80px;
+            z-index: 2;
+        }
+        // .frame__top {
+            
+        // }
+        .frame__bottom {
+            transform: rotate(180deg);
+            bottom: -45px;
+        }
+        .small-dialog__buttons {
+            position: absolute;
+            bottom: 50px;
+    
+            button {
+                position: relative;
+                z-index: 5;
+                width: 200px;
+            }
+    
+            .button-ok {
+                margin-left: 8px;
+                margin-right: 45px;
+            }
+    
+            .button-cancel {
+                margin-left: 45px;
+                margin-right: 15px
+            }
+        }
+    } 
+
+    .window-resizable-handle {
+        z-index: 5;
+    } 
+}

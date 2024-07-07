@@ -324,6 +324,31 @@
                 "Hints": {}
             }
         },
+        "Dialogs": {
+            "AssignLp": {
+                "legendPoints":                                     "Legendenpunkte",
+                "description":                                      "Beschreibung"
+            },
+            "Errors": {
+                "noLp":                                            "Keine Legendenpunkte angegeben!"
+            },
+            "Header": {
+                "activeUser":                                       "Aktive Spieler",
+                "inactiveUser":                                     "Inaktive Spieler",
+                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
+            },
+            "Navigator":{
+                "baseInput":                                        "Standard Optionen",
+                "options":                                          "Sonstige Optionen"
+            }, 
+            "Placeholder": {
+                "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
+            "Title": {
+                "assignLp":                                         "Legendenpunkte zuweisen",
+                "rollPrompt":                                       "Würfelübersicht"
+            }
+        },
         "Item": {
             "Ability": {
                 "damage":                                           "Schaden",

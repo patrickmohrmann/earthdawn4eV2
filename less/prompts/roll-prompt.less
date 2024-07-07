@@ -1,14 +1,24 @@
 .app.window-app.form.earthdawn4e.roll-prompt {
-    .window-content {
+    .navigator-section {
         position: relative;
-        background-image: url('assets/sheet/background.png');
-        background-size: cover;
-        //margin-top: -60px;
-        //padding: 60px 10px 75px 10px;
-        color: black;
-        background-repeat: repeat;
+        z-index: 5;
+        margin-top: 10px;
+        padding-bottom: 10px;
 
-        
-        
-    } 
+    }
+        .roll-prompt-body {
+            .flex-column {
+                display: flex;
+                flex-direction: row;
+                padding-bottom: 5px;
+                label {
+                    display: block;
+                    height:max-content;
+                    padding-top: 8px;
+                    padding-bottom: 4px
+                }
+            }
+        }
+    
+
 }

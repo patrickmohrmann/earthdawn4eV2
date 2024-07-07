@@ -1,3 +1,5 @@
+import AssignLpPrompt from "../../applications/global/assign-legend.mjs";
+
 export default class LpTransactionData extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
@@ -46,5 +48,13 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
 
     get displayString() {
         throw new Error( `The ${this["name"]} subclass of LpTransactionData must define its displayString` );
+    }
+
+    static async assignLpPrompt () {
+        const transactionsPerUser = await AssignLpPrompt.waitPrompt();
+        if ( !transactionsPerUser ) return;
+        for ( const [ actorId, transactionData ] of Object.entries( transactionsPerUser ) ) {
+            game.actors.get( actorId ).addLpTransaction( "earnings", transactionData );
+        }
     }
 }
