@@ -7,12 +7,10 @@ import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mj
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
-import RecoveryPrompt from "../applications/global/recovery-prompt.mjs";
-import EdRoll from "../dice/ed-roll.mjs";
-// import TakeDamagePrompt from "../applications/global/take-damage-prompt.mjs";
 import KnockDownItemsPrompt from "../applications/global/knock-down-prompt.mjs";
 import JumpUpItemsPrompt from "../applications/global/jump-up-prompt.mjs";
-// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
+
+
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -60,7 +58,7 @@ export default class ActorEd extends Actor {
     return this.getItemsByEdid( edid, type )[0];
   }
 
-  /** 
+  /**
    * Perform the karma ritual for this actor to set the current karma points to maximum.
    * Only to be used for namegivers with a discipline.
    */
@@ -79,11 +77,11 @@ export default class ActorEd extends Actor {
     currentItemElement.classList.toggle( "d-none" )
   }
 
-/**
- * Triggers a prompt for updating the Legend Point (LP) history of the actor.
- * Updates the LPTrackingData of the actor based on the input from the prompt.
- * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
- */
+  /**
+   * Triggers a prompt for updating the Legend Point (LP) history of the actor.
+   * Updates the LPTrackingData of the actor based on the input from the prompt.
+   * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
+   */
   async legendPointHistoryEarned() {
     // let history = await getLegendPointHistoryData( actor );
     const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), { actor: this } );
@@ -103,18 +101,18 @@ export default class ActorEd extends Actor {
       step: attributeStep,
       attribute: `${game.i18n.localize( ED4E.attributes[attributeId].label )}`
     } );
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
-      testType: "action",
-      rollType: "attribute",
-      strain: 0,
-      target: undefined,
-      step: step,
-      devotionRequired: false,
-      chatFlavor: chatFlavor,
+        testType: "action",
+        rollType: "attribute",
+        strain: 0,
+        target: undefined,
+        step: step,
+        devotionRequired: false,
+        chatFlavor: chatFlavor,
       },
       this,
-     );
+    );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -134,7 +132,7 @@ export default class ActorEd extends Actor {
       return;
     }
     const difficultyFinal = { base: difficulty }
-    const devotionRequired = ability.system.devotionRequired ? true : false;
+    const devotionRequired = !!ability.system.devotionRequired;
     const strain = { base: ability.system.strain };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbility", {
       sourceActor: this.name,
@@ -142,18 +140,18 @@ export default class ActorEd extends Actor {
       step: abilityStep
     } );
     const abilityFinalStep = { base: abilityStep }
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
-      testType: "action",
-      rollType: "ability",
-      strain: strain,
-      target: difficultyFinal,
-      step: abilityFinalStep,
-      devotionRequired: devotionRequired,
-      chatFlavor: chatFlavor,
+        testType: "action",
+        rollType: "ability",
+        strain: strain,
+        target: difficultyFinal,
+        step: abilityFinalStep,
+        devotionRequired: devotionRequired,
+        chatFlavor: chatFlavor,
       },
       this,
-     );
+    );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -177,18 +175,18 @@ export default class ActorEd extends Actor {
       equipment: equipment.name,
       step: arbitraryStep
     } );
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
-      testType: "action",
-      rollType: "equipment",
-      strain: 0,
-      target: difficultyFinal,
-      step: arbitraryStep,
-      devotionRequired: false,
-      chatFlavor: chatFlavor,
+        testType: "action",
+        rollType: "equipment",
+        strain: 0,
+        target: difficultyFinal,
+        step: arbitraryStep,
+        devotionRequired: false,
+        chatFlavor: chatFlavor,
       },
       this,
-     );
+    );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -204,7 +202,7 @@ export default class ActorEd extends Actor {
   // }
 
   async rollRecovery( options = {} ) {
-    const recoveryMode = await RecoveryPrompt.waitPrompt( this );
+    const recoveryMode = await this._getPrompt( "recovery" );
     let recoveryStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
     const stunDamage = this.system.characteristics.health.damage.stun;
     const totalDamage = this.system.characteristics.health.damage.total;
@@ -216,48 +214,49 @@ export default class ActorEd extends Actor {
     const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty`;
 
     // logic which is not triggering a roll
-    if ( recoveryMode === "recovery" ) {
-      if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
-        ui.notifications.warn( "Localize: Not enough recovery tests available." );
-        return;
-      } else {
-        if ( totalDamage === 0 ) {
-          ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
-          return;
-        }
-      }
-    }
-    else if ( recoveryMode === "nightRest" ) {
-      if ( totalDamage === 0 && currentWounds === 0 ) {
-        this.update( {
-          [`${recoveryStunAvailabiltyPath}`]: false,
-          [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
-        } );
-        return;
-      } else if ( totalDamage === 0 && currentWounds > 0 ) {
-        this.update( {
-          [`${recoveryStunAvailabiltyPath}`]: false,
-          [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1,
-          [`${woundsPath}`]: newWounds
-        } );
-        return;
-      }
-    }
-    else if ( recoveryMode === "recoverStun" ) {
-      if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
-        ui.notifications.warn( "Localize: Not enough recovery tests available." );
-        return;
-      } else {
-        if ( stunDamage === 0 ) {
-          ui.notifications.warn( "Localize: You don'T have Stun damage" );
+    switch ( recoveryMode ) {
+      case "recovery":
+        if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
+          ui.notifications.warn( "Localize: Not enough recovery tests available." );
           return;
         } else {
-          recoveryStep += this.system.attributes.wil.step
+          if ( totalDamage === 0 ) {
+            ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
+            return;
+          }
         }
-      }
-    }
-    else {
-      return
+        break;
+      case "nightRest":
+        if ( totalDamage === 0 && currentWounds === 0 ) {
+          this.update( {
+            [`${recoveryStunAvailabiltyPath}`]: false,
+            [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
+          } );
+          return;
+        } else if ( totalDamage === 0 && currentWounds > 0 ) {
+          this.update( {
+            [`${recoveryStunAvailabiltyPath}`]: false,
+            [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1,
+            [`${woundsPath}`]: newWounds
+          } );
+          return;
+        }
+        break;
+      case "recoverStun":
+        if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
+          ui.notifications.warn( "Localize: Not enough recovery tests available." );
+          return;
+        } else {
+          if ( stunDamage === 0 ) {
+            ui.notifications.warn( "Localize: You don'T have Stun damage" );
+            return;
+          } else {
+            recoveryStep += this.system.attributes.wil.step
+          }
+        }
+        break;
+      default:
+        return;
     }
 
     let chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollRecovery", {
@@ -265,19 +264,19 @@ export default class ActorEd extends Actor {
       step: recoveryStep
     } );
     const recoveryFinalStep = { base: recoveryStep }
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
-      testType: "effect",
-      rollType: "recovery",
-      rollSubType: recoveryMode,
-      strain: 0,
-      target: undefined,
-      step: recoveryFinalStep,
-      devotionRequired: false,
-      chatFlavor: chatFlavor,
+        testType: "effect",
+        rollType: "recovery",
+        rollSubType: recoveryMode,
+        strain: 0,
+        target: undefined,
+        step: recoveryFinalStep,
+        devotionRequired: false,
+        chatFlavor: chatFlavor,
       },
       this,
-     );
+    );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -357,7 +356,7 @@ export default class ActorEd extends Actor {
         if ( selectedAbility ) {
           const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
           knockdownStep = attributes[attribute].step + level;
-          devotionRequired = devotion ? true : false;
+          devotionRequired = !!devotion;
           strain = { base: abilityStrain };
         }
       }
@@ -370,18 +369,18 @@ export default class ActorEd extends Actor {
     } );
 
     const knockdownStepFinal = { base: knockdownStep + this.system.singleBonuses.knockdownEffects.value };
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
-      testType: "action",
-      rollType: "knockdown",
-      strain: strain,
-      target: difficultyFinal,
-      step: knockdownStepFinal,
-      devotionRequired: devotionRequired,
-      chatFlavor: chatFlavor,
+        testType: "action",
+        rollType: "knockdown",
+        strain: strain,
+        target: difficultyFinal,
+        step: knockdownStepFinal,
+        devotionRequired: devotionRequired,
+        chatFlavor: chatFlavor,
       },
       this,
-     );
+    );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
 
     this.#processRoll( roll );
@@ -408,7 +407,7 @@ export default class ActorEd extends Actor {
         if ( selectedAbility ) {
           const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
           jumpUpStep = attributes[attribute].step + level;
-          devotionRequired = devotion ? true : false;
+          devotionRequired = !!devotion;
           strain = { base: abilityStrain };
         }
       }
@@ -422,18 +421,18 @@ export default class ActorEd extends Actor {
     const difficulty = { base: 6 };
     const jumpUpStepFinal = { base: jumpUpStep };
     // const edRollOptions = await this.createEdRollOptions( "action", "jumpUp", strain, difficulty, jumpUpStepFinal, devotionRequired, chatFlavor );
-    const edRollOptions = EdRollOptions.fromActor( 
+    const edRollOptions = EdRollOptions.fromActor(
       {
-      testType: "action",
-      rollType: "jumpUp",
-      strain: strain,
-      target: difficulty,
-      step: jumpUpStepFinal,
-      devotionRequired: devotionRequired,
-      chatFlavor: chatFlavor,
+        testType: "action",
+        rollType: "jumpUp",
+        strain: strain,
+        target: difficulty,
+        step: jumpUpStepFinal,
+        devotionRequired: devotionRequired,
+        chatFlavor: chatFlavor,
       },
       this,
-     );
+    );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
 
     this.#processRoll( roll );
@@ -462,7 +461,6 @@ export default class ActorEd extends Actor {
    *     <li>recover from damage</li>
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
-   * @param {string} recoveryMode type of recovery
    */
   #processRoll( roll ) {
     if ( !roll ) {
@@ -520,7 +518,6 @@ export default class ActorEd extends Actor {
   /**
    * Process the result of a recovery roll. This will reduce the damage taken by the amount rolled.
    * @param {EdRoll} roll The roll to process.
-   * @param {string} recoveryMode type of the recovery
    * @returns {Promise<void>}
    */
   async #processRecoveryResult( roll ) {
@@ -632,9 +629,9 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichmentEmbeddedItems() {
     for ( const item of this.items ) {
       item.system.description.value = foundry.utils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
-        async: true,
-        secrets: this.isOwner,
-      } )
+          async: true,
+          secrets: this.isOwner,
+        } )
       );
     }
   }
@@ -647,5 +644,56 @@ export default class ActorEd extends Actor {
     return this.update( {
       [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
     } )
+  }
+
+  _getPrompt( promptType ) {
+    const DialogClass = foundry.applications.api.DialogV2;
+    switch ( promptType ) {
+      case "recovery":
+        const buttons = [];
+        if ( this.system.characteristics.recoveryTestsRecource.value > 0 ) buttons.push( {
+          action: "recovery",
+          label: game.i18n.localize( "ED.Dialogs.Buttons.recovery"),
+          icon: "fa-light fa-heart-circle-plus",
+          class: "recovery default button-recovery",
+          default: false,
+          callback: _ => { return "recovery" },
+        } );
+        if ( this.system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty ) buttons.push( {
+          action: "recoverStun",
+          label: game.i18n.localize( "ED.Dialogs.Buttons.recoverStun"),
+          icon: "fa-light fa-head-side-medical",
+          class: "recoverStun default button-recoverStun",
+          default: false,
+          callback: _ => { return "recoverStun" },
+        } );
+        buttons.push( {
+          action: "nightRest",
+          label: game.i18n.localize( "ED.Dialogs.Buttons.nightRest"),
+          icon: "fa-duotone fa-campfire",
+          class: "nightRest default button-nightRest",
+          default: true,
+          callback: _ => { return "nightRest" },
+        } );
+        buttons.push( {
+          action: "close",
+          label: game.i18n.localize( "ED.Dialogs.Buttons.cancel"),
+          icon: "fa-light fa-times",
+          class: "cancel default button-cancel",
+          default: false,
+        } );
+
+        return DialogClass.wait( {
+          id: "recovery-mode-prompt",
+          uniqueId: String( ++globalThis._appId ),
+          classes: ["earthdawn4e", "recovery-prompt"],
+          window: {
+            title: game.i18n.localize( "ED.Dialogs.Title.recovery" ),
+            minimizable: false,
+          },
+          modal: false,
+          buttons: buttons,
+        } );
+    }
   }
 }
