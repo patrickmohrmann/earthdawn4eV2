@@ -35,7 +35,7 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
       assignLP: AssignLpPrompt._assignLP,
     },
     form: {
-      handler: AssignLpPrompt.handleFormSubmission,
+      handler: AssignLpPrompt.#onFormSubmission,
       submitOnChange: true,
       closeOnSubmit: false,
     },
@@ -102,7 +102,7 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
     return context;
   }
 
-  static async handleFormSubmission( event, form, formData ) {
+  static async #onFormSubmission( event, form, formData ) {
     const data = foundry.utils.expandObject( formData.object );
     // make array if only one actor is selected
     this.object.selectedActors = [].concat( data.selectedActors || [] );
