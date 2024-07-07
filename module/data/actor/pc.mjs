@@ -311,7 +311,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      * @private
      */
     #prepareDerivedArmor() {
-        const armorItems = this.parent.items.filter( item => item.type === 'armor' && item.system.itemStatus.equipped );
+        const armorItems = this.parent.items.filter( item => item.type === 'armor' && item.system.itemStatus === "equipped" );
         this.characteristics.armor.physical.value = this.characteristics.armor.physical.baseValue;
         this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue;
         if ( armorItems ) {
@@ -328,7 +328,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedBloodMagic() {
         const bloodDamageItems = this.parent.items.filter(
-          ( item ) => ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type !== "path" && item.system.itemStatus.equipped ) ||
+          ( item ) => ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type !== "path" && item.system.itemStatus === "equipped" ) ||
             ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type === "path" ),
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
@@ -342,7 +342,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedDefenses() {
         const shieldItems = this.parent.items.filter(
-          item => item.type === 'shield' && item.system.itemStatus.equipped
+          item => item.type === 'shield' && item.system.itemStatus === "equipped"
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
@@ -401,7 +401,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedInitiative() {
         const armors = this.parent.items.filter( item =>
-          ["armor", "shield"].includes( item.type ) && item.system.itemStatus.equipped
+          ["armor", "shield"].includes( item.type ) && item.system.itemStatus === "equipped"
         );
         this.initiative -= sum( armors.map( item => item.system.initiativePenalty ) );
     }
@@ -416,7 +416,7 @@ export default class PcData extends NamegiverTemplate.mixin(
         // relevant items are those with a weight property and are either equipped or carried
         const relevantItems = this.parent.items.filter( item =>
           item.system.hasOwnProperty( 'weight' )
-          && ( item.system.itemStatus.equipped || item.system.itemStatus.carried )
+          && ( item.system.itemStatus === "equipped" || item.system.itemStatus === "carried")
         );
 
         const carriedWeight = relevantItems.reduce( ( accumulator, currentItem ) => {
