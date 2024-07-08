@@ -1,31 +1,38 @@
 <div class="item__left--main">
     <h3>{{localize "ED.General.coreData"}}</h3>
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.rank"}}:</label>
-        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
+        <label class="partial__40--left">{{localize "ED.General.rank"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.level" type="text" value="{{item.system.level}}"
             data-dtype="Number">
     </div>
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
-        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
+        <label class="partial__40--left">{{localize "ED.General.strainShort"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.strain" type="text" value="{{item.system.strain}}"
             data-dtype="Number">
     </div>
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
+        <label class="partial__40--left">{{localize "ED.Attributes.attribute"}}:</label>
         <select name="system.attribute">
             {{selectOptions config.attributes selected=item.system.attribute blank="" labelAttr="label" localize=true }}
         </select>
     </div>
     {{!-- Action --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Action.action"}}:</label>
+        <label class="partial__40--left">{{localize "ED.Action.action"}}:</label>
         <select name="system.action">
             {{selectOptions config.action selected=item.system.action localize=true }}
         </select>
     </div>
+    {{!-- Type --}}
+    <div class="item-data__input--line">
+        <label class="partial__40--left">{{localize "ED.Tier.tier"}}:</label>
+        <select name="system.skillType">
+            {{selectOptions config.skillTypes selected=item.system.skillType localize=true }}
+        </select>
+    </div>
     {{!-- Tier --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
+        <label class="partial__40--left">{{localize "ED.Tier.tier"}}:</label>
         <select name="system.tier">
             {{selectOptions config.tier selected=item.system.tier localize=true }}
         </select>
