@@ -532,33 +532,33 @@ async _onAbilityEnhancement( event ) {
     if ( this.actor.type === "character" ) {
       // Knacks
       if ( knacks.includes(itemData.type ) ) {
-        const choice = await this._showLpOptionsPrompt();
+        bookingResult = await this._showLpOptionsPrompt();
       // Spells
       } else if ( spells.includes(itemData.type ) ) {
-        const choice = await this._showLpOptionsPrompt();
+        bookingResult = await this._showLpOptionsPrompt();
         // Abilities
         } else if ( abilities.includes(itemData.type ) ) {
-          const choice = await this._showLpOptionsPrompt();
+          bookingResult = await this._showLpOptionsPrompt();
           // Threads
           } else if ( threads.includes(itemData.type ) ) {
-            const choice = await this._showLpOptionsPrompt();      
+            bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);      
             } else 
             {
               return super._onDropItem(event, data);
             }
-      // if ( bookingResult === "free" ) {
-      //   return super._onDropItem(event, data);
-      // } else  if ( validationResult === "free" ) {
-      //   return super._onDropItem(event, data);
-      // } else {
-      //   return false;
-      // }
+      if ( bookingResult === "free" ) {
+        return super._onDropItem(event, data);
+      } else  if ( bookingResult === "spend" ) {
+        return super._onDropItem(event, data);
+      } else {
+        return false;
+      }
     } else return super._onDropItem(event, data);
   }
 
-// to berefactored into a V2 Application or V2 Dialog
+// to berefactored into a V2 Application or V2 Dialog the real file should be lp-validation-prompt for this.
   // Step 1: Define the method to create and handle the prompt
-async _showLpOptionsPrompt() {
+async _showLpOptionsPrompt(actor, item) {
   return new Promise((resolve) => {
     let d = new Dialog({
       title: "LP Options",
