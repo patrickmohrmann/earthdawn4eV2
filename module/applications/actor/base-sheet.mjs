@@ -1,6 +1,6 @@
 import ED4E from "../../config.mjs";
 import LpValidationPrompt from "../global/lp-validation-prompt.mjs";
-import ed4eDropItem from "../global/ed4e-drop-item.mjs";
+import ed4eDropItem from "../global/drop-items.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -383,153 +383,26 @@ async _onAbilityEnhancement( event ) {
     itemDescription.toggleClass( "card__description--toggle" );
   }
 
-  // async _onDropItem(event, data) {
-  //   const itemData = await fromUuid(data.uuid);
-  //   // Items which cost LP once added to the actor
-  //   const lpRelevantItemTypes = ["knackAbility", "knackKarma", "knackManeuver", "spell", "spellKnack", "thread"];
-  //   if (this.actor.type === "character" && lpRelevantItemTypes.includes(itemData.type)) {
-  //     // Parse the dropped data
-  //     try {
-  //       data = JSON.parse(event.dataTransfer.getData('text/plain'));
-  //     } catch (err) {
-  //       return false;
-  //     }
 
-  //     // Confirm dialog
-  //     const confirmed = await new Promise((resolve) => {
-  //       new Dialog({
-  //         title: "Confirm Item Drop",
-  //         content: "<p>Do you want to add this item to the actor?</p>",
-  //         buttons: {
-  //           free: {
-  //             icon: '<i class="fas fa-check"></i>',
-  //             label: "For Free",
-  //             callback: async () => {
-  //               // this.actor.addAbility( itemData, false, true );
-  //               const abilityAddedSuccessfully = await this.actor.addAbility(itemData, false, true);
-  //               if (!abilityAddedSuccessfully) {
-  //                 console.error("Failed to add LP transaction. Aborting item drop.");
-  //                 return; // Exit if the LP transaction was not successful
-  //               } else {
-  //                 super._onDropItem(event, data);
-  //               }
-  //               resolve(true);
-  //             },
-  //           },
-  //           spendLP: {
-  //             icon: '<i class="fas fa-check"></i>',
-  //             label: "Spend LP",
-  //             callback: async () => {
-  //               // this.actor.addAbility( itemData, false, true );
-  //               const abilityAddedSuccessfully = await this.actor.addAbility(itemData, false, true);
-  //               if (!abilityAddedSuccessfully) {
-  //                 console.error("Failed to add LP transaction. Aborting item drop.");
-  //                 return; // Exit if the LP transaction was not successful
-  //               } else {
-  //                 super._onDropItem(event, data);
-  //               }
-  //               resolve(true);
-  //             },
-  //           },
-  //           no: {
-  //             icon: '<i class="fas fa-times"></i>',
-  //             label: "No",
-  //             callback: () => resolve(false),
-  //           },
-  //         },
-  //         default: "no",
-  //         close: () => resolve(false),
-  //       }).render(true);
-  //     });
-
-  //     if (confirmed) {
-  //       return super._onDropItem(event, data);
-  //     } else {
-  //       return false;
-  //     }
-  //   } else if (itemData.type === "talent") {
-  //     if (this.actor.type === "character") {
-  //       // Parse the dropped data
-  //       try {
-  //         data = JSON.parse(event.dataTransfer.getData('text/plain'));
-  //       } catch (err) {
-  //         return false;
-  //       }
-  //       // Confirm dialog
-  //       const confirmed = await new Promise((resolve) => {
-  //         new Dialog({
-  //           title: "Confirm Item Drop",
-  //           content: "<p>Do you want to add this item to the actor?</p>",
-  //           buttons: {
-  //             free: {
-  //               icon: '<i class="fas fa-check"></i>',
-  //               label: "Standard Talent",
-  //               callback: async () => {
-  //                 resolve(true);
-  //                 super._onDropItem(event, data);
-  //               },
-  //             },
-  //             spendLP: {
-  //               icon: '<i class="fas fa-check"></i>',
-  //               label: "Versatility Talent",
-  //               callback: async () => {
-  //                 // this.actor.addAbility( itemData, false, true );
-  //                 const versatility = this.actor.items.find(i => i.type === "talent" && i.system.edid === "versatility");
-  //                 const versatilityTalentsCount = this.actor.items.filter(i => 
-  //                   i.type === "talent" && 
-  //                   i.system.edid === "versatility" && 
-  //                   i.system.talentCategory === "versatility"
-  //                 ).length;
-  //                 if (versatility) {
-  //                   const currentVersatilityTalents = this.actor.items.filter(i => i.type === "talent" && i.system.talentCategory === "versatility");
-  //                   if (currentVersatilityTalents.length >= versatility.system.level + versatilityTalentsCount) {
-  //                     ui.notifications.error("You already have the maximum number of Versatility Talents.");
-  //                     return
-  //                   } else {
-  //                     super._onDropItem(event, data);
-  //                   }
-  //                   resolve(true);
-  //                 } else if ( itemData.system.talentCategory === "versatility" && itemData.system.edid === "versatility") {
-  //                   super._onDropItem(event, data);
-  //                 } else {
-  //                   ui.notifications.error("You do not have the Versatility Talent.");
-  //                   return
-  //                 }
-  //               }
-  //             },
-  //             no: {
-  //               icon: '<i class="fas fa-times"></i>',
-  //               label: "No",
-  //               callback: () => resolve(false),
-  //             },
-  //           },
-  //           default: "no",
-  //           close: () => resolve(false),
-  //         }).render(true);
-  //       });
-
-  //       if (confirmed) {
-  //         // return super._onDropItem(event, data);
-  //       } else {
-  //         return false;
-  //       }
-  //     }
-  //   } else return super._onDropItem(event, data);
-  
-  // }
   async lpValidation ( itemData, actor ) {
     const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);
     console.log("DIALOG OUTPUT", dialog)
   }
 
   async _onDropItem(event, data) {
-    ed4eDropItem(this.actor, data);
+    const itemData = await fromUuid(data.uuid);
+    const dropItemResult = await ed4eDropItem(this.actor, itemData);
+    console.log("dropItem", dropItemResult)
+
+    if ( dropItemResult === "spend") {
+      await this.actor.addAbility(itemData, false);
+      return super._onDropItem(event, data);
+    } else if ( dropItemResult === "free") {
+      await this.actor.addAbility(itemData, true);
+      return super._onDropItem(event, data);
+    } else if ( dropItemResult === "cancel" ) {
+      return
     }
-  
-
-// to berefactored into a V2 Application or V2 Dialog the real file should be lp-validation-prompt for this.
-  // Step 1: Define the method to create and handle the prompt
-
-  
+  }
 }
 
