@@ -2,6 +2,18 @@
 import LpTrackingData from "../../data/advancement/lp-tracking.mjs";
 
 /**
+ * 
+ * @param {object} inputs actor data
+ * @returns 
+ */
+// export async function getLegendPointHistoryData( inputs ) {
+//   return new Promise( ( resolve ) => {
+//     let history = new LegendPointHistoryEarnedPrompt( inputs, resolve );
+//     history.render( true );
+//   } )
+// }
+
+/**
  * The application responsible for handling Legend Point History of Earned Points
  *
  * @augments {FormApplication}
@@ -42,7 +54,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
       height: 850,
       width: 1000,
       resizable: true,
-      classes: [...options.classes, 'earthdawn4e', 'legend-point__history'],
+      classes: [...options.classes, 'earthdawn4e', 'legend-point__history--earned'],
       tabs: [
         {
           navSelector: '.prompt-tabs',
@@ -66,22 +78,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
     super.activateListeners( html );
 
     $( this.form.querySelector( 'button.ok' ) ).on( 'click', this.ok.bind( this ) );
-    $( this.form.querySelector('button.close') ).on('click', this.close.bind( this ) );
 
-    $( this.form ).on( 'click', '.toggle-details', this._toggleDetails.bind( this ) );
-  }
-
-  _toggleDetails(event) {
-    event.preventDefault();
-  
-    const currentItem = $(event.currentTarget);
-    // Adjusted traversal to reflect the actual structure
-    const detailsDiv = currentItem.closest('tr').next('tr').find('.spendings-details');
-    if (detailsDiv.length > 0) {
-      detailsDiv.toggleClass("is-visible");
-    } else {
-      console.error("Failed to find .spendings-details related to the clicked item.");
-    }
   }
 
   async _updateObject( event, formData ) {
@@ -94,16 +91,9 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
   }
 
   /** @inheritDoc */
-  async close1( options = {} ) {
+  async close( options = {} ) {
     this.resolve?.( null );
     return super.close( options );
-  }
-
-  /** @inheritDoc */
-  async close( event ) {
-    await this.submit( { preventRender: true } );
-    this.resolve?.( this.object );
-    return this.close1( );
   }
 
   /** @inheritDoc */
@@ -114,6 +104,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
     await this.submit( { preventRender: true } );
     this.resolve?.( this.object );
-    return this.close1( );
+    return this.close( );
   }
+
 }

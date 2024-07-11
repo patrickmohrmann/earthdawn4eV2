@@ -81,13 +81,13 @@ export default function registerHandlebarHelpers() {
     }));
   });
 
-  Handlebars.registerHelper('formatDate', function(date, options) {
-    const locale = options.hash.locale || 'default'; // Use provided locale or default
-    return new Intl.DateTimeFormat(locale, {
-      year: 'numeric', month: 'long', day: 'numeric',
-      hour: '2-digit', minute: '2-digit', second: '2-digit'
-    }).format(new Date(date));
-  });
+  // Handlebars.registerHelper('formatDate', function(date, options) {
+  //   const locale = options.hash.locale || 'default'; // Use provided locale or default
+  //   return new Intl.DateTimeFormat(locale, {
+  //     year: 'numeric', month: 'long', day: 'numeric',
+  //     hour: '2-digit', minute: '2-digit', second: '2-digit'
+  //   }).format(new Date(date));
+  // });
 
   // Handlebars.registerHelper( 'edGetAttributeValue', ( attribute, attributes ) => {
   //   if ( attribute === undefined || attribute === '' || attribute === "" ) {

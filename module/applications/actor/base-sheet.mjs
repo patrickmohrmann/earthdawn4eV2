@@ -516,6 +516,10 @@ async _onAbilityEnhancement( event ) {
   //   } else return super._onDropItem(event, data);
   
   // }
+  async lpValidation ( itemData, actor ) {
+    const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);
+    console.log("DIALOG OUTPUT", dialog)
+  }
 
   async _onDropItem(event, data) {
     const itemData = await fromUuid(data.uuid);
@@ -524,34 +528,36 @@ async _onAbilityEnhancement( event ) {
     const spells = ["spell", "spellKnack"];
     const abilities = ["talent", "skills", "devotions"];
     const threads = ["thread"];
+    let bookingResult = "";
     if ( this.actor.type === "character" ) {
       // Knacks
       if ( knacks.includes(itemData.type ) ) {
-        const dialog = new LpValidationPrompt(itemData);
+        const dialog = new LpValidationPrompt(itemData, this);
         await dialog.render(true);
       // Spells
       } else if ( spells.includes(itemData.type ) ) {
-        const dialog = new LpValidationPrompt(itemData);
+        const dialog = new LpValidationPrompt(itemData, this);
         await dialog.render(true);
         // Abilities
         } else if ( abilities.includes(itemData.type ) ) {
-          const dialog = new LpValidationPrompt(itemData);
-          const validationResult = await dialog.render(true);
+          this.actor.lpValidation( itemData, this)
           // Threads
           } else if ( threads.includes(itemData.type ) ) {
-            const dialog = new LpValidationPrompt(itemData);
+            const dialog = new LpValidationPrompt(itemData, this);
             await dialog.render(true);        
             } else 
             {
               return super._onDropItem(event, data);
             }
-      if ( validationResult === "free" ) {
-        return super._onDropItem(event, data);
-      } else  if ( validationResult === "free" ) {
-        return super._onDropItem(event, data);
-      } else {
-        return false;
-      }
+      // if ( bookingResult === "free" ) {
+      //   return super._onDropItem(event, data);
+      // } else  if ( validationResult === "free" ) {
+      //   return super._onDropItem(event, data);
+      // } else {
+      //   return false;
+      // }
     } else return super._onDropItem(event, data);
   }
+
+  
 }

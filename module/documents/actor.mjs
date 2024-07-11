@@ -779,14 +779,14 @@ export default class ActorEd extends Actor {
   }
 
 
-  /**
-   * Legend point History earned prompt trigger
-   */
-  async legendPointHistoryEarned() {
-    // let history = await getLegendPointHistoryData( actor );
-    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(new LpTrackingData(this.system.lp.toObject()), { actor: this });
-    return this.update({ system: { lp: lpUpdateData } })
-  }
+  // /**
+  //  * Legend point History earned prompt trigger
+  //  */
+  // async legendPointHistoryEarned() {
+  //   // let history = await getLegendPointHistoryData( actor );
+  //   const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(new LpTrackingData(this.system.lp.toObject()), { actor: this });
+  //   return this.update({ system: { lp: lpUpdateData } })
+  // }
 
 
   /**
