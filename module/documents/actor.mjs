@@ -1009,4 +1009,41 @@ export default class ActorEd extends Actor {
     return this._promptFactory.getPrompt( promptType );
   }
 
+  async _showLpOptionsPrompt(actor, item) {
+    return new Promise((resolve) => {
+      const actorName = actor.name;
+      const itemName = item.name;
+      const currentLp = actor.system.lp.current;
+      const requiredLp = 500;
+      let actorHealth = "is healthy";
+      if ( actor.system.characteristics.health.damage.total > 0 ) {
+        actorHealth = "is not healthy, do you want to increase anyway?"
+      }
+      let d = new Dialog({
+        title: "LP Options",
+        content: `<p>Increase ${itemName}</p>
+                  <p>Current LP: ${currentLp}</p>
+                  <p>required LP: ${requiredLp}</p>
+                  <p>Actor: ${actorName}</p>
+                  <p>Current Damage: ${actorHealth}</p>`,
+        buttons: {
+          free: {
+            label: "Free",
+            callback: () => resolve("free")
+          },
+          spend: {
+            label: "Spend LP",
+            callback: () => resolve("spend")
+          },
+          cancel: {
+            label: "Cancel",
+            callback: () => resolve("cancel")
+          }
+        },
+        default: "cancel",
+        close: () => resolve(null)
+      });
+      d.render(true);
+    });
+  }
 }

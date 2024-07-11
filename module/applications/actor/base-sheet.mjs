@@ -542,16 +542,16 @@ async _onAbilityEnhancement( event ) {
     if ( this.actor.type === "character" ) {
       // Knacks
       if ( knacks.includes(itemData.type ) ) {
-        bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);    
+        bookingResult = await this.actor._showLpOptionsPrompt(this.actor, itemData);    
       // Spells
       } else if ( spells.includes(itemData.type ) ) {
-        bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);    
+        bookingResult = await this.actor._showLpOptionsPrompt(this.actor, itemData);    
         // Abilities
         } else if ( abilities.includes(itemData.type ) ) {
-          bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);    
+          bookingResult = await this.actor._showLpOptionsPrompt(this.actor, itemData);    
           // Threads
           } else if ( threads.includes(itemData.type ) ) {
-            bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);      
+            bookingResult = await this.actor._showLpOptionsPrompt(this.actor, itemData);      
             } else if ( powers.includes( itemData.type ) || mask.includes( itemData.type ) || shipWeapon.includes( itemData.type ) ) {
               return ui.notifications.warn( game.i18n.format("ED.Notifications.Info.notAddedforTheActor") );
             } else if ( namegiver.includes (itemData.type ) ) {
@@ -571,49 +571,65 @@ async _onAbilityEnhancement( event ) {
       } else {
         return false;
       }
-    } 
-    // add restrictions for all others
-    else return super._onDropItem(event, data);
+    } else if ( this.actor.type === "npc" ) {
+      if ( knacks.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( knacks.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( spells.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( abilities.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( threads.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( powers.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( classes.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( mask.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( bindingSecrets.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( physicalItems.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( specialAbility.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( conditions.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( shipWeapon.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      } else if ( namegiver.includes(itemData.type ) ) {
+        return super._onDropItem(event, data);
+      }
+    } else if ( this.actor.type === "creature" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "dragon" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "spirit" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "horror" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "group" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "trap" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "loot" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else if ( this.actor.type === "vehicle" ) {
+      // see npc
+      return super._onDropItem(event, data);
+    } else return super._onDropItem(event, data);
   }
 
 // to berefactored into a V2 Application or V2 Dialog the real file should be lp-validation-prompt for this.
   // Step 1: Define the method to create and handle the prompt
-async _showLpOptionsPrompt(actor, item) {
-  return new Promise((resolve) => {
-    const actorName = actor.name;
-    const itemName = item.name;
-    const currentLp = actor.system.lp.current;
-    const requiredLp = 500;
-    let actorHealth = "is healthy";
-    if ( actor.system.characteristics.health.damage.total > 0 ) {
-      actorHealth = "is not healthy, do you want to increase anyway?"
-    }
-    let d = new Dialog({
-      title: "LP Options",
-      content: `<p>Increase ${itemName}</p>
-                <p>Current LP: ${currentLp}</p>
-                <p>required LP: ${requiredLp}</p>
-                <p>Actor: ${actorName}</p>
-                <p>Current Damage: ${actorHealth}</p>`,
-      buttons: {
-        free: {
-          label: "Free",
-          callback: () => resolve("free")
-        },
-        spend: {
-          label: "Spend LP",
-          callback: () => resolve("spend")
-        },
-        cancel: {
-          label: "Cancel",
-          callback: () => resolve("cancel")
-        }
-      },
-      default: "cancel",
-      close: () => resolve(null)
-    });
-    d.render(true);
-  });
-}
+
   
 }
