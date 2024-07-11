@@ -562,7 +562,9 @@ async _showLpOptionsPrompt(actor, item) {
   return new Promise((resolve) => {
     let d = new Dialog({
       title: "LP Options",
-      content: "<p>Choose an option:</p>",
+      content: `<p>Choose an option:</p>
+                <p>Current LP: ${actor.system.lp.current}</p>
+                <p>Current Damage: ${actor.system.damage}</p>`,
       buttons: {
         free: {
           label: "Free",
