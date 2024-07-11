@@ -532,19 +532,16 @@ async _onAbilityEnhancement( event ) {
     if ( this.actor.type === "character" ) {
       // Knacks
       if ( knacks.includes(itemData.type ) ) {
-        const dialog = new LpValidationPrompt(itemData, this);
-        await dialog.render(true);
+        const choice = await this._showLpOptionsPrompt();
       // Spells
       } else if ( spells.includes(itemData.type ) ) {
-        const dialog = new LpValidationPrompt(itemData, this);
-        await dialog.render(true);
+        const choice = await this._showLpOptionsPrompt();
         // Abilities
         } else if ( abilities.includes(itemData.type ) ) {
-          this.actor.lpValidation( itemData, this)
+          const choice = await this._showLpOptionsPrompt();
           // Threads
           } else if ( threads.includes(itemData.type ) ) {
-            const dialog = new LpValidationPrompt(itemData, this);
-            await dialog.render(true);        
+            const choice = await this._showLpOptionsPrompt();      
             } else 
             {
               return super._onDropItem(event, data);
@@ -559,5 +556,32 @@ async _onAbilityEnhancement( event ) {
     } else return super._onDropItem(event, data);
   }
 
+// to berefactored into a V2 Application or V2 Dialog
+  // Step 1: Define the method to create and handle the prompt
+async _showLpOptionsPrompt() {
+  return new Promise((resolve) => {
+    let d = new Dialog({
+      title: "LP Options",
+      content: "<p>Choose an option:</p>",
+      buttons: {
+        free: {
+          label: "Free",
+          callback: () => resolve("free")
+        },
+        spend: {
+          label: "Spend LP",
+          callback: () => resolve("spend")
+        },
+        cancel: {
+          label: "Cancel",
+          callback: () => resolve("cancel")
+        }
+      },
+      default: "cancel",
+      close: () => resolve(null)
+    });
+    d.render(true);
+  });
+}
   
 }
