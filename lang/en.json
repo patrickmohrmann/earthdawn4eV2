@@ -527,7 +527,10 @@
             "targetModifiers":                                      "Target Modifier"
         },
         "Notifications": {
-            "Info": {},
+            "Info": {
+                "noMoreItemsOfThisType":                            "This Item cannot be added again to this Actor.",
+                "notAddedforTheActor":                              "This Item is not meant for this Actor."
+            },
             "Warn": {
                 "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
             },

@@ -537,7 +537,10 @@
             "targetModifiers":                                      "Ziel Modifikatoren"
         },
         "Notifications": {
-            "Info": {},
+            "Info": {
+                "noMoreItemsOfThisType":                             "Diese Item kann kein weiteres Mal hinzugefügt werden.",
+                "notAddedforTheActor":                              "Diese Item ist nicht für diesen Actortyp gedacht."
+            },
             "Warn": {
                 "piecemealArmorSizeExceeded":                       "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
             },

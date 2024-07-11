@@ -796,7 +796,7 @@ export default class ActorEd extends Actor {
      * @param {boolean} free        If the item was freely added
      * @param {boolean} addedNew    If the item was newly added
      */
-  async addAbility(item, free, addedNew) {
+  async addAbility(item, free) {
     let requiredLp = 0;
     const legendPointsCostConfig = ED4E.legendPointsCost;
     const actorTalents = this.items.filter(item => item.type === "talent");
@@ -858,14 +858,14 @@ export default class ActorEd extends Actor {
     }
       
     let description = "added" + item.name;
-    if (addedNew) {
-      description = game.i18n.localize("ED.Actor.LpTracking.Spendings.descriptionNewlyAdded");
-    } else {
-      description = game.i18n.format("ED.Dialogs.LegendPoints.SpendLp", {
-        previousLevel: item.system.level - 1,
-        newLevel: item.system.level,
-      });
-    }
+    // if (addedNew) {
+    //   description = game.i18n.localize("ED.Actor.LpTracking.Spendings.descriptionNewlyAdded");
+    // } else {
+    //   description = game.i18n.format("ED.Dialogs.LegendPoints.SpendLp", {
+    //     previousLevel: item.system.level - 1,
+    //     newLevel: item.system.level,
+    //   });
+    // }
     // add Prompt for LP spending which can be skipped by a certain click (shift+RIghtclick or so)
     // only after confirming the promt, this shall go on.
     const transactionData = new LpSpendingTransactionData({

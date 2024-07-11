@@ -528,43 +528,73 @@ async _onAbilityEnhancement( event ) {
     const spells = ["spell", "spellKnack"];
     const abilities = ["talent", "skills", "devotions"];
     const threads = ["thread"];
+    const powers = ["power", "attack", "maneuver"];
+    const classes = ["discipline", "path", "questor"];
+    const mask = ["mask"];
+    const bindingSecrets = ["bindingSecrets"];
+    const physicalItems = ["armor","equipment","shield","weapon"];
+    const specialAbility = ["specialAbility"];
+    const conditions = ["curseMark", "effect", "poisonDisease"];
+    const shipWeapon = ["shipWeapon"];
+    const namegiver = ["namegiver"]
+    
     let bookingResult = "";
     if ( this.actor.type === "character" ) {
       // Knacks
       if ( knacks.includes(itemData.type ) ) {
-        bookingResult = await this._showLpOptionsPrompt();
+        bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);    
       // Spells
       } else if ( spells.includes(itemData.type ) ) {
-        bookingResult = await this._showLpOptionsPrompt();
+        bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);    
         // Abilities
         } else if ( abilities.includes(itemData.type ) ) {
-          bookingResult = await this._showLpOptionsPrompt();
+          bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);    
           // Threads
           } else if ( threads.includes(itemData.type ) ) {
             bookingResult = await this._showLpOptionsPrompt(this.actor, itemData);      
-            } else 
-            {
-              return super._onDropItem(event, data);
-            }
+            } else if ( powers.includes( itemData.type ) || mask.includes( itemData.type ) || shipWeapon.includes( itemData.type ) ) {
+              return ui.notifications.warn( game.i18n.format("ED.Notifications.Info.notAddedforTheActor") );
+            } else if ( namegiver.includes (itemData.type ) ) {
+             const namegiver = this.actor.items.filter( i => i.type ==="namegiver" )
+             if ( namegiver.length > 0 ) {
+              return ui.notifications.warn( game.i18n.format("ED.Notifications.Info.noMoreItemsOfThisType") );
+             }
+              } else {
+                return super._onDropItem(event, data);
+              }
       if ( bookingResult === "free" ) {
+        await this.actor.addAbility( itemData, true)
         return super._onDropItem(event, data);
       } else  if ( bookingResult === "spend" ) {
+        await this.actor.addAbility(itemData, false);
         return super._onDropItem(event, data);
       } else {
         return false;
       }
-    } else return super._onDropItem(event, data);
+    } 
+    // add restrictions for all others
+    else return super._onDropItem(event, data);
   }
 
 // to berefactored into a V2 Application or V2 Dialog the real file should be lp-validation-prompt for this.
   // Step 1: Define the method to create and handle the prompt
 async _showLpOptionsPrompt(actor, item) {
   return new Promise((resolve) => {
+    const actorName = actor.name;
+    const itemName = item.name;
+    const currentLp = actor.system.lp.current;
+    const requiredLp = 500;
+    let actorHealth = "is healthy";
+    if ( actor.system.characteristics.health.damage.total > 0 ) {
+      actorHealth = "is not healthy, do you want to increase anyway?"
+    }
     let d = new Dialog({
       title: "LP Options",
-      content: `<p>Choose an option:</p>
-                <p>Current LP: ${actor.system.lp.current}</p>
-                <p>Current Damage: ${actor.system.damage}</p>`,
+      content: `<p>Increase ${itemName}</p>
+                <p>Current LP: ${currentLp}</p>
+                <p>required LP: ${requiredLp}</p>
+                <p>Actor: ${actorName}</p>
+                <p>Current Damage: ${actorHealth}</p>`,
       buttons: {
         free: {
           label: "Free",
