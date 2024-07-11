@@ -54,7 +54,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
       height: 850,
       width: 1000,
       resizable: true,
-      classes: [...options.classes, 'earthdawn4e', 'legend-point__history--earned'],
+      classes: [...options.classes, 'earthdawn4e', 'legend-point__history'],
       tabs: [
         {
           navSelector: '.prompt-tabs',
@@ -79,6 +79,20 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
     $( this.form.querySelector( 'button.ok' ) ).on( 'click', this.ok.bind( this ) );
 
+    $( this.form ).on( 'click', '.toggle-details', this._toggleDetails.bind( this ) );
+
+  }
+  _toggleDetails(event) {
+    event.preventDefault();
+  
+    const currentItem = $(event.currentTarget);
+    // Adjusted traversal to reflect the actual structure
+    const detailsDiv = currentItem.closest('tr').next('tr').find('.spendings-details');
+    if (detailsDiv.length > 0) {
+      detailsDiv.toggleClass("is-visible");
+    } else {
+      console.error("Failed to find .spendings-details related to the clicked item.");
+    }
   }
 
   async _updateObject( event, formData ) {

@@ -383,7 +383,6 @@ async _onAbilityEnhancement( event ) {
     itemDescription.toggleClass( "card__description--toggle" );
   }
 
-
   async lpValidation ( itemData, actor ) {
     const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);
     console.log("DIALOG OUTPUT", dialog)
