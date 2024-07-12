@@ -9,7 +9,7 @@ import LpSpendingTransactionData from '../data/advancement/lp-spending-transacti
 import LpTrackingData from '../data/advancement/lp-tracking.mjs';
 import KnockDownItemsPrompt from '../applications/global/knock-down-prompt.mjs';
 import JumpUpItemsPrompt from '../applications/global/jump-up-prompt.mjs';
-import { PromptFactory } from "../applications/global/_module.mjs";
+import PromptFactory from "../applications/global/prompt-factory.mjs";
 
 
 /**
