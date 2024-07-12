@@ -123,22 +123,26 @@ export default class ItemEd extends Item {
         const dropItemResult = await ed4eDropItem(this.actor, data);
         console.log("dropItem", dropItemResult);
     
-        if (dropItemResult.bookingResult === "spend" || dropItemResult.bookingResult === "free" || dropItemResult.bookingResult === "versatility") {
+        if (dropItemResult.bookingResult === "spend" 
+            || dropItemResult.bookingResult === "free" 
+            || dropItemResult.bookingResult === "versatility"
+            || dropItemResult.bookingResult === "discipline"
+            || dropItemResult.bookingResult === "optional") {
           await this.actor.addItemLpTransaction(data, dropItemResult.validationData, dropItemResult.bookingResult);
           if (dropItemResult.bookingResult === "versatility") {
-            let updateData = {
-                "data.system.talentCategory": "versatility" // Specify the path and new value
-              };
-              
-              // Call `updateSource` with the update data
-              this.actor.updateSource(updateData).then(() => {
-                console.log("Update successful");
-              }).catch((error) => {
-                console.error("Update failed", error);
-              });
+            this.updateSource({"system.talentCategory": "versatility"});
+          }
+          if (dropItemResult.bookingResult === "discipline") {
+            this.updateSource({"system.talentCategory": "discipline"});
+          }
+          if (dropItemResult.bookingResult === "free") {
+            this.updateSource({"system.talentCategory": "free"});
+          }
+          if (dropItemResult.bookingResult === "optional") {
+            this.updateSource({"system.talentCategory": "optional"});
           }
         } else if (dropItemResult.bookingResult === "cancel") {
-          return;
+          return false;
         }
         return super._preCreate(data, options, user);
       }

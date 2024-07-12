@@ -37,6 +37,7 @@ export default async function validateAbilityUpgrade(item) {
 
       const validationData = {
         requiredLp: requiredLp,
+        interaction: "upgrade",
       }
 
       return validationData

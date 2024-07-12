@@ -8,11 +8,13 @@ export default async function validateDropItem(actor, item) {
     if ( item.type === "talent" || item.type === "skill" || item.type === "devotion" ) {
       validationData = {
         requiredLp: 0,
+        interaction: "create",
       }
     // spells
     } else if ( item.type === "spell" ) {
       validationData = {
         requiredLp: legendPointsCostConfig[item.system.level],
+        interaction: "create",
       }
     // Knacks
     } else if ( item.type === "knackAbility" || item.type === "knackManeuver" || item.type === "knackKarma" ) {
@@ -61,19 +63,23 @@ export default async function validateDropItem(actor, item) {
       
       validationData = {
         requiredLp: item.system.lpCost > 0 ? item.system.lpCost : legendPointsCostConfig[knackMinLevel],
+        interaction: "create",
       }
     // threads
     } else if ( item.type === "thread" ) {
       validationData = {
         requiredLp: 0,
+        interaction: "create",
       }
     } else if ( item.type === "thread" ) {
         validationData = {
           requiredLp: 0,
+          interaction: "create",
         }
     } else if ( item.type === "thread" ) {
         validationData = {
           requiredLp: 0,
+          interaction: "create",
         }
       } else {
       return true;

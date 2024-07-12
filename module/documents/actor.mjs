@@ -969,19 +969,23 @@ export default class ActorEd extends Actor {
         actorHealth = "is not healthy, do you want to increase anyway?"
       }
       let buttons = {};
-      if ( item.type === "talent") {
+      if ( item.type === "talent" && validationData.interaction === "create") {
         buttons = {
-          free: {
-            label: "Free",
-            callback: () => resolve("free")
+          discipline: {
+            label: "Discipline",
+            callback: () => resolve("discipline")
           },
           versatility: {
             label: "Versatility?",
             callback: () => resolve("versatility")
           },
-          spend: {
-            label: "Spend LP",
-            callback: () => resolve("spend")
+          optional: {
+            label: "Optional",
+            callback: () => resolve("optional")
+          },
+          free: {
+            label: "Free / Other",
+            callback: () => resolve("free")
           },
           cancel: {
             label: "Cancel",
