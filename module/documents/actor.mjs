@@ -231,7 +231,7 @@ export default class ActorEd extends Actor {
     const recoveryTestPerDay = this.system.characteristics.recoveryTestsRecource.max;
     const woundsPath = `system.characteristics.health.wounds`;
     const recoveryTestAvailablePath = `system.characteristics.recoveryTestsRecource.value`;
-    const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty`;
+    const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTestsRecource.stunRecoveryAvailable`;
 
     switch ( recoveryMode ) {
 
@@ -250,13 +250,13 @@ export default class ActorEd extends Actor {
       case "nightRest":
         if ( totalDamage === 0 && currentWounds === 0 ) {
           this.update( {
-            [`${recoveryStunAvailabiltyPath}`]: false,
+            [`${recoveryStunAvailabiltyPath}`]: true,
             [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
           } );
           return;
         } else if ( totalDamage === 0 && currentWounds > 0 ) {
           this.update( {
-            [`${recoveryStunAvailabiltyPath}`]: false,
+            [`${recoveryStunAvailabiltyPath}`]: true,
             [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1,
             [`${woundsPath}`]: newWounds
           } );
@@ -562,7 +562,7 @@ export default class ActorEd extends Actor {
       standardDamage: `system.characteristics.health.damage.standard`,
       stunDamage: `system.characteristics.health.damage.stun`,
       recoveryTestAvailable: `system.characteristics.recoveryTestsRecource.value`,
-      recoveryStunAvailability: `system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty`,
+      stunRecoveryAvailable: `system.characteristics.recoveryTestsRecource.stunRecoveryAvailable`,
     };
 
     const updateData = {};
@@ -571,7 +571,7 @@ export default class ActorEd extends Actor {
       case "recovery":
         updateData[updatePaths.standardDamage] = newPhysicalDamage;
         updateData[updatePaths.stunDamage] = newStunDamage;
-        updateData[updatePaths.recoveryStunAvailability] = false;
+        updateData[updatePaths.stunRecoveryAvailable] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
         break;
       case "nightRest":
@@ -581,12 +581,12 @@ export default class ActorEd extends Actor {
           updateData[updatePaths.standardDamage] = newPhysicalDamage;
           updateData[updatePaths.stunDamage] = newStunDamage;
         }
-        updateData[updatePaths.recoveryStunAvailability] = false;
+        updateData[updatePaths.stunRecoveryAvailable] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestPerDay - ( wounds > 0 || total > 0 ? 1 : 0 );
         break;
       case "recoverStun":
         updateData[updatePaths.stunDamage] = newStunDamage;
-        updateData[updatePaths.recoveryStunAvailability] = true;
+        updateData[updatePaths.stunRecoveryAvailable] = false;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
         break;
       default:

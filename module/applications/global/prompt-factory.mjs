@@ -45,7 +45,7 @@ export default class PromptFactory {
       class: "recovery default button-recovery",
       default: false,
     } );
-    if ( this.document.system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty ) buttons.push( {
+    if ( this.document.system.characteristics.recoveryTestsRecource.stunRecoveryAvailable ) buttons.push( {
       action: "recoverStun",
       label: "ED.Dialogs.Buttons.recoverStun",
       icon: "fa-light fa-head-side-medical",

@@ -192,7 +192,7 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
-                    stunRecoveryAvailabilty: new fields.BooleanField( {
+                    stunRecoveryAvailable: new fields.BooleanField( {
                         required: true,
                         initial: false,
                         label: "ED.Actor.Characteristics.recoveryTestsStun"
