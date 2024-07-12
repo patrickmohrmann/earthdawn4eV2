@@ -44,7 +44,6 @@ export default class PromptFactory {
       icon: "fa-light fa-heart-circle-plus",
       class: "recovery default button-recovery",
       default: false,
-      callback: _ => { return "recovery" },
     } );
     if ( this.document.system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty ) buttons.push( {
       action: "recoverStun",
@@ -52,7 +51,6 @@ export default class PromptFactory {
       icon: "fa-light fa-head-side-medical",
       class: "recoverStun default button-recoverStun",
       default: false,
-      callback: _ => { return "recoverStun" },
     } );
     buttons.push( {
       action: "nightRest",
@@ -60,7 +58,6 @@ export default class PromptFactory {
       icon: "fa-duotone fa-campfire",
       class: "nightRest default button-nightRest",
       default: true,
-      callback: _ => { return "nightRest" },
     } );
     buttons.push( this.constructor.getCancelButtonConfig() );
 
