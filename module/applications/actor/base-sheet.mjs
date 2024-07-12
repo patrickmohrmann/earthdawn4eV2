@@ -74,7 +74,7 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
     // take strain
-    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+    html.find( ".card__ability .take-strain" ).click( this._onTakeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
     html.find(".item__status").mousedown(this._onChangeItemStatus.bind(this));
@@ -198,7 +198,7 @@ export default class ActorSheetEd extends ActorSheet {
    * @param {Event} event     The originating click event
    * @private
    */
-    _takeStrain( event ) {
+    _onTakeStrain( event ) {
         event.preventDefault();
         const li = event.currentTarget.closest( ".item-id" );
         const ability = this.actor.items.get( li.dataset.itemId );
