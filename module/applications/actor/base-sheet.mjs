@@ -1,5 +1,4 @@
 import ED4E from "../../config.mjs";
-import TakeDamagePrompt from "../global/take-damage-prompt.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -95,9 +94,9 @@ export default class ActorSheetEd extends ActorSheet {
         "knockdownTest": () => this._onKnockDown( event ),
       };
       // Check if the action exists in the mapping and call it
-    if ( actionMapping.hasOwnProperty( action ) ) {
-    actionMapping[action]();
-  }
+      if ( actionMapping.hasOwnProperty( action ) ) {
+        actionMapping[action]();
+      }
     } );
 
     // Effect Management
@@ -195,7 +194,7 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * @description Take strain is used for non rollable abilities which requires strain. player can click on the icon to take the strain damage
+   * @description Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private
    */
@@ -216,23 +215,17 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.rollRecovery( {event: event} );
   }
 
-  /**
-   * Handles Recovery tests
-   * @param {Event} event The originating click event.
-   */
-  // _onTakeDamage( event ) {
-  //   event.preventDefault();
-  //   this.actor.takeDamageManual( {event: event} );
-  // }
-
   async _onTakeDamage( event ) {
-    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
-    const amount = takeDamage.damage;
-    const damageType = takeDamage.damageType;
-    const armorType = takeDamage.armorType;
-    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
+    const takeDamage = await this.actor.getPrompt( "takeDamage" );
+    if ( !takeDamage || takeDamage === 'close' ) return;
 
-    this.actor.takeDamage( amount, false, damageType, armorType, ignoreArmor );
+    this.actor.takeDamage(
+      takeDamage.damage,
+      false,
+      takeDamage.damageType,
+      takeDamage.armorType,
+      takeDamage.ignoreArmor,
+    );
   }
 
   _onJumpUp( event ) {
