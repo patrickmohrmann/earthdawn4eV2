@@ -182,7 +182,8 @@ export default class PromptFactory {
     noAbilityButton.label = game.i18n.localize( 'ED.Dialogs.Buttons.noAbility' );
     buttons.push( noAbilityButton );
 
-    return new DialogClass.wait( {
+    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
+    return DialogClass.wait( {
       rejectClose: false,
       id: 'jump-up-prompt',
       uniqueId: String( ++globalThis._appId ),
