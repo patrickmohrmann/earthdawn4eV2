@@ -1,5 +1,6 @@
 const DialogClass = foundry.applications.api.DialogV2;
 const fields = foundry.data.fields;
+const futils = foundry.utils;
 
 export default class PromptFactory {
 
@@ -8,8 +9,27 @@ export default class PromptFactory {
   }
 
   _promptTypeMapping = {
-    "recovery": this.recoveryPrompt.bind( this ),
-    "takeDamage": this.takeDamagePrompt.bind( this ),
+    recovery: this.recoveryPrompt.bind(this),
+    takeDamage: this.takeDamagePrompt.bind(this),
+    jumpUp: this.jumpUpPrompt.bind(this),
+  };
+
+  /**
+   * Generates a {@link DialogV2Button} object for a cancel button.
+   * It provides a standardized way to create a cancel button configuration
+   * for dialogs within the application, ensuring consistency in appearance and behavior.
+   *
+   * @param {boolean} isDefaultButton - Determines if the cancel button should be marked as the default action.
+   * @returns {DialogV2Button} An object containing properties for the cancel button's action, label, icon, CSS class, and default status.
+   */
+  static getCancelButtonConfig(isDefaultButton = true) {
+    return {
+      action: 'close', // The action to be taken when the button is clicked, here it's to close the dialog.
+      label: 'ED.Dialogs.Buttons.cancel', // The text label for the button, localized.
+      icon: 'fa-light fa-times', // The icon class from FontAwesome, here using a light variant of the 'times' icon.
+      class: 'cancel default button-cancel', // Additional CSS classes for styling the button.
+      default: isDefaultButton, // Marks this button as the default action, affecting its appearance and behavior.
+    };
   }
 
   async getPrompt( type ) {
@@ -20,7 +40,7 @@ export default class PromptFactory {
     const buttons = [];
     if ( this.document.system.characteristics.recoveryTestsRecource.value > 0 ) buttons.push( {
       action: "recovery",
-      label: game.i18n.localize( "ED.Dialogs.Buttons.recovery"),
+      label: "ED.Dialogs.Buttons.recovery",
       icon: "fa-light fa-heart-circle-plus",
       class: "recovery default button-recovery",
       default: false,
@@ -28,7 +48,7 @@ export default class PromptFactory {
     } );
     if ( this.document.system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty ) buttons.push( {
       action: "recoverStun",
-      label: game.i18n.localize( "ED.Dialogs.Buttons.recoverStun"),
+      label: "ED.Dialogs.Buttons.recoverStun",
       icon: "fa-light fa-head-side-medical",
       class: "recoverStun default button-recoverStun",
       default: false,
@@ -36,26 +56,20 @@ export default class PromptFactory {
     } );
     buttons.push( {
       action: "nightRest",
-      label: game.i18n.localize( "ED.Dialogs.Buttons.nightRest"),
+      label: "ED.Dialogs.Buttons.nightRest",
       icon: "fa-duotone fa-campfire",
       class: "nightRest default button-nightRest",
       default: true,
       callback: _ => { return "nightRest" },
     } );
-    buttons.push( {
-      action: "close",
-      label: game.i18n.localize( "ED.Dialogs.Buttons.cancel"),
-      icon: "fa-light fa-times",
-      class: "cancel default button-cancel",
-      default: false,
-    } );
+    buttons.push( this.constructor.getCancelButtonConfig() );
 
     return DialogClass.wait( {
       id: "recovery-mode-prompt",
       uniqueId: String( ++globalThis._appId ),
       classes: ["earthdawn4e", "recovery-prompt"],
       window: {
-        title: game.i18n.localize( "ED.Dialogs.Title.recovery" ),
+        title: "ED.Dialogs.Title.recovery" ,
         minimizable: false,
       },
       modal: false,
@@ -114,7 +128,7 @@ export default class PromptFactory {
       classes: ["earthdawn4e", "take-damage-prompt", "take-damage__dialog"],
       //tag: "form",
       window: {
-        title: game.i18n.localize( "ED.Dialogs.Title.takeDamage" ),
+        title: "ED.Dialogs.Title.takeDamage" ,
         minimizable: false,
       },
       form: {
@@ -125,7 +139,7 @@ export default class PromptFactory {
       buttons: [
         {
           action: "takeDamage",
-          label: game.i18n.localize( "ED.Dialogs.Buttons.takeDamage"),
+          label: "ED.Dialogs.Buttons.takeDamage",
           icon: "fa-solid fa-heart-crack",
           class: "takeDamage default button__take-damage",
           default: false,
@@ -134,19 +148,47 @@ export default class PromptFactory {
             return formData.object;
           }
         },
-        {
-          action: "close",
-          label: game.i18n.localize( "ED.Dialogs.Buttons.cancel"),
-          icon: "fa-light fa-times",
-          class: "cancel default button-cancel",
-          default: true,
-        },
+        this.constructor.getCancelButtonConfig(),
       ],
       content: await renderTemplate(
         "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs",
         formFields,
       ),
       rejectClose: false,
+    } );
+  }
+
+  async jumpUpPrompt() {
+    const jumpUpAbilities = this.document.getItemsByEdid('jump-up');
+    if ( futils.isEmpty( jumpUpAbilities ) ) return;
+
+    const buttons = jumpUpAbilities.map((ability) => {
+      return {
+        action: ability.id,
+        label: ability.name,
+        icon: '',
+        class: `button-jump-up ${ability.name}`,
+        default: false,
+        callback: (_) => {
+          return ability.id;
+        },
+      };
+    });
+    const noAbilityButton = this.constructor.getCancelButtonConfig();
+    noAbilityButton.label = 'ED.Dialogs.Buttons.noAbility' ;
+    buttons.push( noAbilityButton );
+
+    return new DialogClass.wait( {
+      rejectClose: false,
+      id: 'jump-up-prompt',
+      uniqueId: String( ++globalThis._appId ),
+      classes: ["earthdawn4e", "jump-up-prompt jump-up flexcol"],
+      window: {
+        title: "ED.Dialogs.Title.jumpUp" ,
+        minimizable: false,
+      },
+      modal: false,
+      buttons: buttons,
     } );
   }
 
