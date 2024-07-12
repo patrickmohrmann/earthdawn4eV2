@@ -9,9 +9,9 @@ export default class PromptFactory {
   }
 
   _promptTypeMapping = {
-    recovery: this.recoveryPrompt.bind(this),
-    takeDamage: this.takeDamagePrompt.bind(this),
-    jumpUp: this.jumpUpPrompt.bind(this),
+    recovery: this._recoveryPrompt.bind(this),
+    takeDamage: this._takeDamagePrompt.bind(this),
+    jumpUp: this._jumpUpPrompt.bind(this),
   };
 
   /**
@@ -36,7 +36,7 @@ export default class PromptFactory {
     return this._promptTypeMapping[ type ]();
   }
 
-  async recoveryPrompt() {
+  async _recoveryPrompt() {
     const buttons = [];
     if ( this.document.system.characteristics.recoveryTestsRecource.value > 0 ) buttons.push( {
       action: "recovery",
@@ -78,7 +78,7 @@ export default class PromptFactory {
     } );
   }
 
-  async takeDamagePrompt() {
+  async _takeDamagePrompt() {
     const formFields = {
       damage: new fields.NumberField( {
         required: true,
@@ -159,7 +159,7 @@ export default class PromptFactory {
     } );
   }
 
-  async jumpUpPrompt() {
+  async _jumpUpPrompt() {
     const jumpUpAbilities = this.document.getItemsByEdid('jump-up');
     if ( futils.isEmpty( jumpUpAbilities ) ) return;
 
