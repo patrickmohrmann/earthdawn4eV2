@@ -18,6 +18,7 @@ const futils = foundry.utils;
 
 //import validateDropItem from "../applications/global/validation-dropped-items.mjs";
 import validateAbilityUpgrade from "../applications/global/validation-upgrade.mjs";
+import ed4eDropItem from "../applications/global/drop-items.mjs";
 // import LpTransactionData from "../data/advancement/lp-transaction.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
@@ -1013,11 +1014,32 @@ export default class ActorEd extends Actor {
                   <p>Actor: ${actorName}</p>
                   <p>Current Damage: ${actorHealth}</p>`,
         buttons: buttons,
-        default: "cancel",
+        default: "spend",
         close: () => resolve(null)
       });
       d.render(true);
     });
+  }
+
+
+  // async _preCreate(data, options, user) {
+  //   const itemData = await fromUuid(data.uuid);
+  //   const dropItemResult = await ed4eDropItem(this.actor, itemData);
+  //   console.log("dropItem", dropItemResult);
+
+  //   if (dropItemResult.bookingResult === "spend" || dropItemResult.bookingResult === "free" || dropItemResult.bookingResult === "versatility") {
+  //     await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
+  //     if (dropItemResult.bookingResult === "versatility") {
+  //     }
+  //   } else if (dropItemResult.bookingResult === "cancel") {
+  //     return;
+  //   }
+  //   return super._preCreate(data, options, user);
+  // }
+
+  async lpValidation ( itemData, actor ) {
+    const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);
+    console.log("DIALOG OUTPUT", dialog)
   }
 
 }

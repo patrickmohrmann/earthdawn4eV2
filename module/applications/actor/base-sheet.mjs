@@ -383,25 +383,30 @@ async _onAbilityEnhancement( event ) {
     itemDescription.toggleClass( "card__description--toggle" );
   }
 
-  async lpValidation ( itemData, actor ) {
-    const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);
-    console.log("DIALOG OUTPUT", dialog)
-  }
+  
 
-  async _onDropItem(event, data) {
-    const itemData = await fromUuid(data.uuid);
-    const dropItemResult = await ed4eDropItem(this.actor, itemData);
-    console.log("dropItem", dropItemResult)
+  // async _onDropItem(event, data) {
+  //   const itemData = await fromUuid(data.uuid);
+  //   const dropItemResult = await ed4eDropItem(this.actor, itemData);
+  //   console.log("dropItem", dropItemResult)
 
-    if ( dropItemResult.bookingResult === "spend") {
-      await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
-      return super._onDropItem(event, data);
-    } else if ( dropItemResult.bookingResult === "free") {
-      await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
-      return super._onDropItem(event, data);
-    } else if ( dropItemResult.bookingResult === "cancel" ) {
-      return
-    }
-  }
+  //   if ( dropItemResult.bookingResult === "spend") {
+  //     await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
+  //     return super._onDropItem(event, data);
+  //   } else if ( dropItemResult.bookingResult === "free") {
+  //     await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
+  //     return super._onDropItem(event, data);
+  //   } else if ( dropItemResult.bookingResult === "versatility") {
+  //     await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
+  //     // --> UPDATE THE ITEM DATA SYSTEM.TIER TO versatitility
+  //     return super._onDropItem(event, data);
+
+  //   } else if ( dropItemResult.bookingResult === "cancel" ) {
+  //     return
+  //   }
+  // }
+
+  
+
 }
 

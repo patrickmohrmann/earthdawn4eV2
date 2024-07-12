@@ -59,42 +59,56 @@ export default function registerHandlebarHelpers() {
   } );
 
   /**
-   * @description Reduce and Map: The function uses reduce to group the spendings by itemUuid, 
-   * and then map to transform the grouped object into an array suitable for iteration in Handlebars templates.
-   * @description Return Value: The helper returns an array where each element is an object with itemUuid and spendings properties.
+   * @description This helper groups Lp spendings by itemUuid or name. 
+   * @description It first groups by name to identify items that should be grouped together based on name.
    */
-  Handlebars.registerHelper('groupSpendingsByItemUuid', (spendings) => {
-    const grouped = spendings.reduce((accumulator, current) => {
-      const { itemUuid, name } = current;
-      if (!accumulator[itemUuid]) {
-        accumulator[itemUuid] = { spendings: [], names: new Set() };
+Handlebars.registerHelper('groupSpendingsByItemUuidOrName', (spendings) => {
+  // First pass: Group by name to identify items that should be grouped together based on name.
+  const nameGroups = spendings.reduce((acc, current) => {
+      const nameKey = current.name;
+      if (!acc[nameKey]) {
+          acc[nameKey] = { spendings: [], itemUuids: new Set() };
       }
-      accumulator[itemUuid].spendings.push(current);
-      accumulator[itemUuid].names.add(name);
-      return accumulator;
-    }, {});
-  
-    return Object.entries(grouped).map(([itemUuid, { spendings, names }]) => ({
-      itemUuid,
+      acc[nameKey].spendings.push(current);
+      if (current.itemUuid) {
+          acc[nameKey].itemUuids.add(current.itemUuid);
+      }
+      return acc;
+  }, {});
+
+  // Second pass: Group by itemUuid or fallback to name, considering name groups for matching names.
+  const finalGroups = Object.values(nameGroups).reduce((acc, group) => {
+      // If all items in the group have the same itemUuid or none has an itemUuid, use the first item's key for grouping.
+      const groupKey = group.itemUuids.size <= 1 ? (Array.from(group.itemUuids)[0] || group.spendings[0].name) : null;
+
+      if (groupKey) {
+          if (!acc[groupKey]) {
+              acc[groupKey] = { spendings: [], names: new Set() };
+          }
+          group.spendings.forEach(spending => {
+              acc[groupKey].spendings.push(spending);
+              acc[groupKey].names.add(spending.name);
+          });
+      } else {
+          // If there are multiple itemUuids for the same name, group each by itemUuid.
+          group.spendings.forEach(spending => {
+              const key = spending.itemUuid || spending.name;
+              if (!acc[key]) {
+                  acc[key] = { spendings: [], names: new Set() };
+              }
+              acc[key].spendings.push(spending);
+              acc[key].names.add(spending.name);
+          });
+      }
+      return acc;
+  }, {});
+
+  return Object.entries(finalGroups).map(([key, { spendings, names }]) => ({
+      key, // This can be itemUuid or name
       spendings,
       names: Array.from(names) // Convert Set to Array for names
-    }));
-  });
-
-  // Handlebars.registerHelper('formatDate', function(date, options) {
-  //   const locale = options.hash.locale || 'default'; // Use provided locale or default
-  //   return new Intl.DateTimeFormat(locale, {
-  //     year: 'numeric', month: 'long', day: 'numeric',
-  //     hour: '2-digit', minute: '2-digit', second: '2-digit'
-  //   }).format(new Date(date));
-  // });
-
-  // Handlebars.registerHelper( 'edGetAttributeValue', ( attribute, attributes ) => {
-  //   if ( attribute === undefined || attribute === '' || attribute === "" ) {
-  //     return 0;
-  //   }
-  //   return attributes[attribute].step;
-  // } );
+  }));
+});
 
   /**
    * For use in option elements. If the supplied value is truthy, add the "selected" property, otherwise add nothing.

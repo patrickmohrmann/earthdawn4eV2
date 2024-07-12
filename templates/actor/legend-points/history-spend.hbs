@@ -22,7 +22,11 @@
         </tr>
       </thead>
       <tbody>
-        {{#each (groupSpendingsByItemUuid this.object.spendings)}}
+        {{!-- {{#each (groupSpendingsByItemUuid this.object.spendings)}} --}}
+        {{!-- {{#each (groupSpendingsByUuidOrName this.object.spendings)}} --}}
+        {{#each (groupSpendingsByItemUuidOrName this.object.spendings)}}
+
+        {{log this}}
         <tr>
           <td class="toggle-details">
             {{names}}

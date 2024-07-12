@@ -1,4 +1,5 @@
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
+import ed4eDropItem from "../applications/global/drop-items.mjs";
 import AdvancementLevelData from "../data/advancement/advancement-level.mjs";
 
 /**
@@ -116,4 +117,30 @@ export default class ItemEd extends Item {
         }
         return this.update( changes );
     }
-}
+
+    async _preCreate(data, options, user) {
+        //const itemData = await fromUuid(data.uuid);
+        const dropItemResult = await ed4eDropItem(this.actor, data);
+        console.log("dropItem", dropItemResult);
+    
+        if (dropItemResult.bookingResult === "spend" || dropItemResult.bookingResult === "free" || dropItemResult.bookingResult === "versatility") {
+          await this.actor.addItemLpTransaction(data, dropItemResult.validationData, dropItemResult.bookingResult);
+          if (dropItemResult.bookingResult === "versatility") {
+            let updateData = {
+                "data.system.talentCategory": "versatility" // Specify the path and new value
+              };
+              
+              // Call `updateSource` with the update data
+              this.actor.updateSource(updateData).then(() => {
+                console.log("Update successful");
+              }).catch((error) => {
+                console.error("Update failed", error);
+              });
+          }
+        } else if (dropItemResult.bookingResult === "cancel") {
+          return;
+        }
+        return super._preCreate(data, options, user);
+      }
+    
+    }
