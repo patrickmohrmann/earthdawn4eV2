@@ -64,6 +64,7 @@ export default class PromptFactory {
     } );
     buttons.push( this.constructor.getCancelButtonConfig() );
 
+    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
     return DialogClass.wait( {
       id: "recovery-mode-prompt",
       uniqueId: String( ++globalThis._appId ),
@@ -178,6 +179,7 @@ export default class PromptFactory {
     noAbilityButton.label = 'ED.Dialogs.Buttons.noAbility' ;
     buttons.push( noAbilityButton );
 
+    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
     return new DialogClass.wait( {
       rejectClose: false,
       id: 'jump-up-prompt',
