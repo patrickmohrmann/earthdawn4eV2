@@ -393,13 +393,13 @@ async _onAbilityEnhancement( event ) {
     const dropItemResult = await ed4eDropItem(this.actor, itemData);
     console.log("dropItem", dropItemResult)
 
-    if ( dropItemResult === "spend") {
-      await this.actor.addAbility(itemData, false);
+    if ( dropItemResult.bookingResult === "spend") {
+      await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
       return super._onDropItem(event, data);
-    } else if ( dropItemResult === "free") {
-      await this.actor.addAbility(itemData, true);
+    } else if ( dropItemResult.bookingResult === "free") {
+      await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
       return super._onDropItem(event, data);
-    } else if ( dropItemResult === "cancel" ) {
+    } else if ( dropItemResult.bookingResult === "cancel" ) {
       return
     }
   }

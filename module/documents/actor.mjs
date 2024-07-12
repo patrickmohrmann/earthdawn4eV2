@@ -16,6 +16,9 @@ import LpTransactionData from "../data/advancement/lp-transaction.mjs";
 
 const futils = foundry.utils;
 
+//import validateDropItem from "../applications/global/validation-dropped-items.mjs";
+import validateAbilityUpgrade from "../applications/global/validation-upgrade.mjs";
+// import LpTransactionData from "../data/advancement/lp-transaction.mjs";
 // import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -675,225 +678,6 @@ export default class ActorEd extends Actor {
     }
   }
 
-  /** #############################################################
-   * Legend Point Tracking
-   * UC: #UC_LPTracking
-   * Sub-UC: #UC_LPTracking_Attribute
-   * Sub-UC: #UC_LpTracking_Ability
-   * Sub-UC: #UC_LpTracking_History
-   * UF: #UF_LPTracking-addAbility
-   * UF: #UF_LPTracking-upgradeAttribute
-   * UF: #UF_LPTracking-legendPointHistoryEarned
-   * UF: #UF_LPTracking-upgradeAbility
-   * UF: #UF_LPTracking-addLpTransaction
-   * ############################################################# */
-
-
-  async upgradeAttribute(attribute) {
-    const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
-    // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-    if (attributeOldIncrease >= 3) {
-      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      return
-    } else {
-      const attributeName = ED4E.attributes[attribute].label;
-      const legendPointsCostConfig = ED4E.legendPointsCost;
-      const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
-      const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
-        previousLevel: attributeOldIncrease,
-        newLevel: attributeOldIncrease + 1,
-        attributeName: attributeName,
-      });
-      const transactionData = new LpSpendingTransactionData({
-        entityType: "attribute",
-        type: "spendings",
-        amount: requiredLp,
-        date: new Date(),
-        lpBefore: this.system.lp.current,
-        lpAfter: this.system.lp.current - requiredLp,
-        name: attributeName,
-        description: description
-      })
-
-      const newIncrease = attributeOldIncrease + 1
-      await this.update({ [`system.attributes.${attribute}.timesIncreased`]: newIncrease })
-      return this.addLpTransaction("spendings", transactionData);
-    }
-  }
-
-  
-  async upgradeAbility(ability) {
-    const abilityOldLevel = ability.system.level;
-    // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-    if ( ability.type === "skill" && abilityOldLevel >= 10 ) {
-      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      return
-    } else if ( ability.type === "talent" && abilityOldLevel >= 15 ) {
-      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      return
-    } else if ( ability.type === "devotion" && abilityOldLevel >= 12 ) {
-      ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      return
-    } 
-    const legendPointsCostConfig = ED4E.legendPointsCost;
-    let requiredLp = 0;
-    let tier = 0;
-    if ( ability.system.tier === "novice" ) {
-      tier = 0;
-    } else if ( ability.system.tier === "journeyman" ) {
-      tier = 1;
-    } else if ( ability.system.tier === "warden" ) {
-      tier = 2;
-    } else if ( ability.system.tier === "master" ) {
-      tier = 3;
-    } 
-
-    const versatility = ability.type === "talent" && ability.system.talentCategory === "versatility" && ability.system.edid !== "versatility" ? 1 : 0;
-
-    if (ability.type === "skill" ) {
-    requiredLp = legendPointsCostConfig[abilityOldLevel + 2 + tier];
-    } else {
-    requiredLp = legendPointsCostConfig[abilityOldLevel + 1 + tier + versatility];
-    }
-    const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
-      previousLevel: abilityOldLevel,
-      newLevel: abilityOldLevel + 1,
-      abilityName: ability.name,
-    });
-    const transactionData = new LpSpendingTransactionData({
-      entityType: ability.type,
-      type: "spendings",
-      amount: requiredLp,
-      date: new Date(),
-      itemUuid: ability.uuid,
-      lpBefore: this.system.lp.current,
-      lpAfter: this.system.lp.current - requiredLp,
-      name: ability.name,
-      description: description
-    })
-
-    const newIncrease = abilityOldLevel + 1
-    await ability.update({ [`system.level`]: newIncrease });
-    
-    return this.addLpTransaction("spendings", transactionData);
-  }
-
-
-  // /**
-  //  * Legend point History earned prompt trigger
-  //  */
-  // async legendPointHistoryEarned() {
-  //   // let history = await getLegendPointHistoryData( actor );
-  //   const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(new LpTrackingData(this.system.lp.toObject()), { actor: this });
-  //   return this.update({ system: { lp: lpUpdateData } })
-  // }
-
-
-  /**
-     * 
-     * @param {object} item         The item that was changed or added
-     * @param {object} actor        The actor that the item belongs to
-     * @param {boolean} free        If the item was freely added
-     * @param {boolean} addedNew    If the item was newly added
-     */
-  async addAbility(item, free) {
-    let requiredLp = 0;
-    const legendPointsCostConfig = ED4E.legendPointsCost;
-    const actorTalents = this.items.filter(item => item.type === "talent");
-    
-    // calculate the required Legend Points of knacks
-    if (item.type === "knackAbility"
-      || item.type === "knackManeuver"
-      || item.type === "knackKarma") {
-        let maxKnacksOfTalent = 0;
-        let knackSourceTalent = "";
-        const knackMinLevel = item.system.source.minLevel;
-        const actorKnacks = this.items.filter(item => item.type === "knackAbility" || item.type === "knackManeuver" || item.type === "knackKarma");
-      // search for the knack source talent
-      const knackTalentIdentifier = item.system.source.knackSource;
-      for (const talent of actorTalents) {
-        let sourceTalentCount = 0;
-        if (talent.type === "talent" && talent.system.talentIdentifier === knackTalentIdentifier) {
-          knackSourceTalent = talent;
-          sourceTalentCount += 1;
-        }
-        // it can only be one source talent
-        if (sourceTalentCount > 1) {
-          ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.multipleKnackSources"));
-          return;
-        }
-      }
-      if (knackSourceTalent === "") {
-        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotFound"));
-        return
-      } else {
-        // check if the source talent holds already to many knacks
-        for (const knack of actorKnacks) {
-          if (knack.system.source.knackSource === knackSourceTalent.system.talentIdentifier) {
-            maxKnacksOfTalent += 1;
-            if (maxKnacksOfTalent >= knackSourceTalent.system.level) {
-              ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxKnacksReached"));
-              return;
-            }
-          }
-        }
-        // check if the source talent is high enough
-        if (knackSourceTalent.system.level < knackMinLevel) {
-          ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.knackSourceNotHighEnough"));
-          return;
-        }
-        // required LP for knack
-        if (item.system.lpCost > 0) {
-          requiredLp = item.system.lpCost;
-        } else {
-          requiredLp = legendPointsCostConfig[knackMinLevel];
-        }
-      }  
-
-
-
-
-    } else if ( item.type === "spell" ) {
-      requiredLp = legendPointsCostConfig[item.system.level];
-    }
-      
-    let description = "added" + item.name;
-    // if (addedNew) {
-    //   description = game.i18n.localize("ED.Actor.LpTracking.Spendings.descriptionNewlyAdded");
-    // } else {
-    //   description = game.i18n.format("ED.Dialogs.LegendPoints.SpendLp", {
-    //     previousLevel: item.system.level - 1,
-    //     newLevel: item.system.level,
-    //   });
-    // }
-    // add Prompt for LP spending which can be skipped by a certain click (shift+RIghtclick or so)
-    // only after confirming the promt, this shall go on.
-    const transactionData = new LpSpendingTransactionData({
-      entityType: item.type,
-      type: "spendings",
-      amount: requiredLp,
-      date: new Date(),
-      itemUuid: item.uuid,
-      lpBefore: this.system.lp.current,
-      lpAfter: this.system.lp.current - requiredLp,
-      name: item.name,
-      description: description
-    })
-    const transactionSuccess = await this.addLpTransaction("spendings", transactionData);
-    return transactionSuccess; // Return the success status
-  }
-
-  async addLpTransaction(type, transactionData) {
-    const oldTransactions = this.system.lp[type];
-    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
-    const transaction = new TransactionModel( transactionData );
-
-    return this.update( {
-      [`system.lp.${ type }`]: oldTransactions.concat( [ transaction ] )
-    } );
-  }
-    // const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
-    // const transaction = new transactionModel(transactionData);
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
@@ -1009,24 +793,203 @@ export default class ActorEd extends Actor {
     return this._promptFactory.getPrompt( promptType );
   }
 
-  async _showLpOptionsPrompt(actor, item) {
+
+    /** #############################################################
+   * Legend Point Tracking
+   * UC: #UC_LPTracking
+   * Sub-UC: #UC_LPTracking_Attribute
+   * Sub-UC: #UC_LpTracking_Ability
+   * Sub-UC: #UC_LpTracking_History
+   * UF: #UF_LPTracking-addAbility
+   * UF: #UF_LPTracking-upgradeAttribute
+   * UF: #UF_LPTracking-legendPointHistoryEarned
+   * UF: #UF_LPTracking-upgradeAbility
+   * UF: #UF_LPTracking-addLpTransaction
+   * ############################################################# */
+
+
+    async upgradeAttribute(attribute) {
+      const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
+      // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
+      if (attributeOldIncrease >= 3) {
+        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+        return
+      } else {
+        const attributeName = ED4E.attributes[attribute].label;
+        const legendPointsCostConfig = ED4E.legendPointsCost;
+        const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
+        const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
+          previousLevel: attributeOldIncrease,
+          newLevel: attributeOldIncrease + 1,
+          attributeName: attributeName,
+        });
+        const transactionData = new LpSpendingTransactionData({
+          entityType: "attribute",
+          type: "spendings",
+          amount: requiredLp,
+          date: new Date(),
+          lpBefore: this.system.lp.current,
+          lpAfter: this.system.lp.current - requiredLp,
+          name: attributeName,
+          description: description
+        })
+
+        const newIncrease = attributeOldIncrease + 1
+        await this.update({ [`system.attributes.${attribute}.timesIncreased`]: newIncrease })
+        return this.addLpTransaction("spendings", transactionData);
+      }
+    }
+
+
+    async upgradeAbility(ability) {
+      const abilityOldLevel = ability.system.level;
+      // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
+      // if ( ability.type === "skill" && abilityOldLevel >= 10 ) {
+      //   ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      //   return
+      // } else if ( ability.type === "talent" && abilityOldLevel >= 15 ) {
+      //   ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      //   return
+      // } else if ( ability.type === "devotion" && abilityOldLevel >= 12 ) {
+      //   ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
+      //   return
+      // }
+      // const legendPointsCostConfig = ED4E.legendPointsCost;
+      // let requiredLp = 0;
+      // let tier = 0;
+      // if ( ability.system.tier === "novice" ) {
+      //   tier = 0;
+      // } else if ( ability.system.tier === "journeyman" ) {
+      //   tier = 1;
+      // } else if ( ability.system.tier === "warden" ) {
+      //   tier = 2;
+      // } else if ( ability.system.tier === "master" ) {
+      //   tier = 3;
+      // }
+
+      // const versatility = ability.type === "talent" && ability.system.talentCategory === "versatility" && ability.system.edid !== "versatility" ? 1 : 0;
+
+      // if (ability.type === "skill" ) {
+      // requiredLp = legendPointsCostConfig[abilityOldLevel + 2 + tier];
+      // } else {
+      // requiredLp = legendPointsCostConfig[abilityOldLevel + 1 + tier + versatility];
+      // }
+      const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
+        previousLevel: abilityOldLevel,
+        newLevel: abilityOldLevel + 1,
+        abilityName: ability.name,
+      });
+      let requiredLp = 0;
+      const newIncrease = abilityOldLevel + 1
+      const validationData = await validateAbilityUpgrade(ability);
+      const validateResult = await this._showLpOptionsPrompt (this, ability, validationData);
+      if ( validateResult === "free" ) {
+        requiredLp = 0;
+      } else if ( validateResult === "spend" ) {
+        requiredLp = validationData.requiredLp;
+      }else if ( validateResult === "cancel" ) {
+        return;
+      }
+      const transactionData = new LpSpendingTransactionData({
+        entityType: ability.type,
+        type: "spendings",
+        amount: requiredLp,
+        date: new Date(),
+        itemUuid: ability.uuid,
+        lpBefore: this.system.lp.current,
+        lpAfter: this.system.lp.current - requiredLp,
+        name: ability.name,
+        description: description
+      })
+      await ability.update({ [`system.level`]: newIncrease });
+      return this.addLpTransaction("spendings", transactionData);
+    }
+
+  /**
+   * 
+   * @param {object} item             item to be added
+   * @param {object} validationData   validation data for the item
+   */
+  async addItemLpTransaction(item, validationData, bookingResult) {
+    
+    const description = game.i18n.format("ED.Dialogs.LegendPoints.SpendLp", {
+        previousLevel: item.system.level - 1,
+        newLevel: item.system.level,
+      });
+
+      let requiredLp = 0;
+      if ( bookingResult === "free" ) {
+        requiredLp = 0;
+      } else if ( bookingResult === "spend" ) {
+        requiredLp = validationData.requiredLp;
+      }else if ( bookingResult === "cancel" ) {
+        return;
+      }
+    
+    // add Prompt for LP spending which can be skipped by a certain click (shift+RIghtclick or so)
+    // only after confirming the promt, this shall go on.
+    const transactionData = new LpSpendingTransactionData({
+      entityType: item.type,
+      type: "spendings",
+      amount: validationData.requiredLp,
+      date: new Date(),
+      itemUuid: item.uuid,
+      lpBefore: this.system.lp.current,
+      lpAfter: this.system.lp.current - validationData.requiredLp,
+      name: item.name,
+      description: description
+    })
+    const transactionSuccess = await this.addLpTransaction("spendings", transactionData);
+    // refactored ?!?!
+    // return transactionSuccess; // Return the success status
+  }
+
+  async addLpTransaction(type, transactionData) {
+    const oldTransactions = this.system.lp[type];
+    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new transactionModel(transactionData)
+
+    return this.update( {
+      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
+    } )
+  }
+
+
+  // this prompt will be rebuild later with full complexity
+  async _showLpOptionsPrompt(actor, item, validationData) {
+    
     return new Promise((resolve) => {
       const actorName = actor.name;
       const itemName = item.name;
       const currentLp = actor.system.lp.current;
-      const requiredLp = 500;
+      const requiredLp = validationData.requiredLp;
       let actorHealth = "is healthy";
       if ( actor.system.characteristics.health.damage.total > 0 ) {
         actorHealth = "is not healthy, do you want to increase anyway?"
       }
-      let d = new Dialog({
-        title: "LP Options",
-        content: `<p>Increase ${itemName}</p>
-                  <p>Current LP: ${currentLp}</p>
-                  <p>required LP: ${requiredLp}</p>
-                  <p>Actor: ${actorName}</p>
-                  <p>Current Damage: ${actorHealth}</p>`,
-        buttons: {
+      let buttons = {};
+      if ( item.type === "talent") {
+        buttons = {
+          free: {
+            label: "Free",
+            callback: () => resolve("free")
+          },
+          versatility: {
+            label: "Versatility?",
+            callback: () => resolve("versatility")
+          },
+          spend: {
+            label: "Spend LP",
+            callback: () => resolve("spend")
+          },
+          cancel: {
+            label: "Cancel",
+            callback: () => resolve("cancel")
+          }
+        };
+
+      } else {
+        buttons = {
           free: {
             label: "Free",
             callback: () => resolve("free")
@@ -1039,11 +1002,22 @@ export default class ActorEd extends Actor {
             label: "Cancel",
             callback: () => resolve("cancel")
           }
-        },
+        };
+      }
+
+      let d = new Dialog({
+        title: "LP Options",
+        content: `<p>Increase ${itemName}</p>
+                  <p>Current LP: ${currentLp}</p>
+                  <p>required LP: ${requiredLp}</p>
+                  <p>Actor: ${actorName}</p>
+                  <p>Current Damage: ${actorHealth}</p>`,
+        buttons: buttons,
         default: "cancel",
         close: () => resolve(null)
       });
       d.render(true);
     });
   }
+
 }
