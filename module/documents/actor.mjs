@@ -222,7 +222,7 @@ export default class ActorEd extends Actor {
   }
 
   async rollRecovery( options = {} ) {
-    const recoveryMode = await this._getPrompt( "recovery" );
+    const recoveryMode = await this.getPrompt( "recovery" );
     let recoveryStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
     const stunDamage = this.system.characteristics.health.damage.stun;
     const totalDamage = this.system.characteristics.health.damage.total;
