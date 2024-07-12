@@ -9,6 +9,7 @@ import LpSpendingTransactionData from '../data/advancement/lp-spending-transacti
 import LpTrackingData from '../data/advancement/lp-tracking.mjs';
 import KnockDownItemsPrompt from '../applications/global/knock-down-prompt.mjs';
 import JumpUpItemsPrompt from '../applications/global/jump-up-prompt.mjs';
+import { PromptFactory } from "../applications/global/_module.mjs";
 
 
 /**
@@ -16,10 +17,9 @@ import JumpUpItemsPrompt from '../applications/global/jump-up-prompt.mjs';
  * @augments {Actor}
  */
 export default class ActorEd extends Actor {
-
   /** @inheritDoc */
-  static async createDialog( data = {}, { parent = null, pack = null, ...options } = {} ) {
-    return DocumentCreateDialog.waitPrompt( data, { documentCls: Actor, parent, pack, options } );
+  static async createDialog(data = {}, { parent = null, pack = null, ...options } = {}) {
+    return DocumentCreateDialog.waitPrompt(data, { documentCls: Actor, parent, pack, options });
   }
 
   /**
@@ -27,7 +27,13 @@ export default class ActorEd extends Actor {
    * @type {Item|undefined}
    */
   get namegiver() {
-    return this.items.filter( item => item.type === 'namegiver' )[0];
+    return this.items.filter((item) => item.type === 'namegiver')[0];
+  }
+
+  /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    this._promptFactory = new PromptFactory( this );
+    return super._onCreate(data, options, userId);
   }
 
   /**
@@ -37,14 +43,14 @@ export default class ActorEd extends Actor {
    * @param {string} type           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid( edid, type ) {
-    const edidFilter = ( item ) => item.system.edid === edid;
-    if ( !type ) return this.items.filter( edidFilter );
+  getItemsByEdid(edid, type) {
+    const edidFilter = (item) => item.system.edid === edid;
+    if (!type) return this.items.filter(edidFilter);
 
     const itemTypes = this.itemTypes;
-    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${type} is invalid!` );
+    if (!Object.hasOwn(itemTypes, type)) throw new Error(`Type ${type} is invalid!`);
 
-    return itemTypes[type].filter( edidFilter );
+    return itemTypes[type].filter(edidFilter);
   }
 
   /**
@@ -54,8 +60,8 @@ export default class ActorEd extends Actor {
    * @param {string} type         Optionally, a type name to restrict the search
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
-  getSingleItemByEdid( edid, type ) {
-    return this.getItemsByEdid( edid, type )[0];
+  getSingleItemByEdid(edid, type) {
+    return this.getItemsByEdid(edid, type)[0];
   }
 
   /**
@@ -63,18 +69,18 @@ export default class ActorEd extends Actor {
    * Only to be used for namegivers with a discipline.
    */
   karmaRitual() {
-    this.update( { "system.karma.value": this.system.karma.max } );
+    this.update({ 'system.karma.value': this.system.karma.max });
   }
 
   /**
    * Expand Item Cards by clicking on the name span
    * @param {object} item item
    */
-  expandItemCards( item ) {
-    console.log( "card wurde geklickt" )
-    const itemDescriptionDocument = document.getElementsByClassName( "card__description" );
+  expandItemCards(item) {
+    console.log('card wurde geklickt');
+    const itemDescriptionDocument = document.getElementsByClassName('card__description');
     const currentItemElement = itemDescriptionDocument.nextElementSibling;
-    currentItemElement.classList.toggle( "d-none" )
+    currentItemElement.classList.toggle('d-none');
   }
 
   /**
@@ -84,8 +90,11 @@ export default class ActorEd extends Actor {
    */
   async legendPointHistoryEarned() {
     // let history = await getLegendPointHistoryData( actor );
-    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), { actor: this } );
-    return this.update( { system: { lp: lpUpdateData } } );
+    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(
+      new LpTrackingData(this.system.lp.toObject()),
+      { actor: this },
+    );
+    return this.update({ system: { lp: lpUpdateData } });
   }
 
   /**
@@ -93,18 +102,18 @@ export default class ActorEd extends Actor {
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAttribute( attributeId, options = {} ) {
+  async rollAttribute(attributeId, options = {}) {
     const attributeStep = this.system.attributes[attributeId].step;
     const step = { base: attributeStep };
-    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
+    const chatFlavor = game.i18n.format('ED.Chat.Flavor.rollAttribute', {
       sourceActor: this.name,
       step: attributeStep,
-      attribute: `${game.i18n.localize( ED4E.attributes[attributeId].label )}`
-    } );
+      attribute: `${game.i18n.localize(ED4E.attributes[attributeId].label)}`,
+    });
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "attribute",
+        testType: 'action',
+        rollType: 'attribute',
         strain: 0,
         target: undefined,
         step: step,
@@ -113,8 +122,8 @@ export default class ActorEd extends Actor {
       },
       this,
     );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    const roll = await RollPrompt.waitPrompt(edRollOptions, options);
+    this.#processRoll(roll);
   }
 
   /**
@@ -123,27 +132,27 @@ export default class ActorEd extends Actor {
    * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAbility( ability, options = {} ) {
+  async rollAbility(ability, options = {}) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
-    if ( difficulty === undefined || difficulty === null ) {
-      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
+    if (difficulty === undefined || difficulty === null) {
+      ui.notifications.error('ability is not part of Targeting Template, please call your Administrator!');
       return;
     }
-    const difficultyFinal = { base: difficulty }
+    const difficultyFinal = { base: difficulty };
     const devotionRequired = !!ability.system.devotionRequired;
     const strain = { base: ability.system.strain };
-    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbility", {
+    const chatFlavor = game.i18n.format('ED.Chat.Flavor.rollAbility', {
       sourceActor: this.name,
       ability: ability.name,
-      step: abilityStep
-    } );
-    const abilityFinalStep = { base: abilityStep }
+      step: abilityStep,
+    });
+    const abilityFinalStep = { base: abilityStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "ability",
+        testType: 'action',
+        rollType: 'ability',
         strain: strain,
         target: difficultyFinal,
         step: abilityFinalStep,
@@ -152,8 +161,8 @@ export default class ActorEd extends Actor {
       },
       this,
     );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    const roll = await RollPrompt.waitPrompt(edRollOptions, options);
+    this.#processRoll(roll);
   }
 
   /**
@@ -162,23 +171,23 @@ export default class ActorEd extends Actor {
    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollEquipment( equipment, options = {} ) {
-    const arbitraryStep = equipment.system.usableItem.arbitraryStep
-    const difficulty = await equipment.system.getDifficulty()
-    if ( difficulty === undefined || difficulty === null ) {
-      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
+  async rollEquipment(equipment, options = {}) {
+    const arbitraryStep = equipment.system.usableItem.arbitraryStep;
+    const difficulty = await equipment.system.getDifficulty();
+    if (difficulty === undefined || difficulty === null) {
+      ui.notifications.error('ability is not part of Targeting Template, please call your Administrator!');
       return;
     }
-    const difficultyFinal = { base: difficulty }
-    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
+    const difficultyFinal = { base: difficulty };
+    const chatFlavor = game.i18n.format('ED.Chat.Flavor.rollEquipment', {
       sourceActor: this.name,
       equipment: equipment.name,
-      step: arbitraryStep
-    } );
+      step: arbitraryStep,
+    });
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "equipment",
+        testType: 'action',
+        rollType: 'equipment',
         strain: 0,
         target: difficultyFinal,
         step: arbitraryStep,
@@ -187,12 +196,12 @@ export default class ActorEd extends Actor {
       },
       this,
     );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    const roll = await RollPrompt.waitPrompt(edRollOptions, options);
+    this.#processRoll(roll);
   }
 
-  async rollRecovery( options = {} ) {
-    const recoveryMode = await this.getPrompt( "recovery" );
+  async rollRecovery(options = {}) {
+    const recoveryMode = await this.getPrompt( 'recovery' );
     let recoveryStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
     const stunDamage = this.system.characteristics.health.damage.stun;
     const totalDamage = this.system.characteristics.health.damage.total;
@@ -204,44 +213,44 @@ export default class ActorEd extends Actor {
     const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty`;
 
     // logic which is not triggering a roll
-    switch ( recoveryMode ) {
-      case "recovery":
-        if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
-          ui.notifications.warn( "Localize: Not enough recovery tests available." );
+    switch (recoveryMode) {
+      case 'recovery':
+        if (this.system.characteristics.recoveryTestsRecource.value < 1) {
+          ui.notifications.warn('Localize: Not enough recovery tests available.');
           return;
         } else {
-          if ( totalDamage === 0 ) {
-            ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
+          if (totalDamage === 0) {
+            ui.notifications.warn('Localize: No Injuries, no recovery needed');
             return;
           }
         }
         break;
-      case "nightRest":
-        if ( totalDamage === 0 && currentWounds === 0 ) {
-          this.update( {
+      case 'nightRest':
+        if (totalDamage === 0 && currentWounds === 0) {
+          this.update({
             [`${recoveryStunAvailabiltyPath}`]: false,
-            [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
-          } );
+            [`${recoveryTestAvailablePath}`]: recoveryTestPerDay,
+          });
           return;
-        } else if ( totalDamage === 0 && currentWounds > 0 ) {
-          this.update( {
+        } else if (totalDamage === 0 && currentWounds > 0) {
+          this.update({
             [`${recoveryStunAvailabiltyPath}`]: false,
             [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1,
-            [`${woundsPath}`]: newWounds
-          } );
+            [`${woundsPath}`]: newWounds,
+          });
           return;
         }
         break;
-      case "recoverStun":
-        if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
-          ui.notifications.warn( "Localize: Not enough recovery tests available." );
+      case 'recoverStun':
+        if (this.system.characteristics.recoveryTestsRecource.value < 1) {
+          ui.notifications.warn('Localize: Not enough recovery tests available.');
           return;
         } else {
-          if ( stunDamage === 0 ) {
-            ui.notifications.warn( "Localize: You don'T have Stun damage" );
+          if (stunDamage === 0) {
+            ui.notifications.warn("Localize: You don'T have Stun damage");
             return;
           } else {
-            recoveryStep += this.system.attributes.wil.step
+            recoveryStep += this.system.attributes.wil.step;
           }
         }
         break;
@@ -249,15 +258,15 @@ export default class ActorEd extends Actor {
         return;
     }
 
-    let chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollRecovery", {
+    let chatFlavor = game.i18n.format('ED.Chat.Flavor.rollRecovery', {
       sourceActor: this.name,
-      step: recoveryStep
-    } );
-    const recoveryFinalStep = { base: recoveryStep }
+      step: recoveryStep,
+    });
+    const recoveryFinalStep = { base: recoveryStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "effect",
-        rollType: "recovery",
+        testType: 'effect',
+        rollType: 'recovery',
         rollSubType: recoveryMode,
         strain: 0,
         target: undefined,
@@ -267,18 +276,17 @@ export default class ActorEd extends Actor {
       },
       this,
     );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    const roll = await RollPrompt.waitPrompt(edRollOptions, options);
+    this.#processRoll(roll);
   }
-
 
   /**
    * @summary                       Take the given amount of strain as damage.
    * @param {number} strain         The amount of strain damage take
    */
-  takeStrain( strain ) {
-    if ( !strain ) return;
-    this.takeDamage( strain, true, "standard", undefined, true );
+  takeStrain(strain) {
+    if (!strain) return;
+    this.takeDamage(strain, true, 'standard', undefined, true);
   }
 
   /**
@@ -292,43 +300,43 @@ export default class ActorEd extends Actor {
    * @param {boolean} [ignoreArmor]                                Whether armor should be ignored when applying this damage.
    */
   // eslint-disable-next-line max-params
-  takeDamage( amount, isStrain, damageType = "standard", armorType, ignoreArmor ) {
+  takeDamage(amount, isStrain, damageType = 'standard', armorType, ignoreArmor) {
     const { armor, health } = this.system.characteristics;
-    const finalAmount = amount - ( ignoreArmor || !armorType ? 0 : armor[armorType].value );
+    const finalAmount = amount - (ignoreArmor || !armorType ? 0 : armor[armorType].value);
     const newDamage = health.damage[damageType] + finalAmount;
 
     const updates = { [`system.characteristics.health.damage.${damageType}`]: newDamage };
 
-    if ( finalAmount > health.woundThreshold ) {
-      switch ( damageType ) {
-        case "standard":
+    if (finalAmount > health.woundThreshold) {
+      switch (damageType) {
+        case 'standard':
           updates[`system.characteristics.health.wounds`] = health.wounds + 1;
           break;
-        case "stun":
+        case 'stun':
           updates[`system.condition.harried`] = true;
           break;
         // Add more cases here for other damage types
       }
     }
 
-    this.update( updates );
+    this.update(updates);
     let messageData = {
       user: game.user._id,
-      speaker: ChatMessage.getSpeaker( { actor: this.actor } ),
-      content: "THIS WILL BE FIXED LATER see #756"
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: 'THIS WILL BE FIXED LATER see #756',
     };
-    if ( isStrain === false ) {
-      ChatMessage.create( messageData );
+    if (isStrain === false) {
+      ChatMessage.create(messageData);
     }
 
-    if ( !this.system.condition.knockedDown && finalAmount >= health.woundThreshold ) {
-      this.knockdownTest( finalAmount );
+    if (!this.system.condition.knockedDown && finalAmount >= health.woundThreshold) {
+      this.knockdownTest(finalAmount);
     }
   }
 
-  async knockdownTest( amount, options = {} ) {
-    if ( this.system.condition.knockedDown === true ) {
-      ui.notifications.warn( "Localize: You are already knocked down." );
+  async knockdownTest(amount, options = {}) {
+    if (this.system.condition.knockedDown === true) {
+      ui.notifications.warn('Localize: You are already knocked down.');
       return;
     }
     const { attributes, characteristics } = this.system;
@@ -336,14 +344,14 @@ export default class ActorEd extends Actor {
     let strain = 0;
     let knockdownStep = attributes.str.step;
 
-    const knockdownAbilities = this.items.filter( item => item.system.edid === "knock-down" );
+    const knockdownAbilities = this.items.filter((item) => item.system.edid === 'knock-down');
 
-    if ( knockdownAbilities.length > 0 ) {
-      const knockdownAbilityId = await KnockDownItemsPrompt.waitPrompt( knockdownAbilities );
+    if (knockdownAbilities.length > 0) {
+      const knockdownAbilityId = await KnockDownItemsPrompt.waitPrompt(knockdownAbilities);
 
-      if ( knockdownAbilityId ) {
-        const selectedAbility = knockdownAbilities.find( ability => ability.id === knockdownAbilityId );
-        if ( selectedAbility ) {
+      if (knockdownAbilityId) {
+        const selectedAbility = knockdownAbilities.find((ability) => ability.id === knockdownAbilityId);
+        if (selectedAbility) {
           const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
           knockdownStep = attributes[attribute].step + level;
           devotionRequired = !!devotion;
@@ -353,16 +361,16 @@ export default class ActorEd extends Actor {
     }
     const difficulty = amount > 0 ? amount - characteristics.health.woundThreshold : 0;
     const difficultyFinal = { base: difficulty };
-    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.knockdownTest", {
+    const chatFlavor = game.i18n.format('ED.Chat.Flavor.knockdownTest', {
       sourceActor: this.name,
-      step: knockdownStep
-    } );
+      step: knockdownStep,
+    });
 
     const knockdownStepFinal = { base: knockdownStep + this.system.singleBonuses.knockdownEffects.value };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "knockdown",
+        testType: 'action',
+        rollType: 'knockdown',
         strain: strain,
         target: difficultyFinal,
         step: knockdownStepFinal,
@@ -371,14 +379,14 @@ export default class ActorEd extends Actor {
       },
       this,
     );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    const roll = await RollPrompt.waitPrompt(edRollOptions, options);
 
-    this.#processRoll( roll );
+    this.#processRoll(roll);
   }
 
-  async jumpUp( options = {} ) {
-    if ( this.system.condition.knockedDown === false ) {
-      ui.notifications.warn( "Localize: You are not knocked down." );
+  async jumpUp(options = {}) {
+    if (this.system.condition.knockedDown === false) {
+      ui.notifications.warn('Localize: You are not knocked down.');
       return;
     }
     const { attributes } = this.system;
@@ -386,15 +394,15 @@ export default class ActorEd extends Actor {
     let strain = 2;
     let jumpUpStep = attributes.dex.step;
 
-    const jumpUpAbilities = this.items.filter( item => item.system.edid === "jump-up" );
+    const jumpUpAbilities = this.items.filter((item) => item.system.edid === 'jump-up');
 
-    if ( jumpUpAbilities.length > 0 ) {
-      const jumpUpAbilityId = await JumpUpItemsPrompt.waitPrompt( jumpUpAbilities );
+    if (jumpUpAbilities.length > 0) {
+      const jumpUpAbilityId = await JumpUpItemsPrompt.waitPrompt(jumpUpAbilities);
 
-      if ( jumpUpAbilityId ) {
-        const selectedAbility = jumpUpAbilities.find( ability => ability.id === jumpUpAbilityId );
+      if (jumpUpAbilityId) {
+        const selectedAbility = jumpUpAbilities.find((ability) => ability.id === jumpUpAbilityId);
 
-        if ( selectedAbility ) {
+        if (selectedAbility) {
           const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
           jumpUpStep = attributes[attribute].step + level;
           devotionRequired = !!devotion;
@@ -403,18 +411,18 @@ export default class ActorEd extends Actor {
       }
     }
 
-    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.jumpUp", {
+    const chatFlavor = game.i18n.format('ED.Chat.Flavor.jumpUp', {
       sourceActor: this.name,
-      step: jumpUpStep
-    } );
+      step: jumpUpStep,
+    });
 
     const difficulty = { base: 6 };
     const jumpUpStepFinal = { base: jumpUpStep };
     // const edRollOptions = await this.createEdRollOptions( "action", "jumpUp", strain, difficulty, jumpUpStepFinal, devotionRequired, chatFlavor );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "jumpUp",
+        testType: 'action',
+        rollType: 'jumpUp',
         strain: strain,
         target: difficulty,
         step: jumpUpStepFinal,
@@ -423,11 +431,10 @@ export default class ActorEd extends Actor {
       },
       this,
     );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    const roll = await RollPrompt.waitPrompt(edRollOptions, options);
 
-    this.#processRoll( roll );
+    this.#processRoll(roll);
   }
-
 
   /**
    * Use a resource (karma, devotion) by deducting the amount. This will always happen, even if not enough is available.
@@ -437,9 +444,9 @@ export default class ActorEd extends Actor {
    * @returns {boolean}                       Returns `true` if the full amount was deducted (enough available), 'false'
    *                                          otherwise.
    */
-  #useResource( resourceType, amount ) {
+  #useResource(resourceType, amount) {
     const available = this.system[resourceType].value;
-    this.update( { [`system.${resourceType}.value`]: ( available - amount ) } );
+    this.update({ [`system.${resourceType}.value`]: available - amount });
     return amount <= available;
   }
 
@@ -452,54 +459,55 @@ export default class ActorEd extends Actor {
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
-  #processRoll( roll ) {
-    if ( !roll ) {
+  #processRoll(roll) {
+    if (!roll) {
       // No roll available, do nothing.
       return;
     }
 
     // Check if this uses karma or strain at all
-    this.takeDamage( roll.totalStrain, true, "standard", undefined, true );
+    this.takeDamage(roll.totalStrain, true, 'standard', undefined, true);
 
     const { karma, devotion } = roll.options;
-    const resourcesUsedSuccessfully = this.#useResource( 'karma', karma.pointsUsed ) && this.#useResource( 'devotion', devotion.pointsUsed );
+    const resourcesUsedSuccessfully =
+      this.#useResource('karma', karma.pointsUsed) && this.#useResource('devotion', devotion.pointsUsed);
 
-    if ( !resourcesUsedSuccessfully ) {
-      ui.notifications.warn( "Localize: Not enough karma,devotion or recovery. Used all that was available." );
+    if (!resourcesUsedSuccessfully) {
+      ui.notifications.warn('Localize: Not enough karma,devotion or recovery. Used all that was available.');
     }
 
     const rollTypeProcessors = {
-      "recovery": () => this.#processRecoveryResult( roll ),
-      "knockdown": () => this.#processKnockdownResult( roll ),
-      "jumpUp": () => this.#processJumpUpResult( roll ),
+      recovery: () => this.#processRecoveryResult(roll),
+      knockdown: () => this.#processKnockdownResult(roll),
+      jumpUp: () => this.#processJumpUpResult(roll),
     };
 
     const processRollType = rollTypeProcessors[roll.options.rollType];
 
-    if ( processRollType ) {
+    if (processRollType) {
       processRollType();
     } else {
       roll.toMessage();
     }
   }
 
-  async #processJumpUpResult( roll ) {
+  async #processJumpUpResult(roll) {
     await roll.evaluate();
 
-    if ( roll._total && roll.isSuccess ) {
-      this.update( { [`system.condition.knockedDown`]: false } );
+    if (roll._total && roll.isSuccess) {
+      this.update({ [`system.condition.knockedDown`]: false });
     }
 
     roll.toMessage();
   }
 
-  async #processKnockdownResult( roll ) {
+  async #processKnockdownResult(roll) {
     await roll.evaluate();
-    if ( !roll._total ) {
+    if (!roll._total) {
       return;
     } else {
-      if ( roll.isSuccess === false ) {
-        this.update( { [`system.condition.knockedDown`]: true, } );
+      if (roll.isSuccess === false) {
+        this.update({ [`system.condition.knockedDown`]: true });
       }
     }
     roll.toMessage();
@@ -510,10 +518,10 @@ export default class ActorEd extends Actor {
    * @param {EdRoll} roll The roll to process.
    * @returns {Promise<void>}
    */
-  async #processRecoveryResult( roll ) {
+  async #processRecoveryResult(roll) {
     await roll.evaluate();
 
-    if ( !roll._total ) {
+    if (!roll._total) {
       return;
     }
 
@@ -523,10 +531,10 @@ export default class ActorEd extends Actor {
     const { stun, standard, total } = damage;
 
     const rollTotal = roll._total;
-    const healingRate = Math.max( rollTotal - wounds, 1 );
-    const newWounds = Math.max( wounds - 1, 0 );
-    const newPhysicalDamage = Math.max( standard - healingRate, 0 );
-    const newStunDamage = Math.max( stun - healingRate, 0 );
+    const healingRate = Math.max(rollTotal - wounds, 1);
+    const newWounds = Math.max(wounds - 1, 0);
+    const newPhysicalDamage = Math.max(standard - healingRate, 0);
+    const newStunDamage = Math.max(stun - healingRate, 0);
 
     const recoveryTestPerDay = recoveryTestsRecource.max;
     const recoveryTestsCurrent = recoveryTestsRecource.value;
@@ -541,235 +549,112 @@ export default class ActorEd extends Actor {
 
     const updateData = {};
 
-    switch ( roll.options.rollSubType ) {
-      case "recovery":
+    switch (roll.options.rollSubType) {
+      case 'recovery':
         updateData[updatePaths.standardDamage] = newPhysicalDamage;
         updateData[updatePaths.stunDamage] = newStunDamage;
         updateData[updatePaths.recoveryStunAvailability] = false;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
         break;
-      case "nightRest":
-        if ( wounds > 0 && total === 0 ) {
+      case 'nightRest':
+        if (wounds > 0 && total === 0) {
           updateData[updatePaths.wounds] = newWounds;
-        } else if ( total > 0 ) {
+        } else if (total > 0) {
           updateData[updatePaths.standardDamage] = newPhysicalDamage;
           updateData[updatePaths.stunDamage] = newStunDamage;
         }
         updateData[updatePaths.recoveryStunAvailability] = false;
-        updateData[updatePaths.recoveryTestAvailable] = recoveryTestPerDay - ( wounds > 0 || total > 0 ? 1 : 0 );
+        updateData[updatePaths.recoveryTestAvailable] = recoveryTestPerDay - (wounds > 0 || total > 0 ? 1 : 0);
         break;
-      case "recoverStun":
+      case 'recoverStun':
         updateData[updatePaths.stunDamage] = newStunDamage;
         updateData[updatePaths.recoveryStunAvailability] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
         break;
       default:
-        ui.notifications.warn( "Localize: No recovery type found." );
+        ui.notifications.warn('Localize: No recovery type found.');
         return;
     }
 
-    this.update( updateData );
+    this.update(updateData);
     roll.toMessage();
   }
-  _applyBaseEffects( baseCharacteristics ) {
+  _applyBaseEffects(baseCharacteristics) {
     let overrides = {};
     // Organize non-disabled effects by their application priority
     // baseCharacteristics is list of attributes that need to have Effects applied before Derived Characteristics are calculated
-    const changes = this.effects.reduce( ( changes, e ) => {
-      if ( e.changes.length < 1 ) {
+    const changes = this.effects.reduce((changes, e) => {
+      if (e.changes.length < 1) {
         return changes;
       }
-      if ( e.disabled || e.isSuppressed || !baseCharacteristics.includes( e.changes[0].key ) ) {
+      if (e.disabled || e.isSuppressed || !baseCharacteristics.includes(e.changes[0].key)) {
         return changes;
       }
 
       return changes.concat(
-
-        e.changes.map( ( c ) => {
+        e.changes.map((c) => {
           // eslint-disable-next-line no-param-reassign
-          c = foundry.utils.duplicate( c );
+          c = foundry.utils.duplicate(c);
           c.effect = e;
           c.priority = c.priority ?? c.mode * 10;
           return c;
-        } ),
+        }),
       );
-    }, [] );
+    }, []);
 
-    changes.sort( ( a, b ) => a.priority - b.priority );
+    changes.sort((a, b) => a.priority - b.priority);
 
     // Apply all changes
-    for ( let change of changes ) {
-      const result = change.effect.apply( this, change );
-      if ( result !== null ) overrides[change.key] = result[change.key];
+    for (let change of changes) {
+      const result = change.effect.apply(this, change);
+      if (result !== null) overrides[change.key] = result[change.key];
     }
 
     // Expand the set of final overrides
-    this.overrides = foundry.utils.expandObject( { ...foundry.utils.flattenObject( this.overrides ), ...overrides } );
+    this.overrides = foundry.utils.expandObject({ ...foundry.utils.flattenObject(this.overrides), ...overrides });
   }
 
   async _enableHTMLEnrichment() {
     let enrichment = {};
-    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.system.description.value, {
+    enrichment['system.description.value'] = await TextEditor.enrichHTML(this.system.description.value, {
       async: true,
       secrets: this.isOwner,
-    } );
-    return foundry.utils.expandObject( enrichment );
+    });
+    return foundry.utils.expandObject(enrichment);
   }
 
   async _enableHTMLEnrichmentEmbeddedItems() {
-    for ( const item of this.items ) {
-      item.system.description.value = foundry.utils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
+    for (const item of this.items) {
+      item.system.description.value = foundry.utils.expandObject(
+        await TextEditor.enrichHTML(item.system.description.value, {
           async: true,
           secrets: this.isOwner,
-        } )
+        }),
       );
     }
   }
 
-  async addLpTransaction( type, transactionData ) {
+  async addLpTransaction(type, transactionData) {
     const oldTransactions = this.system.lp[type];
-    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
-    const transaction = new TransactionModel( transactionData )
+    const TransactionModel = type === 'earnings' ? LpEarningTransactionData : LpSpendingTransactionData;
+    const transaction = new TransactionModel(transactionData);
 
-    return this.update( {
-      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
-    } )
+    return this.update({
+      [`system.lp.${type}`]: oldTransactions.concat([transaction]),
+    });
   }
 
-  async getPrompt( promptType ) {
-    const DialogClass = foundry.applications.api.DialogV2;
-    switch ( promptType ) {
-      case "recovery":
-        const buttons = [];
-        if ( this.system.characteristics.recoveryTestsRecource.value > 0 ) buttons.push( {
-          action: "recovery",
-          label: game.i18n.localize( "ED.Dialogs.Buttons.recovery"),
-          icon: "fa-light fa-heart-circle-plus",
-          class: "recovery default button-recovery",
-          default: false,
-          callback: _ => { return "recovery" },
-        } );
-        if ( this.system.characteristics.recoveryTestsRecource.stunRecoveryAvailabilty ) buttons.push( {
-          action: "recoverStun",
-          label: game.i18n.localize( "ED.Dialogs.Buttons.recoverStun"),
-          icon: "fa-light fa-head-side-medical",
-          class: "recoverStun default button-recoverStun",
-          default: false,
-          callback: _ => { return "recoverStun" },
-        } );
-        buttons.push( {
-          action: "nightRest",
-          label: game.i18n.localize( "ED.Dialogs.Buttons.nightRest"),
-          icon: "fa-duotone fa-campfire",
-          class: "nightRest default button-nightRest",
-          default: true,
-          callback: _ => { return "nightRest" },
-        } );
-        buttons.push( {
-          action: "close",
-          label: game.i18n.localize( "ED.Dialogs.Buttons.cancel"),
-          icon: "fa-light fa-times",
-          class: "cancel default button-cancel",
-          default: false,
-        } );
 
-        return DialogClass.wait( {
-          id: "recovery-mode-prompt",
-          uniqueId: String( ++globalThis._appId ),
-          classes: ["earthdawn4e", "recovery-prompt"],
-          window: {
-            title: game.i18n.localize( "ED.Dialogs.Title.recovery" ),
-            minimizable: false,
-          },
-          modal: false,
-          buttons: buttons,
-        } );
-      case "takeDamage":
-        const fields = foundry.data.fields;
-        const formFields = {
-          damage: new fields.NumberField( {
-            required: true,
-            name: "damage",
-            initial: 1,
-            integer: true,
-            positive: true,
-            label: "ED.Dialogs.damage",
-            hint: "localize: The amount of damage to take",
-          } ),
-          damageType: new fields.StringField( {
-            required: true,
-            nullable: false,
-            name: "damageType",
-            initial: "standard",
-            blank: false,
-            label: "ED.Dialogs.damageType",
-            hint: "localize: The type of damage to take",
-            choices: {
-              standard: "ED.Dialogs.damageStandard",
-              stun: "ED.Dialogs.damageStun",
-            },
-          } ),
-          armorType: new fields.StringField( {
-            required: true,
-            nullable: false,
-            name: "armorType",
-            initial: "physical",
-            blank: false,
-            label: "ED.Dialogs.armorType",
-            hint: "localize: The type of armor to use",
-            choices: {
-              physical: "ED.Dialogs.physical",
-              mystical: "ED.Dialogs.mystical",
-            },
-          } ),
-          ignoreArmor: new fields.BooleanField( {
-            required: true,
-            name: "ignoreArmor",
-            initial: false,
-            label: "ED.Dialogs.ignoreArmor",
-            hint: "localize: Whether to ignore armor when taking damage",
-          } ),
-        };
-        return DialogClass.wait( {
-          id: "take-damage-prompt",
-          uniqueId: String( ++globalThis._appId ),
-          classes: ["earthdawn4e", "take-damage-prompt", "take-damage__dialog"],
-          //tag: "form",
-          window: {
-            title: game.i18n.localize( "ED.Dialogs.Title.takeDamage" ),
-            minimizable: false,
-          },
-          form: {
-            submitOnChange: false,
-            closeOnSubmit: true,
-          },
-          modal: false,
-          buttons: [
-            {
-              action: "takeDamage",
-              label: game.i18n.localize( "ED.Dialogs.Buttons.takeDamage"),
-              icon: "fa-solid fa-heart-crack",
-              class: "takeDamage default button__take-damage",
-              default: false,
-              callback: ( event, button, dialog ) => {
-                const formData = new FormDataExtended( button.form );
-                return formData.object;
-              }
-            },
-            {
-              action: "close",
-              label: game.i18n.localize( "ED.Dialogs.Buttons.cancel"),
-              icon: "fa-light fa-times",
-              class: "cancel default button-cancel",
-              default: true,
-            },
-          ],
-          content: await renderTemplate(
-            "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs",
-            formFields,
-          ),
-          rejectClose: false,
-        } );
-    }
+  /**
+   * Retrieves a specific prompt based on the provided prompt type.
+   * This method delegates the call to the `_promptFactory` instance's `getPrompt` method,
+   * effectively acting as a proxy to access various prompts defined within the factory.
+   *
+   * @param {( 'recovery' | 'takeDamage' )} promptType - The type of prompt to retrieve.
+   * @returns {Promise<any>} - A promise that resolves to the specific prompt instance or logic
+   * associated with the given `promptType`. The exact return type depends on promptType.
+   */
+  async getPrompt( promptType ) {
+    return this._promptFactory.getPrompt( promptType );
   }
 }
