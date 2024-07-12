@@ -8,8 +8,9 @@ import LpEarningTransactionData from '../data/advancement/lp-earning-transaction
 import LpSpendingTransactionData from '../data/advancement/lp-spending-transaction.mjs';
 import LpTrackingData from '../data/advancement/lp-tracking.mjs';
 import KnockDownItemsPrompt from '../applications/global/knock-down-prompt.mjs';
-import JumpUpItemsPrompt from '../applications/global/jump-up-prompt.mjs';
 import PromptFactory from "../applications/global/prompt-factory.mjs";
+
+const futils = foundry.utils;
 
 
 /**
@@ -17,10 +18,8 @@ import PromptFactory from "../applications/global/prompt-factory.mjs";
  * @augments {Actor}
  */
 export default class ActorEd extends Actor {
-  /** @inheritDoc */
-  static async createDialog(data = {}, { parent = null, pack = null, ...options } = {}) {
-    return DocumentCreateDialog.waitPrompt(data, { documentCls: Actor, parent, pack, options });
-  }
+
+  _promptFactory = new PromptFactory( this );
 
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
@@ -31,16 +30,15 @@ export default class ActorEd extends Actor {
   }
 
   /** @inheritDoc */
-  _onCreate(data, options, userId) {
-    this._promptFactory = new PromptFactory( this );
-    return super._onCreate(data, options, userId);
+  static async createDialog(data = {}, { parent = null, pack = null, ...options } = {}) {
+    return DocumentCreateDialog.waitPrompt(data, { documentCls: Actor, parent, pack, options });
   }
 
   /**
    * Taken from the ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
    * Returns an array of items that match a given EDID and optionally an item type.
    * @param {string} edid           The SWID of the item(s) which you want to retrieve
-   * @param {string} type           Optionally, a type name to restrict the search
+   * @param {string} [type]           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
   getItemsByEdid(edid, type) {
@@ -385,8 +383,8 @@ export default class ActorEd extends Actor {
   }
 
   async jumpUp(options = {}) {
-    if (this.system.condition.knockedDown === false) {
-      ui.notifications.warn('Localize: You are not knocked down.');
+    if ( !this.system.condition.knockedDown ) {
+      ui.notifications.info( 'LocalizeLabel: You are not knocked down.' , { localize: true } );
       return;
     }
     const { attributes } = this.system;
@@ -394,21 +392,13 @@ export default class ActorEd extends Actor {
     let strain = 2;
     let jumpUpStep = attributes.dex.step;
 
-    const jumpUpAbilities = this.items.filter((item) => item.system.edid === 'jump-up');
+    const selectedAbility = this.items.get( await this.getPrompt( "jumpUp" ) );
 
-    if (jumpUpAbilities.length > 0) {
-      const jumpUpAbilityId = await JumpUpItemsPrompt.waitPrompt(jumpUpAbilities);
-
-      if (jumpUpAbilityId) {
-        const selectedAbility = jumpUpAbilities.find((ability) => ability.id === jumpUpAbilityId);
-
-        if (selectedAbility) {
-          const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
-          jumpUpStep = attributes[attribute].step + level;
-          devotionRequired = !!devotion;
-          strain = { base: abilityStrain };
-        }
-      }
+    if (selectedAbility) {
+      const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
+      jumpUpStep = attributes[attribute]?.step || jumpUpStep + level;
+      devotionRequired = !!devotion;
+      strain = { base: abilityStrain };
     }
 
     const chatFlavor = game.i18n.format('ED.Chat.Flavor.jumpUp', {
@@ -594,7 +584,7 @@ export default class ActorEd extends Actor {
       return changes.concat(
         e.changes.map((c) => {
           // eslint-disable-next-line no-param-reassign
-          c = foundry.utils.duplicate(c);
+          c = futils.duplicate(c);
           c.effect = e;
           c.priority = c.priority ?? c.mode * 10;
           return c;
@@ -611,7 +601,7 @@ export default class ActorEd extends Actor {
     }
 
     // Expand the set of final overrides
-    this.overrides = foundry.utils.expandObject({ ...foundry.utils.flattenObject(this.overrides), ...overrides });
+    this.overrides = futils.expandObject({ ...futils.flattenObject(this.overrides), ...overrides });
   }
 
   async _enableHTMLEnrichment() {
@@ -620,12 +610,12 @@ export default class ActorEd extends Actor {
       async: true,
       secrets: this.isOwner,
     });
-    return foundry.utils.expandObject(enrichment);
+    return futils.expandObject(enrichment);
   }
 
   async _enableHTMLEnrichmentEmbeddedItems() {
     for (const item of this.items) {
-      item.system.description.value = foundry.utils.expandObject(
+      item.system.description.value = futils.expandObject(
         await TextEditor.enrichHTML(item.system.description.value, {
           async: true,
           secrets: this.isOwner,
@@ -650,7 +640,7 @@ export default class ActorEd extends Actor {
    * This method delegates the call to the `_promptFactory` instance's `getPrompt` method,
    * effectively acting as a proxy to access various prompts defined within the factory.
    *
-   * @param {( 'recovery' | 'takeDamage' )} promptType - The type of prompt to retrieve.
+   * @param {( 'recovery' | 'takeDamage' | 'jumpUp' )} promptType - The type of prompt to retrieve.
    * @returns {Promise<any>} - A promise that resolves to the specific prompt instance or logic
    * associated with the given `promptType`. The exact return type depends on promptType.
    */
