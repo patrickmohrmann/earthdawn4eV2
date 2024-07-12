@@ -1,14 +1,14 @@
-import EdRollOptions from "../data/other/roll-options.mjs";
-import ED4E from "../config.mjs";
-import RollPrompt from "../applications/global/roll-prompt.mjs";
-import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
+import EdRollOptions from '../data/other/roll-options.mjs';
+import ED4E from '../config.mjs';
+import RollPrompt from '../applications/global/roll-prompt.mjs';
+import { DocumentCreateDialog } from '../applications/global/document-creation.mjs';
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
-import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
-import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
-import LpTrackingData from "../data/advancement/lp-tracking.mjs";
-import KnockDownItemsPrompt from "../applications/global/knock-down-prompt.mjs";
-import JumpUpItemsPrompt from "../applications/global/jump-up-prompt.mjs";
+import LegendPointHistoryEarnedPrompt from '../applications/global/lp-history.mjs';
+import LpEarningTransactionData from '../data/advancement/lp-earning-transaction.mjs';
+import LpSpendingTransactionData from '../data/advancement/lp-spending-transaction.mjs';
+import LpTrackingData from '../data/advancement/lp-tracking.mjs';
+import KnockDownItemsPrompt from '../applications/global/knock-down-prompt.mjs';
+import JumpUpItemsPrompt from '../applications/global/jump-up-prompt.mjs';
 
 
 /**
@@ -191,18 +191,8 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
-  // async takeDamageManual( options = {} ) {
-  //   const takeDamage = await TakeDamagePrompt.waitPrompt( this );
-  //   const amount = takeDamage.damage;
-  //   const damageType = takeDamage.damageType;
-  //   const armorType = takeDamage.armorType;
-  //   const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
-
-  //   this.takeDamage( amount, false, damageType, armorType, ignoreArmor );
-  // }
-
   async rollRecovery( options = {} ) {
-    const recoveryMode = await this._getPrompt( "recovery" );
+    const recoveryMode = await this.getPrompt( "recovery" );
     let recoveryStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
     const stunDamage = this.system.characteristics.health.damage.stun;
     const totalDamage = this.system.characteristics.health.damage.total;
@@ -299,12 +289,12 @@ export default class ActorEd extends Actor {
    * @param {("standard"|"stun")} damageType                    The type of damage. One of either 'standard' or 'stun'.
    * @param {("physical"|"mystical")} [armorType]               The type of armor that protects from this damage, one of either
    *                                                            'physical', 'mystical', or 'none'.
-   * @param {boolean} [ignoreAmor]                                Whether armor should be ignored when applying this damage.
+   * @param {boolean} [ignoreArmor]                                Whether armor should be ignored when applying this damage.
    */
   // eslint-disable-next-line max-params
-  takeDamage( amount, isStrain, damageType = "standard", armorType, ignoreAmor ) {
+  takeDamage( amount, isStrain, damageType = "standard", armorType, ignoreArmor ) {
     const { armor, health } = this.system.characteristics;
-    const finalAmount = amount - ( ignoreAmor || !armorType ? 0 : armor[armorType].value );
+    const finalAmount = amount - ( ignoreArmor || !armorType ? 0 : armor[armorType].value );
     const newDamage = health.damage[damageType] + finalAmount;
 
     const updates = { [`system.characteristics.health.damage.${damageType}`]: newDamage };
@@ -646,7 +636,7 @@ export default class ActorEd extends Actor {
     } )
   }
 
-  _getPrompt( promptType ) {
+  async getPrompt( promptType ) {
     const DialogClass = foundry.applications.api.DialogV2;
     switch ( promptType ) {
       case "recovery":
@@ -693,6 +683,92 @@ export default class ActorEd extends Actor {
           },
           modal: false,
           buttons: buttons,
+        } );
+      case "takeDamage":
+        const fields = foundry.data.fields;
+        const formFields = {
+          damage: new fields.NumberField( {
+            required: true,
+            name: "damage",
+            initial: 1,
+            integer: true,
+            positive: true,
+            label: "ED.Dialogs.damage",
+            hint: "localize: The amount of damage to take",
+          } ),
+          damageType: new fields.StringField( {
+            required: true,
+            nullable: false,
+            name: "damageType",
+            initial: "standard",
+            blank: false,
+            label: "ED.Dialogs.damageType",
+            hint: "localize: The type of damage to take",
+            choices: {
+              standard: "ED.Dialogs.damageStandard",
+              stun: "ED.Dialogs.damageStun",
+            },
+          } ),
+          armorType: new fields.StringField( {
+            required: true,
+            nullable: false,
+            name: "armorType",
+            initial: "physical",
+            blank: false,
+            label: "ED.Dialogs.armorType",
+            hint: "localize: The type of armor to use",
+            choices: {
+              physical: "ED.Dialogs.physical",
+              mystical: "ED.Dialogs.mystical",
+            },
+          } ),
+          ignoreArmor: new fields.BooleanField( {
+            required: true,
+            name: "ignoreArmor",
+            initial: false,
+            label: "ED.Dialogs.ignoreArmor",
+            hint: "localize: Whether to ignore armor when taking damage",
+          } ),
+        };
+        return DialogClass.wait( {
+          id: "take-damage-prompt",
+          uniqueId: String( ++globalThis._appId ),
+          classes: ["earthdawn4e", "take-damage-prompt", "take-damage__dialog"],
+          //tag: "form",
+          window: {
+            title: game.i18n.localize( "ED.Dialogs.Title.takeDamage" ),
+            minimizable: false,
+          },
+          form: {
+            submitOnChange: false,
+            closeOnSubmit: true,
+          },
+          modal: false,
+          buttons: [
+            {
+              action: "takeDamage",
+              label: game.i18n.localize( "ED.Dialogs.Buttons.takeDamage"),
+              icon: "fa-solid fa-heart-crack",
+              class: "takeDamage default button__take-damage",
+              default: false,
+              callback: ( event, button, dialog ) => {
+                const formData = new FormDataExtended( button.form );
+                return formData.object;
+              }
+            },
+            {
+              action: "close",
+              label: game.i18n.localize( "ED.Dialogs.Buttons.cancel"),
+              icon: "fa-light fa-times",
+              class: "cancel default button-cancel",
+              default: true,
+            },
+          ],
+          content: await renderTemplate(
+            "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs",
+            formFields,
+          ),
+          rejectClose: false,
         } );
     }
   }

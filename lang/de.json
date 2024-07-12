@@ -245,6 +245,7 @@
             }
         },
         "Dialogs": {
+            "armor":                                                "Rüstung",
             "armorType":                                            "Rüstungsart",
             "Buttons": {
                 "cancel":                                           "Abbrechen",    
@@ -257,7 +258,7 @@
             "damageStandard":                                       "Tödlicher Schaden",
             "damageStun":                                           "Betäubungsschaden",
             "damageType":                                           "Schadensart",
-            "ignoreArmor":                                          "Rüstung Ignoriere?",
+            "ignoreArmor":                                          "Ignoriere Rüstung",
             "jumpUpChoice":                                         "Wähle die Fähigkeit um aufzuspringen",
             "knockDownChoice":                                      "Wähle die Fähigkeit um dem Niederschlag zu widerstehen",
             "mystical":                                             "Mystischer Schaden",

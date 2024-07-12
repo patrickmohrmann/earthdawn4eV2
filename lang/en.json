@@ -246,6 +246,8 @@
             }
         },
         "Dialogs": {
+            "armor":                                                "Armor",
+            "armorType":                                            "Armor Type",
             "Buttons": {
                 "cancel":                                           "Cancel",
                 "nightRest":                                        "Nightly Rest",  
@@ -257,7 +259,7 @@
             "damageStandard":                                       "Deadly Damage",
             "damageStun":                                           "Stun Damage",
             "damageType":                                           "Damage Type",
-            "ignoreArmor":                                          "Ignore Armor?",
+            "ignoreArmor":                                          "Ignore Armor",
             "jumpUpChoice":                                         "Chose the Ability to jump up",
             "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
             "mystical":                                             "Mystical Damage",

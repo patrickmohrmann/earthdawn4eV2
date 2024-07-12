@@ -1,5 +1,4 @@
 import ED4E from "../../config.mjs";
-import TakeDamagePrompt from "../global/take-damage-prompt.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -89,9 +88,9 @@ export default class ActorSheetEd extends ActorSheet {
         "knockdownTest": () => this._onKnockDown( event ),
       };
       // Check if the action exists in the mapping and call it
-    if ( actionMapping.hasOwnProperty( action ) ) {
-    actionMapping[action]();
-  }
+      if ( actionMapping.hasOwnProperty( action ) ) {
+        actionMapping[action]();
+      }
     } );
 
     // Effect Management
@@ -158,40 +157,39 @@ export default class ActorSheetEd extends ActorSheet {
    * @param {Event} event     The originating click event
    * @private
    */
-    _takeStrain( event ) {
-        event.preventDefault();
-        const li = event.currentTarget.closest( ".item-id" );
-        const ability = this.actor.items.get( li.dataset.itemId );
-        this.actor.takeStrain( ability.system.strain );
-    }
+  _takeStrain( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    this.actor.takeStrain( ability.system.strain );
+  }
 
- /**
-  * Handles Recovery tests  
-  * @param {Event} event The originating click event.
-  * @private
-  */
-  _onRecoveryRoll( event ) { 
+  /**
+   * Handles Recovery tests
+   * @param {Event} event The originating click event.
+   * @private
+   */
+  _onRecoveryRoll( event ) {
     event.preventDefault();
     this.actor.rollRecovery( {event: event} );
   }
 
   /**
-   * Handles Recovery tests  
+   * Handles Recovery tests
    * @param {Event} event The originating click event.
    */
-  // _onTakeDamage( event ) {
-  //   event.preventDefault();
-  //   this.actor.takeDamageManual( {event: event} );
-  // }
-
   async _onTakeDamage( event ) {
-    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
-    const amount = takeDamage.damage;
-    const damageType = takeDamage.damageType;
-    const armorType = takeDamage.armorType;
-    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
+    // const takeDamage = await TakeDamagePrompt.waitPrompt( this );
+    const takeDamage = await this.actor.getPrompt( "takeDamage" );
+    if ( !takeDamage || takeDamage === 'close' ) return;
 
-    this.actor.takeDamage( amount, false, damageType, armorType, ignoreArmor );
+    this.actor.takeDamage(
+      takeDamage.damage,
+      false,
+      takeDamage.damageType,
+      takeDamage.armorType,
+      takeDamage.ignoreArmor,
+    );
   }
 
   _onJumpUp( event ) {
@@ -199,7 +197,7 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.jumpUp( {event: event} );
   }
 
-  _onInitiative( event ) { 
+  _onInitiative( event ) {
     event.preventDefault();
     this.actor.rollInitiative( {event: event} );
   }
@@ -295,9 +293,9 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
 
     const itemDescription = $( event.currentTarget )
-    .parent( ".item-id" )
-    .parent( ".card__ability" )
-    .children( ".card__description" );
+      .parent( ".item-id" )
+      .parent( ".card__ability" )
+      .children( ".card__description" );
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
