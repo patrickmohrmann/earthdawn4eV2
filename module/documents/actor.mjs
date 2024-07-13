@@ -4,7 +4,7 @@ import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs"
+import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs";
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
@@ -27,7 +27,7 @@ export default class ActorEd extends Actor {
    * @type {Item|undefined}
    */
   get namegiver() {
-    return this.items.filter( item => item.type === 'namegiver' )[0];
+    return this.items.filter( item => item.type === "namegiver" )[0];
   }
 
   /** @inheritDoc */
@@ -87,7 +87,7 @@ export default class ActorEd extends Actor {
   expandItemCards() {
     const itemDescriptionDocument = document.getElementsByClassName( "card__description" );
     const currentItemElement = itemDescriptionDocument.nextElementSibling;
-    currentItemElement.classList.toggle( "d-none" )
+    currentItemElement.classList.toggle( "d-none" );
   }
 
   /**
@@ -147,7 +147,7 @@ export default class ActorEd extends Actor {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
     }
-    const difficultyFinal = { base: difficulty }
+    const difficultyFinal = { base: difficulty };
     const devotionRequired = !!ability.system.devotionRequired;
     const strain = { base: ability.system.strain };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbility", {
@@ -155,7 +155,7 @@ export default class ActorEd extends Actor {
       ability: ability.name,
       step: abilityStep
     } );
-    const abilityFinalStep = { base: abilityStep }
+    const abilityFinalStep = { base: abilityStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
         testType: "action",
@@ -179,13 +179,13 @@ export default class ActorEd extends Actor {
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
   async rollEquipment( equipment, options = {} ) {
-    const arbitraryStep = equipment.system.usableItem.arbitraryStep
-    const difficulty = await equipment.system.getDifficulty()
+    const arbitraryStep = equipment.system.usableItem.arbitraryStep;
+    const difficulty = await equipment.system.getDifficulty();
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
     }
-    const difficultyFinal = { base: difficulty }
+    const difficultyFinal = { base: difficulty };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
       sourceActor: this.name,
       equipment: equipment.name,
@@ -213,25 +213,16 @@ export default class ActorEd extends Actor {
     return this._updateItemStates( item, nextStatus );
   }
 
-  async takeDamageManual( options = {} ) {
-    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
-    const amount = takeDamage.damage;
-    const damageType = takeDamage.damageType;
-    const armorType = takeDamage.armorType;
-    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
-  }
-
-  async rollRecovery( options = {} ) {
-    const recoveryMode = await this.getPrompt( "recovery" );
+  async rollRecovery( recoveryMode, options = {} ) {
     let recoveryStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
     const stunDamage = this.system.characteristics.health.damage.stun;
     const totalDamage = this.system.characteristics.health.damage.total;
     const currentWounds = this.system.characteristics.health.wounds;
     const newWounds = currentWounds > 0 ? currentWounds - 1 : 0;
     const recoveryTestPerDay = this.system.characteristics.recoveryTestsRecource.max;
-    const woundsPath = `system.characteristics.health.wounds`;
-    const recoveryTestAvailablePath = `system.characteristics.recoveryTestsRecource.value`;
-    const recoveryStunAvailabiltyPath = `system.characteristics.recoveryTestsRecource.stunRecoveryAvailable`;
+    const woundsPath = "system.characteristics.health.wounds";
+    const recoveryTestAvailablePath = "system.characteristics.recoveryTestsRecource.value";
+    const recoveryStunAvailabiltyPath = "system.characteristics.recoveryTestsRecource.stunRecoveryAvailable";
 
     switch ( recoveryMode ) {
 
@@ -273,7 +264,7 @@ export default class ActorEd extends Actor {
             ui.notifications.warn( "Localize: You don'T have Stun damage" );
             return;
           } else {
-            recoveryStep += this.system.attributes.wil.step
+            recoveryStep += this.system.attributes.wil.step;
           }
         }
         break;
@@ -335,10 +326,10 @@ export default class ActorEd extends Actor {
     if ( finalAmount > health.woundThreshold ) {
       switch ( damageType ) {
         case "standard":
-          updates[`system.characteristics.health.wounds`] = health.wounds + 1;
+          updates["system.characteristics.health.wounds"] = health.wounds + 1;
           break;
         case "stun":
-          updates[`system.condition.harried`] = true;
+          updates["system.condition.harried"] = true;
           break;
         // Add more cases here for other damage types
       }
@@ -421,7 +412,7 @@ export default class ActorEd extends Actor {
 
     const selectedAbility = this.items.get( await this.getPrompt( "jumpUp" ) );
 
-    if (selectedAbility) {
+    if ( selectedAbility ) {
       const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
       jumpUpStep = attributes[attribute]?.step || jumpUpStep + level;
       devotionRequired = !!devotion;
@@ -487,7 +478,7 @@ export default class ActorEd extends Actor {
     this.takeDamage( roll.totalStrain, true, "standard", undefined, true );
 
     const { karma, devotion } = roll.options;
-    const resourcesUsedSuccessfully = this.#useResource( 'karma', karma.pointsUsed ) && this.#useResource( 'devotion', devotion.pointsUsed );
+    const resourcesUsedSuccessfully = this.#useResource( "karma", karma.pointsUsed ) && this.#useResource( "devotion", devotion.pointsUsed );
 
     if ( !resourcesUsedSuccessfully ) {
       ui.notifications.warn( "Localize: Not enough karma,devotion or recovery. Used all that was available." );
@@ -512,7 +503,7 @@ export default class ActorEd extends Actor {
     await roll.evaluate();
 
     if ( roll._total && roll.isSuccess ) {
-      this.update( { [`system.condition.knockedDown`]: false } );
+      this.update( { "system.condition.knockedDown": false } );
     }
 
     roll.toMessage();
@@ -524,7 +515,7 @@ export default class ActorEd extends Actor {
       return;
     } else {
       if ( roll.isSuccess === false ) {
-        this.update( { [`system.condition.knockedDown`]: true, } );
+        this.update( { "system.condition.knockedDown": true, } );
       }
     }
     roll.toMessage();
@@ -558,11 +549,11 @@ export default class ActorEd extends Actor {
     const recoveryTestsCurrent = recoveryTestsRecource.value;
 
     const updatePaths = {
-      wounds: `system.characteristics.health.wounds`,
-      standardDamage: `system.characteristics.health.damage.standard`,
-      stunDamage: `system.characteristics.health.damage.stun`,
-      recoveryTestAvailable: `system.characteristics.recoveryTestsRecource.value`,
-      stunRecoveryAvailable: `system.characteristics.recoveryTestsRecource.stunRecoveryAvailable`,
+      wounds: "system.characteristics.health.wounds",
+      standardDamage: "system.characteristics.health.damage.standard",
+      stunDamage: "system.characteristics.health.damage.stun",
+      recoveryTestAvailable: "system.characteristics.recoveryTestsRecource.value",
+      stunRecoveryAvailable: "system.characteristics.recoveryTestsRecource.stunRecoveryAvailable",
     };
 
     const updateData = {};
@@ -634,7 +625,7 @@ export default class ActorEd extends Actor {
 
   async _enableHTMLEnrichment() {
     let enrichment = {};
-    enrichment['system.description.value'] = await TextEditor.enrichHTML( this.system.description.value, {
+    enrichment["system.description.value"] = await TextEditor.enrichHTML( this.system.description.value, {
       async: true,
       secrets: this.isOwner,
     } );
@@ -653,19 +644,19 @@ export default class ActorEd extends Actor {
 
   async addLpTransaction( type, transactionData ) {
     const oldTransactions = this.system.lp[type];
-    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
-    const transaction = new TransactionModel( transactionData )
+    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
+    const transaction = new TransactionModel( transactionData );
 
     return this.update( {
-      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
-    } )
+      [`system.lp.${type}`]: oldTransactions.concat( [ transaction ] )
+    } );
   }
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
     const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };
     const equippedWeapons = this.itemTypes.weapon.filter(
-      weapon => ["mainHand", "offHand", "twoHands"].includes( weapon.system.itemStatus )
+      weapon => [ "mainHand", "offHand", "twoHands" ].includes( weapon.system.itemStatus )
     );
     const addUnequipItemUpdate = ( itemType, statuses ) => {
       this.itemTypes[itemType].filter(
@@ -673,7 +664,7 @@ export default class ActorEd extends Actor {
       ).forEach(
         item => updates.push( { _id: item.id, "system.itemStatus": "carried" } )
       );
-    }
+    };
 
     switch ( itemToUpdate.type ) {
       case "armor":
@@ -681,7 +672,7 @@ export default class ActorEd extends Actor {
         if ( nextStatus === "equipped" ) {
           if ( itemToUpdate.system.piecemealArmor?.selector ) {
             if ( !this.wearsPiecemealArmor ) {
-              addUnequipItemUpdate( "armor", ["equipped"] );
+              addUnequipItemUpdate( "armor", [ "equipped" ] );
             } else {
               // A complete set of piecemeal armor can have up to 5 size points. Armor pieces come in three sizes and
               // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
@@ -710,7 +701,7 @@ export default class ActorEd extends Actor {
             }
           } else {
             // Unequip other armor
-            if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", ["equipped"] );
+            if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", [ "equipped" ] );
           }
         }
         updates.push( originalItemUpdate );
@@ -720,15 +711,15 @@ export default class ActorEd extends Actor {
         switch ( nextStatus ) {
           case "twoHands":
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
-            addUnequipItemUpdate( "weapon", ["mainHand", "offHand", "twoHands"] );
-            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", ["equipped"] );
+            addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
           case "mainHand":
           case "offHand":
-            addUnequipItemUpdate( "weapon", [nextStatus, "twoHands"] );
+            addUnequipItemUpdate( "weapon", [ nextStatus, "twoHands" ] );
             break;
           case "tail":
-            addUnequipItemUpdate( "weapon", ["tail"] );
+            addUnequipItemUpdate( "weapon", [ "tail" ] );
             break;
         }
 
@@ -738,7 +729,7 @@ export default class ActorEd extends Actor {
 
         if ( nextStatus === "equipped" ) {
           // Unequip other shields
-          addUnequipItemUpdate( "shield", ["equipped"] );
+          addUnequipItemUpdate( "shield", [ "equipped" ] );
           // If there's a bow and the shield allows it, no need to unequip the weapon
           const bowAllowed = equippedWeapons[0]?.system.isTwoHandedRanged && itemToUpdate.system.bowUsage;
           // If there's a two-handed weapon or two one-handed weapons, unequip one
@@ -764,7 +755,6 @@ export default class ActorEd extends Actor {
    * Retrieves a specific prompt based on the provided prompt type.
    * This method delegates the call to the `_promptFactory` instance's `getPrompt` method,
    * effectively acting as a proxy to access various prompts defined within the factory.
-   *
    * @param {( 'recovery' | 'takeDamage' | 'jumpUp')} promptType - The type of prompt to retrieve.
    * @returns {Promise<any>} - A promise that resolves to the specific prompt instance or logic
    * associated with the given `promptType`. The exact return type depends on promptType.

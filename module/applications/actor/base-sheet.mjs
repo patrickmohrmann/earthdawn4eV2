@@ -11,19 +11,19 @@ export default class ActorSheetEd extends ActorSheet {
    */
   static get defaultOptions() {
     return foundry.utils.mergeObject( super.defaultOptions, {
-      classes: ['earthdawn4e', 'sheet', 'actor', 'character-sheet'],
+      classes: [ "earthdawn4e", "sheet", "actor", "character-sheet" ],
       width: 800,
       height: 800,
       tabs: [
         {
-          navSelector: '.actor-sheet-tabs',
-          contentSelector: '.actor-sheet-body',
-          initial: 'main',
+          navSelector: ".actor-sheet-tabs",
+          contentSelector: ".actor-sheet-body",
+          initial: "main",
         },
         {
-          navSelector: '.actor-sheet-spell-tabs',
-          contentSelector: '.actor-sheet-spell-body',
-          initial: 'spell-matrix-tab',
+          navSelector: ".actor-sheet-spell-tabs",
+          contentSelector: ".actor-sheet-spell-body",
+          initial: "spell-matrix-tab",
         },
       ],
       scrollY: [
@@ -77,7 +77,7 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__ability .take-strain" ).click( this._onTakeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
-    html.find(".item__status").mousedown(this._onChangeItemStatus.bind(this));
+    html.find( ".item__status" ).mousedown( this._onChangeItemStatus.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -205,19 +205,20 @@ export default class ActorSheetEd extends ActorSheet {
         this.actor.takeStrain( ability.system.strain );
     }
 
- /**
-  * Handles Recovery tests
-  * @param {Event} event The originating click event.
-  * @private
-  */
-  _onRecoveryRoll( event ) {
+  /**
+   * Handles Recovery tests
+   * @param {Event} event The originating click event.
+   * @private
+   */
+  async _onRecoveryRoll( event ) {
     event.preventDefault();
-    this.actor.rollRecovery( {event: event} );
+    const recoveryMode = await this.actor.getPrompt( "recovery" );
+    this.actor.rollRecovery( recoveryMode, {event: event} );
   }
 
   async _onTakeDamage( event ) {
     const takeDamage = await this.actor.getPrompt( "takeDamage" );
-    if ( !takeDamage || takeDamage === 'close' ) return;
+    if ( !takeDamage || takeDamage === "close" ) return;
 
     this.actor.takeDamage(
       takeDamage.damage,
@@ -258,12 +259,12 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onEffectAdd( event ) {
     event.preventDefault();
-    return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
-      label: `New Effect`,
-      icon: 'icons/svg/item-bag.svg',
+    return this.actor.createEmbeddedDocuments( "ActiveEffect", [ {
+      label: "New Effect",
+      icon: "icons/svg/item-bag.svg",
       duration: { rounds: 1 },
       origin: this.actor.uuid
-    }] );
+    } ] );
   }
 
   /**
