@@ -12,6 +12,7 @@ export default class PromptFactory {
     recovery: this._recoveryPrompt.bind(this),
     takeDamage: this._takeDamagePrompt.bind(this),
     jumpUp: this._jumpUpPrompt.bind(this),
+    knockDown: this._knockDownPrompt.bind(this),
   };
 
   /**
@@ -191,4 +192,5 @@ export default class PromptFactory {
     } );
   }
 
+  async _knockDownPrompt() {}
 }
