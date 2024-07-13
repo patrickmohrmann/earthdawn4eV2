@@ -9,7 +9,6 @@ import LpEarningTransactionData from "../data/advancement/lp-earning-transaction
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import { sum } from "../utils.mjs";
-import KnockDownItemsPrompt from "../applications/global/knock-down-prompt.mjs";
 import PromptFactory from "../applications/global/prompt-factory.mjs";
 
 const futils = foundry.utils;
