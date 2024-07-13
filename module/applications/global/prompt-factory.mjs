@@ -9,21 +9,20 @@ export default class PromptFactory {
   }
 
   _promptTypeMapping = {
-    recovery: this._recoveryPrompt.bind(this),
-    takeDamage: this._takeDamagePrompt.bind(this),
-    jumpUp: this._jumpUpPrompt.bind(this),
-    knockDown: this._knockDownPrompt.bind(this),
+    recovery: this._recoveryPrompt.bind( this ),
+    takeDamage: this._takeDamagePrompt.bind( this ),
+    jumpUp: this._jumpUpPrompt.bind( this ),
+    knockDown: this._knockDownPrompt.bind( this ),
   };
 
   /**
    * Generates a {@link DialogV2Button} object for a cancel button.
    * It provides a standardized way to create a cancel button configuration
    * for dialogs within the application, ensuring consistency in appearance and behavior.
-   *
    * @param {boolean} isDefaultButton - Determines if the cancel button should be marked as the default action.
    * @returns {DialogV2Button} An object containing properties for the cancel button's action, label, icon, CSS class, and default status.
    */
-  static getCancelButtonConfig(isDefaultButton = true) {
+  static getCancelButtonConfig( isDefaultButton = true ) {
     return {
       action: 'close', // The action to be taken when the button is clicked, here it's to close the dialog.
       label: 'ED.Dialogs.Buttons.cancel', // The text label for the button, localized.
@@ -66,7 +65,7 @@ export default class PromptFactory {
     return DialogClass.wait( {
       id: "recovery-mode-prompt",
       uniqueId: String( ++globalThis._appId ),
-      classes: ["earthdawn4e", "recovery-prompt"],
+      classes: [ "earthdawn4e", "recovery-prompt" ],
       window: {
         title: "ED.Dialogs.Title.recovery" ,
         minimizable: false,
@@ -124,8 +123,8 @@ export default class PromptFactory {
     return DialogClass.wait( {
       id: "take-damage-prompt",
       uniqueId: String( ++globalThis._appId ),
-      classes: ["earthdawn4e", "take-damage-prompt", "take-damage__dialog"],
-      //tag: "form",
+      classes: [ "earthdawn4e", "take-damage-prompt", "take-damage__dialog" ],
+      // tag: "form",
       window: {
         title: "ED.Dialogs.Title.takeDamage" ,
         minimizable: false,
@@ -158,31 +157,31 @@ export default class PromptFactory {
   }
 
   async _jumpUpPrompt() {
-    const jumpUpAbilities = this.document.getItemsByEdid('jump-up');
+    const jumpUpAbilities = this.document.getItemsByEdid( 'jump-up' );
     if ( futils.isEmpty( jumpUpAbilities ) ) return;
 
-    const buttons = jumpUpAbilities.map((ability) => {
+    const buttons = jumpUpAbilities.map( ( ability ) => {
       return {
         action: ability.id,
         label: ability.name,
         icon: '',
         class: `button-jump-up ${ability.name}`,
         default: false,
-        callback: (_) => {
+        callback: ( _ ) => {
           return ability.id;
         },
       };
-    });
+    } );
     const noAbilityButton = this.constructor.getCancelButtonConfig();
     noAbilityButton.label = 'ED.Dialogs.Buttons.noAbility' ;
     buttons.push( noAbilityButton );
 
     // TODO: adapt CSS to overwrite class "form-footer" with flexcol
-    return new DialogClass.wait( {
+    return DialogClass.wait( {
       rejectClose: false,
       id: 'jump-up-prompt',
       uniqueId: String( ++globalThis._appId ),
-      classes: ["earthdawn4e", "jump-up-prompt jump-up flexcol"],
+      classes: [ "earthdawn4e", "jump-up-prompt jump-up flexcol" ],
       window: {
         title: "ED.Dialogs.Title.jumpUp" ,
         minimizable: false,
