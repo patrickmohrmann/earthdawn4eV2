@@ -194,7 +194,7 @@ export default class SentientTemplate extends CommonTemplate {
                     } ),
                     stunRecoveryAvailable: new fields.BooleanField( {
                         required: true,
-                        initial: false,
+                        initial: true,
                         label: "ED.Actor.Characteristics.recoveryTestsStun"
                     } ),
                 } ),

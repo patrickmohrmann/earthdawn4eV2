@@ -213,62 +213,66 @@ export default class ActorEd extends Actor {
   }
 
   async rollRecovery( recoveryMode, options = {} ) {
-    let recoveryStep = this.system.attributes.tou.step + this.system.globalBonuses.allRecoveryEffects.value;
-    const stunDamage = this.system.characteristics.health.damage.stun;
-    const totalDamage = this.system.characteristics.health.damage.total;
-    const currentWounds = this.system.characteristics.health.wounds;
-    const newWounds = currentWounds > 0 ? currentWounds - 1 : 0;
-    const recoveryTestPerDay = this.system.characteristics.recoveryTestsResource.max;
+
+    const { attributes, characteristics, globalBonuses } = this.system;
+
+    let recoveryStep = attributes.tou.step;
+    const recoveryFinalStep = {
+      base: recoveryStep,
+      modifiers: {},
+    };
+    if ( globalBonuses.allRecoveryEffects.value > 0 ) recoveryFinalStep.modifiers["localize: Global Recovery Bonus"] = globalBonuses.allRecoveryEffects.value;
+
+    const { stun: stunDamage, total: totalDamage } = characteristics.health.damage;
+    const currentWounds = characteristics.health.wounds;
+    const newWounds = Math.max( currentWounds - 1, 0 );
+
+    const recoveryTestPerDay = characteristics.recoveryTestsResource.max;
+    const availableRecoveryTestResource = characteristics.recoveryTestsResource.value;
+
     const woundsPath = "system.characteristics.health.wounds";
     const recoveryTestAvailablePath = "system.characteristics.recoveryTestsResource.value";
-    const recoveryStunAvailabiltyPath = "system.characteristics.recoveryTestsResource.stunRecoveryAvailable";
+    const recoveryStunAvailablePath = "system.characteristics.recoveryTestsResource.stunRecoveryAvailable";
 
     switch ( recoveryMode ) {
 
       case "recovery":
-        if ( this.system.characteristics.recoveryTestsResource.value < 1 ) {
-          ui.notifications.warn( "Localize: Not enough recovery tests available." );
+        if ( availableRecoveryTestResource < 1 ) {
+          ui.notifications.warn( "LocalizeLabel: Not enough recovery tests available." );
           return;
-        } else {
-          if ( totalDamage === 0 ) {
-            ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
-            return;
-          }
+        } else if ( totalDamage === 0 ) {
+          ui.notifications.warn( "LocalizeLabel: No Injuries, no recovery needed" );
+          return;
         }
         break;
 
       case "nightRest":
-        if ( totalDamage === 0 && currentWounds === 0 ) {
-          this.update( {
-            [`${ recoveryStunAvailabiltyPath }`]: true,
-            [`${ recoveryTestAvailablePath }`]: recoveryTestPerDay
-          } );
-          return;
-        } else if ( totalDamage === 0 && currentWounds > 0 ) {
-          this.update( {
-            [`${ recoveryStunAvailabiltyPath }`]: true,
-            [`${ recoveryTestAvailablePath }`]: recoveryTestPerDay - 1,
-            [`${ woundsPath }`]: newWounds
-          } );
+        if ( totalDamage === 0 ) {
+          const updateData = {
+            [recoveryStunAvailablePath]: true,
+            [recoveryTestAvailablePath]: currentWounds === 0 ? recoveryTestPerDay : recoveryTestPerDay - 1
+          };
+          if ( currentWounds > 0 ) updateData[woundsPath] = newWounds;
+          this.update( updateData );
           return;
         }
         break;
 
       case "recoverStun":
-        if ( this.system.characteristics.recoveryTestsResource.value < 1 ) {
+        if ( availableRecoveryTestResource < 1 ) {
           ui.notifications.warn( "Localize: Not enough recovery tests available." );
           return;
-        } else {
-          if ( stunDamage === 0 ) {
-            ui.notifications.warn( "Localize: You don'T have Stun damage" );
-            return;
-          } else {
-            recoveryStep += this.system.attributes.wil.step;
-          }
         }
+        if ( stunDamage === 0 ) {
+          ui.notifications.warn( "Localize: You don'T have Stun damage" );
+          return;
+        }
+        // TODO: won't be visible in the prompt until modifiers input is implemented
+        recoveryFinalStep.modifiers["localize: Wil for Stun Recovery"] = this.system.attributes.wil.step;
         break;
 
       default:
+        console.warn( "ED4E | ActorEd.rollRecovery: No recovery type found" );
         return;
     }
 
@@ -276,7 +280,6 @@ export default class ActorEd extends Actor {
       sourceActor: this.name,
       step: recoveryStep
     } );
-    const recoveryFinalStep = { base: recoveryStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
         testType: "effect",
