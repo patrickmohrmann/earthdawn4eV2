@@ -27,6 +27,29 @@ export default class ActorEd extends Actor {
     return this.items.filter( item => item.type === 'namegiver' )[0];
   }
 
+  async _preCreate( data, options, userId ) {
+    await super._preCreate( data, options, userId );
+
+    // Configure prototype token settings
+    if ( this.type === "character" ) {
+      const prototypeToken = {
+        sight: {enabled: true},
+        actorLink: true,
+        disposition: 1,   // Friendly
+        displayBars: 50,  // Always Display bar 1 and 2
+        displayName: 30,  // Display nameplate on hover
+        bar1: {
+          attribute: "healthRate"
+        },
+        bar2: {
+          attribute: "karma"
+        }
+      };
+
+      this.updateSource( { prototypeToken } )
+    }
+  }
+
   /**
    * Taken from the ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
    * Returns an array of items that match a given EDID and optionally an item type.
@@ -34,12 +57,12 @@ export default class ActorEd extends Actor {
    * @param {string} type           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid( edid, type) {
+  getItemsByEdid( edid, type ) {
     const edidFilter = ( item ) => item.system.edid === edid;
     if ( !type ) return this.items.filter( edidFilter );
 
     const itemTypes = this.itemTypes;
-    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error(`Type ${type} is invalid!`);
+    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${type} is invalid!` );
 
     return itemTypes[type].filter( edidFilter );
   }
@@ -52,7 +75,7 @@ export default class ActorEd extends Actor {
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
   getSingleItemByEdid( edid, type ) {
-    return this.getItemsByEdid(edid, type)[0];
+    return this.getItemsByEdid( edid, type )[0];
   }
 
   /** 
@@ -129,11 +152,11 @@ export default class ActorEd extends Actor {
   }
 
    /**
-   * @summary                     Equipment rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
-   * @description                 Roll an Equipment. use {@link RollPrompt} for further input data.
-   * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
-   * @param {object} options      Any additional options for the {@link EdRoll}.
-   */
+    * @summary                     Equipment rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
+    * @description                 Roll an Equipment. use {@link RollPrompt} for further input data.
+    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
+    * @param {object} options      Any additional options for the {@link EdRoll}.
+    */
    async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
     const difficulty = equipment.system.getDifficulty();

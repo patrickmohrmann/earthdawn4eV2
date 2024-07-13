@@ -14,6 +14,9 @@ import * as utils from "../utils.mjs";
 
 
 
+/**
+ *
+ */
 export default function () {
     Hooks.once( "init", () => {
         globalThis.ed4e = game.ed4e = Object.assign( game.system, globalThis.ed4e );
@@ -22,9 +25,10 @@ export default function () {
         // record configuration values
         CONFIG.ED4E = ED4E;
         CONFIG.Actor.documentClass = documents.ActorEd;
-        CONFIG.Actor.documentClass = documents.CharacterEd;
         CONFIG.Item.documentClass = documents.ItemEd;
         CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
+
+        CONFIG.Token.objectClass = canvas.TokenEd;
 
         // Register Roll Extensions
         CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
