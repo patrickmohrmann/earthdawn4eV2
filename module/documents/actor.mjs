@@ -350,7 +350,7 @@ export default class ActorEd extends Actor {
     }
   }
 
-  async knockdownTest( amount, options = {} ) {
+  async knockdownTest( damageTaken, options = {} ) {
     if ( this.system.condition.knockedDown === true ) {
       ui.notifications.warn( "Localize: You are already knocked down." );
       return;
@@ -360,29 +360,28 @@ export default class ActorEd extends Actor {
     let strain = 0;
     let knockdownStep = attributes.str.step;
 
-    const knockdownAbilities = this.items.filter( item => item.system.edid === "knock-down" );
+    const knockdownAbility = await fromUuid(
+      await this.getPrompt( "knockDown" )
+    );
 
-    if ( knockdownAbilities.length > 0 ) {
-      const knockdownAbilityId = await KnockDownItemsPrompt.waitPrompt( knockdownAbilities );
-
-      if ( knockdownAbilityId ) {
-        const selectedAbility = knockdownAbilities.find( ability => ability.id === knockdownAbilityId );
-        if ( selectedAbility ) {
-          const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
-          knockdownStep = attributes[attribute].step + level;
-          devotionRequired = !!devotion;
-          strain = { base: abilityStrain };
-        }
-      }
+    if ( knockdownAbility ) {
+      const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = knockdownAbility.system;
+      knockdownStep = attributes[attribute].step + level;
+      devotionRequired = !!devotion;
+      strain = { base: abilityStrain };
     }
-    const difficulty = amount > 0 ? amount - characteristics.health.woundThreshold : 0;
-    const difficultyFinal = { base: difficulty };
+
+    const difficultyFinal = {
+      base: damageTaken > 0 ? damageTaken - characteristics.health.woundThreshold : 0
+    };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.knockdownTest", {
       sourceActor: this.name,
       step: knockdownStep
     } );
 
-    const knockdownStepFinal = { base: knockdownStep + this.system.singleBonuses.knockdownEffects.value };
+    const knockdownStepFinal = {
+      base: knockdownStep + this.system.singleBonuses.knockdownEffects.value
+    };
     const edRollOptions = EdRollOptions.fromActor(
       {
         testType: "action",
@@ -755,7 +754,7 @@ export default class ActorEd extends Actor {
    * Retrieves a specific prompt based on the provided prompt type.
    * This method delegates the call to the `_promptFactory` instance's `getPrompt` method,
    * effectively acting as a proxy to access various prompts defined within the factory.
-   * @param {( 'recovery' | 'takeDamage' | 'jumpUp')} promptType - The type of prompt to retrieve.
+   * @param {( 'recovery' | 'takeDamage' | 'jumpUp' | 'knockDown' )} promptType - The type of prompt to retrieve.
    * @returns {Promise<any>} - A promise that resolves to the specific prompt instance or logic
    * associated with the given `promptType`. The exact return type depends on promptType.
    */

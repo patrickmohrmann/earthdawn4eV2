@@ -1,6 +1,5 @@
 const DialogClass = foundry.applications.api.DialogV2;
 const fields = foundry.data.fields;
-const futils = foundry.utils;
 
 export default class PromptFactory {
 
@@ -61,7 +60,6 @@ export default class PromptFactory {
     } );
     buttons.push( this.constructor.getCancelButtonConfig() );
 
-    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
     return DialogClass.wait( {
       id: "recovery-mode-prompt",
       uniqueId: String( ++globalThis._appId ),
@@ -157,26 +155,12 @@ export default class PromptFactory {
   }
 
   async _jumpUpPrompt() {
-    const jumpUpAbilities = this.document.getItemsByEdid( "jump-up" );
-    if ( futils.isEmpty( jumpUpAbilities ) ) return;
+    const buttons = await this._getAbilityButtons( "jump-up" );
 
-    const buttons = jumpUpAbilities.map( ( ability ) => {
-      return {
-        action: ability.id,
-        label: ability.name,
-        icon: "",
-        class: `button-jump-up ${ability.name}`,
-        default: false,
-        callback: ( _ ) => {
-          return ability.id;
-        },
-      };
-    } );
     const noAbilityButton = this.constructor.getCancelButtonConfig();
     noAbilityButton.label = "ED.Dialogs.Buttons.noAbility" ;
     buttons.push( noAbilityButton );
 
-    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
     return DialogClass.wait( {
       rejectClose: false,
       id: "jump-up-prompt",
@@ -191,5 +175,38 @@ export default class PromptFactory {
     } );
   }
 
-  async _knockDownPrompt() {}
+  async _knockDownPrompt() {
+    const buttons = await this._getAbilityButtons( "knock-down" );
+
+    const noAbilityButton = this.constructor.getCancelButtonConfig();
+    noAbilityButton.label = "ED.Dialogs.Buttons.noAbility" ;
+    buttons.push( noAbilityButton );
+
+    return DialogClass.wait( {
+      rejectClose: false,
+      id: "knock-down-prompt",
+      uniqueId: String( ++globalThis._appId ),
+      classes: [ "earthdawn4e", "knock-down-prompt knockdown flexcol" ],
+      window: {
+        title: "ED.Dialogs.Title.knockDown" ,
+        minimizable: false,
+      },
+      modal: false,
+      buttons: buttons,
+    } );
+  }
+
+  async _getAbilityButtons( edid ) {
+    const abilities = this.document.getItemsByEdid( edid );
+    return  abilities.map( ( ability ) => {
+      return {
+        action: ability.id,
+        label: ability.name,
+        icon: "",
+        class: `button-${edid} ${ability.name}`,
+        default: false,
+      };
+    } );
+    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
+  }
 }

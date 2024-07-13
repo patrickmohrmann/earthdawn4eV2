@@ -246,8 +246,8 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onKnockDown( event ) {
     event.preventDefault();
-    const amount = 0;
-    this.actor.knockdownTest( amount );
+    const damageTaken = 0;
+    this.actor.knockdownTest( damageTaken );
   }
 
 
