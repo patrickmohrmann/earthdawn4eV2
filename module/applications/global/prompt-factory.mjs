@@ -141,7 +141,7 @@ export default class PromptFactory {
           icon: "fa-solid fa-heart-crack",
           class: "takeDamage default button__take-damage",
           default: false,
-          callback: ( event, button, dialog ) => {
+          callback: ( event, button, _ ) => {
             const formData = new FormDataExtended( button.form );
             return formData.object;
           }
