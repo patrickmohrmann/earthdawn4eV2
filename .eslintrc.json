@@ -46,6 +46,8 @@
     "ed4e": true,
     "expandObject": false,
     "foundry": false,
+    "fromUuid": false,
+    "fromUuidSync": false,
     "game": false,
     "isOwned": false,
     "items": false,
