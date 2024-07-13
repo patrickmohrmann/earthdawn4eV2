@@ -347,7 +347,7 @@ export default class ActorEd extends Actor {
       ChatMessage.create( messageData );
     }
 
-    if ( !this.system.condition.knockedDown && finalAmount >= health.woundThreshold ) {
+    if ( !this.system.condition.knockedDown && finalAmount >= health.woundThreshold + 5 ) {
       this.knockdownTest( finalAmount );
     }
   }
