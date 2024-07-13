@@ -82,7 +82,7 @@
             "Characteristics": {
                 "currentDamage":                                    "Schaden",
                 "currentRecoveryTestsRecource":                     "Aktuell",
-                "dailyrecoveryTestsRecource":                       "Täglich",
+                "dailyrecoveryTestsResource":                       "Täglich",
                 "deathThesholdShort":                               "Todesschwelle",
                 "mysticalArmor":                                    "Mystisch",
                 "mysticalDefense":                                  "Mystisch",

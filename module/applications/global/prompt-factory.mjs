@@ -11,7 +11,7 @@ export default class PromptFactory {
     recovery: this._recoveryPrompt.bind( this ),
     takeDamage: this._takeDamagePrompt.bind( this ),
     jumpUp: this._jumpUpPrompt.bind( this ),
-    knockDown: this._knockDownPrompt.bind( this ),
+    knockDown: this._knockDownPrompt.bind( this )
   };
 
   /**
@@ -27,36 +27,36 @@ export default class PromptFactory {
       label: "ED.Dialogs.Buttons.cancel", // The text label for the button, localized.
       icon: "fa-light fa-times", // The icon class from FontAwesome, here using a light variant of the 'times' icon.
       class: "cancel default button-cancel", // Additional CSS classes for styling the button.
-      default: isDefaultButton, // Marks this button as the default action, affecting its appearance and behavior.
+      default: isDefaultButton // Marks this button as the default action, affecting its appearance and behavior.
     };
   }
 
   async getPrompt( type ) {
-    return this._promptTypeMapping[ type ]();
+    return this._promptTypeMapping[type]();
   }
 
   async _recoveryPrompt() {
     const buttons = [];
-    if ( this.document.system.characteristics.recoveryTestsRecource.value > 0 ) buttons.push( {
+    if ( this.document.system.characteristics.recoveryTestsResource.value > 0 ) buttons.push( {
       action: "recovery",
       label: "ED.Dialogs.Buttons.recovery",
       icon: "fa-light fa-heart-circle-plus",
       class: "recovery default button-recovery",
-      default: false,
+      default: false
     } );
-    if ( this.document.system.characteristics.recoveryTestsRecource.stunRecoveryAvailable ) buttons.push( {
+    if ( this.document.system.characteristics.recoveryTestsResource.stunRecoveryAvailable ) buttons.push( {
       action: "recoverStun",
       label: "ED.Dialogs.Buttons.recoverStun",
       icon: "fa-light fa-head-side-medical",
       class: "recoverStun default button-recoverStun",
-      default: false,
+      default: false
     } );
     buttons.push( {
       action: "nightRest",
       label: "ED.Dialogs.Buttons.nightRest",
       icon: "fa-duotone fa-campfire",
       class: "nightRest default button-nightRest",
-      default: true,
+      default: true
     } );
     buttons.push( this.constructor.getCancelButtonConfig() );
 
@@ -65,11 +65,11 @@ export default class PromptFactory {
       uniqueId: String( ++globalThis._appId ),
       classes: [ "earthdawn4e", "recovery-prompt" ],
       window: {
-        title: "ED.Dialogs.Title.recovery" ,
-        minimizable: false,
+        title: "ED.Dialogs.Title.recovery",
+        minimizable: false
       },
       modal: false,
-      buttons: buttons,
+      buttons: buttons
     } );
   }
 
@@ -82,7 +82,7 @@ export default class PromptFactory {
         integer: true,
         positive: true,
         label: "ED.Dialogs.damage",
-        hint: "localize: The amount of damage to take",
+        hint: "localize: The amount of damage to take"
       } ),
       damageType: new fields.StringField( {
         required: true,
@@ -94,8 +94,8 @@ export default class PromptFactory {
         hint: "localize: The type of damage to take",
         choices: {
           standard: "ED.Dialogs.damageStandard",
-          stun: "ED.Dialogs.damageStun",
-        },
+          stun: "ED.Dialogs.damageStun"
+        }
       } ),
       armorType: new fields.StringField( {
         required: true,
@@ -107,16 +107,16 @@ export default class PromptFactory {
         hint: "localize: The type of armor to use",
         choices: {
           physical: "ED.Dialogs.physical",
-          mystical: "ED.Dialogs.mystical",
-        },
+          mystical: "ED.Dialogs.mystical"
+        }
       } ),
       ignoreArmor: new fields.BooleanField( {
         required: true,
         name: "ignoreArmor",
         initial: false,
         label: "ED.Dialogs.ignoreArmor",
-        hint: "localize: Whether to ignore armor when taking damage",
-      } ),
+        hint: "localize: Whether to ignore armor when taking damage"
+      } )
     };
     return DialogClass.wait( {
       id: "take-damage-prompt",
@@ -124,12 +124,12 @@ export default class PromptFactory {
       classes: [ "earthdawn4e", "take-damage-prompt", "take-damage__dialog" ],
       // tag: "form",
       window: {
-        title: "ED.Dialogs.Title.takeDamage" ,
-        minimizable: false,
+        title: "ED.Dialogs.Title.takeDamage",
+        minimizable: false
       },
       form: {
         submitOnChange: false,
-        closeOnSubmit: true,
+        closeOnSubmit: true
       },
       modal: false,
       buttons: [
@@ -144,13 +144,13 @@ export default class PromptFactory {
             return formData.object;
           }
         },
-        this.constructor.getCancelButtonConfig(),
+        this.constructor.getCancelButtonConfig()
       ],
       content: await renderTemplate(
         "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs",
-        formFields,
+        formFields
       ),
-      rejectClose: false,
+      rejectClose: false
     } );
   }
 
@@ -158,7 +158,7 @@ export default class PromptFactory {
     const buttons = await this._getAbilityButtons( "jump-up" );
 
     const noAbilityButton = this.constructor.getCancelButtonConfig();
-    noAbilityButton.label = "ED.Dialogs.Buttons.noAbility" ;
+    noAbilityButton.label = "ED.Dialogs.Buttons.noAbility";
     buttons.push( noAbilityButton );
 
     return DialogClass.wait( {
@@ -167,11 +167,11 @@ export default class PromptFactory {
       uniqueId: String( ++globalThis._appId ),
       classes: [ "earthdawn4e", "jump-up-prompt jump-up flexcol" ],
       window: {
-        title: "ED.Dialogs.Title.jumpUp" ,
-        minimizable: false,
+        title: "ED.Dialogs.Title.jumpUp",
+        minimizable: false
       },
       modal: false,
-      buttons: buttons,
+      buttons: buttons
     } );
   }
 
@@ -179,7 +179,7 @@ export default class PromptFactory {
     const buttons = await this._getAbilityButtons( "knock-down" );
 
     const noAbilityButton = this.constructor.getCancelButtonConfig();
-    noAbilityButton.label = "ED.Dialogs.Buttons.noAbility" ;
+    noAbilityButton.label = "ED.Dialogs.Buttons.noAbility";
     buttons.push( noAbilityButton );
 
     return DialogClass.wait( {
@@ -188,23 +188,23 @@ export default class PromptFactory {
       uniqueId: String( ++globalThis._appId ),
       classes: [ "earthdawn4e", "knock-down-prompt knockdown flexcol" ],
       window: {
-        title: "ED.Dialogs.Title.knockDown" ,
-        minimizable: false,
+        title: "ED.Dialogs.Title.knockDown",
+        minimizable: false
       },
       modal: false,
-      buttons: buttons,
+      buttons: buttons
     } );
   }
 
   async _getAbilityButtons( edid ) {
     const abilities = this.document.getItemsByEdid( edid );
-    return  abilities.map( ( ability ) => {
+    return abilities.map( ( ability ) => {
       return {
         action: ability.id,
         label: ability.name,
         icon: "",
-        class: `button-${edid} ${ability.name}`,
-        default: false,
+        class: `button-${ edid } ${ ability.name }`,
+        default: false
       };
     } );
     // TODO: adapt CSS to overwrite class "form-footer" with flexcol

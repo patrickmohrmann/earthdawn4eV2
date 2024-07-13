@@ -22,7 +22,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {number} physicalarmor             physical armor modifications
  * @property {number} mysticarmor               mystic armor modifications
  * @property {number} knockDownStep             knock down step modifications
- * @property {number} recoveryTestsRecource             recovery tests modifications
+ * @property {number} recoveryTestsResource             recovery tests modifications
  * @property {number} deathThreshold            death threshold modifications
  * @property {number} unconsciousThreshold      unconcious threshold modifications
  * @property {number} woundThreshold            wound threshold modifications
@@ -193,13 +193,13 @@ export default class MaskData extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.Masks.knockDownStep"
             } ),
-            recoveryTestsRecource: new fields.NumberField( {
+            recoveryTestsResource: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
                 integer: true,
-                label: "ED.Item.Masks.recoveryTestsRecource"
+                label: "ED.Item.Masks.recoveryTestsResource"
             } ),
             deathThreshold: new fields.NumberField( {
                 required: true,

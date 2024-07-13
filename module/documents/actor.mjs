@@ -56,7 +56,7 @@ export default class ActorEd extends Actor {
     if ( !type ) return this.items.filter( edidFilter );
 
     const itemTypes = this.itemTypes;
-    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${type} is invalid!` );
+    if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${ type } is invalid!` );
 
     return itemTypes[type].filter( edidFilter );
   }
@@ -114,7 +114,7 @@ export default class ActorEd extends Actor {
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
       sourceActor: this.name,
       step: attributeStep,
-      attribute: `${game.i18n.localize( ED4E.attributes[attributeId].label )}`
+      attribute: `${ game.i18n.localize( ED4E.attributes[attributeId].label ) }`
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
@@ -124,9 +124,9 @@ export default class ActorEd extends Actor {
         target: undefined,
         step: step,
         devotionRequired: false,
-        chatFlavor: chatFlavor,
+        chatFlavor: chatFlavor
       },
-      this,
+      this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -163,9 +163,9 @@ export default class ActorEd extends Actor {
         target: difficultyFinal,
         step: abilityFinalStep,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor,
+        chatFlavor: chatFlavor
       },
-      this,
+      this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -173,7 +173,7 @@ export default class ActorEd extends Actor {
 
   /**
    * @summary                     Equipment rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
-   * @description                 Roll an Equipment. use {@link RollPrompt} for further input data.
+   * @description                 Roll an Equipment item. use {@link RollPrompt} for further input data.
    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
@@ -198,9 +198,9 @@ export default class ActorEd extends Actor {
         target: difficultyFinal,
         step: arbitraryStep,
         devotionRequired: false,
-        chatFlavor: chatFlavor,
+        chatFlavor: chatFlavor
       },
-      this,
+      this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -218,15 +218,15 @@ export default class ActorEd extends Actor {
     const totalDamage = this.system.characteristics.health.damage.total;
     const currentWounds = this.system.characteristics.health.wounds;
     const newWounds = currentWounds > 0 ? currentWounds - 1 : 0;
-    const recoveryTestPerDay = this.system.characteristics.recoveryTestsRecource.max;
+    const recoveryTestPerDay = this.system.characteristics.recoveryTestsResource.max;
     const woundsPath = "system.characteristics.health.wounds";
-    const recoveryTestAvailablePath = "system.characteristics.recoveryTestsRecource.value";
-    const recoveryStunAvailabiltyPath = "system.characteristics.recoveryTestsRecource.stunRecoveryAvailable";
+    const recoveryTestAvailablePath = "system.characteristics.recoveryTestsResource.value";
+    const recoveryStunAvailabiltyPath = "system.characteristics.recoveryTestsResource.stunRecoveryAvailable";
 
     switch ( recoveryMode ) {
 
       case "recovery":
-        if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
+        if ( this.system.characteristics.recoveryTestsResource.value < 1 ) {
           ui.notifications.warn( "Localize: Not enough recovery tests available." );
           return;
         } else {
@@ -240,22 +240,22 @@ export default class ActorEd extends Actor {
       case "nightRest":
         if ( totalDamage === 0 && currentWounds === 0 ) {
           this.update( {
-            [`${recoveryStunAvailabiltyPath}`]: true,
-            [`${recoveryTestAvailablePath}`]: recoveryTestPerDay
+            [`${ recoveryStunAvailabiltyPath }`]: true,
+            [`${ recoveryTestAvailablePath }`]: recoveryTestPerDay
           } );
           return;
         } else if ( totalDamage === 0 && currentWounds > 0 ) {
           this.update( {
-            [`${recoveryStunAvailabiltyPath}`]: true,
-            [`${recoveryTestAvailablePath}`]: recoveryTestPerDay - 1,
-            [`${woundsPath}`]: newWounds
+            [`${ recoveryStunAvailabiltyPath }`]: true,
+            [`${ recoveryTestAvailablePath }`]: recoveryTestPerDay - 1,
+            [`${ woundsPath }`]: newWounds
           } );
           return;
         }
         break;
 
       case "recoverStun":
-        if ( this.system.characteristics.recoveryTestsRecource.value < 1 ) {
+        if ( this.system.characteristics.recoveryTestsResource.value < 1 ) {
           ui.notifications.warn( "Localize: Not enough recovery tests available." );
           return;
         } else {
@@ -286,9 +286,9 @@ export default class ActorEd extends Actor {
         target: undefined,
         step: recoveryFinalStep,
         devotionRequired: false,
-        chatFlavor: chatFlavor,
+        chatFlavor: chatFlavor
       },
-      this,
+      this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
@@ -320,7 +320,7 @@ export default class ActorEd extends Actor {
     const finalAmount = amount - ( ignoreArmor || !armorType ? 0 : armor[armorType].value );
     const newDamage = health.damage[damageType] + finalAmount;
 
-    const updates = { [`system.characteristics.health.damage.${damageType}`]: newDamage };
+    const updates = { [`system.characteristics.health.damage.${ damageType }`]: newDamage };
 
     if ( finalAmount > health.woundThreshold ) {
       switch ( damageType ) {
@@ -389,9 +389,9 @@ export default class ActorEd extends Actor {
         target: difficultyFinal,
         step: knockdownStepFinal,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor,
+        chatFlavor: chatFlavor
       },
-      this,
+      this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
 
@@ -432,9 +432,9 @@ export default class ActorEd extends Actor {
         target: difficulty,
         step: jumpUpStepFinal,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor,
+        chatFlavor: chatFlavor
       },
-      this,
+      this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
 
@@ -452,7 +452,7 @@ export default class ActorEd extends Actor {
    */
   #useResource( resourceType, amount ) {
     const available = this.system[resourceType].value;
-    this.update( { [`system.${resourceType}.value`]: ( available - amount ) } );
+    this.update( { [`system.${ resourceType }.value`]: ( available - amount ) } );
     return amount <= available;
   }
 
@@ -464,7 +464,6 @@ export default class ActorEd extends Actor {
    *     <li>recover from damage</li>
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
-   * @param {string} recoveryMode type of recovery
    */
   #processRoll( roll ) {
     if ( !roll ) {
@@ -485,7 +484,7 @@ export default class ActorEd extends Actor {
     const rollTypeProcessors = {
       "recovery": () => this.#processRecoveryResult( roll ),
       "knockdown": () => this.#processKnockdownResult( roll ),
-      "jumpUp": () => this.#processJumpUpResult( roll ),
+      "jumpUp": () => this.#processJumpUpResult( roll )
     };
 
     const processRollType = rollTypeProcessors[roll.options.rollType];
@@ -513,7 +512,7 @@ export default class ActorEd extends Actor {
       return;
     } else {
       if ( roll.isSuccess === false ) {
-        this.update( { "system.condition.knockedDown": true, } );
+        this.update( { "system.condition.knockedDown": true } );
       }
     }
     roll.toMessage();
@@ -522,8 +521,7 @@ export default class ActorEd extends Actor {
   /**
    * Process the result of a recovery roll. This will reduce the damage taken by the amount rolled.
    * @param {EdRoll} roll The roll to process.
-   * @param {string} recoveryMode type of the recovery
-   * @returns {Promise<void>}
+   * @returns {Promise<ChatMessage | object>} The created ChatMessage or the data for it.
    */
   async #processRecoveryResult( roll ) {
     await roll.evaluate();
@@ -533,7 +531,7 @@ export default class ActorEd extends Actor {
     }
 
     const { characteristics } = this.system;
-    const { health, recoveryTestsRecource } = characteristics;
+    const { health, recoveryTestsResource } = characteristics;
     const { damage, wounds } = health;
     const { stun, standard, total } = damage;
 
@@ -543,15 +541,15 @@ export default class ActorEd extends Actor {
     const newPhysicalDamage = Math.max( standard - healingRate, 0 );
     const newStunDamage = Math.max( stun - healingRate, 0 );
 
-    const recoveryTestPerDay = recoveryTestsRecource.max;
-    const recoveryTestsCurrent = recoveryTestsRecource.value;
+    const recoveryTestPerDay = recoveryTestsResource.max;
+    const recoveryTestsCurrent = recoveryTestsResource.value;
 
     const updatePaths = {
       wounds: "system.characteristics.health.wounds",
       standardDamage: "system.characteristics.health.damage.standard",
       stunDamage: "system.characteristics.health.damage.stun",
-      recoveryTestAvailable: "system.characteristics.recoveryTestsRecource.value",
-      stunRecoveryAvailable: "system.characteristics.recoveryTestsRecource.stunRecoveryAvailable",
+      recoveryTestAvailable: "system.characteristics.recoveryTestsResource.value",
+      stunRecoveryAvailable: "system.characteristics.recoveryTestsResource.stunRecoveryAvailable"
     };
 
     const updateData = {};
@@ -584,8 +582,9 @@ export default class ActorEd extends Actor {
     }
 
     this.update( updateData );
-    roll.toMessage();
+    return roll.toMessage();
   }
+
   _applyBaseEffects( baseCharacteristics ) {
     let overrides = {};
     // Organize non-disabled effects by their application priority
@@ -605,7 +604,7 @@ export default class ActorEd extends Actor {
           c.effect = e;
           c.priority = c.priority ?? c.mode * 10;
           return c;
-        } ),
+        } )
       );
     }, [] );
 
@@ -625,7 +624,7 @@ export default class ActorEd extends Actor {
     let enrichment = {};
     enrichment["system.description.value"] = await TextEditor.enrichHTML( this.system.description.value, {
       async: true,
-      secrets: this.isOwner,
+      secrets: this.isOwner
     } );
     return futils.expandObject( enrichment );
   }
@@ -634,7 +633,7 @@ export default class ActorEd extends Actor {
     for ( const item of this.items ) {
       item.system.description.value = futils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
           async: true,
-          secrets: this.isOwner,
+          secrets: this.isOwner
         } )
       );
     }
@@ -646,7 +645,7 @@ export default class ActorEd extends Actor {
     const transaction = new TransactionModel( transactionData );
 
     return this.update( {
-      [`system.lp.${type}`]: oldTransactions.concat( [ transaction ] )
+      [`system.lp.${ type }`]: oldTransactions.concat( [ transaction ] )
     } );
   }
 
@@ -707,18 +706,21 @@ export default class ActorEd extends Actor {
       case "weapon":
 
         switch ( nextStatus ) {
-          case "twoHands":
+          case "twoHands": {
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
             addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
             if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
+          }
           case "mainHand":
-          case "offHand":
+          case "offHand": {
             addUnequipItemUpdate( "weapon", [ nextStatus, "twoHands" ] );
             break;
-          case "tail":
+          }
+          case "tail": {
             addUnequipItemUpdate( "weapon", [ "tail" ] );
             break;
+          }
         }
 
         updates.push( originalItemUpdate );
@@ -753,7 +755,7 @@ export default class ActorEd extends Actor {
    * Retrieves a specific prompt based on the provided prompt type.
    * This method delegates the call to the `_promptFactory` instance's `getPrompt` method,
    * effectively acting as a proxy to access various prompts defined within the factory.
-   * @param {( 'recovery' | 'takeDamage' | 'jumpUp' | 'knockDown' )} promptType - The type of prompt to retrieve.
+   * @param {( "recovery" | "takeDamage" | "jumpUp" | "knockDown" )} promptType - The type of prompt to retrieve.
    * @returns {Promise<any>} - A promise that resolves to the specific prompt instance or logic
    * associated with the given `promptType`. The exact return type depends on promptType.
    */

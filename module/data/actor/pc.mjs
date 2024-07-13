@@ -128,7 +128,7 @@ export default class PcData extends NamegiverTemplate.mixin(
 
     /**
      *
-     * @return {Promise<ActorEd|void>}
+     * @returns {Promise<ActorEd|void>}
      */
     static async characterGeneration () {
         const generation = await CharacterGenerationPrompt.waitPrompt();
@@ -136,7 +136,7 @@ export default class PcData extends NamegiverTemplate.mixin(
 
         const attributeData = mapObject(
           await generation.getFinalAttributeValues(),
-          ( attribute, value ) => [attribute, {initialValue: value}]
+          ( attribute, value ) => [ attribute, {initialValue: value} ]
         );
         const additionalKarma = generation.availableAttributePoints;
 
@@ -275,7 +275,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      * @private
      */
     #prepareBaseRecoveryTestsRecource() {
-        this.characteristics.recoveryTestsRecource.max = Math.ceil( this.attributes.tou.value / 6 );
+        this.characteristics.recoveryTestsResource.max = Math.ceil( this.attributes.tou.value / 6 );
     }
 
     /**
@@ -311,7 +311,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      * @private
      */
     #prepareDerivedArmor() {
-        const armorItems = this.parent.items.filter( item => item.type === 'armor' && item.system.itemStatus === "equipped" );
+        const armorItems = this.parent.items.filter( item => item.type === "armor" && item.system.itemStatus === "equipped" );
         this.characteristics.armor.physical.value = this.characteristics.armor.physical.baseValue;
         this.characteristics.armor.mystical.value = this.characteristics.armor.mystical.baseValue;
         if ( armorItems ) {
@@ -342,11 +342,11 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedDefenses() {
         const shieldItems = this.parent.items.filter(
-          item => item.type === 'shield' && item.system.itemStatus === "equipped"
+          item => item.type === "shield" && item.system.itemStatus === "equipped"
         );
         // Calculate sum of defense bonuses, defaults to zero if no shields equipped
         const physicalBonus = sumProperty( shieldItems, "system.defenseBonus.physical" );
-        const mysticalBonus = sumProperty( shieldItems, 'system.defenseBonus.mystical' );
+        const mysticalBonus = sumProperty( shieldItems, "system.defenseBonus.mystical" );
 
         this.characteristics.defenses.physical.value = this.characteristics.defenses.physical.baseValue + physicalBonus;
         this.characteristics.defenses.mystical.value = this.characteristics.defenses.mystical.baseValue + mysticalBonus;
@@ -359,7 +359,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedHealth() {
         const durabilityItems = this.parent.items.filter(
-          item => ["discipline", "devotion"].includes( item.type ) && item.system.durability > 0
+          item => [ "discipline", "devotion" ].includes( item.type ) && item.system.durability > 0
         );
         if ( !durabilityItems?.length ) {
             console.log(
@@ -401,7 +401,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedInitiative() {
         const armors = this.parent.items.filter( item =>
-          ["armor", "shield"].includes( item.type ) && item.system.itemStatus === "equipped"
+          [ "armor", "shield" ].includes( item.type ) && item.system.itemStatus === "equipped"
         );
         this.initiative -= sum( armors.map( item => item.system.initiativePenalty ) );
     }
@@ -415,8 +415,8 @@ export default class PcData extends NamegiverTemplate.mixin(
     #prepareDerivedEncumbrance() {
         // relevant items are those with a weight property and are either equipped or carried
         const relevantItems = this.parent.items.filter( item =>
-          item.system.hasOwnProperty( 'weight' )
-          && ( item.system.itemStatus === "equipped" || item.system.itemStatus === "carried")
+          item.system.hasOwnProperty( "weight" )
+          && ( item.system.itemStatus === "equipped" || item.system.itemStatus === "carried" )
         );
 
         const carriedWeight = relevantItems.reduce( ( accumulator, currentItem ) => {
@@ -427,7 +427,7 @@ export default class PcData extends NamegiverTemplate.mixin(
                   ( currentItem.system.amount ?? 1 )
                   / ( currentItem.system.bundleSize > 1 ? currentItem.system.bundleSize : 1 )
                 )
-              )
+              );
         }, 0 );
 
         this.encumbrance.value = carriedWeight;
@@ -435,13 +435,13 @@ export default class PcData extends NamegiverTemplate.mixin(
         // calculate encumbrance status
         const encumbrancePercentage = carriedWeight / this.encumbrance.max;
         if ( encumbrancePercentage <= 1.0 ) {
-            this.encumbrance.status = 'notEncumbered';
+            this.encumbrance.status = "notEncumbered";
         } else if ( encumbrancePercentage < 1.5 ) {
-            this.encumbrance.status = 'light';
+            this.encumbrance.status = "light";
         } else if ( encumbrancePercentage <= 2.0 ) {
-            this.encumbrance.status = 'heavy';
+            this.encumbrance.status = "heavy";
         } else if ( encumbrancePercentage > 2.0 ) {
-            this.encumbrance.status = 'tooHeavy';
+            this.encumbrance.status = "tooHeavy";
         }
     }
 
@@ -533,7 +533,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      * @returns {Item|undefined} The namegiver item, if available, `undefined` otherwise.
      */
     #getNamegiver() {
-        return this.#getItemsByType( 'namegiver' )[0];
+        return this.#getItemsByType( "namegiver" )[0];
     }
 
     /* -------------------------------------------- */
