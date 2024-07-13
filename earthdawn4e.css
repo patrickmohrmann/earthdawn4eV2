@@ -348,6 +348,13 @@ p {
   height: 35px;
   align-self: flex-end;
 }
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__earned .add-earning-icon {
+  top: 5px;
+  /* Adjust as needed */
+  right: 5px;
+  /* Adjust as needed */
+  cursor: pointer;
+}
 .app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .legend-point__history--spent-buttons button {
   height: 35px;
   align-self: flex-end;

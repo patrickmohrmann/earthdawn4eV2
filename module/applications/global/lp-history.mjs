@@ -1,5 +1,7 @@
 
+import LpEarningTransactionData from "../../data/advancement/lp-earning-transaction.mjs";
 import LpTrackingData from "../../data/advancement/lp-tracking.mjs";
+import LpTransactionData from "../../data/advancement/lp-transaction.mjs";
 
 /**
  * 
@@ -81,7 +83,41 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
     $( this.form ).on( 'click', '.toggle-details', this._toggleDetails.bind( this ) );
 
+
+    $(this.form.querySelector('.add-earning-icon')).on('click', () => {
+      console.log("Binding");
+    
+      // Assuming `amount`, `description` are to be fetched or are predefined
+      const amount = 0; // Placeholder value
+      const description = ''; // Placeholder value
+    
+      // Calculate lpBefore and lpAfter based on current lp
+      const lpBefore = this.actor.system.lp.current;
+      const lpAfter = lpBefore + amount;
+    
+      // Create a new LpTransactionData instance
+      const transaction = new LpEarningTransactionData({
+        amount,
+        description,
+        lpBefore,
+        lpAfter,
+      });
+    
+      // Ensure the transactions array exists
+      if (!this.actor.system.lp.transactions) {
+        this.actor.system.lp.transactions = []; // Initialize if it doesn't exist
+      }
+    
+      // Add the new transaction
+      this.actor.addLpTransaction("earnings", transaction);
+      console.log("ACTOR LP Transactions: ", this.actor.system.lp.transactions);
+      this.render(true);
+      
+      console.log("ACTOR LP ", this.actor.system.lp.earnings);
+    });
+
   }
+  
   _toggleDetails(event) {
     event.preventDefault();
   
