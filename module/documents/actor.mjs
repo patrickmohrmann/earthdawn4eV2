@@ -374,7 +374,7 @@ export default class ActorEd extends Actor {
     }
 
     const difficultyFinal = {
-      base: damageTaken > 0 ? damageTaken - characteristics.health.woundThreshold : 0
+      base: Math.max( damageTaken - characteristics.health.woundThreshold, 0 ),
     };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.knockdownTest", {
       sourceActor: this.name,
@@ -382,7 +382,10 @@ export default class ActorEd extends Actor {
     } );
 
     const knockdownStepFinal = {
-      base: knockdownStep + this.system.singleBonuses.knockdownEffects.value
+      base: knockdownStep,
+      modifiers: {
+        "localize: Global Knockdown Bonus": this.system.singleBonuses.knockdownEffects.value,
+      }
     };
     const edRollOptions = EdRollOptions.fromActor(
       {
