@@ -24,10 +24,10 @@ export default class PromptFactory {
    */
   static getCancelButtonConfig( isDefaultButton = true ) {
     return {
-      action: 'close', // The action to be taken when the button is clicked, here it's to close the dialog.
-      label: 'ED.Dialogs.Buttons.cancel', // The text label for the button, localized.
-      icon: 'fa-light fa-times', // The icon class from FontAwesome, here using a light variant of the 'times' icon.
-      class: 'cancel default button-cancel', // Additional CSS classes for styling the button.
+      action: "close", // The action to be taken when the button is clicked, here it's to close the dialog.
+      label: "ED.Dialogs.Buttons.cancel", // The text label for the button, localized.
+      icon: "fa-light fa-times", // The icon class from FontAwesome, here using a light variant of the 'times' icon.
+      class: "cancel default button-cancel", // Additional CSS classes for styling the button.
       default: isDefaultButton, // Marks this button as the default action, affecting its appearance and behavior.
     };
   }
@@ -157,14 +157,14 @@ export default class PromptFactory {
   }
 
   async _jumpUpPrompt() {
-    const jumpUpAbilities = this.document.getItemsByEdid( 'jump-up' );
+    const jumpUpAbilities = this.document.getItemsByEdid( "jump-up" );
     if ( futils.isEmpty( jumpUpAbilities ) ) return;
 
     const buttons = jumpUpAbilities.map( ( ability ) => {
       return {
         action: ability.id,
         label: ability.name,
-        icon: '',
+        icon: "",
         class: `button-jump-up ${ability.name}`,
         default: false,
         callback: ( _ ) => {
@@ -173,13 +173,13 @@ export default class PromptFactory {
       };
     } );
     const noAbilityButton = this.constructor.getCancelButtonConfig();
-    noAbilityButton.label = 'ED.Dialogs.Buttons.noAbility' ;
+    noAbilityButton.label = "ED.Dialogs.Buttons.noAbility" ;
     buttons.push( noAbilityButton );
 
     // TODO: adapt CSS to overwrite class "form-footer" with flexcol
     return DialogClass.wait( {
       rejectClose: false,
-      id: 'jump-up-prompt',
+      id: "jump-up-prompt",
       uniqueId: String( ++globalThis._appId ),
       classes: [ "earthdawn4e", "jump-up-prompt jump-up flexcol" ],
       window: {

@@ -334,7 +334,7 @@
     "prefer-rest-params": "off",
     "prefer-spread": "off",
     "prefer-template": "off",
-    "@stylistic/quote": ["error", "double"],
+    "@stylistic/quotes": ["error", "double"],
     "radix": "error",
     "require-atomic-updates": "off",
     "require-await": "off",
