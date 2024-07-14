@@ -61,11 +61,11 @@
             </label>
           </li>
         {{/each}}
-      {{#each object.abilities.option}}
+      {{#each object.abilities.optional}}
           <li data-ability-uuid="{{@key}}" data-level="{{this}}">
             {{nameFromUuid @key}}
             <label>
-              {{!--numberInput this name=(concat "abilities.option[" @key "]") step=1 min=0 max=@root.maxAssignableRanks--}}
+              {{!--numberInput this name=(concat "abilities.optional[" @key "]") step=1 min=0 max=@root.maxAssignableRanks--}}
             </label>
           </li>
         {{/each}}
@@ -90,21 +90,21 @@
         <tr class="flexrow">
           <td class=" ability-name" data-ability-uuid="{{this}}">
             <label for="char-gen-ability-option-radio">
-              <input type="radio" id="char-gen-ability-option-radio" name="abilityOption" value="{{this}}" {{checked (ed-hasOwnProperty @root.object.abilities.option this)}}>
+              <input type="radio" id="char-gen-ability-option-radio" name="abilityOption" value="{{this}}" {{checked (ed-hasOwnProperty @root.object.abilities.optional this)}}>
               {{nameFromUuid this}}
             </label>
           </td>
           <td class="flexrow rank-change">
-            {{#if (ed-hasOwnProperty @root.object.abilities.option this)}}
+            {{#if (ed-hasOwnProperty @root.object.abilities.optional this)}}
               <span class="decrease-value-button rank-decrease rank-change-icon" title="{{localize 'X.Decrease Rank Value'}}"
-                    data-change-type="decrease" data-ability-uuid="{{this}}" data-ability-type="option">
+                    data-change-type="decrease" data-ability-uuid="{{this}}" data-ability-type="optional">
               <i class="fa-light fa-circle-minus"></i>
             </span>
               <span class="rank-change-value">
-                {{lookup @root.object.abilities.option this}}
+                {{lookup @root.object.abilities.optional this}}
               </span>
               <span class="increase-value-button rank-increase rank-change-icon" title="{{localize 'X.Increase Rank Value'}}"
-                    data-change-type="increase" data-ability-uuid="{{this}}" data-ability-type="option">
+                    data-change-type="increase" data-ability-uuid="{{this}}" data-ability-type="optional">
               <i class="fa-light fa-circle-plus"></i>
             </span>
             {{/if}}

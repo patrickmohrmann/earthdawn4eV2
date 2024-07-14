@@ -36,7 +36,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
      */
     get status() {
         let status = 0;
-        if ( this.total < 10000 ) {
+        if ( this.total <= 10000 ) {
             status = 1
         } else if ( this.total > 10000 && this.total <= 100000 ) {
             status = 2

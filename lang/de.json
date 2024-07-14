@@ -139,6 +139,7 @@
                 "effectsTemporary":                                 "Temporäre Effekte",  
                 "encumbrance":                                      "Belastung",
                 "equipment":                                        "Ausrüstung",
+                "equippedStatus":                                   "Ausgerüstet",
                 "healthRating":                                     "Gesundheit",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Malus",
@@ -200,11 +201,103 @@
                 "wizard":                                           "Magier"
             },
             "Tooltips": {
+                "carried":                                          "Getragen",
+                "equipped":                                         "Ausgerüstet",
+                "equippedArmor":                                    "Rüstung Ausgerüstet",
+                "equippedShield":                                   "Schild Ausgerüstet",
                 "karmaAlways":                                      "Benutze immer Karma",
                 "karmaRitualTooltip":                               "Karmaritual",
                 "loaded":                                           "Belastet",
                 "loadedHeavy":                                      "Stark Belastet",
-                "loadedOver":                                       "Überlasted"
+                "loadedOver":                                       "Überlasted",
+                "mainHand":                                         "Haupthand",
+                "notEquipped":                                      "Nicht Ausgerüstet",
+                "offHand":                                          "Nebenhand",
+                "tail":                                             "Schwanz",
+                "twoHanded":                                        "Zweihändig"
+            }
+        },
+        "Chat": {
+            "Button": {
+                "applyDamage":                                      "Schaden zufügen",
+                "applyDamageTitle":                                 "Füge den Schaden den ausgewählten Zielen zu!",
+                "applyEffect":                                      "Effekt zufügen",
+                "applyEffectTitle":                                 "Füge den Effect den ausgewählten Zielen zu!",
+                "rollEffect":                                       "Effektwurf",
+                "rollEffectTitle":                                  "Würfel den Effect",
+                "rollDamage":                                       "Effektwurf",
+                "rollDamageTitle":                                  "Würfel den Effect",
+                "takeDamage":                                       "Schaden nehmen",
+                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter"
+            },
+            "Flavor": {
+                "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
+                "rollEquipmentSingleTarget":                        "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen {singleTarget}",
+                "rollEquipmentMultipleTargets":                     "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen mehrere Ziele",
+                "rollAbilityWithoutTarget":                         "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
+                "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
+            },
+            "Header": {
+                "actionTest":                                       "Aktions Test",
+                "arbitraryTest":                                    "Willkürlicher Test",
+                "effectTest":                                       "Effect Test"
+            }
+        },
+        "Config": {
+            "CombatTypes": {
+                "aerial":                                           "Luftkampf",
+                "close":                                            "Nahkampf",
+                "melee":                                            "Bewaffneter Nahkampf",
+                "mounted":                                          "Berittener Kampf",
+                "projectile":                                       "Projektil Fernkampf",
+                "ranged":                                           "Fernkampf",
+                "throwing":                                         "Wurfwaffen Fernkampf",
+                "unarmed":                                          "Unbewaffneter Nahkampf"
+            },
+            "groupDifficulty": {
+                "highestOfGroup":                                   "Höchster der Gruppe",  
+                "hightestX":                                        "Höchster + Ziele",
+                "lowestOfGroup":                                    "Niedrigster der Gruppe",
+                "lowestX":                                          "Niedrigster + Ziele"
+            },
+            "ItemStatus": {
+                "owned":                                            "Besitz",
+                "carried":                                          "Getragen",
+                "equipped":                                         "Ausgerüstet",
+                "mainHand":                                         "Haupthand",
+                "offHand":                                          "Nebenhand",
+                "twoHands":                                         "Beidhändig",
+                "tail":                                             "Schwanz"
+            },
+            "combatTypes": {
+                "Aerial":                                           "Luftkampf",
+                "Close":                                            "Nahkampf",
+                "melee":                                            "Bewaffneter Nahkampf",
+                "Mounted":                                          "Berittener Kampf",
+                "projectile":                                       "Projektil Fernkampf",
+                "ranged":                                           "Fernkampf",
+                "throwing":                                         "Wurfwaffen Fernkampf",
+                "unarmed":                                          "Waffenloser Nahkampf"
+            },
+            "rollTypes": {
+                "ability":                                          "Fähigkeit",
+                "attack":                                           "Angriff",
+                "attribute":                                        "Attribute",               
+                "effect":                                           "Effekt",
+                "halfmagic":                                        "Halb Magie",
+                "initiative":                                       "Initiative",
+                "recovery":                                         "Erholung",
+                "spellcasting":                                     "Spruchzauberei",
+                "threadWeaving":                                    "Fadenweben"
+            },
+            "targetDifficulty": {
+                "mystical":                                         "Mystisch",
+                "physical":                                         "Körperlich",
+                "social":                                           "Sozial"
             }
         },
         "Data": {
@@ -231,7 +324,56 @@
                 "Hints": {}
             }
         },
+        "Dialogs": {
+            "AssignLp": {
+                "legendPoints":                                     "Legendenpunkte",
+                "description":                                      "Beschreibung"
+            },
+            "Errors": {
+                "noLp":                                            "Keine Legendenpunkte angegeben!"
+            },
+            "Header": {
+                "activeUser":                                       "Aktive Spieler",
+                "inactiveUser":                                     "Inaktive Spieler",
+                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
+            },
+            "Navigator":{
+                "baseInput":                                        "Standard Optionen",
+                "options":                                          "Sonstige Optionen"
+            }, 
+            "Placeholder": {
+                "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
+            "Title": {
+                "assignLp":                                         "Legendenpunkte zuweisen",
+                "rollPrompt":                                       "Würfelübersicht"
+            }
+        },
         "Item": {
+            "Ability": {
+                "damage":                                           "Schaden",
+                "difficulty": {
+                    "fixed":                                        "Fester Schwierigkeitsgrad",
+                    "groupDifficulty":                              "Schwierigkeitsanpassung für Gruppen",
+                    "targetDifficulty":                             "Schwierigkeitstyp"
+                },
+                "rollType":                                         "Aktionstyp",
+                "substitute":                                       "Ersetzt Stärke",
+                "relatedRollType":                                  "gilt für Aktionstyp"
+
+            },
+            "Header": {
+                "details":                                          "Details",
+                "navigator":                                        "Navigator"                                       
+            },
+            "Namegiver":{
+                "WeaponSize": {
+                    "OneHanded.min":                                "Minimale Einhandwaffengröße",
+                    "OneHanded.max":                                "Maximale Einhandwaffengröße",
+                    "TwoHanded.min":                                "Minimale Zweihandwaffengröße",
+                    "TwoHanded.max":                                "Maximale Zweihandwaffengröße"
+                }
+            },
             "Navigator": {
                 "advancement":                                      "Fortschritt",
                 "details":                                          "Details",
@@ -249,19 +391,69 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Rolls": {
+            "against":                                              "gegen",
+            "baseValue":                                            "Basis Stufe",
+            "devotion":                                             "Weihekraft",                
+            "formulaDevotion":                                      "{amount}x Weihe (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaStep":                                          "Stufe {step}",
+            "karma":                                                "Karma",
+            "Labels": {
+                "arbitraryTestRoll":                                "Willkürlicher Test",
+                "actionTestRoll":                                   "Aktionsprobe",
+                "effectTestRoll":                                   "Effektprobe",
+                "abilityRoll":                                      "Fähigkeitsprobe",
+                "arbitraryRoll":                                    "Willkürlicher Test",
+                "attackRoll":                                       "Angriffstprobe",
+                "attributeRoll":                                    "Attributsprobe",
+                "damageRoll":                                       "Schadensprobe",
+                "effectRoll":                                       "Effektprobe",
+                "halfmagicRoll":                                    "Halbmagieprobe",
+                "initiativeRoll":                                   "Initiativeprobe",
+                "recoveryRoll":                                     "Erholungsprobe",
+                "spellcastingRoll":                                 "Spruchzaubereiprobe",
+                "threadWeavingRoll":                                "Fadenwebenprobe"
+            },
+            
+            "rolls":                                                "würfelt",
+            "rollResult":                                           "Würfelergebnis",
+            "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
+            "step":                                                 "Stufe",     
+            "stepModifiers":                                        "Stufen Modifikatoren",
+            "successesAchieved":                                    "Gesamt Erfolge",
+            "targetDifficulty":                                     "Schwierigkeit",
+            "targetModifiers":                                      "Ziel Modifikatoren"
+        },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
+            },
+            "Error": {}
+        },
         "Settings": {
-            "talentsSplit":                                         "Talente nach Kategorie gruppieren",
-            "talentsSplitHint":                                     "Talente Gruppieren",
             "Edid": {
-                "languageRW": "ED-ID für Lesen/Schreiben",
-                "languageRWHint": "Identifiziert die Fähigkeit Lesen/Schreiben",
-                "languageSpeak": "ED-ID für Fremdsprachen",
-                "languageSpeakHint": "Identifiziert die Fähigkeit Fremdsprachen",
-                "spellCasting": "ED-ID für Spruchzauberei",
-                "spellCastingHint": "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
-                "threadWeaving": "ED-ID für Fadenweben",
-                "threadWeavingHint": "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+                "knockDown":                                        "ED-ID für Niederschlag",
+                "knockDownHint":                                    "Identifiziert die Fähigkeit Niederschlag zu verwenden",
+                "languageRW":                                       "ED-ID für Lesen/Schreiben",
+                "languageRWHint":                                   "Identifiziert die Fähigkeit Lesen/Schreiben",
+                "languageSpeak":                                    "ED-ID für Fremdsprachen",
+                "languageSpeakHint":                                "Identifiziert die Fähigkeit Fremdsprachen",
+                "spellCasting":                                     "ED-ID für Spruchzauberei",
+                "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
+                "threadWeaving":                                    "ED-ID für Fadenweben",
+                "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+            },
+            "SpecificSettingOptions":{
+                "changelog":                                        "Änderungsprotokoll",
+                "help":                                             "Hilfe",
+                "troubleshooting":                                  "Fehlermeldung"
+            },
+            "talentsSplit":                                         "Talente nach Kategorie gruppieren",
+            "talentsSplitHint":                                     "Talente Gruppieren"
             }
         }
     }
-}
+

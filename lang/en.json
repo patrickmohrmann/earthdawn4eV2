@@ -139,7 +139,8 @@
                 "effectsPermanent":                                 "Permanent Effects",
                 "effectsTemporary":                                 "Temporary Effects",  
                 "encumbrance":                                      "Encumbrance",
-                "equipment":                                        "Equipment",                                               
+                "equipment":                                        "Equipment",   
+                "equippedStatus":                                   "Equipped",                                            
                 "healthRating":                                     "Health Rating",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Penalty",
@@ -201,11 +202,103 @@
                 "wizard":                                           "Wizard"
             },
             "Tooltips": {
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "equippedArmor":                                    "Equipped Armor",
+                "equippedShield":                                   "Equipped Shield",
                 "karmaAlways":                                      "Use Karma always",
                 "karmaRitualTooltip":                               "Karma Ritual",
                 "loaded":                                           "Loaded",
                 "loadedHeavy":                                      "Heavyly Loaded",
-                "loadedOver":                                       "Overloaded"
+                "loadedOver":                                       "Overloaded",
+                "mainHand":                                         "Main Hand",
+                "notEquipped":                                      "Not equipped",
+                "offHand":                                          "Off Hand",
+                "tail":                                             "Tail",
+                "twoHanded":                                        "Two Handed"
+            }
+        },
+        "Chat": {
+            "Button": {
+                "applyDamage":                                      "Assign Damage",
+                "applyDamageTitle":                                 "Assign the Damage to the Targets!",
+                "applyEffect":                                      "Assign Effect",
+                "applyEffectTitle":                                 "Assign the Effect to the Targets!",
+                "rollEffect":                                       "Roll Effect",
+                "rollEffectTitle":                                  "Roll the Effect",
+                "rollDamage":                                       "Roll Damage",
+                "rollDamageTitle":                                  "Roll for Damage",
+                "takeDamage":                                       "Take Damage",
+                "takeDamageTitle":                                  "Take the damage for your Actor"
+            },
+            "Flavor": {
+                "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
+                "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
+                "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
+                "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
+                "rollAttackWithoutTarget":                          "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against many Targets"
+            },
+            "Header": {
+                "actionTest":                                       "Action Test",
+                "arbitraryTest":                                    "arbitrary Test",
+                "effectTest":                                       "Effect Test"
+            }
+        },
+        "Config": {
+            "CombatTypes": {
+                "aerial":                                           "Aerial Combat",
+                "close":                                            "Close Combat",
+                "melee":                                            "Melee Combat",
+                "mounted":                                          "Mounted Combat",
+                "projectile":                                       "Projectil Combat",
+                "ranged":                                           "Ranged Combat",
+                "throwing":                                         "Throwing Combat",
+                "unarmed":                                          "unarmed Combat"
+            },
+            "groupDifficulty": {
+                "highestOfGroup":                                   "Highest of Group",
+                "hightestX":                                        "Highest + Targets",
+                "lowestOfGroup":                                    "Lowest of Group",
+                "lowestX":                                          "Lowest + Targets"
+            },
+            "ItemStatus": {
+                "owned":                                            "Owned",
+                "carried":                                          "Carried",
+                "equipped":                                         "Equipped",
+                "mainHand":                                         "Main Hand",
+                "offHand":                                          "Off Hand",
+                "twoHands":                                         "Two Hands",
+                "tail":                                             "Tail"
+            },
+            "combatTypes": {
+                "Aerial":                                     "Aerial Combat",
+                "Close":                                      "Close Combat",
+                "melee":                                      "Melee Combat",
+                "Mounted":                                    "Mounted Combat",
+                "projectile":                                 "Projectile Combat",
+                "ranged":                                     "Ranged Combat",
+                "throwing":                                   "Throwing Combat",
+                "unarmed":                                    "Unarmed Combat"
+            },
+            "rollTypes": {
+                "ability":                                          "Ability",
+                "attack":                                           "Attack",
+                "attribute":                                        "Attribute",
+                "effect":                                           "Effect",
+                "halfmagic":                                        "Half Magic",
+                "initiative":                                       "Initiative",
+                "recovery":                                         "Recovery",
+                "spellcasting":                                     "Spell Casting",
+                "threadWeaving":                                    "Thread Weaving"
+            },
+            "targetDifficulty": {
+                "mystical":                                         "Mystical",
+                "physical":                                         "Physical",
+                "social":                                           "Social"
             }
         },
         "Data": {
@@ -221,10 +314,10 @@
             },
             "Item": {
                 "Labels": {
-                    "edid": "ED-ID"
+                    "edid":                                         "ED-ID"
                 },
                 "Hints": {
-                    "edid": "An ID to identify an item without considering its name"
+                    "edid":                                         "An ID to identify an item without considering its name"
                 }
             },
             "Journal": {
@@ -232,10 +325,54 @@
                 "Hints": {}
             }
         },
+        "Dialogs": {
+            "AssignLp": {
+                "legendPoints":                                     "Legend Points",
+                "description":                                      "Description"
+            },
+            "Errors": {
+                "noLp":                                            "No Legend Points entered!"
+            },
+            "Header": {
+                "activeUser":                                       "Active User",
+                "inactiveUser":                                     "Inactive User",
+                "actorsNoUserConfigured":                           "Not Configured, Owned Actors"
+            },
+            "Navigator":{
+                "baseInput":                                        "Base Options",
+                "options":                                          "Other Options"
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Enter your description here"
+            }, 
+            "Title": {
+                "assignLp":                                         "Assign Legend Points",
+                "rollPrompt":                                       "Roll Options"
+            }
+        },
         "Item": {
+            "Ability": {
+                "damage":                                           "Damage",
+                "difficulty": {
+                    "fixed":                                        "Fixed Difficulty",
+                    "groupDifficulty":                              "Difficult Adjusted by Groups",
+                    "targetDifficulty":                             "Difficulty Type"
+                },
+                "rollType":                                         "Roll Type",
+                "substitute":                                       "Replaces Strength",
+                "relatedRollType":                                  "counts for Roll Type"
+            },
             "Header": {
                 "navigator":                                        "Navigator"                                       
 
+            },
+            "Namegiver":{
+                "WeaponSize": {
+                    "OneHanded.min":                                "Minimal One hand Weapon Size",
+                    "OneHanded.max":                                "Maximum One hand Weapon Size",
+                    "TwoHanded.min":                                "Minimal two hand Weapon Size",
+                    "TwoHanded.max":                                "Maximum two hand Weapon Size"
+                }
             },
             "Navigator": {
                 "advancement":                                      "advancement",
@@ -254,20 +391,68 @@
             "tskrang":                                              "T'skrang",
             "windling":                                             "Windling"
         },
+        "Rolls": {
+            "against":                                              "against",
+            "baseValue":                                            "Base Step",
+            "devotion":                                             "Devotion",
+            "formulaDevotion":                                      "{amount}x Devotion (St {step})",
+            "formulaExtraStep":                                     "{label} (St {step})",
+            "formulaKarma":                                         "{amount}x Karma (St {step})",
+            "formulaStep":                                          "Step {step}",
+            "karma":                                                "Karma",
+            "Labels": {
+                "arbitraryTestRoll":                                "Arbitrary Test",
+                "actionTestRoll":                                   "Action Test",
+                "effectTestRoll":                                   "Effect Test",
+                "abilityRoll":                                      "Ability Test",
+                "arbitraryRoll":                                    "Arbitrary Test",
+                "attackRoll":                                       "Attack Test",
+                "attributeRoll":                                    "Attribute Test",
+                "damageRoll":                                       "Damage Test",
+                "effectRoll":                                       "Effect Test",
+                "halfmagicRoll":                                    "Half-magic Test",
+                "initiativeRoll":                                   "Initiative Test",
+                "recoveryRoll":                                     "Recovery Test",
+                "spellcastingRoll":                                 "Spellcasting Test",
+                "threadWeavingRoll":                                "Thread weaving Test"
+            },
+            "moreTargets":                                          "and other targets",
+            "rolls":                                                "rolls",
+            "rollResult":                                           "Roll Result",
+            "ruleOfOne":                                            "Failue, Rule of One",
+            "step":                                                 "Step",
+            "stepModifiers":                                        "Step Modifier",
+            "successesAchieved":                                    "Total Successes",
+            "targetDifficulty":                                     "Difficulty",
+            "targetModifiers":                                      "Target Modifier"  
+        },
+        "Notifications": {
+            "Info": {},
+            "Warn": {
+                "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
+            },
+            "Error": {}
+        },
         "Settings": {
+            "Edid": {
+                "knockDown":                                        "ED-ID for Knock Down Test",
+                "knockDownHint":                                    "ED-ID for the Knock Down Test ability",
+                "languageRW":                                       "ED-ID for Read/Write Language",
+                "languageRWHint":                                   "ED-ID for the Read/Write Language ability",
+                "languageSpeak":                                    "ED-ID for Speak Language",
+                "languageSpeakHint":                                "ED-ID for the Speak Language ability",
+                "spellCasting":                                     "ED-ID for Spellcasting",
+                "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
+                "threadWeaving":                                    "ED-ID for Thread Weaving",
+                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+            },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",
-            "Edid": {
-                "languageRW": "ED-ID for Read/Write Language",
-                "languageRWHint": "ED-ID for the Read/Write Language ability",
-                "languageSpeak": "ED-ID for Speak Language",
-                "languageSpeakHint": "ED-ID for the Speak Language ability",
-                "spellCasting": "ED-ID for Spellcasting",
-                "spellCastingHint": "Identifies a talent that is used for spellcasting",
-                "threadWeaving": "ED-ID for Thread Weaving",
-                "threadWeavingHint": "Identifies a talent that is used for thread weaving"
+            "SpecificSettingOptions":{
+                "changelog":                                        "Changelog",
+                "help":                                             "help",
+                "troubleshooting":                                  "troubleshooting"
             }
-        }
-    }
-    
+        }  
+    }   
 }

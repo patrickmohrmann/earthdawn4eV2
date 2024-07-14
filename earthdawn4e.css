@@ -66,7 +66,7 @@
   height: 30px;
   border-radius: 50%;
   padding-top: 5px;
-  background: lightgrey;
+  background: rgba(0, 0, 0, 0.1);
 }
 .input--centered {
   text-align: center;
@@ -113,6 +113,9 @@ h6 {
 p {
   font-size: large;
 }
+.font__no-underline {
+  border-bottom: none;
+}
 .display__inline-block {
   display: inline-block;
 }
@@ -121,6 +124,7 @@ p {
 }
 .undefined {
   background-color: red;
+  color: black;
 }
 .itemControlGroup,
 .icon__position--right {
@@ -149,116 +153,176 @@ p {
   position: absolute;
   left: calc(50% - 64px);
 }
+.chat-message {
+  background-image: url('assets/sheet/background.png');
+}
+
+.app.window-app.form.earthdawn4e .roll-prompt header,
+.assign-legend header {
+  position: relative;
+  z-index: 3;
+  border: none;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header .window-title,
+.app.window-app.form.earthdawn4e.assign-legend header .window-title {
+  padding-left: 35px;
+  margin-top: 0px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header .header-button,
+.app.window-app.form.earthdawn4e.assign-legend header .header-button {
+  margin-top: 0px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header .close,
+.app.window-app.form.earthdawn4e.assign-legend header .close {
+  padding-right: 35px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content,
+.app.window-app.form.earthdawn4e.assign-legend .window-content {
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
+  color: black;
+  background-repeat: repeat;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .frame__dialog--small,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .frame__dialog--small {
+  border: none;
+  position: absolute;
+  margin-left: -8px;
+  margin-top: -80px;
+  z-index: 2;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .frame__bottom,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .frame__bottom {
+  transform: rotate(180deg);
+  bottom: -45px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons {
+  position: absolute;
+  bottom: 50px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons button,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons button {
+  position: relative;
+  z-index: 5;
+  width: 200px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons .button-ok,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons .button-ok {
+  margin-left: 8px;
+  margin-right: 45px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-content .small-dialog__buttons .button-cancel,
+.app.window-app.form.earthdawn4e.assign-legend .window-content .small-dialog__buttons .button-cancel {
+  margin-left: 45px;
+  margin-right: 15px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .window-resizable-handle,
+.app.window-app.form.earthdawn4e.assign-legend .window-resizable-handle {
+  z-index: 5;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input-area {
+  margin-top: 10px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input {
+  position: relative;
+  z-index: 5;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input .assign-lp__amount {
+  z-index: 5;
+  width: 75px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .assing-lp__input .assign-lp__description {
+  z-index: 5;
+  width: 480px;
+  height: var(--form-field-height);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0;
+  color: var(--color-text-dark-primary);
+  font-family: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 3px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area {
+  display: block;
+  margin-top: 25px;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area multi-checkbox {
+  display: flex;
+  flex-direction: column;
+}
+.app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area .checkbox::after {
+  content: "\a";
+  white-space: pre;
+}
 .body .actor-section__top {
   height: 158px;
 }
-.body .actor-section__top .actor__image {
-  width: 20%;
-  float: left;
+.chat-message .message-sender {
+  font-size: larger;
+  padding-top: 12px;
+  padding-left: 5px;
 }
-.body .actor-section__top .actor__characteristics {
-  width: 80%;
-  float: left;
+.chat-message .message-metadata {
+  padding-top: 12px;
 }
-.body .actor-section__top img {
+.chat-message .message-metadata .message-delete {
+  font-size: larger;
+}
+.chat-message img.avatar {
   border: none;
+  object-fit: scale-down;
+  max-height: 40px;
 }
-.body .actor-section__top .padding__top-small {
-  height: 80px;
+.chat-message .custom-flavor {
+  margin: 0.5em 0;
+  font-size: medium;
 }
-.main .actor-sheet-body .tab__general .left-part {
-  float: left;
-  width: 250px;
-}
-.main .actor-sheet-body .tab__general .left-part .margin__none {
-  margin-bottom: 0;
-}
-.main .actor-sheet-body .tab__general .left-part .fa-star {
-  font-size: 7px;
-}
-.main .actor-sheet-body .tab__general .left-part .attribute__increases {
-  text-align: left;
-  padding-left: 2px;
-  margin-bottom: 12px;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
-  height: 30px;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
-  width: 25px;
-  height: 25px;
-  border: none;
-}
-.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
-  align-items: center;
+.chat-message .roll-successes {
+  margin: 0.5em 0;
   text-align: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 83px 83px 83px;
+  font-size: large;
 }
-.main .actor-sheet-body .tab__general .right-part {
-  float: right;
-  width: 520px;
+.chat-message .modifier-lists {
+  margin-bottom: 5px;
+  padding: 0 0.3em;
+  font-size: medium;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
 }
-.main .actor-sheet-body .tab__general .right-part .margin__right {
-  margin-right: 20px;
+.chat-message .modifier-lists li {
+  text-transform: capitalize;
 }
-.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
-  align-items: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 40px 220px;
+.chat-message .dice-formula {
+  word-break: unset;
 }
-.main .actor-sheet-body .tab__legend .legend-card__grid--container {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding-left: 2px;
-  grid-template-columns: 158px 158px 158px 158px 158px;
+.chat-message .dice-total.roll-success {
+  background-color: darkseagreen;
 }
-.main .actor-sheet-body .tab__class .class-card__grid--container {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding-left: 2px;
-  grid-template-columns: 40px 450px 200px 100px;
+.chat-message .dice-total.roll-failure {
+  background-color: indianred;
 }
-.main .actor-sheet-body .tab__class .item__image {
-  width: 25px;
-  border: none;
-}
-.action--buttons {
+.chat-message .roll-failure {
+  background-color: indianred;
+  color: black;
+  font-size: large;
   padding-top: 5px;
-  position: relative;
-  width: 100%;
-  z-index: -6;
+  text-align: center;
 }
-.action--buttons button {
-  position: relative;
-  z-index: 4;
-  width: 100px;
+.chat-message .message-buttons {
+  margin: 1em 0;
 }
-.action--buttons .buttons--left {
-  margin-left: 45px;
-  margin-right: 50px;
-  float: left;
-  width: 40%;
+.chat-message .message-buttons.flexrow button:first-child {
+  margin-left: 0;
 }
-.action--buttons .buttons--right {
-  float: left;
-  width: 40%;
-  margin-right: 50px;
-}
-.legend-point__history--earned {
-  height: 26px;
-  line-height: 22px;
-}
-.body .item-section__top {
-  height: 158px;
-}
-.body .item-section__top img {
-  width: 158px;
-  border: none;
+.chat-message .message-buttons.flexrow button:last-child {
+  margin-right: 0;
 }
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
@@ -430,8 +494,16 @@ p {
 }
 .ability-icon,
 .equipment-icon,
-.effect-icon {
+.effect-icon,
+.item__image--visible,
+.equipment-icon__visible {
   width: 25px;
+  height: 25px;
+  border: none;
+}
+.item__status {
+  width: 16px;
+  border: none;
 }
 .attribute-card__grid--container {
   margin-bottom: 3px;
@@ -451,17 +523,14 @@ p {
   align-items: center;
   display: grid;
   height: 30px;
-  grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 100px;
+  grid-template-columns: 40px 250px 100px 75px 75px 75px 75px 75px;
 }
 .equipment-card__grid--container .equipment-card__grid--item .roll-icon__hover,
 .equipment-card__grid--container .equipment-card__grid--item .roll-icon__pointer {
   display: none;
 }
-.equipment-card__grid--container-Header {
-  align-items: center;
-  display: grid;
-  height: 30px;
-  grid-template-columns: 290px 100px 75px 75px 75px 75px 100px;
+.equipment-card__grid--container .itemControlGroup {
+  float: none;
 }
 .effect-card__grid--container {
   align-items: center;
@@ -526,7 +595,7 @@ p {
 .equipment-card__grid--container:hover .roll-icon__hover-fixed {
   margin-top: -4px;
   display: block;
-  width: 25px;
+  width: 20px;
 }
 .ability-card__grid--container:hover .ability-icon,
 .attribute-card__grid--container:hover .ability-icon,
@@ -599,4 +668,115 @@ p {
 }
 .card__description--toggle {
   display: none;
+}
+.body .actor-section__top {
+  height: 158px;
+}
+.body .actor-section__top .actor__image {
+  width: 20%;
+  float: left;
+}
+.body .actor-section__top .actor__characteristics {
+  width: 80%;
+  float: left;
+}
+.body .actor-section__top img {
+  border: none;
+}
+.body .actor-section__top .padding__top-small {
+  height: 80px;
+}
+.main .actor-sheet-body .tab__general .left-part {
+  float: left;
+  width: 250px;
+}
+.main .actor-sheet-body .tab__general .left-part .margin__none {
+  margin-bottom: 0;
+}
+.main .actor-sheet-body .tab__general .left-part .fa-star {
+  font-size: 7px;
+}
+.main .actor-sheet-body .tab__general .left-part .attribute__increases {
+  text-align: left;
+  padding-left: 2px;
+  margin-bottom: 12px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header {
+  height: 30px;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__header .button__Karma-refresh {
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+.main .actor-sheet-body .tab__general .left-part .karma-devotion__grid--container {
+  align-items: center;
+  text-align: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 83px 83px 83px;
+}
+.main .actor-sheet-body .tab__general .right-part {
+  float: right;
+  width: 520px;
+}
+.main .actor-sheet-body .tab__general .right-part .margin__right {
+  margin-right: 20px;
+}
+.main .actor-sheet-body .tab__general .right-part .conditions__grid--container {
+  align-items: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 40px 220px;
+}
+.main .actor-sheet-body .tab__legend .legend-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 158px 158px 158px 158px 158px;
+}
+.main .actor-sheet-body .tab__class .class-card__grid--container {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding-left: 2px;
+  grid-template-columns: 40px 450px 200px 100px;
+}
+.main .actor-sheet-body .tab__class .item__image {
+  width: 25px;
+  border: none;
+}
+.action--buttons {
+  padding-top: 5px;
+  position: relative;
+  width: 100%;
+  z-index: -6;
+}
+.action--buttons button {
+  position: relative;
+  z-index: 4;
+  width: 100px;
+}
+.action--buttons .buttons--left {
+  margin-left: 45px;
+  margin-right: 50px;
+  float: left;
+  width: 40%;
+}
+.action--buttons .buttons--right {
+  float: left;
+  width: 40%;
+  margin-right: 50px;
+}
+.legend-point__history--earned {
+  height: 26px;
+  line-height: 22px;
+}
+.body .item-section__top {
+  height: 158px;
+}
+.body .item-section__top img {
+  width: 158px;
+  border: none;
 }

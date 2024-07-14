@@ -162,10 +162,9 @@ preLocalize( "action" );
  * @enum {string}
  */
 ED4E.targetDifficulty = {
-	none: 				"ED.General.none",
-	mystical: 			"ED.Defenses.mystical",
-	physical: 			"ED.Defenses.physical",
-	social: 			"ED.Defenses.social",
+	mystical: 			"ED.Config.targetDifficulty.mystical",
+	physical: 			"ED.Config.targetDifficulty.physical",
+	social: 			"ED.Config.targetDifficulty.social",
 }
 preLocalize( "targetDifficulty" );
 
@@ -174,11 +173,10 @@ preLocalize( "targetDifficulty" );
  * @enum {string}
  */
 ED4E.groupDifficulty = {
-	none: 				"ED.General.none",
-	highestOfGroup: 	"ED.Defenses.highestOfGroup",
-	lowestOfGroup: 		"ED.Defenses.lowestOfGroup",
-	hightestX: 			"ED.Defenses.hightestX",
-	lowestX:			"ED.Defenses.lowestX"
+	highestOfGroup: 	"ED.Config.groupDifficulty.highestOfGroup",
+	lowestOfGroup: 		"ED.Config.groupDifficulty.lowestOfGroup",
+	hightestX: 			"ED.Config.groupDifficulty.hightestX",
+	lowestX:			"ED.Config.groupDifficulty.lowestX"
 }
 preLocalize( "groupDifficulty" );
 
@@ -241,6 +239,22 @@ ED4E.tier = {
 }
 preLocalize( "tier" );
 
+
+/**
+ * The possible states for a physical item that describe in which way they connect to an actor.
+ * @enum {string}
+ */
+ED4E.itemStatus = {
+	owned:			"ED.Config.ItemStatus.owned",
+	carried: 		"ED.Config.ItemStatus.carried",
+	equipped: 	"ED.Config.ItemStatus.equipped",
+	mainHand: 	"ED.Config.ItemStatus.mainHand",
+	offHand: 		"ED.Config.ItemStatus.offHand",
+	twoHands: 	"ED.Config.ItemStatus.twoHands",
+	tail: 			"ED.Config.ItemStatus.tail",
+};
+preLocalize( "itemStatus" );
+
 /**
  * talentCategory
  * @enum {string}
@@ -252,6 +266,20 @@ ED4E.talentCategory = {
 	versatility: 			"ED.talentCategory.versatility"
 }
 preLocalize( "talentCategory" );
+
+
+/**
+ * WeaponType
+ * @enum {string}
+ */
+ED4E.weaponType = {
+	bow: 						"ED.Config.bow",
+	crossbow: 			"ED.Config.crossbow",
+	melee: 					"ED.Config.melee",
+	unarmed: 				"ED.Config.unarmed"
+}
+preLocalize( "talentCategory" );
+
 
 /**
  * Type of grantable abilities for a class level
@@ -347,23 +375,110 @@ preLocalize( "lpSpendingTypes" );
  */
 ED4E.testTypes = {
 	arbitrary: {
-		label: "X.arbitraryStepRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/arbitrary-roll-flavor.hbs",
+		label: "ED.Rolls.Labels.arbitraryTestRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
 	},
 	action: {
-		label: "X.actionTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/action-roll-flavor.hbs",
+		label: "ED.Rolls.Labels.actionTestRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
 	effect: {
-		label: "X.effectTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/effect-roll-flavor.hbs",
-	},
-	damage: {
-		label: "X.damageTestRoll",
-		flavorTemplate: "systems/ed4e/templates/dice/chat-flavor/damage-roll-flavor.hbs",
+		label: "ED.Rolls.Labels.effectTestRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
 }
 preLocalize( "testTypes", { key: "label" } );
+
+
+/**
+ * The available sub-types of (roll) tests for {@link EdRollOptions}.
+ * @enum {string}
+ */
+ED4E.rollTypes = {
+	ability: {
+		label: "ED.Config.rollTypes.ability",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
+	},
+	attack: {
+		label: "ED.Config.rollTypes.attack",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},
+	attribute: {
+		label: "ED.Config.rollTypes.attribute",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attribute-roll-flavor.hbs",
+	},
+	damage: {
+		label: "ED.Rolls.Labels.damageRoll",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
+	},
+	effect: {
+		label: "ED.Config.rollTypes.effect",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
+	},
+	halfmagic: {
+		label: "ED.Config.rollTypes.halfmagic",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/halfmagic-roll-flavor.hbs",
+	},
+	initiative: {
+		label: "ED.Config.rollTypes.initiative",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
+	},
+	recovery: {
+		label: "ED.Config.rollTypes.recovery",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/recovery-roll-flavor.hbs",
+	},
+	spellcasting: {
+		label: "ED.Config.rollTypes.spellcasting",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/spellcasting-roll-flavor.hbs",
+	},
+	threadWeaving: {
+		label: "ED.Config.rollTypes.threadWeaving",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/threadWeaving-roll-flavor.hbs",
+	},                   
+}
+preLocalize( "testTypes", { key: "label" } );
+
+/**
+ * The available sub-types of (combatTypes) tests
+ * @enum {string}
+ */
+ED4E.combatTypes = {
+	Aerial: {
+		label: "ED.Config.combatTypes.Aerial",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                    
+	Close: {
+		label: "ED.Config.combatTypes.Close",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                      
+	melee: {
+		label: "ED.Config.combatTypes.melee",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                     
+	Mounted: {
+		label: "ED.Config.combatTypes.Mounted",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                    
+	projectile: {
+		label: "ED.Config.combatTypes.projectile",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                 
+	ranged: {
+		label: "ED.Config.combatTypes.ranged",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                                     
+	throwing: {
+		label: "ED.Config.combatTypes.throwing",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},     
+	unarmed: {
+		label: "ED.Config.combatTypes.unarmed",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},                            
+}
+preLocalize( "testTypes", { key: "label" } );
+
+
 
 /* -------------------------------------------- */
 /*  System			                                */
@@ -404,6 +519,58 @@ preLocalize( "chatCommands" );
 ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15];
 ED4E.attributePointsCost[-1] = -1;
 ED4E.attributePointsCost[-2] = -2;
+ED4E.legendPointsCost = [100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100]
+
+/* -------------------------------------------- */
+/*           Document Data                      */
+/* -------------------------------------------- */
+
+ED4E.documentData = {
+	Item: {
+		skill: {
+			languageSpeak: {
+				name: "ED.SpeakLanguage",
+				type: "skill",
+				system: {
+					description: { value: "ED.SpeakLanguage Skill Description" },
+					// edid needs to be set on creation since settings are not ready on init
+					// edid: game.settings.get( "ed4e", "edidLanguageSpeak" ),
+					attribute: "per",
+				},
+			},
+			languageRW: {
+				name: "ED.ReadWriteLanguage",
+				type: "skill",
+				system: {
+					description: { value: "ED.ReadWriteLanguage Skill Description" },
+					// edid needs to be set on creation since settings are not ready on init
+					// edid: game.settings.get( "ed4e", "edidLanguageRW" ),
+					attribute: "per",
+				},
+			},
+		},
+	},
+};
+preLocalize( "documentData.Item.skill.languageSpeak", { key: "name" } );
+preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: "value" } );
+preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
+preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
+
+// /**
+//  * The available sub-types of (combatTypes) tests
+//  * @enum {string}
+//  */
+// ED4E.combatTypes = {
+// 	aerial: "ED.Config.CombatTypes.aerial",
+// 	close:  "ED.Config.CombatTypes.close",
+// 	melee:  "ED.Config.CombatTypes.melee",
+// 	mounted:  "ED.Config.CombatTypes.mounted",
+// 	projectile: "ED.Config.CombatTypes.projectile",
+// 	ranged:  "ED.Config.CombatTypes.ranged",
+// 	throwing: "ED.Config.CombatTypes.throwing",
+// 	unarmed:  "ED.Config.CombatTypes.unarmed",	                           
+// }
+// preLocalize( "combatTypes" );
 
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */

@@ -52,11 +52,21 @@ export default function registerSystemSettings() {
         type: new EdIdField(),
     } );
 
+    // edid for abilities that substitute for knockdown tests
+    game.settings.register( "ed4e", "edidKnockDownResist", {
+        name: "ED.Settings.Edid.knockDown",
+        hint: "ED.Settings.Edid.knockDownHint",
+        scope: "world",
+        config: true,
+        default: "knock-down",
+        type: new EdIdField(),
+    } );
+
     /* -------------------------------------------------------------------------------- */
     /*                                  STEP TABLES                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // // Step Table settings Header
+    // Step Table settings Header
     // game.settings.register( "ed4e", "stepTableHeader", {
     //     name: "ED.Settings.StepTable.stepTableHeader",
     //     config: true,
@@ -82,7 +92,7 @@ export default function registerSystemSettings() {
     /*                                  DARK MODE                                       */
     /* -------------------------------------------------------------------------------- */
 
-    // // Dark Mode settings Header
+    // Dark Mode settings Header
     // game.settings.register( "ed4e", "darkModeHeader", {
     //     name: "ED.Settings.DarkMode.darkModeHeader",
     //     config: true,
@@ -116,7 +126,7 @@ export default function registerSystemSettings() {
     /*                              CHARACTER GENERATION                                */
     /* -------------------------------------------------------------------------------- */
 
-    // // Legend point settings Header
+    // Legend point settings Header
     // game.settings.register( "ed4e", "charGenHeader", {
     //     name: "ED.Settings.CharGen.charGenHeader",
     //     config: true,
@@ -173,7 +183,7 @@ export default function registerSystemSettings() {
     /*                                  LP TRACKING                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // // Legend point settings Header
+    // Legend point settings Header
     // game.settings.register( "ed4e", "lpTrackingHeader", {
     //     name: "ED.Settings.LpTracking.lpTrackingHeader",
     //     config: true,
@@ -232,7 +242,7 @@ export default function registerSystemSettings() {
     /*                                  ENCUMBRANCE                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // // Encumbrance settings Header
+    // Encumbrance settings Header
     // game.settings.register( "ed4e", "encumberedHeader", {
     //     name: "ED.Settings.Encumbrance.encumberedHeader",
     //     config: true,
@@ -308,7 +318,7 @@ export default function registerSystemSettings() {
     /*                                  GM Chat Avatar                                     */
     /* -------------------------------------------------------------------------------- */
 
-    // // Chat Avatar settings Header
+    // Chat Avatar settings Header
     // game.settings.register( "ed4e", "chatAvatarHeader", {
     //     name: "ED.Settings.Chat.chatAvatarHeader",
     //     config: true,

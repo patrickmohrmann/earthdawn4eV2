@@ -94,6 +94,43 @@
       </span>
     </div>
 
+    <!-- Language Skills -->
+    <div class="skill-options language-skills flexrow">
+      <table>
+        <tr>
+          <th>{{localize "X.Language Options"}}</th>
+        </tr>
+        {{#each skills.language}}
+          <tr class="flexrow" data-skill-uuid="{{this.uuid}}">
+            <td class=" ability-name" data-skill-uuid="{{this.uuid}}" title="{{this.system.description}}">
+              {{this.name}}
+            </td>
+            <td class="flexrow rank-change">
+              {{#if (ed-hasOwnProperty @root.object.abilities.language this.uuid)}}
+                <span class="decrease-value-button rank-decrease rank-change-icon" title="{{localize 'X.Decrease Rank Value'}}"
+                      data-change-type="decrease" data-ability-uuid="{{this.uuid}}" data-ability-type="language">
+                  <i class="fa-light fa-circle-minus"></i>
+              </span>
+              {{/if}}
+              <span class="rank-change-value">
+                {{lookup @root.object.abilities.language this.uuid}}
+              </span>
+              <span class="increase-value-button rank-increase rank-change-icon" title="{{localize 'X.Increase Rank Value'}}"
+                    data-change-type="increase" data-ability-uuid="{{this.uuid}}" data-ability-type="language">
+                <i class="fa-light fa-circle-plus"></i>
+              </span>
+            </td>
+          </tr>
+        {{else}}
+          {{localize "X.No Language Skills available."}}
+        {{/each}}
+      </table>
+
+      <span class="flexcol available-ranks available-language-ranks">
+        {{localize "X.You always have a minimum of 2 ranks in Speaking, and 1 rank in Reading/Writing. You can assign more, if wanted."}}
+      </span>
+    </div>
+
     <!-- General Skills -->
     <div class="skill-options general-skills flexrow">
       <table>

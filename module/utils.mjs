@@ -60,6 +60,37 @@ export function slugify( input ) {
 }
 
 /**
+ * Adapted from ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
+ * Returns an array of items that match a given EDID and optionally an item type.
+ * Searched documents are world and compendium items.
+ * @param {string} edid           The SWID of the item(s) which you want to retrieve
+ * @param {string} type           Optionally, a type name to restrict the search
+ * @returns {Item[]|undefined}    An array containing the found items
+ */
+export async function getGlobalItemsByEdid( edid, type ) {
+  return getAllDocuments(
+    'Item',
+    type,
+    false,
+    'OBSERVER',
+    ['system.edid'],
+    ( item ) => item.system.edid === edid,
+  )
+}
+
+/**
+ * Adapted from ({@link https://gitlab.com/peginc/swade/-/wikis/Savage-Worlds-ID|SWADE system}).
+ * Fetch an item that matches a given EDID and optionally an item type.
+ * Searched documents are world and compendium items.
+ * @param {string} edid         The EDID of the item(s) which you want to retrieve
+ * @param {string} type         Optionally, a type name to restrict the search
+ * @returns {Item|undefined}    The matching item, or undefined if none was found.
+ */
+export async function getSingleGlobalItemByEdid( edid, type ) {
+  return getGlobalItemsByEdid(edid, type).then( item => item[0]);
+}
+
+/**
  * Search all documents in the game, including world and packs, according to the
  * given constraints and return them in an array.
  *
@@ -205,6 +236,19 @@ export function sum( arr ) {
  */
 export function sumProperty( arr, prop ) {
   return arr.reduce( ( partialSum, obj ) => partialSum + resolvePath( obj, prop ), 0 );
+}
+
+/**
+ * Checks if a value is within a specified range.
+ *
+ * @param {number} value - The value to check.
+ * @param {number} min - The lower limit of the range.
+ * @param {number} max - The upper limit of the range.
+ * @param {boolean} [includeLimits=true] - Whether to include the limits in the range. If true, checks if the value is greater than or equal to min and less than or equal to max. If false, checks if the value is strictly greater or less than the limits.
+ * @returns {boolean} Returns true if the value is within the range, and false otherwise.
+ */
+export function inRange( value, min, max, includeLimits = true ) {
+  return includeLimits ? value >= min && value <= max : value > min && value < max;
 }
 
 /* -------------------------------------------- */
@@ -461,6 +505,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/generation/attribute-assignment.hbs",
     "systems/ed4e/templates/actor/generation/spell-selection.hbs",
     "systems/ed4e/templates/actor/generation/skill-selection.hbs",
+    "systems/ed4e/templates/actor/generation/language-selection.hbs",
     "systems/ed4e/templates/actor/generation/equipment.hbs",
 
     // Character details section partials
@@ -530,6 +575,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-thread.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-weapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-shipWeapon.hbs",
+    "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs",
 
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-armor.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-attack.hbs",
@@ -560,10 +606,35 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-weapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-shipWeapon.hbs",
 
+    // ################################################
+    //                      CHAT
+    // ################################################
+    "systems/ed4e/templates/chat/tooltip.hbs",
+
+    // chat buttons
+    "systems/ed4e/templates/chat/chat-buttons/apply-damage.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/assign-effect.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/roll-damage.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/roll-effect.hbs",
+    "systems/ed4e/templates/chat/chat-buttons/take-damage.hbs",
+
+    // chat Flavor
+    "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/arbitrary-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/attribute-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/damage-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/halfmagic-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/recovery-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/spellcasting-roll-flavor.hbs",
+    "systems/ed4e/templates/chat/chat-flavor/thread-weaving-roll-flavor.hbs",
+
     // Dice partials
-    "systems/ed4e/templates/dice/dice-partials/roll-step-modifier.hbs",
-    "systems/ed4e/templates/dice/dice-partials/roll-target-modifier.hbs",
-    "systems/ed4e/templates/dice/dice-partials/roll-successes.hbs",
+    "systems/ed4e/templates/chat/dice-partials/roll-step-modifier.hbs",
+    "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs",
+    "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs",
 
     // other tabs
     "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",

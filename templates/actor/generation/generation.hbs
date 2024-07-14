@@ -16,6 +16,7 @@
           <a class="character-generation-tab" data-tab="attribute-tab">{{localize "X-Attribute"}}</a>
           <a class="character-generation-tab" data-tab="spell-tab">{{localize "X-Spell"}}</a>
           <a class="character-generation-tab" data-tab="skill-tab">{{localize "X-Skill"}}</a>
+          <a class="character-generation-tab" data-tab="language-tab">{{localize "X-Languages"}}</a>
           <a class="character-generation-tab" data-tab="equipment-tab">{{localize "X-Equipment"}}</a>
         </nav>
       </div>
@@ -39,6 +40,9 @@
         {{> "systems/ed4e/templates/actor/generation/skill-selection.hbs"}}
 
         <!-- tab6: equipment -->
+        {{> "systems/ed4e/templates/actor/generation/language-selection.hbs"}}
+
+        <!-- tab7: equipment -->
         {{> "systems/ed4e/templates/actor/generation/equipment.hbs"}}
 
       </div>

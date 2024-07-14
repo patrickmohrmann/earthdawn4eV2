@@ -59,6 +59,11 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 initial: false,
                 label: "ED.Item.Shield.Label.broken"
             } ),
+            bowUsage: new fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Item.Shield.Label.bowUsage"
+            } ),
     } );
     }
     /* -------------------------------------------- */

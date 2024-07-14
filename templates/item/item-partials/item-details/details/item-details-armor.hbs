@@ -3,7 +3,7 @@
     {{!-- Physical Armor --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.Item.Armor.piecemealArmor"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.piecemealArmor.selector" {{ checked system.piecemealArmor.selector }}>
+        <input class="item-data__checkbox--line" type="checkbox" name="system.piecemealArmor.selector" {{checked item.system.piecemealArmor.selector }}>
         <label>{{localize "ED.General.size"}}:</label>
         <input class="input__number-input" name="system.piecemealArmor.size" type="text"
             value="{{item.system.piecemealArmor.size}}" data-dtype="Number">
@@ -70,7 +70,9 @@
     {{!-- itemStatus.itemStatus.itemStatus.equipped --}}
     <div class="item-data__input--line">
         <label>{{localize "ED.General.equipped"}}:</label>
-       <input name="system.itemStatus.equipped" type="checkbox" {{checked item.system.itemStatus.equipped}}>
+       <select name="system.itemStatus">
+            {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
+        </select>
     </div>
     {{#if item.isOwned }}
     {{!-- automatic Weight Calculation --}}
