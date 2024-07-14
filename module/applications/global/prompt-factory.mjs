@@ -200,7 +200,7 @@ export default class PromptFactory {
     const abilities = this.document.getItemsByEdid( edid );
     return abilities.map( ( ability ) => {
       return {
-        action: ability.id,
+        action: ability.uuid,
         label: ability.name,
         icon: "",
         class: `button-${ edid } ${ ability.name }`,
