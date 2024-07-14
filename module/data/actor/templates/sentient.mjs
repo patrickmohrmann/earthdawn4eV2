@@ -37,6 +37,22 @@ export default class SentientTemplate extends CommonTemplate {
                 initialKeysOnly: true,
                 label: "ED.Attributes.attributes"
             } ),
+            healthRate: new fields.SchemaField( {
+                value: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                } ),
+                max: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    step: 1,
+                    initial: 0,
+                    integer: true,
+                } )
+            } ),
             characteristics: new fields.SchemaField( {
                 defenses: new MappingField( new fields.SchemaField( {
                     baseValue: new fields.NumberField( {
@@ -430,6 +446,7 @@ export default class SentientTemplate extends CommonTemplate {
     prepareBaseData() {
         super.prepareBaseData();
         this._prepareDamage();
+        this._healthRating () 
     }
 
     /** @inheritDoc */
@@ -445,6 +462,10 @@ export default class SentientTemplate extends CommonTemplate {
           this.characteristics.health.damage.stun + this.characteristics.health.damage.standard;
     }
 
+    _healthRating () {
+        this.healthRate.max = this.characteristics.health.death
+        this.healthRate.value = this.characteristics.health.damage.stun + this.characteristics.health.damage.standard;
+        }
     /* -------------------------------------------- */
     /*  Migrations                                  */
     /* -------------------------------------------- */
@@ -455,3 +476,4 @@ export default class SentientTemplate extends CommonTemplate {
         // specific migration functions
     }
 }
+

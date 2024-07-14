@@ -29,6 +29,29 @@ export default class ActorEd extends Actor {
     return this.items.filter( item => item.type === 'namegiver' )[0];
   }
 
+  async _preCreate( data, options, userId ) {
+    await super._preCreate( data, options, userId );
+
+    // Configure prototype token settings
+    if ( this.type === "character" ) {
+      const prototypeToken = {
+        sight: {enabled: true},
+        actorLink: true,
+        disposition: 1,   // Friendly
+        displayBars: 50,  // Always Display bar 1 and 2
+        displayName: 30,  // Display nameplate on hover
+        bar1: {
+          attribute: "healthRate"
+        },
+        bar2: {
+          attribute: "karma"
+        }
+      };
+
+      this.updateSource( { prototypeToken } )
+    }
+  }
+
   /**
    * Checks if the actor is wearing any piece of armor that is part of a piecemeal armor set.
    * Piecemeal armor is a type of armor that is made up of several different pieces.
@@ -144,6 +167,7 @@ export default class ActorEd extends Actor {
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
   async rollEquipment( equipment, options = {} ) {
+
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
     const difficulty = equipment.system.getDifficulty();
     if ( !difficulty ) {
