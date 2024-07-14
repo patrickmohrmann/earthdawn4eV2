@@ -29,6 +29,13 @@ export default class ActorEd extends Actor {
     return this.items.filter( item => item.type === 'namegiver' )[0];
   }
 
+  /**
+   * @description             Pre-process a creation operation of the actor document to ensure that a prototype token is
+   * @param {Object} data     Data used to create the Actor
+   * @param {Array} options   Additional options which modify the creation workflow
+   * @param {String} userId   The ID of the User who is creating this Actor
+   * @UserFunction            UF_TokenResouces-preCreate
+   */
   async _preCreate( data, options, userId ) {
     await super._preCreate( data, options, userId );
 
