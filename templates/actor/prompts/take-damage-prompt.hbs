@@ -1,66 +1,15 @@
-<form class="take-damage__dialog flexcol" id="take_damage_form" autocomplete="off">
+<div>
 
-    <!-- Header -->
-    {{!-- <div class="header-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
+  <fieldset>
+    <legend>{{localize "ED.Dialogs.damage"}}</legend>
+    {{formGroup damage name="damage" localize=true}}
+    {{formGroup damageType name="damageType" localize=true}}
+  </fieldset>
 
-    <div>
-        <div>
-            <label>{{localize "ED.Dialogs.damage"}}</label>
-            <input name="damage" type="number">
-        </div>
-        <div>
-            <input name="ignoreArmor" type="checkbox">
-            <label>{{localize "ED.Dialogs.ignoreArmor"}}</label>
-        </div>
-        <div>
-            <div>
-                <label>{{localize "ED.Dialogs.armorType"}}</label>
-                <div>
-                    <input type="radio" name="armorType" value="physical" checked="checked">{{localize
-                    "ED.Dialogs.physical"}}
-                </div>
-                <div>
-                    <input type="radio" name="armorType" value="mystical">{{localize "ED.Dialogs.mystical"}}
-                </div>
-            </div>
-        </div>
-        <div>
-            <div>
-                <label>{{localize "ED.Dialogs.damageType"}}</label>
-                <div>
-                    <input type="radio" name="damageType" value="standard" checked="checked">{{localize
-                    "ED.Dialogs.damageStandard"}}
-                </div>
-                <div>
-                    <input type="radio" name="damageType" value="stun">{{localize "ED.Dialogs.damageStun"}}
-                </div>
-            </div>
-        </div>
-    </div>
+  <fieldset>
+    <legend>{{localize "ED.Dialogs.armor"}}</legend>
+    {{formGroup armorType name="armorType" localize=true}}
+    {{formGroup ignoreArmor name="ignoreArmor" localize=true}}
+  </fieldset>
 
-
-
-
-    <!-- Buttons -->
-    <div class="buttons take-damage__buttons flexcol">
-        <div class="button-group buttons-navigation flexrow">
-            <button class='take-damage default button__take-damage' type="takeDamage" name="takeDamage"
-                data-button='takeDamage'>
-                {{ localize "ED.Dialogs.Buttons.takeDamage" }}
-            </button>
-        </div>
-        <div class="button-group buttons-navigation flexrow">
-            <button class='cancel default button-cancel' type="cancel" name="cancel" data-button='cancel'>
-                {{ localize "ED.Dialogs.Buttons.cancel" }}
-            </button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    {{!-- <div class="footer-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
-
-</form>
+</div>

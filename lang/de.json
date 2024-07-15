@@ -82,7 +82,7 @@
             "Characteristics": {
                 "currentDamage":                                    "Schaden",
                 "currentRecoveryTestsRecource":                     "Aktuell",
-                "dailyrecoveryTestsRecource":                       "Täglich",
+                "dailyrecoveryTestsResource":                       "Täglich",
                 "deathThesholdShort":                               "Todesschwelle",
                 "mysticalArmor":                                    "Mystisch",
                 "mysticalDefense":                                  "Mystisch",
@@ -334,6 +334,8 @@
             }
         },
         "Dialogs": {
+            "armor":                                                "Rüstung",
+            "armorType":                                            "Rüstungsart",
             "AssignLp": {
                 "legendPoints":                                     "Legendenpunkte",
                 "description":                                      "Beschreibung"
@@ -341,7 +343,6 @@
             "Errors": {
                 "noLp":                                            "Keine Legendenpunkte angegeben!"
             },
-            "armorType":                                            "Rüstungsart",
             "Buttons": {
                 "cancel":                                           "Abbrechen",
                 "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
@@ -353,7 +354,7 @@
             "damageStandard":                                       "Tödlicher Schaden",
             "damageStun":                                           "Betäubungsschaden",
             "damageType":                                           "Schadensart",
-            "ignoreArmor":                                          "Rüstung Ignoriere?",
+            "ignoreArmor":                                          "Ignoriere Rüstung",
             "jumpUpChoice":                                         "Wähle die Fähigkeit um aufzuspringen",
             "knockDownChoice":                                      "Wähle die Fähigkeit um dem Niederschlag zu widerstehen",
             "mystical":                                             "Mystischer Schaden",

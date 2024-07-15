@@ -646,7 +646,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/legend-points/history-spend.hbs",
 
     // prompts
-    "systems/ed4e/templates/actor/prompts/recovery-prompt.hbs",
   ];
 
   const paths = {};

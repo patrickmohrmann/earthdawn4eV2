@@ -1,5 +1,4 @@
 import ED4E from "../../config.mjs";
-import TakeDamagePrompt from "../global/take-damage-prompt.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -12,19 +11,19 @@ export default class ActorSheetEd extends ActorSheet {
    */
   static get defaultOptions() {
     return foundry.utils.mergeObject( super.defaultOptions, {
-      classes: ['earthdawn4e', 'sheet', 'actor', 'character-sheet'],
+      classes: [ "earthdawn4e", "sheet", "actor", "character-sheet" ],
       width: 800,
       height: 800,
       tabs: [
         {
-          navSelector: '.actor-sheet-tabs',
-          contentSelector: '.actor-sheet-body',
-          initial: 'main',
+          navSelector: ".actor-sheet-tabs",
+          contentSelector: ".actor-sheet-body",
+          initial: "main",
         },
         {
-          navSelector: '.actor-sheet-spell-tabs',
-          contentSelector: '.actor-sheet-spell-body',
-          initial: 'spell-matrix-tab',
+          navSelector: ".actor-sheet-spell-tabs",
+          contentSelector: ".actor-sheet-spell-body",
+          initial: "spell-matrix-tab",
         },
       ],
       scrollY: [
@@ -75,10 +74,10 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
     // take strain
-    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+    html.find( ".card__ability .take-strain" ).click( this._onTakeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
-    html.find(".item__status").mousedown(this._onChangeItemStatus.bind(this));
+    html.find( ".item__status" ).mousedown( this._onChangeItemStatus.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
@@ -95,9 +94,9 @@ export default class ActorSheetEd extends ActorSheet {
         "knockdownTest": () => this._onKnockDown( event ),
       };
       // Check if the action exists in the mapping and call it
-    if ( actionMapping.hasOwnProperty( action ) ) {
-    actionMapping[action]();
-  }
+      if ( actionMapping.hasOwnProperty( action ) ) {
+        actionMapping[action]();
+      }
     } );
 
     // Effect Management
@@ -195,44 +194,39 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * @description Take strain is used for non rollable abilities which requires strain. player can click on the icon to take the strain damage
+   * @description Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private
    */
-    _takeStrain( event ) {
+    _onTakeStrain( event ) {
         event.preventDefault();
         const li = event.currentTarget.closest( ".item-id" );
         const ability = this.actor.items.get( li.dataset.itemId );
         this.actor.takeStrain( ability.system.strain );
     }
 
- /**
-  * Handles Recovery tests
-  * @param {Event} event The originating click event.
-  * @private
-  */
-  _onRecoveryRoll( event ) {
-    event.preventDefault();
-    this.actor.rollRecovery( {event: event} );
-  }
-
   /**
    * Handles Recovery tests
    * @param {Event} event The originating click event.
+   * @private
    */
-  // _onTakeDamage( event ) {
-  //   event.preventDefault();
-  //   this.actor.takeDamageManual( {event: event} );
-  // }
+  async _onRecoveryRoll( event ) {
+    event.preventDefault();
+    const recoveryMode = await this.actor.getPrompt( "recovery" );
+    this.actor.rollRecovery( recoveryMode, {event: event} );
+  }
 
   async _onTakeDamage( event ) {
-    const takeDamage = await TakeDamagePrompt.waitPrompt( this );
-    const amount = takeDamage.damage;
-    const damageType = takeDamage.damageType;
-    const armorType = takeDamage.armorType;
-    const ignoreArmor = takeDamage.ignoreArmor === "on" ? true : false;
+    const takeDamage = await this.actor.getPrompt( "takeDamage" );
+    if ( !takeDamage || takeDamage === "close" ) return;
 
-    this.actor.takeDamage( amount, false, damageType, armorType, ignoreArmor );
+    this.actor.takeDamage(
+      takeDamage.damage,
+      false,
+      takeDamage.damageType,
+      takeDamage.armorType,
+      takeDamage.ignoreArmor,
+    );
   }
 
   _onJumpUp( event ) {
@@ -252,8 +246,8 @@ export default class ActorSheetEd extends ActorSheet {
 
   _onKnockDown( event ) {
     event.preventDefault();
-    const amount = 0;
-    this.actor.knockdownTest( amount );
+    const damageTaken = 0;
+    this.actor.knockdownTest( damageTaken );
   }
 
 
@@ -265,12 +259,12 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onEffectAdd( event ) {
     event.preventDefault();
-    return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
-      label: `New Effect`,
-      icon: 'icons/svg/item-bag.svg',
+    return this.actor.createEmbeddedDocuments( "ActiveEffect", [ {
+      label: "New Effect",
+      icon: "icons/svg/item-bag.svg",
       duration: { rounds: 1 },
       origin: this.actor.uuid
-    }] );
+    } ] );
   }
 
   /**

@@ -1,6 +1,6 @@
 import CommonTemplate from "./common.mjs";
 import { MappingField } from "../../fields.mjs";
-import MovementFields from './movement.mjs';
+import MovementFields from "./movement.mjs";
 import ED4E from "../../../config.mjs";
 
 /**
@@ -56,7 +56,7 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                     } ),
                 } ), {
-                    initialKeys: ['physical', 'mystical', 'social'],
+                    initialKeys: [ "physical", "mystical", "social" ],
                     initialKeysOnly: true,
                     label: "ED.Actor.Characteristics.defenses"
                 } ),
@@ -78,7 +78,7 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                     } ) ,
                 } ), {
-                    initialKeys: ['physical', 'mystical'],
+                    initialKeys: [ "physical", "mystical" ],
                     initialKeysOnly: true,
                     label: "ED.Actor.Characteristics.armor"
                   } ),
@@ -173,7 +173,7 @@ export default class SentientTemplate extends CommonTemplate {
                         label: "ED.Actor.Characteristics.wounds"
                     } ),
                 } ),
-                recoveryTestsRecource: new fields.SchemaField( {
+                recoveryTestsResource: new fields.SchemaField( {
                     max: new fields.NumberField( {
                         required: true,
                         nullable: false,
@@ -192,9 +192,9 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.recoveryTestsCurrent"
                     } ),
-                    stunRecoveryAvailabilty: new fields.BooleanField( {
+                    stunRecoveryAvailable: new fields.BooleanField( {
                         required: true,
-                        initial: false,
+                        initial: true,
                         label: "ED.Actor.Characteristics.recoveryTestsStun"
                     } ),
                 } ),
@@ -400,7 +400,7 @@ export default class SentientTemplate extends CommonTemplate {
             } ),
             relations: new MappingField( new fields.SchemaField( {
                 attitude: new fields.StringField( {
-                    choices: ['config stuff']
+                    choices: [ "config stuff" ]
                 } ),
                 favors:
                   new MappingField( new fields.SchemaField( {
@@ -417,7 +417,7 @@ export default class SentientTemplate extends CommonTemplate {
                           initial: 0
                       } )
                   } ), {
-                      initialKeys: ['small', 'large'],
+                      initialKeys: [ "small", "large" ],
                       initialKeysOnly: true
                   } )
             } ), {

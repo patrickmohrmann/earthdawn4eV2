@@ -1,3 +1,5 @@
+// Migrate built-in rules to @stylistic/js namespace
+/* eslint @stylistic/migrate/migrate-js: "error" */
 {
   "env": {
     "browser": true,
@@ -6,7 +8,9 @@
     "jquery": true
   },
   "plugins": [
-    "jsdoc"
+    "jsdoc",
+    "@stylistic",
+    "@stylistic/migrate"
   ],
   "globals": {
     "ActiveEffect": false,
@@ -24,6 +28,7 @@
     "Folder": false,
     "FormApplication": false,
     "FormApplicationOptions": false,
+    "FormDataExtended": false,
     "Handlebars": false,
     "Hooks": false,
     "Item": false,
@@ -41,6 +46,8 @@
     "ed4e": true,
     "expandObject": false,
     "foundry": false,
+    "fromUuid": false,
+    "fromUuidSync": false,
     "game": false,
     "isOwned": false,
     "items": false,
@@ -70,8 +77,17 @@
       }
     ],
     "array-callback-return": "error",
+    "@stylistic/array-bracket-spacing": ["error", "always"],
     "arrow-body-style": "off",
+    "@stylistic/arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
     "block-scoped-var": "off",
+    "@stylistic/block-spacing": ["error", "always"],
     "camelcase": "off",
     "capitalized-comments": "off",
     "class-methods-use-this": "off",
@@ -254,6 +270,7 @@
     "no-undef": "error",
     "no-undef-init": "error",
     "no-undefined": "off",
+    "jsdoc/no-undefined-types": 0,
     "no-underscore-dangle": "off",
     "no-unmodified-loop-condition": "error",
     "no-unneeded-ternary": "off",
@@ -319,12 +336,13 @@
     "prefer-rest-params": "off",
     "prefer-spread": "off",
     "prefer-template": "off",
+    "@stylistic/quotes": ["error", "double"],
     "radix": "error",
     "require-atomic-updates": "off",
     "require-await": "off",
     "require-unicode-regexp": "off",
     "require-yield": "error",
-    "semi": ["error", "always"],
+    "@stylistic/semi": ["error", "always"],
     "sort-imports": "off",
     "sort-keys": "off",
     "sort-vars": "off",
@@ -339,7 +357,7 @@
         }
       }
     ],
-    "space-in-parens": ["error", "always"],
+    "@stylistic/space-in-parens": ["error", "always"],
     "strict": ["error", "never"],
     "symbol-description": "error",
     "use-isnan": "error",
