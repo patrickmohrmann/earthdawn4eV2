@@ -414,11 +414,13 @@ export default class ActorEd extends Actor {
     let strain = 2;
     let jumpUpStep = attributes.dex.step;
 
-    const selectedAbility = this.items.get( await this.getPrompt( "jumpUp" ) );
+    const selectedAbility = await fromUuid(
+      await this.getPrompt( "jumpUp" )
+    );
 
     if ( selectedAbility ) {
       const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = selectedAbility.system;
-      jumpUpStep = attributes[attribute]?.step + level || jumpUpStep + level;
+      jumpUpStep = ( attributes[attribute]?.step || jumpUpStep ) + level;
       devotionRequired = !!devotion;
       strain = { base: abilityStrain };
     }
