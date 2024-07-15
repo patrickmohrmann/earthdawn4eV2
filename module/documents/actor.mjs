@@ -368,7 +368,7 @@ export default class ActorEd extends Actor {
 
     if ( knockdownAbility ) {
       const { attribute, level, devotionRequired: devotion, strain: abilityStrain } = knockdownAbility.system;
-      knockdownStep = attributes[attribute]?.step + level || knockdownStep + level;
+      knockdownStep = ( attributes[attribute]?.step || knockdownStep ) + level;
       devotionRequired = !!devotion;
       strain = { base: abilityStrain };
     }
