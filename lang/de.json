@@ -71,6 +71,7 @@
                 "jumpUp":                                           "Aufspringen",
                 "knockDownTest":                                    "Niederschlag",
                 "legendHistory":                                    "LP Übersicht",
+                "recovery":                                         "Erholung",
                 "takeDamage":                                       "Schaden"
             },
             "Cards": {
@@ -80,8 +81,8 @@
             },
             "Characteristics": {
                 "currentDamage":                                    "Schaden",
-                "currentRecoveryTests":                             "Aktuell",
-                "dailyRecoveryTests":                               "Täglich",
+                "currentRecoveryTestsRecource":                     "Aktuell",
+                "dailyrecoveryTestsResource":                       "Täglich",
                 "deathThesholdShort":                               "Todesschwelle",
                 "mysticalArmor":                                    "Mystisch",
                 "mysticalDefense":                                  "Mystisch",
@@ -205,6 +206,8 @@
                 "equipped":                                         "Ausgerüstet",
                 "equippedArmor":                                    "Rüstung Ausgerüstet",
                 "equippedShield":                                   "Schild Ausgerüstet",
+                "damageSubdual":                                    "Betäubung",
+                "damagePhysical":                                   "Körperlich",
                 "karmaAlways":                                      "Benutze immer Karma",
                 "karmaRitualTooltip":                               "Karmaritual",
                 "loaded":                                           "Belastet",
@@ -239,6 +242,12 @@
                 "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
                 "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
                 "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAbility":                                      "{sourceActor} würfelt {attribute} mit Stufe {step}",
+                "rollAttribute":                                    "{sourceActor} würfelt {attribute} mit Stufe {step}",
+                "rollEquipment":                                    "{sourceActor} würfelt {equipment} mit Stufe {step}",
+                "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}",
+                "jumpUp":                                           "{sourceActor} springt auf mit Stufe {step}",
+                "knockdownTest":                                    "{sourceActor} versucht dem Niederschlag zu widerstehen {step}",
                 "rollAttackMultipleTargets":                        "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
             },
             "Header": {
@@ -259,7 +268,7 @@
                 "unarmed":                                          "Unbewaffneter Nahkampf"
             },
             "groupDifficulty": {
-                "highestOfGroup":                                   "Höchster der Gruppe",  
+                "highestOfGroup":                                   "Höchster der Gruppe",
                 "hightestX":                                        "Höchster + Ziele",
                 "lowestOfGroup":                                    "Niedrigster der Gruppe",
                 "lowestX":                                          "Niedrigster + Ziele"
@@ -286,7 +295,7 @@
             "rollTypes": {
                 "ability":                                          "Fähigkeit",
                 "attack":                                           "Angriff",
-                "attribute":                                        "Attribute",               
+                "attribute":                                        "Attribute",
                 "effect":                                           "Effekt",
                 "halfmagic":                                        "Halb Magie",
                 "initiative":                                       "Initiative",
@@ -307,16 +316,16 @@
             },
             "Actor": {
                 "Labels": {
-                    "toughness": "bla"
+                    "toughness":                                    "bla"
                 },
                 "Hints": {}
             },
             "Item": {
                 "Labels": {
-                    "edid": "ED-ID"
+                    "edid":                                         "ED-ID"
                 },
                 "Hints": {
-                    "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+                    "edid":                                         "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
                 }
             },
             "Journal": {
@@ -325,6 +334,8 @@
             }
         },
         "Dialogs": {
+            "armor":                                                "Rüstung",
+            "armorType":                                            "Rüstungsart",
             "AssignLp": {
                 "legendPoints":                                     "Legendenpunkte",
                 "description":                                      "Beschreibung"
@@ -332,21 +343,25 @@
             "Errors": {
                 "noLp":                                            "Keine Legendenpunkte angegeben!"
             },
-            "Header": {
-                "activeUser":                                       "Aktive Spieler",
-                "inactiveUser":                                     "Inaktive Spieler",
-                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
-            },
-            "Navigator":{
-                "baseInput":                                        "Standard Optionen",
-                "options":                                          "Sonstige Optionen"
-            }, 
-            "Placeholder": {
-                "lpDescription":                                    "Trage hier eine Beschreibung ein"
-            },
+            "Buttons": {
+                "cancel":                                           "Abbrechen",
+                "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
+                "recovery":                                         "Erholungsprobe",
+                "nightRest":                                        "Vollständige Rast",
+                "takeDamage":                                       "Schaden nehmen"
+                },
+            "damage":                                               "Schaden",
+            "damageStandard":                                       "Tödlicher Schaden",
+            "damageStun":                                           "Betäubungsschaden",
+            "damageType":                                           "Schadensart",
+            "ignoreArmor":                                          "Ignoriere Rüstung",
+            "jumpUpChoice":                                         "Wähle die Fähigkeit um aufzuspringen",
+            "knockDownChoice":                                      "Wähle die Fähigkeit um dem Niederschlag zu widerstehen",
+            "mystical":                                             "Mystischer Schaden",
+            "physical":                                             "Körperlicher Schaden",
             "Title": {
-                "assignLp":                                         "Legendenpunkte zuweisen",
-                "rollPrompt":                                       "Würfelübersicht"
+                "recovery":                                         "Erholungsprobe",
+                "takeDamage":                                       "Schaden nehmen"
             }
         },
         "Item": {
@@ -363,8 +378,11 @@
 
             },
             "Header": {
+                "activeUser":                                       "Aktive Spieler",
+                "inactiveUser":                                     "Inaktive Spieler",
+                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure",
                 "details":                                          "Details",
-                "navigator":                                        "Navigator"                                       
+                "navigator":                                        "Navigator"
             },
             "Namegiver":{
                 "WeaponSize": {
@@ -379,6 +397,13 @@
                 "details":                                          "Details",
                 "effects":                                          "Effekte",
                 "general":                                          "Allgemein"
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
+            "Title": {
+                "assignLp":                                         "Legendenpunkte zuweisen",
+                "rollPrompt":                                       "Würfelübersicht"
             }
         },
         "Languages": {
@@ -394,7 +419,7 @@
         "Rolls": {
             "against":                                              "gegen",
             "baseValue":                                            "Basis Stufe",
-            "devotion":                                             "Weihekraft",                
+            "devotion":                                             "Weihekraft",
             "formulaDevotion":                                      "{amount}x Weihe (St {step})",
             "formulaExtraStep":                                     "{label} (St {step})",
             "formulaKarma":                                         "{amount}x Karma (St {step})",
@@ -416,11 +441,11 @@
                 "spellcastingRoll":                                 "Spruchzaubereiprobe",
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
-            
+
             "rolls":                                                "würfelt",
             "rollResult":                                           "Würfelergebnis",
             "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
-            "step":                                                 "Stufe",     
+            "step":                                                 "Stufe",
             "stepModifiers":                                        "Stufen Modifikatoren",
             "successesAchieved":                                    "Gesamt Erfolge",
             "targetDifficulty":                                     "Schwierigkeit",

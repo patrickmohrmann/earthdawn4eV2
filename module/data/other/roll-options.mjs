@@ -195,11 +195,36 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'localize: roll type',
         hint: 'localize: type of this roll, like attackMelee, or threadWeaving',
       } ),
+      rollSubType: new fields.StringField( {  
+        required: false,
+        nullable: true,
+        blank: true,
+        initial: '',
+        label: 'localize: roll sub type',
+        hint: 'localize: subtype of this roll, like attackMelee, or threadWeaving',
+      } ),
+
     };
   }
 
   get totalTarget() {
     return this.target.base + sum( Object.values( this.target.modifiers ) );
+  }
+
+  static fromActor( data, actor, options = {} ) {
+    const devotion = { 
+      pointsUsed: data.devotionRequired ? 1: 0, 
+      available: actor.system.devotion.value,
+      step: actor.system.devotion.step,
+    };
+    const karma = { pointsUsed: actor.system.karma.useAlways ? 1 : 0,
+      available: actor.system.karma.value, 
+      step: actor.system.karma.step 
+    };
+    data.karma = karma;
+    data.devotion = devotion;
+
+    return new EdRollOptions( data, options );
   }
 
   static initTotal( source, attribute, defaultValue ){
