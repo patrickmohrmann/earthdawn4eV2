@@ -17,10 +17,13 @@
         </tr>
       </thead>
       <tbody>
+        {{log this}}
         {{#each this.object.earnings}}
+        {{log this}}
         <tr>
           <td>
-            <input name={{concat "earnings." @index ".date"}} type="text" value="{{formatDate this.date}}" data-dtype="String"/>
+            {{!-- <input name={{concat "earnings." @index ".date"}} type="text" value="{{formatDate this.date}}" data-dtype="String"/> --}}
+            <input name={{concat "earnings." @index ".date"}} type="text" value="{{this.date}}" data-dtype="String" />
           </td>
           <td>
             <input name={{concat "earnings." @index ".description"}} type="text" value="{{this.description}}" data-dtype="String" data-transaction-index="{{@index}}" />

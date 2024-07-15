@@ -120,8 +120,8 @@ export default class ItemEd extends Item {
 
     async _preCreate(data, options, user) {
         //const itemData = await fromUuid(data.uuid);
+        if ( !this.actor || !data ) return;
         const dropItemResult = await ed4eDropItem(this.actor, data);
-        console.log("dropItem", dropItemResult);
     
         if (dropItemResult.bookingResult === "spend" 
             || dropItemResult.bookingResult === "free" 

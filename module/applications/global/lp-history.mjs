@@ -84,37 +84,27 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
     $( this.form ).on( 'click', '.toggle-details', this._toggleDetails.bind( this ) );
 
 
-    $(this.form.querySelector('.add-earning-icon')).on('click', () => {
-      console.log("Binding");
+    // $(this.form.querySelector('.add-earning-icon')).on('click', () => {
+    //   console.log("Binding");
+    //   const amount = 0; 
+    //   const description = ''; 
+    //   const lpBefore = this.actor.system.lp.current;
+    //   const lpAfter = lpBefore + amount;
     
-      // Assuming `amount`, `description` are to be fetched or are predefined
-      const amount = 0; // Placeholder value
-      const description = ''; // Placeholder value
+    //   const transaction = new LpEarningTransactionData({
+    //     amount,
+    //     description,
+    //     lpBefore,
+    //     lpAfter,
+    //   });
     
-      // Calculate lpBefore and lpAfter based on current lp
-      const lpBefore = this.actor.system.lp.current;
-      const lpAfter = lpBefore + amount;
-    
-      // Create a new LpTransactionData instance
-      const transaction = new LpEarningTransactionData({
-        amount,
-        description,
-        lpBefore,
-        lpAfter,
-      });
-    
-      // Ensure the transactions array exists
-      if (!this.actor.system.lp.transactions) {
-        this.actor.system.lp.transactions = []; // Initialize if it doesn't exist
-      }
-    
-      // Add the new transaction
-      this.actor.addLpTransaction("earnings", transaction);
-      console.log("ACTOR LP Transactions: ", this.actor.system.lp.transactions);
-      this.render(true);
+    //   // Add the new transaction
+    //   this.actor.addLpTransaction("earnings", transaction);
+    //   console.log("ACTOR LP Transactions: ", this.actor.system.lp.transactions);
+    //   this.render(true);
       
-      console.log("ACTOR LP ", this.actor.system.lp.earnings);
-    });
+    //   console.log("ACTOR LP ", this.actor.system.lp.earnings);
+    // });
 
   }
   

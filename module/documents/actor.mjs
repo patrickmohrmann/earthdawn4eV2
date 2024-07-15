@@ -844,37 +844,6 @@ export default class ActorEd extends Actor {
 
     async upgradeAbility(ability) {
       const abilityOldLevel = ability.system.level;
-      // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-      // if ( ability.type === "skill" && abilityOldLevel >= 10 ) {
-      //   ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      //   return
-      // } else if ( ability.type === "talent" && abilityOldLevel >= 15 ) {
-      //   ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      //   return
-      // } else if ( ability.type === "devotion" && abilityOldLevel >= 12 ) {
-      //   ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-      //   return
-      // }
-      // const legendPointsCostConfig = ED4E.legendPointsCost;
-      // let requiredLp = 0;
-      // let tier = 0;
-      // if ( ability.system.tier === "novice" ) {
-      //   tier = 0;
-      // } else if ( ability.system.tier === "journeyman" ) {
-      //   tier = 1;
-      // } else if ( ability.system.tier === "warden" ) {
-      //   tier = 2;
-      // } else if ( ability.system.tier === "master" ) {
-      //   tier = 3;
-      // }
-
-      // const versatility = ability.type === "talent" && ability.system.talentCategory === "versatility" && ability.system.edid !== "versatility" ? 1 : 0;
-
-      // if (ability.type === "skill" ) {
-      // requiredLp = legendPointsCostConfig[abilityOldLevel + 2 + tier];
-      // } else {
-      // requiredLp = legendPointsCostConfig[abilityOldLevel + 1 + tier + versatility];
-      // }
       const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
         previousLevel: abilityOldLevel,
         newLevel: abilityOldLevel + 1,
@@ -957,58 +926,85 @@ export default class ActorEd extends Actor {
 
 
   // this prompt will be rebuild later with full complexity
-  async _showLpOptionsPrompt(actor, item, validationData) {
-    
-    return new Promise((resolve) => {
-      const actorName = actor.name;
-      const itemName = item.name;
-      const currentLp = actor.system.lp.current;
-      const requiredLp = validationData.requiredLp;
-      let actorHealth = "is healthy";
-      if ( actor.system.characteristics.health.damage.total > 0 ) {
-        actorHealth = "is not healthy, do you want to increase anyway?"
-      }
-      let buttons = {};
-      if ( item.type === "talent" && validationData.interaction === "create") {
-        buttons = {
-          discipline: {
-            label: "Discipline",
-            callback: () => resolve("discipline")
-          },
-          versatility: {
-            label: "Versatility?",
-            callback: () => resolve("versatility")
-          },
-          optional: {
-            label: "Optional",
-            callback: () => resolve("optional")
-          },
-          free: {
-            label: "Free / Other",
-            callback: () => resolve("free")
-          },
-          cancel: {
-            label: "Cancel",
-            callback: () => resolve("cancel")
-          }
-        };
+async _showLpOptionsPrompt(actor, item, validationData) {
+            
+            return new Promise((resolve) => {
+                const actorName = actor.name;
+                const itemName = item.name;
+                const currentLp = actor.system.lp.current;
+                const requiredLp = validationData.requiredLp;
+                let actorHealth = "is healthy";
+                if (actor.system.characteristics.health.damage.total > 0) {
+                    actorHealth = "is not healthy, do you want to increase anyway?"
+                }
+                let buttons = {};
+                if (item.type === "talent" && validationData.interaction === "create") {
+                    // Initial check for the item itself having an ed-id of "versatility"
+                    if (item.system.edid === "versatility") {
+                        buttons.versatility = {
+                            label: "Versatility",
+                            callback: () => resolve("versatility")
+                        };
+                    } else {
+                        // Define buttons without the "Cancel" button initially
+                        buttons = {
+                            discipline: {
+                                label: "Discipline",
+                                callback: () => resolve("discipline")
+                            },
+                            optional: {
+                                label: "Optional",
+                                callback: () => resolve("optional")
+                            },
+                            free: {
+                                label: "Free / Other",
+                                callback: () => resolve("free")
+                            }
+                        };
+                        // Additional check for any item of type "talent" with an ed-id of "versatility" in the actor's items
+                        const hasVersatilityTalent = actor.items.filter(item => item.type === "talent" && item.system.edid === "versatility");
+                        const numberOfVersatilityTalents = actor.items.filter(item => item.type === "talent" 
+                          && item.system.talentCategory === "versatility" 
+                          && item.system.edid !== "versatility");
 
-      } else {
-        buttons = {
-          free: {
-            label: "Free",
-            callback: () => resolve("free")
-          },
-          spend: {
-            label: "Spend LP",
-            callback: () => resolve("spend")
-          },
-          cancel: {
-            label: "Cancel",
-            callback: () => resolve("cancel")
-          }
-        };
-      }
+                        if ( hasVersatilityTalent.length > 0 ) {
+                          let versatilityMaxLevel = 0;
+                          hasVersatilityTalent.forEach(element => {
+                            versatilityMaxLevel += element.system.level;
+                          });
+                          if ( (versatilityMaxLevel  ) > numberOfVersatilityTalents.length ) {
+                            buttons.versatility = {
+                                label: "Versatility?",
+                                callback: () => resolve("versatility")
+                            };
+                        }
+                      }
+
+
+
+
+
+
+
+
+                    }
+                } else {
+                  buttons = {
+                    free: {
+                      label: "Free",
+                      callback: () => resolve("free")
+                    },
+                    spend: {
+                      label: "Spend LP",
+                      callback: () => resolve("spend")
+                    },
+                  };
+                }
+                // Add the "Cancel" button here to ensure it's always on the right
+                buttons.cancel = {
+                    label: "Cancel",
+                    callback: () => resolve("cancel")
+                }; 
 
       let d = new Dialog({
         title: "LP Options",
@@ -1024,22 +1020,6 @@ export default class ActorEd extends Actor {
       d.render(true);
     });
   }
-
-
-  // async _preCreate(data, options, user) {
-  //   const itemData = await fromUuid(data.uuid);
-  //   const dropItemResult = await ed4eDropItem(this.actor, itemData);
-  //   console.log("dropItem", dropItemResult);
-
-  //   if (dropItemResult.bookingResult === "spend" || dropItemResult.bookingResult === "free" || dropItemResult.bookingResult === "versatility") {
-  //     await this.actor.addItemLpTransaction(itemData, dropItemResult.validationData, dropItemResult.bookingResult);
-  //     if (dropItemResult.bookingResult === "versatility") {
-  //     }
-  //   } else if (dropItemResult.bookingResult === "cancel") {
-  //     return;
-  //   }
-  //   return super._preCreate(data, options, user);
-  // }
 
   async lpValidation ( itemData, actor ) {
     const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);

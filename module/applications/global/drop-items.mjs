@@ -12,6 +12,7 @@ import validateDropItem from "./validation-dropped-items.mjs";
  *                                      validationData: date for the validation
  */
 export default async function ed4eDropItem( actor, itemData) {
+  if ( !actor || !itemData ) return;
     const knacks = ["knackAbility", "knackKarma", "knackManeuver"];
     const spells = ["spell", "spellKnack"];
     const abilities = ["talent", "skill", "devotion"];
