@@ -444,6 +444,15 @@
                 "substitute":                                       "Replaces Strength",
                 "relatedRollType":                                  "counts for Roll Type"
             },
+            "Discipline": {
+                "optionalAbilities":                                "Optional Abilities",
+                "addLevel":                                         "Add Circle",
+                "circle":                                           "Circle",
+                "deleteLevel":                                      "Delete Circle",
+                "disciplineTalents":                                "Discipline Talents",
+                "durability":                                       "Durability",
+                "talentOptionsForTier":                             "Talent Options for"
+            },
             "Header": {
                 "details":                                          "Details",
                 "description":                                      "Description",
@@ -454,12 +463,24 @@
                 "type":                                             "Type"
             },
             "Namegiver":{
+                "burrow":                                           "burrow",
+                "charismaValue":                                    "Charisma Value",
+                "climb":                                            "climb",
+                "dexterityValue":                                   "Dexterity Value",
+                "fly":                                              "fly",
+                "karmaModifier":                                    "Karma Modifier",
+                "perceptionValue":                                  "Perception Value",
+                "strengthValue":                                    "Strength Value",
+                "swim":                                             "swim",
+                "toughnessValue":                                   "Toughness Value",
+                "walk":                                             "walk",
                 "WeaponSize": {
                     "OneHanded.min":                                "Minimal One hand Weapon Size",
                     "OneHanded.max":                                "Maximum One hand Weapon Size",
                     "TwoHanded.min":                                "Minimal two hand Weapon Size",
                     "TwoHanded.max":                                "Maximum two hand Weapon Size"
-                }
+                },
+                "willpowerValue":                                   "Willpower Value"
             },
             "Navigator": {
                 "advancement":                                      "advancement",

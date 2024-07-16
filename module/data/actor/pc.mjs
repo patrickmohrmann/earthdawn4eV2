@@ -464,7 +464,7 @@ export default class PcData extends NamegiverTemplate.mixin(
      */
     #prepareDerivedKarma() {
         const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
-        const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmamodifier ?? 0;
+        const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmaModifier ?? 0;
 
         this.karma.max = karmaModifier * highestCircle + this.karma.freeAttributePoints;
     }

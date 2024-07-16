@@ -1,19 +1,19 @@
 <div id="base-information-discipline-item" class="item__left--main">
-    <h3>{{localize "ED.General.coreData"}}</h3>
+    <h3>{{localize "ED.Item.Header.general"}}</h3>
     {{!-- Circle / Rank --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.circle"}}:</label>
-        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
+        <label class="partial__40--left">{{localize "ED.Item.Discipline.circle"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.level" type="text" value="{{item.system.level}}"
             data-dtype="Number">
     </div>
     {{!-- durability --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.durability"}}:</label>
-        <input class="input__circle-input" name="system.durability" type="text" value="{{item.system.durability}}"
+        <label class="partial__40--left">{{localize "ED.Item.Discipline.durability"}}:</label>
+        <input class="input__circle-input partial__55--right" name="system.durability" type="text" value="{{item.system.durability}}"
             data-dtype="Number">
     </div>
 </div>
 <div id="description-discipline-item" class="item__right--main sheet__editor">
-    <h3>{{localize "ED.Item.General.description"}}</h3>
+    <h3>{{localize "ED.Item.Header.description"}}</h3>
     {{> "systems/ed4e/templates/global/editor.hbs"}}
 </div>

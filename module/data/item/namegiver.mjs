@@ -11,7 +11,7 @@ import { MappingField } from "../fields.mjs";
  * @property {number} attributeValues.perceptionValue           perception value
  * @property {number} attributeValues.willpowerValue            willpower value
  * @property {number} attributeValues.charismaValue             charisma value
- * @property {number} karmamodifier                             initiative value
+ * @property {number} karmaModifier                             initiative value
  * @property {object} movement                                  movement Schema Object
  * @property {number} movement.walk                             movement type walk modifications
  * @property {number} movement.fly                              movement type fly modifications
@@ -39,13 +39,13 @@ export default class NamegiverData extends SystemDataModel.mixin(
                   initialKeysOnly: true,
                   label: "ED.items.namegiver.attributes"
               } ),
-            karmamodifier: new fields.NumberField( {
+            karmaModifier: new fields.NumberField( {
                 required: true,
                 nullable: false,
                 min: 0,
                 initial: 0,
                 integer: true,
-                label: "ED.Item.Namegiver.karmamodifier"
+                label: "ED.Item.Namegiver.karmaModifier"
             } ),
             ...MovementFields.movement,
             weightMultiplier: new fields.NumberField( {

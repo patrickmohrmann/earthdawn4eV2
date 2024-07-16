@@ -979,14 +979,6 @@ async _showLpOptionsPrompt(actor, item, validationData) {
                             };
                         }
                       }
-
-
-
-
-
-
-
-
                     }
                 } else {
                   buttons = {

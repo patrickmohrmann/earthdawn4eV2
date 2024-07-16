@@ -499,6 +499,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global/card-options-effect.hbs",
     "systems/ed4e/templates/global/card-options-enhance.hbs",
     "systems/ed4e/templates/global/effect-card.hbs",
+    "systems/ed4e/templates/global/card-options-class-upgrade.hbs",
 
     // Character Generation
     "systems/ed4e/templates/actor/generation/namegiver-selection.hbs",

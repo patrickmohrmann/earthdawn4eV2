@@ -1,39 +1,39 @@
 {{!-- Target Difficulty --}}
 <div class="item-data__input--line">
     <label class="partial__40--left">{{localize "X-FixedDifficulty"}}:</label>
-    <input class="input__number-input" name="system.difficulty.fixed" type="text"
+    <input class="partial__55--right" name="system.difficulty.fixed" type="text"
         value="{{item.system.difficulty.fixed}}" data-dtype="Number">
 </div>
 {{!-- Target Difficulty --}}
 <div class="item-data__input--line">
     <label class="partial__40--left">{{localize "X-TargetDifficulty"}}:</label>
-    <select name="system.difficulty.target">
+    <select class="partial__55--right" name="system.difficulty.target">
         {{selectOptions config.targetDifficulty selected=item.system.difficulty.target blank="" localize=true }}
     </select>
 </div>
 {{!-- Group Difficulty --}}
 <div class="item-data__input--line">
     <label class="partial__40--left">{{localize "X-GroupDifficulty"}}:</label>
-    <select name="system.difficulty.group">
+    <select class="partial__55--right" name="system.difficulty.group">
         {{selectOptions config.groupDifficulty selected=item.system.difficulty.group blank="" localize=true }}
     </select>
 </div>
 {{!-- abilty action type --}}
 <div class="item-data__input--line">
     <label class="partial__40--left">{{localize "ED.Item.Ability.rollType"}}:</label>
-    <select name="system.rollType">
+    <select class="partial__55--right" name="system.rollType">
         {{selectOptions config.rollTypes selected=item.system.rollType blank="" localize=true }}
     </select>
 </div>
 {{!-- Damage ability yes / now --}}
 <div class="item-data__input--line">
-    <label>{{localize "ED.Item.Ability.damage"}}:</label>
+    <label class="partial__40--left">{{localize "ED.Item.Ability.damage"}}:</label>
     <input class="input__circle-input partial__55--right" type="checkbox" name="system.damageAbilities.damage" {{checked
         item.system.damageAbilities.damage }}>
 </div>
 {{!-- Damage adder yes / now --}}
 <div class="item-data__input--line">
-    <label>{{localize "ED.Item.Ability.substitute"}}:</label>
+    <label class="partial__40--left">{{localize "ED.Item.Ability.substitute"}}:</label>
     <input class="input__circle-input partial__55--right" type="checkbox" name="system.damageAbilities.substitute" {{checked
         item.system.damageAbilities.substitute }}>
 </div>
@@ -41,7 +41,7 @@
 {{!-- Strength SUbstitute is based on the rolltype --}}
 <div class="item-data__input--line">
     <label class="partial__40--left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
-    <select name="system.damageAbilities.relatedRollType">
+    <select class="partial__55--right" name="system.damageAbilities.relatedRollType">
         {{selectOptions config.combatTypes selected=item.system.damageAbilities.relatedRollType localize=true }}
     </select>
 </div>

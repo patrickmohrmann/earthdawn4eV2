@@ -430,6 +430,15 @@
                 "relatedRollType":                                  "gilt für Aktionstyp"
 
             },
+            "Discipline": {
+                "optionalAbilities":                                "Optionale Talente",
+                "addLevel":                                         "Füge eine Kreis hinzu",
+                "circle":                                           "Kreis",
+                "deleteLevel":                                      "Lösche Stufe",
+                "disciplineTalents":                                "Disziplin Talente",
+                "durability":                                       "Unverwundbarkeit",
+                "talentOptionsForTier":                             "Talent Optionen für"
+            },
             "Header": {
                 "activeUser":                                       "Aktive Spieler",
                 "inactiveUser":                                     "Inaktive Spieler",
@@ -457,12 +466,24 @@
                 "strain":                                           "Überanstrengung"
             },
             "Namegiver":{
+                "burrow":                                           "Buddeln",
+                "charismaValue":                                    "Charisma Wert",
+                "climb":                                            "Klettern",
+                "dexterityValue":                                   "Geschick Wert",
+                "fly":                                              "Fliegen",
+                "karmaModifier":                                    "Karma Modifikator",
+                "perceptionValue":                                  "Wahrnehmung Wert",
+                "strengthValue":                                    "Stärke Wert",
+                "swim":                                             "Schwimmen",
+                "toughnessValue":                                   "Zähigkeit Wert",
+                "walk":                                             "Zu Fuß",
                 "WeaponSize": {
                     "OneHanded.min":                                "Minimale Einhandwaffengröße",
                     "OneHanded.max":                                "Maximale Einhandwaffengröße",
                     "TwoHanded.min":                                "Minimale Zweihandwaffengröße",
                     "TwoHanded.max":                                "Maximale Zweihandwaffengröße"
-                }
+                },
+                "willpowerValue":                                   "Willenskraft Wert"
             },
             "Navigator": {
                 "advancement":                                      "Fortschritt",

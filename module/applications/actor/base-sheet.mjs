@@ -119,7 +119,7 @@ export default class ActorSheetEd extends ActorSheet {
 
     html.find( ".item-upgrade__ability" ).click( this._onAbilityEnhancement.bind( this ) );
 
-
+    html.find( ".item-upgrade__class" ).click( this._onClassEnhancement.bind( this ) );
 
      // NEW ######################################################
      html.on('click', '.group-header', event => {
@@ -202,6 +202,16 @@ async _onAbilityEnhancement( event ) {
   const li = event.currentTarget.closest( ".item-id" );
   const ability = this.actor.items.get( li.dataset.itemId );
   this.actor.upgradeAbility( ability );
+}
+
+/**
+ * @description This function is used to upgrade Classes
+ */
+async _onClassEnhancement( event ) {
+  event.preventDefault();
+  const li = event.currentTarget.closest( ".item-id" );
+  const ability = this.actor.items.get( li.dataset.itemId );
+  this.actor.upgradeClass( ability );
 }
 
   /**
