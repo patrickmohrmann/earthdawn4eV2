@@ -902,12 +902,39 @@ export default class ActorEd extends Actor {
     const classOldLevel = classItem.system.level;
     const classNewLevel = classOldLevel + 1;
     const classNewLevelIndex = classNewLevel - 1;
+    
+    // validate if the class can be upgraded
+    const disciplineitems = this.items.filter(item => item.type === "talent" && item.system.talentCategory === "discipline");
+    if ( classOldLevel >= 15 ) {
+      ui.notifications.warn("Klasse hat bereits das maximale Level erreicht");
+      return;
+    } 
+    let requiredLp = 0;
+      if ( classNewLevel < 5 ) {
+        requiredLp = 100;
+      } else if ( classNewLevel >= 5 && classNewLevel < 9 ) {
+        requiredLp = 200;
+      } else if ( classNewLevel >= 9 && classNewLevel < 13 ) {
+        requiredLp = 300;
+      } else if ( classNewLevel >= 13 ) {
+        requiredLp = 500;
+      }
     // classNewLevel is reduced by 1 to get the correct index for the class level
     const newLevelTier = classItem.system.advancement.levels[classNewLevelIndex].tier;
     const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
-    if (settingOption === "allTalents") {
+    if (settingOption === "disciplineTalents") {
       ui.notifications.warn("Basis = Disziplin Talente für den Kreisaufstieg");
-    } else if (settingOption === "disciplineTalents") {
+      for ( const item of disciplineitems ) {
+        if ( item.system.level < classNewLevel ) {  
+          ui.notifications.warn(`Talent ${item.name} hat nicht das erforderliche Level`);
+          return
+        }
+      }
+      if ( requiredLp > this.system.lp.current ) {
+          ui.notifications.warn("Nicht genügend Legendpunkte");
+          return;
+        }
+    } else if (settingOption === "allTalents") {
       ui.notifications.warn("Alle Talente für den kreisaufstieg verwenden");
     } else if (settingOption === "allTalentsHouseRule") {
       ui.notifications.warn("Alle Talente ohne verringerte kosten - Hausregel");
@@ -977,11 +1004,6 @@ export default class ActorEd extends Actor {
       talentOptions = [...noviceTalents, ...journeymanTalents, ...wardenTalents, ...masterTalents];
     }
 
-
-
-
-    // Prepare options for the dialog
-
     const optionsHtml = talentOptions.map((talent, index) => `<option value="${index}">${talent.name}</option>`).join('');
 
     // Create and render the dialog
@@ -994,28 +1016,46 @@ export default class ActorEd extends Actor {
           callback: async (html) => {
             const selectedIndex = parseInt(html.find('#talent-choice').val());
             const selectedTalent = talentOptions[selectedIndex];
-            this.createEmbeddedDocuments('Item', [selectedTalent], { noPrompt: true, talentCategory: "optional", tier: newLevelTier })
+            await this.createEmbeddedDocuments('Item', [selectedTalent], { noPrompt: true, talentCategory: "optional", tier: newLevelTier });
             if (classItem.type === "discipline") {
               for (const items of disciplineTalents) {
-                this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "discipline", tier: newLevelTier })
+                await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "discipline", tier: newLevelTier });
               }
             }
             for (const items of freeTalents) {
-              this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "free", tier: newLevelTier })
+              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "free", tier: newLevelTier });
             }
             for (const items of specialAbilities) {
-              this.createEmbeddedDocuments('Item', [items], { noPrompt: true, })
+              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
             }
             for (const items of effects) {
-              this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "discipline", tier: newLevelTier })
+              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "discipline", tier: newLevelTier });
             }
-
+    
+            // Update the class level
+            await classItem.update({ "system.level": classNewLevel });
+            await this.upgradeFreeTalents(classItem, classNewLevel);
           }
-        }
+        },
+        cancel: {
+          label: "Cancel",
+          callback: () => { 
+            return;
+          }
+        },
       },
       default: "ok"
     }).render(true);
   }
+
+  async upgradeFreeTalents(classItem, newLevel) {
+    const freeTalents = this.items.filter(items => items.type === "talent" && items.system.talentCategory === "free");
+    for (const talent of freeTalents) {
+      talent.updateSource({"system.level": newLevel});
+  }
+}
+
+
 
   /**
    * 
