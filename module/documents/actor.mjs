@@ -1004,7 +1004,15 @@ export default class ActorEd extends Actor {
       talentOptions = [...noviceTalents, ...journeymanTalents, ...wardenTalents, ...masterTalents];
     }
 
-    const optionsHtml = talentOptions.map((talent, index) => `<option value="${index}">${talent.name}</option>`).join('');
+    let filteredTalentOptions = [];
+for (const talent of talentOptions) {
+  const isDuplicate = await this.checkDuplicateAbilityName(talent);
+  if (!isDuplicate) {
+    filteredTalentOptions.push(talent);
+  }
+}
+
+    const optionsHtml = filteredTalentOptions.map((talent, index) => `<option value="${index}">${talent.name}</option>`).join('');
 
     // Create and render the dialog
     new Dialog({
@@ -1015,7 +1023,7 @@ export default class ActorEd extends Actor {
           label: "Confirm",
           callback: async (html) => {
             const selectedIndex = parseInt(html.find('#talent-choice').val());
-            const selectedTalent = talentOptions[selectedIndex];
+            const selectedTalent = filteredTalentOptions[selectedIndex];
             await this.createEmbeddedDocuments('Item', [selectedTalent], { 
               noPrompt: true, 
               talentCategory: "optional", 
@@ -1069,9 +1077,16 @@ export default class ActorEd extends Actor {
   async upgradeFreeTalents(classItem, newLevel) {
     const freeTalents = this.items.filter(items => items.type === "talent" && items.system.talentCategory === "free");
     for (const talent of freeTalents) {
+      if ( classItem.uuid === talent.system.sourceClass.identifier ) {
       talent.updateSource({"system.level": newLevel});
+      }
+    }
   }
-}
+
+  async checkDuplicateAbilityName(ability) {
+    const itemsOfType = this.items.filter(item => item.type === ability.type);
+    return itemsOfType.some(item => item.name === ability.name);
+  }
 
 
 
