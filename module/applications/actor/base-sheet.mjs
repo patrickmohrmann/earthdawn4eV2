@@ -210,8 +210,8 @@ async _onAbilityEnhancement( event ) {
 async _onClassEnhancement( event ) {
   event.preventDefault();
   const li = event.currentTarget.closest( ".item-id" );
-  const ability = this.actor.items.get( li.dataset.itemId );
-  this.actor.upgradeClass( ability );
+  const classItem = this.actor.items.get( li.dataset.itemId );
+  this.actor.upgradeClass( classItem );
 }
 
   /**

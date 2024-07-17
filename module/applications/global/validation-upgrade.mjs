@@ -27,12 +27,13 @@ export default async function validateAbilityUpgrade(item) {
         tier = 3;
       }
 
-      const versatility = item.type === "talent" && item.system.talentCategory === "versatility" && item.system.edid !== "versatility" ? 1 : 0;
+      // const versatility = item.type === "talent" && item.system.talentCategory === "versatility" && item.system.edid !== "versatility" ? 1 : 0;
 
       if (item.type === "skill" ) {
       requiredLp = legendPointsCostConfig[itemOldLevel + 2 + tier];
       } else {
-      requiredLp = legendPointsCostConfig[itemOldLevel + 1 + tier + versatility];
+      // requiredLp = legendPointsCostConfig[itemOldLevel + 1 + tier + versatility];
+      requiredLp = legendPointsCostConfig[itemOldLevel + 1 + tier];
       }
 
       const validationData = {

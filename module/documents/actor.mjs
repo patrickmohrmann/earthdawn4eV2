@@ -875,6 +875,118 @@ export default class ActorEd extends Actor {
       return this.addLpTransaction("spendings", transactionData);
     }
 
+    /**
+     * @inheritdoc
+     * @UserFunction #UF_LPTracking-upgradeClass
+     */
+    async upgradeClass( classItem ) {
+      // get system setting for upgrade .. Later
+      const classOldLevel = classItem.system.level;
+      const classNewLevel = classOldLevel + 1;
+      // classNewLevel is reduced by 1 to get the correct index for the class level
+      const newLevelTier = classItem.system.advancement.levels[classNewLevel-1].tier;
+      const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
+      if ( settingOption === "allTalents" ) {
+        ui.notifications.warn("Basis = Disziplin Talente für den Kreisaufstieg");
+      } else if (settingOption === "disciplineTalents" ) {
+        ui.notifications.warn("Alle Talente für den kreisaufstieg verwenden");
+      } else if (settingOption === "allTalentsHouseRule" ) {
+        ui.notifications.warn("Alle Talente ohne verringerte kosten - Hausregel");
+      }
+
+      // get prompt with all optional talents from that class level and let the user choose
+      // system.advancement.abilityOptions.novice
+
+
+      const currentLevel = classItem.system.level;
+      const disciplineTalentIds = classItem.system.advancement.levels[classOldLevel].abilities.class;
+      let disciplineTalent = [];
+  for (const uuid of disciplineTalentIds) {
+    let talent = await fromUuid(uuid);
+    disciplineTalent.push(talent);
+  }
+
+
+  let talentOptions = [];
+
+  // Determine which talent options to include based on the current level
+  console.log("Current Level:", currentLevel);
+
+  // Convert Set to Array and fetch item details
+  const noviceIds = classItem.system.advancement.abilityOptions.novice;
+  const journeymanIds = classItem.system.advancement.abilityOptions.journeyman
+  const wardenIds = classItem.system.advancement.abilityOptions.warden;
+  const masterIds = classItem.system.advancement.abilityOptions.master
+
+  console.log("TYPEOPFNOVICE", typeof noviceIds);
+  let noviceTalents = [];
+  for (const uuid of noviceIds) {
+    let talent = await fromUuid(uuid);
+    noviceTalents.push(talent);
+  }
+  let journeymanTalents = [];
+  for (const uuid of journeymanIds) {
+    let talent = await fromUuid(uuid);
+    journeymanTalents.push(talent);
+  }
+  let wardenTalents = [];
+  for (const uuid of wardenIds) {
+    let talent = await fromUuid(uuid);
+    wardenTalents.push(talent);
+  }
+  let masterTalents = [];
+  for (const uuid of masterIds) {
+    let talent = await fromUuid(uuid);
+    masterTalents.push(talent);
+  }
+
+// console.log("Novice Talents:", noviceTalents);
+// console.log("Journeyman Talents:", journeymanTalents);
+// console.log("Warden Talents:", wardenTalents);
+// console.log("Master Talents:", masterTalents);
+
+  if (currentLevel >= 1 && currentLevel <= 3) {
+    talentOptions = noviceTalents;
+  } else if (currentLevel >= 4 && currentLevel <= 7) {
+    talentOptions = [...noviceTalents, ...journeymanTalents];
+  }
+
+  console.log("Talent Options Length:", talentOptions.length);
+      
+      // Debugging: Log the type and content of talentOptions
+      console.log("Type of talentOptions:", typeof talentOptions);
+      console.log("Content of talentOptions:", talentOptions);
+      
+      // Prepare options for the dialog
+      const optionsHtml = talentOptions.map((talent, index) => `<option value="${index}">${talent.name}</option>`).join('');
+      
+      // Create and render the dialog
+      new Dialog({
+        title: "Choose a Talent",
+        content: `<form><div class="form-group"><label>Talent:</label><select id="talent-choice">${optionsHtml}</select></div></form>`,
+        buttons: {
+          ok: {
+            label: "Confirm",
+            callback: async (html) => {
+              const selectedIndex = parseInt(html.find('#talent-choice').val());
+              const selectedTalent = talentOptions[selectedIndex];
+              // Logic to add the selected talent to the actor goes here
+              console.log("Selected Talent:", selectedTalent); // Replace this with actual add to actor logic
+              
+              this.createEmbeddedDocuments('Item', [selectedTalent] , { noPrompt: true, talentCategory: "optional", tier: newLevelTier })
+              if ( classItem.type === "discipline" ) {
+                for (const items of disciplineTalent ) {
+                  this.createEmbeddedDocuments('Item', [items] , { noPrompt: true, talentCategory: "discipline", tier: newLevelTier })
+                }
+              
+              }
+            }
+          }
+        },
+        default: "ok"
+      }).render(true);
+    }
+
   /**
    * 
    * @param {object} item             item to be added
