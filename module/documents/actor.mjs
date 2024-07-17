@@ -924,11 +924,12 @@ export default class ActorEd extends Actor {
     const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
     if (settingOption === "disciplineTalents") {
       ui.notifications.warn("Basis = Disziplin Talente für den Kreisaufstieg");
-      for ( const item of disciplineitems ) {
-        if ( item.system.level < classNewLevel ) {  
-          ui.notifications.warn(`Talent ${item.name} hat nicht das erforderliche Level`);
-          return
-        }
+      const relevantItems = disciplineitems.filter(item => item.system.sourceClass.identifier === classItem.uuid);
+      const allItemsMeetLevelRequirement = relevantItems.every(item => item.system.level >= classNewLevel);
+
+      if (!allItemsMeetLevelRequirement) {
+        // If any item does not meet the level requirement, notify the user
+      return ui.notifications.warn(`Mindestens ein Talent hat nicht das erforderliche Level.`);
       }
       if ( requiredLp > this.system.lp.current ) {
           ui.notifications.warn("Nicht genügend Legendpunkte");
