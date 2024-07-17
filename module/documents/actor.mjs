@@ -1016,20 +1016,38 @@ export default class ActorEd extends Actor {
           callback: async (html) => {
             const selectedIndex = parseInt(html.find('#talent-choice').val());
             const selectedTalent = talentOptions[selectedIndex];
-            await this.createEmbeddedDocuments('Item', [selectedTalent], { noPrompt: true, talentCategory: "optional", tier: newLevelTier });
+            await this.createEmbeddedDocuments('Item', [selectedTalent], { 
+              noPrompt: true, 
+              talentCategory: "optional", 
+              tier: newLevelTier, 
+              classLevel: classNewLevel,
+              classIdentifier: classItem.uuid
+            });
             if (classItem.type === "discipline") {
               for (const items of disciplineTalents) {
-                await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "discipline", tier: newLevelTier });
+                await this.createEmbeddedDocuments('Item', [items], { 
+                  noPrompt: true, 
+                  talentCategory: "discipline", 
+                  tier: newLevelTier, 
+                  classLevel: classNewLevel,
+                  classIdentifier: classItem.uuid
+                });
               }
             }
             for (const items of freeTalents) {
-              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "free", tier: newLevelTier });
+              await this.createEmbeddedDocuments('Item', [items], { 
+                noPrompt: true, 
+                talentCategory: "free", 
+                tier: newLevelTier, 
+                classLevel: classNewLevel,
+                classIdentifier: classItem.uuid 
+              });
             }
             for (const items of specialAbilities) {
               await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
             }
             for (const items of effects) {
-              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, talentCategory: "discipline", tier: newLevelTier });
+              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
             }
     
             // Update the class level

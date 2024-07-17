@@ -122,7 +122,12 @@ export default class ItemEd extends Item {
         //const itemData = await fromUuid(data.uuid);
         if ( !this.actor || !data ) return;
         if ( options.noPrompt === true ) {
-          this.updateSource( { "system.talentCategory": options.talentCategory, "system.tier": options.tier } );
+          this.updateSource( { 
+            "system.talentCategory": options.talentCategory, 
+            "system.tier": options.tier,
+            "system.sourceClass.identifier": options.classIdentifier,
+            "system.sourceClass.levelAdded": options.classLevel,
+          } );
         } else {
           const dropItemResult = await ed4eDropItem(this.actor, data);
       

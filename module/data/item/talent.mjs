@@ -59,6 +59,24 @@ export default class TalentData extends AbilityTemplate.mixin(
                 label: "ED.Item.Header.magicTalent",
                 hint: "X.Talent information for spellcasting",
             } ),
+            sourceClass: new fields.SchemaField( {
+                identifier: new fields.StringField( {
+                    required: true,
+                    nullable: true,
+                    blank: true,
+                    label: "ED.Item.Talent.sourceClassIdentifier",
+                    hint: "X.the class that the talent belongs to",
+                } ),
+                levelAdded: new fields.NumberField( {
+                    required: true,
+                    nullable: true,
+                    min: 1,
+                    initial: 1,
+                    integer: true,
+                    label: "ED.Item.Class.levelAdded",
+                    hint: "X. the class level the talent is added to the Actor",
+                } ), 
+            } ),
         } );
     }
 
