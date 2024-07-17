@@ -156,7 +156,7 @@ export default class ItemSheetEd extends ItemSheet {
    */
   _onEffectDelete(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest('.item-name');
+    const li = event.currentTarget.closest('.item-id');
     const effect = this.item.effects.get(li.dataset.itemId);
     if (!effect) return;
     return effect.deleteDialog();
@@ -170,7 +170,7 @@ export default class ItemSheetEd extends ItemSheet {
    */
   _onEffectEdit(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest('.item-name');
+    const li = event.currentTarget.closest('.item-id');
     const effect = this.item.effects.get(li.dataset.itemId);
     return effect.sheet?.render(true);
   }
