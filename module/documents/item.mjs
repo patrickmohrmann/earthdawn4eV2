@@ -152,44 +152,44 @@ export default class ItemEd extends Item {
               || dropItemResult.bookingResult === "discipline"
               || dropItemResult.bookingResult === "optional") {
             await this.actor.addItemLpTransaction(data, dropItemResult.validationData, dropItemResult.bookingResult);
-            if (dropItemResult.bookingResult === "versatility") {
-              // Trigger a dialog for tier selection if bookingResult is "versatility"
-              // versatility talents count always 1 higher for tier selection 
-              const tierSelection = await new Promise((resolve) => {
-                  new Dialog({
-                      title: "Select Tier",
-                      content: `<form>
-                                  <div class="form-group">
-                                      <label for="tier">Tier:</label>
-                                      <select id="tier" name="tier">
-                                          <option value="journeyman">${game.i18n.localize('ED.Config.Tier.journeyman')}</option>
-                                          <option value="warden">${game.i18n.localize('ED.Config.Tier.warden')}</option>
-                                          <option value="master">${game.i18n.localize('ED.Config.Tier.master')}</option>
-                                      </select>
-                                  </div>
-                                </form>`,
-                      buttons: {
-                          ok: {
-                              label: "Confirm",
-                              callback: (html) => resolve(html.find("#tier").val())
-                          }
-                      },
-                      default: "ok",
-                      close: () => resolve(null)
-                  }).render(true);
-              });
+              if (dropItemResult.bookingResult === "versatility") {
+                // Trigger a dialog for tier selection if bookingResult is "versatility"
+                // versatility talents count always 1 higher for tier selection 
+                const tierSelection = await new Promise((resolve) => {
+                    new Dialog({
+                        title: "Select Tier",
+                        content: `<form>
+                                    <div class="form-group">
+                                        <label for="tier">Tier:</label>
+                                        <select id="tier" name="tier">
+                                            <option value="journeyman">${game.i18n.localize('ED.Config.Tier.journeyman')}</option>
+                                            <option value="warden">${game.i18n.localize('ED.Config.Tier.warden')}</option>
+                                            <option value="master">${game.i18n.localize('ED.Config.Tier.master')}</option>
+                                        </select>
+                                    </div>
+                                  </form>`,
+                        buttons: {
+                            ok: {
+                                label: "Confirm",
+                                callback: (html) => resolve(html.find("#tier").val())
+                            }
+                        },
+                        default: "ok",
+                        close: () => resolve(null)
+                    }).render(true);
+                });
 
-              if (tierSelection) {
-                  // Update the item with the selected tier
-                  this.updateSource({ 
-                    "system.tier": tierSelection, 
-                    "system.talentCategory": "versatility"
-                  });
-              } else {
-                  // Handle case where user cancels tier selection
-                  return false;
-              }
-          }
+                if (tierSelection) {
+                    // Update the item with the selected tier
+                    this.updateSource({ 
+                      "system.tier": tierSelection, 
+                      "system.talentCategory": "versatility"
+                    });
+                } else {
+                    // Handle case where user cancels tier selection
+                    return false;
+                }
+            }
             if (dropItemResult.bookingResult === "discipline") {
               this.updateSource({
                 "system.talentCategory": "discipline"
@@ -205,6 +205,12 @@ export default class ItemEd extends Item {
                 "system.talentCategory": "optional"
               });
             }
+          } if (dropItemResult.bookingResult === "addDiscipline") {
+            this.updateSource({
+              "system.talentCategory": "discipline",
+              "system.disciplineIndex": dropItemResult.validationData.disciplineIndex,
+              "system.level": 0
+            });
           } else if (dropItemResult.bookingResult === "cancel") {
             return false;
           }

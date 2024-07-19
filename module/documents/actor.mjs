@@ -851,7 +851,7 @@ export default class ActorEd extends Actor {
       });
       let requiredLp = 0;
       const newIncrease = abilityOldLevel + 1
-      const validationData = await validateAbilityUpgrade(ability);
+      const validationData = await validateAbilityUpgrade(ability, this);
       const validateResult = await this._showLpOptionsPrompt (this, ability, validationData);
       if ( validateResult === "free" ) {
         requiredLp = 0;
@@ -874,25 +874,6 @@ export default class ActorEd extends Actor {
       await ability.update({ [`system.level`]: newIncrease });
       return this.addLpTransaction("spendings", transactionData);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * @inheritdoc
@@ -924,7 +905,10 @@ export default class ActorEd extends Actor {
     const currentTier = classItem.system.advancement.levels[classNewLevelIndex].tier;
     //// AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
     //// das muss doch mit der Config funkionieren
+    let newLevelTier = "";
     let currentIndex = 0;
+    if ( disciplineIndex > 1 ) {
+    
     if ( currentTier === "novice" ) {
       currentIndex = 1;
     } else if ( currentTier === "journeyman" ) {
@@ -938,7 +922,7 @@ export default class ActorEd extends Actor {
       return;
     }
 
-    let newLevelTier = "";
+    
     if ( disciplineIndex === 2 ) {
       newLevelTier = currentIndex + 1;
      } else if ( disciplineIndex === 3 ) {
@@ -946,7 +930,7 @@ export default class ActorEd extends Actor {
      } else if ( disciplineIndex >= 4 ) {
       newLevelTier = currentIndex + 3;
      } else { 
-      newLevelTier = classTier
+      newLevelTier = 1
      }
 
      if ( newLevelTier > 4 ) {
@@ -959,10 +943,12 @@ export default class ActorEd extends Actor {
         newLevelTier = "journeyman";  
       } else if ( newLevelTier === 3 ) {
         newLevelTier = "warden";
-      }
-      else if ( newLevelTier === 4 ) {
+      } else if ( newLevelTier === 4 ) {
         newLevelTier = "master";
       }
+    } else {
+      newLevelTier = currentTier;
+    }
 
     const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
     if (settingOption === "disciplineTalents") {
@@ -1050,7 +1036,7 @@ export default class ActorEd extends Actor {
 
     let filteredTalentOptions = [];
 for (const talent of talentOptions) {
-  const isDuplicate = await this.checkDuplicateAbilityName(talent);
+  const isDuplicate = await this.checkDuplicateAbility(talent);
   if (!isDuplicate) {
     filteredTalentOptions.push(talent);
   }
@@ -1075,18 +1061,21 @@ for (const talent of talentOptions) {
               classLevel: classNewLevel,
               classIdentifier: classItem.uuid
             });
-            if (classItem.type === "discipline") {
-              for (const items of newDisciplineTalents) {
-                await this.createEmbeddedDocuments('Item', [items], { 
-                  noPrompt: true, 
-                  talentCategory: "discipline", 
-                  tier: newLevelTier, 
-                  classLevel: classNewLevel,
-                  classIdentifier: classItem.uuid
-                });
-              }
+            for (const items of newDisciplineTalents) {
+              const isDuplicate = await this.checkDuplicateAbility(items);
+              if (!isDuplicate) {
+              await this.createEmbeddedDocuments('Item', [items], { 
+                noPrompt: true, 
+                talentCategory: "discipline", 
+                tier: newLevelTier, 
+                classLevel: classNewLevel,
+                classIdentifier: classItem.uuid
+              });
+            }
             }
             for (const items of freeTalents) {
+              const isDuplicate = await this.checkDuplicateAbility(items);
+              if (!isDuplicate) {
               await this.createEmbeddedDocuments('Item', [items], { 
                 noPrompt: true, 
                 talentCategory: "free", 
@@ -1095,12 +1084,19 @@ for (const talent of talentOptions) {
                 classIdentifier: classItem.uuid 
               });
             }
+          }
             for (const items of specialAbilities) {
+              const isDuplicate = await this.checkDuplicateAbility(items);
+              if (!isDuplicate) {
               await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
             }
+          }
             for (const items of effects) {
+              const isDuplicate = await this.checkDuplicateAbility(items);
+              if (!isDuplicate) {
               await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
             }
+          }
     
             // Update the class level
             await classItem.update({ "system.level": classNewLevel });
@@ -1127,9 +1123,9 @@ for (const talent of talentOptions) {
     }
   }
 
-  async checkDuplicateAbilityName(ability) {
+  async checkDuplicateAbility(ability) {
     const itemsOfType = this.items.filter(item => item.type === ability.type);
-    return itemsOfType.some(item => item.name === ability.name);
+    return itemsOfType.some(item => item.name === ability.name && item.system.edid !== "thread-weaving" && item.system.edid !== "matrix");
   }
 
 
@@ -1239,6 +1235,13 @@ async _showLpOptionsPrompt(actor, item, validationData) {
                         }
                       }
                     }
+                } else if (item.type === "discipline") {
+                    buttons = {
+                        confirm: {
+                            label: "confirm",
+                            callback: () => resolve("addDiscipline")
+                        }
+                    };
                 } else {
                   buttons = {
                     free: {

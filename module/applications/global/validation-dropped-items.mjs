@@ -67,10 +67,11 @@ export default async function validateDropItem(actor, item) {
       }
     // threads
     } else if (item.type === "discipline") {
-      
+        const disciplineItems = actor.items.filter(item => item.type === 'discipline');
+        const disciplineIndex = disciplineItems.length;
         validationData = {
           requiredLp: 0,
-          
+          disciplineIndex: disciplineIndex + 1,
           interaction: "create",
         }
     } else if ( item.type === "thread" ) {
