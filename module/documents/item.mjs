@@ -119,7 +119,6 @@ export default class ItemEd extends Item {
     }
 
     async _preCreate(data, options, user) {
-        //const itemData = await fromUuid(data.uuid);
         if ( !this.actor || !data ) return;
         if ( options.noPrompt === true ) {
           this.updateSource( { 
@@ -137,10 +136,6 @@ export default class ItemEd extends Item {
               || dropItemResult.bookingResult === "discipline"
               || dropItemResult.bookingResult === "optional") {
             await this.actor.addItemLpTransaction(data, dropItemResult.validationData, dropItemResult.bookingResult);
-            // if (dropItemResult.bookingResult === "versatility") {
-            //   this.updateSource({"system.talentCategory": "versatility"});
-
-            // }
             if (dropItemResult.bookingResult === "versatility") {
               // Trigger a dialog for tier selection if bookingResult is "versatility"
               // versatility talents count always 1 higher for tier selection 

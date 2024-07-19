@@ -211,7 +211,13 @@ async _onClassEnhancement( event ) {
   event.preventDefault();
   const li = event.currentTarget.closest( ".item-id" );
   const classItem = this.actor.items.get( li.dataset.itemId );
-  this.actor.upgradeClass( classItem );
+  if ( classItem.type === "discipline" ) {
+    this.actor.upgradeDiscipline( classItem );
+  } else if ( classItem.type === "path" ) {
+    this.actor.upgradePath( classItem );
+  } else if ( classItem.type === "questor" ) {
+    this.actor.upgradeQuestor( classItem );
+  }
 }
 
   /**

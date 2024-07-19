@@ -898,7 +898,7 @@ export default class ActorEd extends Actor {
      * @inheritdoc
      * @UserFunction #UF_LPTracking-upgradeClass
      */
-  async upgradeClass(classItem) {
+  async upgradeDiscipline(classItem) {
     const classOldLevel = classItem.system.level;
     const classNewLevel = classOldLevel + 1;
     const classNewLevelIndex = classNewLevel - 1;
