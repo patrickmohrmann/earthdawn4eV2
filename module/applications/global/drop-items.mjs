@@ -41,7 +41,11 @@ export default async function ed4eDropItem( actor, itemData) {
         // Abilities
       } else if (abilities.includes(itemData.type)) {
         validationData = await validateDropItem(actor, itemData);
+        if ( itemData.type === "talent" ) {
         bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+        } else {
+          bookingResult = "free";
+        }
         // Threads
       } else if (threads.includes(itemData.type)) {
         validationData = await validateDropItem(actor, itemData);
@@ -50,7 +54,8 @@ export default async function ed4eDropItem( actor, itemData) {
       if (classes.includes(itemData.type)) {
         if ( itemData.type === "discipline" ) {
           validationData = await validateDropItem(actor, itemData);
-          bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+          // bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+          bookingResult = "addDiscipline";
         } 
       }
     } 

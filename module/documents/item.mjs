@@ -133,7 +133,6 @@ export default class ItemEd extends Item {
           this.updateSource({
             "system.talentIdentifier": globalTalentidentifier,
           });
-
         }
 
 
@@ -144,6 +143,10 @@ export default class ItemEd extends Item {
             "system.sourceClass.identifier": options.classIdentifier,
             "system.sourceClass.levelAdded": options.classLevel,
           } );
+        } else if (data.system.edid == "versatility" && data.type === "talent") {
+          this.updateSource({
+            "system.talentCategory": "versatility",
+          });
         } else {
           const dropItemResult = await ed4eDropItem(this.actor, data);
           if (dropItemResult.bookingResult === "spend" 
@@ -152,7 +155,7 @@ export default class ItemEd extends Item {
               || dropItemResult.bookingResult === "discipline"
               || dropItemResult.bookingResult === "optional") {
             await this.actor.addItemLpTransaction(data, dropItemResult.validationData, dropItemResult.bookingResult);
-              if (dropItemResult.bookingResult === "versatility") {
+              if (dropItemResult.bookingResult === "versatility" && data.system.edid !== "versatility") {
                 // Trigger a dialog for tier selection if bookingResult is "versatility"
                 // versatility talents count always 1 higher for tier selection 
                 const tierSelection = await new Promise((resolve) => {
@@ -189,7 +192,7 @@ export default class ItemEd extends Item {
                     // Handle case where user cancels tier selection
                     return false;
                 }
-            }
+            } 
             if (dropItemResult.bookingResult === "discipline") {
               this.updateSource({
                 "system.talentCategory": "discipline"

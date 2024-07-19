@@ -70,8 +70,6 @@ export default class TalentData extends AbilityTemplate.mixin(
                 levelAdded: new fields.NumberField( {
                     required: true,
                     nullable: true,
-                    min: 1,
-                    initial: 1,
                     integer: true,
                     label: "ED.Item.Class.levelAdded",
                     hint: "X. the class level the talent is added to the Actor",

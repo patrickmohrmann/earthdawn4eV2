@@ -29,64 +29,58 @@ export default async function validateAbilityUpgrade(item, actor) {
 
       // find necessary bonus required for talent rank 1 of multi disciplines
       let multiDisciplineBonus = 0;
-      if ( item.type === "talent" && item.system.level === 0 && item.system.sourceClass.levelAdded === 1) {
+      if ( item.type === "talent" && item.system.level === 0 && item.system.sourceClass.levelAdded === 1 ) {
         const parentDiscipline = await fromUuid(item.system.sourceClass.identifier);
-        const parentDisciplineIndex = parentDiscipline.system.disciplineIndex;
-        const disciplineItems = actor.items.filter(item => item.type === 'discipline'&& item.id !== parentDiscipline.id);
+        if ( parentDiscipline.type !== "discipline" ) {
+          return;
+        } else {
+          const parentDisciplineIndex = parentDiscipline.system.disciplineIndex;
+          const disciplineItems = actor.items.filter(item => item.type === 'discipline'&& item.id !== parentDiscipline.id);
 
-        // Sort discipline items by level in ascending order
-        const sortedDisciplineItems = disciplineItems.sort((a, b) => a.system.level - b.system.level);
-        // The item with the lowest level
-        const lowestDisciplineItem = sortedDisciplineItems[0];
-        const lowestDisciplineLevel = lowestDisciplineItem.system.level;
-        if ( lowestDisciplineLevel === 1 ) {
-          if ( parentDisciplineIndex === 2 ) {
-            multiDisciplineBonus = 4;
-          } else if ( parentDisciplineIndex === 3 ) {
-            multiDisciplineBonus = 4;
-          } else if ( parentDisciplineIndex >= 4 ) {
-            multiDisciplineBonus = 4;
-          }
-        } else if ( lowestDisciplineLevel === 2 ) {
-          if ( parentDisciplineIndex === 2 ) {
-            multiDisciplineBonus = 3;
-          } else if ( parentDisciplineIndex === 3 ) {
-            multiDisciplineBonus = 3;
-          } else if ( parentDisciplineIndex >= 4 ) {
-            multiDisciplineBonus = 3;
-          }
-        } else if ( lowestDisciplineLevel === 3 ) {
-          if ( parentDisciplineIndex === 2 ) {
-            multiDisciplineBonus = 2;
-          } else if ( parentDisciplineIndex === 3 ) {
-            multiDisciplineBonus = 2;
-          } else if ( parentDisciplineIndex >= 4 ) {
-            multiDisciplineBonus = 2;
-          }
-        } else if ( lowestDisciplineLevel >= 4 ) {
-          if ( parentDisciplineIndex === 2 ) {
-            multiDisciplineBonus = 1;
-          } else if ( parentDisciplineIndex === 3 ) {
-            multiDisciplineBonus = 1;
-          } else if ( parentDisciplineIndex >= 4 ) {
-            multiDisciplineBonus = 1;
-          }
-        } 
-        // else if ( lowestDisciplineLevel >= 5 ) {
-        //   if ( parentDisciplineIndex === 2 ) {
-        //     multiDisciplineBonus = 1;
-        //   } else if ( parentDisciplineIndex === 3 ) {
-        //     multiDisciplineBonus = 2;
-        //   } else if ( parentDisciplineIndex >= 4 ) {
-        //     multiDisciplineBonus = 3;
-        //   }
-        // } 
+          // Sort discipline items by level in ascending order
+          const sortedDisciplineItems = disciplineItems.sort((a, b) => a.system.level - b.system.level);
+          // The item with the lowest level
+          const lowestDisciplineItem = sortedDisciplineItems[0];
+          const lowestDisciplineLevel = lowestDisciplineItem.system.level;
+          if ( lowestDisciplineLevel === 1 ) {
+            if ( parentDisciplineIndex === 2 ) {
+              multiDisciplineBonus = 4;
+            } else if ( parentDisciplineIndex === 3 ) {
+              multiDisciplineBonus = 4;
+            } else if ( parentDisciplineIndex >= 4 ) {
+              multiDisciplineBonus = 4;
+            }
+          } else if ( lowestDisciplineLevel === 2 ) {
+            if ( parentDisciplineIndex === 2 ) {
+              multiDisciplineBonus = 3;
+            } else if ( parentDisciplineIndex === 3 ) {
+              multiDisciplineBonus = 3;
+            } else if ( parentDisciplineIndex >= 4 ) {
+              multiDisciplineBonus = 3;
+            }
+          } else if ( lowestDisciplineLevel === 3 ) {
+            if ( parentDisciplineIndex === 2 ) {
+              multiDisciplineBonus = 2;
+            } else if ( parentDisciplineIndex === 3 ) {
+              multiDisciplineBonus = 2;
+            } else if ( parentDisciplineIndex >= 4 ) {
+              multiDisciplineBonus = 2;
+            }
+          } else if ( lowestDisciplineLevel >= 4 ) {
+            if ( parentDisciplineIndex === 2 ) {
+              multiDisciplineBonus = 1;
+            } else if ( parentDisciplineIndex === 3 ) {
+              multiDisciplineBonus = 1;
+            } else if ( parentDisciplineIndex >= 4 ) {
+              multiDisciplineBonus = 1;
+            }
+          } 
+        }
       }
 
       if (item.type === "skill" ) {
       requiredLp = legendPointsCostConfig[itemOldLevel + 2 + tier];
       } else {
-      // requiredLp = legendPointsCostConfig[itemOldLevel + 1 + tier + versatility];
       requiredLp = legendPointsCostConfig[itemOldLevel + 1 + tier + multiDisciplineBonus];
       }
 
