@@ -66,11 +66,13 @@ export default async function validateDropItem(actor, item) {
         interaction: "create",
       }
     // threads
-    } else if ( item.type === "thread" ) {
-      validationData = {
-        requiredLp: 0,
-        interaction: "create",
-      }
+    } else if (item.type === "discipline") {
+      
+        validationData = {
+          requiredLp: 0,
+          
+          interaction: "create",
+        }
     } else if ( item.type === "thread" ) {
         validationData = {
           requiredLp: 0,
@@ -85,4 +87,9 @@ export default async function validateDropItem(actor, item) {
       return true;
     }
     return validationData;
+
+
+
+      
+
   }

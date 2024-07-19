@@ -120,6 +120,23 @@ export default class ItemEd extends Item {
 
     async _preCreate(data, options, user) {
         if ( !this.actor || !data ) return;
+
+        // set talent identifier
+        let globalTalentidentifier = "";
+        if ( data.type === "talent" ) {
+          const systemData = data.system;
+          const name = data.name;
+          const strain = systemData.strain
+          const attribute = systemData.attribute
+          const action = systemData.action
+          globalTalentidentifier = `${name}-${strain}-${attribute}-${action}`;
+          this.updateSource({
+            "system.talentIdentifier": globalTalentidentifier,
+          });
+
+        }
+
+
         if ( options.noPrompt === true ) {
           this.updateSource( { 
             "system.talentCategory": options.talentCategory, 
@@ -129,7 +146,6 @@ export default class ItemEd extends Item {
           } );
         } else {
           const dropItemResult = await ed4eDropItem(this.actor, data);
-      
           if (dropItemResult.bookingResult === "spend" 
               || dropItemResult.bookingResult === "free" 
               || dropItemResult.bookingResult === "versatility"
@@ -165,20 +181,29 @@ export default class ItemEd extends Item {
 
               if (tierSelection) {
                   // Update the item with the selected tier
-                  this.updateSource({ "system.tier": tierSelection, "system.talentCategory": "versatility"});
+                  this.updateSource({ 
+                    "system.tier": tierSelection, 
+                    "system.talentCategory": "versatility"
+                  });
               } else {
                   // Handle case where user cancels tier selection
                   return false;
               }
           }
             if (dropItemResult.bookingResult === "discipline") {
-              this.updateSource({"system.talentCategory": "discipline"});
+              this.updateSource({
+                "system.talentCategory": "discipline"
+              });
             }
             if (dropItemResult.bookingResult === "free") {
-              this.updateSource({"system.talentCategory": "free"});
+              this.updateSource({
+                "system.talentCategory": "free"
+              });
             }
             if (dropItemResult.bookingResult === "optional") {
-              this.updateSource({"system.talentCategory": "optional"});
+              this.updateSource({
+                "system.talentCategory": "optional"
+              });
             }
           } else if (dropItemResult.bookingResult === "cancel") {
             return false;

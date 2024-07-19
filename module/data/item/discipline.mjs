@@ -21,6 +21,15 @@ export default class DisciplineData extends ClassTemplate.mixin(
                 integer: true,
                 label: "ED.Item.Class.durability"
             } ), 
+            // identifier for additional disciplines
+            disciplineIndex: new fields.NumberField( {
+                required: true,
+                nullable: false,
+                min: 1,
+                initial: 1,
+                positive: true,
+                integer: true
+            } ),
             spellcasting: new fields.BooleanField( {
                 required: true,
                 initial: false,

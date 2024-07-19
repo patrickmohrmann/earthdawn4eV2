@@ -15,9 +15,8 @@ export default class ClassTemplate extends SystemDataModel{
             level: new fields.NumberField( {
                 required: true,
                 nullable: false,
-                min: 1,
+                min: 0,
                 initial: 1,
-                positive: true,
                 integer: true
             } ),
             advancement: new fields.EmbeddedDataField(

@@ -899,12 +899,13 @@ export default class ActorEd extends Actor {
      * @UserFunction #UF_LPTracking-upgradeClass
      */
   async upgradeDiscipline(classItem) {
+    const disciplineIndex = classItem.system.disciplineIndex;
     const classOldLevel = classItem.system.level;
     const classNewLevel = classOldLevel + 1;
     const classNewLevelIndex = classNewLevel - 1;
     
     // validate if the class can be upgraded
-    const disciplineitems = this.items.filter(item => item.type === "talent" && item.system.talentCategory === "discipline");
+    const currentDisciplineTalents = this.items.filter(item => item.type === "talent" && item.system.talentCategory === "discipline" && item.system.sourceClass.identifier === classItem.uuid);
     if ( classOldLevel >= 15 ) {
       ui.notifications.warn("Klasse hat bereits das maximale Level erreicht");
       return;
@@ -920,11 +921,53 @@ export default class ActorEd extends Actor {
         requiredLp = 500;
       }
     // classNewLevel is reduced by 1 to get the correct index for the class level
-    const newLevelTier = classItem.system.advancement.levels[classNewLevelIndex].tier;
+    const currentTier = classItem.system.advancement.levels[classNewLevelIndex].tier;
+    //// AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+    //// das muss doch mit der Config funkionieren
+    let currentIndex = 0;
+    if ( currentTier === "novice" ) {
+      currentIndex = 1;
+    } else if ( currentTier === "journeyman" ) {
+      currentIndex = 2;
+    } else if ( currentTier === "warden" ) {
+      currentIndex = 3;
+    } else if ( currentTier === "master" ) {
+      currentIndex = 4;
+    } else {
+      ui.notifications.warn("Tier nicht gefunden");
+      return;
+    }
+
+    let newLevelTier = "";
+    if ( disciplineIndex === 2 ) {
+      newLevelTier = currentIndex + 1;
+     } else if ( disciplineIndex === 3 ) {
+      newLevelTier = currentIndex + 2;
+     } else if ( disciplineIndex >= 4 ) {
+      newLevelTier = currentIndex + 3;
+     } else { 
+      newLevelTier = classTier
+     }
+
+     if ( newLevelTier > 4 ) {
+      newLevelTier = 4;
+      } 
+
+      if ( newLevelTier === 1 ) {
+        newLevelTier = "novice";
+      } else if ( newLevelTier === 2 ) {
+        newLevelTier = "journeyman";  
+      } else if ( newLevelTier === 3 ) {
+        newLevelTier = "warden";
+      }
+      else if ( newLevelTier === 4 ) {
+        newLevelTier = "master";
+      }
+
     const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
     if (settingOption === "disciplineTalents") {
       ui.notifications.warn("Basis = Disziplin Talente für den Kreisaufstieg");
-      const relevantItems = disciplineitems.filter(item => item.system.sourceClass.identifier === classItem.uuid);
+      const relevantItems = currentDisciplineTalents.filter(item => item.system.sourceClass.identifier === classItem.uuid);
       const allItemsMeetLevelRequirement = relevantItems.every(item => item.system.level >= classNewLevel);
 
       if (!allItemsMeetLevelRequirement) {
@@ -942,10 +985,10 @@ export default class ActorEd extends Actor {
     }
 
     const disciplineTalentIds = classItem.system.advancement.levels[classNewLevelIndex].abilities.class;
-    let disciplineTalents = [];
+    let newDisciplineTalents = [];
     for (const uuid of disciplineTalentIds) {
       let talent = await fromUuid(uuid);
-      disciplineTalents.push(talent);
+      newDisciplineTalents.push(talent);
     }
 
     const freeTalentIds = classItem.system.advancement.levels[classNewLevelIndex].abilities.free;
@@ -995,7 +1038,7 @@ export default class ActorEd extends Actor {
       masterTalents.push(talent);
     }
 
-    if (classNewLevelIndex >= 1 && classNewLevelIndex <= 3) {
+    if (classNewLevelIndex >= 0 && classNewLevelIndex <= 3) {
       talentOptions = noviceTalents;
     } else if (classNewLevelIndex >= 4 && classNewLevelIndex <= 7) {
       talentOptions = [...noviceTalents, ...journeymanTalents];
@@ -1033,7 +1076,7 @@ for (const talent of talentOptions) {
               classIdentifier: classItem.uuid
             });
             if (classItem.type === "discipline") {
-              for (const items of disciplineTalents) {
+              for (const items of newDisciplineTalents) {
                 await this.createEmbeddedDocuments('Item', [items], { 
                   noPrompt: true, 
                   talentCategory: "discipline", 

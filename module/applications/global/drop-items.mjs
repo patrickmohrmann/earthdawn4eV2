@@ -31,22 +31,28 @@ export default async function ed4eDropItem( actor, itemData) {
     let validationData = {};
     if ( actor.type === "character" ) {
       // Knacks
-      if ( knacks.includes(itemData.type ) ) {
+      if (knacks.includes(itemData.type)) {
         validationData = await validateDropItem(actor, itemData);
-        bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);   
-      // Spells
-      } else if ( spells.includes(itemData.type ) ) {
+        bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+        // Spells
+      } else if (spells.includes(itemData.type)) {
         validationData = await validateDropItem(actor, itemData);
-        bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);  
+        bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
         // Abilities
-        } else if ( abilities.includes(itemData.type ) ) {
-          validationData = await validateDropItem(actor, itemData);  
-          bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData); 
-          // Threads
-          } else if ( threads.includes(itemData.type ) ) {
-            validationData = await validateDropItem(actor, itemData);
-            bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);   
-            } 
+      } else if (abilities.includes(itemData.type)) {
+        validationData = await validateDropItem(actor, itemData);
+        bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+        // Threads
+      } else if (threads.includes(itemData.type)) {
+        validationData = await validateDropItem(actor, itemData);
+        bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+      }
+      if (classes.includes(itemData.type)) {
+        if ( itemData.type === "discipline" ) {
+          validationData = await validateDropItem(actor, itemData);
+          bookingResult = await actor._showLpOptionsPrompt(actor, itemData, validationData);
+        } 
+      }
     } 
     const result = {
       bookingResult: bookingResult,
