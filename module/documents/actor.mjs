@@ -30,9 +30,8 @@ export default class ActorEd extends Actor {
   }
 
   /**
-   * @inheritDoc  
-   * @description             Pre-process a creation operation of the actor document to ensure that a prototype token is
-   * @UserFunction            UF_TokenResouces-preCreate
+   * @inheritDoc
+   * @userFunction            UF_TokenResources-preCreate
    */
   async _preCreate( data, options, userId ) {
     await super._preCreate( data, options, userId );
@@ -114,6 +113,7 @@ export default class ActorEd extends Actor {
 
   /**
    * Legend point History earned prompt trigger
+   * @returns {Promise<ActorEd>}    The updated actor instance
    */
   async legendPointHistoryEarned( ) {
     const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt( new LpTrackingData( this.system.lp.toObject() ), {actor: this} );
@@ -179,7 +179,7 @@ export default class ActorEd extends Actor {
       ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
       return;
     }
-    const edRollOptions = new EdRollOptions({
+    const edRollOptions = new EdRollOptions( {
       testType: 'action',
       step: { base: arbitraryStep },
       target: { base: difficulty },
@@ -190,7 +190,7 @@ export default class ActorEd extends Actor {
       },
       devotion: { available: this.system.devotion.value, step: this.system.devotion.step },
       chatFlavor: equipment.name + ' Equipment Test',
-    });
+    } );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
@@ -325,8 +325,8 @@ export default class ActorEd extends Actor {
 
   async addLpTransaction( type, transactionData ) {
     const oldTransactions = this.system.lp[type];
-    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
-    const transaction = new transactionModel( transactionData )
+    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
+    const transaction = new TransactionModel( transactionData )
 
     return this.update( {
       [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
@@ -390,11 +390,12 @@ export default class ActorEd extends Actor {
       case "weapon":
 
         switch ( nextStatus ) {
-          case "twoHands":
+          case "twoHands": {
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
-            addUnequipItemUpdate( "weapon", ["mainHand", "offHand", "twoHands"] );
-            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", ["equipped"] );
+            addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
+          }
           case "mainHand":
           case "offHand":
             addUnequipItemUpdate( "weapon", [nextStatus, "twoHands"] );
