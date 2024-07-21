@@ -31,12 +31,13 @@ export default async function validateAbilityUpgrade(item, actor) {
       let multiDisciplineBonus = 0;
       if ( item.type === "talent" && item.system.level === 0 && item.system.sourceClass.levelAdded === 1 ) {
         const parentDiscipline = await fromUuid(item.system.sourceClass.identifier);
+        if ( parentDiscipline ) {
         if ( parentDiscipline.type !== "discipline" ) {
           return;
         } else {
           const parentDisciplineIndex = parentDiscipline.system.disciplineIndex;
           const disciplineItems = actor.items.filter(item => item.type === 'discipline'&& item.id !== parentDiscipline.id);
-
+          if ( disciplineItems.length > 0 ) {
           // Sort discipline items by level in ascending order
           const sortedDisciplineItems = disciplineItems.sort((a, b) => a.system.level - b.system.level);
           // The item with the lowest level
@@ -74,8 +75,11 @@ export default async function validateAbilityUpgrade(item, actor) {
             } else if ( parentDisciplineIndex >= 4 ) {
               multiDisciplineBonus = 1;
             }
-          } 
+          }
         }
+        } 
+        }
+      
       }
 
       if (item.type === "skill" ) {

@@ -411,6 +411,9 @@
             "jumpUpChoice":                                         "Wähle die Fähigkeit um aufzuspringen",
             "knockDownChoice":                                      "Wähle die Fähigkeit um dem Niederschlag zu widerstehen",
             "mystical":                                             "Mystischer Schaden",
+            "LegendPoints": {
+                "spendLp":                                          "Legendenpunkte ausgeben"
+            },
             "physical":                                             "Körperlicher Schaden",
             "Title": {
                 "recovery":                                         "Erholungsprobe",

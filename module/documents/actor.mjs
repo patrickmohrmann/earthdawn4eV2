@@ -877,7 +877,7 @@ export default class ActorEd extends Actor {
 
     /**
      * @inheritdoc
-     * @UserFunction #UF_LPTracking-upgradeClass
+     * @UserFunction #UF_LPTracking-upgradeDiscipline
      */
   async upgradeDiscipline(classItem) {
     const disciplineIndex = classItem.system.disciplineIndex;
@@ -1137,7 +1137,7 @@ for (const talent of talentOptions) {
    */
   async addItemLpTransaction(item, validationData, bookingResult) {
     
-    const description = game.i18n.format("ED.Dialogs.LegendPoints.SpendLp", {
+    const description = game.i18n.format("ED.Dialogs.LegendPoints.spendLp", {
         previousLevel: item.system.level - 1,
         newLevel: item.system.level,
       });
