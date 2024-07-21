@@ -1,6 +1,4 @@
 import ED4E from "../../config.mjs";
-import LpValidationPrompt from "../global/lp-validation-prompt.mjs";
-import ed4eDropItem from "../global/drop-items.mjs";
 
 /**
  * Extend the basic ActorSheet with modifications
@@ -113,29 +111,18 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
     // Legend point Tracking
-    html.find( ".legend-point__history" ).click( this._onLegendPointHistoryEarned.bind( this ) );
+    html.find( ".legend-point__history" ).click( this._onLegendPointHistory.bind( this ) );
 
     html.find( ".item-upgrade__attribute" ).click( this._onAttributeEnhancement.bind( this ) );
 
     html.find( ".item-upgrade__ability" ).click( this._onAbilityEnhancement.bind( this ) );
 
     html.find( ".item-upgrade__class" ).click( this._onClassEnhancement.bind( this ) );
-
-    // // toggle function for the Legend point History entreis
-    //  html.on('click', '.group-header', event => {
-    //   const header = event.currentTarget;
-    //   const itemUuid = header.dataset.itemUuid;
-  
-    //   // Toggle the folded/unfolded state for each entry related to the clicked header
-    //   html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((index, entry) => {
-    //     if ($(entry).hasClass('folded')) {
-    //       $(entry).removeClass('folded').addClass('unfolded');
-    //     } else {
-    //       $(entry).removeClass('unfolded').addClass('folded');
-    //     }
-    //   });
-    // });
   }
+
+  /* -------------------------------------------- */
+  /*              Equipment Toggle                */
+  /* -------------------------------------------- */
 
   /**
    * Handle changing the holding type of an owned item.
@@ -171,51 +158,65 @@ export default class ActorSheetEd extends ActorSheet {
     if ( deposit ) return item.system.deposit()?.then( _ => this.render() );
   }
 
+  /* -------------------------------------------- */
+  /*             LP Tracking Trigger              */
+  /* -------------------------------------------- */
 
   /**
-   * Legend Point history earned
-   * @param { Event } event    The originating click event.
+   * @description               Open the Legend Point history of the actor
+   * @param { Event } event     The originating click event.
    * @private
    */
-  _onLegendPointHistoryEarned( event ) {
+  _onLegendPointHistory( event ) {
     event.preventDefault();
     this.actor.legendPointHistoryEarned( this.actor );
   }
 
-/**
- * @description This function is used to upgrade attributes
- */
-async _onAttributeEnhancement( event ) {
-  event.preventDefault();
-  const attribute = event.currentTarget.dataset.attribute;
-  await this.actor.upgradeAttribute( attribute );
-}
-
-/**
- * @description This function is used to upgrade attributes
- */
-async _onAbilityEnhancement( event ) {
-  event.preventDefault();
-  const li = event.currentTarget.closest( ".item-id" );
-  const ability = this.actor.items.get( li.dataset.itemId );
-  this.actor.upgradeAbility( ability );
-}
-
-/**
- * @description This function is used to upgrade Classes
- */
-async _onClassEnhancement( event ) {
-  event.preventDefault();
-  const li = event.currentTarget.closest( ".item-id" );
-  const classItem = this.actor.items.get( li.dataset.itemId );
-  if ( classItem.type === "discipline" ) {
-    this.actor.upgradeDiscipline( classItem );
-  } else if ( classItem.type === "path" ) {
-    this.actor.upgradePath( classItem );
-  } else if ( classItem.type === "questor" ) {
-    this.actor.upgradeQuestor( classItem );
+  /**
+   * @description             This function is used to upgrade attributes
+   * @param {Event} event     The originating click event.
+   * @private
+   */
+  async _onAttributeEnhancement( event ) {
+    event.preventDefault();
+    const attribute = event.currentTarget.dataset.attribute;
+    await this.actor.upgradeAttribute( attribute );
   }
-}
+
+  /**
+   * @description             This function is used to upgrade attributes
+   * @param {Event} event     The originating click event.
+   * @private
+   */
+  async _onAbilityEnhancement( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    this.actor.upgradeAbility( ability );
+  }
+
+  /**
+   * @description             This function is used to upgrade Classes
+   * @param {Event} event     The originating click event.
+   * @private
+   */
+  async _onClassEnhancement( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const classItem = this.actor.items.get( li.dataset.itemId );
+    if ( classItem.type === "discipline" ) {
+      this.actor.upgradeDiscipline( classItem );
+    } else if ( classItem.type === "path" ) {
+      this.actor.upgradePath( classItem );
+    } else if ( classItem.type === "questor" ) {
+      this.actor.upgradeQuestor( classItem );
+    }
+  }
+
+
+  /* -------------------------------------------- */
+  /*                 Roll Trigger                 */
+  /* -------------------------------------------- */
 
   /**
    * Handle rolling an attribute test.
@@ -253,7 +254,7 @@ async _onClassEnhancement( event ) {
   }
 
   /**
-   * @description Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
+   * @description             Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private
    */
@@ -263,6 +264,10 @@ async _onClassEnhancement( event ) {
         const ability = this.actor.items.get( li.dataset.itemId );
         this.actor.takeStrain( ability.system.strain );
     }
+
+  /* -------------------------------------------- */
+  /*                Action Button                 */
+  /* -------------------------------------------- */
 
   /**
    * Handles Recovery tests
@@ -309,6 +314,14 @@ async _onClassEnhancement( event ) {
     this.actor.knockdownTest( damageTaken );
   }
 
+  _onKarmaRefresh() {
+    this.actor.karmaRitual();
+  }
+
+
+  /* -------------------------------------------- */
+  /*                   Effects                    */
+  /* -------------------------------------------- */
 
   /**
    * Handle creating an owned ActiveEffect for the Actor.
@@ -354,6 +367,10 @@ async _onClassEnhancement( event ) {
     return effect.sheet?.render( true );
   }
 
+
+  /* -------------------------------------------- */
+  /*             Owned item Handler               */
+  /* -------------------------------------------- */
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event                 The originating click event.
@@ -379,10 +396,6 @@ async _onClassEnhancement( event ) {
     const itemId = event.currentTarget.parentElement.dataset.itemId;
     const item = this.actor.items.get( itemId );
     return item.sheet?.render( true );
-  }
-
-  _onKarmaRefresh() {
-    this.actor.karmaRitual();
   }
 
   _onCardExpand( event ) {
