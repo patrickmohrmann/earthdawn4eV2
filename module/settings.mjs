@@ -52,13 +52,23 @@ export default function registerSystemSettings() {
         type: new EdIdField(),
     } );
 
-    // edid for abilities that substitute for knockdown tests
-    game.settings.register( "ed4e", "edidKnockDownResist", {
-        name: "ED.Settings.Edid.knockDown",
-        hint: "ED.Settings.Edid.knockDownHint",
+    // edid for knock down  
+    game.settings.register( "ed4e", "edidKnockDown", {
+        name: "ED.Settings.Edid.knockdown",
+        hint: "ED.Settings.Edid.knockdownHint",
         scope: "world",
         config: true,
         default: "knock-down",
+        type: new EdIdField(),
+    } );
+
+    // edid for Jumping up 
+    game.settings.register( "ed4e", "edidJumpUp", {
+        name: "ED.Settings.Edid.jumpUp",
+        hint: "ED.Settings.Edid.jumpUpHint",
+        scope: "world",
+        config: true,
+        default: "jump-up",
         type: new EdIdField(),
     } );
 

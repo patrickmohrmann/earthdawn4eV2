@@ -72,6 +72,7 @@
                 "jumpUp":                                           "Jump Up",
                 "knockDownTest":                                    "Knock down",
                 "legendHistory":                                    "LP History",
+                "recovery":                                         "Recovery",
                 "takeDamage":                                       "Take Damage"
             },
             "Cards": {
@@ -81,8 +82,8 @@
             },
             "Characteristics": {
                 "currentDamage":                                    "Damage",
-                "currentRecoveryTests":                             "Current",
-                "dailyRecoveryTests":                               "Daily",
+                "currentrecoveryTestsResource":                             "Current",
+                "dailyrecoveryTestsResource":                               "Daily",
                 "deathThesholdShort":                               "Death Rating",
                 "mysticalArmor":                                    "Mystical",
                 "mysticalDefense":                                  "Mystical",
@@ -139,8 +140,8 @@
                 "effectsPermanent":                                 "Permanent Effects",
                 "effectsTemporary":                                 "Temporary Effects",  
                 "encumbrance":                                      "Encumbrance",
-                "equipment":                                        "Equipment",   
-                "equippedStatus":                                   "Equipped",                                            
+                "equipment":                                        "Equipment",
+                "equippedStatus":                                   "Equipped",
                 "healthRating":                                     "Health Rating",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Penalty",
@@ -206,6 +207,8 @@
                 "equipped":                                         "Equipped",
                 "equippedArmor":                                    "Equipped Armor",
                 "equippedShield":                                   "Equipped Shield",
+                "damageSubdual":                                    "Subdual",
+                "damagePhysical":                                   "Physical",
                 "karmaAlways":                                      "Use Karma always",
                 "karmaRitualTooltip":                               "Karma Ritual",
                 "loaded":                                           "Loaded",
@@ -236,6 +239,12 @@
                 "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
                 "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
+                "jumpUp":                                           "{sourceActor} tries to jump up with Step {step}",
+                "knockdownTest":                                    "{sourceActor} tries to avoid being knocked down with Step {step}",
+                "rollAbility":                                      "{sourceActor} rolls {ability} with Step {step}",
+                "rollAttribute":                                    "{sourceActor} rolls {attribute} with Step {step}",
+                "rollEquipment":                                    "{sourceActor} rolls {equipment} with Step {step}",
+                "rollRecovery":                                     "{sourceActor} recovers from Damage with Step {step}",
                 "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
                 "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
                 "rollAttackWithoutTarget":                          "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep}",
@@ -326,6 +335,8 @@
             }
         },
         "Dialogs": {
+            "armor":                                                "Armor",
+            "armorType":                                            "Armor Type",
             "AssignLp": {
                 "legendPoints":                                     "Legend Points",
                 "description":                                      "Description"
@@ -344,11 +355,29 @@
             },
             "Placeholder": {
                 "lpDescription":                                    "Enter your description here"
-            }, 
+            },
             "Title": {
                 "assignLp":                                         "Assign Legend Points",
-                "rollPrompt":                                       "Roll Options"
-            }
+                "rollPrompt":                                       "Roll Options",
+                "recovery":                                         "Recovery Test",
+                "takeDamage":                                       "Take Damage"
+            },
+            "Buttons": {
+                "cancel":                                           "Cancel",
+                "nightRest":                                        "Nightly Rest",
+                "recoverStun":                                      "Stun Damage Recovery",
+                "recovery":                                         "Recovey Test",
+                "takeDamage":                                       "Take Damage"
+                },
+            "damage":                                               "Damage",
+            "damageStandard":                                       "Deadly Damage",
+            "damageStun":                                           "Stun Damage",
+            "damageType":                                           "Damage Type",
+            "ignoreArmor":                                          "Ignore Armor",
+            "jumpUpChoice":                                         "Chose the Ability to jump up",
+            "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
+            "mystical":                                             "Mystical Damage",
+            "physical":                                             "Physical Damage"
         },
         "Item": {
             "Ability": {
@@ -424,7 +453,7 @@
             "stepModifiers":                                        "Step Modifier",
             "successesAchieved":                                    "Total Successes",
             "targetDifficulty":                                     "Difficulty",
-            "targetModifiers":                                      "Target Modifier"  
+            "targetModifiers":                                      "Target Modifier"
         },
         "Notifications": {
             "Info": {},
@@ -453,6 +482,6 @@
                 "help":                                             "help",
                 "troubleshooting":                                  "troubleshooting"
             }
-        }  
-    }   
+        }
+    }
 }

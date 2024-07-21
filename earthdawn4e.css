@@ -324,6 +324,29 @@ p {
 .chat-message .message-buttons.flexrow button:last-child {
   margin-right: 0;
 }
+.action--buttons .buttons--left {
+  margin-left: 45px;
+  margin-right: 25px;
+  float: left;
+  width: 40%;
+}
+.action--buttons .buttons--right {
+  float: right;
+  width: 40%;
+  margin-left: 25px;
+  margin-right: 45px;
+}
+.legend-point__history--earned {
+  height: 26px;
+  line-height: 22px;
+}
+.body .item-section__top {
+  height: 158px;
+}
+.body .item-section__top img {
+  width: 158px;
+  border: none;
+}
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
   background-size: cover;

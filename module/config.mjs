@@ -30,7 +30,7 @@ ED4E.typeGroups = {
 		Creatures: 	['creature', 'spirit', 'horror', 'dragon'],
 		Other: 		['group', 'vehicle', 'trap', 'loot']
 	}
-}
+};
 
 /**
  * Configuration data for abilities.
@@ -113,6 +113,12 @@ ED4E.globalBonuses = {
 	allRangedDamage: {
 		label: 			"ED.Actor.GlobalBonus.allRangedDamage"
 	},
+	allRecoveryEffects: {
+		label: 			"ED.Actor.GlobalBonus.allRecoveryEffects"
+	},
+	allKnockdownEffects: {
+		label: 			"ED.Actor.GlobalBonus.allKnockDownEffects"
+	},
 	allSpellEffects: {
 		label: 			"ED.Actor.GlobalBonus.allSpellEffects"
 	}
@@ -127,7 +133,7 @@ ED4E.denomination = {
 	copper: 			"ED.Denomination.copper",
 	silver: 			"ED.Denomination.silver",
 	gold: 				"ED.Denomination.gold"
-}
+};
 preLocalize( "denomination" );
 
 /**
@@ -141,7 +147,7 @@ ED4E.availability = {
 	rare: 				"ED.Item.Availability.rare",
 	veryRare: 			"ED.Item.Availability.veryRare",
 	unique: 			"ED.Item.Availability.unique"
-}
+};
 preLocalize( "availability" );
 
 /**
@@ -154,7 +160,7 @@ ED4E.action = {
 	simple: 			"ED.Action.simple",
 	standard: 			"ED.Action.standard",
 	sustained: 			"ED.Action.sustained"
-}
+};
 preLocalize( "action" );
 
 /**
@@ -188,7 +194,7 @@ ED4E.armor = {
 	none: 				"ED.General.none",
 	physical:			"ED.Armor.physical",
 	mystical: 			"ED.Armor.mystical",
-}
+};
 preLocalize( "armor" );
 
 /**
@@ -198,7 +204,7 @@ preLocalize( "armor" );
 ED4E.damageType = {
 	standard:			"ED.Health.Damage.standard",
 	stun:				"ED.Health.Damage.stun",
-}
+};
 preLocalize( "damageType" );
 
 ED4E.languages = {
@@ -223,6 +229,16 @@ ED4E.spellcastingTypes = {
 preLocalize( "spellcastingTypes" );
 
 /* -------------------------------------------- */
+/*  Active Effects Shortcuts                    */
+/* -------------------------------------------- */
+  ED4E.singleBonuses = {
+	knockdownEffects: "ED.Config.Eae.allKnockDownEffects",
+  };
+  preLocalize( "singleBonuses" );
+
+
+
+/* -------------------------------------------- */
 /*  Advancement & Char Gen                      */
 /* -------------------------------------------- */
 
@@ -236,7 +252,7 @@ ED4E.tier = {
 	journeyman: 		"ED.Tier.journeyman",
 	warden: 			"ED.Tier.warden",
 	master: 			"ED.Tier.master"
-}
+};
 preLocalize( "tier" );
 
 
@@ -264,7 +280,7 @@ ED4E.talentCategory = {
 	optional: 				"ED.talentCategory.optional",
 	free: 					"ED.talentCategory.free",
 	versatility: 			"ED.talentCategory.versatility"
-}
+};
 preLocalize( "talentCategory" );
 
 
@@ -280,7 +296,6 @@ ED4E.weaponType = {
 }
 preLocalize( "talentCategory" );
 
-
 /**
  * Type of grantable abilities for a class level
  * @enum {string}
@@ -289,7 +304,7 @@ ED4E.abilityPools = {
 	class:		"ED.Advancement.Pools.class",
 	free:			"ED.Advancement.Pools.free",
 	special:	"ED.Advancement.Pools.special"
-}
+};
 preLocalize( "abilityPools" );
 
 /**
@@ -320,7 +335,7 @@ ED4E.characteristicsTable = {
 	woundThreshold: [0, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17],
 	recovery: [0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, ],
 	armor: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6],
-}
+};
 
 ED4E.availableRanks = {
 	talent: 8,
@@ -345,7 +360,7 @@ ED4E.encumbranceStatus = {
 	light: "ED.Conditions.Encumbrance.light",
 	heavy: "ED.Conditions.Encumbrance.heavy",
 	tooHeavy: "ED.Conditions.Encumbrance.tooHeavy"
-}
+};
 preLocalize( "encumbranceStatus" );
 
 /* -------------------------------------------- */
@@ -386,7 +401,7 @@ ED4E.testTypes = {
 		label: "ED.Rolls.Labels.effectTestRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
-}
+};
 preLocalize( "testTypes", { key: "label" } );
 
 
@@ -434,7 +449,7 @@ ED4E.rollTypes = {
 	threadWeaving: {
 		label: "ED.Config.rollTypes.threadWeaving",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/threadWeaving-roll-flavor.hbs",
-	},                   
+	},
 }
 preLocalize( "testTypes", { key: "label" } );
 
@@ -446,35 +461,35 @@ ED4E.combatTypes = {
 	Aerial: {
 		label: "ED.Config.combatTypes.Aerial",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                    
+	},
 	Close: {
 		label: "ED.Config.combatTypes.Close",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                      
+	},
 	melee: {
 		label: "ED.Config.combatTypes.melee",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                     
+	},
 	Mounted: {
 		label: "ED.Config.combatTypes.Mounted",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                    
+	},
 	projectile: {
 		label: "ED.Config.combatTypes.projectile",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                 
+	},
 	ranged: {
 		label: "ED.Config.combatTypes.ranged",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                                     
+	},
 	throwing: {
 		label: "ED.Config.combatTypes.throwing",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},     
+	},
 	unarmed: {
 		label: "ED.Config.combatTypes.unarmed",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
-	},                            
+	},
 }
 preLocalize( "testTypes", { key: "label" } );
 
@@ -491,7 +506,7 @@ preLocalize( "testTypes", { key: "label" } );
 ED4E.reserved_edid = {
 	DEFAULT: 'none',
 	ANY: 'any',
-}
+};
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */
@@ -519,7 +534,7 @@ preLocalize( "chatCommands" );
 ED4E.attributePointsCost = [0, 1, 2, 3, 5, 7, 9, 12, 15];
 ED4E.attributePointsCost[-1] = -1;
 ED4E.attributePointsCost[-2] = -2;
-ED4E.legendPointsCost = [100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100]
+ED4E.legendPointsCost = [100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100];
 
 /* -------------------------------------------- */
 /*           Document Data                      */
@@ -555,22 +570,6 @@ preLocalize( "documentData.Item.skill.languageSpeak", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: "value" } );
 preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
-
-// /**
-//  * The available sub-types of (combatTypes) tests
-//  * @enum {string}
-//  */
-// ED4E.combatTypes = {
-// 	aerial: "ED.Config.CombatTypes.aerial",
-// 	close:  "ED.Config.CombatTypes.close",
-// 	melee:  "ED.Config.CombatTypes.melee",
-// 	mounted:  "ED.Config.CombatTypes.mounted",
-// 	projectile: "ED.Config.CombatTypes.projectile",
-// 	ranged:  "ED.Config.CombatTypes.ranged",
-// 	throwing: "ED.Config.CombatTypes.throwing",
-// 	unarmed:  "ED.Config.CombatTypes.unarmed",	                           
-// }
-// preLocalize( "combatTypes" );
 
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */

@@ -11,19 +11,19 @@ export default class ActorSheetEd extends ActorSheet {
    */
   static get defaultOptions() {
     return foundry.utils.mergeObject( super.defaultOptions, {
-      classes: ['earthdawn4e', 'sheet', 'actor', 'character-sheet'],
+      classes: [ "earthdawn4e", "sheet", "actor", "character-sheet" ],
       width: 800,
       height: 800,
       tabs: [
         {
-          navSelector: '.actor-sheet-tabs',
-          contentSelector: '.actor-sheet-body',
-          initial: 'main',
+          navSelector: ".actor-sheet-tabs",
+          contentSelector: ".actor-sheet-body",
+          initial: "main",
         },
         {
-          navSelector: '.actor-sheet-spell-tabs',
-          contentSelector: '.actor-sheet-spell-body',
-          initial: 'spell-matrix-tab',
+          navSelector: ".actor-sheet-spell-tabs",
+          contentSelector: ".actor-sheet-spell-body",
+          initial: "spell-matrix-tab",
         },
       ],
       scrollY: [
@@ -74,13 +74,30 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
     // take strain
-    html.find( ".card__ability .take-strain" ).click( this._takeStrain.bind( this ) );
+    html.find( ".card__ability .take-strain" ).click( this._onTakeStrain.bind( this ) );
 
     // toggle holding Tpye of an owned item
-    html.find(".item__status").mousedown(this._onChangeItemStatus.bind(this));
+    html.find( ".item__status" ).mousedown( this._onChangeItemStatus.bind( this ) );
 
     // Owned Item management
     html.find( ".item-delete" ).click( this._onItemDelete.bind( this ) );
+
+    // Actor Sheet Buttons
+    html.find( ".action-buttons" ).click( event => {
+      const action = event.currentTarget.dataset.action;
+      const actionMapping = {
+        "recovery": () => this._onRecoveryRoll( event ),
+        "takeDamage": () => this._onTakeDamage( event ),
+        "jumpUp": () => this._onJumpUp( event ),
+        "initiative": () => this._onInitiative( event ),
+        "halfMagic": () => this._onHalfMagic( event ),
+        "knockdownTest": () => this._onKnockDown( event ),
+      };
+      // Check if the action exists in the mapping and call it
+      if ( actionMapping.hasOwnProperty( action ) ) {
+        actionMapping[action]();
+      }
+    } );
 
     // Effect Management
     html.find( ".effect-add" ).click( this._onEffectAdd.bind( this ) );
@@ -177,15 +194,60 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * @description Take strain is used for non rollable abilities which requires strain. player can click on the icon to take the strain damage
+   * @description Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private
    */
-  _takeStrain( event ) {
+    _onTakeStrain( event ) {
+        event.preventDefault();
+        const li = event.currentTarget.closest( ".item-id" );
+        const ability = this.actor.items.get( li.dataset.itemId );
+        this.actor.takeStrain( ability.system.strain );
+    }
+
+  /**
+   * Handles Recovery tests
+   * @param {Event} event The originating click event.
+   * @private
+   */
+  async _onRecoveryRoll( event ) {
     event.preventDefault();
-    const li = event.currentTarget.closest( ".item-id" );
-    const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.takeStrain( ability.system.strain );
+    const recoveryMode = await this.actor.getPrompt( "recovery" );
+    this.actor.rollRecovery( recoveryMode, {event: event} );
+  }
+
+  async _onTakeDamage( event ) {
+    const takeDamage = await this.actor.getPrompt( "takeDamage" );
+    if ( !takeDamage || takeDamage === "close" ) return;
+
+    this.actor.takeDamage(
+      takeDamage.damage,
+      false,
+      takeDamage.damageType,
+      takeDamage.armorType,
+      takeDamage.ignoreArmor,
+    );
+  }
+
+  _onJumpUp( event ) {
+    event.preventDefault();
+    this.actor.jumpUp( {event: event} );
+  }
+
+  _onInitiative( event ) {
+    event.preventDefault();
+    this.actor.rollInitiative( {event: event} );
+  }
+
+  _onHalfMagic( event ) {
+    event.preventDefault();
+    this.actor.rollHalfMagic( {event: event} );
+  }
+
+  _onKnockDown( event ) {
+    event.preventDefault();
+    const damageTaken = 0;
+    this.actor.knockdownTest( damageTaken );
   }
 
 
@@ -197,12 +259,12 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onEffectAdd( event ) {
     event.preventDefault();
-    return this.actor.createEmbeddedDocuments( 'ActiveEffect', [{
-      label: `New Effect`,
-      icon: 'icons/svg/item-bag.svg',
+    return this.actor.createEmbeddedDocuments( "ActiveEffect", [ {
+      label: "New Effect",
+      icon: "icons/svg/item-bag.svg",
       duration: { rounds: 1 },
       origin: this.actor.uuid
-    }] );
+    } ] );
   }
 
   /**
@@ -274,4 +336,5 @@ export default class ActorSheetEd extends ActorSheet {
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
+
 }
