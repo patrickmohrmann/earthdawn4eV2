@@ -121,23 +121,20 @@ export default class ActorSheetEd extends ActorSheet {
 
     html.find( ".item-upgrade__class" ).click( this._onClassEnhancement.bind( this ) );
 
-     // NEW ######################################################
-     html.on('click', '.group-header', event => {
-      const header = event.currentTarget;
-      const itemUuid = header.dataset.itemUuid;
+    // // toggle function for the Legend point History entreis
+    //  html.on('click', '.group-header', event => {
+    //   const header = event.currentTarget;
+    //   const itemUuid = header.dataset.itemUuid;
   
-      // Toggle the folded/unfolded state for each entry related to the clicked header
-      html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((index, entry) => {
-        if ($(entry).hasClass('folded')) {
-          $(entry).removeClass('folded').addClass('unfolded');
-        } else {
-          $(entry).removeClass('unfolded').addClass('folded');
-        }
-      });
-    });
-    // NEW ######################################################
-
-
+    //   // Toggle the folded/unfolded state for each entry related to the clicked header
+    //   html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((index, entry) => {
+    //     if ($(entry).hasClass('folded')) {
+    //       $(entry).removeClass('folded').addClass('unfolded');
+    //     } else {
+    //       $(entry).removeClass('unfolded').addClass('folded');
+    //     }
+    //   });
+    // });
   }
 
   /**

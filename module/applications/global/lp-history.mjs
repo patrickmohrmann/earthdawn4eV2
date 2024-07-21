@@ -83,28 +83,20 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
     $( this.form ).on( 'click', '.toggle-details', this._toggleDetails.bind( this ) );
 
-
-    // $(this.form.querySelector('.add-earning-icon')).on('click', () => {
-    //   console.log("Binding");
-    //   const amount = 0; 
-    //   const description = ''; 
-    //   const lpBefore = this.actor.system.lp.current;
-    //   const lpAfter = lpBefore + amount;
-    
-    //   const transaction = new LpEarningTransactionData({
-    //     amount,
-    //     description,
-    //     lpBefore,
-    //     lpAfter,
-    //   });
-    
-    //   // Add the new transaction
-    //   this.actor.addLpTransaction("earnings", transaction);
-    //   console.log("ACTOR LP Transactions: ", this.actor.system.lp.transactions);
-    //   this.render(true);
-      
-    //   console.log("ACTOR LP ", this.actor.system.lp.earnings);
-    // });
+    // toggle function for the Legend point History entreis
+     html.on('click', '.group-header', event => {
+      const header = event.currentTarget;
+      const itemUuid = header.dataset.itemUuid;
+  
+      // Toggle the folded/unfolded state for each entry related to the clicked header
+      html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((index, entry) => {
+        if ($(entry).hasClass('folded')) {
+          $(entry).removeClass('folded').addClass('unfolded');
+        } else {
+          $(entry).removeClass('unfolded').addClass('folded');
+        }
+      });
+    });
 
   }
   
