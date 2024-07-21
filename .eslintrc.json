@@ -25,6 +25,7 @@
     "delay": false,
     "Dialog": false,
     "Die": false,
+    "EdRoll": false,
     "Folder": false,
     "FormApplication": false,
     "FormApplicationOptions": false,
@@ -122,6 +123,13 @@
     "id-length": "off",
     "id-match": "off",
     "init-declarations": "off",
+    "jsdoc/check-tag-names": [
+      "warn",
+      {
+        "definedTags":
+        ["userFunction"]
+      }
+    ],
     "line-comment-position": "off",
     "lines-between-class-members": "off",
     "logical-assignment-operators": "off",

@@ -13,6 +13,14 @@ export default class TokenEd extends Token {
     return super._drawBar( number, bar, data );
   }
 
+  /**
+   * @description             Draw a health bar for the Token representing a rate of damage points.
+   * @param {Number} number   Index of the Bar being drawn
+   * @param {Object} bar      PIXI.Graphics instance for the Bar
+   * @param {Object} data     Data object for the Bar
+   * @returns 
+   * @UserFunction             UF_TokenResouces-drawHealthBar
+   */
   _drawHealthBar( number, bar, data ) {
     const value = Number( data.value );
     const percentage = Math.clamp( value, 0, data.max ) / data.max;
@@ -43,6 +51,14 @@ export default class TokenEd extends Token {
     return undefined;
   }
 
+  /**
+   * @description             Draw a karma bar for the Token representing a rate of karma points.
+   * @param {Number} number   Index of the bar being drawn
+   * @param {Object} bar      PIXI.Graphics instance for the bar 
+   * @param {Object} data     Data object for the Bar
+   * @returns 
+   * @UserFunction             UF_TokenResources-drawKarmaBar
+   */
   _drawKarmaBar( number, bar, data ) {
     const value = Number( data.value );
     const max = Number( data.max );

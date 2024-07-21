@@ -34,6 +34,10 @@ export default class ActorEd extends Actor {
     return DocumentCreateDialog.waitPrompt( data, { documentCls: Actor, parent, pack, options } );
   }
 
+  /**
+   * @inheritDoc
+   * @userFunction            UF_TokenResources-preCreate
+   */
   async _preCreate( data, options, userId ) {
     await super._preCreate( data, options, userId );
 
@@ -116,6 +120,7 @@ export default class ActorEd extends Actor {
    * Triggers a prompt for updating the Legend Point (LP) history of the actor.
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
+
    */
   async legendPointHistoryEarned() {
     // let history = await getLegendPointHistoryData( actor );
@@ -208,6 +213,7 @@ export default class ActorEd extends Actor {
 
       return;
     }
+
     const difficultyFinal = { base: difficulty };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
       sourceActor: this.name,
