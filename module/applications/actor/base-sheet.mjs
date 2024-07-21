@@ -112,8 +112,8 @@ export default class ActorSheetEd extends ActorSheet {
     // item card description shown on item click
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
-    // Legend point History (Earned)
-    html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
+    // Legend point Tracking
+    html.find( ".legend-point__history" ).click( this._onLegendPointHistoryEarned.bind( this ) );
 
     html.find( ".item-upgrade__attribute" ).click( this._onAttributeEnhancement.bind( this ) );
 
