@@ -852,7 +852,7 @@ export default class ActorEd extends Actor {
       let requiredLp = 0;
       const newIncrease = abilityOldLevel + 1
       const validationData = await validateAbilityUpgrade(ability, this);
-      const validateResult = await this._showLpOptionsPrompt (this, ability, validationData);
+      const validateResult = await this._showOptionsPrompt (this, ability, validationData);
       if ( validateResult === "free" ) {
         requiredLp = 0;
       } else if ( validateResult === "spend" ) {
@@ -1181,7 +1181,7 @@ for (const talent of talentOptions) {
 
 
   // this prompt will be rebuild later with full complexity
-async _showLpOptionsPrompt(actor, item, validationData) {
+async _showOptionsPrompt(actor, item, validationData) {
             
             return new Promise((resolve) => {
                 const actorName = actor.name;
