@@ -7,5 +7,6 @@ import basics from "../use-cases/UC_LpTracking-History.md"
 
 ## Basics
 
+<!--@include:../use-cases/UC_LpTracking-History.md-->
 {{ basics }}
 
