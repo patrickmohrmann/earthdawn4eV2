@@ -6,19 +6,23 @@ This chapter covers the same chapter form the Players Guide but will not go into
 
 ### relevant Use Cases
 
-[UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.adoc)
+[UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.md)
 
 ## Spending Legend Points
 
-
+[UC_LpTracking-abilities](../Use%20Cases/UC_LpTracking-abilities.md)
+[UC_LpTracking-attributes](../Use%20Cases/UC_LpTracking-attributes.md)
+[UC_LpTracking-knacks](../Use%20Cases/UC_LpTracking-knacks.md)
+[UC_LpTracking-spells](../Use%20Cases/UC_LpTracking-spells.md)
+[UC_LpTracking-threads](../Use%20Cases/UC_LpTracking-threads.md)
 
 ## Advancing Discipline Circles, Path- and Questor Ranks
 
-
+[UC_LpTracking-classes](../Use%20Cases/UC_LpTracking-classes.md)
 
 ## Legendary Status
 
-
+[UC_LpTracking-status](../Use%20Cases/UC_LpTracking-status.md)
 
 ## Adventuring Groups
 
