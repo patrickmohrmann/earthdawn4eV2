@@ -6,7 +6,7 @@ This chapter covers the same chapter form the Players Guide but will not go into
 
 ### relevant Use Cases
 
-include::../Use%20Cases/UC_LpTracking-History.adoc[]
+[UC_LpTracking-History](documentation/Use%20Cases/UC_LpTracking-History.adoc)
 
 ## Spending Legend Points
 
