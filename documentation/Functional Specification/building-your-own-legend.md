@@ -8,9 +8,7 @@ This chapter covers the same chapter form the Players Guide but will not go into
 
 * [UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.md)
 
-@@include[UC_LpTracking-History]()
-```{include} ../Use%20Cases/UC_LpTracking-History.md
-```
+https://github.com/patrickmohrmann/earthdawn4eV2/blob/c4127448fae127d744a5398258afe9c74c46a9a4/documentation/Use%20Cases/UC_LpTracking-History.md?plain=1#L1C1-L34C94
 
 ## Spending Legend Points
 
