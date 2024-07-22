@@ -9,7 +9,7 @@ const cmdMapping = {
   group: triggerCrCalc,
   h: triggerHelp,
   help: triggerHelp,
-  lp: triggerLPAward,
+  lp: triggerLpAward,
   s: triggerRollStep,
 };
 
@@ -99,11 +99,11 @@ function triggerHelp(argString) {
  * /char triggers legend point assignment prompt 
  * @param {*} argString 
  * @returns 
- * @UF UF_LpTracking-triggerLPAward
+ * @UF UF_LpTracking-triggerLpAward
  */
-function triggerLPAward(argString) {
+function triggerLpAward(argString) {
   LpTransactionData.assignLpPrompt();
-  // ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
+
   return false;
 }
 

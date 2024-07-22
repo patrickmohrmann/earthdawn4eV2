@@ -4,7 +4,7 @@ import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs";
+import LegendPointHistoryPrompt from "../applications/global/lp-history.mjs";
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
@@ -125,9 +125,9 @@ export default class ActorEd extends Actor {
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
    */
-  async legendPointHistoryEarned() {
+  async legendpointHistory() {
     // let history = await getLegendPointHistoryData( actor );
-    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(
+    const lpUpdateData = await LegendPointHistoryPrompt.waitPrompt(
       new LpTrackingData( this.system.lp.toObject() ),
       { actor: this }
     );
@@ -803,7 +803,7 @@ export default class ActorEd extends Actor {
    * Sub-UC: #UC_LpTracking_History
    * UF: #UF_LPTracking-addAbility
    * UF: #UF_LPTracking-upgradeAttribute
-   * UF: #UF_LPTracking-legendPointHistoryEarned
+   * UF: #UF_LPTracking-legendpointHistory
    * UF: #UF_LPTracking-upgradeAbility
    * UF: #UF_LPTracking-addLpTransaction
    * ############################################################# */

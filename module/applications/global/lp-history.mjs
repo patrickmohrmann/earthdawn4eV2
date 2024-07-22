@@ -1,34 +1,18 @@
-
-import LpEarningTransactionData from "../../data/advancement/lp-earning-transaction.mjs";
 import LpTrackingData from "../../data/advancement/lp-tracking.mjs";
-import LpTransactionData from "../../data/advancement/lp-transaction.mjs";
 
 /**
- * 
- * @param {object} inputs actor data
- * @returns 
- */
-// export async function getLegendPointHistoryData( inputs ) {
-//   return new Promise( ( resolve ) => {
-//     let history = new LegendPointHistoryEarnedPrompt( inputs, resolve );
-//     history.render( true );
-//   } )
-// }
-
-/**
- * The application responsible for handling Legend Point History of Earned Points
- *
+ * The application responsible for handling Legend Point related interactions and data.
  * @augments {FormApplication}
  *
- * @param {LegendPointHistoryEarnedPrompt} legendpointHistoryEarned         The data model which is the
+ * @param {LegendPointHistoryPrompt} legendpointHistory         The data model which is the
  *      target data structure to be updated by the form.
  * @param {FormApplicationOptions} [options={}]     Additional options which
  *      modify the rendering of the sheet.
  */
-export default class LegendPointHistoryEarnedPrompt extends FormApplication {
-  constructor( legendpointHistoryEarned , options = {} ) {
-     legendpointHistoryEarned ??= new LpTrackingData();
-    super( legendpointHistoryEarned );
+export default class LegendPointHistoryPrompt extends FormApplication {
+  constructor( legendpointHistory , options = {} ) {
+     legendpointHistory ??= new LpTrackingData();
+    super( legendpointHistory );
     this.actor = options.actor;
     this.resolve = options.resolve;
   }
@@ -68,7 +52,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
   }
 
   get title() {
-    return game.i18n.localize( "X-Legend Point History - Earned" );
+    return game.i18n.localize( "X-Legend Point History" );
   }
 
   get template() {
@@ -81,7 +65,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
     $( this.form.querySelector( 'button.ok' ) ).on( 'click', this.ok.bind( this ) );
 
-    $( this.form ).on( 'click', '.toggle-details', this._toggleDetails.bind( this ) );
+    $( this.form ).on( 'click', '.toggle-details', this._toggleTransactionDetails.bind( this ) );
 
     // toggle function for the Legend point History entreis
      html.on('click', '.group-header', event => {
@@ -89,7 +73,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
       const itemUuid = header.dataset.itemUuid;
   
       // Toggle the folded/unfolded state for each entry related to the clicked header
-      html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((index, entry) => {
+      html.find(`.group-entry[data-item-uuid="${itemUuid}"]`).each((entry) => {
         if ($(entry).hasClass('folded')) {
           $(entry).removeClass('folded').addClass('unfolded');
         } else {
@@ -100,11 +84,15 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
   }
   
-  _toggleDetails(event) {
-    event.preventDefault();
   
+  /**
+   * @description               Toggles the visibility of spending details when a table row is clicked.
+   * @param {Event} event       The click event.
+   * @UserFunction              UF_LpTracking-toggleTransactionDetails
+   */
+  _toggleTransactionDetails(event) {
+    event.preventDefault();
     const currentItem = $(event.currentTarget);
-    // Adjusted traversal to reflect the actual structure
     const detailsDiv = currentItem.closest('tr').next('tr').find('.spendings-details');
     if (detailsDiv.length > 0) {
       detailsDiv.toggleClass("is-visible");
@@ -115,9 +103,7 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
 
   async _updateObject( event, formData ) {
     const data = foundry.utils.expandObject( formData );
-
     this.object.updateSource( data );
-
     // Re-render sheet with updated values
     this.render();
   }
@@ -138,5 +124,4 @@ export default class LegendPointHistoryEarnedPrompt extends FormApplication {
     this.resolve?.( this.object );
     return this.close( );
   }
-
 }

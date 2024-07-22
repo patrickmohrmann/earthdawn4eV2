@@ -169,7 +169,7 @@ export default class ActorSheetEd extends ActorSheet {
    */
   _onLegendPointHistory( event ) {
     event.preventDefault();
-    this.actor.legendPointHistoryEarned( this.actor );
+    this.actor.legendpointHistory( this.actor );
   }
 
   /**
