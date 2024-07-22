@@ -1,5 +1,5 @@
 <script>
-import basics from "../use-cases/UC_LpTracking-History.md"
+import basics from "./use-cases/UC_LpTracking-History.md"
 
 </script>
 
@@ -7,6 +7,6 @@ import basics from "../use-cases/UC_LpTracking-History.md"
 
 ## Basics
 
-<!--@include:../use-cases/UC_LpTracking-History.md-->
+<!--@include:./use-cases/UC_LpTracking-History.md-->
 {{ basics }}
 
