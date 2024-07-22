@@ -4,15 +4,15 @@ import LpTrackingData from "../../data/advancement/lp-tracking.mjs";
  * The application responsible for handling Legend Point related interactions and data.
  * @augments {FormApplication}
  *
- * @param {LegendPointHistoryPrompt} legendpointHistory         The data model which is the
+ * @param {LegendPointHistoryPrompt} legendPointHistory         The data model which is the
  *      target data structure to be updated by the form.
  * @param {FormApplicationOptions} [options={}]     Additional options which
  *      modify the rendering of the sheet.
  */
 export default class LegendPointHistoryPrompt extends FormApplication {
-  constructor( legendpointHistory , options = {} ) {
-     legendpointHistory ??= new LpTrackingData();
-    super( legendpointHistory );
+  constructor( legendPointHistory , options = {} ) {
+     legendPointHistory ??= new LpTrackingData();
+    super( legendPointHistory );
     this.actor = options.actor;
     this.resolve = options.resolve;
   }

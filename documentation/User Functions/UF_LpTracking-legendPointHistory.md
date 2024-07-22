@@ -1,0 +1,1 @@
+this function is collecting all legend point transactions and shows them in a prompt, separated by earnings and spendings.

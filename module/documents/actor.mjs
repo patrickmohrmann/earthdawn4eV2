@@ -125,7 +125,7 @@ export default class ActorEd extends Actor {
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
    */
-  async legendpointHistory() {
+  async legendPointHistory() {
     // let history = await getLegendPointHistoryData( actor );
     const lpUpdateData = await LegendPointHistoryPrompt.waitPrompt(
       new LpTrackingData( this.system.lp.toObject() ),
@@ -803,7 +803,7 @@ export default class ActorEd extends Actor {
    * Sub-UC: #UC_LpTracking_History
    * UF: #UF_LPTracking-addAbility
    * UF: #UF_LPTracking-upgradeAttribute
-   * UF: #UF_LPTracking-legendpointHistory
+   * UF: #UF_LPTracking-legendPointHistory
    * UF: #UF_LPTracking-upgradeAbility
    * UF: #UF_LPTracking-addLpTransaction
    * ############################################################# */

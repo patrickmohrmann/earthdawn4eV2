@@ -1,0 +1,1 @@
+this function folds and unfolds the individual legend point interactions in the spend history, to avoid overwhelming. clicking on the name of the item toggles the view.
