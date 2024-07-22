@@ -1,1 +1,1 @@
-include::https://raw.githubusercontent.com/asciidoctor/asciidoctor/main/README.adoc
+include::https://github.com/patrickmohrmann/earthdawn4eV2/blob/teset/README.md
