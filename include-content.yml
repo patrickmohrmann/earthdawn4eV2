@@ -1,0 +1,26 @@
+name: Include Content
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Replace content
+        run: |
+          CONTENT=$(cat source.md)
+          sed -i "/<!-- include:documentation\Use Cases\UC_LpTracking-History.md -->/c $CONTENT" documentation\Functional Specification\building-your-own-legend.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add target.md
+          git commit -m "Update target.md with content from source.md"
+          git push
