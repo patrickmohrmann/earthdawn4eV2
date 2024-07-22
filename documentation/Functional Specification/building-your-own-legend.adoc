@@ -1,1 +1,13 @@
-include::https://github.com/patrickmohrmann/earthdawn4eV2/blob/teset/README.md
+
+= My Current AsciiDoc File
+:doctype: book
+
+== Introduction
+This is the introduction to my document.
+
+== Including Another Document
+// The following line includes content from building-your-own-legend.adoc
+include::documentation/Functional Specification/building-your-own-legend.adoc[]
+
+== Conclusion
+This is the conclusion of my document.
