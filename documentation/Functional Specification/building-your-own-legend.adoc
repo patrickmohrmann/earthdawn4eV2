@@ -1,30 +1,7 @@
-# Building your own Legend
 
-This chapter covers the same chapter form the Players Guide but will not go into details of the rules itself, those have to be referenced in the Players Guide itself. Legend Points are in general only relevant for Actors of type Character.
-
-## Earning Legend Points
-
-### relevant Use Cases
-
-* [UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.md)
-
-include::target[UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.adoc)
 
 include::../Use%20Cases/UC_LpTracking-History.adoc[]
 
-## Spending Legend Points
-
-
-
-## Advancing Discipline Circles, Path- and Questor Ranks
-
-
-
-## Legendary Status
-
-
-
-## Adventuring Groups
 
 
 
