@@ -1,11 +1,1 @@
-
-
-include::https://github.com/patrickmohrmann/earthdawn4eV2/blob/teset/documentation/Use%20Cases/UC_LpTracking-History.adoc[]
-
-
-
-
-
-
-
-
+include::https://github.com/patrickmohrmann/earthdawn4eV2/blob/teset/README.md
