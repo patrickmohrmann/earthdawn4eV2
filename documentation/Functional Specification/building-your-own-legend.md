@@ -8,7 +8,9 @@ This chapter covers the same chapter form the Players Guide but will not go into
 
 * [UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.md)
 
-@@include[UC_LpTracking-History](../Use%20Cases/UC_LpTracking-History.md)
+@@include[UC_LpTracking-History]()
+```{include} ../Use%20Cases/UC_LpTracking-History.md
+```
 
 ## Spending Legend Points
 
