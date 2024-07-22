@@ -12,6 +12,7 @@ import { sum } from "../utils.mjs";
 import PromptFactory from "../applications/global/prompt-factory.mjs";
 
 
+
 import LpTransactionData from "../data/advancement/lp-transaction.mjs";
 
 const futils = foundry.utils;
@@ -124,6 +125,8 @@ export default class ActorEd extends Actor {
    * Triggers a prompt for updating the Legend Point (LP) history of the actor.
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
+   * @UserFunction            UF_LpTracking-legendPointHistory 
+   * @see ../../documentation/User Functions/UF_LpTracking-legendPointHistory.md
    */
   async legendPointHistory() {
     // let history = await getLegendPointHistoryData( actor );
@@ -1169,6 +1172,14 @@ for (const talent of talentOptions) {
     // return transactionSuccess; // Return the success status
   }
 
+  /**
+   * @description                     Add a new LP transaction to the actor's system data
+   * @param {string} type             Type of the transaction (earnings or spendings)
+   * @param {object} transactionData  Data of the transaction
+   * @returns 
+   * @UserFunction                    UF_LPTracking-addLpTransaction
+   * @see                             ../../documentation/User Functions/UF_LpTracking-addLpTransaction.md
+   */
   async addLpTransaction(type, transactionData) {
     const oldTransactions = this.system.lp[type];
     const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData

@@ -89,6 +89,7 @@ export default class LegendPointHistoryPrompt extends FormApplication {
    * @description               Toggles the visibility of spending details when a table row is clicked.
    * @param {Event} event       The click event.
    * @UserFunction              UF_LpTracking-toggleTransactionDetails
+   * @see                       ../../documentation/User Functions/UF_LpTracking-toggleTransactionDetails.md
    */
   _toggleTransactionDetails(event) {
     event.preventDefault();
