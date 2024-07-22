@@ -1,1 +1,11 @@
-<!--@include:../documentation/use-cases/UC_LpTracking-History.md  -->
+<script>
+import basics from "../use-cases/UC_LpTracking-History.md"
+
+</script>
+
+# Docs
+
+## Basics
+
+{{ basics }}
+
