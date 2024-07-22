@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/asciidoctor/asciidoctor/main/README.adoc
+include::https://raw.githubusercontent.com/asciidoctor/asciidoctor/main/README.adoc
