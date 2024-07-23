@@ -43,13 +43,13 @@ stateDiagram-v2
 
 ### Related Test Coverage
 
-[UF_LpTracking-toggleTransactionDetails](https://github.com/patrickmohrmann/earthdawn4eV2/issues/835) 
+[TC_LpTracking-toggleTransactionDetails](https://github.com/patrickmohrmann/earthdawn4eV2/issues/835) 
 
-[UF_LpTracking-legendpointHistory](https://github.com/patrickmohrmann/earthdawn4eV2/issues/834) 
+[TC_LpTracking-legendpointHistory](https://github.com/patrickmohrmann/earthdawn4eV2/issues/834) 
 
-[UF_LpTracking-addLpTransaction-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/831) 
+[TC_LpTracking-addLpTransaction-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/831) 
 
-[UF_LpTracking-addLpTransaction-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/832) 
+[TC_LpTracking-addLpTransaction-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/832) 
 
-[UF_LpTracking-addLpTransaction-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/833) 
+[TC_LpTracking-addLpTransaction-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/833) 
 

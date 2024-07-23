@@ -1,4 +1,4 @@
-<Description>
+the chat command /char triggers the actor creation. To do so, it is essential for the player to be able to create actors (see [enable players to start Char Gen](https://github.com/patrickmohrmann/earthdawn4eV2/issues/829) )
 
 ### Diagram
 ```mermaid
@@ -24,6 +24,5 @@ stateDiagram-v2
 [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) 
 
 [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) 
-
 
 

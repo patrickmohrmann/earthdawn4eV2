@@ -49,26 +49,26 @@ state4 --> [*]
 
 ### Related Test Coverage
 
-[UF_LpTracking-upgradeAbility-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/837) 
+[TC_LpTracking-upgradeAbility-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/837) 
 
-[UF_LpTracking-upgradeAbility-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/836) 
+[TC_LpTracking-upgradeAbility-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/836) 
 
-[UF_LpTracking-validateAbilityUpgrade-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/838) 
+[TC_LpTracking-validateAbilityUpgrade-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/838) 
 
-[UF_LpTracking-validateAbilityUpgrade-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/840) 
+[TC_LpTracking-validateAbilityUpgrade-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/840) 
 
-[UF_LpTracking-validateAbilityUpgrade-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/839) 
+[TC_LpTracking-validateAbilityUpgrade-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/839) 
 
-[UF_LpTracking-showOptionsPrompt-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/841) 
+[TC_LpTracking-showOptionsPrompt-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/841) 
 
-[UF_LpTracking-showOptionsPrompt-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/842) 
+[TC_LpTracking-showOptionsPrompt-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/842) 
 
-[UF_LpTracking-showOptionsPrompt-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/843) 
+[TC_LpTracking-showOptionsPrompt-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/843) 
 
-[UF_LpTracking-showOptionsPrompt-4](https://github.com/patrickmohrmann/earthdawn4eV2/issues/844) 
+[TC_LpTracking-showOptionsPrompt-4](https://github.com/patrickmohrmann/earthdawn4eV2/issues/844) 
 
-[UF_LpTracking-showOptionsPrompt-5](https://github.com/patrickmohrmann/earthdawn4eV2/issues/845) 
+[TC_LpTracking-showOptionsPrompt-5](https://github.com/patrickmohrmann/earthdawn4eV2/issues/845) 
 
-[UF_LpTracking-showOptionsPrompt-6](https://github.com/patrickmohrmann/earthdawn4eV2/issues/846) 
+[TC_LpTracking-showOptionsPrompt-6](https://github.com/patrickmohrmann/earthdawn4eV2/issues/846) 
 
-[UF_LpTracking-addLpTransaction-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/832) 
+[TC_LpTracking-addLpTransaction-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/832) 
