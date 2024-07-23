@@ -454,13 +454,36 @@
                 "talentOptionsForTier":                             "Talent Options for"
             },
             "Header": {
-                "details":                                          "Details",
+                "activeUser":                                       "Active User",
+                "inactiveUser":                                     "Inactive User",
+                "actorsNoUserConfigured":                           "Not Configured, Owned Actors",
+                "details":                                          "Details",                                     
                 "description":                                      "Description",
                 "effects":                                          "Effects",
                 "general":                                          "General",
                 "navigator":                                        "Navigator",
                 "magic":                                            "Magic",
                 "type":                                             "Type"
+            },
+            "Knack": {
+                "action":                                           "Action",
+                "attribute":                                        "Attribute",
+                "description":                                      "Description",
+                "difficultyFixed":                                  "Fixed Difficulty",
+                "difficultyGroup":                                  "Group Difficulty",
+                "difficultyTarget":                                 "Target Difficulty",
+                "minLevel":                                         "Min. Rank",
+                "lpCost":                                           "LP Cost",
+                "Notifications": {
+                    "knackSourceNotFound":                          "The Knack is not referenced in any Talent of the Actor",
+                    "knackSourceNotHighEnough":                     "The Rank of the Talent is not high enough",
+                    "knackSourceMultipleTalents":                   "The Knack is referenced in multiple Talents of the Actor",
+                    "maxKnacksReached":                             "Maximum amount of Knacks reached"
+                },
+                "rank":                                             "Rank",
+                "sourceTalent":                                     "Source Talent",
+                "standardEffect":                                   "Standard Effect",
+                "strain":                                           "Strain"
             },
             "Namegiver":{
                 "burrow":                                           "burrow",
