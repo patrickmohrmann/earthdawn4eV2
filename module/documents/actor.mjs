@@ -1276,10 +1276,4 @@ async _showOptionsPrompt(actor, item, validationData) {
       d.render(true);
     });
   }
- // is this used???
-  async lpValidation ( itemData, actor ) {
-    const dialog = await new LpValidationPrompt.waitPrompt(itemData, actor);
-    console.log("DIALOG OUTPUT", dialog)
-  }
-
 }
