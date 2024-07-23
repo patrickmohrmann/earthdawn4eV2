@@ -137,12 +137,14 @@ export default class ItemEd extends Item {
 
 
         if ( options.noPrompt === true ) {
-          this.updateSource( { 
-            "system.talentCategory": options.talentCategory, 
-            "system.tier": options.tier,
-            "system.sourceClass.identifier": options.classIdentifier,
-            "system.sourceClass.levelAdded": options.classLevel,
-          } );
+          if ( data.type === "talent" ) {
+            this.updateSource( { 
+              "system.talentCategory": options.talentCategory, 
+              "system.tier": options.tier,
+              "system.sourceClass.identifier": options.classIdentifier,
+              "system.sourceClass.levelAdded": options.classLevel,
+            } );
+          }
         } else if (data.system.edid == "versatility" && data.type === "talent") {
           this.updateSource({
             "system.talentCategory": "versatility",

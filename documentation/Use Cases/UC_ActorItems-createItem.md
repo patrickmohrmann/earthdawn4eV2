@@ -7,57 +7,137 @@ _showOptionsPrompt is required for additional user interaction when the item is 
 
 ### Diagram
 ```mermaid
-
 stateDiagram-v2
     classDef fromOutside font-style:italic,font-weight:bold,fill:lightyellow
+    classDef foundryCore font-style:italic,font-weight:bold,fill: lightgreen
+    classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
+    classDef userFunctionReturn font-style:italic,font-weight:bold,fill:aqua
+    classDef dialog font-style:italic,font-weight:bold,fill:orange
 
-    state1: start item creation
-    state2: edid = versatitliy
-    state3: preset options
-    state4: validate item
-    state5: show user options
-    state6: create item
+    ###################### status #######################
 
-    state userInteraction <<choice>>
+    condition1: conditional If
+    condition2: talents added during circle increase
+    condition3: talent with edid "versatility"
 
-    interaction1: triggered creation
+    triggerAction1: triggerd Creation
+    triggerAction2: manual creation (drop)
+    lpTracking: UC_LpTracking-History
 
-    interaction1:::fromOutside
+    ed4eDropItem: ed4eDropItem
+    ed4eDropItem(Return): ed4eDropItem(Return)
+    addItemLpTransaction: addItemLpTransaction
+    validateDropItem: validateDropItem
+    validateDropItem(Return): validateDropItem(Return)
+    showOptionsPrompt: showOptionsPrompt
+    showOptionsPrompt(Return): showOptionsPrompt(Return)
 
-    [*] --> state1
-    interaction1 --> state1: automatic creation
-    state1 --> userInteraction: user interaction required?
-    userInteraction --> state2
-    state2 --> state6
-    userInteraction --> state3
-    state3 --> state6
-    userInteraction --> state4
-    state4 --> state5
-    state5 --> state6
-    state6 --> [*]
+    _preCreate: _preCreate
+    createItem(_preCreate): createItem(_preCreate)
+    updateSource: updateSource
 
-    
+    dialog: Dialog tier Selection
 
+    ####################### Decisions #######################
+
+    state requireInteraction <<choice>>
+    state itemType <<choice>>
+    state bookingResultVersatility <<choice>>
+
+    ######################## Colorations ######################
+
+    triggerAction1:::fromOutside
+    triggerAction2:::fromOutside
+    lpTracking:::fromOutside
+
+    ed4eDropItem:::userFunction
+    addItemLpTransaction:::userFunction
+    validateDropItem:::userFunction
+    showOptionsPrompt:::userFunction
+
+    validateDropItem(Return):::userFunctionReturn
+    showOptionsPrompt(Return):::userFunctionReturn
+    ed4eDropItem(Return):::userFunctionReturn
+
+    _preCreate:::foundryCore
+    createItem(_preCreate):::foundryCore
+    updateSource:::foundryCore
+
+    dialog:::dialog
+
+    ##################### StateDiagram ########################
+
+    triggerAction1 --> _preCreate
+    triggerAction2 --> _preCreate
+
+    _preCreate --> condition1: 
+
+    condition1 --> requireInteraction: interaction required based on item parameter
+        requireInteraction --> condition2: no interaction needed
+            condition2 --> updateSource: tier<br> category<br> identifier<br> level reference
+            
+        requireInteraction --> condition3: edid = versatility<br> & type = talent
+            condition3 --> updateSource: talent Category = versatility
+           
+        requireInteraction --> ed4eDropItem: yes
+
+            ed4eDropItem --> validateDropItem
+            validateDropItem --> validateDropItem(Return)
+            
+            validateDropItem(Return) --> itemType: interaction required? <br> based on item type
+                itemType --> showOptionsPrompt: yes
+                itemType --> updateSource: no
+
+            showOptionsPrompt --> showOptionsPrompt(Return)
+
+            showOptionsPrompt(Return) --> ed4eDropItem(Return)
+            
+            ed4eDropItem(Return) --> bookingResultVersatility
+            bookingResultVersatility --> addItemLpTransaction
+            
+            
+            bookingResultVersatility --> dialog: Versatility option
+                dialog  --> updateSource: talent category = versatility <br> tier selection
+            addItemLpTransaction --> updateSource: talent category
+
+            updateSource --> createItem(_preCreate)
+
+            addItemLpTransaction --> lpTracking
 ```
 
 ### Related User Functions
 
 [UF_ActorItems-ed4eDropItem](../User%20Functions/UF_ActorItems-ed4eDropItem.md)
 
-[UF_ActorItems-ValidateDropItem](../User%20Functions/UF_ActorItems-ValidateDropItem.md)
+[UF_ActorItems-validateDropItem](../User%20Functions/UF_ActorItems-validateDropItem.md)
 
 [UF_LpTracking-showOptionsPrompt](../User%20Functions/UF_LpTracking-showOptionsPrompt.md)
 
-[UF_ActorItems-preCreate](../User%20Functions/UF_AssignLpPrompt-preCreate.md)
+[UF_ActorItems-preCreate](../User%20Functions/UF_ActorItems-preCreate.md)
 
 
 ### Related Test Coverage
 
-[TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) 
-
-[TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) 
-
-[TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) 
+| Test Coverage | Related Documentation |
+|---------------|-----------------------|
+| add skill | [[Test] - add skill to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/846) |
+| add effect | [[Test] - add effect to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/851) |
+| add special ability | [[Test] - add special ability to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/849) |
+| add spell knack | [[Test] - add knack to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/845) |
+| add devotion | [[Test] - add devotion to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/844) |
+| add talents | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add talent with edid versatility | [[Test] - add talent with edid "versatility" to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/842) |
+| add talent for versatility choice | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add discipline | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add multi discipline | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add path | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add questor | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add knacks | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add spell | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add binding secret | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add physical item | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add thread item | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| Gui Test of Options Prompt | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 
 
 
