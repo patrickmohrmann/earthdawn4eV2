@@ -115,6 +115,12 @@ stateDiagram-v2
 
 [UF_ActorItems-preCreate](../User%20Functions/UF_ActorItems-preCreate.md)
 
+[UF_ActorItems-createEmbeddedDocuments](../User%20Functions/UF_ActorItems-createEmbeddedDocuments.md)
+
+[UF_ActorItems-findSourceTalent](../User%20Functions/UF_ActorItems-findSourceTalent.md)
+
+[UF_ActorItems-countKnacksForTalent](../User%20Functions/UF_ActorItems-countKnacksForTalent.md)
+
 
 ### Related Test Coverage
 
@@ -127,16 +133,14 @@ stateDiagram-v2
 | add devotion | [[Test] - add devotion to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/844) |
 | add talents | [[Test] - add talent to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/835) |
 | add talent with edid versatility | [[Test] - add talent with edid "versatility" to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/842) |
-| add talents through circle up | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | add disciplines | [[Test] - add discipline to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/843) |
 | -- Later -- add path | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | -- Later -- add questor | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| add spell | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| add spell | [[Test] - add spells to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/841) |
 | -- Later -- add binding secret | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| add physical item | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| -- Later -- add physical item --> with thread items| [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | -- Later -- add spell knack | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | -- Later -- add thread item | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Gui Test of Options Prompt | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 
 
 
