@@ -40,16 +40,30 @@ stateDiagram-v2
 
 [UF_LpTracking-toggleTransactionDetails](../User%20Functions/UF_LpTracking-toggleTransactionDetails.md)
 
+[UF_LpTracking-status](../User%20Functions/UF_LpTracking-status.md)
 
 ### Related Test Coverage
 
-[TC_LpTracking-toggleTransactionDetails](https://github.com/patrickmohrmann/earthdawn4eV2/issues/835) 
+| Test Coverage | Related Documentation |
+|---------------|-----------------------|
+|  | [[Test] - assign lp to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/850)  |
+|  | [[Test] - add spells to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/841)  |
+|  | [[Test] - add knack to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/845)  |
+|  | [[Test] - upgrade talent](https://github.com/patrickmohrmann/earthdawn4eV2/issues/XXX)  |
+|  | [[Test] - upgrade attribute](https://github.com/patrickmohrmann/earthdawn4eV2/issues/XXX)  |
+|  | [[Test] - upgrade skill](https://github.com/patrickmohrmann/earthdawn4eV2/issues/XXX)  |
+|  | [[Test] - upgrade devotion](https://github.com/patrickmohrmann/earthdawn4eV2/issues/XXX)  |
+|  | [[Test] - upgrade thread](https://github.com/patrickmohrmann/earthdawn4eV2/issues/XXX)  |
 
-[TC_LpTracking-legendpointHistory](https://github.com/patrickmohrmann/earthdawn4eV2/issues/834) 
 
-[TC_LpTracking-addLpTransaction-1](https://github.com/patrickmohrmann/earthdawn4eV2/issues/831) 
 
-[TC_LpTracking-addLpTransaction-2](https://github.com/patrickmohrmann/earthdawn4eV2/issues/832) 
 
-[TC_LpTracking-addLpTransaction-3](https://github.com/patrickmohrmann/earthdawn4eV2/issues/833) 
+
+
+
+
+
+ 
+
+
 

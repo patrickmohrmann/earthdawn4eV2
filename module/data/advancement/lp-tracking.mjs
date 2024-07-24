@@ -33,7 +33,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
     /**
      * The legendary status of this actor based on their total earned LP.
      * @type {number} A number from 1 through 4 indicating their status.
-     * @UF UF_LpTracking-legendPointsCalculations
+     * @UerFunction                  UF_LpTracking-status
      */
     get status() {
         let status = 0;

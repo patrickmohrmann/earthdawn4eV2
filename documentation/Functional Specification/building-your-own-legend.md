@@ -1,24 +1,57 @@
 # Building your own Legend
 
-This chapter covers the same chapter form the Players Guide but will not go into details of the rules itself, those have to be referenced in the Players Guide itself. Legend Points are in general only relevant for Actors of type Character.
+This chapter covers the same chapter form the Players Guide but will not go into details of the rules itself, those have to be referenced in the Players Guide itself. Legend Points are in general only relevant for Actors of type Character. 
 
 ## Earning Legend Points
 
-### relevant Use Cases
+One of the Goals in Earthdawn is the collection of legend points. They are used for Character progress and define the might of a character. The following use case describes how legend points can be assigned to characters by using an build in dialog. [UC_ChatCommands-TriggerLpAward](../Use%20Cases/UC_ChatCommands-TriggerLpAward.md.md)
 
-[UC_LpTracking-history](../Use%20Cases/UC_LpTracking-history.md)
+In addition to the above mentioned method of assigning legend points, it is although possible to assign legend points manually to individual characters. This process is described in the following use case in detail [UC_LpTracking-addLegendPointsManually](../Use%20Cases/UC_LpTracking-addLegendPointsManually.md).
+
+all those legend point transactions will be visible in the legend point history, accessable from the legend tab of each character. there are two tabs in the legend point history dialog. One for all earnings and another one for all spendings. The earnings tab shows not only all earned legend points, but also has the option to manually add legend points. In addition, it is possible to adapt the fiels of the description and the amount after an entry was made. Those changes should be done with care since they overwrite the data and will not be revertable afterwards. 
+Everything about the legend point history can be found in this use case [UC_LpTracking-history](../Use%20Cases/UC_LpTracking-history.md).
+
 
 ## Spending Legend Points
 
+Legend points can be spend for different purposes, increasing abilities, adding knacks or forging group patterns. from a system point of view there is a differentiation between items which can be upgraded, like talents or threads and those which will const only once legend points when added.
+the upgradeable items are:
+* talents
+* skills
+* devotions
+* attributes
+* threads
+
+the one-time cost items are:
+* spells
+* spell knacks
+* knack abilities
+* karma knacks
+* karma maneuver
+
+there are several items and/or workflows which are not relevant for the system in regards of legend point tracking, like disciplines, paths and devotinos. Those items are mentioned in the next [Chapter-Advancement](#Chapter-Advancement). 
+
+### upgradables:
+
+the most important upgradeable items are for sure talents. They are grouped together with devotions and skills and are handled in the following use case. Note, that all of those ability items will be added a rank 0 to the actor and therefore not directly triggering an event to spend legend points (the only exception is for abilities added from character generation).
 [UC_LpTracking-abilities](../Use%20Cases/UC_LpTracking-abilities.md)
 
+
+the next upgradables are the attributes. Their upgrade process is described in detail in the following use case. The use case is highly dependend on several system settings, which are referenced in the use case as well. 
 [UC_LpTracking-attributes](../Use%20Cases/UC_LpTracking-attributes.md)
+
+the last upgradable is... STILLLLL NOT IMPLEMENTED!
+[UC_LpTracking-threads](../Use%20Cases/UC_LpTracking-threads.md)
+
+### one-timer:
+
 
 [UC_LpTracking-knacks](../Use%20Cases/UC_LpTracking-knacks.md)
 
 [UC_LpTracking-spells](../Use%20Cases/UC_LpTracking-spells.md)
 
-[UC_LpTracking-threads](../Use%20Cases/UC_LpTracking-threads.md)
+
+<a name="Chapter-Advancement"></a>
 
 ## Advancing Discipline Circles, Path- and Questor Ranks
 

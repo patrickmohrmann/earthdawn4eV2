@@ -127,20 +127,19 @@ stateDiagram-v2
 | Test Coverage | Related Documentation |
 |---------------|-----------------------|
 | add skill | [[Test] - add skill to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/846) |
-| -- Later -- add effect | [[Test] - add effect to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/851) |
-| -- Later -- add special ability | [[Test] - add special ability to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/849) |
 | add knack | [[Test] - add knack to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/845) |
 | add devotion | [[Test] - add devotion to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/844) |
 | add talents | [[Test] - add talent to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/835) |
 | add talent with edid versatility | [[Test] - add talent with edid "versatility" to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/842) |
 | add disciplines | [[Test] - add discipline to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/843) |
-| -- Later -- add path | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| -- Later -- add questor | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | add spell | [[Test] - add spells to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/841) |
 | -- Later -- add binding secret | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | -- Later -- add physical item --> with thread items| [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | -- Later -- add spell knack | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | -- Later -- add thread item | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-
+| -- Later -- add effect | [[Test] - add effect to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/851) |
+| -- Later -- add special ability | [[Test] - add special ability to character](https://github.com/patrickmohrmann/earthdawn4eV2/issues/849) |
+| -- Later -- add path | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| -- Later -- add questor | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 
 
