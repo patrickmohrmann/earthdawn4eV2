@@ -38,13 +38,13 @@ export default async function validateDropItem(actor, item) {
         return
       }
     
-      const maxKnacksOfTalent = countKnacksForTalent(actorKnacks, knackSourceTalent.system.talentIdentifier);
-      if (maxKnacksOfTalent >= knackSourceTalent.system.level) {
+      const maxKnacksOfTalent = countKnacksForTalent(actorKnacks, knackSourceTalent[0].system.talentIdentifier);
+      if (maxKnacksOfTalent >= knackSourceTalent[0].system.level) {
         notifyWarning("ED.Item.Knack.Notification.maxKnacksReached");
         return;
       }
     
-      if (knackSourceTalent.system.level < knackMinLevel) {
+      if (knackSourceTalent[0].system.level < knackMinLevel) {
         notifyWarning("ED.Item.Knack.Notification.knackSourceNotHighEnough");
         return;
       }

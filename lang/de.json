@@ -463,7 +463,7 @@
                 "difficultyTarget":                                 "Ziel Schwierigkeit",
                 "minLevel":                                         "Min. Rang",
                 "lpCost":                                           "Feste LP Kosten",
-                "Notifications": {
+                "Notification": {
                     "knackSourceNotFound":                          "Der Kniff verweißt auf kein Talent des Acteurs.",
                     "knackSourceNotHighEnough":                     "Der Rank des Talents ist nicht hoch genug für diesen Kniff",
                     "knackSourceMultipleTalents":                   "Der Kniff verweißt auf mehrere Talente des Acteurs.",
