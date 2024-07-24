@@ -13,10 +13,7 @@ export default function registerHandlebarHelpers() {
     if (talent === undefined || knacks === undefined) {
       return;
     }
-    //return knacks.filter((knack) => knack.data.sourceTalentName === talent.name);
-    // V10 changes
     return knacks.filter((knack) => knack.system.source.knackSource === talent.system.talentIdentifier);
-		// change End
   });
 
   Handlebars.registerHelper( 'hasItems', ( collection ) => {
