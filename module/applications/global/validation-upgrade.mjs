@@ -1,92 +1,52 @@
 import ED4E from "../../config.mjs";
 
-// import { ED4E } from "../../config.mjs";
+/**
+ * @param {Object} item     The item to be upgraded
+ * @param {Object} actor    The actor that owns the item
+ * @returns 
+ * @UserFunction            UF_LpTracking-validateAbilityUpgrade  
+ */
 export default async function validateAbilityUpgrade(item, actor) {
     const itemOldLevel = item.system.level;
       // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-      if ( item.type === "skill" && itemOldLevel >= 10 ) {
+      const maxLevels = {
+        "skill": 10,
+        "talent": 15,
+        "devotion": 12
+      };
+      
+      if (maxLevels[item.type] && itemOldLevel >= maxLevels[item.type]) {
         ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-        return
-      } else if ( item.type === "talent" && itemOldLevel >= 15 ) {
-        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-        return
-      } else if ( item.type === "devotion" && itemOldLevel >= 12 ) {
-        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-        return
-      }
-      const legendPointsCostConfig = ED4E.legendPointsCost;
-      let requiredLp = 0;
-      let tier = 0;
-      if ( item.system.tier === "novice" ) {
-        tier = 0;
-      } else if ( item.system.tier === "journeyman" ) {
-        tier = 1;
-      } else if ( item.system.tier === "warden" ) {
-        tier = 2;
-      } else if ( item.system.tier === "master" ) {
-        tier = 3;
+        return;
       }
 
-      // find necessary bonus required for talent rank 1 of multi disciplines
+      const legendPointsCostConfig = ED4E.legendPointsCost;
+      const tierMapping = {
+        "novice": 0,
+        "journeyman": 1,
+        "warden": 2,
+        "master": 3
+      };
+
+      let tier = tierMapping[item.system.tier] || 0;
+
       let multiDisciplineBonus = 0;
-      if ( item.type === "talent" && item.system.level === 0 && item.system.sourceClass.levelAdded === 1 ) {
+      if (item.type === "talent" && item.system.level === 0 && item.system.sourceClass.levelAdded === 1) {
         const parentDiscipline = await fromUuid(item.system.sourceClass.identifier);
-        if ( parentDiscipline ) {
-        if ( parentDiscipline.type !== "discipline" ) {
-          return;
-        } else {
-          const parentDisciplineIndex = parentDiscipline.system.disciplineIndex;
-          const disciplineItems = actor.items.filter(item => item.type === 'discipline'&& item.id !== parentDiscipline.id);
-          if ( disciplineItems.length > 0 ) {
-          // Sort discipline items by level in ascending order
-          const sortedDisciplineItems = disciplineItems.sort((a, b) => a.system.level - b.system.level);
-          // The item with the lowest level
-          const lowestDisciplineItem = sortedDisciplineItems[0];
-          const lowestDisciplineLevel = lowestDisciplineItem.system.level;
-          if ( lowestDisciplineLevel === 1 ) {
-            if ( parentDisciplineIndex === 2 ) {
-              multiDisciplineBonus = 4;
-            } else if ( parentDisciplineIndex === 3 ) {
-              multiDisciplineBonus = 4;
-            } else if ( parentDisciplineIndex >= 4 ) {
-              multiDisciplineBonus = 4;
-            }
-          } else if ( lowestDisciplineLevel === 2 ) {
-            if ( parentDisciplineIndex === 2 ) {
-              multiDisciplineBonus = 3;
-            } else if ( parentDisciplineIndex === 3 ) {
-              multiDisciplineBonus = 3;
-            } else if ( parentDisciplineIndex >= 4 ) {
-              multiDisciplineBonus = 3;
-            }
-          } else if ( lowestDisciplineLevel === 3 ) {
-            if ( parentDisciplineIndex === 2 ) {
-              multiDisciplineBonus = 2;
-            } else if ( parentDisciplineIndex === 3 ) {
-              multiDisciplineBonus = 2;
-            } else if ( parentDisciplineIndex >= 4 ) {
-              multiDisciplineBonus = 2;
-            }
-          } else if ( lowestDisciplineLevel >= 4 ) {
-            if ( parentDisciplineIndex === 2 ) {
-              multiDisciplineBonus = 1;
-            } else if ( parentDisciplineIndex === 3 ) {
-              multiDisciplineBonus = 1;
-            } else if ( parentDisciplineIndex >= 4 ) {
-              multiDisciplineBonus = 1;
+        if (parentDiscipline && parentDiscipline.type === "discipline") {
+          const disciplineItems = actor.items.filter(i => i.type === 'discipline' && i.id !== parentDiscipline.id);
+          if (disciplineItems.length > 0) {
+            const lowestDisciplineLevel = Math.min(...disciplineItems.map(i => i.system.level));
+            if (lowestDisciplineLevel <= 4) {
+              const bonusMapping = {1: 4, 2: 3, 3: 2, 4: 1};
+              multiDisciplineBonus = parentDiscipline.system.disciplineIndex >= 2 ? bonusMapping[lowestDisciplineLevel] : 0;
             }
           }
         }
-        } 
-        }
-      
       }
 
-      if (item.type === "skill" ) {
-      requiredLp = legendPointsCostConfig[itemOldLevel + 2 + tier];
-      } else {
-      requiredLp = legendPointsCostConfig[itemOldLevel + 1 + tier + multiDisciplineBonus];
-      }
+      const offset = item.type === "skill" ? 2 : 1;
+      const requiredLp = legendPointsCostConfig[itemOldLevel + offset + tier + multiDisciplineBonus];
 
       const validationData = {
         requiredLp: requiredLp,
