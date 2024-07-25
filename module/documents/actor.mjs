@@ -10,18 +10,10 @@ import LpSpendingTransactionData from "../data/advancement/lp-spending-transacti
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import { sum } from "../utils.mjs";
 import PromptFactory from "../applications/global/prompt-factory.mjs";
-
-
-
-import LpTransactionData from "../data/advancement/lp-transaction.mjs";
+import validateAbilityUpgrade from "../applications/global/validation-upgrade.mjs";
 
 const futils = foundry.utils;
 
-//import validateDropItem from "../applications/global/validation-dropped-items.mjs";
-import validateAbilityUpgrade from "../applications/global/validation-upgrade.mjs";
-import ed4eDropItem from "../applications/global/drop-items.mjs";
-// import LpTransactionData from "../data/advancement/lp-transaction.mjs";
-// import { getLegendPointHistoryData } from "../applications/global/lp-history.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @augments {Actor}
@@ -809,51 +801,48 @@ export default class ActorEd extends Actor {
       if (attributeOldIncrease >= 3) {
         ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
         return
-      } else {
-        const attributeName = ED4E.attributes[attribute].label;
-        const legendPointsCostConfig = ED4E.legendPointsCost;
-        const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
-        const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
-          previousLevel: attributeOldIncrease,
-          newLevel: attributeOldIncrease + 1,
-          attributeName: attributeName,
-        });
-        const transactionData = new LpSpendingTransactionData({
-          entityType: "attribute",
-          type: "spendings",
-          amount: requiredLp,
-          date: new Date(),
-          lpBefore: this.system.lp.current,
-          lpAfter: this.system.lp.current - requiredLp,
-          name: attributeName,
-          description: description
-        })
+      } 
+      const attributeName = ED4E.attributes[attribute].label;
+      const legendPointsCostConfig = ED4E.legendPointsCost;
+      const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
 
-        const newIncrease = attributeOldIncrease + 1
-        await this.update({ [`system.attributes.${attribute}.timesIncreased`]: newIncrease })
-        return this.addLpTransaction("spendings", transactionData);
-      }
+      const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
+        previousLevel: attributeOldIncrease,
+        newLevel: attributeOldIncrease + 1,
+        attributeName: attributeName,
+      });
+      const transactionData = new LpSpendingTransactionData({
+        entityType: "attribute",
+        type: "spendings",
+        amount: requiredLp,
+        date: new Date(),
+        lpBefore: this.system.lp.current,
+        lpAfter: this.system.lp.current - requiredLp,
+        name: attributeName,
+        description: description
+      })
+
+      await this.update({ [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 })
+      return this.addLpTransaction("spendings", transactionData);
     }
 
 
     async upgradeAbility(ability) {
       const abilityOldLevel = ability.system.level;
+      const newIncrease = abilityOldLevel + 1
       const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
         previousLevel: abilityOldLevel,
-        newLevel: abilityOldLevel + 1,
+        newLevel: newIncrease,
         abilityName: ability.name,
       });
-      let requiredLp = 0;
-      const newIncrease = abilityOldLevel + 1
+      
       const validationData = await validateAbilityUpgrade(ability, this);
       const validateResult = await this._showOptionsPrompt (this, ability, validationData);
-      if ( validateResult === "free" ) {
-        requiredLp = 0;
-      } else if ( validateResult === "spend" ) {
-        requiredLp = validationData.requiredLp;
-      }else if ( validateResult === "cancel" ) {
-        return;
-      }
+
+      if (validateResult === "cancel") return;
+
+      const requiredLp = validateResult === "free" ? 0 : validationData.requiredLp;
+
       const transactionData = new LpSpendingTransactionData({
         entityType: ability.type,
         type: "spendings",
@@ -878,71 +867,38 @@ export default class ActorEd extends Actor {
     const classOldLevel = classItem.system.level;
     const classNewLevel = classOldLevel + 1;
     const classNewLevelIndex = classNewLevel - 1;
-    
+
     // validate if the class can be upgraded
     const currentDisciplineTalents = this.items.filter(item => item.type === "talent" && item.system.talentCategory === "discipline" && item.system.sourceClass.identifier === classItem.uuid);
-    if ( classOldLevel >= 15 ) {
+    if (classOldLevel >= 15) {
       ui.notifications.warn("Klasse hat bereits das maximale Level erreicht");
       return;
-    } 
-    let requiredLp = 0;
-      if ( classNewLevel < 5 ) {
-        requiredLp = 100;
-      } else if ( classNewLevel >= 5 && classNewLevel < 9 ) {
-        requiredLp = 200;
-      } else if ( classNewLevel >= 9 && classNewLevel < 13 ) {
-        requiredLp = 300;
-      } else if ( classNewLevel >= 13 ) {
-        requiredLp = 500;
-      }
-    // classNewLevel is reduced by 1 to get the correct index for the class level
+    }
+
     const currentTier = classItem.system.advancement.levels[classNewLevelIndex].tier;
-    //// AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-    //// das muss doch mit der Config funkionieren
-    let newLevelTier = "";
-    let currentIndex = 0;
-    if ( disciplineIndex > 1 ) {
-    
-    if ( currentTier === "novice" ) {
-      currentIndex = 1;
-    } else if ( currentTier === "journeyman" ) {
-      currentIndex = 2;
-    } else if ( currentTier === "warden" ) {
-      currentIndex = 3;
-    } else if ( currentTier === "master" ) {
-      currentIndex = 4;
-    } else {
+    const tierMap = {
+      [ED4E.tier.novice.toLowerCase()]: 1,
+      [ED4E.tier.journeyman.toLowerCase()]: 2,
+      [ED4E.tier.warden.toLowerCase()]: 3,
+      [ED4E.tier.master.toLowerCase()]: 4
+    };
+    const reverseTierMap = {
+      1: [ED4E.tier.novice.toLowerCase()],
+      2: [ED4E.tier.journeyman.toLowerCase()],
+      3: [ED4E.tier.warden.toLowerCase()],
+      4: [ED4E.tier.master.toLowerCase()]
+    };
+
+    let currentIndex = tierMap[currentTier];
+    if (!currentIndex) {
       ui.notifications.warn("Tier nicht gefunden");
       return;
     }
 
-    
-    if ( disciplineIndex === 2 ) {
-      newLevelTier = currentIndex + 1;
-     } else if ( disciplineIndex === 3 ) {
-      newLevelTier = currentIndex + 2;
-     } else if ( disciplineIndex >= 4 ) {
-      newLevelTier = currentIndex + 3;
-     } else { 
-      newLevelTier = 1
-     }
+    let newLevelTier = disciplineIndex > 1 ? currentIndex + disciplineIndex - 1 : currentIndex;
+    newLevelTier = Math.min(newLevelTier, 4);
+    newLevelTier = reverseTierMap[newLevelTier];
 
-     if ( newLevelTier > 4 ) {
-      newLevelTier = 4;
-      } 
-
-      if ( newLevelTier === 1 ) {
-        newLevelTier = "novice";
-      } else if ( newLevelTier === 2 ) {
-        newLevelTier = "journeyman";  
-      } else if ( newLevelTier === 3 ) {
-        newLevelTier = "warden";
-      } else if ( newLevelTier === 4 ) {
-        newLevelTier = "master";
-      }
-    } else {
-      newLevelTier = currentTier;
-    }
 
     const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
     if (settingOption === "disciplineTalents") {
@@ -950,73 +906,40 @@ export default class ActorEd extends Actor {
       const relevantItems = currentDisciplineTalents.filter(item => item.system.sourceClass.identifier === classItem.uuid);
       const allItemsMeetLevelRequirement = relevantItems.every(item => item.system.level >= classNewLevel);
 
+
       if (!allItemsMeetLevelRequirement) {
         // If any item does not meet the level requirement, notify the user
-      return ui.notifications.warn(`Mindestens ein Talent hat nicht das erforderliche Level.`);
+        return ui.notifications.warn(`Mindestens ein Talent hat nicht das erforderliche Level.`);
       }
-      if ( requiredLp > this.system.lp.current ) {
-          ui.notifications.warn("Nicht genügend Legendpunkte");
-          return;
-        }
     } else if (settingOption === "allTalents") {
       ui.notifications.warn("Alle Talente für den kreisaufstieg verwenden");
     } else if (settingOption === "allTalentsHouseRule") {
       ui.notifications.warn("Alle Talente ohne verringerte kosten - Hausregel");
     }
 
-    const disciplineTalentIds = classItem.system.advancement.levels[classNewLevelIndex].abilities.class;
-    let newDisciplineTalents = [];
-    for (const uuid of disciplineTalentIds) {
-      let talent = await fromUuid(uuid);
-      newDisciplineTalents.push(talent);
-    }
+    const fetchItemsByIds = async (ids) => {
+      return Promise.all(ids.map(uuid => fromUuid(uuid)));
+    };
 
-    const freeTalentIds = classItem.system.advancement.levels[classNewLevelIndex].abilities.free;
-    let freeTalents = [];
-    for (const uuid of freeTalentIds) {
-      let talent = await fromUuid(uuid);
-      freeTalents.push(talent);
-    }
+    const classLevels = classItem.system.advancement.levels[classNewLevelIndex];
+    const abilityOptions = classItem.system.advancement.abilityOptions;
 
-    const specialAbilityIds = classItem.system.advancement.levels[classNewLevelIndex].abilities.special;
-    let specialAbilities = [];
-    for (const uuid of specialAbilityIds) {
-      let special = await fromUuid(uuid);
-      specialAbilities.push(special);
-    }
+    const newDisciplineTalents = await fetchItemsByIds(classLevels.abilities.class);
+    const freeTalents = await fetchItemsByIds(classLevels.abilities.free);
+    const specialAbilities = await fetchItemsByIds(classLevels.abilities.special);
+    const effects = await fetchItemsByIds(classLevels.effects);
 
-    const effectIds = classItem.system.advancement.levels[classNewLevelIndex].effects;
-    let effects = [];
-    for (const uuid of effectIds) {
-      let effect = await fromUuid(uuid);
-      effects.push(effect);
-    }
+    const noviceTalents = await fetchItemsByIds(abilityOptions.novice);
+    const journeymanTalents = await fetchItemsByIds(abilityOptions.journeyman);
+    const wardenTalents = await fetchItemsByIds(abilityOptions.warden);
+    const masterTalents = await fetchItemsByIds(abilityOptions.master);
 
-    let talentOptions = [];
-    const noviceIds = classItem.system.advancement.abilityOptions.novice;
-    const journeymanIds = classItem.system.advancement.abilityOptions.journeyman
-    const wardenIds = classItem.system.advancement.abilityOptions.warden;
-    const masterIds = classItem.system.advancement.abilityOptions.master
-    let noviceTalents = [];
-    for (const uuid of noviceIds) {
-      let talent = await fromUuid(uuid);
-      noviceTalents.push(talent);
-    }
-    let journeymanTalents = [];
-    for (const uuid of journeymanIds) {
-      let talent = await fromUuid(uuid);
-      journeymanTalents.push(talent);
-    }
-    let wardenTalents = [];
-    for (const uuid of wardenIds) {
-      let talent = await fromUuid(uuid);
-      wardenTalents.push(talent);
-    }
-    let masterTalents = [];
-    for (const uuid of masterIds) {
-      let talent = await fromUuid(uuid);
-      masterTalents.push(talent);
-    }
+    let talentOptions = [
+      ...noviceTalents,
+      ...journeymanTalents,
+      ...wardenTalents,
+      ...masterTalents
+    ];
 
     if (classNewLevelIndex >= 0 && classNewLevelIndex <= 3) {
       talentOptions = noviceTalents;
@@ -1029,14 +952,30 @@ export default class ActorEd extends Actor {
     }
 
     let filteredTalentOptions = [];
-for (const talent of talentOptions) {
-  const isDuplicate = await this.checkDuplicateAbility(talent);
-  if (!isDuplicate) {
-    filteredTalentOptions.push(talent);
-  }
-}
+    for (const talent of talentOptions) {
+      const isDuplicate = await this.checkDuplicateAbility(talent);
+      if (!isDuplicate) {
+        filteredTalentOptions.push(talent);
+      }
+    }
 
     const optionsHtml = filteredTalentOptions.map((talent, index) => `<option value="${index}">${talent.name}</option>`).join('');
+
+    // Helper function to create embedded documents if not duplicate
+    const createIfNotDuplicate = async (items, category, tier, level, identifier) => {
+      for (const item of items) {
+        const isDuplicate = await this.checkDuplicateAbility(item);
+        if (!isDuplicate) {
+          await this.createEmbeddedDocuments('Item', [item], {
+            noPrompt: true,
+            talentCategory: category,
+            tier: tier,
+            classLevel: level,
+            classIdentifier: identifier
+          });
+        }
+      }
+    };
 
     // Create and render the dialog
     new Dialog({
@@ -1048,50 +987,20 @@ for (const talent of talentOptions) {
           callback: async (html) => {
             const selectedIndex = parseInt(html.find('#talent-choice').val());
             const selectedTalent = filteredTalentOptions[selectedIndex];
-            await this.createEmbeddedDocuments('Item', [selectedTalent], { 
-              noPrompt: true, 
-              talentCategory: "optional", 
-              tier: newLevelTier, 
+
+            await this.createEmbeddedDocuments('Item', [selectedTalent], {
+              noPrompt: true,
+              talentCategory: "optional",
+              tier: newLevelTier,
               classLevel: classNewLevel,
               classIdentifier: classItem.uuid
             });
-            for (const items of newDisciplineTalents) {
-              const isDuplicate = await this.checkDuplicateAbility(items);
-              if (!isDuplicate) {
-              await this.createEmbeddedDocuments('Item', [items], { 
-                noPrompt: true, 
-                talentCategory: "discipline", 
-                tier: newLevelTier, 
-                classLevel: classNewLevel,
-                classIdentifier: classItem.uuid
-              });
-            }
-            }
-            for (const items of freeTalents) {
-              const isDuplicate = await this.checkDuplicateAbility(items);
-              if (!isDuplicate) {
-              await this.createEmbeddedDocuments('Item', [items], { 
-                noPrompt: true, 
-                talentCategory: "free", 
-                tier: newLevelTier, 
-                classLevel: classNewLevel,
-                classIdentifier: classItem.uuid 
-              });
-            }
-          }
-            for (const items of specialAbilities) {
-              const isDuplicate = await this.checkDuplicateAbility(items);
-              if (!isDuplicate) {
-              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
-            }
-          }
-            for (const items of effects) {
-              const isDuplicate = await this.checkDuplicateAbility(items);
-              if (!isDuplicate) {
-              await this.createEmbeddedDocuments('Item', [items], { noPrompt: true, });
-            }
-          }
-    
+
+            await createIfNotDuplicate(newDisciplineTalents, "discipline", newLevelTier, classNewLevel, classItem.uuid);
+            await createIfNotDuplicate(freeTalents, "free", newLevelTier, classNewLevel, classItem.uuid);
+            await createIfNotDuplicate(specialAbilities, "special", newLevelTier, classNewLevel, classItem.uuid);
+            await createIfNotDuplicate(effects, "effect", newLevelTier, classNewLevel, classItem.uuid);
+
             // Update the class level
             await classItem.update({ "system.level": classNewLevel });
             await this.upgradeFreeTalents(classItem, classNewLevel);
@@ -1099,7 +1008,7 @@ for (const talent of talentOptions) {
         },
         cancel: {
           label: "Cancel",
-          callback: () => { 
+          callback: () => {
             return;
           }
         },
@@ -1109,12 +1018,9 @@ for (const talent of talentOptions) {
   }
 
   async upgradeFreeTalents(classItem, newLevel) {
-    const freeTalents = this.items.filter(items => items.type === "talent" && items.system.talentCategory === "free");
-    for (const talent of freeTalents) {
-      if ( classItem.uuid === talent.system.sourceClass.identifier ) {
-      talent.updateSource({"system.level": newLevel});
-      }
-    }
+    this.items
+      .filter(item => item.type === "talent" && item.system.talentCategory === "free" && item.system.sourceClass.identifier === classItem.uuid)
+      .forEach(talent => talent.updateSource({ "system.level": newLevel }));
   }
 
   async checkDuplicateAbility(ability) {
@@ -1159,8 +1065,6 @@ for (const talent of talentOptions) {
       description: description
     })
     const transactionSuccess = await this.addLpTransaction("spendings", transactionData);
-    // refactored ?!?!
-    // return transactionSuccess; // Return the success status
   }
 
   /**

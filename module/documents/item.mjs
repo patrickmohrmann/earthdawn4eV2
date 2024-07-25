@@ -130,11 +130,12 @@ export default class ItemEd extends Item {
           });
         } else if (data.system.edid === "versatility") {
           this.updateSource({ "system.talentCategory": "versatility" });
+        }
         } else {
           const dropItemResult = await ed4eDropItem(this.actor, data);
           await this.handleDropItemResult(dropItemResult, data);
         }
-      }
+      
     
       return super._preCreate(data, options, user);
     }
