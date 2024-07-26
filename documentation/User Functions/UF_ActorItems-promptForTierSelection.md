@@ -1,0 +1,1 @@
+this function will be called if a manual selection for the item tier is required.

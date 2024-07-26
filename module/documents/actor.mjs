@@ -795,6 +795,12 @@ export default class ActorEd extends Actor {
    * ############################################################# */
 
 
+    /**
+     * 
+     * @param {Object} attribute      The attribute to upgrade
+     * @returns 
+     * @UserFunction                  UF_LPTracking-upgradeAttribute
+     */
     async upgradeAttribute(attribute) {
       const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
       // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
@@ -821,12 +827,17 @@ export default class ActorEd extends Actor {
         name: attributeName,
         description: description
       })
-
+      // add the _showOptionsPrompt function to show the options for the user to choose
       await this.update({ [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 })
       return this.addLpTransaction("spendings", transactionData);
     }
 
 
+    /**
+     * @param {Object} ability  The ability to upgrade
+     * @returns 
+     * @UserFunction            UF_LPTracking-upgradeAbility
+     */
     async upgradeAbility(ability) {
       const abilityOldLevel = ability.system.level;
       const newIncrease = abilityOldLevel + 1
@@ -859,8 +870,10 @@ export default class ActorEd extends Actor {
     }
 
     /**
+     * @chris I dont get inheritdoc...
      * @inheritdoc
-     * @UserFunction #UF_LPTracking-upgradeDiscipline
+     * @param {ItemEd} classItem    The class item to upgrade
+     * @UserFunction                UF_LPTracking-upgradeDiscipline
      */
   async upgradeDiscipline(classItem) {
     const disciplineIndex = classItem.system.disciplineIndex;
@@ -1017,12 +1030,24 @@ export default class ActorEd extends Actor {
     }).render(true);
   }
 
+  /**
+   * 
+   * @param {Object} classItem      class item to be used for the upgrade
+   * @param {number} newLevel       new level of the class
+   * @UserFunction                  UF_LPTracking-upgradeFreeTalents
+   */
   async upgradeFreeTalents(classItem, newLevel) {
     this.items
       .filter(item => item.type === "talent" && item.system.talentCategory === "free" && item.system.sourceClass.identifier === classItem.uuid)
       .forEach(talent => talent.updateSource({ "system.level": newLevel }));
   }
 
+  /**
+   * 
+   * @param {Object} ability    ability to be checked for duplicates
+   * @returns                   returns true if the ability is a duplicate, false otherwise
+   * @UserFunction              UF_LPTracking-checkDuplicateAbility
+   */
   async checkDuplicateAbility(ability) {
     const itemsOfType = this.items.filter(item => item.type === ability.type);
     return itemsOfType.some(item => item.name === ability.name && item.system.edid !== "thread-weaving" && item.system.edid !== "matrix");
@@ -1031,9 +1056,10 @@ export default class ActorEd extends Actor {
 
 
   /**
-   * 
+   * @description                     Add a new LP transaction to the actor's system data for a new or upgraded item
    * @param {object} item             item to be added
    * @param {object} validationData   validation data for the item
+   * @UserFunction                    UF_LPTracking-addItemLpTransaction
    */
   async addItemLpTransaction(item, validationData, bookingResult) {
     
@@ -1086,7 +1112,15 @@ export default class ActorEd extends Actor {
   }
 
 
-  // this prompt will be rebuild later with full complexity
+
+  /**
+   * needs to be rebuild later after paths, questors and threads are implemented to show all relevant information
+   * @param {Object} actor            actor to be used for the prompt   
+   * @param {Object} item             item to be added or upgraded
+   * @param {Array} validationData    validation data for the item
+   * @returns                         returns the result of the prompt which defines the LP spending and grouping of the item
+   * @UserFunction                    UF_LPTracking-showOptionsPrompt
+   */
 async _showOptionsPrompt(actor, item, validationData) {
             
             return new Promise((resolve) => {

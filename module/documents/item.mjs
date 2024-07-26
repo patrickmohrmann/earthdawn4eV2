@@ -106,7 +106,7 @@ export default class ItemEd extends Item {
      * @param {Object} data         The data of the item to be created.
      * @param {Object} options      The options of the item to be created.
      * @param {Object} user         The user creating the item.
-     * @returns 
+     * @returns                     The created item.
      * @UserFunction                UF_ActorItems-preCreate
      */
     async _preCreate(data, options, user) {
@@ -166,7 +166,7 @@ export default class ItemEd extends Item {
      * @param {Object} dropItemResult   The result of the drop item dialog.
      * @param {Object} data             The data of the item to be created.
      * @returns 
-     * @UserFunction              UF_ActorItems-updateTalentCategoryAndTier
+     * @UserFunction                    UF_ActorItems-updateTalentCategoryAndTier
      */
     async updateCategoryAndTier(dropItemResult, data) {
       const category = dropItemResult.bookingResult;

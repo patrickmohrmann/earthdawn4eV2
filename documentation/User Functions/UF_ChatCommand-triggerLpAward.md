@@ -1,0 +1,1 @@
+This function listens on the foundry chat and will trigger the **assign LP award** dialog if **/lp** was entered.

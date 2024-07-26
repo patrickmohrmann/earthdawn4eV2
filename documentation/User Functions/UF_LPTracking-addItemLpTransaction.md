@@ -1,0 +1,1 @@
+for items which require a one time legend point invest this function is used to create the legend point transaction based on the prompt result (free or for LP).

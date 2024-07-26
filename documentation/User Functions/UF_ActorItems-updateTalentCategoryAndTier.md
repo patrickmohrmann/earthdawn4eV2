@@ -1,0 +1,1 @@
+this function adapts the talent category and the tier of a talent based on the validations and the user interaction.
