@@ -94,31 +94,6 @@ export default class PcData extends NamegiverTemplate.mixin(
               }
 
             ),
-            // I believe this is a leftover from the previous implementation
-            // legendPointsEarned: new foundry.data.fields.ArrayField(
-            //   new foundry.data.fields.SchemaField( {
-            //       date: new foundry.data.fields.StringField( {
-            //           required: true,
-            //           blank: false,
-            //           nullable: false,
-            //           initial: "date?"
-            //       } ),
-            //       description: new foundry.data.fields.StringField( {
-            //           required: true,
-            //           blank: true,
-            //           nullable: false,
-            //           initial: ""
-            //       } ),
-            //       lp: new foundry.data.fields.NumberField( {
-            //           required: true,
-            //           nullable: false,
-            //           min: 0,
-            //           step: 1,
-            //           initial: 0,
-            //           integer: true
-            //       } ),
-            //   } )
-            // )
         } );
         return superSchema;
     }
@@ -129,7 +104,7 @@ export default class PcData extends NamegiverTemplate.mixin(
 
     /**
      *
-     * @returns {Promise<ActorEd|void>}
+     * @returns {Promise<ActorEd|void>} The newly created actor or `undefined` if the generation was canceled.
      */
     static async characterGeneration () {
         const generation = await CharacterGenerationPrompt.waitPrompt();
@@ -198,7 +173,6 @@ export default class PcData extends NamegiverTemplate.mixin(
         this.#prepareDerivedEncumbrance();
         this.#prepareDerivedKarma();
         this.#prepareDerivedDevotion();
-        // this.#prepareDerivedCurrentLp();
     }
 
     /* -------------------------------------------- */
@@ -479,29 +453,6 @@ export default class PcData extends NamegiverTemplate.mixin(
             this.devotion.max = questor.system.level * 10;
         }
     }
-
-    // /**
-    //  * Prepare Legendpoint infromation calculation
-    //  */
-
-    // #prepareDerivedCurrentLp() {
-    //     const stingTotalLp = this.legendPoints.total;
-    //     const stringSpendLp = this.legendPoints.spend;
-    //     // const stringcurrentLp = this.legendPoints.current;
-
-    //     const totalLp = stingTotalLp.replaceAll( ".","" )
-    //     const totalLpNumber = Number( totalLp )
-    //     this.legendPoints.current = totalLpNumber - Number( stringSpendLp.replaceAll( ".","" ) );
-    //     if ( totalLp < 10000 ) {
-    //         this.legendPoints.status = 1
-    //     } else if ( totalLp >= 10000 && totalLp < 100000 ) {
-    //         this.legendPoints.status = 2
-    //     } else if ( totalLp >= 100000 && totalLp < 1000000 ) {
-    //         this.legendPoints.status = 3
-    //     } else if ( totalLp >= 1000000 ) {
-    //         this.legendPoints.status = 4
-    //     } 
-    // }
 
     /* -------------------------------------------- */
 
