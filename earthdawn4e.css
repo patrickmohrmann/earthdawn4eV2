@@ -153,12 +153,354 @@ p {
   position: absolute;
   left: calc(50% - 64px);
 }
+form#document-create > .form-group > label,
+form#document-create > .form-group > header {
+  font-size: larger;
+  font-weight: bold;
+}
+form#document-create header.type-group-label {
+  border-bottom: double;
+  margin-top: 0.3em;
+}
+form#document-create #typeSelectionHeader {
+  font-size: large;
+  font-weight: bold;
+}
+form#document-create .type-selection input {
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+form#document-create .type-selection label:has(input[type='radio']) {
+  color: #06a506;
+  font-variant: all-small-caps;
+  font-size: large;
+  scale: 1;
+  margin-top: 0.6em;
+  vertical-align: middle;
+  text-shadow: 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white;
+}
+form#document-create .type-selection label:has(input[type='radio']):has(input:checked) {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+form#document-create .type-selection .checkbox {
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 100px;
+  height: 70px;
+  text-shadow: 1px 1px 5px #ca2121;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+  -webkit-filter: brightness(1.8) grayscale(1) opacity(0.7);
+  -moz-filter: brightness(1.8) grayscale(1) opacity(0.7);
+  filter: brightness(1.8) grayscale(1) opacity(0.7);
+}
+form#document-create .checkbox,
+form#document-create .type-selection input:active + .checkbox {
+  opacity: 0.9;
+}
+form#document-create .checkbox,
+form#document-create .type-selection input[checked=""] + .checkbox {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+form#document-create .checkbox:hover {
+  -webkit-filter: brightness(1.2) grayscale(0.5) opacity(0.9);
+  -moz-filter: brightness(1.2) grayscale(0.5) opacity(0.9);
+  filter: brightness(1.2) grayscale(0.5) opacity(0.9);
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='character']) {
+  background-image: url('assets/icons/character.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='npc']) {
+  background-image: url('assets/icons/npc.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='creature']) {
+  background-image: url('assets/icons/creature.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='spirit']) {
+  background-image: url('assets/icons/spirit.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='horror']) {
+  background-image: url('assets/icons/horror.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='dragon']) {
+  background-image: url('assets/icons/dragon.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='group']) {
+  background-image: url('assets/icons/group.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='vehicle']) {
+  background-image: url('assets/icons/vehicle.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='trap']) {
+  background-image: url('assets/icons/trap.svg');
+}
+.create-document.create-actor .type-selection label:has(input[type='radio'][value='loot']) {
+  background-image: url('assets/icons/loot.svg');
+}
+.create-document.create-item {
+  min-width: 750px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='armor']) {
+  background-image: url('assets/icons/items/armor.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='attack']) {
+  background-image: url('assets/icons/items/attack.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='bindingSecret']) {
+  background-image: url('assets/icons/items/bindingSecrets.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='cursemark']) {
+  background-image: url('assets/icons/items/poison.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='devotion']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='discipline']) {
+  background-image: url('assets/icons/items/others.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='effect']) {
+  background-image: url('assets/icons/items/poison.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='equipment']) {
+  background-image: url('assets/icons/items/others.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='knackAbility']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='knackKarma']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='knackManeuver']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='maneuver']) {
+  background-image: url('assets/icons/items/attack.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='mask']) {
+  background-image: url('assets/icons/items/others.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='matrix']) {
+  background-image: url('assets/icons/items/bindingSecrets.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='namegiver']) {
+  background-image: url('assets/icons/items/condition.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='path']) {
+  background-image: url('assets/icons/items/others.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='poisonDisease']) {
+  background-image: url('assets/icons/items/poison.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='power']) {
+  background-image: url('assets/icons/items/attack.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='questor']) {
+  background-image: url('assets/icons/items/others.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='shield']) {
+  background-image: url('assets/icons/items/others.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='shipWeapon']) {
+  background-image: url('assets/icons/items/condition.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='skill']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='specialAbility']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='spellKnack']) {
+  background-image: url('assets/icons/items/bindingSecrets.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='spell']) {
+  background-image: url('assets/icons/items/bindingSecrets.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='talent']) {
+  background-image: url('assets/icons/items/meditation.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='thread']) {
+  background-image: url('assets/icons/items/bindingSecrets.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.create-document.create-item .type-selection label:has(input[type='radio'][value='weapon']) {
+  background-image: url('assets/icons/items/weapon.svg');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
 .chat-message {
   background-image: url('assets/sheet/background.png');
 }
-
-.app.window-app.form.earthdawn4e .roll-prompt header,
-.assign-legend header {
+.chat-message .message-sender {
+  font-size: larger;
+  padding-top: 12px;
+  padding-left: 5px;
+}
+.chat-message .message-metadata {
+  padding-top: 12px;
+}
+.chat-message .message-metadata .message-delete {
+  font-size: larger;
+}
+.chat-message img.avatar {
+  border: none;
+  object-fit: scale-down;
+  max-height: 40px;
+}
+.chat-message .custom-flavor {
+  margin: 0.5em 0;
+  font-size: medium;
+}
+.chat-message .roll-successes {
+  margin: 0.5em 0;
+  text-align: center;
+  font-size: large;
+}
+.chat-message .modifier-lists {
+  margin-bottom: 5px;
+  padding: 0 0.3em;
+  font-size: medium;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+}
+.chat-message .modifier-lists li {
+  text-transform: capitalize;
+}
+.chat-message .dice-formula {
+  word-break: unset;
+}
+.chat-message .dice-total.roll-success {
+  background-color: darkseagreen;
+}
+.chat-message .dice-total.roll-failure {
+  background-color: indianred;
+}
+.chat-message .roll-failure {
+  background-color: indianred;
+  color: black;
+  font-size: large;
+  padding-top: 5px;
+  text-align: center;
+}
+.chat-message .message-buttons {
+  margin: 1em 0;
+}
+.chat-message .message-buttons.flexrow button:first-child {
+  margin-left: 0;
+}
+.chat-message .message-buttons.flexrow button:last-child {
+  margin-right: 0;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .navigator-section {
+  position: relative;
+  z-index: 5;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column label {
+  display: block;
+  height: max-content;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header,
+.app.window-app.form.earthdawn4e.assign-legend header {
   position: relative;
   z-index: 3;
   border: none;
@@ -258,94 +600,6 @@ p {
 .app.window-app.form.earthdawn4e.assign-legend .assign-legend-point__body .actor-area .checkbox::after {
   content: "\a";
   white-space: pre;
-}
-.body .actor-section__top {
-  height: 158px;
-}
-.chat-message .message-sender {
-  font-size: larger;
-  padding-top: 12px;
-  padding-left: 5px;
-}
-.chat-message .message-metadata {
-  padding-top: 12px;
-}
-.chat-message .message-metadata .message-delete {
-  font-size: larger;
-}
-.chat-message img.avatar {
-  border: none;
-  object-fit: scale-down;
-  max-height: 40px;
-}
-.chat-message .custom-flavor {
-  margin: 0.5em 0;
-  font-size: medium;
-}
-.chat-message .roll-successes {
-  margin: 0.5em 0;
-  text-align: center;
-  font-size: large;
-}
-.chat-message .modifier-lists {
-  margin-bottom: 5px;
-  padding: 0 0.3em;
-  font-size: medium;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-border-light-2);
-  border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
-}
-.chat-message .modifier-lists li {
-  text-transform: capitalize;
-}
-.chat-message .dice-formula {
-  word-break: unset;
-}
-.chat-message .dice-total.roll-success {
-  background-color: darkseagreen;
-}
-.chat-message .dice-total.roll-failure {
-  background-color: indianred;
-}
-.chat-message .roll-failure {
-  background-color: indianred;
-  color: black;
-  font-size: large;
-  padding-top: 5px;
-  text-align: center;
-}
-.chat-message .message-buttons {
-  margin: 1em 0;
-}
-.chat-message .message-buttons.flexrow button:first-child {
-  margin-left: 0;
-}
-.chat-message .message-buttons.flexrow button:last-child {
-  margin-right: 0;
-}
-.action--buttons .buttons--left {
-  margin-left: 45px;
-  margin-right: 25px;
-  float: left;
-  width: 40%;
-}
-.action--buttons .buttons--right {
-  float: right;
-  width: 40%;
-  margin-left: 25px;
-  margin-right: 45px;
-}
-.legend-point__history--earned {
-  height: 26px;
-  line-height: 22px;
-}
-.body .item-section__top {
-  height: 158px;
-}
-.body .item-section__top img {
-  width: 158px;
-  border: none;
 }
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
@@ -783,14 +1037,15 @@ p {
 }
 .action--buttons .buttons--left {
   margin-left: 45px;
-  margin-right: 50px;
+  margin-right: 25px;
   float: left;
   width: 40%;
 }
 .action--buttons .buttons--right {
-  float: left;
+  float: right;
   width: 40%;
-  margin-right: 50px;
+  margin-left: 25px;
+  margin-right: 45px;
 }
 .legend-point__history--earned {
   height: 26px;

@@ -1,4 +1,4 @@
-<form id="document-create" autocomplete="off">
+{{!-- <form id="document-create" autocomplete="off">
   <div class="form-group">
     <label>{{localize "Name"}}</label>
     <div class="form-fields">
@@ -21,13 +21,73 @@
   <div class="type-selection flexcol">
     <header id='typeSelectionHeader'>{{localize "Type"}}</header>
     {{#each typesRadio}}
-      <header class='type-group-label'>{{@key}}</header>
+      <header class='type-group-label {{@key}}'>{{@key}}</header>
       <div class='form-fields'>
         {{radioBoxes 'type' this checked=../currentType}}
       </div>
     {{/each}}
   </div>
 
+  <div class="buttons">
+    <button type="submit" class="create-document">
+      <i class="fas fa-check"></i>
+      {{localize "DOCUMENT.Create" type=documentTypeLocalized}}
+    </button>
+  </div>
+</form> --}}
+
+<form id="document-create" autocomplete="off">
+  <div class="form-group">
+    <label>{{localize "Name"}}</label>
+    <div class="form-fields">
+      <input type="text" name="name" placeholder="{{defaultName}}" value="{{name}}" autofocus>
+    </div>
+  </div>
+
+  {{#if hasFolders}}
+    <div class="form-group">
+      <label>{{ localize "DOCUMENT.Folder" }}</label>
+      <div class="form-fields">
+        <select name="folder">
+          <option value=""></option>
+          {{selectOptions folders selected=folder valueAttr="id" labelAttr="name"}}
+        </select>
+      </div>
+    </div>
+  {{/if}}
+
+  {{!-- <div class="type-selection flexcol">
+    <header id='typeSelectionHeader'>{{localize "Type"}}</header>
+    {{#each typesRadio}}
+      <header class='type-group-label {{@key}}'>{{formatTypeName @key}}</header>
+      <div class='form-fields'>
+
+        {{#each this}}
+          <label>
+            <input type="radio" name="type" value="{{this}}" {{#if (eq ../currentType this)}}checked{{/if}}>
+            {{formatTypeName this}}
+          </label>
+        {{/each}}
+
+        {{!-- {{radioBoxes 'type' this checked=../currentType}} --}}
+      {{!-- </div>
+    {{/each}}
+  </div> --}}
+
+<div class="type-selection flexcol">
+  <header id='typeSelectionHeader'>{{localize "Type"}}</header>
+  {{#each typesRadio}}
+    <header class='type-group-label {{@key}}'>{{formatTypeName @key}}</header>
+    <div class='form-fields'>
+      {{#each this}}
+        <label>
+          <input type="radio" name="type" value="{{this}}" {{#if (eq ../currentType this)}}checked{{/if}}>
+          {{formatTypeName this}}
+        </label>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>
   <div class="buttons">
     <button type="submit" class="create-document">
       <i class="fas fa-check"></i>

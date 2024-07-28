@@ -48,6 +48,12 @@ export default function registerHandlebarHelpers() {
     }
   } );
 
+
+  Handlebars.registerHelper('formatTypeName', function(name) {
+    console.log('Formatting name:', name); // Add this line for debugging
+    return name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  });
+
   // Handlebars.registerHelper( 'edGetAttributeValue', ( attribute, attributes ) => {
   //   if ( attribute === undefined || attribute === '' || attribute === "" ) {
   //     return 0;

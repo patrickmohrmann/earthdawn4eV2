@@ -10,6 +10,38 @@
   trap: 'assets/icons/trap.svg';
   loot: 'assets/icons/loot.svg';
 }
+
+@itemIcons: {
+  armor: 'assets/icons/items/armor.svg';
+  attack: 'assets/icons/items/attack.svg';
+  bindingSecret: 'assets/icons/items/bindingSecrets.svg';
+  cursemark: 'assets/icons/items/poison.svg';
+  devotion: 'assets/icons/items/meditation.svg';
+  discipline: 'assets/icons/items/others.svg';
+  effect: 'assets/icons/items/poison.svg';
+  equipment: 'assets/icons/items/others.svg';
+  knackAbility: 'assets/icons/items/meditation.svg';
+  knackKarma: 'assets/icons/items/meditation.svg';
+  knackManeuver: 'assets/icons/items/meditation.svg';
+  maneuver: 'assets/icons/items/attack.svg';
+  mask: 'assets/icons/items/others.svg';
+  matrix: 'assets/icons/items/bindingSecrets.svg';
+  namegiver: 'assets/icons/items/condition.svg';
+  path: 'assets/icons/items/others.svg';
+  poisonDisease: 'assets/icons/items/poison.svg';
+  power: 'assets/icons/items/attack.svg';
+  questor: 'assets/icons/items/others.svg';
+  shield: 'assets/icons/items/others.svg';
+  shipWeapon: 'assets/icons/items/condition.svg';
+  skill: 'assets/icons/items/meditation.svg';
+  specialAbility: 'assets/icons/items/meditation.svg';
+  spellKnack: 'assets/icons/items/bindingSecrets.svg';
+  spell: 'assets/icons/items/bindingSecrets.svg';
+  talent: 'assets/icons/items/meditation.svg';
+  thread: 'assets/icons/items/bindingSecrets.svg';
+  weapon: 'assets/icons/items/weapon.svg';
+}
+
 @labelOutlineThickness: 1px;
 @labelOutlineColor: white;
 
@@ -37,10 +69,11 @@ form#document-create{
       -webkit-appearance:none;
       -moz-appearance:none;
       appearance:none;
+
     }
 
     label:has(input[type='radio']){
-      color: magenta;
+      color: rgb(6, 165, 6);
       font-variant: all-small-caps;
       font-size: large;
       scale: 1;
@@ -64,7 +97,7 @@ form#document-create{
       display:inline-block;
       width:100px;
       height:70px;
-      text-shadow: 1px 1px 5px white;
+      text-shadow: 1px 1px 5px rgb(202, 33, 33);
       -webkit-transition: all 100ms ease-in;
       -moz-transition: all 100ms ease-in;
       transition: all 100ms ease-in;
@@ -102,6 +135,34 @@ form#document-create{
 }
 
 .create-document.create-item{
-  .type-selection label:has(input[type='radio']){background-image:url('assets/icons/meditation.svg');}
+  .type-selection label:has(input[type='radio'][value='armor']){background-image:url(@itemIcons[armor]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='attack']){background-image:url(@itemIcons[attack]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='bindingSecret']){background-image:url(@itemIcons[bindingSecret]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='cursemark']){background-image:url(@itemIcons[cursemark]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='devotion']){background-image:url(@itemIcons[devotion]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='discipline']){background-image:url(@itemIcons[discipline]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='effect']){background-image:url(@itemIcons[effect]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='equipment']){background-image:url(@itemIcons[equipment]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='knackAbility']){background-image:url(@itemIcons[knackAbility]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='knackKarma']){background-image:url(@itemIcons[knackKarma]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='knackManeuver']){background-image:url(@itemIcons[knackManeuver]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='maneuver']){background-image:url(@itemIcons[maneuver]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='mask']){background-image:url(@itemIcons[mask]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='matrix']){background-image:url(@itemIcons[matrix]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='namegiver']){background-image:url(@itemIcons[namegiver]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='path']){background-image:url(@itemIcons[path]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='poisonDisease']){background-image:url(@itemIcons[poisonDisease]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='power']){background-image:url(@itemIcons[power]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='questor']){background-image:url(@itemIcons[questor]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='shield']){background-image:url(@itemIcons[shield]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='shipWeapon']){background-image:url(@itemIcons[shipWeapon]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='skill']){background-image:url(@itemIcons[skill]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='specialAbility']){background-image:url(@itemIcons[specialAbility]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='spellKnack']){background-image:url(@itemIcons[spellKnack]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='spell']){background-image:url(@itemIcons[spell]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='talent']){background-image:url(@itemIcons[talent]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='thread']){background-image:url(@itemIcons[thread]);display:inline-block; width: 100px; height: 100px;}
+.type-selection label:has(input[type='radio'][value='weapon']){background-image:url(@itemIcons[weapon]);display:inline-block; width: 100px; height: 100px;}
+  
   min-width: 750px;
 }

@@ -33,6 +33,28 @@ ED4E.typeGroups = {
 };
 
 /**
+ * @description Formats the type names by inserting spaces before capital letters.
+ * @param {string} name - The name to format.
+ * @returns {string} - The formatted name.
+ */
+function formatTypeName(name) {
+	return name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  }
+  
+  // Example usage
+  const typeGroups = ED4E.typeGroups;
+  
+  for (const group in typeGroups) {
+	console.log(`Group: ${group}`);
+	for (const subGroup in typeGroups[group]) {
+	  console.log(`  SubGroup: ${subGroup}`);
+	  typeGroups[group][subGroup].forEach(type => {
+		console.log(`    Type: ${formatTypeName(type)}`);
+	  });
+	}
+  }
+
+/**
  * Configuration data for abilities.
  * @typedef {object} AttributeConfiguration
  * @property {string} label                               Localized label.
