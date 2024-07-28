@@ -11,7 +11,7 @@ export default function () {
         /*  Dice Icon Roll                              */
         /* -------------------------------------------- */
 
-        $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
+        $( "#chat-controls .chat-control-icon i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
 
         /* -------------------------------------------- */
         /*  Debug Documents                             */
