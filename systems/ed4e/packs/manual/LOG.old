@@ -1,3 +1,4 @@
-2024/05/16-10:37:49.145 e90 Recovering log #221
-2024/05/16-10:37:49.208 e90 Delete type=0 #221
-2024/05/16-10:37:49.208 e90 Delete type=3 #220
+2024/07/28-23:58:47.664 1bcfc Log #113: 0 ops saved to Table #114 OK
+2024/07/28-23:58:47.665 1bcfc Archiving E:\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/000113.log: OK
+2024/07/28-23:58:47.665 1bcfc Archiving E:\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual/MANIFEST-000112: OK
+2024/07/28-23:58:47.666 1bcfc **** Repaired leveldb E:\FoundryVTT\Data\systems\ed4e\systems\ed4e\packs\manual; recovered 0 files; 0 bytes. Some data may have been lost. ****
