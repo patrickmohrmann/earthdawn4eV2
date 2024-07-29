@@ -13,7 +13,7 @@ export default function () {
         /**
          * @UserFunction                UF_Rolls_triggerDiceIconRoll
          */
-        $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
+        $( "#chat-controls i.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
 
         /* -------------------------------------------- */
         /*  Debug Documents                             */
