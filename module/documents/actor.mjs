@@ -841,7 +841,7 @@ export default class ActorEd extends Actor {
           case "twoHands": {
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
             addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
-            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield?.system?.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
           }
           case "mainHand":
