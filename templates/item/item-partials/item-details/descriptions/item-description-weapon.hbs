@@ -2,91 +2,133 @@
     <h3>{{localize "ED.General.coreData"}}</h3>
     {{!-- Weapon Type --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.weaponType"}}:</label>
-        <select name="system.weaponType">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.weaponType"}}:</label>
+        <select class="partial__55--right" name="system.weaponType">
             {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
         </select>
     </div>
+    {{#isRangedWeapon item.system.weaponType}}
+        {{#if (uneq item.system.weaponType "thrown")}}
+            {{!-- ammunition - Type --}}
+            <div class="item-data__input--line">
+                <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
+                <select class="partial__55--right" name="system.ammunition.type">
+                    {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
+                </select>
+            </div>
+            {{!-- ammunition - Amount --}}
+            <div class="item-data__input--line">
+                <label class="partial__40--left">{{localize "ED.Item.Weapon.ammunition"}}:</label>
+                <input class="partial__55--right" name="system.ammunition.amount" type="text"
+                    value="{{item.system.ammunition.amount}}" data-dtype="Number">  
+            </div>
+        {{/if}}
+    {{/isRangedWeapon}}
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageAttribute"}}:</label>
-        <select name="system.damage.attribute">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.damageAttribute"}}:</label>
+        <select class="partial__55--right" name="system.damage.attribute">
             {{selectOptions config.attributes selected=item.system.damage.attribute labelAttr="label" localize=true }}
         </select>
     </div>
-    {{!-- Mystische Armor --}}
+    {{!-- Damage base Step --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageBaseStep"}}:</label>
-        <input class="input__circle-input" name="system.damage.baseStep" type="text" value="{{item.system.damage.baseStep}}"
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.damageBaseStep"}}:</label>
+        <input class="partial__55--right" name="system.damage.baseStep" type="text"
+            value="{{item.system.damage.baseStep}}" data-dtype="Number">
+    </div>
+    {{!-- Weapon Size --}}
+    <div class="item-data__input--line">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.size"}}:</label>
+        <input class="partial__55--right" name="system.size" type="text" value="{{item.system.size}}"
             data-dtype="Number">
     </div>
-    {{!-- Forged Physical Armor --}}
+    {{!-- Dexterity Minimum --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.size"}}:</label>
-        <input class="input__circle-input" name="system.size" type="text" value="{{item.system.size}}"
-            data-dtype="Number">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.dexterityMinimum"}}:</label>
+        <input class="partial__55--right" name="system.dexterityMinimum" type="text"
+            value="{{item.system.dexterityMinimum}}" data-dtype="Number">
     </div>
-    {{!-- Forged Mystische Armor --}}
+    {{!-- Strength Minimum --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Label.dexterityMinimum"}}:</label>
-        <input class="input__circle-input" name="system.dexterityMinimum" type="text" value="{{item.system.dexterityMinimum}}"
-            data-dtype="Number">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.strengthMinimum"}}:</label>
+        <input class="partial__55--right" name="system.strengthMinimum" type="text"
+            value="{{item.system.strengthMinimum}}" data-dtype="Number">
     </div>
-    {{!-- Initiative Penalty --}}
+    {{#if (eq isRangedWeapon this.system.weaponType)}}
+        {{!-- short range Min --}}
+        <div class="item-data__input--line">
+            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeShortMin"}}:</label>
+            <input class="partial__55--right" name="system.range.shortMin" type="text" value="{{item.system.range.shortMin}}"
+                data-dtype="Number">
+        </div>
+        {{!-- short range Max --}}
+        <div class="item-data__input--line">
+            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeShortMax"}}:</label>
+            <input class="partial__55--right" name="system.range.shortMax" type="text" value="{{item.system.range.shortMax}}"
+                data-dtype="Number">
+        </div>
+        {{!-- long range Min--}}
+        <div class="item-data__input--line">
+            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeLongMin"}}:</label>
+            <input  class="partial__55--right" name="system.range.longMin" type="text" value="{{item.system.range.longMin}}"
+                data-dtype="Number">
+        </div>
+        {{!-- long range Max--}}
+        <div class="item-data__input--line">
+            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeLongMax"}}:</label>
+            <input  class="partial__55--right" name="system.range.longMax" type="text" value="{{item.system.range.longMax}}"
+                data-dtype="Number">
+        </div>
+    {{else}}
+        {{!-- Range--}}
+        <div class="item-data__input--line">
+            <label class="partial__40--left">{{localize "ED.Item.Weapon.range"}}:</label>
+            <input  class="partial__55--right" name="system.range.longMax" type="text" value="{{item.system.range.longMax}}"
+                data-dtype="Number">
+        </div>
+    {{/if}}
+
+    {{!-- forgeBonus --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeShort"}}:</label>
-        <input class="input__circle-input" name="system.range.short" type="text" value="{{item.system.range.short}}"
-            data-dtype="Number">
-    </div>
-    {{!-- Initiative Penalty --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeLong"}}:</label>
-        <input class="input__circle-input" name="system.range.long" type="text" value="{{item.system.range.long}}"
-            data-dtype="Number">
-    </div>
-    {{!-- Initiative Penalty --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Label.ammunition"}}:</label>
-        <input class="input__circle-input" name="system.ammunition" type="text" value="{{item.system.ammunition}}"
-            data-dtype="Number">
-    </div>
-    {{!-- Initiative Penalty --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.forgeBonus"}}:</label>
-        <input class="input__circle-input" name="system.forgeBonus" type="text" value="{{item.system.forgeBonus}}"
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.forgeBonus"}}:</label>
+        <input class="partial__55--right" name="system.forgeBonus" type="text" value="{{item.system.forgeBonus}}"
             data-dtype="Number">
     </div>
     {{!-- price --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.General.price"}}:</label>
-        <input class="input__number-input" name="system.price.value" type="text" value="{{item.system.price.value}}"
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.price"}}:</label>
+        <input class="partial__55--right" name="system.price.value" type="text" value="{{item.system.price.value}}"
             data-dtype="Number">
-            <select name="system.price.denomination">
-                {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
-            </select>
+    </div>
+    <div class="item-data__input--line">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.denomination"}}:</label>
+        <select class="partial__55--right" name="system.price.denomination">
+            {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
+        </select>
     </div>
     {{!-- Weight --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.General.weight"}}:</label>
-        <input class="input__number-input" name="system.weight.value" type="text" value="{{item.system.weight.value}}"
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.weight"}}:</label>
+        <input class="partial__55--right" name="system.weight.value" type="text" value="{{item.system.weight.value}}"
             data-dtype="Number">
     </div>
     {{!-- Amount --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.General.amount"}}:</label>
-        <input class="input__number-input" name="system.amount" type="text" value="{{item.system.amount}}"
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.amount"}}:</label>
+        <input class="partial__55--right" name="system.amount" type="text" value="{{item.system.amount}}"
             data-dtype="Number">
     </div>
     {{!-- availability --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Availability.availability"}}:</label>
-        <select name="system.availability">
+        <label class="partial__40--left">{{localize "ED.Item.Weapon.availability"}}:</label>
+        <select class="partial__55--right" name=="system.availability">
             {{selectOptions config.availability selected=item.system.availability localize=true }}
         </select>
     </div>
 </div>
 {{!-- Editor --}}
 <div class="item__right--main sheet__editor">
-    <h3>{{localize "ED.Item.General.description"}}</h3>
+    <h3>{{localize "ED.Item.Header.description"}}</h3>
     {{> "systems/ed4e/templates/global/editor.hbs"}}
 </div>

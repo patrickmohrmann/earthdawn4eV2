@@ -138,6 +138,7 @@ export default class ActorSheetEd extends ActorSheet {
    * @param {Event} event     The originating click event.
    * @returns {Application}   The rendered item sheet.
    * @private
+   * @UserFunction              UF_ActorItems-onChangeItemStatus
    */
   // eslint-disable-next-line complexity
   _onChangeItemStatus( event ) {

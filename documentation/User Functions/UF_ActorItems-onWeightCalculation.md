@@ -1,0 +1,1 @@
+this function triggers the weight recalculation of equipments.

@@ -19,12 +19,14 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
                 label: "ED.Item.Equipment.consumable"
             } ),
             // different ammo types are availabel see issue #
-            ammoType: new fields.StringField( {
+            ammunition: new fields.SchemaField( {
+                type: new fields.StringField( {
                     required: true,
                     nullable: true,
                     blank: true,
                     initial: "",
-                label: "ED.Item.Equipment.ammoType"
+                label: "ED.Item.Weapon.ammunition.type"
+                } ),
             } ),
             bundleSize: new fields.NumberField( {
                 required: true,

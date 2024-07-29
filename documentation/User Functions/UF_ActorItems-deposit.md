@@ -1,0 +1,1 @@
+if this function is triggered, the equipped status will be set to owned (not counting for encumbrance calculation).

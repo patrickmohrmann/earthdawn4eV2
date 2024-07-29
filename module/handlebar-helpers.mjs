@@ -80,4 +80,46 @@ export default function registerHandlebarHelpers() {
   Handlebars.registerHelper( "ed-includes", ( collection, element ) => {
     return Array.from( collection ).includes( element );
   } );
+
+
+  /*************************************************** */
+  /*            Handlebars for Item sheets             */
+  /*************************************************** */
+  Handlebars.registerHelper("isRangedWeapon", function(weaponType) {
+    // Define the logic to determine if the weapon is ranged
+    const rangedWeaponTypes = ["bow", "crossbow", "blowgun", "thrown"]; // Example types
+    return rangedWeaponTypes.includes(weaponType);
+  })
+
+  /*************************************************** */
+  /*            Handlebars for Item Cards              */
+  /*************************************************** */
+
+  Handlebars.registerHelper("calculateDamageSum", function(actor, item) {
+    if (item.type !== "weapon") return 0;
+    const damageAttributeKey = item.system.damage.attribute;
+    const damageAttributeValue = actor.system.attributes[damageAttributeKey].step;
+    const damageStep = item.system.damage.baseStep;
+    const forgeBonus = item.system.forgeBonus;
+    const sum = damageAttributeValue + damageStep + forgeBonus;
+    return sum;
+  });
+
+  Handlebars.registerHelper('sumMatchingEquipment', function(actor, item) {
+    // Get the ammunition type of the current item
+    const currentAmmunitionType = item.system.ammunition.type;
+  
+    // Filter the actor's items to find matching equipment
+    const matchingItems = actor.items.filter(i => 
+      i.type === 'equipment' && i.system.ammunition.type === currentAmmunitionType
+    );
+  
+    // Sum up the values after multiplying system.amount with system.bundleSize
+    const totalSum = matchingItems.reduce((sum, i) => {
+      return sum + (i.system.amount * i.system.bundleSize);
+    }, 0);
+  
+    // Return the total sum
+    return totalSum;
+  });
 }

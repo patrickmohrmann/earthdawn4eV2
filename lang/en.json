@@ -126,6 +126,7 @@
                 "action":                                           "Action",
                 "active":                                           "Active",
                 "amount":                                           "Amount",
+                "ammunition":                                       "Ammunition / Amount",
                 "armor":                                            "Armor",
                 "attribute":                                        "Attribute",
                 "attributes":                                       "Attributes",
@@ -160,7 +161,8 @@
                 "paths":                                            "Path",
                 "physicalArmor":                                    "Physical Armor",
                 "physicalDefense":                                  "Physical Defense", 
-                "questor":                                          "Questor",                    
+                "questor":                                          "Questor", 
+                "range":                                            "Range",                   
                 "rank":                                             "Rank", 
                 "recovery":                                         "Recovery",
                 "shields":                                          "Shields",
@@ -275,12 +277,25 @@
             }
         },
         "Config": {
-            "Action": {
-                "free":                                             "Free",
-                "none":                                             "None",
-                "simple":                                           "Simple",   
+            "Action":{
                 "standard":                                         "Standard",
+                "free":                                             "Free",
+                "simple":                                           "Simple",
                 "sustained":                                        "Sustained"
+            },
+            "AmmunitionType": {
+                "arrow":                                            "Arrow",
+                "bolt":                                             "Bolt",
+                "needle":                                           "Needle",
+                "stone":                                            "Stone"
+            },
+            "Availability": {
+                "average":                                          "Average",
+                "everyday":                                         "Everyday",
+                "rare":                                             "Rare",
+                "unique":                                           "Unique",
+                "unusual":                                          "Unusual",
+                "veryRare":                                         "Very Rare"
             },
             "CombatTypes": {
                 "aerial":                                           "Aerial Combat",
@@ -291,6 +306,11 @@
                 "ranged":                                           "Ranged Combat",
                 "throwing":                                         "Throwing Combat",
                 "unarmed":                                          "unarmed Combat"
+            },
+            "Denomination": {
+                "copper":                                           "Copper",
+                "gold":                                             "Gold",
+                "silver":                                           "Silver"
             },
             "groupDifficulty": {
                 "highestOfGroup":                                   "Highest of Group",
@@ -316,6 +336,14 @@
                 "ranged":                                     "Ranged Combat",
                 "throwing":                                   "Throwing Combat",
                 "unarmed":                                    "Unarmed Combat"
+            },
+            "RecoveryProperty": {
+                "abilityStep":                                      "Ability usage cost 1 recovery test",
+                "arbitrary":                                        "Arbitrary Step",
+                "arbitraryAndAttribute":                            "Arbitrary Step adds to Recovery Test",
+                "arbitraryOptionalAttribute":                       "Arbitrary Step adds or replaces Recovery Test",
+                "noHealing":                                        "No Healing ability",
+                "noRecovery":                                       "no Healing just usage of 1 Recovery Test"
             },
             "rollTypes": {
                 "ability":                                          "Ability",
@@ -455,6 +483,28 @@
                 "durability":                                       "Durability",
                 "talentOptionsForTier":                             "Talent Options for"
             },
+            "Equipment": {
+                "action":                                           "Action",
+                "ammunitionType":                                   "Ammunition Type",
+                "amount":                                           "Amount",
+                "arbitraryStep":                                    "Arbitrary Step",
+                "availability":                                     "Availability",
+                "bloodMagicDamage":                                 "Blood Magic Damage",
+                "bundleSize":                                       "Bundle Size",
+                "consumable":                                       "Consumable",
+                "denomination":                                     "Denomination",
+                "difficulty": {
+                    "fixed":                                        "Fixed Difficulty",
+                    "groupDifficulty":                              "Difficult Adjusted by Groups",
+                    "targetDifficulty":                             "Difficulty Type"
+                },
+                "equipped:":                                        "Equipped",
+                "price":                                            "Price",
+                "recoveryPropertyValue":                            "Recovery Options",
+                "usableItem":                                       "Usable Item",
+                "weight":                                           "Weight",
+                "weightCalculation":                                "Weight Calculation"
+            },
             "Header": {
                 "activeUser":                                       "Active User",
                 "inactiveUser":                                     "Inactive User",
@@ -525,6 +575,27 @@
                 "strain":                                           "Strain",
                 "talentIdentifier":                                 "Source Talent Identifier",
                 "tier":                                             "Tier"
+            },
+            "Weapon": {
+                "ammunition":                                       "Ammunition",
+                "ammunitionType":                                   "Ammo Type", 
+                "amount":                                           "Amount",
+                "availability":                                     "Availability",
+                "damageAttribute":                                  "Damage Attribute",
+                "damageBaseStep":                                   "Damage Step",
+                "denomination":                                     "Denomination",
+                "dexterityMinimum":                                 "Min. Dex.",
+                "forgeBonus":                                       "Forge Bonus",
+                "price":                                            "Price",
+                "range":                                            "Range",    
+                "rangeShortMin":                                    "Short Range min.",
+                "rangeShortMax":                                    "Short Range max.",
+                "rangeLongMin":                                     "Long Range min.",
+                "rangeLongMax":                                     "Long Range max.",
+                "size":                                             "Size",
+                "strengthMinimum":                                  "Min. Str.",
+                "weaponType":                                       "Weapon Type",
+                "weight":                                           "Weight"
             }
         },
         "Languages": {

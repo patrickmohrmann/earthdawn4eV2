@@ -241,6 +241,7 @@ export default class ItemSheetEd extends ItemSheet {
 
   /**
    * Handle autorecalculation of physical items for actors, based on the namegiver modifier for weight.
+   * @UserFunction        UF_ActorItems-onWeightCalculation
    */
   async _onWeightCalculation() {
     this.item.tailorToNamegiver( this.item.parent.namegiver );

@@ -336,6 +336,13 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
+  /**
+   * 
+   * @param {Object}    itemId        Id of the item to rotate the status of
+   * @param {Boolean}   backwards     Whether to rotate the status backwards
+   * @returns 
+   * @UserFunction                    UF_ActorItems-rotateItemStatus
+   */
   async rotateItemStatus( itemId, backwards = false ) {
     const item = this.items.get( itemId );
     const nextStatus = backwards ? item.system.previousItemStatus : item.system.nextItemStatus;
@@ -781,6 +788,13 @@ export default class ActorEd extends Actor {
   }
 
 
+  /**
+   * 
+   * @param {Object}    itemToUpdate    The item to update
+   * @param {String}    nextStatus      The next status of the item
+   * @returns 
+   * @UserFunction                      UF_ActorItems-updateItemStates
+   */
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
     const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };

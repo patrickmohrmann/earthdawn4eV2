@@ -37,7 +37,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 attribute: new fields.StringField( {
                     required: true,
                     nullable: false,
-                    initial: "strength",
+                    initial: "str",
                     label: "ED.Item.Weapon.Label.damageAttribute",
                     hint: "ED.Item.Weapon.Hint.damageAttribute"
                 } ),
@@ -80,29 +80,54 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 hint: "ED.Item.Weapon.Hint.dexterityMinimum"
             } ),
             range: new fields.SchemaField( {
-                short: new fields.NumberField( {
+                shortMin: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
                     integer: true,
-                    label: "ED.Item.ShipWeapon.rangeShort"
+                    label: "ED.Item.Weapon.rangeShort"
                 } ),
-                long: new fields.NumberField( {
+                shortMax: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
                     integer: true,
-                    label: "ED.Item.ShipWeapon.rangeLong"
+                    label: "ED.Item.Weapon.rangeShort"
+                } ),
+                longMin: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.Weapon.rangeLong"
+                } ),
+                longMax: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 1,
+                    initial: 1,
+                    integer: true,
+                    label: "ED.Item.Weapon.rangeLong"
                 } ),
             } ),
-            ammunition: new fields.NumberField( {
-                required: true,
-                nullable: true,
-                min: 0,
-                integer: true,
-                label: "ED.Item.Weapon.Label.ammunition"
+            ammunition: new fields.SchemaField( {
+                amount: new fields.NumberField( {
+                    required: true,
+                    nullable: true,
+                    min: 0,
+                    integer: true,
+                    label: "ED.Item.Weapon.Label.ammunition"
+                } ),
+                type: new fields.StringField( {
+                    required: true,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
+                label: "ED.Item.Weapon.ammunition.type"
+            } ),
             } ),
             forgeBonus: new fields.NumberField( {
                 required: true,
