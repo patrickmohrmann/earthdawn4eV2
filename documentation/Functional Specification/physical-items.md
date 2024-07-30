@@ -18,7 +18,7 @@ all physical items have a set of values which are identical on all sub types:
   * recovery action
   * difficulty
     * target difficulty
-    * group difficulty calculation
+    * group difficulty 
     * fixed difficulty
 * item equip status  
 
@@ -29,6 +29,10 @@ all these above mentioned values are available for all items. Some of them, are 
 Only manual fields without any Use case at the moment
 
 #### weight
+
+The weight field usually is a manual entry field. 
+
+There is one use case though, which enables user to adapt the weight of an item to their namegiver race (if that namegiver race has a weight modifier). The detailed information about this functionality can be found in this use case [UC_ActorItems-changeItemWeight](../Use%20Cases/UC_ActorItems-changeItemWeight.md)
 
 
 #### availability
@@ -41,39 +45,74 @@ Only manual fields without any Use case at the moment
 
 #### blood magic damage
 
-Only manual fields without any Use case at the moment
+Blood magic damage is a manual entry field which is used to add blood magic damage from items to the actor. 
+if a physical item is equipped, the blood magic damage value will be substracted from the death- and unconcious rating
+
+*NOTE* has to be changed see #860 https://github.com/patrickmohrmann/earthdawn4eV2/issues/860
 
 #### usable item (yes/no)
 
-Only manual fields without any Use case at the moment
+if usable item is active, this item becomes **rollable** which means, that clicking on the now appearing dice symbol in front of the item name on the actor item list, will trigger a roll. This roll will has roll data based on the following fields:
+ * arbitrary Step
+  * action
+  * recovery action
+  * difficulty
+    * target difficulty
+    * group difficulty calculation
+    * fixed difficulty
+
+for further information about rollable items, see the use case [UC_ActorItems-rollableItems](../Use%20Cases/UC_ActorItems-rollableItems.md)
+
 
 #### arbitrary Step
 
-Only manual fields without any Use case at the moment
+A manual entry field for rollable items, this value represents a step number which can based on further settings be used in addition or instead of other steps to create a roll. For further information on when and how the arbitrary step is used, see the use case [UC_ActorItems-rollableItems](../Use%20Cases/UC_ActorItems-rollableItems.md)
+
 
 #### action
 
-Only manual fields without any Use case at the moment
+Only manual fields without any Use case at the moment. It is so far only meant to indicate which type of action is needed to save some time for the users to look this up.
 
 #### recovery action
 
-Only manual fields without any Use case at the moment
+The recovery Value has several options which are not implemented at the moment.
 
 #### difficulty
 
-Only manual fields without any Use case at the moment
+the difficulty settings are blocked behind the usable item option, except for weapon items, where these settings are available by default. there are three options available:
+* target difficulty
+* group difficulty
+* fixed difficulty
+
+these options will be explained further below and their usage is described in the use case [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
+
 
 #### target difficulty
 
-Only manual fields without any Use case at the moment
+four options are available:
+* blank (no difficulty)
+* physical defense
+* mystical defense
+* social defense
 
-#### group difficulty calculation
+for the explicit influence of this value please see [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
 
-Only manual fields without any Use case at the moment
+#### group difficulty
+
+five options are availabel:
+* blank (no group difficulty)
+* highest difficulty
+* lowest difficulty
+* highest difficulty + number of targets
+* lowest difficulty + number of targets
+
+for the explicit influence of this value please see [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
 
 #### fixed difficulty
 
-Only manual fields without any Use case at the moment
+This field is used to enter a fixed difficulty.
+
+for the explicit influence of this value please see [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
 
 #### item equip status  
 
