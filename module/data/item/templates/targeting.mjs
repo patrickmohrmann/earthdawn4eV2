@@ -38,6 +38,11 @@ export default class TargetTemplate extends SystemDataModel {
     } );
   }
 
+  /**
+   *  
+   * @returns {number} return
+   * @UserFunction              UC_Actions-getDifficulty
+   */
   getDifficulty() {
     let difficulty;
     let currentTarget = game.user.targets.first()?.actor;
@@ -83,6 +88,7 @@ export default class TargetTemplate extends SystemDataModel {
    * @param { string } targetDefenseType defense
    * @param { any } aggregate ???
    * @returns { number} return
+   * @UserFunction              UC_Actions-getAggregatedDefense
    */
   static _getAggregatedDefense( targets, targetDefenseType, aggregate = Math.max ) {
     return targets.length > 0 ? aggregate( ...targets.map( ( t ) => t.system.characteristics.defenses[targetDefenseType].value ) ) : 0;
