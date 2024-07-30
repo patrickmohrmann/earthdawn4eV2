@@ -14,8 +14,41 @@ the **tailor to Namegiver** button can not be clicked once per item, as long as 
 ```mermaid
 stateDiagram-v2
     classDef fromOutside font-style:italic,font-weight:bold,fill:lightyellow
+    classDef foundryCore font-style:italic,font-weight:bold,fill: lightgreen
+    classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
+    classDef userFunctionReturn font-style:italic,font-weight:bold,fill:aqua
+    classDef dialog font-style:italic,font-weight:bold,fill:orange
 
-    
+    ###################### status #######################
+
+    triggerAction1: trigger "tailor to namegiver"
+
+    userFunction1: onWeightCalculation
+    userFunction2: tailorToNamegiver
+
+    state1: update item data
+   
+
+
+    ####################### Decisions #######################
+
+
+    ######################## Colorations ######################
+
+    triggerAction1:::fromOutside
+
+    userFunction1:::userFunction
+    userFunction2:::userFunction
+
+    ##################### StateDiagram ########################
+
+    [*] --> triggerAction1
+    triggerAction1 --> userFunction1
+
+    userFunction1  --> userFunction2
+
+    userFunction2 --> state1
+    state1 --> [*]
 ```
 
 ### Related User Functions
@@ -28,23 +61,6 @@ stateDiagram-v2
 
 ### Related Test Coverage
 
-| Test Coverage | Related Documentation | related User Function |
-|---------------|-----------------------|-----------------------|
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
-| Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/) | UserFunction |
+| Test Coverage | Related Documentation |
+|---------------|-----------------------|
+| Test case | [[Test] - tailor to Namegiver](https://github.com/patrickmohrmann/earthdawn4eV2/issues/864) |

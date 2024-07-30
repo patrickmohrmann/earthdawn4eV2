@@ -89,7 +89,7 @@ stateDiagram-v2
 
 ### Related Test Coverage
 
-| Test Coverage | Related Documentation | related User Function |
-|---------------|-----------------------|-----------------------|
+| Test Coverage | Related Documentation |
+|---------------|-----------------------|
 | Test case | [[Test] - action with single target](https://github.com/patrickmohrmann/earthdawn4eV2/issues/862) | 
 | Test case | [[Test] - action against multiple targets](https://github.com/patrickmohrmann/earthdawn4eV2/issues/863) |
