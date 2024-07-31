@@ -1,1 +1,1 @@
-the rotate item status function is looking for the next status in line and calls [UF_ActorItems-updateItemStates](../User%20Functions/UF_ActorItems-updateItemStates.md) to verify if that status is available.
+the rotate item status function is looking for the next status in line and calls [UF_PhysicalItems-updateItemStates](../User%20Functions/UF_PhysicalItems-updateItemStates.md) to verify if that status is available.

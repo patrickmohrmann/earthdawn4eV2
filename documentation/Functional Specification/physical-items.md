@@ -32,7 +32,7 @@ Only manual fields without any Use case at the moment
 
 The weight field usually is a manual entry field. 
 
-There is one use case though, which enables user to adapt the weight of an item to their namegiver race (if that namegiver race has a weight modifier). The detailed information about this functionality can be found in this use case [UC_ActorItems-changeItemWeight](../Use%20Cases/UC_ActorItems-changeItemWeight.md)
+There is one use case though, which enables user to adapt the weight of an item to their namegiver race (if that namegiver race has a weight modifier). The detailed information about this functionality can be found in this use case [UC_PhysicalItems-changeItemWeight](../Use%20Cases/UC_PhysicalItems-changeItemWeight.md)
 
 
 #### availability
@@ -61,12 +61,12 @@ if usable item is active, this item becomes **rollable** which means, that click
     * group difficulty calculation
     * fixed difficulty
 
-for further information about rollable items, see the use case [UC_ActorItems-rollableItems](../Use%20Cases/UC_ActorItems-rollableItems.md)
+for further information about rollable items, see the use case [UC_PhysicalItems-rollableItems](../Use%20Cases/UC_PhysicalItems-rollableItems.md)
 
 
 #### arbitrary Step
 
-A manual entry field for rollable items, this value represents a step number which can based on further settings be used in addition or instead of other steps to create a roll. For further information on when and how the arbitrary step is used, see the use case [UC_ActorItems-rollableItems](../Use%20Cases/UC_ActorItems-rollableItems.md)
+A manual entry field for rollable items, this value represents a step number which can based on further settings be used in addition or instead of other steps to create a roll. For further information on when and how the arbitrary step is used, see the use case [UC_PhysicalItems-rollableItems](../Use%20Cases/UC_PhysicalItems-rollableItems.md)
 
 
 #### action
@@ -84,7 +84,7 @@ the difficulty settings are blocked behind the usable item option, except for we
 * group difficulty
 * fixed difficulty
 
-these options will be explained further below and their usage is described in the use case [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
+these options will be explained further below and their usage is described in the use case [UC_PhysicalItems-difficultyCalculation](../Use%20Cases/UC_PhysicalItems-difficultyCalculation.md).
 
 
 #### target difficulty
@@ -95,7 +95,7 @@ four options are available:
 * mystical defense
 * social defense
 
-for the explicit influence of this value please see [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
+for the explicit influence of this value please see [UC_PhysicalItems-difficultyCalculation](../Use%20Cases/UC_PhysicalItems-difficultyCalculation.md).
 
 #### group difficulty
 
@@ -106,13 +106,13 @@ five options are availabel:
 * highest difficulty + number of targets
 * lowest difficulty + number of targets
 
-for the explicit influence of this value please see [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
+for the explicit influence of this value please see [UC_PhysicalItems-difficultyCalculation](../Use%20Cases/UC_PhysicalItems-difficultyCalculation.md).
 
 #### fixed difficulty
 
 This field is used to enter a fixed difficulty.
 
-for the explicit influence of this value please see [UC_ActorItems-difficultyCalculation](../Use%20Cases/UC_ActorItems-difficultyCalculation.md).
+for the explicit influence of this value please see [UC_PhysicalItems-difficultyCalculation](../Use%20Cases/UC_PhysicalItems-difficultyCalculation.md).
 
 #### item equip status  
 
@@ -122,7 +122,7 @@ Characteristics will be changed according to the item value if equipments are eq
 
 Abilities like the melee weapons talent will use the damage value of the weapon equipped in the main or both hands.
 
-all these different options are descibed in the use case [UC_ActorItems-itemStatus](../Use%20Cases/UC_ActorItems-itemStatus.md)
+all these different options are descibed in the use case [UC_PhysicalItems-itemStatus](../Use%20Cases/UC_PhysicalItems-itemStatus.md)
 
 
 ## Differences
