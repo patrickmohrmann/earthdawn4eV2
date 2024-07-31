@@ -1,0 +1,1 @@
+This function is collecting the arbitrary step and the difficulty setting of the item to prepare the Roll Options. The Test type will be of type *action* and the rolltype *equipment*
