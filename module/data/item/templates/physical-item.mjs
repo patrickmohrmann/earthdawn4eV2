@@ -206,23 +206,27 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
 
-  /**
-   * Set the item status to "carried".
-   * @returns {Promise} The updated Item instance.
-   */
-  async carry() {
-    return this.parent.update( {
-      "system.itemStatus": "carried"
-    } );
-  }
+    /**
+     * Set the item status to "carried".
+     *
+     * @returns {Promise} The updated Item instance.
+     * @UserFunction            UF_PhysicalItems-carry
+     */
+    async carry() {
+        return this.parent.update( {
+            "system.itemStatus": "carried"
+        } );
+    }
 
-  /**
-   * Set the item status to "owned".
-   * @returns {Promise} The updated Item instance.
-   */
-  async deposit() {
-    return this.parent.update( {
-      "system.itemStatus": "owned"
-    } );
-  }
+    /**
+     * Set the item status to "owned".
+     *
+     * @returns {Promise} The updated Item instance.
+     * @UserFunction            UF_PhysicalItems-deposit
+     */
+    async deposit() {
+        return this.parent.update( {
+            "system.itemStatus": "owned"
+        } );
+    }
 }

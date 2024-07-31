@@ -53,9 +53,9 @@ stateDiagram-v2
 
 ### Related User Functions
 
-[UF_ActorItems-onWeightCalculation](../User%20Functions/UF_ActorItems-onWeightCalculation.md)
+[UF_PhysicalItems-onWeightCalculation](../User%20Functions/UF_PhysicalItems-onWeightCalculation.md)
 
-[UF_ActorItems-tailorToNamegiver](../User%20Functions/UF_ActorItems-tailorToNamegiver.md)
+[UF_PhysicalItems-tailorToNamegiver](../User%20Functions/UF_PhysicalItems-tailorToNamegiver.md)
 
 
 

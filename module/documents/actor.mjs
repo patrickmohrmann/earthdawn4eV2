@@ -341,7 +341,7 @@ export default class ActorEd extends Actor {
    * @param {Object}    itemId        Id of the item to rotate the status of
    * @param {Boolean}   backwards     Whether to rotate the status backwards
    * @returns 
-   * @UserFunction                    UF_ActorItems-rotateItemStatus
+   * @UserFunction                    UF_PhysicalItems-rotateItemStatus
    */
   async rotateItemStatus( itemId, backwards = false ) {
     const item = this.items.get( itemId );
@@ -793,7 +793,7 @@ export default class ActorEd extends Actor {
    * @param {Object}    itemToUpdate    The item to update
    * @param {String}    nextStatus      The next status of the item
    * @returns 
-   * @UserFunction                      UF_ActorItems-updateItemStates
+   * @UserFunction                      UF_PhysicalItems-updateItemStates
    */
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
