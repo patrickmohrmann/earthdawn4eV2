@@ -20,7 +20,100 @@ based on the equipped status for the weapon, this weapon will be used for attack
 there are several special situation where one or the other status can work along side one another if the items have special values (see special cases in [UF_ActorItems-updateItemStates](../User%20Functions/UF_ActorItems-updateItemStates.md))
 
 the equipment status can be changed using several mouse click options.
+* left-click & right-click (see [UF_ActorItems-rotateItemStatus](../User%20Functions/UF_ActorItems-rotateItemStatus.md))
+* shift-left-click (see [UF_ActorItems-carry](../User%20Functions/UF_ActorItems-carry.md))
+* middle-click (see [UF_ActorItems-deposit](../User%20Functions/UF_ActorItems-deposit.md))
+
 ### Diagram
+
+#### Rotate status
+```mermaid
+stateDiagram-v2
+    classDef fromOutside font-style:italic,font-weight:bold,fill:lightyellow
+    classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
+
+    ###################### status #######################
+
+    triggerAction3: rotate forward
+    triggerAction4: rotate backwards
+
+    userFunction1: rotate
+
+    shortStatusOwned: owned
+    shortStatusCarried: carried
+    shortStatusEquipped: equipped
+
+    noTailWeaponOwned: owned
+    noTailWeaponCarried: carried
+    noTailWeaponMainHand: main hand
+    noTailWeaponOffHand: off hand
+    noTailWeaponTwoHanded: Two handed
+
+    weaponOwned: owned
+    weaponCarried: carried
+    weaponMainHand: main hand
+    nweaponOffHand: off hand
+    weaponTwoHanded: Two handed
+    weaponTail: tail
+
+    ####################### Decisions #######################
+
+    state itemTypeDecision <<choice>>
+    state tailOption <<choice>>
+
+    ######################## Colorations ######################
+
+    triggerAction3:::fromOutside
+    triggerAction4:::fromOutside
+
+    userFunction1:::userFunction
+
+    ##################### StateDiagram ########################
+
+
+    state weapon_status_with_Tail {
+        weaponOwned
+        weaponOwned --> weaponCarried
+        weaponCarried --> weaponMainHand
+        weaponMainHand --> nweaponOffHand
+        nweaponOffHand --> weaponTwoHanded
+        weaponTwoHanded --> weaponTail
+        weaponTail --> weaponOwned
+    }
+
+    state weapon_status_without_Tail {
+        noTailWeaponOwned
+        noTailWeaponOwned --> noTailWeaponCarried
+        noTailWeaponCarried --> noTailWeaponMainHand
+        noTailWeaponMainHand --> noTailWeaponOffHand
+        noTailWeaponOffHand --> noTailWeaponTwoHanded
+        noTailWeaponTwoHanded --> noTailWeaponOwned
+    }
+
+    state no_weapon_status {
+        shortStatusOwned
+        shortStatusOwned --> shortStatusCarried
+        shortStatusCarried --> shortStatusEquipped
+        shortStatusEquipped --> shortStatusOwned
+    }
+
+[*] --> triggerAction3
+[*] --> triggerAction4
+    triggerAction3 --> userFunction1
+    triggerAction4 --> userFunction1: revers the arrow <br> direction in status boxes
+    userFunction1 --> itemTypeDecision
+
+    itemTypeDecision --> no_weapon_status: armor, shield or equipment
+    itemTypeDecision --> tailOption: namegiver having tail
+    tailOption --> weapon_status_with_Tail: yes
+    tailOption --> weapon_status_without_Tail: no
+
+    no_weapon_status --> [*]
+    weapon_status_with_Tail --> [*]
+    weapon_status_without_Tail --> [*]
+```
+
+#### deposit status
 ```mermaid
 stateDiagram-v2
     classDef fromOutside font-style:italic,font-weight:bold,fill:lightyellow
@@ -31,52 +124,104 @@ stateDiagram-v2
 
     ###################### status #######################
 
-    condition1: CONDITIONNAME1
-    condition2: CONDITIONNAME1
-    condition3: CONDITIONNAME1
+    triggerAction1: deposit
 
-    triggerAction1: TRIGGERACTION1
-    triggerAction2: TRIGGERACTION2
-    triggerAction3: TRIGGERACTION3
+    userFunction2: deposit
 
-    userFunction1: USERFUNCTION1
-    userFunction2: USERFUNCTION2
-    userFunction3: USERFUNCTION3
-
-    state1: STATE1
-    state2: STATE2
-    state3: STATE3
-
-    dialog1: DIALOG1
+    depositOwned: owned
+    depositCarried: carried
+    depositEquipped: equipped
+    depositMainHand: main hand
+    depositOffHand: off hand
+    depositTwoHanded: Two handed
+    depositTail: tail
 
     ####################### Decisions #######################
-
-    state DECISION1 <<choice>>
-    state DECISION2 <<choice>>
-    state DECISION3 <<choice>>
 
     ######################## Colorations ######################
 
     triggerAction1:::fromOutside
-    triggerAction2:::fromOutside
-    triggerAction3:::fromOutside
 
-    userFunction1:::userFunction
     userFunction2:::userFunction
-    userFunction3:::userFunction
-
-    dialog1:::dialog
 
     ##################### StateDiagram ########################
+
+    state deposit_item {
+    depositCarried --> depositOwned
+    depositEquipped --> depositOwned
+    depositMainHand --> depositOwned
+    depositOffHand --> depositOwned
+    depositTwoHanded --> depositOwned
+    depositTail --> depositOwned
+    }
+
+    [*] --> triggerAction1
+    triggerAction1 --> userFunction2
+    userFunction2 --> deposit_item
+    deposit_item --> [*]
+```
+
+#### carry status
+```mermaid
+stateDiagram-v2
+    classDef fromOutside font-style:italic,font-weight:bold,fill:lightyellow
+    classDef foundryCore font-style:italic,font-weight:bold,fill: lightgreen
+    classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
+    classDef userFunctionReturn font-style:italic,font-weight:bold,fill:aqua
+    classDef dialog font-style:italic,font-weight:bold,fill:orange
+
+    ###################### status #######################
+
+    triggerAction2: carry
+
+    userFunction3: carry
+
+    carryOwned: owned
+    carryEquipped: equipped
+    carryMainHand: main hand
+    carryOffHand: off hand
+    carryTwoHanded: two handed
+    carryTail: tail
+    carryCarried: carried
+
+
+    ####################### Decisions #######################
+
+    ######################## Colorations ######################
+
+    triggerAction2:::fromOutside
+
+    userFunction3:::userFunction
+
+    ##################### StateDiagram ########################
+
+
+    state carry_item {  
+    carryOwned --> carryCarried
+    carryEquipped --> carryCarried
+    carryMainHand --> carryCarried
+    carryOffHand --> carryCarried
+    carryTwoHanded --> carryCarried
+    carryTail --> carryCarried
+    }
+
+    [*] --> triggerAction2
+    triggerAction2 --> userFunction3
+    userFunction3 --> carry_item
+    carry_item --> [*]
 ```
 
 ### Related User Functions
 
-[UF_YYYYYY-XXXXX](../User%20Functions/UF_YYYYYY-XXXXX.md)
+[UF_ActorItems-deposit](../User%20Functions/UF_ActorItems-deposit.md)
 
-[UF_YYYYYY-XXXXX](../User%20Functions/UF_YYYYYY-XXXXX.md)
+[UF_ActorItems-carry](../User%20Functions/UF_ActorItems-carry.md)
 
-[UF_YYYYYY-XXXXX](../User%20Functions/UF_YYYYYY-XXXXX.md)
+[UF_ActorItems-onChangeItemStatus](../User%20Functions/UF_ActorItems-onChangeItemStatus.md)
+
+[UF_ActorItems-updateItemStates](../User%20Functions/UF_ActorItems-updateItemStates.md)
+
+[UF_ActorItems-rotateItemStatus](../User%20Functions/UF_ActorItems-rotateItemStatus.md)
 
 
 ### Related Test Coverage
@@ -93,100 +238,3 @@ stateDiagram-v2
 | Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | Test case | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-
-
-
-
-
-stateDiagram-v2
-    classDef fromOutside font-style:italic,font-weight:bold,fill:lightyellow
-    classDef foundryCore font-style:italic,font-weight:bold,fill: lightgreen
-    classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
-    classDef userFunctionReturn font-style:italic,font-weight:bold,fill:aqua
-    classDef dialog font-style:italic,font-weight:bold,fill:orange
-
-    ###################### status #######################
-
-    condition1: CONDITIONNAME1
-    condition2: CONDITIONNAME1
-    condition3: CONDITIONNAME1
-
-    triggerAction1: deposit
-    triggerAction2: carry
-    triggerAction3: rotate forward
-    triggerAction4: rotate backwards
-
-    userFunction1: rotate
-    userFunction2: deposit
-    userFunction3: carry
-
-    statusState1: owned
-    statusState2: carried
-    statusState3: equipped
-    statusState4: main hand
-    statusState5: off hand
-    statusState6: Two handed
-    statusState7: tail
-
-
-    state1: armor
-    state2: three status
-    state3: equipment
-    state5: shield
-    state7: weapon
-    state8: six status
-    state9: seven status
-
-    dialog1: DIALOG1
-
-    ####################### Decisions #######################
-
-    state itemTypeDecision <<choice>>
-    state tailOption <<choice>>
-    state DECISION3 <<choice>>
-
-    ######################## Colorations ######################
-
-    triggerAction1:::fromOutside
-    triggerAction2:::fromOutside
-    triggerAction3:::fromOutside
-    triggerAction4:::fromOutside
-
-    userFunction1:::userFunction
-    userFunction2:::userFunction
-    userFunction3:::userFunction
-    userFunction4:::userFunction
-
-    dialog1:::dialog
-
-    ##################### StateDiagram ########################
-
-    First
-    
-    First --> Third
-
-    state First 
-    state threeOptions {
-        statusState1
-        statusState1 --> statusState2
-        statusState2 --> statusState3
-        statusState3 --> statusState1
-    }
-    state Third {
-        [*] --> thi
-        thi --> [*]
-    }
-
-    state Third {
-        [*] --> thi
-        thi --> [*]
-    }
-
-    state Third {
-        [*] --> thi
-        thi --> [*]
-    }
-
-
-userFunction1 --> threeOptions
-    
