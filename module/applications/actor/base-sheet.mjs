@@ -243,6 +243,7 @@ export default class ActorSheetEd extends ActorSheet {
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
    * @private
+   * @UserFunction              UF_PhysicalItems-onRollEquipment
    */
   _onRollEquipment( event ) {
     event.preventDefault();
