@@ -15,10 +15,12 @@ export default class RollPrompt extends FormApplication {
             throw new TypeError( "ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`." );
         }
         super( edRollOptions, options );
+        console.log('Constructor options:', this.options);
 
         this.resolve = resolve;
         this.edRollOptions = edRollOptions;
         this.rollData = rollData;
+        //this.options = options;
         this._updateObject( undefined, {
           'step.modifiers.manual': edRollOptions.step.modifiers.manual ?? 0,
         } );
@@ -104,6 +106,7 @@ export default class RollPrompt extends FormApplication {
     getData( options = {} ) {
         return {
             ...this.edRollOptions,
+            ...this.options,
             CONFIG
         };
     }
@@ -142,7 +145,7 @@ export default class RollPrompt extends FormApplication {
 
         await this.submit( {preventRender: true} );
 
-        const roll = new EdRoll( undefined, this.rollData, this.edRollOptions );
+        const roll = new EdRoll( undefined, this.rollData, this.edRollOptions, this.options);
         this.resolve?.( roll );
         return this.close();
     }

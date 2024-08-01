@@ -163,6 +163,19 @@ ED4E.action = {
 };
 preLocalize( "action" );
 
+
+/**
+ * Required Item Status to use an ability
+ * @enum {string}
+ */
+ED4E.requiredItemStatus = {
+	mainHand: 				"ED.Config.ItemStatus.mainHand",
+	offHand: 				"ED.Config.ItemStatus.offHand",
+	twoHands: 				"ED.Config.ItemStatus.twoHands",
+};
+preLocalize( "requiredItemStatus" );
+
+
 /**
  * Target Difficulty
  * @enum {string}

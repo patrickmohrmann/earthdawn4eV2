@@ -56,6 +56,24 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 choices: ED4E.rollTypes,
                 label: "ED.Item.Ability.type"
             } ),
+            combatAbility: new fields.SchemaField( {
+                requiredItemStatus: new fields.StringField( {
+                    required: false,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
+                    choices: ED4E.requiredItemStatus,
+                    label: "ED.Item.Ability.type"
+                } ),
+            } ),
+            reaction: new fields.SchemaField( {
+                reactionType: new fields.BooleanField( {
+                    required: false,
+                    nullable: false,
+                    initial: false,
+                    label: "ED.Item.Ability.reactionType"
+                } ),
+            } ),
             damageAbilities: new fields.SchemaField( {
                 damage: new fields.BooleanField( {
                     required: false,

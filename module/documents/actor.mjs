@@ -183,20 +183,86 @@ export default class ActorEd extends Actor {
       step: abilityStep
     } );
     const abilityFinalStep = { base: abilityStep };
-    const edRollOptions = EdRollOptions.fromActor(
-      {
-        testType: "action",
-        rollType: "ability",
-        strain: strain,
-        target: difficultyFinal,
-        step: abilityFinalStep,
-        devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
-      },
-      this
-    );
+    const rollType = ability.system.rollType;
+    let edRollOptions;
+    if ( rollType === "ability" )  { 
+      ui.notifications.warn( "Ability Workflow" );
+      edRollOptions = EdRollOptions.fromActor(
+        {
+          testType: "action",
+          rollType: rollType,
+          strain: strain,
+          target: difficultyFinal,
+          step: abilityFinalStep,
+          devotionRequired: devotionRequired,
+          chatFlavor: chatFlavor
+        },
+        this
+      );
+    } else if ( rollType === "attack" ) {
+      const attackData = await this.getAttackData ( ability );
+      ui.notifications.warn( "Attack Workflow" );
+      edRollOptions = EdRollOptions.fromActor(
+        {
+          testType: "action",
+          rollType: rollType,
+          strain: strain,
+          target: difficultyFinal,
+          step: abilityFinalStep,
+          devotionRequired: devotionRequired,
+          chatFlavor: chatFlavor
+        },
+        this
+      );
+      options = {
+        weapon: attackData.weapon,
+        target: attackData.target,
+        range: attackData.range,
+      }
+    }
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
+  }
+
+  async getAttackData ( ability ) {
+    let weapon;
+    const holdingType = ability.system.combatAbility.requiredItemStatus;
+    if ( holdingType === "mainHand" || holdingTpye === "twoHands" ) {
+      weapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === holdingType ); 
+    } else if ( holdingType === "offHand" ) {
+      weapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
+    }
+    if ( !weapon ) {
+      ui.notifications.error( "No weapon found in the required item status" );
+      return;
+    };
+    const targetsArray = Array.from(game.user.targets);
+    if (targetsArray.length === 0) {
+      ui.notifications.error("No targets selected");
+      return;
+    }
+    const target = targetsArray[0]
+    const distance = await this.getDistanceToTarget( target );
+    const closeCombat = distance.spaces === 1 ? distance.distance : 1
+    const range = {
+      targetDistance: distance,
+      weaponShortRangeMin: weapon.system.shortRangeMin >= 0 ? weapon.system.shortRangeMin : closeCombat,
+      weaponShortRangeMax: weapon.system.shortRangeMax >= 0 ? weapon.system.shortRangeMax : 1,
+      weaponLongRangeMin: weapon.system.longRangeMin >= 0 ? weapon.system.longRangeMin : 1,
+      weaponLongRangeMax: weapon.system.longRangeMax >= 0 ? weapon.system.longRangeMax : 1,
+    };
+    if ( distance.spaces !== 1 && range.weaponShortRangeMin < distance.distance ) {
+      ui.notifications.error( "Target is out of range" );
+      return;
+    };
+
+    return { weapon, target, range };
+  }
+
+  async getDistanceToTarget( target ) {
+    const actorToken = this.getActiveTokens()[0];
+    const distance = canvas.grid.measurePath([actorToken.center, target.center])
+    return distance;
   }
 
   /**

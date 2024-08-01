@@ -35,7 +35,7 @@ export default class EdRoll extends Roll {
   /*  Constructor and Fields                      */
   /* -------------------------------------------- */
 
-  constructor( formula = undefined, data = {}, edRollOptions = {} ) {
+  constructor( formula = undefined, data = {}, edRollOptions = {}, options = {} ) {
     // us ternary operator to also check for empty strings, nullish coalescing operator (??) only checks null or undefined
     const baseTerm = formula
       ? formula
@@ -45,8 +45,13 @@ export default class EdRoll extends Roll {
       }]`;
     super( baseTerm, data, edRollOptions );
 
-    this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
+    /// das muss umgebogen werden ich muss hier die rollTypes als subtyes von den test types sehen.
+    if( this.options.rollType === "attack") {
+      this.flavorTemplate = ED4E.rollTypes.attack.flavorTemplate;
+    } else {
 
+    this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
+    }
     if ( !this.options.extraDiceAdded ) this.#addExtraDice();
     if ( !this.options.configured ) this.#configureModifiers();
   }
