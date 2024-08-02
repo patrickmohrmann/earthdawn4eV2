@@ -8,8 +8,9 @@ Actor1 <ACTOR1> is at long rang (higher than the thrown weapon **long range max*
 
 ### Diagram:
 
-mermaid
 ```
+mermaid
+
 sequenceDiagram
 actor Attacker
 participant System
