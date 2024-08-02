@@ -414,6 +414,10 @@ ED4E.testTypes = {
 		label: "ED.Rolls.Labels.effectTestRoll",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/effect-roll-flavor.hbs",
 	},
+	attack: {
+		label: "ED.Config.rollTypes.attack",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/attack-roll-flavor.hbs",
+	},
 };
 preLocalize( "testTypes", { key: "label" } );
 

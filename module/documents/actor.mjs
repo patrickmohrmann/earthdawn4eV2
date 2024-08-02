@@ -214,13 +214,13 @@ export default class ActorEd extends Actor {
         },
         this
       );
-      options = {
-        weapon: attackData.weapon,
-        target: attackData.target,
-        range: attackData.range,
-      }
+       options= {
+          weapon: attackData.weapon,
+          target: attackData.target,
+          range: attackData.range,
+        };
     }
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, {options} );
     this.#processRoll( roll );
   }
 
