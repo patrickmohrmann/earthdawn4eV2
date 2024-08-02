@@ -1,6 +1,18 @@
 ## Test description:
 
-## Test instructions:
+this test covers the ranges of weapons
+
+## User Journey:
+
+<description>
+
+### Diagram:
+
+```mermaid
+
+```
+
+### Prerequisites:
 
 | Test Instruction  | Expected Result  |
 |---|---|
