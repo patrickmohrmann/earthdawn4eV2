@@ -6,6 +6,32 @@ this test covers the ranges of weapons
 
 Actor1 <ACTOR1> is at long rang (higher than the thrown weapon **long range max** value) to Actor2 <ACTOR2> and tries to hit him with melee, unarmed, thrown and missle weapons. Only the missle weapon has the possibility to hit the target. For the missle weapon a roll prompt appears, for all other, a Ui notification informs the user about that the distance is to high for his weapon. The missle weapon roll prompt shows a long range modifier of -2. After Actor1 <ACTOR1> confirms the roll prompt, the roll is executed (this process is repeated until it is a success). A chat message appears with the success information and two click options only to be used by Actor2 <ACTOR2> or the GM. one option is **take the hit** and the other one is **use avoid Blow**. Actor2 <ACTOR2> confirms the **take the hit** option and therefore a damage roll prompt appears for the Actor1 <ACTOR1>. Actor1 <ACTOR1> will confirm this prompt and damage is rolled. A new chat message shows the result and provides a click option **assign damage** together with the token image of Actor2 <ACTOR2>. This Option is only to be used by Actor1 <ACTOR1> or the GM. By confirming the option, the rolled damage is assigned to Actor2 <ACTOR2> lessend by its Armor.
 
+### Diagram:
+
+mermaid
+```
+sequenceDiagram
+actor Attacker
+participant System
+actor Defender
+
+Attacker ->> Defender: Distance between 21 and 40
+Attacker ->> System: attack with melee weapon
+System -->> Attacker: not in range
+Attacker ->> System: attack with unarmed weapon
+System -->> Attacker: not in range
+Attacker ->> System: attack with throwing weapon
+System -->> Attacker: not in range
+Attacker ->> Defender: attack with missle weapon
+System -->> Attacker: prompt for attack
+Attacker ->> Defender: roll Attack
+System -->> Defender: show reactions
+Defender ->> System: chose **take the hit**
+System ->> Attacker: damage prompt
+Attacker ->> Defender: roll Damage
+Attacker ->> Defender: assign Damage
+```
+
 ### Prerequisites:
 
 Actor1 <ACTOR1> and Actor2 <ACTOR2> exist.
