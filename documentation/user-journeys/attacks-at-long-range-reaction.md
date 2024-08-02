@@ -1,6 +1,6 @@
 ## Test description:
 
-this test covers the ranges of weapons
+this test covers ranged attack at long range with a successful reaction
 
 ## User Journey:
 
