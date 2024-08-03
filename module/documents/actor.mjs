@@ -4,7 +4,7 @@ import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
 import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
 
-import LegendPointHistoryPrompt from "../applications/global/lp-history.mjs";
+import LegendPointHistory from "../applications/global/lp-history.mjs";
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
@@ -54,7 +54,7 @@ export default class ActorEd extends Actor {
         }
       };
 
-      this.updateSource( { prototypeToken } )
+      this.updateSource( { prototypeToken } );
     }
   }
 
@@ -75,14 +75,14 @@ export default class ActorEd extends Actor {
    * @param {string} [type]           Optionally, a type name to restrict the search
    * @returns {Item[]|undefined}    An array containing the found items
    */
-  getItemsByEdid(edid, type) {
-    const edidFilter = (item) => item.system.edid === edid;
-    if (!type) return this.items.filter(edidFilter);
+  getItemsByEdid( edid, type ) {
+    const edidFilter = ( item ) => item.system.edid === edid;
+    if ( !type ) return this.items.filter( edidFilter );
 
     const itemTypes = this.itemTypes;
     if ( !Object.hasOwn( itemTypes, type ) ) throw new Error( `Type ${ type } is invalid!` );
 
-    return itemTypes[type].filter(edidFilter);
+    return itemTypes[type].filter( edidFilter );
   }
 
   /**
@@ -92,8 +92,8 @@ export default class ActorEd extends Actor {
    * @param {string} [type]         Optionally, a type name to restrict the search
    * @returns {Item|undefined}    The matching item, or undefined if none was found.
    */
-  getSingleItemByEdid(edid, type) {
-    return this.getItemsByEdid(edid, type)[0];
+  getSingleItemByEdid( edid, type ) {
+    return this.getItemsByEdid( edid, type )[0];
   }
 
   /**
@@ -122,7 +122,7 @@ export default class ActorEd extends Actor {
    */
   async legendPointHistory() {
     // let history = await getLegendPointHistoryData( actor );
-    const lpUpdateData = await LegendPointHistoryPrompt.waitPrompt(
+    const lpUpdateData = await LegendPointHistory.waitPrompt(
       new LpTrackingData( this.system.lp.toObject() ),
       { actor: this }
     );
@@ -134,7 +134,7 @@ export default class ActorEd extends Actor {
    * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAttribute(attributeId, options = {}) {
+  async rollAttribute( attributeId, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const step = { base: attributeStep };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
@@ -164,7 +164,7 @@ export default class ActorEd extends Actor {
    * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAbility(ability, options = {}) {
+  async rollAbility( ability, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
@@ -204,7 +204,7 @@ export default class ActorEd extends Actor {
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
   async rollEquipment( equipment, options = {} ) {
-    const arbitraryStep = equipment.system.usableItem.arbitraryStep
+    const arbitraryStep = equipment.system.usableItem.arbitraryStep;
     const difficulty = equipment.system.getDifficulty();
     if ( !difficulty ) {
       ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
@@ -485,7 +485,7 @@ export default class ActorEd extends Actor {
    * @returns {boolean}                       Returns `true` if the full amount was deducted (enough available), 'false'
    *                                          otherwise.
    */
-  #useResource(resourceType, amount) {
+  #useResource( resourceType, amount ) {
     const available = this.system[resourceType].value;
     this.update( { [`system.${ resourceType }.value`]: ( available - amount ) } );
     return amount <= available;
@@ -500,8 +500,8 @@ export default class ActorEd extends Actor {
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
-  #processRoll(roll) {
-    if (!roll) {
+  #processRoll( roll ) {
+    if ( !roll ) {
       // No roll available, do nothing.
       return;
     }
@@ -624,11 +624,11 @@ export default class ActorEd extends Actor {
     let overrides = {};
     // Organize non-disabled effects by their application priority
     // baseCharacteristics is list of attributes that need to have Effects applied before Derived Characteristics are calculated
-    const changes = this.effects.reduce((changes, e) => {
-      if (e.changes.length < 1) {
+    const changes = this.effects.reduce( ( changes, e ) => {
+      if ( e.changes.length < 1 ) {
         return changes;
       }
-      if (e.disabled || e.isSuppressed || !baseCharacteristics.includes(e.changes[0].key)) {
+      if ( e.disabled || e.isSuppressed || !baseCharacteristics.includes( e.changes[0].key ) ) {
         return changes;
       }
 
@@ -641,14 +641,14 @@ export default class ActorEd extends Actor {
           return c;
         } )
       );
-    }, []);
+    }, [] );
 
-    changes.sort((a, b) => a.priority - b.priority);
+    changes.sort( ( a, b ) => a.priority - b.priority );
 
     // Apply all changes
-    for (let change of changes) {
-      const result = change.effect.apply(this, change);
-      if (result !== null) overrides[change.key] = result[change.key];
+    for ( let change of changes ) {
+      const result = change.effect.apply( this, change );
+      if ( result !== null ) overrides[change.key] = result[change.key];
     }
 
     // Expand the set of final overrides
@@ -790,83 +790,81 @@ export default class ActorEd extends Actor {
   }
 
 
-    /** #############################################################
-   * Legend Point Tracking
-   * ############################################################# */
+    /**
+     * #############################################################
+     * Legend Point Tracking
+     * #############################################################
+     */
 
 
     /**
      * 
-     * @param {Object} attribute      The attribute to upgrade
+     * @param {object} attribute      The attribute to upgrade
      * @returns 
      * @UserFunction                  UF_LPTracking-upgradeAttribute
      */
-    async upgradeAttribute(attribute) {
+    async upgradeAttribute( attribute ) {
       const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
       // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-      if (attributeOldIncrease >= 3) {
-        ui.notifications.warn(game.i18n.localize("ED.Actor.LpTracking.Spendings.maxIncreaseReached"));
-        return
+      if ( attributeOldIncrease >= 3 ) {
+        ui.notifications.warn( game.i18n.localize( "ED.Actor.LpTracking.Spendings.maxIncreaseReached" ) );
+        return;
       } 
       const attributeName = ED4E.attributes[attribute].label;
       const legendPointsCostConfig = ED4E.legendPointsCost;
       const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
 
-      const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAttribute", {
+      const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAttribute", {
         previousLevel: attributeOldIncrease,
         newLevel: attributeOldIncrease + 1,
         attributeName: attributeName,
-      });
-      const transactionData = new LpSpendingTransactionData({
+      } );
+      const transactionData = new LpSpendingTransactionData( {
         entityType: "attribute",
         type: "spendings",
         amount: requiredLp,
         date: new Date(),
-        lpBefore: this.system.lp.current,
-        lpAfter: this.system.lp.current - requiredLp,
         name: attributeName,
         description: description
-      })
+      } );
       // add the _showOptionsPrompt function to show the options for the user to choose
-      await this.update({ [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 })
-      return this.addLpTransaction("spendings", transactionData);
+      await this.update( { [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 } );
+      return this.addLpTransaction( "spendings", transactionData );
     }
 
 
     /**
-     * @param {Object} ability  The ability to upgrade
+     * @param {object} ability  The ability to upgrade
      * @returns 
      * @UserFunction            UF_LPTracking-upgradeAbility
      */
-    async upgradeAbility(ability) {
+    async upgradeAbility( ability ) {
       const abilityOldLevel = ability.system.level;
-      const newIncrease = abilityOldLevel + 1
-      const description = game.i18n.format("ED.Actor.LpTracking.Spendings.descriptionAbility", {
+      const newIncrease = abilityOldLevel + 1;
+      const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAbility", {
         previousLevel: abilityOldLevel,
         newLevel: newIncrease,
         abilityName: ability.name,
-      });
+      } );
       
-      const validationData = await validateAbilityUpgrade(ability, this);
-      const validateResult = await this._showOptionsPrompt (this, ability, validationData);
+      const validationData = await validateAbilityUpgrade( ability, this );
+      const validateResult = await this._showOptionsPrompt ( this, ability, validationData );
 
-      if (validateResult === "cancel") return;
+      if ( validateResult === "cancel" ) return;
 
       const requiredLp = validateResult === "free" ? 0 : validationData.requiredLp;
 
-      const transactionData = new LpSpendingTransactionData({
+      const transactionData = new LpSpendingTransactionData( {
         entityType: ability.type,
         type: "spendings",
         amount: requiredLp,
         date: new Date(),
         itemUuid: ability.uuid,
-        lpBefore: this.system.lp.current,
-        lpAfter: this.system.lp.current - requiredLp,
         name: ability.name,
         description: description
-      })
-      await ability.update({ [`system.level`]: newIncrease });
-      return this.addLpTransaction("spendings", transactionData);
+      } );
+      await ability.update( { "system.level": newIncrease } );
+      return this.addLpTransaction( "spendings", transactionData );
     }
 
     /**
@@ -875,16 +873,16 @@ export default class ActorEd extends Actor {
      * @param {ItemEd} classItem    The class item to upgrade
      * @UserFunction                UF_LPTracking-upgradeDiscipline
      */
-  async upgradeDiscipline(classItem) {
+  async upgradeDiscipline( classItem ) {
     const disciplineIndex = classItem.system.disciplineIndex;
     const classOldLevel = classItem.system.level;
     const classNewLevel = classOldLevel + 1;
     const classNewLevelIndex = classNewLevel - 1;
 
     // validate if the class can be upgraded
-    const currentDisciplineTalents = this.items.filter(item => item.type === "talent" && item.system.talentCategory === "discipline" && item.system.sourceClass.identifier === classItem.uuid);
-    if (classOldLevel >= 15) {
-      ui.notifications.warn("Klasse hat bereits das maximale Level erreicht");
+    const currentDisciplineTalents = this.items.filter( item => item.type === "talent" && item.system.talentCategory === "discipline" && item.system.sourceClass.identifier === classItem.uuid );
+    if ( classOldLevel >= 15 ) {
+      ui.notifications.warn( "Klasse hat bereits das maximale Level erreicht" );
       return;
     }
 
@@ -896,56 +894,56 @@ export default class ActorEd extends Actor {
       [ED4E.tier.master.toLowerCase()]: 4
     };
     const reverseTierMap = {
-      1: [ED4E.tier.novice.toLowerCase()],
-      2: [ED4E.tier.journeyman.toLowerCase()],
-      3: [ED4E.tier.warden.toLowerCase()],
-      4: [ED4E.tier.master.toLowerCase()]
+      1: [ ED4E.tier.novice.toLowerCase() ],
+      2: [ ED4E.tier.journeyman.toLowerCase() ],
+      3: [ ED4E.tier.warden.toLowerCase() ],
+      4: [ ED4E.tier.master.toLowerCase() ]
     };
 
     let currentIndex = tierMap[currentTier];
-    if (!currentIndex) {
-      ui.notifications.warn("Tier nicht gefunden");
+    if ( !currentIndex ) {
+      ui.notifications.warn( "Tier nicht gefunden" );
       return;
     }
 
     let newLevelTier = disciplineIndex > 1 ? currentIndex + disciplineIndex - 1 : currentIndex;
-    newLevelTier = Math.min(newLevelTier, 4);
+    newLevelTier = Math.min( newLevelTier, 4 );
     newLevelTier = reverseTierMap[newLevelTier];
 
 
-    const settingOption = game.settings.get("ed4e", "lpTrackingAllTalents");
-    if (settingOption === "disciplineTalents") {
-      ui.notifications.warn("Basis = Disziplin Talente für den Kreisaufstieg");
-      const relevantItems = currentDisciplineTalents.filter(item => item.system.sourceClass.identifier === classItem.uuid);
-      const allItemsMeetLevelRequirement = relevantItems.every(item => item.system.level >= classNewLevel);
+    const settingOption = game.settings.get( "ed4e", "lpTrackingAllTalents" );
+    if ( settingOption === "disciplineTalents" ) {
+      ui.notifications.warn( "Basis = Disziplin Talente für den Kreisaufstieg" );
+      const relevantItems = currentDisciplineTalents.filter( item => item.system.sourceClass.identifier === classItem.uuid );
+      const allItemsMeetLevelRequirement = relevantItems.every( item => item.system.level >= classNewLevel );
 
 
-      if (!allItemsMeetLevelRequirement) {
+      if ( !allItemsMeetLevelRequirement ) {
         // If any item does not meet the level requirement, notify the user
-        return ui.notifications.warn(`Mindestens ein Talent hat nicht das erforderliche Level.`);
+        return ui.notifications.warn( "Mindestens ein Talent hat nicht das erforderliche Level." );
       }
-    } else if (settingOption === "allTalents") {
-      ui.notifications.warn("Alle Talente für den kreisaufstieg verwenden");
-    } else if (settingOption === "allTalentsHouseRule") {
-      ui.notifications.warn("Alle Talente ohne verringerte kosten - Hausregel");
+    } else if ( settingOption === "allTalents" ) {
+      ui.notifications.warn( "Alle Talente für den kreisaufstieg verwenden" );
+    } else if ( settingOption === "allTalentsHouseRule" ) {
+      ui.notifications.warn( "Alle Talente ohne verringerte kosten - Hausregel" );
     }
 
-    const fetchItemsByIds = async (ids) => {
-      return Promise.all(ids.map(uuid => fromUuid(uuid)));
+    const fetchItemsByIds = async ( ids ) => {
+      return Promise.all( ids.map( uuid => fromUuid( uuid ) ) );
     };
 
     const classLevels = classItem.system.advancement.levels[classNewLevelIndex];
     const abilityOptions = classItem.system.advancement.abilityOptions;
 
-    const newDisciplineTalents = await fetchItemsByIds(classLevels.abilities.class);
-    const freeTalents = await fetchItemsByIds(classLevels.abilities.free);
-    const specialAbilities = await fetchItemsByIds(classLevels.abilities.special);
-    const effects = await fetchItemsByIds(classLevels.effects);
+    const newDisciplineTalents = await fetchItemsByIds( classLevels.abilities.class );
+    const freeTalents = await fetchItemsByIds( classLevels.abilities.free );
+    const specialAbilities = await fetchItemsByIds( classLevels.abilities.special );
+    const effects = await fetchItemsByIds( classLevels.effects );
 
-    const noviceTalents = await fetchItemsByIds(abilityOptions.novice);
-    const journeymanTalents = await fetchItemsByIds(abilityOptions.journeyman);
-    const wardenTalents = await fetchItemsByIds(abilityOptions.warden);
-    const masterTalents = await fetchItemsByIds(abilityOptions.master);
+    const noviceTalents = await fetchItemsByIds( abilityOptions.novice );
+    const journeymanTalents = await fetchItemsByIds( abilityOptions.journeyman );
+    const wardenTalents = await fetchItemsByIds( abilityOptions.warden );
+    const masterTalents = await fetchItemsByIds( abilityOptions.master );
 
     let talentOptions = [
       ...noviceTalents,
@@ -954,69 +952,69 @@ export default class ActorEd extends Actor {
       ...masterTalents
     ];
 
-    if (classNewLevelIndex >= 0 && classNewLevelIndex <= 3) {
+    if ( classNewLevelIndex >= 0 && classNewLevelIndex <= 3 ) {
       talentOptions = noviceTalents;
-    } else if (classNewLevelIndex >= 4 && classNewLevelIndex <= 7) {
-      talentOptions = [...noviceTalents, ...journeymanTalents];
-    } else if (classNewLevelIndex >= 8 && classNewLevelIndex <= 11) {
-      talentOptions = [...noviceTalents, ...journeymanTalents, ...wardenTalents];
-    } else if (classNewLevelIndex >= 12) {
-      talentOptions = [...noviceTalents, ...journeymanTalents, ...wardenTalents, ...masterTalents];
+    } else if ( classNewLevelIndex >= 4 && classNewLevelIndex <= 7 ) {
+      talentOptions = [ ...noviceTalents, ...journeymanTalents ];
+    } else if ( classNewLevelIndex >= 8 && classNewLevelIndex <= 11 ) {
+      talentOptions = [ ...noviceTalents, ...journeymanTalents, ...wardenTalents ];
+    } else if ( classNewLevelIndex >= 12 ) {
+      talentOptions = [ ...noviceTalents, ...journeymanTalents, ...wardenTalents, ...masterTalents ];
     }
 
     let filteredTalentOptions = [];
-    for (const talent of talentOptions) {
-      const isDuplicate = await this.checkDuplicateAbility(talent);
-      if (!isDuplicate) {
-        filteredTalentOptions.push(talent);
+    for ( const talent of talentOptions ) {
+      const isDuplicate = await this.checkDuplicateAbility( talent );
+      if ( !isDuplicate ) {
+        filteredTalentOptions.push( talent );
       }
     }
 
-    const optionsHtml = filteredTalentOptions.map((talent, index) => `<option value="${index}">${talent.name}</option>`).join('');
+    const optionsHtml = filteredTalentOptions.map( ( talent, index ) => `<option value="${index}">${talent.name}</option>` ).join( "" );
 
     // Helper function to create embedded documents if not duplicate
-    const createIfNotDuplicate = async (items, category, tier, level, identifier) => {
-      for (const item of items) {
-        const isDuplicate = await this.checkDuplicateAbility(item);
-        if (!isDuplicate) {
-          await this.createEmbeddedDocuments('Item', [item], {
+    const createIfNotDuplicate = async ( items, category, tier, level, identifier ) => {
+      for ( const item of items ) {
+        const isDuplicate = await this.checkDuplicateAbility( item );
+        if ( !isDuplicate ) {
+          await this.createEmbeddedDocuments( "Item", [ item ], {
             noPrompt: true,
             talentCategory: category,
             tier: tier,
             classLevel: level,
             classIdentifier: identifier
-          });
+          } );
         }
       }
     };
 
     // Create and render the dialog
-    new Dialog({
+    new Dialog( {
       title: "Choose a Talent",
       content: `<form><div class="form-group"><label>Talent:</label><select id="talent-choice">${optionsHtml}</select></div></form>`,
       buttons: {
         ok: {
           label: "Confirm",
-          callback: async (html) => {
-            const selectedIndex = parseInt(html.find('#talent-choice').val());
+          callback: async ( html ) => {
+            const selectedIndex = parseInt( html.find( "#talent-choice" ).val() );
             const selectedTalent = filteredTalentOptions[selectedIndex];
 
-            await this.createEmbeddedDocuments('Item', [selectedTalent], {
+            await this.createEmbeddedDocuments( "Item", [ selectedTalent ], {
               noPrompt: true,
               talentCategory: "optional",
               tier: newLevelTier,
               classLevel: classNewLevel,
               classIdentifier: classItem.uuid
-            });
+            } );
 
-            await createIfNotDuplicate(newDisciplineTalents, "discipline", newLevelTier, classNewLevel, classItem.uuid);
-            await createIfNotDuplicate(freeTalents, "free", newLevelTier, classNewLevel, classItem.uuid);
-            await createIfNotDuplicate(specialAbilities, "special", newLevelTier, classNewLevel, classItem.uuid);
-            await createIfNotDuplicate(effects, "effect", newLevelTier, classNewLevel, classItem.uuid);
+            await createIfNotDuplicate( newDisciplineTalents, "discipline", newLevelTier, classNewLevel, classItem.uuid );
+            await createIfNotDuplicate( freeTalents, "free", newLevelTier, classNewLevel, classItem.uuid );
+            await createIfNotDuplicate( specialAbilities, "special", newLevelTier, classNewLevel, classItem.uuid );
+            await createIfNotDuplicate( effects, "effect", newLevelTier, classNewLevel, classItem.uuid );
 
             // Update the class level
-            await classItem.update({ "system.level": classNewLevel });
-            await this.upgradeFreeTalents(classItem, classNewLevel);
+            await classItem.update( { "system.level": classNewLevel } );
+            await this.upgradeFreeTalents( classItem, classNewLevel );
           }
         },
         cancel: {
@@ -1027,30 +1025,30 @@ export default class ActorEd extends Actor {
         },
       },
       default: "ok"
-    }).render(true);
+    } ).render( true );
   }
 
   /**
    * 
-   * @param {Object} classItem      class item to be used for the upgrade
+   * @param {object} classItem      class item to be used for the upgrade
    * @param {number} newLevel       new level of the class
    * @UserFunction                  UF_LPTracking-upgradeFreeTalents
    */
-  async upgradeFreeTalents(classItem, newLevel) {
+  async upgradeFreeTalents( classItem, newLevel ) {
     this.items
-      .filter(item => item.type === "talent" && item.system.talentCategory === "free" && item.system.sourceClass.identifier === classItem.uuid)
-      .forEach(talent => talent.updateSource({ "system.level": newLevel }));
+      .filter( item => item.type === "talent" && item.system.talentCategory === "free" && item.system.sourceClass.identifier === classItem.uuid )
+      .forEach( talent => talent.updateSource( { "system.level": newLevel } ) );
   }
 
   /**
    * 
-   * @param {Object} ability    ability to be checked for duplicates
+   * @param {object} ability    ability to be checked for duplicates
    * @returns                   returns true if the ability is a duplicate, false otherwise
    * @UserFunction              UF_LPTracking-checkDuplicateAbility
    */
-  async checkDuplicateAbility(ability) {
-    const itemsOfType = this.items.filter(item => item.type === ability.type);
-    return itemsOfType.some(item => item.name === ability.name && item.system.edid !== "thread-weaving" && item.system.edid !== "matrix");
+  async checkDuplicateAbility( ability ) {
+    const itemsOfType = this.items.filter( item => item.type === ability.type );
+    return itemsOfType.some( item => item.name === ability.name && item.system.edid !== "thread-weaving" && item.system.edid !== "matrix" );
   }
 
 
@@ -1058,15 +1056,16 @@ export default class ActorEd extends Actor {
   /**
    * @description                     Add a new LP transaction to the actor's system data for a new or upgraded item
    * @param {object} item             item to be added
+   * @param bookingResult
    * @param {object} validationData   validation data for the item
    * @UserFunction                    UF_LPTracking-addItemLpTransaction
    */
-  async addItemLpTransaction(item, validationData, bookingResult) {
+  async addItemLpTransaction( item, validationData, bookingResult ) {
     
-    const description = game.i18n.format("ED.Dialogs.LegendPoints.spendLp", {
+    const description = game.i18n.format( "ED.Dialogs.LegendPoints.spendLp", {
         previousLevel: item.system.level - 1,
         newLevel: item.system.level,
-      });
+      } );
 
       let requiredLp = 0;
       if ( bookingResult === "free" ) {
@@ -1079,18 +1078,16 @@ export default class ActorEd extends Actor {
     
     // add Prompt for LP spending which can be skipped by a certain click (shift+RIghtclick or so)
     // only after confirming the promt, this shall go on.
-    const transactionData = new LpSpendingTransactionData({
+    const transactionData = new LpSpendingTransactionData( {
       entityType: item.type,
       type: "spendings",
       amount: validationData.requiredLp,
       date: new Date(),
       itemUuid: item.uuid,
-      lpBefore: this.system.lp.current,
-      lpAfter: this.system.lp.current - validationData.requiredLp,
       name: item.name,
       description: description
-    })
-    const transactionSuccess = await this.addLpTransaction("spendings", transactionData);
+    } );
+    const transactionSuccess = await this.addLpTransaction( "spendings", transactionData );
   }
 
   /**
@@ -1101,106 +1098,106 @@ export default class ActorEd extends Actor {
    * @UserFunction                    UF_LPTracking-addLpTransaction
    * @see                             ../../documentation/User Functions/UF_LpTracking-addLpTransaction.md
    */
-  async addLpTransaction(type, transactionData) {
+  async addLpTransaction( type, transactionData ) {
     const oldTransactions = this.system.lp[type];
-    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData
-    const transaction = new transactionModel(transactionData)
+    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
+    const transaction = new transactionModel( transactionData );
 
     return this.update( {
-      [`system.lp.${type}`]: oldTransactions.concat( [transaction] )
-    } )
+      [`system.lp.${type}`]: oldTransactions.concat( [ transaction ] )
+    } );
   }
 
 
 
   /**
    * needs to be rebuild later after paths, questors and threads are implemented to show all relevant information
-   * @param {Object} actor            actor to be used for the prompt   
-   * @param {Object} item             item to be added or upgraded
+   * @param {object} actor            actor to be used for the prompt   
+   * @param {object} item             item to be added or upgraded
    * @param {Array} validationData    validation data for the item
    * @returns                         returns the result of the prompt which defines the LP spending and grouping of the item
    * @UserFunction                    UF_LPTracking-showOptionsPrompt
    */
-async _showOptionsPrompt(actor, item, validationData) {
+async _showOptionsPrompt( actor, item, validationData ) {
             
-            return new Promise((resolve) => {
+            return new Promise( ( resolve ) => {
                 const actorName = actor.name;
                 const itemName = item.name;
                 const currentLp = actor.system.lp.current;
                 const requiredLp = validationData.requiredLp;
                 let actorHealth = "is healthy";
-                if (actor.system.characteristics.health.damage.total > 0) {
-                    actorHealth = "is not healthy, do you want to increase anyway?"
+                if ( actor.system.characteristics.health.damage.total > 0 ) {
+                    actorHealth = "is not healthy, do you want to increase anyway?";
                 }
                 let buttons = {};
-                if (item.type === "talent" && validationData.interaction === "create") {
+                if ( item.type === "talent" && validationData.interaction === "create" ) {
                     // Initial check for the item itself having an ed-id of "versatility"
-                    if (item.system.edid === "versatility") {
+                    if ( item.system.edid === "versatility" ) {
                         buttons.versatility = {
                             label: "Versatility",
-                            callback: () => resolve("versatility")
+                            callback: () => resolve( "versatility" )
                         };
                     } else {
                         // Define buttons without the "Cancel" button initially
                         buttons = {
                             discipline: {
                                 label: "Discipline",
-                                callback: () => resolve("discipline")
+                                callback: () => resolve( "discipline" )
                             },
                             optional: {
                                 label: "Optional",
-                                callback: () => resolve("optional")
+                                callback: () => resolve( "optional" )
                             },
                             free: {
                                 label: "Free / Other",
-                                callback: () => resolve("free")
+                                callback: () => resolve( "free" )
                             }
                         };
                         // Additional check for any item of type "talent" with an ed-id of "versatility" in the actor's items
-                        const hasVersatilityTalent = actor.items.filter(item => item.type === "talent" && item.system.edid === "versatility");
-                        const numberOfVersatilityTalents = actor.items.filter(item => item.type === "talent" 
+                        const hasVersatilityTalent = actor.items.filter( item => item.type === "talent" && item.system.edid === "versatility" );
+                        const numberOfVersatilityTalents = actor.items.filter( item => item.type === "talent" 
                           && item.system.talentCategory === "versatility" 
-                          && item.system.edid !== "versatility");
+                          && item.system.edid !== "versatility" );
 
                         if ( hasVersatilityTalent.length > 0 ) {
                           let versatilityMaxLevel = 0;
-                          hasVersatilityTalent.forEach(element => {
+                          hasVersatilityTalent.forEach( element => {
                             versatilityMaxLevel += element.system.level;
-                          });
-                          if ( (versatilityMaxLevel  ) > numberOfVersatilityTalents.length ) {
+                          } );
+                          if ( ( versatilityMaxLevel  ) > numberOfVersatilityTalents.length ) {
                             buttons.versatility = {
                                 label: "Versatility?",
-                                callback: () => resolve("versatility")
+                                callback: () => resolve( "versatility" )
                             };
                         }
                       }
                     }
-                } else if (item.type === "discipline") {
+                } else if ( item.type === "discipline" ) {
                     buttons = {
                         confirm: {
                             label: "confirm",
-                            callback: () => resolve("addDiscipline")
+                            callback: () => resolve( "addDiscipline" )
                         }
                     };
                 } else {
                   buttons = {
                     free: {
                       label: "Free",
-                      callback: () => resolve("free")
+                      callback: () => resolve( "free" )
                     },
                     spend: {
                       label: "Spend LP",
-                      callback: () => resolve("spend")
+                      callback: () => resolve( "spend" )
                     },
                   };
                 }
                 // Add the "Cancel" button here to ensure it's always on the right
                 buttons.cancel = {
                     label: "Cancel",
-                    callback: () => resolve("cancel")
+                    callback: () => resolve( "cancel" )
                 }; 
 
-      let d = new Dialog({
+      let d = new Dialog( {
         title: "LP Options",
         content: `<p>Increase ${itemName}</p>
                   <p>Current LP: ${currentLp}</p>
@@ -1209,9 +1206,9 @@ async _showOptionsPrompt(actor, item, validationData) {
                   <p>Current Damage: ${actorHealth}</p>`,
         buttons: buttons,
         default: "spend",
-        close: () => resolve(null)
-      });
-      d.render(true);
-    });
+        close: () => resolve( null )
+      } );
+      d.render( true );
+    } );
   }
 }

@@ -48,7 +48,7 @@ export class IdentifierField extends foundry.data.fields.StringField {
    * @override
    */
   _validateType( value ) {
-    if ( ed4e.utils.validators.isValidIdentifier( value ) ) {
+    if ( !ed4e.utils.validators.isValidIdentifier( value ) ) {
       throw new Error( game.i18n.localize( "ED.Errors.IdentifierError" ) );
     }
   }
@@ -63,37 +63,36 @@ export class IdentifierField extends foundry.data.fields.StringField {
 
 /**
  * Special case StringField which represents a formula.
- *
  * @param {FormulaFieldOptions} [options={}]  Options which configure the behavior of the field.
- * @property {boolean} deterministic=false    Is this formula not allowed to have dice values?
+ * @property {boolean} [deterministic=false]  Is this formula not allowed to have dice values?
  */
 export class FormulaField extends foundry.data.fields.StringField {
 
   /** @inheritdoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
+    return foundry.utils.mergeObject( super._defaults, {
       deterministic: false
-    });
+    } );
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _validateType(value) {
+  _validateType( value ) {
     if ( this.options.deterministic ) {
-      const roll = new Roll(value);
-      if ( !roll.isDeterministic ) throw new Error("must not contain dice terms");
-      Roll.safeEval(roll.formula);
+      const roll = new Roll( value );
+      if ( !roll.isDeterministic ) throw new Error( "must not contain dice terms" );
+      Roll.safeEval( roll.formula );
     }
-    else Roll.validate(value);
-    super._validateType(value);
+    else Roll.validate( value );
+    super._validateType( value );
   }
 }
 
 /* -------------------------------------------- */
 
 export class DatetimeField extends foundry.data.fields.DataField {
-  //TODO: implement
+  // TODO: implement
 }
 
 /* -------------------------------------------- */
@@ -128,7 +127,7 @@ export class DatetimeField extends foundry.data.fields.DataField {
 export class MappingField extends foundry.data.fields.ObjectField {
   constructor( model, options ) {
     if ( !( model instanceof foundry.data.fields.DataField ) ) {
-      throw new Error( 'MappingField must have a DataField as its contained element' );
+      throw new Error( "MappingField must have a DataField as its contained element" );
     }
     super( options );
 
@@ -206,13 +205,13 @@ export class MappingField extends foundry.data.fields.ObjectField {
    * @override
    */
   _validateType( value, options = {} ) {
-    if ( foundry.utils.getType( value ) !== 'Object' ) throw new Error( 'Must be an Object' );
+    if ( foundry.utils.getType( value ) !== "Object" ) throw new Error( "Must be an Object" );
     const errors = this._validateValues( value, options );
     if ( !foundry.utils.isEmpty( errors ) ) {
       throw new foundry.data.validation.DataModelValidationError(
         Object.entries( errors ).map(
-          ( [k, v] ) => `\n${k}: ${errors[k].toString()}`
-        ).join( '' )
+          ( [ k, v ] ) => `\n${k}: ${errors[k].toString()}`
+        ).join( "" )
       );
     }
   }
@@ -227,7 +226,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
    */
   _validateValues( value, options ) {
     const errors = {};
-    for ( const [k, v] of Object.entries( value ) ) {
+    for ( const [ k, v ] of Object.entries( value ) ) {
       const error = this.model.validate( v, options );
       if ( error ) errors[k] = error;
     }

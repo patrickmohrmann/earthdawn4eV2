@@ -1,7 +1,6 @@
 import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, sum, sumProperty } from "../../utils.mjs";
-import LpTransactionData from "../advancement/lp-transaction.mjs";
 import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
 import LpTrackingData from "../advancement/lp-tracking.mjs";
 import ActorEd from "../../documents/actor.mjs";
@@ -69,12 +68,6 @@ export default class PcData extends NamegiverTemplate.mixin(
                 initial: 0,
                 integer: true
             } ),
-            lp: new fields.EmbeddedDataField(
-              LpTransactionData,
-              {
-                  required: true,
-              }
-            ),
         } );
 
         this.mergeSchema( superSchema, {

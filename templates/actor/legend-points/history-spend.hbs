@@ -1,66 +1,12 @@
-<div class="tab spend-tab" data-group="primary" data-tab="spend-tab">
-  <!-- Body -->
-  <div class="lp-history__spend">
-    <table class="input--centered">
-      <thead>
-        <tr>
-          <th class="lp-history__date">
-            {{localize "ED.Actor.LpTracking.Header.date"}}
-          </th>
-          <th class="lp-history__type">
-            {{localize "ED.Actor.LpTracking.Header.type"}}
-          </th>
-          <th class="lp-history__name">
-            {{localize "ED.Actor.LpTracking.Header.name"}}
-          </th>
-          <th class="lp-history__description">
-            {{localize "ED.Actor.LpTracking.Header.description"}}
-          </th>
-          <th class="lp-history__amount">
-            {{localize "ED.Actor.LpTracking.Header.legendPoints"}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {{!-- {{#each (groupSpendingsByItemUuid this.object.spendings)}} --}}
-        {{!-- {{#each (groupSpendingsByUuidOrName this.object.spendings)}} --}}
-        {{#each (groupSpendingsByItemUuidOrName this.object.spendings)}}
+<section class="tab spend-tab {{tab.cssClass}} lp-history__spend scrollable" data-group="primary" data-tab="spend-tab">
 
-        {{log this}}
-        <tr>
-          <td class="toggle-details">
-            {{names}}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="5">
-            <div class="spendings-details">
-              <table>
-              {{#each spendings}}
-              <tr>
-                <td class="lp-history__date">
-                  {{formatDate this.date}}
-                </td>
-                <td class="lp-history__type">
-                  {{this.type}}
-                </td>
-                <td class="lp-history__name">
-                  {{this.name}}
-                </td>
-                <td class="lp-history__description">
-                  {{this.description}}
-                </td>
-                <td class="lp-history__amount">
-                  {{this.amount}}
-                </td>
-              </tr>
-              {{/each}}
-              </table>
-            </div>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+  <div class="form-group">
+    <label>{{localize "ED.Dialogs.Sorting.sortBy"}}</label>
+    <div class="form-fields flexrow">
+      {{radioBoxes "sortBy" SORTING checked=sortBy localize=false}}
+    </div>
   </div>
-</div>
+
+  {{{spendingsHtmlTable}}}
+
+</section>

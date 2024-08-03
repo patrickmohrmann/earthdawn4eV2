@@ -610,8 +610,6 @@ this functionality creates an entry in either actor.system.lp.earnings or actor.
 Each entry contains the following data:
 amount
 date
-lpBefore
-lpAfter
 description
 
 spendings have a few **additional** data:

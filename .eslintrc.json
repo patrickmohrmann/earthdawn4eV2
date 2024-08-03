@@ -122,6 +122,12 @@
     "id-length": "off",
     "id-match": "off",
     "init-declarations": "off",
+    "jsdoc/check-tag-names": [
+      "error",
+      {
+        "definedTags": ["UserFunction"]
+      }
+    ],
     "line-comment-position": "off",
     "lines-between-class-members": "off",
     "logical-assignment-operators": "off",

@@ -1,42 +1,15 @@
-<form class="legend-point__history flexcol" id="legend-point__history--earned-form" autocomplete="off">
+<div class="flexcol" id="legend-point__history--earned-form" >
+  <!--autocomplete="off"-->
 
-    <!-- Header -->
-    {{!-- <div class="header-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
+  <!-- tab bodies -->
+  <div class="tab-body">
 
-    <div>
-      <!-- navigator -->
-      <div class="navigator-section input--centered">
-        <nav class="prompt-tabs tabs list__ordered-column--flex" data-group="primary">
-          <a class="legend-point-history__tab" data-tab="earned-tab">{{localize "X-Earned"}}</a>
-          <a class="legend-point-history__tab" data-tab="spend-tab">{{localize "X-Spend"}}</a>
-         </nav>
-      </div>
+    <!-- tab1: namegiver -->
+    {{> "systems/ed4e/templates/actor/legend-points/history-earned.hbs"}}
 
-            <!-- tab bodies -->
-      <div class="tab-body">
+    <!-- tab2: class -->
+    {{> "systems/ed4e/templates/actor/legend-points/history-spend.hbs"}}
 
-         <!-- tab1: namegiver -->
-        {{> "systems/ed4e/templates/actor/legend-points/history-earned.hbs"}}
+  </div>
 
-        <!-- tab2: class -->
-        {{> "systems/ed4e/templates/actor/legend-points/history-spend.hbs"}}
-
-    </div>
-    <!-- Buttons -->
-    <div class="buttons legend-point__history--earned-buttons flexcol">
-        <div class="button-group buttons-navigation flexrow">
-            <button class='ok default button-ok' type="cancel" name="cancel" data-button='ok'>
-                {{ localize 'X-ok' }}
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Footer -->
-    {{!-- <div class="footer-item__frame">
-        <img src="systems/ed4e/assets/foundry/background-vasgothia2.png">
-    </div> --}}
-
-</form>
+</div>

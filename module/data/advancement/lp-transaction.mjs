@@ -6,6 +6,19 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
         return  {
+            id: new fields.StringField( {
+                required: true,
+                nullable: false,
+                blank: false,
+                initial: () => foundry.utils.randomID(),
+                label: "X.transactionId",
+                hint: "X.Unique identifier for this transaction",
+            } ),
+            type: new fields.StringField( {
+                blank: false,
+                label: "X.transactionType",
+                hint: "X.transaction Type",
+            } ),
             amount: new fields.NumberField( {
                 required: true,
                 initial: 0,
@@ -20,22 +33,6 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
                 label: "X.Datetime of transaction",
                 hint: "X.The date and time of this transaction",
             } ),
-            lpBefore: new fields.NumberField( {
-                required: true,
-                initial: null,
-                min: 0,
-                integer: true,
-                label: "X.LpBeforeTransaction",
-                hint: "X.The current LP before this transaction",
-            } ),
-            lpAfter: new fields.NumberField( {
-                required: true,
-                initial: null,
-                min: 0,
-                integer: true,
-                label: "X.LpAfterTransaction",
-                hint: "X.The current LP after this transaction.",
-            } ),
             description: new fields.StringField( {
                 required: true,
                 blank: true,
@@ -46,8 +43,16 @@ export default class LpTransactionData extends foundry.abstract.DataModel {
         };
     }
 
+    /**
+     * @description An automated description of this transaction.
+     * @type {string}
+     */
     get displayString() {
         throw new Error( `The ${this["name"]} subclass of LpTransactionData must define its displayString` );
+    }
+
+    getHtmlRow( index, classes, dataGroup ) {
+        throw new Error( `The ${this["name"]} subclass of LpTransactionData must define its htmlRow` );
     }
 
     static async assignLpPrompt () {

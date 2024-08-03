@@ -417,9 +417,11 @@
             },
             "Buttons": {
                 "cancel":                                           "Cancel",
+                "close":                                            "Close",
                 "nightRest":                                        "Nightly Rest",
                 "recoverStun":                                      "Stun Damage Recovery",
                 "recovery":                                         "Recovey Test",
+                "save":                                             "Save",
                 "takeDamage":                                       "Take Damage"
                 },
             "damage":                                               "Damage",

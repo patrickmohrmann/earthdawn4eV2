@@ -1,5 +1,6 @@
 import LpTransactionData from "./lp-transaction.mjs";
 import SystemDataModel from "../abstract.mjs";
+import { dateToInputString } from "../../utils.mjs";
 
 export default class LpSpendingTransactionData extends LpTransactionData {
 
@@ -9,9 +10,7 @@ export default class LpSpendingTransactionData extends LpTransactionData {
         return SystemDataModel.mergeSchema( super.defineSchema(), {
             type: new fields.StringField( {
                 required: true,
-                blank: false,
-                label: "X.transactionType",
-                hint: "X.transaction Type",
+                initial: "spendings",
             } ),
             entityType: new fields.StringField( {
                 required: true,
@@ -50,5 +49,40 @@ export default class LpSpendingTransactionData extends LpTransactionData {
                 }
             ),
         } );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    getHtmlRow( index, classes, dataGroup ) {
+        return `
+        <tr class="${ classes?.join( " " ) ?? "" }" data-group="${ dataGroup ?? "" }" data-id="${ this.id }">
+          <td class="lp-history__date">
+            <input name="spendings.${ index }.date" type="datetime-local" value="${
+              dateToInputString( this.date )
+            }" data-dtype="String" />
+          </td>
+          <input type="hidden" name="spendings.${ index }.entityType" value="${ this.entityType }" />
+          <td class="lp-history__name">
+            ${ this.schema.fields.name.toInput( {
+            name: `spendings.${ index }.name`,
+            value: this.name,
+        } ).outerHTML }
+          </td>
+          <td>
+            ${ this.schema.fields.description.toInput( {
+            name: `spendings.${ index }.description`,
+            value: this.description,
+            dataset: { index },
+        } ).outerHTML }
+          </td>
+          <td>
+            ${ this.schema.fields.amount.toInput( {
+            name: `spendings.${ index }.amount`,
+            value: this.amount,
+        } ).outerHTML }
+          </td>
+        </tr>
+      `;
     }
 }

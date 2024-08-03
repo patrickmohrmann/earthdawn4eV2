@@ -398,9 +398,11 @@
             },
             "Buttons": {
                 "cancel":                                           "Abbrechen",
+                "close":                                            "Schließen",
                 "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
                 "recovery":                                         "Erholungsprobe",
                 "nightRest":                                        "Vollständige Rast",
+                "save":                                             "Speichern",
                 "takeDamage":                                       "Schaden nehmen"
                 },
             "damage":                                               "Schaden",

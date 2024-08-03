@@ -1,5 +1,5 @@
 import LpTransactionData from "../../data/advancement/lp-transaction.mjs";
-const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 export default class AssignLpPrompt extends HandlebarsApplicationMixin( ApplicationV2 ) {
 
@@ -10,7 +10,7 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
     this.object = {
       selectedActors: object.selectedActors || [],
       amount: object.amount || "",
-      description: object.description || ''
+      description: object.description || ""
     };
   }
 
@@ -24,14 +24,13 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
   static DEFAULT_OPTIONS = {
     id: "assign-legend-prompt",
     uniqueId: String( ++globalThis._appId ),
-    classes: ['earthdawn4e', 'assign-legend'],
+    classes: [ "earthdawn4e", "assign-legend" ],
     tag: "form",
     window: {
       frame: true,
-      title: "LOCALIZE!!! Assign LP"//game.i18n.localize( 'ED.Dialogs.Title.assignLp' ),
+      title: "LOCALIZE!!! Assign LP"
     },
     actions: {
-      //close: AssignLpPrompt.close,
       assignLP: AssignLpPrompt._assignLP,
     },
     form: {
@@ -43,21 +42,21 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
       width: 500,
       height: 800,
     },
-  }
+  };
 
   static PARTS = {
     form: {
-      template: 'systems/ed4e/templates/prompts/assign-legend.hbs',
+      template: "systems/ed4e/templates/prompts/assign-legend.hbs",
     },
     footer: {
       template: "templates/generic/form-footer.hbs",
     }
-  }
+  };
 
   async _prepareContext( options = {} ) {
     const context = {};
     context.object = this.object;
-    context.user = game.users.filter( u => u.active )
+    context.user = game.users.filter( u => u.active );
 
     const actorUserActive = game.users.filter(
       u => u.active && u.character
@@ -70,7 +69,7 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
     ).map(
       user => ( {actorId: user.character.id, actorName: user.character.name, playerName: user.name} )
     );
-    const notGMs = game.users.filter( user => !user.isGM )
+    const notGMs = game.users.filter( user => !user.isGM );
     const actorsOwnedNotConfigured = game.actors.filter(
       actor => notGMs.map(
         user => actor.testUserPermission( user,"OWNER" ) && user.character?.id !== actor.id
@@ -85,19 +84,19 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
     context.buttons = [
       {
         type: "button",
-        label: game.i18n.localize('ED.Dialogs.Buttons.cancel'),
+        label: game.i18n.localize( "ED.Dialogs.Buttons.cancel" ),
         cssClass: "cancel",
         icon: "fas fa-times",
         action: "close",
       },
       {
         type: "button",
-        label: game.i18n.localize('ED.Dialogs.Buttons.ok'),
+        label: game.i18n.localize( "ED.Dialogs.Buttons.ok" ),
         cssClass: "assignLP",
         icon: "fas fa-check",
         action: "assignLP",
       }
-    ]
+    ];
 
     return context;
   }
@@ -107,33 +106,31 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
     // make array if only one actor is selected
     this.object.selectedActors = [].concat( data.selectedActors || [] );
     this.object.amount = data.amount || 0;
-    this.object.description = data.description || 'No description provided';
+    this.object.description = data.description || "No description provided";
     return this.object;
   }
 
   static async close( options = {} ) {
-    this.resolve?.(null);
+    this.resolve?.( null );
     return super.close( options );
   }
 
   static async _assignLP( event ) {
     event.preventDefault();
-    if ( !this.object.amount ) return ui.notifications.error( game.i18n.localize( 'ED.Dialogs.Errors.noLp' ) );
+    if ( !this.object.amount ) return ui.notifications.error( game.i18n.localize( "ED.Dialogs.Errors.noLp" ) );
     // await this.submit( { preventRender: true } );
 
 
     const { selectedActors, amount, description } = this.object;
     const transactionData = selectedActors.reduce( ( obj, actorId ) => {
       if ( !actorId ) return obj; // Skip if actorId is null
-      const actor = game.actors.get(actorId);
+      const actor = game.actors.get( actorId );
       if ( !actor ) return obj; // Skip if actor is not found
       return {
         ...obj,
         [actorId]: new LpTransactionData( {
           amount,
           description,
-          lpBefore: actor.system.lp.current,
-          lpAfter: actor.system.lp.current + amount,
         } ),
       };
     }, {} );
