@@ -4,8 +4,8 @@ this test covers a simple missile combat attack within close combat range withou
 
 ## User Journey:
 
-Actor1 <ACTOR1> is adjacent to Actor2 <ACTOR2> and has Actor2 <ACTOR2> targeted. 
-On activating the abilities *missile Weapons* a ui notification appears, informing about, that the target is in close combat range.
+Actor1 <ACTOR1> is adjacent to Actor2 <ACTOR2> and has Actor2 <ACTOR2> targeted. <br>
+On activating the abilities *missile Weapons* a ui notification appears, informing about, that the target is in close combat range.<br>
 
 ### Diagram:
 

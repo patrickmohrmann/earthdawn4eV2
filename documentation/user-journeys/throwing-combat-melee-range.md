@@ -4,8 +4,8 @@ this test covers a simple throwing combat attack within close combat range witho
 
 ## User Journey:
 
-Actor1 <ACTOR1> is adjacent to Actor2 <ACTOR2> and has Actor2 <ACTOR2> targeted. 
-On activating the abilities *thowing Weapons* a ui notification appears, informing about, that the target is in close combat range and it is required to use a close combat ability.
+Actor1 <ACTOR1> is adjacent to Actor2 <ACTOR2> and has Actor2 <ACTOR2> targeted. <br>
+On activating the abilities *thowing Weapons* a ui notification appears, informing about, that the target is in close combat range and it is required to use a close combat ability.<br>
 
 ### Diagram:
 

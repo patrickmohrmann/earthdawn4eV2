@@ -4,8 +4,8 @@ this test covers a simple close combat attack with the target out of range
 
 ## User Journey:
 
-Actor1 <ACTOR1> is not adjacent to Actor2 <ACTOR2> and has Actor2 <ACTOR2> targeted. 
-On activating the abilities *melee weapons* or *unarmed combat* a ui notification appears, informing about, that the target is out of range
+Actor1 <ACTOR1> is not adjacent to Actor2 <ACTOR2> and has Actor2 <ACTOR2> targeted. <br>
+On activating the abilities *melee weapons* or *unarmed combat* a ui notification appears, informing about, that the target is out of range.<br>
 
 ### Diagram:
 
