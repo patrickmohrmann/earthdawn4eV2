@@ -14,8 +14,6 @@ this test covers the ranges of weapons
 
 ### Prerequisites:
 
-## Test:
-
 | Test Instruction  | Expected Result  |
 |---|---|
 |   | <ul><li>- [ ] </li> <li>- [ ] </li></ul> |
