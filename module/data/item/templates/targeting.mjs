@@ -15,36 +15,36 @@ export default class TargetTemplate extends SystemDataModel {
       difficulty: new foundry.data.fields.SchemaField( {
         target: new foundry.data.fields.StringField( {
           nullable: false,
-          blank: false,
-          initial: "none",
-          label: "X.TargetDifficulty"
+          blank:    false,
+          initial:  "none",
+          label:    "X.TargetDifficulty"
         } ),
         group: new foundry.data.fields.StringField( {
           nullable: false,
-          blank: false,
-          initial: "none",
-          label: "X.GroupDifficulty"
+          blank:    false,
+          initial:  "none",
+          label:    "X.GroupDifficulty"
         } ),
         fixed: new foundry.data.fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          initial: 0,
-          integer: true,
-          label: "X.FixedDifficulty"
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "X.FixedDifficulty"
         } ),
       } ),
     } );
   }
 
   getDifficulty() {
-    let difficulty = 0;
+    let difficulty;
     let currentTarget = game.user.targets.first()?.actor;
-    let currentTargets = [...game.user.targets.map( ( t ) => t.actor )];
+    let currentTargets = [ ...game.user.targets.map( ( t ) => t.actor ) ];
     let numTargets = game.user.targets.size;
-    let targetDifficultySetting = this.difficulty.target
-    let groupDifficultySetting = this.difficulty.group
-    let fixedDifficultySetting = this.difficulty.fixed
+    let targetDifficultySetting = this.difficulty.target;
+    let groupDifficultySetting = this.difficulty.group;
+    let fixedDifficultySetting = this.difficulty.fixed;
 
     if ( numTargets <= 0 || targetDifficultySetting === "none" ) {
       if ( fixedDifficultySetting > 0 ) {
@@ -53,18 +53,19 @@ export default class TargetTemplate extends SystemDataModel {
         difficulty = 0;
       }
     } else {
-      let baseDifficulty = 0;
+      let baseDifficulty;
       let additionalTargetDifficulty = 0;
+      // noinspection FallThroughInSwitchStatementJS
       switch ( groupDifficultySetting ) {
-        case 'hightestX':
+        case "highestX":
           additionalTargetDifficulty = numTargets - 1;
-        case 'highestOfGroup':
-          baseDifficulty = TargetTemplate._getAggregatedDefense(currentTargets, targetDifficultySetting, Math.max);
+        case "highestOfGroup":
+          baseDifficulty = TargetTemplate._getAggregatedDefense( currentTargets, targetDifficultySetting, Math.max );
           break;
-        case 'lowestX':
+        case "lowestX":
           additionalTargetDifficulty = numTargets - 1;
-        case 'lowestOfGroup':
-          baseDifficulty = TargetTemplate._getAggregatedDefense(currentTargets, targetDifficultySetting, Math.min);
+        case "lowestOfGroup":
+          baseDifficulty = TargetTemplate._getAggregatedDefense( currentTargets, targetDifficultySetting, Math.min );
           break;
         default:
           baseDifficulty = currentTarget?.system.characteristics.defenses[targetDifficultySetting].value ?? 0;

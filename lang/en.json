@@ -294,7 +294,7 @@
             },
             "groupDifficulty": {
                 "highestOfGroup":                                   "Highest of Group",
-                "hightestX":                                        "Highest + Targets",
+                "highestX":                                        "Highest + Targets",
                 "lowestOfGroup":                                    "Lowest of Group",
                 "lowestX":                                          "Lowest + Targets"
             },
@@ -335,7 +335,7 @@
             },
             "Defenses": {
                 "highestOfGroup":                                   "Highest of Group",
-                "hightestX":                                        "Highest of Group + Targets",
+                "highestX":                                        "Highest of Group + Targets",
                 "lowestOfGroup":                                    "Lowest of Group",
                 "lowestX":                                          "Lowest of Group + Targets",
                 "mystical":                                         "Mystical",

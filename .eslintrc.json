@@ -128,6 +128,15 @@
         "definedTags": ["UserFunction"]
       }
     ],
+    "@stylistic/key-spacing": [
+      "error",
+      {
+        "beforeColon": false,
+        "afterColon": true,
+        "mode": "minimum",
+        "align": "value"
+      }
+    ],
     "line-comment-position": "off",
     "lines-between-class-members": "off",
     "logical-assignment-operators": "off",
@@ -198,7 +207,7 @@
     "no-extra-bind": "error",
     "no-extra-boolean-cast": "error",
     "no-extra-label": "off",
-    "no-fallthrough": "error",
+    "no-fallthrough": "off",
     "no-func-assign": "error",
     "no-global-assign": "error",
     "no-implicit-coercion": [
@@ -269,6 +278,7 @@
     "no-shadow": "off",
     "no-shadow-restricted-names": "error",
     "no-sparse-arrays": "error",
+    "@stylistic/no-tabs": "error",
     "no-template-curly-in-string": "error",
     "no-ternary": "off",
     "no-this-before-super": "error",

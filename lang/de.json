@@ -293,7 +293,7 @@
             },
             "groupDifficulty": {
                 "highestOfGroup":                                   "Höchster der Gruppe",
-                "hightestX":                                        "Höchster + Ziele",
+                "highestX":                                        "Höchster + Ziele",
                 "lowestOfGroup":                                    "Niedrigster der Gruppe",
                 "lowestX":                                          "Niedrigster + Ziele"
             },
@@ -334,7 +334,7 @@
             },
             "Defenses": {
                 "highestOfGroup":                                   "Höchste der Gruppe",
-                "hightestX":                                        "Höchste der Gruppe + Ziele",
+                "highestX":                                        "Höchste der Gruppe + Ziele",
                 "lowestOfGroup":                                    "Niedrigste der Gruppe",
                 "lowestX":                                          "Niedrigste der Gruppe + Ziele",
                 "mystical":                                         "Mystisch",
