@@ -208,25 +208,28 @@ export default class ActorEd extends Actor {
   async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep
     const difficulty = equipment.system.getDifficulty();
-    if ( !difficulty ) {
-      ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
-
-      return;
-    }
-
     const difficultyFinal = { base: difficulty };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
       sourceActor: this.name,
       equipment: equipment.name,
       step: arbitraryStep
     } );
+    const rollType = equipment.system.usableItem.rollType;
+    const testType = equipment.system.usableItem.testType;
+    let finalStep = arbitraryStep
+    if ( rollType === "recovery" ) {
+      if ( this.system.characteristics.recoveryTestsResource.value === 0 && equipment.system.usableItem.provideRecoveryTest === true) {
+      const recoverNow = await this.recoverNow( equipment, options );
+      return;
+    }
+  }
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "equipment",
+        testType: testType,
+        rollType: rollType,
         strain: 0,
         target: difficultyFinal,
-        step: arbitraryStep,
+        step: finalStep,
         devotionRequired: false,
         chatFlavor: chatFlavor
       },
@@ -236,23 +239,58 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
+  async recoverNow( equipment, options ) {
+    new Dialog( {
+      title: "LocalizeLabel: No Recovery Tests available",
+      content: "LocalizeLabel: Do you want to use the item to recover now?",
+      buttons: {
+        yes: {
+          icon: '<i class="fas fa-check"></i>',
+          label: "LocalizeLabel: Yes",
+          callback: () => {
+            this.rollRecovery( "healingAid", options = {}, equipment );
+            return;
+          }
+        },
+        no: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "LocalizeLabel: No",
+          callback: () => {
+            // Update system.globalBonuses.recoveryTest.value
+
+            this.update({
+              'system.globalBonuses.recoveryTest.value': equipment.system.usableItem.arbitraryStep
+            });
+          }
+        }
+      },
+      default: "yes"
+    } ).render( true );
+  }
+
+
   async rotateItemStatus( itemId, backwards = false ) {
     const item = this.items.get( itemId );
     const nextStatus = backwards ? item.system.previousItemStatus : item.system.nextItemStatus;
     return this._updateItemStates( item, nextStatus );
   }
 
-  async rollRecovery( recoveryMode, options = {} ) {
+  async rollRecovery( recoveryMode, options = {}, equipment ) {
 
     const { attributes, characteristics, globalBonuses } = this.system;
 
-    let recoveryStep = attributes.tou.step;
+    let recoveryStep;
+    if ( equipment ) {
+      recoveryStep = equipment.system.usableItem.arbitraryStep;
+    } else {
+      recoveryStep = attributes.tou.step;
+    }
     const recoveryFinalStep = {
       base: recoveryStep,
       modifiers: {},
     };
     if ( globalBonuses.allRecoveryEffects.value > 0 ) recoveryFinalStep.modifiers["localize: Global Recovery Bonus"] = globalBonuses.allRecoveryEffects.value;
-
+    if ( globalBonuses.recoveryTest.value > 0 ) recoveryFinalStep.modifiers["localize: Global Recovery Test Bonus"] = globalBonuses.recoveryTest.value;
     const { stun: stunDamage, total: totalDamage } = characteristics.health.damage;
     const currentWounds = characteristics.health.wounds;
     const newWounds = Math.max( currentWounds - 1, 0 );
@@ -299,6 +337,17 @@ export default class ActorEd extends Actor {
         }
         // TODO: won't be visible in the prompt until modifiers input is implemented
         recoveryFinalStep.modifiers["localize: Wil for Stun Recovery"] = this.system.attributes.wil.step;
+        break;
+
+      // some healing aids like Healing potion or Last Chance Salve may provide a recovery test if none is available anymore
+      // those are executed with the arbitrary Step of the item.  
+      case "healingAid":
+        if ( totalDamage === 0 ) {
+          ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
+          return;
+        }      
+
+        recoveryFinalStep.base = equipment.system.usableItem.arbitraryStep ;
         break;
 
       default:
@@ -587,7 +636,8 @@ export default class ActorEd extends Actor {
       standardDamage: "system.characteristics.health.damage.standard",
       stunDamage: "system.characteristics.health.damage.stun",
       recoveryTestAvailable: "system.characteristics.recoveryTestsResource.value",
-      stunRecoveryAvailable: "system.characteristics.recoveryTestsResource.stunRecoveryAvailable"
+      stunRecoveryAvailable: "system.characteristics.recoveryTestsResource.stunRecoveryAvailable",
+      recoveryBonus: "system.globalBonuses.recoveryTest.value"
     };
 
     const updateData = {};
@@ -598,6 +648,7 @@ export default class ActorEd extends Actor {
         updateData[updatePaths.stunDamage] = newStunDamage;
         updateData[updatePaths.stunRecoveryAvailable] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
+        updateData[updatePaths.recoveryBonus] = 0;
         break;
       case "nightRest":
         if ( wounds > 0 && total === 0 ) {
@@ -608,16 +659,19 @@ export default class ActorEd extends Actor {
         }
         updateData[updatePaths.stunRecoveryAvailable] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestPerDay - ( wounds > 0 || total > 0 ? 1 : 0 );
+        updateData[updatePaths.recoveryBonus] = 0;
         break;
       case "recoverStun":
         updateData[updatePaths.stunDamage] = newStunDamage;
         updateData[updatePaths.stunRecoveryAvailable] = false;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
+        updateData[updatePaths.recoveryBonus] = 0;
         break;
       default:
         ui.notifications.warn( "Localize: No recovery type found." );
         return;
     }
+    
 
     this.update( updateData );
     return roll.toMessage();

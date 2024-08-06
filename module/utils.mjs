@@ -577,6 +577,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-weapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-shipWeapon.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs",
+    "systems/ed4e/templates/item/item-partials/item-details/details/item-details-physical-items.hbs",
 
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-armor.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/descriptions/item-description-attack.hbs",

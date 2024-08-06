@@ -1,0 +1,20 @@
+{{!-- abilty action type --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Equipment.rollType"}}:</label>
+    <select name="system.usableItem.rollType">
+        {{selectOptions config.rollTypes selected=item.system.usableItem.rollType blank="" localize=true }}
+    </select>
+</div>
+{{!-- abilty action type --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Equipment.testType"}}:</label>
+    <select name="system.usableItem.testType">
+        {{selectOptions config.testTypes selected=item.system.usableItem.testType blank="" localize=true }}
+    </select>
+</div>
+
+{{!-- provide recovery test if none is availabel --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Equipment.provideRecoveryTest"}}:</label>
+    <input type="checkbox" name="system.usableItem.provideRecoveryTest" {{checked item.system.usableItem.provideRecoveryTest}} />
+</div>

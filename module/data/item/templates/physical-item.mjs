@@ -78,7 +78,6 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
                 blank: false,
                 initial: "average",
                 label:  "ED.Item.General.availability"
-
             } ),
             amount: new fields.NumberField( {
                 required: true,
@@ -97,28 +96,49 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
             usableItem: new fields.SchemaField( {
-                  usableItemSelector: new fields.BooleanField( {
-                      required: true,
-                      label: "ED.Item.General.usableItem"
+                usableItemSelector: new fields.BooleanField( {
+                    required: true,
+                    label: "ED.Item.General.usableItem"
+                } ),
+                arbitraryStep: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.General.arbitraryStep"
+                } ),
+                // recovery property value shall be a drop down menu with several options discribed in #26
+                recoveryPropertyValue: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    max: 5,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.General.recoveryPropertyValue"
+                } ),
+                provideRecoveryTest: new fields.BooleanField( {
+                    required: true,
+                    initial: false,
+                    label: "ED.Item.General.usableItem"
+                } ),
+                testType: new fields.StringField( {
+                    required: true,
+                    nullable: false,
+                    blank: true,
+                    initial: 'arbitrary',
+                    label: 'localize: test type',
+                    hint: 'localize: type of this roll test, like action or effect test, or arbitrary step roll',
                   } ),
-                  arbitraryStep: new fields.NumberField( {
-                      required: true,
-                      nullable: false,
-                      min: 0,
-                      initial: 0,
-                      integer: true,
-                      label: "ED.Item.General.arbitraryStep"
-                  } ),
-                  // recovery property value shall be a drop down menu with several options discribed in #26
-                  recoveryPropertyValue: new fields.NumberField( {
-                      required: true,
-                      nullable: false,
-                      min: 0,
-                      max: 5,
-                      initial: 0,
-                      integer: true,
-                      label: "ED.Item.General.recoveryPropertyValue"
-                  } ),
+                rollType: new fields.StringField( {
+                required: false,
+                nullable: true,
+                blank: true,
+                initial: '',
+                label: 'localize: roll type',
+                hint: 'localize: type of this roll, like attackMelee, or threadWeaving',
+                } ),
               },
               {
                   label: "ED.Item.General.usableItem"

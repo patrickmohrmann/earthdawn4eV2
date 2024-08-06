@@ -121,6 +121,12 @@ ED4E.globalBonuses = {
 	},
 	allSpellEffects: {
 		label: 			"ED.Actor.GlobalBonus.allSpellEffects"
+	},
+	recoveryTest: {
+		label: 			"ED.Actor.GlobalBonus.recoveryTest"
+	},
+	poisonDiseaseResistence: {
+		label: 			"ED.Actor.GlobalBonus.poisonDiseaseResistence"
 	}
 };
 preLocalize( "globalBonuses", {key: "label"} );
