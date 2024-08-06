@@ -50,5 +50,9 @@ The **assign damage** function is assigning the rolled result to the target and 
 
 The assign effects function is available twice, once on a successful attack and once after the damage test is rolled. Some effects requried only a successful attack, while others require damage or even a wound.
 
+The following as well?
+## Take Damage
+
+### Knock down tests
 
 
