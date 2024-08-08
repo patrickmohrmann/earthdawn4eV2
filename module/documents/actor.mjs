@@ -219,10 +219,15 @@ export default class ActorEd extends Actor {
     let finalStep = arbitraryStep
     if ( rollType === "recovery" ) {
       if ( this.system.characteristics.recoveryTestsResource.value === 0 && equipment.system.usableItem.provideRecoveryTest === true) {
-      const recoverNow = await this.recoverNow( equipment, options );
-      return;
+        const recoverNow = await this.recoverNow( equipment, options );
+        return;
+      } else {
+        this.update({
+          'system.globalBonuses.recoveryTest.value': equipment.system.usableItem.arbitraryStep
+        });
+        return;
+      }
     }
-  }
     const edRollOptions = EdRollOptions.fromActor(
       {
         testType: testType,
@@ -346,7 +351,6 @@ export default class ActorEd extends Actor {
           ui.notifications.warn( "Localize: No Injuries, no recovery needed" );
           return;
         }      
-
         recoveryFinalStep.base = equipment.system.usableItem.arbitraryStep ;
         break;
 
@@ -607,8 +611,9 @@ export default class ActorEd extends Actor {
 
   /**
    * Process the result of a recovery roll. This will reduce the damage taken by the amount rolled.
-   * @param {EdRoll} roll The roll to process.
-   * @returns {Promise<ChatMessage | object>} The created ChatMessage or the data for it.
+   * @param {EdRoll}                            roll  The roll to process.
+   * @returns {Promise<ChatMessage | object>}         The created ChatMessage or the data for it.
+   * @UserFunction                                    UF_Recovery-processRecoveryResult
    */
   async #processRecoveryResult( roll ) {
     await roll.evaluate();
