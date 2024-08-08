@@ -16,16 +16,11 @@ stateDiagram-v2
 
     ###################### status #######################
 
-    condition1: CONDITIONNAME1
-    condition2: CONDITIONNAME1
-    condition3: CONDITIONNAME1
 
     triggerAction1: attack ability
-    triggerAction2: TRIGGERACTION2
-    triggerAction3: TRIGGERACTION3
 
     getDifficulty: getDifficulty
-    ManeuverUC: USERFUNCTION2
+
     ReactionUC: Reaction
     assignDamageEffects: assign Damage Effects
     assignAttackEffects: assign Attack Effects
@@ -33,9 +28,7 @@ stateDiagram-v2
     AssignDamage: assign damage
 
     ReactionResult: Reaction Result
-    state3: STATE3
 
-    dialog1: DIALOG1
 
     ####################### Decisions #######################
 
