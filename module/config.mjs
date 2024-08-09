@@ -159,7 +159,7 @@ ED4E.action = {
   free:         "ED.Config.Action.free",
   simple:       "ED.Config.Action.simple",
   standard:     "ED.Config.Action.standard",
-  sustained:    "ED.Config.Action.sustained"
+  sustained:    "ED.Config.Action.sustained",
 };
 preLocalize( "action" );
 
@@ -200,6 +200,18 @@ ED4E.armor = {
 preLocalize( "armor" );
 
 /**
+ * WeaponType
+ * @enum {string}
+ */
+ED4E.weaponType = {
+  bow:        "ED.Config.bow",
+  crossbow:   "ED.Config.crossbow",
+  melee:      "ED.Config.melee",
+  unarmed:    "ED.Config.unarmed"
+};
+preLocalize( "weaponType" );
+
+/**
  * Damage type
  * @enum {string}
  */
@@ -208,6 +220,21 @@ ED4E.damageType = {
   stun:       "ED.Health.Damage.stun",
 };
 preLocalize( "damageType" );
+
+/**
+ * The possible states for a physical item that describe in which way they connect to an actor.
+ * @enum {string}
+ */
+ED4E.itemStatus = {
+  owned:      "ED.Config.ItemStatus.owned",
+  carried:    "ED.Config.ItemStatus.carried",
+  equipped:   "ED.Config.ItemStatus.equipped",
+  mainHand:   "ED.Config.ItemStatus.mainHand",
+  offHand:    "ED.Config.ItemStatus.offHand",
+  twoHands:   "ED.Config.ItemStatus.twoHands",
+  tail:       "ED.Config.ItemStatus.tail",
+};
+preLocalize( "itemStatus" );
 
 ED4E.languages = {
   dwarf:        "ED.Languages.dwarf",
@@ -230,19 +257,64 @@ ED4E.spellcastingTypes = {
 };
 preLocalize( "spellcastingTypes" );
 
+
 /* -------------------------------------------- */
 /*  Active Effects Shortcuts                    */
 /* -------------------------------------------- */
-  ED4E.singleBonuses = {
+ED4E.singleBonuses = {
   knockdownEffects: "ED.Config.Eae.allKnockDownEffects",
-  };
-  preLocalize( "singleBonuses" );
-
+};
+preLocalize( "singleBonuses" );
 
 
 /* -------------------------------------------- */
 /*  Advancement & Char Gen                      */
 /* -------------------------------------------- */
+
+ED4E.attributePointsCost = [ 0, 1, 2, 3, 5, 7, 9, 12, 15 ];
+ED4E.attributePointsCost[-1] = -1;
+ED4E.attributePointsCost[-2] = -2;
+ED4E.legendPointsCost = [ 0, 100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100 ];
+
+/**
+ * The cost of learning a new talent for additional disciplines. The first index is the order of the corresponding
+ * discipline (with 0 and 1 undefined). The second index is the lowest circle attained between all disciplines.
+ * @type {number[][]}
+ */
+ED4E.multiDisciplineNewTalentLpCost = [
+  [],
+  [],
+  [ 0, 1300, 800, 500, 300, 200 ], // Second Discipline
+  [ 0, 2100, 1300, 800, 500, 300 ], // Third Discipline
+  [ 0, 3400, 2100, 1300, 800, 500 ], // Fourth+ Discipline
+];
+
+/**
+ * The modifier for the lookup table {@link ED4E.legendPointsCost} based on the tier. Each tier starts at the next value
+ * in the fibonacci (lp cost) sequence. The first index is the order of the corresponding discipline (with 0
+ * being undefined). The key is the tier.
+ * @type {[{}|{ novice: number, journeyman: number, warden: number, master: number }]}
+ */
+ED4E.lpIndexModForTier = [
+  {},
+  { novice: 0, journeyman: 1, warden: 2, master: 3, },  // First Discipline
+  { novice: 1, journeyman: 2, warden: 3, master: 3, }, // Second Discipline
+  { novice: 2,  journeyman: 3, warden: 3, master: 3, }, // Third Discipline
+  { novice: 3, journeyman: 3, warden: 3, master: 3, }, // Fourth+ Discipline
+];
+
+ED4E.lpSpendingTypes = {
+  attribute:        "X.Attribute",
+  devotion:         "X.devotion",
+  knack:            "X.knack",
+  knackManeuver:    "X.knackManeuver",
+  skill:            "X.skill",
+  spell:            "X.spell",
+  spellKnack:       "X.spellKnack",
+  talent:           "X.talent",
+  thread:           "X.thread",
+};
+preLocalize( "lpSpendingTypes" );
 
 /**
  * Tier
@@ -256,22 +328,6 @@ ED4E.tier = {
 };
 preLocalize( "tier" );
 
-
-/**
- * The possible states for a physical item that describe in which way they connect to an actor.
- * @enum {string}
- */
-ED4E.itemStatus = {
-  owned:      "ED.Config.ItemStatus.owned",
-  carried:    "ED.Config.ItemStatus.carried",
-  equipped:   "ED.Config.ItemStatus.equipped",
-  mainHand:   "ED.Config.ItemStatus.mainHand",
-  offHand:    "ED.Config.ItemStatus.offHand",
-  twoHands:   "ED.Config.ItemStatus.twoHands",
-  tail:       "ED.Config.ItemStatus.tail",
-};
-preLocalize( "itemStatus" );
-
 /**
  * talentCategory
  * @enum {string}
@@ -281,19 +337,6 @@ ED4E.talentCategory = {
   optional:       "ED.Config.talentCategory.optional",
   free:           "ED.Config.talentCategory.free",
   versatility:    "ED.Config.talentCategory.versatility"
-};
-preLocalize( "talentCategory" );
-
-
-/**
- * WeaponType
- * @enum {string}
- */
-ED4E.weaponType = {
-  bow:        "ED.Config.bow",
-  crossbow:   "ED.Config.crossbow",
-  melee:      "ED.Config.melee",
-  unarmed:    "ED.Config.unarmed"
 };
 preLocalize( "talentCategory" );
 
@@ -318,10 +361,6 @@ ED4E.skillTypes = {
   knowledge:    "ED.Skills.knowledge",
 };
 preLocalize( "skillTypes" );
-
-/* -------------------------------------------- */
-/*  Character Generation                        */
-/* -------------------------------------------- */
 
 /**
  * Lookup table used during character generation based on attribute values.
@@ -348,6 +387,7 @@ ED4E.availableRanks = {
   readWrite: 1,
 };
 
+
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
 /* -------------------------------------------- */
@@ -364,22 +404,6 @@ ED4E.encumbranceStatus = {
 };
 preLocalize( "encumbranceStatus" );
 
-/* -------------------------------------------- */
-/*  Advancement                                 */
-/* -------------------------------------------- */
-
-ED4E.lpSpendingTypes = {
-  attribute:        "X.Attribute",
-  devotion:         "X.devotion",
-  knack:            "X.knack",
-  knackManeuver:    "X.knackManeuver",
-  skill:            "X.skill",
-  spell:            "X.spell",
-  spellKnack:       "X.spellKnack",
-  talent:           "X.talent",
-  thread:           "X.thread",
-};
-preLocalize( "lpSpendingTypes" );
 
 /* -------------------------------------------- */
 /*  Rolls and Tests                             */
@@ -495,7 +519,6 @@ ED4E.combatTypes = {
 preLocalize( "testTypes", { key: "label" } );
 
 
-
 /* -------------------------------------------- */
 /*  System                                      */
 /* -------------------------------------------- */
@@ -508,6 +531,7 @@ ED4E.reserved_edid = {
   DEFAULT:    "none",
   ANY:        "any",
 };
+
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */
@@ -528,14 +552,6 @@ ED4E.chatCommands = {
 };
 preLocalize( "chatCommands" );
 
-/* -------------------------------------------- */
-/*  Costs                                       */
-/* -------------------------------------------- */
-
-ED4E.attributePointsCost = [ 0, 1, 2, 3, 5, 7, 9, 12, 15 ];
-ED4E.attributePointsCost[-1] = -1;
-ED4E.attributePointsCost[-2] = -2;
-ED4E.legendPointsCost = [ 0, 100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100 ];
 
 /* -------------------------------------------- */
 /*           Document Data                      */
@@ -572,6 +588,7 @@ preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: 
 preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
 
+
 /* -------------------------------------------- */
 /*  Enable .hbs Hot Reload                      */
 /* -------------------------------------------- */
@@ -595,6 +612,7 @@ Hooks.on('hotReload', async ({ content, extension, packageId, packageType, path 
   }
 });
 /* eslint-enable */
+
 
 /* -------------------------------------------- */
 /*  Export Config                               */

@@ -2,15 +2,16 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
-import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
+import DocumentCreateDialog from "../applications/global/document-creation.mjs";
 
-import LegendPointHistory from "../applications/global/lp-history.mjs";
+import LegendPointHistory from "../applications/advancement/lp-history.mjs";
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import { sum } from "../utils.mjs";
 import PromptFactory from "../applications/global/prompt-factory.mjs";
 import validateAbilityUpgrade from "../applications/global/validation-upgrade.mjs";
+import ClassTemplate from "../data/item/templates/class.mjs";
 
 const futils = foundry.utils;
 
@@ -20,7 +21,47 @@ const futils = foundry.utils;
  */
 export default class ActorEd extends Actor {
 
-  _promptFactory = new PromptFactory( this );
+  _promptFactory = PromptFactory.fromDocument( this );
+
+  /**
+   * The class items if this actor has any (has to be of type "character" or "npc" for this).
+   * @type {[ItemEd]}
+   */
+  get classes() {
+    return this.items.filter( item => item.system instanceof ClassTemplate );
+  }
+
+  /**
+   * The actor's currently available legend points.
+   * @type {number}
+   */
+  get currentLp() {
+    return this.system.lp.current;
+  }
+
+  /**
+   * Returns the discipline items if this actor has any (has to be of type "character" or "npc" for this).
+   * @type {Item[]}
+   */
+  get disciplines() {
+    return this.items.filter( item => item.type === "discipline" );
+  }
+
+  /**
+   * Whether this actor has more than one discipline. Returns `true` if this actor has more than one discipline, `false` otherwise
+   * @type {boolean}
+   */
+  get isMultiDiscipline() {
+    return this.disciplines.length > 1;
+  }
+
+  /**
+   * The lowest circle of all disciplines this actor has.
+   * @type {number}
+   */
+  get minCircle() {
+    return Math.min( ...this.disciplines.map( discipline => discipline.system.level ) );
+  }
 
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
@@ -41,12 +82,12 @@ export default class ActorEd extends Actor {
     // Configure prototype token settings
     if ( this.type === "character" ) {
       const prototypeToken = {
-        sight: {enabled: true},
-        actorLink: true,
+        sight:       {enabled: true},
+        actorLink:   true,
         disposition: 1,   // Friendly
         displayBars: 50,  // Always Display bar 1 and 2
         displayName: 30,  // Display nameplate on hover
-        bar1: {
+        bar1:        {
           attribute: "healthRate"
         },
         bar2: {
@@ -105,6 +146,51 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @param {('standard'|'blood'|'any')} [type] The type of wounds that is to be checked.
+   * @returns {boolean} True if there is a positive amount of wounds of the given type marked on this actor, false otherwise.
+   */
+  hasWounds( type = "any" ) {
+    const hasStandardWounds = this.system.characteristics.health.wounds > 0;
+    const hasBloodWounds = this.system.characteristics.health.bloodMagic.wounds > 0;
+    switch ( type ) {
+      case "standard":
+        return hasStandardWounds;
+      case "blood":
+        return hasBloodWounds;
+      case "any":
+        return hasStandardWounds || hasBloodWounds;
+      default:
+        return undefined;
+    }
+  }
+
+  /**
+   * @param {('standard'|'lethal'|'stun'|'blood'|'any')} [type] The type of damage that is to be checked. Standard
+   * damage is any of either lethal or stun damage.
+   * @returns {boolean} True if there is a positive amount of damage of the given type marked on this actor, false otherwise.
+   */
+  hasDamage( type = "any" ) {
+    const hasLethalDamage = this.system.characteristics.health.damage.standard > 0;
+    const hasStunDamage = this.system.characteristics.health.damage.stun > 0;
+    const hasBloodDamage = this.system.characteristics.health.bloodMagic.damage > 0;
+    switch ( type ) {
+      case "standard":
+        return hasLethalDamage || hasStunDamage;
+      case "lethal":
+        return hasLethalDamage;
+      case "stun":
+        return hasStunDamage;
+      case "blood":
+        return hasBloodDamage;
+      case "any":
+        return hasLethalDamage || hasStunDamage || hasBloodDamage;
+      default:
+        return undefined;
+    }
+  }
+
+
+  /**
    * Expand Item Cards by clicking on the name span
    */
   expandItemCards() {
@@ -117,7 +203,7 @@ export default class ActorEd extends Actor {
    * Triggers a prompt for updating the Legend Point (LP) history of the actor.
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
-   * @UserFunction            UF_LpTracking-legendPointHistory 
+   * @UserFunction            UF_LpTracking-legendPointHistory
    * @see ../../documentation/User Functions/UF_LpTracking-legendPointHistory.md
    */
   async legendPointHistory() {
@@ -139,18 +225,18 @@ export default class ActorEd extends Actor {
     const step = { base: attributeStep };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
       sourceActor: this.name,
-      step: attributeStep,
-      attribute: `${ game.i18n.localize( ED4E.attributes[attributeId].label ) }`
+      step:        attributeStep,
+      attribute:   `${ game.i18n.localize( ED4E.attributes[attributeId].label ) }`
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "attribute",
-        strain: 0,
-        target: undefined,
-        step: step,
+        testType:         "action",
+        rollType:         "attribute",
+        strain:           0,
+        target:           undefined,
+        step:             step,
         devotionRequired: false,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -177,19 +263,19 @@ export default class ActorEd extends Actor {
     const strain = { base: ability.system.strain };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbility", {
       sourceActor: this.name,
-      ability: ability.name,
-      step: abilityStep
+      ability:     ability.name,
+      step:        abilityStep
     } );
     const abilityFinalStep = { base: abilityStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "ability",
-        strain: strain,
-        target: difficultyFinal,
-        step: abilityFinalStep,
+        testType:         "action",
+        rollType:         "ability",
+        strain:           strain,
+        target:           difficultyFinal,
+        step:             abilityFinalStep,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -214,18 +300,18 @@ export default class ActorEd extends Actor {
     const difficultyFinal = { base: difficulty };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
       sourceActor: this.name,
-      equipment: equipment.name,
-      step: arbitraryStep
+      equipment:   equipment.name,
+      step:        arbitraryStep
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "equipment",
-        strain: 0,
-        target: difficultyFinal,
-        step: arbitraryStep,
+        testType:         "action",
+        rollType:         "equipment",
+        strain:           0,
+        target:           difficultyFinal,
+        step:             arbitraryStep,
         devotionRequired: false,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -245,7 +331,7 @@ export default class ActorEd extends Actor {
 
     let recoveryStep = attributes.tou.step;
     const recoveryFinalStep = {
-      base: recoveryStep,
+      base:      recoveryStep,
       modifiers: {},
     };
     if ( globalBonuses.allRecoveryEffects.value > 0 ) recoveryFinalStep.modifiers["localize: Global Recovery Bonus"] = globalBonuses.allRecoveryEffects.value;
@@ -305,18 +391,18 @@ export default class ActorEd extends Actor {
 
     let chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollRecovery", {
       sourceActor: this.name,
-      step: recoveryStep
+      step:        recoveryStep
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "effect",
-        rollType: "recovery",
-        rollSubType: recoveryMode,
-        strain: 0,
-        target: undefined,
-        step: recoveryFinalStep,
+        testType:         "effect",
+        rollType:         "recovery",
+        rollSubType:      recoveryMode,
+        strain:           0,
+        target:           undefined,
+        step:             recoveryFinalStep,
         devotionRequired: false,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -366,7 +452,7 @@ export default class ActorEd extends Actor {
 
     this.update( updates );
     let messageData = {
-      user: game.user._id,
+      user:    game.user._id,
       speaker: ChatMessage.getSpeaker( { actor: this.actor } ),
       content: "THIS WILL BE FIXED LATER see #756"
     };
@@ -405,24 +491,24 @@ export default class ActorEd extends Actor {
     };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.knockdownTest", {
       sourceActor: this.name,
-      step: knockdownStep
+      step:        knockdownStep
     } );
 
     const knockdownStepFinal = {
-      base: knockdownStep,
+      base:      knockdownStep,
       modifiers: {
         "localize: Global Knockdown Bonus": this.system.singleBonuses.knockdownEffects.value,
       }
     };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "knockdown",
-        strain: strain,
-        target: difficultyFinal,
-        step: knockdownStepFinal,
+        testType:         "action",
+        rollType:         "knockdown",
+        strain:           strain,
+        target:           difficultyFinal,
+        step:             knockdownStepFinal,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -454,20 +540,20 @@ export default class ActorEd extends Actor {
 
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.jumpUp", {
       sourceActor: this.name,
-      step: jumpUpStep
+      step:        jumpUpStep
     } );
 
     const difficulty = { base: 6 };
     const jumpUpStepFinal = { base: jumpUpStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "jumpUp",
-        strain: strain,
-        target: difficulty,
-        step: jumpUpStepFinal,
+        testType:         "action",
+        rollType:         "jumpUp",
+        strain:           strain,
+        target:           difficulty,
+        step:             jumpUpStepFinal,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -517,9 +603,9 @@ export default class ActorEd extends Actor {
     }
 
     const rollTypeProcessors = {
-      "recovery": () => this.#processRecoveryResult( roll ),
+      "recovery":  () => this.#processRecoveryResult( roll ),
       "knockdown": () => this.#processKnockdownResult( roll ),
-      "jumpUp": () => this.#processJumpUpResult( roll )
+      "jumpUp":    () => this.#processJumpUpResult( roll )
     };
 
     const processRollType = rollTypeProcessors[roll.options.rollType];
@@ -580,9 +666,9 @@ export default class ActorEd extends Actor {
     const recoveryTestsCurrent = recoveryTestsResource.value;
 
     const updatePaths = {
-      wounds: "system.characteristics.health.wounds",
-      standardDamage: "system.characteristics.health.damage.standard",
-      stunDamage: "system.characteristics.health.damage.stun",
+      wounds:                "system.characteristics.health.wounds",
+      standardDamage:        "system.characteristics.health.damage.standard",
+      stunDamage:            "system.characteristics.health.damage.stun",
       recoveryTestAvailable: "system.characteristics.recoveryTestsResource.value",
       stunRecoveryAvailable: "system.characteristics.recoveryTestsResource.stunRecoveryAvailable"
     };
@@ -658,7 +744,7 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichment() {
     let enrichment = {};
     enrichment["system.description.value"] = await TextEditor.enrichHTML( this.system.description.value, {
-      async: true,
+      async:   true,
       secrets: this.isOwner
     } );
     return futils.expandObject( enrichment );
@@ -667,7 +753,7 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichmentEmbeddedItems() {
     for ( const item of this.items ) {
       item.system.description.value = futils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
-          async: true,
+          async:   true,
           secrets: this.isOwner
         } )
       );
@@ -790,89 +876,87 @@ export default class ActorEd extends Actor {
   }
 
 
-    /**
-     * #############################################################
-     * Legend Point Tracking
-     * #############################################################
-     */
+  /**
+   * #############################################################
+   * Legend Point Tracking
+   * #############################################################
+   */
 
 
-    /**
-     * 
-     * @param {object} attribute      The attribute to upgrade
-     * @returns 
-     * @UserFunction                  UF_LPTracking-upgradeAttribute
-     */
-    async upgradeAttribute( attribute ) {
-      const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
-      // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-      if ( attributeOldIncrease >= 3 ) {
-        ui.notifications.warn( game.i18n.localize( "ED.Actor.LpTracking.Spendings.maxIncreaseReached" ) );
-        return;
-      } 
-      const attributeName = ED4E.attributes[attribute].label;
-      const legendPointsCostConfig = ED4E.legendPointsCost;
-      const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
-
-      const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAttribute", {
-        previousLevel: attributeOldIncrease,
-        newLevel: attributeOldIncrease + 1,
-        attributeName: attributeName,
-      } );
-      const transactionData = new LpSpendingTransactionData( {
-        entityType: "attribute",
-        type: "spendings",
-        amount: requiredLp,
-        date: new Date(),
-        name: attributeName,
-        description: description
-      } );
-      // add the _showOptionsPrompt function to show the options for the user to choose
-      await this.update( { [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 } );
-      return this.addLpTransaction( "spendings", transactionData );
+  /**
+   *
+   * @param {object} attribute     The attribute to upgrade
+   * @returns {ActorEd}            The updated actor
+   * @UserFunction                 UF_LPTracking-upgradeAttribute
+   */
+  async upgradeAttribute( attribute ) {
+    const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
+    // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
+    if ( attributeOldIncrease >= 3 ) {
+      ui.notifications.warn( game.i18n.localize( "ED.Actor.LpTracking.Spendings.maxIncreaseReached" ) );
+      return;
     }
+    const attributeName = ED4E.attributes[attribute].label;
+    const legendPointsCostConfig = ED4E.legendPointsCost;
+    const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
+
+    const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAttribute", {
+      previousLevel: attributeOldIncrease,
+      newLevel:      attributeOldIncrease + 1,
+      attributeName: attributeName,
+    } );
+    const transactionData = new LpSpendingTransactionData( {
+      entityType:  "attribute",
+      type:        "spendings",
+      amount:      requiredLp,
+      date:        new Date(),
+      name:        attributeName,
+      description: description
+    } );
+    // add the _showOptionsPrompt function to show the options for the user to choose
+    await this.update( { [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 } );
+    return this.addLpTransaction( "spendings", transactionData );
+  }
 
 
-    /**
-     * @param {object} ability  The ability to upgrade
-     * @returns 
-     * @UserFunction            UF_LPTracking-upgradeAbility
-     */
-    async upgradeAbility( ability ) {
-      const abilityOldLevel = ability.system.level;
-      const newIncrease = abilityOldLevel + 1;
-      const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAbility", {
-        previousLevel: abilityOldLevel,
-        newLevel: newIncrease,
-        abilityName: ability.name,
-      } );
-      
-      const validationData = await validateAbilityUpgrade( ability, this );
-      const validateResult = await this._showOptionsPrompt ( this, ability, validationData );
+  /**
+   * @param {object} ability  The ability to upgrade
+   * @returns {ActorEd}       The updated actor
+   * @UserFunction            UF_LPTracking-upgradeAbility
+   */
+  async upgradeAbility( ability ) {
+    const abilityOldLevel = ability.system.level;
+    const newIncrease = abilityOldLevel + 1;
+    const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAbility", {
+      previousLevel: abilityOldLevel,
+      newLevel:      newIncrease,
+      abilityName:   ability.name,
+    } );
 
-      if ( validateResult === "cancel" ) return;
+    const validationData = await validateAbilityUpgrade( ability, this );
+    const validateResult = await this._showOptionsPrompt ( this, ability, validationData );
 
-      const requiredLp = validateResult === "free" ? 0 : validationData.requiredLp;
+    if ( validateResult === "cancel" ) return;
 
-      const transactionData = new LpSpendingTransactionData( {
-        entityType: ability.type,
-        type: "spendings",
-        amount: requiredLp,
-        date: new Date(),
-        itemUuid: ability.uuid,
-        name: ability.name,
-        description: description
-      } );
-      await ability.update( { "system.level": newIncrease } );
-      return this.addLpTransaction( "spendings", transactionData );
-    }
+    const requiredLp = validateResult === "free" ? 0 : validationData.requiredLp;
 
-    /**
-     * @chris I dont get inheritdoc...
-     * @inheritdoc
-     * @param {ItemEd} classItem    The class item to upgrade
-     * @UserFunction                UF_LPTracking-upgradeDiscipline
-     */
+    const transactionData = new LpSpendingTransactionData( {
+      entityType:  ability.type,
+      type:        "spendings",
+      amount:      requiredLp,
+      date:        new Date(),
+      itemUuid:    ability.uuid,
+      name:        ability.name,
+      description: description
+    } );
+    await ability.update( { "system.level": newIncrease } );
+    return this.addLpTransaction( "spendings", transactionData );
+  }
+
+  /**
+   * @param {ItemEd} classItem    The class item to upgrade
+   * @UserFunction                UF_LPTracking-upgradeDiscipline
+   */
   async upgradeDiscipline( classItem ) {
     const disciplineIndex = classItem.system.disciplineIndex;
     const classOldLevel = classItem.system.level;
@@ -888,10 +972,10 @@ export default class ActorEd extends Actor {
 
     const currentTier = classItem.system.advancement.levels[classNewLevelIndex].tier;
     const tierMap = {
-      [ED4E.tier.novice.toLowerCase()]: 1,
+      [ED4E.tier.novice.toLowerCase()]:     1,
       [ED4E.tier.journeyman.toLowerCase()]: 2,
-      [ED4E.tier.warden.toLowerCase()]: 3,
-      [ED4E.tier.master.toLowerCase()]: 4
+      [ED4E.tier.warden.toLowerCase()]:     3,
+      [ED4E.tier.master.toLowerCase()]:     4
     };
     const reverseTierMap = {
       1: [ ED4E.tier.novice.toLowerCase() ],
@@ -978,10 +1062,10 @@ export default class ActorEd extends Actor {
         const isDuplicate = await this.checkDuplicateAbility( item );
         if ( !isDuplicate ) {
           await this.createEmbeddedDocuments( "Item", [ item ], {
-            noPrompt: true,
-            talentCategory: category,
-            tier: tier,
-            classLevel: level,
+            noPrompt:        true,
+            talentCategory:  category,
+            tier:            tier,
+            classLevel:      level,
             classIdentifier: identifier
           } );
         }
@@ -990,20 +1074,20 @@ export default class ActorEd extends Actor {
 
     // Create and render the dialog
     new Dialog( {
-      title: "Choose a Talent",
+      title:   "Choose a Talent",
       content: `<form><div class="form-group"><label>Talent:</label><select id="talent-choice">${optionsHtml}</select></div></form>`,
       buttons: {
         ok: {
-          label: "Confirm",
+          label:    "Confirm",
           callback: async ( html ) => {
-            const selectedIndex = parseInt( html.find( "#talent-choice" ).val() );
+            const selectedIndex = parseInt( html.find( "#talent-choice" ).val(), 10 );
             const selectedTalent = filteredTalentOptions[selectedIndex];
 
             await this.createEmbeddedDocuments( "Item", [ selectedTalent ], {
-              noPrompt: true,
-              talentCategory: "optional",
-              tier: newLevelTier,
-              classLevel: classNewLevel,
+              noPrompt:        true,
+              talentCategory:  "optional",
+              tier:            newLevelTier,
+              classLevel:      classNewLevel,
               classIdentifier: classItem.uuid
             } );
 
@@ -1018,7 +1102,7 @@ export default class ActorEd extends Actor {
           }
         },
         cancel: {
-          label: "Cancel",
+          label:    "Cancel",
           callback: () => {
             return;
           }
@@ -1029,7 +1113,7 @@ export default class ActorEd extends Actor {
   }
 
   /**
-   * 
+   *
    * @param {object} classItem      class item to be used for the upgrade
    * @param {number} newLevel       new level of the class
    * @UserFunction                  UF_LPTracking-upgradeFreeTalents
@@ -1041,7 +1125,7 @@ export default class ActorEd extends Actor {
   }
 
   /**
-   * 
+   *
    * @param {object} ability    ability to be checked for duplicates
    * @returns                   returns true if the ability is a duplicate, false otherwise
    * @UserFunction              UF_LPTracking-checkDuplicateAbility
@@ -1061,47 +1145,47 @@ export default class ActorEd extends Actor {
    * @UserFunction                    UF_LPTracking-addItemLpTransaction
    */
   async addItemLpTransaction( item, validationData, bookingResult ) {
-    
-    const description = game.i18n.format( "ED.Dialogs.LegendPoints.spendLp", {
-        previousLevel: item.system.level - 1,
-        newLevel: item.system.level,
-      } );
 
-      let requiredLp = 0;
-      if ( bookingResult === "free" ) {
-        requiredLp = 0;
-      } else if ( bookingResult === "spend" ) {
-        requiredLp = validationData.requiredLp;
-      }else if ( bookingResult === "cancel" ) {
-        return;
-      }
-    
+    const description = game.i18n.format( "ED.Dialogs.LegendPoints.spendLp", {
+      previousLevel: item.system.level - 1,
+      newLevel:      item.system.level,
+    } );
+
+    let requiredLp = 0;
+    if ( bookingResult === "free" ) {
+      requiredLp = 0;
+    } else if ( bookingResult === "spend" ) {
+      requiredLp = validationData.requiredLp;
+    }else if ( bookingResult === "cancel" ) {
+      return;
+    }
+
     // add Prompt for LP spending which can be skipped by a certain click (shift+RIghtclick or so)
     // only after confirming the promt, this shall go on.
     const transactionData = new LpSpendingTransactionData( {
-      entityType: item.type,
-      type: "spendings",
-      amount: validationData.requiredLp,
-      date: new Date(),
-      itemUuid: item.uuid,
-      name: item.name,
+      entityType:  item.type,
+      type:        "spendings",
+      amount:      validationData.requiredLp,
+      date:        new Date(),
+      itemUuid:    item.uuid,
+      name:        item.name,
       description: description
     } );
     const transactionSuccess = await this.addLpTransaction( "spendings", transactionData );
   }
 
   /**
-   * @description                     Add a new LP transaction to the actor's system data
-   * @param {string} type             Type of the transaction (earnings or spendings)
-   * @param {object} transactionData  Data of the transaction
-   * @returns 
-   * @UserFunction                    UF_LPTracking-addLpTransaction
+   * @description                                 Add a new LP transaction to the actor's system data
+   * @param {('earnings'|'spendings')} type       Type of the transaction
+   * @param {object} transactionData   Data of the transaction
+   * @returns {ActorEd}                           The updated actor data
+   * @UserFunction                                UF_LPTracking-addLpTransaction
    * @see                             ../../documentation/User Functions/UF_LpTracking-addLpTransaction.md
    */
   async addLpTransaction( type, transactionData ) {
     const oldTransactions = this.system.lp[type];
-    const transactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
-    const transaction = new transactionModel( transactionData );
+    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
+    const transaction = new TransactionModel( transactionData );
 
     return this.update( {
       [`system.lp.${type}`]: oldTransactions.concat( [ transaction ] )
@@ -1112,93 +1196,93 @@ export default class ActorEd extends Actor {
 
   /**
    * needs to be rebuild later after paths, questors and threads are implemented to show all relevant information
-   * @param {object} actor            actor to be used for the prompt   
+   * @param {object} actor            actor to be used for the prompt
    * @param {object} item             item to be added or upgraded
    * @param {Array} validationData    validation data for the item
    * @returns                         returns the result of the prompt which defines the LP spending and grouping of the item
    * @UserFunction                    UF_LPTracking-showOptionsPrompt
    */
-async _showOptionsPrompt( actor, item, validationData ) {
-            
-            return new Promise( ( resolve ) => {
-                const actorName = actor.name;
-                const itemName = item.name;
-                const currentLp = actor.system.lp.current;
-                const requiredLp = validationData.requiredLp;
-                let actorHealth = "is healthy";
-                if ( actor.system.characteristics.health.damage.total > 0 ) {
-                    actorHealth = "is not healthy, do you want to increase anyway?";
-                }
-                let buttons = {};
-                if ( item.type === "talent" && validationData.interaction === "create" ) {
-                    // Initial check for the item itself having an ed-id of "versatility"
-                    if ( item.system.edid === "versatility" ) {
-                        buttons.versatility = {
-                            label: "Versatility",
-                            callback: () => resolve( "versatility" )
-                        };
-                    } else {
-                        // Define buttons without the "Cancel" button initially
-                        buttons = {
-                            discipline: {
-                                label: "Discipline",
-                                callback: () => resolve( "discipline" )
-                            },
-                            optional: {
-                                label: "Optional",
-                                callback: () => resolve( "optional" )
-                            },
-                            free: {
-                                label: "Free / Other",
-                                callback: () => resolve( "free" )
-                            }
-                        };
-                        // Additional check for any item of type "talent" with an ed-id of "versatility" in the actor's items
-                        const hasVersatilityTalent = actor.items.filter( item => item.type === "talent" && item.system.edid === "versatility" );
-                        const numberOfVersatilityTalents = actor.items.filter( item => item.type === "talent" 
-                          && item.system.talentCategory === "versatility" 
-                          && item.system.edid !== "versatility" );
+  async _showOptionsPrompt( actor, item, validationData ) {
 
-                        if ( hasVersatilityTalent.length > 0 ) {
-                          let versatilityMaxLevel = 0;
-                          hasVersatilityTalent.forEach( element => {
-                            versatilityMaxLevel += element.system.level;
-                          } );
-                          if ( ( versatilityMaxLevel  ) > numberOfVersatilityTalents.length ) {
-                            buttons.versatility = {
-                                label: "Versatility?",
-                                callback: () => resolve( "versatility" )
-                            };
-                        }
-                      }
-                    }
-                } else if ( item.type === "discipline" ) {
-                    buttons = {
-                        confirm: {
-                            label: "confirm",
-                            callback: () => resolve( "addDiscipline" )
-                        }
-                    };
-                } else {
-                  buttons = {
-                    free: {
-                      label: "Free",
-                      callback: () => resolve( "free" )
-                    },
-                    spend: {
-                      label: "Spend LP",
-                      callback: () => resolve( "spend" )
-                    },
-                  };
-                }
-                // Add the "Cancel" button here to ensure it's always on the right
-                buttons.cancel = {
-                    label: "Cancel",
-                    callback: () => resolve( "cancel" )
-                }; 
+    return new Promise( ( resolve ) => {
+      const actorName = actor.name;
+      const itemName = item.name;
+      const currentLp = actor.system.lp.current;
+      const requiredLp = validationData.requiredLp;
+      let actorHealth = "is healthy";
+      if ( actor.system.characteristics.health.damage.total > 0 ) {
+        actorHealth = "is not healthy, do you want to increase anyway?";
+      }
+      let buttons = {};
+      if ( item.type === "talent" && validationData.interaction === "create" ) {
+        // Initial check for the item itself having an ed-id of "versatility"
+        if ( item.system.edid === "versatility" ) {
+          buttons.versatility = {
+            label:    "Versatility",
+            callback: () => resolve( "versatility" )
+          };
+        } else {
+          // Define buttons without the "Cancel" button initially
+          buttons = {
+            discipline: {
+              label:    "Discipline",
+              callback: () => resolve( "discipline" )
+            },
+            optional: {
+              label:    "Optional",
+              callback: () => resolve( "optional" )
+            },
+            free: {
+              label:    "Free / Other",
+              callback: () => resolve( "free" )
+            }
+          };
+          // Additional check for any item of type "talent" with an ed-id of "versatility" in the actor's items
+          const hasVersatilityTalent = actor.items.filter( item => item.type === "talent" && item.system.edid === "versatility" );
+          const numberOfVersatilityTalents = actor.items.filter( item => item.type === "talent"
+            && item.system.talentCategory === "versatility"
+            && item.system.edid !== "versatility" );
+
+          if ( hasVersatilityTalent.length > 0 ) {
+            let versatilityMaxLevel = 0;
+            hasVersatilityTalent.forEach( element => {
+              versatilityMaxLevel += element.system.level;
+            } );
+            if ( ( versatilityMaxLevel  ) > numberOfVersatilityTalents.length ) {
+              buttons.versatility = {
+                label:    "Versatility?",
+                callback: () => resolve( "versatility" )
+              };
+            }
+          }
+        }
+      } else if ( item.type === "discipline" ) {
+        buttons = {
+          confirm: {
+            label:    "confirm",
+            callback: () => resolve( "addDiscipline" )
+          }
+        };
+      } else {
+        buttons = {
+          free: {
+            label:    "Free",
+            callback: () => resolve( "free" )
+          },
+          spend: {
+            label:    "Spend LP",
+            callback: () => resolve( "spend" )
+          },
+        };
+      }
+      // Add the "Cancel" button here to ensure it's always on the right
+      buttons.cancel = {
+        label:    "Cancel",
+        callback: () => resolve( "cancel" )
+      };
 
       let d = new Dialog( {
-        title: "LP Options",
+        title:   "LP Options",
         content: `<p>Increase ${itemName}</p>
                   <p>Current LP: ${currentLp}</p>
                   <p>required LP: ${requiredLp}</p>
@@ -1206,7 +1290,7 @@ async _showOptionsPrompt( actor, item, validationData ) {
                   <p>Current Damage: ${actorHealth}</p>`,
         buttons: buttons,
         default: "spend",
-        close: () => resolve( null )
+        close:   () => resolve( null )
       } );
       d.render( true );
     } );

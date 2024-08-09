@@ -1,5 +1,5 @@
 // Import configuration
-import ED4E from '../config.mjs';
+import ED4E from "../config.mjs";
 import  "../tours/ed-tours.mjs";
 import registerHandlebarHelpers from "../handlebar-helpers.mjs";
 
@@ -18,60 +18,60 @@ import * as utils from "../utils.mjs";
  *
  */
 export default function () {
-    Hooks.once( "init", () => {
-        globalThis.ed4e = game.ed4e = Object.assign( game.system, globalThis.ed4e );
-        console.log( "ED4e | Initializing the ED4e Game System" );
+  Hooks.once( "init", () => {
+    globalThis.ed4e = game.ed4e = Object.assign( game.system, globalThis.ed4e );
+    console.log( "ED4e | Initializing the ED4e Game System" );
 
-        // record configuration values
-        CONFIG.ED4E = ED4E;
-        CONFIG.Actor.documentClass = documents.ActorEd;
-        CONFIG.Item.documentClass = documents.ItemEd;
-        CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
+    // record configuration values
+    CONFIG.ED4E = ED4E;
+    CONFIG.Actor.documentClass = documents.ActorEd;
+    CONFIG.Item.documentClass = documents.ItemEd;
+    CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
 
-        CONFIG.Token.objectClass = canvas.TokenEd;
+    CONFIG.Token.objectClass = canvas.TokenEd;
 
-        // Register Roll Extensions
-        CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
+    // Register Roll Extensions
+    CONFIG.Dice.rolls.splice( 0, 0, dice.EdRoll );
 
-        // Register text editor enrichers
-        enrichers.registerCustomEnrichers();
+    // Register text editor enrichers
+    enrichers.registerCustomEnrichers();
 
-        // Hook up system data types
-        CONFIG.Actor.dataModels = dataModels.actor.config;
-        CONFIG.Item.dataModels = dataModels.item.config;
+    // Hook up system data types
+    CONFIG.Actor.dataModels = dataModels.actor.config;
+    CONFIG.Item.dataModels = dataModels.item.config;
 
-        // Register sheet application classes
-        Actors.unregisterSheet( "core", ActorSheet );
-        Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
-            types: ["character"],
-            makeDefault: true
-        } );
-        Items.unregisterSheet( "core", ItemSheet );
-        Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
-            makeDefault: true
-        } );
-        Journal.unregisterSheet( "core", JournalSheet );
-        Journal.registerSheet( "earthdawn4e", applications.journal.JournalSheetEd, {
-            makeDefault: true
-        } );
-
-        // Register Handlebars Helper
-        registerHandlebarHelpers();
-        // Preload Handlebars partials.
-        utils.preloadHandlebarsTemplates();
-
-        /* -------------------------------------------- */
-        /*  System Setting Initialization               */
-        /* -------------------------------------------- */
-
-        // registerSystemSettings()
-
-        /* -------------------------------------------- */
-        /*  Bundled Module Exports                      */
-        /* -------------------------------------------- */
-
-        // _registerDarkMode();
+    // Register sheet application classes
+    Actors.unregisterSheet( "core", ActorSheet );
+    Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEd, {
+      types:       [ "character" ],
+      makeDefault: true
     } );
+    Items.unregisterSheet( "core", ItemSheet );
+    Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
+      makeDefault: true
+    } );
+    Journal.unregisterSheet( "core", JournalSheet );
+    Journal.registerSheet( "earthdawn4e", applications.journal.JournalSheetEd, {
+      makeDefault: true
+    } );
+
+    // Register Handlebars Helper
+    registerHandlebarHelpers();
+    // Preload Handlebars partials.
+    utils.preloadHandlebarsTemplates();
+
+    /* -------------------------------------------- */
+    /*  System Setting Initialization               */
+    /* -------------------------------------------- */
+
+    // registerSystemSettings()
+
+    /* -------------------------------------------- */
+    /*  Bundled Module Exports                      */
+    /* -------------------------------------------- */
+
+    // _registerDarkMode();
+  } );
 }
 
 /**

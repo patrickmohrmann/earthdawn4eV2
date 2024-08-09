@@ -9,8 +9,8 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
     this.resolve = options.resolve;
     this.object = {
       selectedActors: object.selectedActors || [],
-      amount: object.amount || "",
-      description: object.description || ""
+      amount:         object.amount || "",
+      description:    object.description || ""
     };
   }
 
@@ -22,11 +22,11 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
   }
 
   static DEFAULT_OPTIONS = {
-    id: "assign-legend-prompt",
+    id:       "assign-legend-prompt",
     uniqueId: String( ++globalThis._appId ),
-    classes: [ "earthdawn4e", "assign-legend" ],
-    tag: "form",
-    window: {
+    classes:  [ "earthdawn4e", "assign-legend" ],
+    tag:      "form",
+    window:   {
       frame: true,
       title: "LOCALIZE!!! Assign LP"
     },
@@ -34,12 +34,12 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
       assignLP: AssignLpPrompt._assignLP,
     },
     form: {
-      handler: AssignLpPrompt.#onFormSubmission,
-      submitOnChange: true,
-      closeOnSubmit: false,
+      handler:        AssignLpPrompt.#onFormSubmission,
+      submitOnChange: true, 
+      closeOnSubmit:  false,
     },
     position: {
-      width: 500,
+      width:  500,
       height: 800,
     },
   };
@@ -83,18 +83,18 @@ export default class AssignLpPrompt extends HandlebarsApplicationMixin( Applicat
 
     context.buttons = [
       {
-        type: "button",
-        label: game.i18n.localize( "ED.Dialogs.Buttons.cancel" ),
+        type:     "button",
+        label:    game.i18n.localize( "ED.Dialogs.Buttons.cancel" ),
         cssClass: "cancel",
-        icon: "fas fa-times",
-        action: "close",
+        icon:     "fas fa-times",
+        action:   "close",
       },
       {
-        type: "button",
-        label: game.i18n.localize( "ED.Dialogs.Buttons.ok" ),
+        type:     "button",
+        label:    game.i18n.localize( "ED.Dialogs.Buttons.ok" ),
         cssClass: "assignLP",
-        icon: "fas fa-check",
-        action: "assignLP",
+        icon:     "fas fa-check",
+        action:   "assignLP",
       }
     ];
 

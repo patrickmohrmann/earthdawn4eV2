@@ -12,18 +12,18 @@ export default class ActorSheetEd extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject( super.defaultOptions, {
       classes: [ "earthdawn4e", "sheet", "actor", "character-sheet" ],
-      width: 800,
-      height: 800,
-      tabs: [
+      width:   800,
+      height:  800,
+      tabs:    [
         {
-          navSelector: ".actor-sheet-tabs",
+          navSelector:     ".actor-sheet-tabs",
           contentSelector: ".actor-sheet-body",
-          initial: "main",
+          initial:         "main",
         },
         {
-          navSelector: ".actor-sheet-spell-tabs",
+          navSelector:     ".actor-sheet-spell-tabs",
           contentSelector: ".actor-sheet-spell-body",
-          initial: "spell-matrix-tab",
+          initial:         "spell-matrix-tab",
         },
       ],
       scrollY: [
@@ -86,11 +86,11 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".action-buttons" ).click( event => {
       const action = event.currentTarget.dataset.action;
       const actionMapping = {
-        "recovery": () => this._onRecoveryRoll( event ),
-        "takeDamage": () => this._onTakeDamage( event ),
-        "jumpUp": () => this._onJumpUp( event ),
-        "initiative": () => this._onInitiative( event ),
-        "halfMagic": () => this._onHalfMagic( event ),
+        "recovery":      () => this._onRecoveryRoll( event ),
+        "takeDamage":    () => this._onTakeDamage( event ),
+        "jumpUp":        () => this._onJumpUp( event ),
+        "initiative":    () => this._onInitiative( event ),
+        "halfMagic":     () => this._onHalfMagic( event ),
         "knockdownTest": () => this._onKnockDown( event ),
       };
       // Check if the action exists in the mapping and call it
@@ -125,7 +125,7 @@ export default class ActorSheetEd extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle changing the holding type of an owned item.
+   * Handle changing the holding type of owned items.
    * @description itemStatus.value =
    * 1: owned,
    * 2: carried,
@@ -134,7 +134,8 @@ export default class ActorSheetEd extends ActorSheet {
    * 5: offHand,
    * 6: twoHanded,
    * 7: tail
-   * @param {Event} event      The originating click event.
+   * @param {Event} event     The originating click event.
+   * @returns {Application}   The rendered item sheet.
    * @private
    */
   // eslint-disable-next-line complexity
@@ -192,7 +193,8 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.upgradeAbility( ability );
+    if ( typeof ability.system.increase === "function" ) ability.system.increase();
+    // this.actor.upgradeAbility( ability );
   }
 
   /**
@@ -332,10 +334,10 @@ export default class ActorSheetEd extends ActorSheet {
   _onEffectAdd( event ) {
     event.preventDefault();
     return this.actor.createEmbeddedDocuments( "ActiveEffect", [ {
-      label: "New Effect",
-      icon: "icons/svg/item-bag.svg",
+      label:    "New Effect",
+      icon:     "icons/svg/item-bag.svg",
       duration: { rounds: 1 },
-      origin: this.actor.uuid
+      origin:   this.actor.uuid
     } ] );
   }
 

@@ -1,4 +1,4 @@
-import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
+import DocumentCreateDialog from "../applications/global/document-creation.mjs";
 import ed4eDropItem from "../applications/global/drop-items.mjs";
 import AdvancementLevelData from "../data/advancement/advancement-level.mjs";
 
@@ -22,11 +22,11 @@ export default class ItemEd extends Item {
     async tailorToNamegiver( namegiver ) {
         if ( this.isOwned && !this.system.weight.weightCalculated && namegiver ) {
             const updateData = {
-                "name": `${this.name} (${namegiver.name})`,
-                "system.weight.value": namegiver.system.weightMultiplier * this.system.weight.value,
+                "name":                           `${this.name} (${namegiver.name})`,
+                "system.weight.value":            namegiver.system.weightMultiplier * this.system.weight.value,
                 "system.weight.weightCalculated": true,
                 "system.weight.weightMultiplier": namegiver.system.weightMultiplier,
-            }
+            };
             await this.update( updateData );
             this.render( true );
         } else if ( this.system.weight.weightCalculated ) {
@@ -48,7 +48,7 @@ export default class ItemEd extends Item {
                     ...abilities,
                     [poolType]: abilitiesPool.concat( abilityUUID ),
                 },
-            } )
+            } );
 
             const newLevels = this.system.advancement.levels.toSpliced(
               levelIndex, 1, levelModel
@@ -60,7 +60,7 @@ export default class ItemEd extends Item {
             const abilitiesPool = this.system.advancement.abilityOptions[poolType];
             changes = {
                 [`system.advancement.abilityOptions.${poolType}`]: abilitiesPool.concat( abilityUUID ),
-            }
+            };
         }
         return this.update( changes );
     }
@@ -82,7 +82,7 @@ export default class ItemEd extends Item {
                     ...abilities,
                     [poolType]: newPool,
                 },
-            } )
+            } );
 
             const newLevels = this.system.advancement.levels.toSpliced(
               levelIndex, 1, levelModel
@@ -97,88 +97,85 @@ export default class ItemEd extends Item {
             );
             changes = {
                 [`system.advancement.abilityOptions.${poolType}`]: newPool,
-            }
+            };
         }
         return this.update( changes );
     }
 
     /**
-     * @param {Object} data         The data of the item to be created.
-     * @param {Object} options      The options of the item to be created.
-     * @param {Object} user         The user creating the item.
-     * @returns                     The created item.
+     * @inheritDoc
      * @UserFunction                UF_ActorItems-preCreate
      */
-    async _preCreate(data, options, user) {
-      if (!this.actor || !data) return;
+    async _preCreate( data, options, user ) {
+      if ( !this.actor || !data ) return;
     
       // Set talent identifier for talent type items.
-      if (data.type === "talent") {
-        if (data.name && data.system) {
+      if ( data.type === "talent" ) {
+        if ( data.name && data.system ) {
           const { name, system: { strain, attribute, action } } = data;
           const globalTalentidentifier = `${name}-${strain}-${attribute}-${action}`;
-          this.updateSource({ "system.talentIdentifier": globalTalentidentifier });
+          this.updateSource( { "system.talentIdentifier": globalTalentidentifier } );
         }
     
         // Handle noPrompt option or versatility directly.
-        if (options.noPrompt === true) {
-          this.updateSource({
-            "system.talentCategory": options.talentCategory,
-            "system.tier": options.tier,
+        if ( options.noPrompt === true ) {
+          this.updateSource( {
+            "system.talentCategory":         options.talentCategory,
+            "system.tier":                   options.tier,
             "system.sourceClass.identifier": options.classIdentifier,
             "system.sourceClass.levelAdded": options.classLevel,
-          });
-        } else if (data.system.edid === "versatility") {
-          this.updateSource({ "system.talentCategory": "versatility" });
+          } );
+        } else if ( data.system.edid === "versatility" ) {
+          this.updateSource( { "system.talentCategory": "versatility" } );
         }
         } else {
-          const dropItemResult = await ed4eDropItem(this.actor, data);
-          await this.handleDropItemResult(dropItemResult, data);
+          const dropItemResult = await ed4eDropItem( this.actor, data );
+          await this.handleDropItemResult( dropItemResult, data );
         }
       
     
-      return super._preCreate(data, options, user);
+      return super._preCreate( data, options, user );
     }
     
     /**
      * 
-     * @param {Object} dropItemResult   The result of the drop item dialog.
-     * @param {Object} data             The data of the item to be created.
-     * @returns 
+     * @param {object} dropItemResult   The result of the drop item dialog.
+     * @param {object} data             The data of the item to be created.
+     * @returns {boolean|undefined}               Whether the item creation was successful.
      * @UserFunction                    UF_ActorItems-handleDropItemResult
      */
-    async handleDropItemResult(dropItemResult, data) {
-      if (["spend", "free", "versatility", "discipline", "optional"].includes(dropItemResult.bookingResult)) {
-        await this.actor.addItemLpTransaction(data, dropItemResult.validationData, dropItemResult.bookingResult);
-        await this.updateCategoryAndTier(dropItemResult, data);
-      } else if (dropItemResult.bookingResult === "addDiscipline") {
-        this.updateSource({
-          "system.talentCategory": "discipline",
+    async handleDropItemResult( dropItemResult, data ) {
+      if ( [ "spend", "free", "versatility", "discipline", "optional" ].includes( dropItemResult.bookingResult ) ) {
+        await this.actor.addItemLpTransaction( data, dropItemResult.validationData, dropItemResult.bookingResult );
+        await this.updateCategoryAndTier( dropItemResult, data );
+      } else if ( dropItemResult.bookingResult === "addDiscipline" ) {
+        this.updateSource( {
+          "system.talentCategory":  "discipline",
           "system.disciplineIndex": dropItemResult.validationData.disciplineIndex,
-          "system.level": 0
-        });
-      } else if (dropItemResult.bookingResult === "cancel") {
+          "system.level":           0
+        } );
+      } else if ( dropItemResult.bookingResult === "cancel" ) {
         return false;
       }
     }
     
     /**
-     * @param {Object} dropItemResult   The result of the drop item dialog.
-     * @param {Object} data             The data of the item to be created.
-     * @returns 
+     * @param {object} dropItemResult   The result of the drop item dialog.
+     * @param {object} data             The data of the item to be created.
+     * @returns {boolean|undefined}     Whether the item creation was successful.
      * @UserFunction                    UF_ActorItems-updateTalentCategoryAndTier
      */
-    async updateCategoryAndTier(dropItemResult, data) {
+    async updateCategoryAndTier( dropItemResult, data ) {
       const category = dropItemResult.bookingResult;
-      if (category === "versatility" && data.system.edid !== "versatility") {
+      if ( category === "versatility" && data.system.edid !== "versatility" ) {
         const tierSelection = await this.promptForTierSelection();
-        if (tierSelection) {
-          this.updateSource({ "system.tier": tierSelection, "system.talentCategory": "versatility" });
+        if ( tierSelection ) {
+          this.updateSource( { "system.tier": tierSelection, "system.talentCategory": "versatility" } );
         } else {
           return false; // User cancelled tier selection.
         }
       } else {
-        this.updateSource({ "system.talentCategory": category });
+        this.updateSource( { "system.talentCategory": category } );
       }
     }
     
@@ -187,28 +184,28 @@ export default class ItemEd extends Item {
      * @UserFunction              UF_ActorItems-promptForTierSelection
      */
     async promptForTierSelection() {
-      return new Promise((resolve) => {
-        new Dialog({
-          title: "Select Tier",
+      return new Promise( ( resolve ) => {
+        new Dialog( {
+          title:   "Select Tier",
           content: `<form>
                       <div class="form-group">
                         <label for="tier">Tier:</label>
                         <select id="tier" name="tier">
-                          <option value="journeyman">${game.i18n.localize('ED.Config.Tier.journeyman')}</option>
-                          <option value="warden">${game.i18n.localize('ED.Config.Tier.warden')}</option>
-                          <option value="master">${game.i18n.localize('ED.Config.Tier.master')}</option>
+                          <option value="journeyman">${game.i18n.localize( "ED.Config.Tier.journeyman" )}</option>
+                          <option value="warden">${game.i18n.localize( "ED.Config.Tier.warden" )}</option>
+                          <option value="master">${game.i18n.localize( "ED.Config.Tier.master" )}</option>
                         </select>
                       </div>
                     </form>`,
           buttons: {
             ok: {
-              label: "Confirm",
-              callback: (html) => resolve(html.find("#tier").val())
+              label:    "Confirm",
+              callback: ( html ) => resolve( html.find( "#tier" ).val() )
             }
           },
           default: "ok",
-          close: () => resolve(null)
-        }).render(true);
-      });
+          close:   () => resolve( null )
+        } ).render( true );
+      } );
     }
   }

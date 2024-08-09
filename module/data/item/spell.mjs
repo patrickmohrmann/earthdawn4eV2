@@ -1,11 +1,14 @@
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import MagicTemplate from "./templates/sorcery-item.mjs";
+import LearnableTemplate from "./templates/learnable.mjs";
 
 /**
  * Data model template with information on Spell items.
+ * @mixes LearnableTemplate
  */
 export default class SpellData extends MagicTemplate.mixin(
-    ItemDescriptionTemplate
+  ItemDescriptionTemplate,
+  LearnableTemplate
 )  {
 
     /** @inheritDoc */

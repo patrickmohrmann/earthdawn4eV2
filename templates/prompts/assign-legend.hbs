@@ -16,7 +16,6 @@
         <input class="assign-lp__description" type='string' name="description" value="{{object.description}}" placeholder="{{localize "ED.Dialogs.Placeholder.lpDescription"}}"></input>
       </div>
       <div class="actor-area">
-        {{ log this}}
   <fieldset>
     <legend>{{localize "ED.Dialogs.Header.activeUser"}}</legend>
     {{#each actorUserActive}}
@@ -48,17 +47,6 @@
   </fieldset>
       </div>
     </div>
-    <!-- Buttons -->
-    <!--div class="buttons small-dialog__buttons flexcol">
-      <div class="button-group buttons-navigation flexrow">
-        <button class='ok default button-ok' type="confirm" name="confirm" data-button='ok'>
-          {{ localize 'X-ok' }}
-        </button>
-        <button class='cancel button-cancel' type="button" name="cancel" data-button='cancel'>
-          {{ localize 'X-cancel' }}
-        </button>
-      </div>
-    </div-->
   </div>
     <img class="frame__dialog--small frame__bottom"
       src="systems/ed4e/assets/foundry/background-vasgothia-top-frame-small.png">

@@ -36,6 +36,7 @@
     "ItemSheet": false,
     "ItemSheetEd": true,
     "Items": false,
+    "Journal": false,
     "JournalSheet": false,
     "isEmpty": false,
     "Roll": false,
