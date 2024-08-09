@@ -50,27 +50,27 @@ export default class LegendPointHistory extends HandlebarsApplicationMixin( Appl
    * @inheritdoc
    */
   static DEFAULT_OPTIONS = {
-    id: "legend-point-history-prompt",
+    id:      "legend-point-history-prompt", 
     classes: [ "earthdawn4e", "legend-point__history" ],
-    tag: "form",
-    window: {
+    tag:     "form",
+    window:  {
       frame: true,
-      icon: "fa-thin fa-list-timeline",
+      icon:  "fa-thin fa-list-timeline",
       title: "X-Localize Legend Point History",
     },
     actions: {
-      saveChanges: this._saveChanges,
-      toggleDetail: this._toggleDetail,
-      addEarning: this._addEarning,
+      saveChanges:        this._saveChanges,
+      toggleDetail:       this._toggleDetail,
+      addEarning:         this._addEarning,
       revertTransactions: this._revertTransactions,
     },
     form: {
-      handler: LegendPointHistory.#onFormSubmission,
+      handler:        LegendPointHistory.#onFormSubmission,
       submitOnChange: true,
-      closeOnSubmit: false,
+      closeOnSubmit:  false,
     },
     position: {
-      width: 1000,
+      width:  1000,
       height: 850,
     },
   };
@@ -83,20 +83,20 @@ export default class LegendPointHistory extends HandlebarsApplicationMixin( Appl
       template: "templates/generic/tab-navigation.hbs",
     },
     "earned-tab": {
-      template: "systems/ed4e/templates/actor/legend-points/history-earned.hbs",
+      template:   "systems/ed4e/templates/actor/legend-points/history-earned.hbs",
       scrollable: [ "table" ],
     },
     "spend-tab": {
-      template: "systems/ed4e/templates/actor/legend-points/history-spend.hbs",
+      template:   "systems/ed4e/templates/actor/legend-points/history-spend.hbs",
       scrollable: [ "table" ],
     },
     "chronological-tab": {
-      template: "systems/ed4e/templates/actor/legend-points/history-chronological.hbs",
+      template:   "systems/ed4e/templates/actor/legend-points/history-chronological.hbs",
       scrollable: [ "table" ],
     },
     footer: {
       template: "templates/generic/form-footer.hbs",
-      classes: [ "flexrow" ],
+      classes:  [ "flexrow" ],
     }
   };
 
@@ -105,27 +105,27 @@ export default class LegendPointHistory extends HandlebarsApplicationMixin( Appl
    */
   static TABS = {
     "earned-tab": {
-      id: "earned-tab",
-      group: "primary",
-      icon: "fa-light fa-hexagon-plus",
-      label: "X-LocalizeLabel-Earned",
-      active: false,
+      id:       "earned-tab",
+      group:    "primary",
+      icon:     "fa-light fa-hexagon-plus",
+      label:    "X-LocalizeLabel-Earned",
+      active:   false,
       cssClass: ""
     },
     "spend-tab": {
-      id: "spend-tab",
-      group: "primary",
-      icon: "fa-light fa-hexagon-minus",
-      label: "X-LocalizeLabel-Spend",
-      active: false,
+      id:       "spend-tab",
+      group:    "primary",
+      icon:     "fa-light fa-hexagon-minus",
+      label:    "X-LocalizeLabel-Spend",
+      active:   false,
       cssClass: ""
     },
     "chronological-tab": {
-      id: "chronological-tab",
-      group: "primary",
-      icon: "fa-light fa-timeline-arrow",
-      label: "X-LocalizeLabel-Chronological",
-      active: false,
+      id:       "chronological-tab",
+      group:    "primary",
+      icon:     "fa-light fa-timeline-arrow",
+      label:    "X-LocalizeLabel-Chronological",
+      active:   false,
       cssClass: ""
     },
   };
@@ -145,18 +145,18 @@ export default class LegendPointHistory extends HandlebarsApplicationMixin( Appl
 
     context.buttons = [
       {
-        type: "button",
-        label: game.i18n.localize( "ED.Dialogs.Buttons.close" ),
+        type:     "button",
+        label:    game.i18n.localize( "ED.Dialogs.Buttons.close" ),
         cssClass: "cancel",
-        icon: "fas fa-times",
-        action: "close",
+        icon:     "fas fa-times",
+        action:   "close",
       },
       {
-        type: "button",
-        label: game.i18n.localize( "ED.Dialogs.Buttons.save" ),
+        type:     "button",
+        label:    game.i18n.localize( "ED.Dialogs.Buttons.save" ),
         cssClass: "saveChanges",
-        icon: "fa-light fa-floppy-disk",
-        action: "saveChanges",
+        icon:     "fa-light fa-floppy-disk",
+        action:   "saveChanges",
       }
     ];
 
@@ -257,8 +257,8 @@ export default class LegendPointHistory extends HandlebarsApplicationMixin( Appl
 
   static async _addEarning( event, target ) {
     const transaction = new LpEarningTransactionData( {
-      amount: 0,
-      date: Date.now(),
+      amount:      0,
+      date:        Date.now(),
       description: "💕",
     } );
     this.lpHistory.updateSource( {
