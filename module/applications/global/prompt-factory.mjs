@@ -307,10 +307,9 @@ class ItemPromptFactory extends PromptFactory {
       throw new Error( "Item must be a subclass of LpIncreaseTemplate to use this prompt." );
     }
 
-    const increaseData = this.document.system.increaseData;
     const content = `
     <p>${ this.document.system.increaseRules }</p>
-    ${ Object.entries( increaseData ).map( ( [ key, value ] ) => {
+    ${ Object.entries( this.document.system.validationData ).map( ( [ key, value ] ) => {
       return `<div class="flex-row">${ key }: <i class="fa-solid ${ value ? "fa-hexagon-check" : "fa-hexagon-xmark" }"></i></div>`;
     } ).join( "" ) }
     `;

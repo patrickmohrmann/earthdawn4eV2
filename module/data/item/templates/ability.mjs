@@ -4,6 +4,8 @@ import ActionTemplate from "./action.mjs";
 import ED4E from "../../../config.mjs";
 import LpIncreaseTemplate from "./lp-increase.mjs";
 import LearnableTemplate from "./learnable.mjs";
+import PromptFactory from "../../../applications/global/prompt-factory.mjs";
+const isEmpty = foundry.utils.isEmpty;
 
 /**
  * Data model template with information on Ability items.
@@ -35,6 +37,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
       tier: new fields.StringField( {
         nullable: false,
         blank:    false,
+        choices:  ED4E.tier,
         initial:  "novice",
         label:    "ED.Item.Ability.tier"
       } ),
@@ -93,6 +96,61 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
         } ),
       } ),
     } );
+  }
+
+  /**
+   * @inheritDoc
+   */
+  async increase() {
+    if ( !this.isActorEmbedded ) return;
+
+    const promptFactory = PromptFactory.fromDocument( this.parent );
+    const spendLp = await promptFactory.getPrompt( "lpIncrease" );
+
+    if ( !spendLp
+      || spendLp === "cancel"
+      || spendLp === "close" ) return;
+
+    const currentLevel = this.level;
+
+    const updatedItem = await this.parent.update( {
+      "system.level": currentLevel + 1,
+    } );
+
+    if ( isEmpty( updatedItem ) ) {
+      ui.notifications.warn(
+        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
+      );
+      return;
+    }
+
+    const updatedActor = await this.parent.actor.addLpTransaction(
+      "spendings",
+      {
+        amount:      spendLp === "spendLp" ? this.requiredLpForIncrease : 0,
+        description: game.i18n.format(
+          "ED.Actor.LpTracking.Spendings",
+          {
+            previousLevel: currentLevel,
+            newLevel:      currentLevel + 1,
+          },
+        ),
+        entityType:  this.parent.type,
+        name:       this.parent.name,
+        value:      {
+          before: currentLevel,
+          after:  currentLevel + 1,
+        },
+        itemUuid:   this.parent.uuid,
+      },
+    );
+
+    if ( isEmpty( updatedActor ) )
+      ui.notifications.warn(
+        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
+      );
+
+    return this.parent;
   }
 
   /* -------------------------------------------- */

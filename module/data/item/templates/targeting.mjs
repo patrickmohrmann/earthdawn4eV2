@@ -7,6 +7,7 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {string} tier talent tier
  * @property {number} strain strain
  * @property {number} level rank
+ * @mixin
  */
 export default class TargetTemplate extends SystemDataModel {
   /** @inheritDoc */
@@ -86,7 +87,7 @@ export default class TargetTemplate extends SystemDataModel {
   static _getAggregatedDefense( targets, targetDefenseType, aggregate = Math.max ) {
     return targets.length > 0 ? aggregate( ...targets.map( ( t ) => t.system.characteristics.defenses[targetDefenseType].value ) ) : 0;
   }
-  
+
   /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */

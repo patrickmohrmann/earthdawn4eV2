@@ -40,6 +40,14 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * The actor's currently available money in silver.
+   * @type {number}
+   */
+  get currentSilver() {
+    return 1000;
+  }
+
+  /**
    * Returns the discipline items if this actor has any (has to be of type "character" or "npc" for this).
    * @type {Item[]}
    */
@@ -956,6 +964,7 @@ export default class ActorEd extends Actor {
   /**
    * @param {ItemEd} classItem    The class item to upgrade
    * @UserFunction                UF_LPTracking-upgradeDiscipline
+   * @returns {ActorEd}            The updated actor
    */
   async upgradeDiscipline( classItem ) {
     const disciplineIndex = classItem.system.disciplineIndex;

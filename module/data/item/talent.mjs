@@ -1,8 +1,6 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ED4E from "../../config.mjs";
-import PromptFactory from "../../applications/global/prompt-factory.mjs";
-const isEmpty = foundry.utils.isEmpty;
 
 /**
  * Data model template with information on talent items.
@@ -98,7 +96,8 @@ export default class TalentData extends AbilityTemplate.mixin(
    * @inheritDoc
    */
   get canBeLearned() {
-    return !foundry.utils.isEmpty( this.parent?.actor?.classes );
+    return true;
+    // return !foundry.utils.isEmpty( this.parent?.actor?.classes );
   }
 
   /**
@@ -149,6 +148,13 @@ export default class TalentData extends AbilityTemplate.mixin(
   /**
    * @inheritDoc
    */
+  get requiredMoneyForIncrease() {
+    return 0;
+  }
+
+  /**
+   * @inheritDoc
+   */
   get validationData() {
     if ( !this.isActorEmbedded ) return undefined;
 
@@ -161,59 +167,11 @@ export default class TalentData extends AbilityTemplate.mixin(
     };
   }
 
+  /**
+   * @inheritDoc
+   */
   async increase() {
-    if ( !this.isActorEmbedded ) return;
-
-    const promptFactory = PromptFactory.fromDocument( this.parent );
-    const spendLp = await promptFactory.getPrompt( "lpIncrease" );
-
-    const free = PromptFactory.freeButton.action;
-    const spend = PromptFactory.spendLpButton.action;
-
-    if ( !spendLp
-      || ![ free, spend ].includes( spendLp )
-    ) return;
-
-    const currentLevel = this.level;
-
-    const updatedItem = await this.parent.update( {
-      "system.level": currentLevel + 1,
-    } );
-
-    if ( isEmpty( updatedItem ) ) {
-      ui.notifications.warn(
-        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
-      );
-      return;
-    }
-
-    const updatedActor = await this.parent.actor.addLpTransaction(
-      "spendings",
-      {
-        amount:      spendLp === "spendLp" ? this.requiredLpForIncrease : 0,
-        description: game.i18n.format(
-          "ED.Actor.LpTracking.Spendings",
-          {
-            previousLevel: currentLevel,
-            newLevel:      currentLevel + 1,
-          },
-        ),
-        entityType:  "talent",
-        name:       this.parent.name,
-        value:      {
-          before: currentLevel,
-          after:  currentLevel + 1,
-        },
-        itemUuid:   this.parent.uuid,
-      },
-    );
-
-    if ( isEmpty( updatedActor ) )
-      ui.notifications.warn(
-        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
-      );
-
-    return this.parent;
+    return super.increase();
   }
 
   /* -------------------------------------------- */

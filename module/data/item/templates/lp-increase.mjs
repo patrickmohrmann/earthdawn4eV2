@@ -42,6 +42,14 @@ export default class LpIncreaseTemplate extends SystemDataModel {
   }
 
   /**
+   * @description The amount of silver required to increase the level of the entity.
+   * @type {number}
+   */
+  get requiredMoneyForIncrease() {
+    throw new Error( "A subclass of the LpIncreaseTemplate must implement the requiredMoneyForIncrease getter." );
+  }
+
+  /**
    * The data needed to validate the increase of this entity's level. Each key is a validation rule with the value
    * indicating whether the rule is fulfilled. If any of the values is `false`, the increase should not be allowed.
    * @type {Record<string, boolean>}
