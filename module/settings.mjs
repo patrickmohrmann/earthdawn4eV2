@@ -81,6 +81,16 @@ export default function registerSystemSettings() {
     type:    new EdIdField(),
   } );
 
+  // edid for questor devotion
+  game.settings.register( "ed4e", "edidQuestorDevotion", {
+    name:    "ED.Settings.Edid.questorDevotion",
+    hint:    "ED.Settings.Edid.questorDevotionHint",
+    scope:   "world",
+    config:  true,
+    default: "questor-devotion",
+    type:    new EdIdField(),
+  } );
+
   /* -------------------------------------------------------------------------------- */
   /*                                  STEP TABLES                                     */
   /* -------------------------------------------------------------------------------- */
