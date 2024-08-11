@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
@@ -15,102 +15,102 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} activation            how the poison will be activated
  * @property {boolean} death                deadly poison
  */
-export default class PoisonDiseaseData extends SystemDataModel.mixin(
-    ItemDescriptionTemplate
+export default class PoisonDiseaseData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate
 )  {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        const fields = foundry.data.fields;
-        return this.mergeSchema( super.defineSchema(), {
-            effect: new fields.SchemaField( {
-                damageStep: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,   
-                    integer: true,
-                    label: "ED.Item.PoisonDisease.damageStep"
-                } ), 
-                paralysisStep: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.PoisonDisease.paralysisStep"
-                } ), 
-                debilitationStep: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.PoisonDisease.debilitationStep"
-                } ), 
-            },
-            {
-                label: "ED.Item.PoisonDisease.effect"
-            } ),
-            interval: new fields.SchemaField( {
-                totalEffects: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.PoisonDisease.totalEffects"
-                } ), 
-                timeInBetween: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.PoisonDisease.timeInBetween"
-                } ), 
-            },
-            {
-                label: "ED.Item.PoisonDisease.interval"
-            } ),
-            onsetTime: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.PoisonDisease.onsetTime"
-            } ), 
-            duration: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.PoisonDisease.duration"
-            } ), 
-            activation: new fields.StringField( {
-                required: true,
-                blank: false,
-                initial: "wound",
-                label: "ED.Item.PoisonDisease.activation"
-            } ),
-            death: new fields.BooleanField( {
-                required: true,
-                initial: false,
-                label: "ED.Item.PoisonDisease.death"
-            } ),
+  /** @inheritDoc */
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    return this.mergeSchema( super.defineSchema(), {
+      effect: new fields.SchemaField( {
+        damageStep: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,   
+          integer:  true,
+          label:    "ED.Item.PoisonDisease.damageStep"
+        } ), 
+        paralysisStep: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.PoisonDisease.paralysisStep"
+        } ), 
+        debilitationStep: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.PoisonDisease.debilitationStep"
+        } ), 
+      },
+      {
+        label: "ED.Item.PoisonDisease.effect"
+      } ),
+      interval: new fields.SchemaField( {
+        totalEffects: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.PoisonDisease.totalEffects"
+        } ), 
+        timeInBetween: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.PoisonDisease.timeInBetween"
+        } ), 
+      },
+      {
+        label: "ED.Item.PoisonDisease.interval"
+      } ),
+      onsetTime: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.PoisonDisease.onsetTime"
+      } ), 
+      duration: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.PoisonDisease.duration"
+      } ), 
+      activation: new fields.StringField( {
+        required: true,
+        blank:    false,
+        initial:  "wound",
+        label:    "ED.Item.PoisonDisease.activation"
+      } ),
+      death: new fields.BooleanField( {
+        required: true,
+        initial:  false,
+        label:    "ED.Item.PoisonDisease.death"
+      } ),
             
-        } );
-    }
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

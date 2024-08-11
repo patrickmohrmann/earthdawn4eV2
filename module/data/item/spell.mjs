@@ -1,5 +1,5 @@
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-import MagicTemplate from "./templates/sorcery-item.mjs";
+import MagicTemplate from "./templates/magic-item.mjs";
 import LearnableTemplate from "./templates/learnable.mjs";
 
 /**
@@ -11,20 +11,20 @@ export default class SpellData extends MagicTemplate.mixin(
   LearnableTemplate
 )  {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return this.mergeSchema( super.defineSchema(), {
+  /** @inheritDoc */
+  static defineSchema() {
+    return this.mergeSchema( super.defineSchema(), {
             
-        } );
-    }
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

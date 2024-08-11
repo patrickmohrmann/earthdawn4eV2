@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import { ItemDataModel } from "../../abstract.mjs";
 import ED4E from "../../../config.mjs";
 
 /**
@@ -6,7 +6,7 @@ import ED4E from "../../../config.mjs";
  * @property {number} strain        strain
  * @property {string} action        action type
  */
-export default class ActionTemplate extends SystemDataModel {
+export default class ActionTemplate extends ItemDataModel {
 
   /** @inheritDoc */
   static defineSchema() {

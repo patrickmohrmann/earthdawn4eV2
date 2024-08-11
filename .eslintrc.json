@@ -130,6 +130,7 @@
         "definedTags": ["UserFunction"]
       }
     ],
+    "jsdoc/require-returns-check": "warn",
     "@stylistic/key-spacing": [
       "error",
       {

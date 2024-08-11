@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
@@ -10,73 +10,73 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {number} salvoCost         cost per salvo
  * @property {number} charakterDamage   weapon damage on a sentient being
  */
-export default class ShipWeaponData extends SystemDataModel.mixin(
-    ItemDescriptionTemplate
+export default class ShipWeaponData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate
 ) {
-    /** @inheritDoc */
-    static defineSchema() {
-        const fields = foundry.data.fields;
-        return this.mergeSchema( super.defineSchema(), {
-            firePowerPoints: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.ShipWeapon.firePowerPoints"
-            } ), 
-            crewWeapon: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.ShipWeapon.crewWeapon"
-            } ), 
-            range: new fields.SchemaField( {
-                short: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.ShipWeapon.rangeShort"
-                } ), 
-                long: new fields.NumberField( {
-                    required: true,
-                    nullable: false,
-                    min: 0,
-                    initial: 0,
-                    integer: true,
-                    label: "ED.Item.ShipWeapon.rangeLong"
-                } ), 
-            } ),
-            salvoCost: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.ShipWeapon.salvoCost"
-            } ), 
-            characterDamage: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.ShipWeapon.characterDamage"
-            } ), 
-        } );
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    return this.mergeSchema( super.defineSchema(), {
+      firePowerPoints: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.ShipWeapon.firePowerPoints"
+      } ), 
+      crewWeapon: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.ShipWeapon.crewWeapon"
+      } ), 
+      range: new fields.SchemaField( {
+        short: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.ShipWeapon.rangeShort"
+        } ), 
+        long: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.ShipWeapon.rangeLong"
+        } ), 
+      } ),
+      salvoCost: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.ShipWeapon.salvoCost"
+      } ), 
+      characterDamage: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.ShipWeapon.characterDamage"
+      } ), 
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }
