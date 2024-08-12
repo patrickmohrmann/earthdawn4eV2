@@ -206,6 +206,40 @@ export default class EdRoll extends Roll {
     } );
   }
 
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add the actors maneuver.
+   */
+  get actorManeuver() {
+    if ( this.options.rollType === "attack" ) {
+      const actor = game.actors.get(this.options.actor.id);
+      const maneuver = actor.items.filter( ( item ) => item.type === "knackManeuver" );
+      return maneuver;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add the target tokens reactions.
+   */
+  get targetReactions() {
+    if ( this.options.rollType === "attack" ) {
+      const targetsTokens = this.options.targetTokens; 
+      let reactions = [];
+      for ( const target of targetsTokens ) {
+
+        const findActor = canvas.scene.tokens.get(target.id)?.actor
+        const targetReactions = findActor.items.filter( ( item ) => item.system.reaction?.reactionType === "physical" );
+        reactions.push( { actor: findActor.id, name: findActor.name, reactions: targetReactions, img: findActor.img} );
+      }
+      return reactions
+    }
+    
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -332,6 +366,8 @@ export default class EdRoll extends Roll {
     }
   }
 
+  
+
   /* -------------------------------------------- */
   /*  Chat Messages                               */
   /* -------------------------------------------- */
@@ -357,6 +393,8 @@ export default class EdRoll extends Roll {
     templateData.failure = this.isFailure;
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
+    templateData.targetReactions = this.targetReactions;
+    templateData.actorManeuver = this.actorManeuver;
 
     return templateData;
   }

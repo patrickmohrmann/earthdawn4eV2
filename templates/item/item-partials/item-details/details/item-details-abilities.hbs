@@ -37,8 +37,9 @@
 {{!-- reachtion ability? --}}
 <div class="item-data__input--line">
     <label class="label__left">{{localize "ED.Item.Ability.reactionType"}}:</label>
-    <input class="item-data__checkbox--line" type="checkbox" name="system.reaction.reactionType" {{checked
-        item.system.reaction.reactionType }}>
+    <select name="system.reaction.reactionType">
+        {{selectOptions config.reactionType selected=item.system.reaction.reactionType blank="" localize=true }}
+    </select>
 </div>
 {{!-- Damage ability yes / now --}}
 <div class="item-data__input--line">

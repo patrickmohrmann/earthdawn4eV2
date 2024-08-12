@@ -67,10 +67,11 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                 } ),
             } ),
             reaction: new fields.SchemaField( {
-                reactionType: new fields.BooleanField( {
+                reactionType: new fields.StringField( {
                     required: false,
-                    nullable: false,
-                    initial: false,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
                     label: "ED.Item.Ability.reactionType"
                 } ),
             } ),

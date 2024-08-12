@@ -232,7 +232,8 @@
                 "rollDamage":                                       "Roll Damage",
                 "rollDamageTitle":                                  "Roll for Damage",
                 "takeDamage":                                       "Take Damage",
-                "takeDamageTitle":                                  "Take the damage for your Actor"
+                "takeDamageTitle":                                  "Take the damage for your Actor",
+                "takeTheHit":                                       "Take the Hit"
             },
             "Flavor": {
                 "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
@@ -254,7 +255,10 @@
             "Header": {
                 "actionTest":                                       "Action Test",
                 "arbitraryTest":                                    "arbitrary Test",
-                "effectTest":                                       "Effect Test"
+                "effectTest":                                       "Effect Test",
+                "maneuver":                                         "Maneuver",
+                "reactions":                                        "Reactions",
+                "rollDamage":                                       "Roll Damage"      
             }
         },
         "Config": {

@@ -26,6 +26,16 @@ export default function () {
         /*  Tour                                        */
         /* -------------------------------------------- */
         EdTour.travelAgency();
+
+        /* -------------------------------------------- */
+        /*  Tour                                        */
+        /* -------------------------------------------- */
+        const socket = socketLib.registerSystem( "ed4e" );
+        socket.register( "damage", assignDamage);
+        socket.register( "effect", assignEffect);
+        socket.register( "chatMessage", updateChatMessage);
+
+
     } );
 }
 

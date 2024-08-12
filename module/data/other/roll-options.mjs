@@ -72,6 +72,52 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'extra Steps apart from step, karma and devotion',
         hint: 'keys are localized labels of the given extra step',
       } ),
+      actor: new fields.SchemaField( {
+        id: new fields.StringField( {
+          required: false,
+          nullable: false,
+          initial: '',
+          label: 'earthdawn.actor',
+          hint: 'earthdawn.actorWhoIsRolling',
+        } ),
+      name: new fields.StringField( {
+        required: false,
+        nullable: false,
+        initial: '',
+        label: 'earthdawn.actor',
+        hint: 'earthdawn.actorWhoIsRolling',
+      } ),
+    } ),
+
+    targetTokens: new foundry.data.fields.ArrayField(
+      new foundry.data.fields.SchemaField( {
+          id: new foundry.data.fields.StringField( {
+              required: false,
+              blank: false,
+              nullable: false,
+              initial: "date?"
+          } ),
+          name: new foundry.data.fields.StringField( {
+              required: false,
+              blank: true,
+              nullable: false,
+              initial: ""
+          } ),
+          type: new foundry.data.fields.StringField( {
+            required: false,
+            blank: true,
+            nullable: false,
+            initial: ""
+          } ),
+          img: new foundry.data.fields.StringField( {
+            required: false,
+            blank: true,
+            nullable: false,
+            initial: ""
+          } ),
+      } )
+    ),
+    
       target: new fields.SchemaField(
         {
           base: new fields.NumberField( {
@@ -203,7 +249,14 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'localize: roll sub type',
         hint: 'localize: subtype of this roll, like attackMelee, or threadWeaving',
       } ),
-
+      triggeredMessId: new fields.StringField( {  
+        required: false,
+        nullable: true,
+        blank: true,
+        initial: '',
+        label: 'localize: roll sub type',
+        hint: 'localize: subtype of this roll, like attackMelee, or threadWeaving',
+      } ),
     };
   }
 
@@ -221,8 +274,13 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
       available: actor.system.karma.value, 
       step: actor.system.karma.step 
     };
+
+    const actorData = { id: actor.id, name: actor.name };
+
+    data.actor = actorData;
     data.karma = karma;
     data.devotion = devotion;
+
 
     return new EdRollOptions( data, options );
   }

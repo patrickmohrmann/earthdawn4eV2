@@ -166,10 +166,11 @@ export default class ActorEd extends Actor {
    * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAbility( ability, options = {} ) {
+  async rollAbility( ability, options = {}, inputDifficulty, triggeredMessId) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
-    const difficulty = await ability.system.getDifficulty();
+    const difficulty = !inputDifficulty ? await ability.system.getDifficulty() : inputDifficulty;
+    const targetActor = 1 
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
@@ -191,6 +192,7 @@ export default class ActorEd extends Actor {
         {
           testType: "action",
           rollType: rollType,
+          triggeredMessId: triggeredMessId ? triggeredMessId : undefined,
           strain: strain,
           target: difficultyFinal,
           step: abilityFinalStep,
@@ -204,6 +206,8 @@ export default class ActorEd extends Actor {
       ui.notifications.warn( "Attack Workflow" );
       edRollOptions = EdRollOptions.fromActor(
         {
+          actor: this.id,
+          targetTokens: attackData.targetsArray,
           testType: "action",
           rollType: rollType,
           strain: strain,
@@ -214,20 +218,15 @@ export default class ActorEd extends Actor {
         },
         this
       );
-       options= {
-          weapon: attackData.weapon,
-          target: attackData.target,
-          range: attackData.range,
-        };
     }
-    const roll = await RollPrompt.waitPrompt( edRollOptions, {options} );
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );
   }
 
   async getAttackData ( ability ) {
     let weapon;
     const holdingType = ability.system.combatAbility.requiredItemStatus;
-    if ( holdingType === "mainHand" || holdingTpye === "twoHands" ) {
+    if ( holdingType === "mainHand" || holdingType === "twoHands" ) {
       weapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === holdingType ); 
     } else if ( holdingType === "offHand" ) {
       weapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
@@ -236,27 +235,43 @@ export default class ActorEd extends Actor {
       ui.notifications.error( "No weapon found in the required item status" );
       return;
     };
-    const targetsArray = Array.from(game.user.targets);
+    const targets = Array.from(game.user.targets);
+    const targetsArray = await this.getTargets( targets );
     if (targetsArray.length === 0) {
       ui.notifications.error("No targets selected");
       return;
     }
-    const target = targetsArray[0]
-    const distance = await this.getDistanceToTarget( target );
-    const closeCombat = distance.spaces === 1 ? distance.distance : 1
-    const range = {
-      targetDistance: distance,
-      weaponShortRangeMin: weapon.system.shortRangeMin >= 0 ? weapon.system.shortRangeMin : closeCombat,
-      weaponShortRangeMax: weapon.system.shortRangeMax >= 0 ? weapon.system.shortRangeMax : 1,
-      weaponLongRangeMin: weapon.system.longRangeMin >= 0 ? weapon.system.longRangeMin : 1,
-      weaponLongRangeMax: weapon.system.longRangeMax >= 0 ? weapon.system.longRangeMax : 1,
-    };
-    if ( distance.spaces !== 1 && range.weaponShortRangeMin < distance.distance ) {
-      ui.notifications.error( "Target is out of range" );
-      return;
-    };
+    // const target = targetsArray[0]
+    // const distance = await this.getDistanceToTarget( target );
+    // const closeCombat = distance.spaces === 1 ? distance.distance : 1
+    // const range = {
+    //   targetDistance: distance,
+    //   weaponShortRangeMin: weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : closeCombat,
+    //   weaponShortRangeMax: weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1,
+    //   weaponLongRangeMin: weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1,
+    //   weaponLongRangeMax: weapon.system.range.longMax >= 0 ? weapon.system.range.longMax : 1,
+    // };
+    // if ( distance.spaces !== 1 && range.weaponLongRangeMax < distance.distance ) {
+    //   ui.notifications.error( "Target is out of range" );
+    //   return;
+    // };
 
-    return { weapon, target, range };
+    //return { weapon, targetsArray, range };
+
+    return { weapon, targetsArray};
+  }
+
+  async getTargets( targets ) {
+    const targetArray = [];
+    for ( const target of targets ) {
+      targetArray.push( {
+        name: target.name,
+        id: target.id,
+        type: target.actor.type,
+        img: target.actor.img,
+      } );
+    }
+    return targetArray;
   }
 
   async getDistanceToTarget( target ) {
@@ -569,7 +584,7 @@ export default class ActorEd extends Actor {
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
-  #processRoll( roll ) {
+  async #processRoll( roll ) {
     if ( !roll ) {
       // No roll available, do nothing.
       return;
@@ -586,6 +601,7 @@ export default class ActorEd extends Actor {
     }
 
     const rollTypeProcessors = {
+      "attack": () => this.#processAttackResult( roll ),
       "recovery": () => this.#processRecoveryResult( roll ),
       "knockdown": () => this.#processKnockdownResult( roll ),
       "jumpUp": () => this.#processJumpUpResult( roll )
@@ -596,8 +612,13 @@ export default class ActorEd extends Actor {
     if ( processRollType ) {
       processRollType();
     } else {
-      roll.toMessage();
+      await roll.toMessage();
     }
+  }
+
+  async #processAttackResult( roll ) {
+    await roll.evaluate();
+    roll.toMessage();
   }
 
   async #processJumpUpResult( roll ) {
@@ -813,7 +834,7 @@ export default class ActorEd extends Actor {
           case "twoHands": {
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
             addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
-            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield?.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
           }
           case "mainHand":

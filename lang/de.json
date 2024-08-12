@@ -231,7 +231,8 @@
                 "rollDamage":                                       "Effektwurf",
                 "rollDamageTitle":                                  "Würfel den Effect",
                 "takeDamage":                                       "Schaden nehmen",
-                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter"
+                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter",
+                "takeTheHit":                                       "Nimm den Schaden"
             },
             "Flavor": {
                 "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
@@ -253,7 +254,10 @@
             "Header": {
                 "actionTest":                                       "Aktions Test",
                 "arbitraryTest":                                    "Willkürlicher Test",
-                "effectTest":                                       "Effect Test"
+                "effectTest":                                       "Effect Test",
+                "maneuver":                                         "Manöver",
+                "reactions":                                        "Reaktionen",
+                "rollDamage":                                       "Würfel Schaden"
             }
         },
         "Config": {

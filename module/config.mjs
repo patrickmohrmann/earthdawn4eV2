@@ -126,6 +126,18 @@ ED4E.globalBonuses = {
 preLocalize( "globalBonuses", {key: "label"} );
 
 /**
+ * Ammunition types
+ * @enum {string}
+ */
+ED4E.ammunitionType = {
+	arrow: 							"ED.Config.ammunitionType.arrow",
+	bolt: 							"ED.Config.ammunitionType.bolt",
+	needle: 						"ED.Config.ammunitionType.needle",
+	stone: 							"ED.Config.ammunitionType.stone",
+};
+preLocalize( "ammunitionType" );
+
+/**
  * Denomination options
  * @enum {string}
  */
@@ -135,6 +147,19 @@ ED4E.denomination = {
 	gold: 				"ED.Denomination.gold"
 };
 preLocalize( "denomination" );
+
+
+/**
+ * Denomination options
+ * @enum {string}
+ */
+ED4E.reactionType = {
+	mystical: 			"ED.Config.ReactionType.mystical",
+	physical: 			"ED.Config.ReactionType.physical",
+	social: 			"ED.Config.ReactionType.social",
+};
+preLocalize( "reactionType" );
+
 
 /**
  * Availability
