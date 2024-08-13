@@ -226,10 +226,30 @@ export default class ActorEd extends Actor {
   async getAttackData ( ability ) {
     let weapon;
     const holdingType = ability.system.combatAbility.requiredItemStatus;
-    if ( holdingType === "mainHand" || holdingType === "twoHands" ) {
-      weapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === holdingType ); 
+    if ( holdingType === "mainHand") {
+      const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
+      if ( mainhand.system.weaponType === ability.system.combatAbility.requiredCombatType ) {
+        weapon = mainhand;
+      } else {
+        ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
+      }
     } else if ( holdingType === "offHand" ) {
-      weapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
+      const offHand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
+      if ( offHand.system.weaponType === "melee" || offHand.system.requiredCombatType === "unarmed" ) {
+        weapon = offHand;
+      } else {
+        ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
+      }
+    } else if ( holdingType === "tail" ) {
+      const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
+      if ( tailWeapon.system.weaponType === "melee" || offHand.system.requiredCombatType === "unarmed" ) {
+        weapon = tailWeapon;
+      } else {
+        ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
+      }
+      if ( !weapon ) {
+        weapon = "tail";
+      }
     }
     if ( !weapon ) {
       ui.notifications.error( "No weapon found in the required item status" );
@@ -241,24 +261,35 @@ export default class ActorEd extends Actor {
       ui.notifications.error("No targets selected");
       return;
     }
-    // const target = targetsArray[0]
-    // const distance = await this.getDistanceToTarget( target );
-    // const closeCombat = distance.spaces === 1 ? distance.distance : 1
-    // const range = {
-    //   targetDistance: distance,
-    //   weaponShortRangeMin: weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : closeCombat,
-    //   weaponShortRangeMax: weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1,
-    //   weaponLongRangeMin: weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1,
-    //   weaponLongRangeMax: weapon.system.range.longMax >= 0 ? weapon.system.range.longMax : 1,
-    // };
-    // if ( distance.spaces !== 1 && range.weaponLongRangeMax < distance.distance ) {
-    //   ui.notifications.error( "Target is out of range" );
-    //   return;
-    // };
+    const firstTarget = targetsArray[0]
+    const firstTargetToken = canvas.tokens.get(firstTarget.id);
+    const firstTargetRadius = firstTargetToken.document.width;
+    const firstTargetDistance = await this.getDistanceToTarget( firstTargetToken );
+    const targetTokenDiameter = firstTargetToken.document.width;
+    let distance = firstTargetDistance.distance;
+    if ( firstTargetRadius > 1 && targetTokenDiameter === 1) {
+      distance -= firstTargetRadius / 2;
+    } else if ( firstTargetRadius > 1 && targetTokenDiameter > 1) {
+      distance -= firstTargetRadius;
+    }
+   
+    const range = {
+      targetDistance: distance,
+      weaponShortRangeMin: weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : 1,
+      weaponShortRangeMax: weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1,
+      weaponLongRangeMin: weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1,
+      weaponLongRangeMax: weapon.system.range.longMax >= 0 ? weapon.system.range.longMax : 1,
+    };
+    if (  range.weaponLongRangeMax < distance ) {
+      ui.notifications.error( "Target is out of range" );
+      return;
+    } else if ( range.weaponShortRangeMin > distance && range.weaponShortRangeMin !== 1 ) {
+      ui.notifications.error( "Target is to close" );
+      return;
+    }
+    return { weapon, targetsArray, range };
 
-    //return { weapon, targetsArray, range };
-
-    return { weapon, targetsArray};
+    // return { weapon, targetsArray};
   }
 
   async getTargets( targets ) {
@@ -276,6 +307,7 @@ export default class ActorEd extends Actor {
 
   async getDistanceToTarget( target ) {
     const actorToken = this.getActiveTokens()[0];
+    const targetToken = canvas.tokens.get(target.id);
     const distance = canvas.grid.measurePath([actorToken.center, target.center])
     return distance;
   }

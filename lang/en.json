@@ -412,6 +412,24 @@
                 "details":                                          "Details",
                 "effects":                                          "Effects",
                 "general":                                          "General"
+            },
+            "PhysicalItems": {
+                "requiredItemStatus":                               "Required Item Status",
+                "RequiredItemStatus": {
+                    "carried":                                      "Carried",
+                    "equipped":                                     "Equipped",
+                    "mainHand":                                     "Main Hand",
+                    "offHand":                                      "Off Hand",
+                    "twoHands":                                     "Two Hands",
+                    "tail":                                         "Tail"
+                }
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Insert your description here"
+            },
+            "Title": {
+                "assignLp":                                         "Assign Legend Points",
+                "rollPrompt":                                       "Roll Options"
             }
         },
         "Languages": {

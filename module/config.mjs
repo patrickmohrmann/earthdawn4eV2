@@ -194,9 +194,9 @@ preLocalize( "action" );
  * @enum {string}
  */
 ED4E.requiredItemStatus = {
-	mainHand: 				"ED.Config.ItemStatus.mainHand",
-	offHand: 				"ED.Config.ItemStatus.offHand",
-	twoHands: 				"ED.Config.ItemStatus.twoHands",
+	mainHand: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.mainHand",
+	offHand: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.offHand",
+	tail: 					"ED.Config.Item.PhysicalItems.RequiredItemStatus.tail",
 };
 preLocalize( "requiredItemStatus" );
 
@@ -299,13 +299,13 @@ preLocalize( "tier" );
  * @enum {string}
  */
 ED4E.itemStatus = {
-	owned:			"ED.Config.ItemStatus.owned",
-	carried: 		"ED.Config.ItemStatus.carried",
-	equipped: 	"ED.Config.ItemStatus.equipped",
-	mainHand: 	"ED.Config.ItemStatus.mainHand",
-	offHand: 		"ED.Config.ItemStatus.offHand",
-	twoHands: 	"ED.Config.ItemStatus.twoHands",
-	tail: 			"ED.Config.ItemStatus.tail",
+	owned:						"ED.Config.ItemStatus.owned",
+	carried: 					"ED.Config.ItemStatus.carried",
+	equipped: 					"ED.Config.ItemStatus.equipped",
+	mainHand: 					"ED.Config.ItemStatus.mainHand",
+	offHand: 					"ED.Config.ItemStatus.offHand",
+	twoHands: 					"ED.Config.ItemStatus.twoHands",
+	tail: 						"ED.Config.ItemStatus.tail",
 };
 preLocalize( "itemStatus" );
 
@@ -327,12 +327,12 @@ preLocalize( "talentCategory" );
  * @enum {string}
  */
 ED4E.weaponType = {
-	bow: 						"ED.Config.bow",
-	crossbow: 			"ED.Config.crossbow",
+	bow: 					"ED.Config.bow",
+	crossbow: 				"ED.Config.crossbow",
 	melee: 					"ED.Config.melee",
 	unarmed: 				"ED.Config.unarmed"
 }
-preLocalize( "talentCategory" );
+preLocalize( "weaponType" );
 
 /**
  * Type of grantable abilities for a class level

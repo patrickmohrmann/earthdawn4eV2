@@ -402,6 +402,17 @@
                 "effects":                                          "Effekte",
                 "general":                                          "Allgemein"
             },
+            "PhysicalItems": {
+                "requiredItemStatus":                               "Required Item Status",
+                "RequiredItemStatus": {
+                    "carried":                                      "Getragen",
+                    "equipped":                                     "Ausgerüstet",
+                    "mainHand":                                     "Haupthand",
+                    "offHand":                                      "Nebenhand",
+                    "twoHands":                                     "Beidhändig",
+                    "tail":                                         "Schwanz"
+                }
+            },
             "Placeholder": {
                 "lpDescription":                                    "Trage hier eine Beschreibung ein"
             },

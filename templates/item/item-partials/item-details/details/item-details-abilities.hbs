@@ -34,6 +34,14 @@
     </select>
 </div>
 
+{{!-- required Combat Type of the Weapons  --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Ability.requiredCombatType"}}:</label>
+    <select name="system.combatAbility.requiredCombatType">
+        {{selectOptions config.weaponType selected=item.system.combatAbility.requiredCombatType blank="" localize=true }}
+    </select>
+</div>
+
 {{!-- reachtion ability? --}}
 <div class="item-data__input--line">
     <label class="label__left">{{localize "ED.Item.Ability.reactionType"}}:</label>

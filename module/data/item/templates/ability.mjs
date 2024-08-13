@@ -63,7 +63,15 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                     blank: true,
                     initial: "",
                     choices: ED4E.requiredItemStatus,
-                    label: "ED.Item.Ability.type"
+                    label: "ED.Item.PhysicalItems.requiredItemStatus"
+                } ),
+                requiredCombatType: new fields.StringField( {
+                    required: false,
+                    nullable: true,
+                    blank: true,
+                    initial: "",
+                    choices: ED4E.weaponType,
+                    label: "ED.Item.Ability.requiredCombatType"
                 } ),
             } ),
             reaction: new fields.SchemaField( {
