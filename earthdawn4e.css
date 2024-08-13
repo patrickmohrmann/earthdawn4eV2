@@ -218,28 +218,38 @@ p {
 .chat-message .message-buttons.flexrow button:last-child {
   margin-right: 0;
 }
-.chat-message .target__reaction {
-  vertical-align: middle;
-  display: flex;
+.chat-message .targets {
+  margin-top: 5px;
 }
-.chat-message .target__reaction img {
-  width: 40px;
-  height: 40px;
-  margin-right: 5px;
+.chat-message .reaction .reaction__image {
+  display: flex;
+  width: 20%;
+  float: left;
+}
+.chat-message .reaction .reaction__image .target__image {
+  width: 38px;
+  height: 38px;
   border: none;
 }
-.chat-message .target__reaction .reaction__toggle {
-  width: fit-content;
-  float: right;
-  margin-right: 20px;
+.chat-message .reaction__target--name {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+.chat-message .reaction__button-header {
+  font-family: "warhorseDIY", serif;
+  font-size: 1.25em;
+  border-bottom: 1px solid;
+  font-weight: normal;
+  height: 20px;
 }
 .chat-message .maneuver {
   width: 100%;
-  min-height: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-.chat-message .maneuver .testClass {
+.chat-message .maneuver .maneuver__button-header {
   font-family: "warhorseDIY", serif;
-  font-size: 1.4em;
+  font-size: 1.25em;
   border-bottom: 1px solid;
   font-weight: normal;
   height: 20px;
