@@ -70,11 +70,14 @@ export default class ActorSheetEd extends ActorSheet {
     // Ability tests
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
 
-    // Ability tests
+    // weapon attack tests without ability
     html.find( ".attack-substitude__weapon-attack" ).click( this._onAttackSubstitude.bind( this ) );
 
-    // Ability tests
+    // unarmed attack tests without ability
     html.find( ".attack-substitude__unarmed-attack" ).click( this._onAttackSubstitude.bind( this ) );
+
+    // tail attack tests without ability
+    html.find( ".attack-substitude__tail-attack" ).click( this._onAttackSubstitude.bind( this ) );
 
     // Equipment tests
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );

@@ -236,7 +236,8 @@
                 "takeTheHit":                                       "Take the Hit"
             },
             "Flavor": {
-                "attackSubstitude":                                 "{sourceActor} uses Dexterity with step {step}.",
+                "attackSubstitude":                                 "{sourceActor} uses Dexterity with step {step} to roll a {weapon} attack.",
+                "attackSubstitudeTail":                             "{sourceActor} uses Dexterity with step {step} to roll a {weapon} attack with the tail.",
                 "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
                 "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
@@ -252,6 +253,10 @@
                 "rollAttackWithoutTarget":                          "{sourceActor} uses {ability} ({weapon}) with step {abilityFinalStep}",
                 "rollAttackSingleTarget":                           "{sourceActor} uses {ability} ({weapon}) with step {abilityFinalStep} against {singleTarget}",
                 "rollAttackMultipleTargets":                        "{sourceActor} uses {ability} ({weapon}) with step {abilityFinalStep} against many Targets"
+            },
+            "FlavorLocalize": {
+                "tail":                                             "Tail",
+                "unarmed":                                          "Unarmed"    
             },
             "Header": {
                 "actionTest":                                       "Action Test",
@@ -469,7 +474,8 @@
                 "threadWeavingRoll":                                "Thread weaving Test"
             },
             "Modifiers": {
-                "longRange":                                        "Lange Reichweite"
+                "longRange":                                        "Long Range",
+                "tailWeapon":                                       "Tail Attack"
             },
             "rolls":                                                "rolls",
             "rollResult":                                           "Roll Result",

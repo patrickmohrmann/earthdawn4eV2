@@ -235,7 +235,8 @@
                 "takeTheHit":                                       "Nimm den Schaden"
             },
             "Flavor": {
-                "attackSubstitude":                                 "{sourceActor} benutzt Geschicklichkeit mit Stufe {step}.",
+                "attackSubstitude":                                 "{sourceActor} benutzt Geschicklichkeit mit Stufe {step} um einen {weapon} Angriff auszuführen.",
+                "attackSubstitudeTail":                             "{sourceActor} benutzt Geschicklichkeit mit Stufe {step} um einen {weapon} Angriff mit dem Schwanz auszuführen.",
                 "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
                 "rollEquipmentSingleTarget":                        "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen mehrere Ziele",
@@ -251,6 +252,10 @@
                 "jumpUp":                                           "{sourceActor} springt auf mit Stufe {step}",
                 "knockdownTest":                                    "{sourceActor} versucht dem Niederschlag zu widerstehen {step}",
                 "rollAttackMultipleTargets":                        "{sourceActor} benutzt {ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
+            },
+            "FlavorLocalize": {
+                "tail":                                             "Schwanz",
+                "unarmed":                                          "Waffenlosen"    
             },
             "Header": {
                 "actionTest":                                       "Aktions Test",
@@ -458,7 +463,8 @@
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
             "Modifiers": {
-                "longRange":                                        "Lange Reichweite"
+                "longRange":                                        "Lange Reichweite",
+                "tailWeapon":                                       "Schwanzangriff"
             },
             "rolls":                                                "würfelt",
             "rollResult":                                           "Würfelergebnis",

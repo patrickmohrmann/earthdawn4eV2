@@ -14,13 +14,18 @@ export default function registerHandlebarHelpers() {
       // Check if collection is iterable
       return false;
     }
-
     for (const _ of collection) {
       return true; // Only returns if at least on element exists
     }
 
     return false; // If no elements found, return false
   } );
+
+  
+  //hasTailAttack
+  Handlebars.registerHelper( 'hasTailAttack', ( items ) => {
+    return items.some(item => item.type === 'namegiver' && item.system.tailAttack === true);
+  });
 
   Handlebars.registerHelper( 'add', ( value1, value2 ) => {
     return value1 + value2;

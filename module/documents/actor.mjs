@@ -201,7 +201,7 @@ export default class ActorEd extends Actor {
         this
       );
     } else if ( rollType === "attack" ) {
-      const attackData = await this.getAttackData ( ability, false, false );
+      const attackData = await this.getAttackData ( ability, false, false, false );
       if (attackData === undefined ) {
         return
       }
@@ -209,8 +209,12 @@ export default class ActorEd extends Actor {
       { base: abilityStep, 
         modifiers: {}
       };
-      abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.longRange")] = attackData.modifier;
-      console.log("abilityFinalStep", abilityFinalStep)
+      if (attackData.modifier.range !== 0) {
+        abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.longRange")] = attackData.modifier.range;
+        }
+        if (attackData.modifier.tailWeapon !== 0) {
+        abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.tailWeapon")] = attackData.modifier.tailWeapon;
+        }
       edRollOptions = EdRollOptions.fromActor(
         {
           actor: this.id,
@@ -232,19 +236,40 @@ export default class ActorEd extends Actor {
 
   async attackSubstitude ( ability, type, options = {} ) {
     const unarmed = type.itemId === "unarmed-attack" ? true : false
-
-    const attackData = await this.getAttackData( undefined, true, unarmed);
+    const tailAttack = type.itemId === "tail-attack" ? true : false
+    const attackData = await this.getAttackData( undefined, true, unarmed, tailAttack);
     if (attackData === undefined ) {
       return
+    }
+    let abilityFinalStep = 
+    { base: ability, 
+      modifiers: {}
+    };
+    if (attackData.modifier.range !== 0) {
+    abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.longRange")] = attackData.modifier.range;
+    }
+    if (attackData.modifier.tailWeapon !== 0) {
+    abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.tailWeapon")] = attackData.modifier.tailWeapon;
     }
     const currentTarget = game.user.targets.first()?.actor;
     const difficulty = currentTarget.system.characteristics.defenses.physical.value
     const difficultyFinal = { base: difficulty };
-    const finalStep = { base: ability };
-    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.attackSubstitude", {
+    let weaponName = attackData.weapon === "unarmed" ? game.i18n.localize("ED.Chat.FlavorLocalize.unarmed") : 
+        attackData.weapon === "tail" ? game.i18n.localize("ED.Chat.FlavorLocalize.tail") : 
+        attackData.weapon.name; 
+    
+    let chatFlavor = game.i18n.format( "ED.Chat.Flavor.attackSubstitude", {
       sourceActor: this.name,
-      step: ability
+      step: ability,
+      weapon: weaponName
     } );
+    if ( tailAttack === true && attackData.weapon !== "tail" ) {
+      chatFlavor = game.i18n.format( "ED.Chat.Flavor.attackSubstitudeTail", {
+        sourceActor: this.name,
+        step: ability,
+        weapon: weaponName
+      } );
+    }
     const edRollOptions = EdRollOptions.fromActor(
       {
         actor: this.id,
@@ -253,7 +278,7 @@ export default class ActorEd extends Actor {
         rollType: "attack",
         strain: 0,
         target: difficultyFinal,
-        step: finalStep,
+        step: abilityFinalStep,
         devotionRequired: false,
         chatFlavor: chatFlavor
       },
@@ -264,26 +289,47 @@ export default class ActorEd extends Actor {
   }
 
 
-  async getAttackData ( ability, substitude, unarmed ) {
+  /**
+   * 
+   * @param {Object or Number} ability 
+   * @param {Boolean} substitude 
+   * @param {Boolean} unarmed 
+   * @param {Boolean} tailAttack
+   * @returns 
+   */
+  async getAttackData ( ability, substitude, unarmed, tailAttack ) {
     let weapon;
     const holdingType = ability?.system.combatAbility.requiredItemStatus;
+    let modifier = {
+      tailWeapon: 0,
+      range: 0,
+    }
     if ( substitude === true ) {
       if ( unarmed === true ) {
         weapon = "unarmed";
+      } else if ( tailAttack === true ) {
+        const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
+        if ( tailWeapon ) {
+          weapon = tailWeapon;
+          modifier.tailWeapon += -2;
+        } else {
+        weapon = "tail";
+        modifier.tailWeapon += -2;
+        }
       } else {
       const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
         weapon = mainhand;
       }
     } else if ( holdingType === "mainHand") {
       const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
-      if ( mainhand.system.weaponType === ability.system.combatAbility.requiredCombatType ) {
+      if ( mainhand?.system.weaponType === ability.system.combatAbility.requiredCombatType ) {
         weapon = mainhand;
       } else {
         ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
       }
     } else if ( holdingType === "offHand" ) {
       const offHand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
-      if ( offHand.system.weaponType === "melee" || offHand.system.requiredCombatType === "unarmed" ) {
+      if ( offHand?.system.weaponType === "melee" || offHand?.system.requiredCombatType === "unarmed" ) {
         weapon = offHand;
       } else {
         ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
@@ -291,13 +337,16 @@ export default class ActorEd extends Actor {
     } else if ( holdingType === "tail" ) {
       // add code for tail weapon Earthdawn Active Effect here see #909
       const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
-      if ( tailWeapon.system.weaponType === "melee" || offHand.system.requiredCombatType === "unarmed" ) {
+      const offHand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
+      if ( tailWeapon?.system.weaponType === "melee" || offHand?.system.requiredCombatType === "unarmed" ) {
         weapon = tailWeapon;
+        modifier.tailWeapon += -2;
       } else {
         ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
       }
       if ( !weapon ) {
         weapon = "tail";
+        modifier.tailWeapon += -2;
       }
     }
     if ( !weapon ) {
@@ -313,7 +362,7 @@ export default class ActorEd extends Actor {
     
     const automaticRangeCalculation = game.settings.get( "ed4e", "automaticRangeCalculation" );
     if ( automaticRangeCalculation === false ) {
-      return { weapon, targetsArray};
+      return { weapon, targetsArray, modifier};
     } else {
       const firstTarget = targetsArray[0]
       const firstTargetToken = canvas.tokens.get(firstTarget.id);
@@ -336,9 +385,8 @@ export default class ActorEd extends Actor {
       }
 
       distance = Math.round( distance );
-
+      let rangeModifier = 0;
       let range;  
-      let modifier = 0;
         let weaponShortRangeMin = 1;
         let weaponShortRangeMax = 1;
         let weaponLongRangeMin = 1;
@@ -358,10 +406,10 @@ export default class ActorEd extends Actor {
         return;
       } else if ( weaponShortRangeMax >= distance && weaponShortRangeMin <= distance ) {
         range = "short";
-        return { weapon, targetsArray, modifier };
+        return { weapon, targetsArray, modifier  };
       } else if ( weaponLongRangeMin <= distance && weaponLongRangeMax >= distance ) {
         range = "long";
-        modifier = -2;
+        modifier.range += -2;
         return { weapon, targetsArray, modifier };
       }
     }

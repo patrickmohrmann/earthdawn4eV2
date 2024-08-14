@@ -204,12 +204,26 @@
         <div>
             <h3>{{localize "ED.Actor.Header.defaultAttacks"}}</h3>
             <div>
-                <div class="partial__two">
-                    <button class="attack-substitude__weapon-attack" data-item-id="weapon-attack">Weapon Attack</button>
-                </div>
-                <div class="partial__two">
-                    <button class="attack-substitude__unarmed-attack" data-item-id="unarmed-attack">Unarmed Attack</button>
-                </div>
+                   
+                
+                {{#if (hasTailAttack this.actor.items)}}
+                    <div class="partial__three">
+                        <button class="attack-substitude__weapon-attack" data-item-id="weapon-attack">Weapon Attack</button>
+                    </div>
+                    <div class="partial__three">
+                        <button class="attack-substitude__unarmed-attack" data-item-id="unarmed-attack">Unarmed Attack</button>
+                    </div>
+                    <div class="partial__three">
+                        <button class="attack-substitude__tail-attack" data-item-id="tail-attack">Tail Attack</button>
+                    </div>
+                {{else}}
+                    <div class="partial__two">
+                        <button class="attack-substitude__weapon-attack" data-item-id="weapon-attack">Weapon Attack</button>
+                    </div>
+                    <div class="partial__two">
+                        <button class="attack-substitude__unarmed-attack" data-item-id="unarmed-attack">Unarmed Attack</button>
+                    </div>
+                {{/if}}
             </div>
         </div>
         {{!-- tobe removed --}}
