@@ -26,9 +26,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
               initial: 1,
               label: 'earthdawn.modifierStep',
               hint: 'earthdawn.modifierStepForTheRoll',
-              min: 0,
               step: 1,
-              integer: true,
+              integer: false,
             } ),
             {
               required: true,

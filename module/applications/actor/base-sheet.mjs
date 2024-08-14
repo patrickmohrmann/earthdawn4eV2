@@ -70,6 +70,12 @@ export default class ActorSheetEd extends ActorSheet {
     // Ability tests
     html.find( ".card__ability .rollable" ).click( this._onRollAbility.bind( this ) );
 
+    // Ability tests
+    html.find( ".attack-substitude__weapon-attack" ).click( this._onAttackSubstitude.bind( this ) );
+
+    // Ability tests
+    html.find( ".attack-substitude__unarmed-attack" ).click( this._onAttackSubstitude.bind( this ) );
+
     // Equipment tests
     html.find( ".card__equipment .rollable" ).click( this._onRollEquipment.bind( this ) );
 
@@ -179,6 +185,18 @@ export default class ActorSheetEd extends ActorSheet {
     const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
     this.actor.rollAbility( ability, { event: event } );
+  }
+
+  /**
+   * handles attack substitude functions if abilities are missing
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+  _onAttackSubstitude( event ) {
+    event.preventDefault();
+    const ability = this.actor.system.attributes.dex.step
+    const type = event.currentTarget.dataset
+    this.actor.attackSubstitude( ability, type, { event: event } );
   }
 
   /**

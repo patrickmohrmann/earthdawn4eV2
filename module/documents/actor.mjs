@@ -183,11 +183,10 @@ export default class ActorEd extends Actor {
       ability: ability.name,
       step: abilityStep
     } );
-    const abilityFinalStep = { base: abilityStep };
+    let abilityFinalStep = { base: abilityStep };
     const rollType = ability.system.rollType;
     let edRollOptions;
     if ( rollType === "ability" )  { 
-      ui.notifications.warn( "Ability Workflow" );
       edRollOptions = EdRollOptions.fromActor(
         {
           testType: "action",
@@ -202,8 +201,16 @@ export default class ActorEd extends Actor {
         this
       );
     } else if ( rollType === "attack" ) {
-      const attackData = await this.getAttackData ( ability );
-      ui.notifications.warn( "Attack Workflow" );
+      const attackData = await this.getAttackData ( ability, false, false );
+      if (attackData === undefined ) {
+        return
+      }
+      abilityFinalStep = 
+      { base: abilityStep, 
+        modifiers: {}
+      };
+      abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.longRange")] = attackData.modifier;
+      console.log("abilityFinalStep", abilityFinalStep)
       edRollOptions = EdRollOptions.fromActor(
         {
           actor: this.id,
@@ -223,10 +230,51 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
-  async getAttackData ( ability ) {
+  async attackSubstitude ( ability, type, options = {} ) {
+    const unarmed = type.itemId === "unarmed-attack" ? true : false
+
+    const attackData = await this.getAttackData( undefined, true, unarmed);
+    if (attackData === undefined ) {
+      return
+    }
+    const currentTarget = game.user.targets.first()?.actor;
+    const difficulty = currentTarget.system.characteristics.defenses.physical.value
+    const difficultyFinal = { base: difficulty };
+    const finalStep = { base: ability };
+    const chatFlavor = game.i18n.format( "ED.Chat.Flavor.attackSubstitude", {
+      sourceActor: this.name,
+      step: ability
+    } );
+    const edRollOptions = EdRollOptions.fromActor(
+      {
+        actor: this.id,
+        targetTokens: attackData.targetsArray,
+        testType: "action",
+        rollType: "attack",
+        strain: 0,
+        target: difficultyFinal,
+        step: finalStep,
+        devotionRequired: false,
+        chatFlavor: chatFlavor
+      },
+      this
+    );  
+  const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+  this.#processRoll( roll );
+  }
+
+
+  async getAttackData ( ability, substitude, unarmed ) {
     let weapon;
-    const holdingType = ability.system.combatAbility.requiredItemStatus;
-    if ( holdingType === "mainHand") {
+    const holdingType = ability?.system.combatAbility.requiredItemStatus;
+    if ( substitude === true ) {
+      if ( unarmed === true ) {
+        weapon = "unarmed";
+      } else {
+      const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
+        weapon = mainhand;
+      }
+    } else if ( holdingType === "mainHand") {
       const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
       if ( mainhand.system.weaponType === ability.system.combatAbility.requiredCombatType ) {
         weapon = mainhand;
@@ -241,6 +289,7 @@ export default class ActorEd extends Actor {
         ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
       }
     } else if ( holdingType === "tail" ) {
+      // add code for tail weapon Earthdawn Active Effect here see #909
       const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
       if ( tailWeapon.system.weaponType === "melee" || offHand.system.requiredCombatType === "unarmed" ) {
         weapon = tailWeapon;
@@ -261,35 +310,61 @@ export default class ActorEd extends Actor {
       ui.notifications.error("No targets selected");
       return;
     }
-    const firstTarget = targetsArray[0]
-    const firstTargetToken = canvas.tokens.get(firstTarget.id);
-    const firstTargetRadius = firstTargetToken.document.width;
-    const firstTargetDistance = await this.getDistanceToTarget( firstTargetToken );
-    const targetTokenDiameter = firstTargetToken.document.width;
-    let distance = firstTargetDistance.distance;
-    if ( firstTargetRadius > 1 && targetTokenDiameter === 1) {
-      distance -= firstTargetRadius / 2;
-    } else if ( firstTargetRadius > 1 && targetTokenDiameter > 1) {
-      distance -= firstTargetRadius;
-    }
-   
-    const range = {
-      targetDistance: distance,
-      weaponShortRangeMin: weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : 1,
-      weaponShortRangeMax: weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1,
-      weaponLongRangeMin: weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1,
-      weaponLongRangeMax: weapon.system.range.longMax >= 0 ? weapon.system.range.longMax : 1,
-    };
-    if (  range.weaponLongRangeMax < distance ) {
-      ui.notifications.error( "Target is out of range" );
-      return;
-    } else if ( range.weaponShortRangeMin > distance && range.weaponShortRangeMin !== 1 ) {
-      ui.notifications.error( "Target is to close" );
-      return;
-    }
-    return { weapon, targetsArray, range };
+    
+    const automaticRangeCalculation = game.settings.get( "ed4e", "automaticRangeCalculation" );
+    if ( automaticRangeCalculation === false ) {
+      return { weapon, targetsArray};
+    } else {
+      const firstTarget = targetsArray[0]
+      const firstTargetToken = canvas.tokens.get(firstTarget.id);
+      const firstTargetRadius = firstTargetToken.document.width / 2;
+      const firstTargetDistance = await this.getDistanceToTarget( firstTargetToken );
+      const targetTokenDiameter = firstTargetToken.document.width;
+      const attackerTokenDocument = this.getActiveTokens()[0];
+      const attackerToken = canvas.tokens.get(this.id);
+      const attackTokenRadius = attackerTokenDocument.document.width / 2;
+      const attackerTokenDiameter = attackerTokenDocument.document.width;
+      const gridDistance = game.scenes.active.grid.distance;
+      let distance = firstTargetDistance.distance
 
-    // return { weapon, targetsArray};
+      if ( targetTokenDiameter > 1 ) {
+        distance -= (firstTargetRadius ) * gridDistance;
+      } 
+
+      if ( attackerTokenDiameter > 1 ) {
+        distance -= (attackTokenRadius ) * gridDistance;
+      }
+
+      distance = Math.round( distance );
+
+      let range;  
+      let modifier = 0;
+        let weaponShortRangeMin = 1;
+        let weaponShortRangeMax = 1;
+        let weaponLongRangeMin = 1;
+        let weaponLongRangeMax = 1;
+        if ( weapon !== "unarmed" ) {      
+        weaponShortRangeMin = weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : 1;
+        weaponShortRangeMax = weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1;
+        weaponLongRangeMin = weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1;
+        weaponLongRangeMax = weapon.system.range.longMax >= 0 ? weapon.system.range.longMax : 1;
+        }
+
+      if (  weaponLongRangeMax < distance ) {
+        ui.notifications.error( "Target is out of range" );
+        return;
+      } else if ( weaponShortRangeMin > distance && weaponShortRangeMin !== 1 ) {
+        ui.notifications.error( "Target is to close" );
+        return;
+      } else if ( weaponShortRangeMax >= distance && weaponShortRangeMin <= distance ) {
+        range = "short";
+        return { weapon, targetsArray, modifier };
+      } else if ( weaponLongRangeMin <= distance && weaponLongRangeMax >= distance ) {
+        range = "long";
+        modifier = -2;
+        return { weapon, targetsArray, modifier };
+      }
+    }
   }
 
   async getTargets( targets ) {

@@ -321,8 +321,23 @@ export default function registerSystemSettings() {
         type: Boolean
     } );
 
-     /* -------------------------------------------------------------------------------- */
-    /*                                  GM Chat Avatar                                     */
+    /* -------------------------------------------------------------------------------- */
+    /*                                       Combat                                     */
+    /* -------------------------------------------------------------------------------- */
+
+    // automatic Range Calculation for Weapons
+    game.settings.register( "ed4e", "automaticRangeCalculation", {
+        name: "ED.Settings.Name.automaticRangeCalculation",
+        hint: "ED.Settings.Hint.automaticRangeCalculation",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    } );
+
+    
+    /* -------------------------------------------------------------------------------- */
+    /*                                  GM Chat Avatar                                  */
     /* -------------------------------------------------------------------------------- */
 
     // Chat Avatar settings Header

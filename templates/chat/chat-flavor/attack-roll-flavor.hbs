@@ -41,7 +41,9 @@
   <details class="roll-target-modifiers">
     <summary  class="maneuver__button-header">{{localize "ED.Chat.Header.maneuver"}}</summary>
   {{#each this.actorManeuver}}
-  <button class="maneuver-button" data-button-id="{{this.id}}" type="button">Maneuver: {{this.name}}</button>
+    {{#if (eq this.system.rollType "attack")}}
+    <button class="maneuver-button" data-button-id="{{this.id}}" type="button">{{this.name}}</button>
+    {{/if}}
   {{/each}}
   </details>
 </div>
@@ -50,14 +52,26 @@
     <h3>{{localize "ED.Chat.Header.rollDamage"}}</h3>
     {{> "systems/ed4e/templates/chat/chat-buttons/roll-damage.hbs"}}
   </div>
+
+{{!--
+todo:
+#284 assign effect button if rolled item contains an effect with the flag "transfer to actor" set to false.
+#711 show target actor name if a target is chosen
+--}}
+{{#if (eq effects true)}}
+  <div>
+    <h3>{{localize "ED.Chat.Header.assignEffect"}}</h3>
+    {{> "systems/ed4e/templates/chat/chat-buttons/assign-effect.hbs"}}
+  </div>
+{{/if}}
+
+ <div>
+    <h3>{{localize "ED.Chat.Header.assignEffect"}}</h3>
+    {{> "systems/ed4e/templates/chat/chat-buttons/assign-effect.hbs"}}
+  </div>
+
     
   {{/if}}
 
 
 
-{{!--
-todo:
-
-#284 assign effect button if rolled item contains an effect with the flag "transfer to actor" set to false.
-#711 show target actor name if a target is chosen
---}}

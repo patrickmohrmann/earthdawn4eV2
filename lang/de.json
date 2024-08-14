@@ -228,13 +228,14 @@
                 "applyEffectTitle":                                 "Füge den Effect den ausgewählten Zielen zu!",
                 "rollEffect":                                       "Effektwurf",
                 "rollEffectTitle":                                  "Würfel den Effect",
-                "rollDamage":                                       "Effektwurf",
+                "rollDamage":                                       "Schadenswurf",
                 "rollDamageTitle":                                  "Würfel den Effect",
                 "takeDamage":                                       "Schaden nehmen",
                 "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter",
                 "takeTheHit":                                       "Nimm den Schaden"
             },
             "Flavor": {
+                "attackSubstitude":                                 "{sourceActor} benutzt Geschicklichkeit mit Stufe {step}.",
                 "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
                 "rollEquipmentSingleTarget":                        "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen mehrere Ziele",
@@ -456,7 +457,9 @@
                 "spellcastingRoll":                                 "Spruchzaubereiprobe",
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
-
+            "Modifiers": {
+                "longRange":                                        "Lange Reichweite"
+            },
             "rolls":                                                "würfelt",
             "rollResult":                                           "Würfelergebnis",
             "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
@@ -485,6 +488,12 @@
                 "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
                 "threadWeaving":                                    "ED-ID für Fadenweben",
                 "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+            },
+            "Hint": {
+                "automaticRangeCalculation":                        "Automatische Reichweitenberechnung für Angriffe" 
+            },
+            "Name": {
+                "automaticRangeCalculation":                        "Automatische Reichweitenberechnung"   
             },
             "SpecificSettingOptions":{
                 "changelog":                                        "Änderungsprotokoll",

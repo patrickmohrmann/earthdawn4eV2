@@ -236,6 +236,7 @@
                 "takeTheHit":                                       "Take the Hit"
             },
             "Flavor": {
+                "attackSubstitude":                                 "{sourceActor} uses Dexterity with step {step}.",
                 "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
                 "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
@@ -467,7 +468,9 @@
                 "spellcastingRoll":                                 "Spellcasting Test",
                 "threadWeavingRoll":                                "Thread weaving Test"
             },
-            "moreTargets":                                          "and other targets",
+            "Modifiers": {
+                "longRange":                                        "Lange Reichweite"
+            },
             "rolls":                                                "rolls",
             "rollResult":                                           "Roll Result",
             "ruleOfOne":                                            "Failue, Rule of One",
@@ -496,6 +499,12 @@
                 "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
                 "threadWeaving":                                    "ED-ID for Thread Weaving",
                 "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+            },
+            "Hint": {
+                "automaticRangeCalculation":                        "Automatically calculate the range for weapons attacks" 
+            },
+            "Name": {
+                "automaticRangeCalculation":                        "Automatic Range Calculation"   
             },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",
