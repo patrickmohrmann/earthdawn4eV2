@@ -507,9 +507,11 @@
                 "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
             },
             "Hint": {
+                "automaticAmmunitionReduction":                     "Automatically reduce the ammunition",
                 "automaticRangeCalculation":                        "Automatically calculate the range for weapons attacks" 
             },
             "Name": {
+                "automaticAmmunitionReduction":                     "Automatic Ammunition Reduction",
                 "automaticRangeCalculation":                        "Automatic Range Calculation"   
             },
             "talentsSplit":                                         "Sort Talents by Kategory",

@@ -205,6 +205,19 @@ export default class ActorEd extends Actor {
       if (attackData === undefined ) {
         return
       }
+      if ( game.settings.get( "ed4e", "automaticAmmunitionReduction" ) === true ) {
+        if ( attackData.weapon.system.weaponType === "missile" || attackData.weapon.weaponType === "thrown" ) {
+          const ammunitionType = attackData.weapon.system.ammunition.type;
+          const ammunition = this.items.find( ammo => ammo.system.ammunitionType === ammunitionType );
+          if ( !ammunition || ammunition.system.quantity < 1 ) { 
+            ui.notifications.error( "No ammunition found" );
+            return;
+          }
+          const newAmmunition = await this.removeQuantity( attackData.weapon );
+          ammunition.update( { "system.quantity": newAmmunition } );
+        }
+      }
+
       abilityFinalStep = 
       { base: abilityStep, 
         modifiers: {}
@@ -370,7 +383,7 @@ export default class ActorEd extends Actor {
       const firstTargetDistance = await this.getDistanceToTarget( firstTargetToken );
       const targetTokenDiameter = firstTargetToken.document.width;
       const attackerTokenDocument = this.getActiveTokens()[0];
-      const attackerToken = canvas.tokens.get(this.id);
+      // const attackerToken = canvas.tokens.get(this.id);
       const attackTokenRadius = attackerTokenDocument.document.width / 2;
       const attackerTokenDiameter = attackerTokenDocument.document.width;
       const gridDistance = game.scenes.active.grid.distance;
@@ -385,7 +398,7 @@ export default class ActorEd extends Actor {
       }
 
       distance = Math.round( distance );
-      let rangeModifier = 0;
+      //let rangeModifier = 0;
       let range;  
         let weaponShortRangeMin = 1;
         let weaponShortRangeMax = 1;

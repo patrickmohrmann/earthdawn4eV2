@@ -5,6 +5,7 @@ import { inRange } from "../../utils.mjs";
 /**
  * Data model template with information on weapon items.
  * @property {string} weaponType            type of weapon
+ * @property {string} missleWeaponType      type of missle weapon
  * @property {object} damage                damage object
  * @property {string} damage.attribute       base attribute used for damage
  * @property {number} damage.baseStep        weapon basic damage step
@@ -32,6 +33,13 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 initial: "",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
+            } ),
+            missleWeaponType: new fields.StringField( {
+                required: true,
+                nullable: true,
+                initial: "",
+                label: "ED.Item.Weapon.Label.missleWeaponType",
+                hint: "ED.Item.Weapon.Hint.missleWeaponType"
             } ),
             damage: new fields.SchemaField( {
                 attribute: new fields.StringField( {
@@ -171,7 +179,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
      * @type {boolean}
      */
     get isTwoHandedRanged() {
-        return ["bow", "crossbow"].includes( this.weaponType );
+        return ["bow", "crossbow"].includes( this.missleWeaponType );
     }
 
     /* -------------------------------------------- */

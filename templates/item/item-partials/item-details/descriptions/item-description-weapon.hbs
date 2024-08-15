@@ -7,6 +7,17 @@
             {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
         </select>
     </div>
+    {{#if (eq item.system.weaponType "missile")}}
+    {{!-- Missile Type --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.missleWeaponType"}}:</label>
+        <select name="system.missleWeaponType">
+            {{selectOptions config.missleWeaponType selected=item.system.missleWeaponType blank="" localize=true }}
+        </select>
+    </div>
+    {{/if}}
+
+    {{!-- Damage Type --}}
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageAttribute"}}:</label>

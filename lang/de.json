@@ -496,9 +496,11 @@
                 "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
             },
             "Hint": {
+                "automaticAmmunitionReduction":                     "Automatische Reduzierung der Munition",
                 "automaticRangeCalculation":                        "Automatische Reichweitenberechnung für Angriffe" 
             },
             "Name": {
+                "automaticAmmunitionReduction":                     "Automatische Munitionsreduktion",
                 "automaticRangeCalculation":                        "Automatische Reichweitenberechnung"   
             },
             "SpecificSettingOptions":{

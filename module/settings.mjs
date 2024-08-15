@@ -335,6 +335,16 @@ export default function registerSystemSettings() {
         type: Boolean
     } );
 
+    // automatic Ammunition Tracking
+    game.settings.register( "ed4e", "automaticAmmunitionReduction", {
+        name: "ED.Settings.Name.automaticAmmunitionReduction",
+        hint: "ED.Settings.Hint.automaticAmmunitionReduction",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    } );
+
     
     /* -------------------------------------------------------------------------------- */
     /*                                  GM Chat Avatar                                  */

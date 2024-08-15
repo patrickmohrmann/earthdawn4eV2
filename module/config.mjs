@@ -327,12 +327,24 @@ preLocalize( "talentCategory" );
  * @enum {string}
  */
 ED4E.weaponType = {
-	bow: 					"ED.Config.bow",
-	crossbow: 				"ED.Config.crossbow",
-	melee: 					"ED.Config.melee",
-	unarmed: 				"ED.Config.unarmed"
+	melee: 					"ED.Config.weaponType.melee",
+	missile: 				"ED.Config.weaponType.missile",
+	thrown: 				"ED.Config.weaponType.thrown",
+	unarmed: 				"ED.Config.weaponType.unarmed"
 }
 preLocalize( "weaponType" );
+
+/**
+ * WeaponType
+ * @enum {string}
+ */
+ED4E.missleWeaponType = {
+	blowgun: 				"ED.Config.missleWeaponType.blowgun",
+	bow: 					"ED.Config.missleWeaponType.bow",
+	crossbow: 				"ED.Config.missleWeaponType.crossbow",
+	sling: 					"ED.Config.missleWeaponType.sling",
+}
+preLocalize( "missleWeaponType" );
 
 /**
  * Type of grantable abilities for a class level
