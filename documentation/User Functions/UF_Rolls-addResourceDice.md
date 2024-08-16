@@ -1,0 +1,1 @@
+This function evaluates the dice which is added to the roll for any Karma or devotion points used.

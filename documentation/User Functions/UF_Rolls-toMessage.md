@@ -1,0 +1,1 @@
+This functionaly is responsible for collecting all rolldata and sending it to the message function which will create a chat message out of these data.

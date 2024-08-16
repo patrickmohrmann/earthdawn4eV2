@@ -1,0 +1,1 @@
+If a test gets extra dice from Karma, devotion or something similar, an additional dice (or more) is added to the roll, instead of increasing the step.
