@@ -6,12 +6,12 @@ Settings do not required a diagram
 
 ### Related User Functions
 
-[UF_Basic-chooseStepTable](../User%20Functions/UF_Basic-chooseStepTable.md)
+[UF_Settings-chooseStepTable](../User%20Functions/UF_Settings-chooseStepTable.md)
 
 ### Related Test Coverage
 
 | Test Coverage | Related Documentation |
 |---------------|-----------------------|
-| [Test] - System Setting Step tables | [[Test] - System Setting Step tables](https://github.com/patrickmohrmann/earthdawn4eV2/issues/386) |
+| Tests different Step tables | [[Test] - System Setting Step tables](https://github.com/patrickmohrmann/earthdawn4eV2/issues/386) |
 
 

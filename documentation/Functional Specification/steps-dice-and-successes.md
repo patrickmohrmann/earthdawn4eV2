@@ -1,6 +1,6 @@
 # Steps, Dice and Successes
 
-Earthdawn uses Steps as a base for almost every roll. each Step results in a combination of different dice these tables are called Step Tables. [UC_Settings-stepTables](../User%20Functions/UF_YYYYYY-XXXXX.md)
+Earthdawn uses Steps as a base for almost every roll. each Step results in a combination of different dice these tables are called Step Tables. [UC_Settings-stepTables](../Use%20Cases/UC_Settings-stepTables.md)
 
 every Earthdawn related roll will calculated the final step of the roll and look up the related dice combination from that table.
 

@@ -37,6 +37,10 @@ export default class RollPrompt extends FormApplication {
         } );
     }
 
+    /**
+     * @description                 Roll a step prompt.
+     * @UserFunction                UF_Rolls-rollStepPrompt
+     */
     static rollArbitraryPrompt() {
         RollPrompt.waitPrompt(
             new EdRollOptions( {
