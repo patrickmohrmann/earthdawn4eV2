@@ -27,6 +27,7 @@ stateDiagram-v2
     classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
     classDef userFunctionReturn font-style:italic,font-weight:bold,fill:aqua
     classDef dialog font-style:italic,font-weight:bold,fill:orange
+    classDef subUseCase font-style:italic,font-weight:bold,fill:violet
 
     ###################### status #######################
 
@@ -39,6 +40,19 @@ stateDiagram-v2
     userFunction5: UF_Rolls-rollAttack
     userFunction6: UF_Rolls-rollHalfMagic
 
+    userFunction7: UF_Rolls-processRoll
+
+    userFunction8: UF_Rolls-processRollType
+
+    foundryCore1: toMessage
+
+    userFunction10: UF_ActorDocument-takeDamage
+    userFunction11: UF_ActorDocument-useResource
+
+    subUseCase1: UC_EdRoll
+
+    dialog1: Roll Prompt
+
     state1: Ability Test
     state2: Spellcasting Tests
     state3: thread weaving Tests
@@ -48,9 +62,17 @@ stateDiagram-v2
     state7: equipment tests
     state8: Power Tests
 
+    state9: strain
+    state10: karma & Devotion
+
     ####################### Decisions #######################
 
     state DECISION1 <<choice>>
+    state DECISION2 <<choice>>
+
+    state fork_state1 <<fork>>
+
+    state join_state1 <<join>>
 
     ######################## Colorations ######################
 
@@ -63,7 +85,16 @@ stateDiagram-v2
     userFunction5:::userFunction
     userFunction6:::userFunction
     userFunction7:::userFunction
+    userFunction8:::userFunction
 
+    userFunction10:::userFunction
+    userFunction11:::userFunction
+
+    subUseCase1:::subUseCase
+
+    dialog1:::dialog
+
+    foundryCore1:::foundryCore
 
     ##################### StateDiagram ########################
 
@@ -92,12 +123,36 @@ stateDiagram-v2
 
     state7 --> userFunction3
 
-    userFunction1 --> [*]
-    userFunction2 --> [*]   
-    userFunction3 --> [*]
-    userFunction4 --> [*]
-    userFunction5 --> [*]
-    userFunction6 --> [*]
+    userFunction1 --> dialog1
+    userFunction2 --> dialog1 
+    userFunction3 --> dialog1
+    userFunction4 --> dialog1
+    userFunction5 --> dialog1
+    userFunction6 --> dialog1
+
+    dialog1 --> subUseCase1
+    subUseCase1 --> userFunction7
+
+    userFunction7 --> fork_state1
+
+    fork_state1 --> DECISION2
+
+    fork_state1 --> state9
+    fork_state1 --> state10
+
+    state9 --> userFunction10
+    state10 --> userFunction11
+
+    DECISION2 --> userFunction8: special processesor required?
+    DECISION2 --> join_state1
+    userFunction8 --> join_state1
+
+
+    userFunction10 --> join_state1
+    userFunction11 --> join_state1
+
+    join_state1 --> foundryCore1
+    foundryCore1 --> [*]
 ```
 
 ### Related User Functions
