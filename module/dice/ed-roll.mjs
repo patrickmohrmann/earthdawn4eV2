@@ -27,6 +27,7 @@ import ED4E from "../config.mjs";
  * @param { object } data TODO
  * @param { EdRollOptions } edRollOptions Collection of data, steps, karma, devotions, target and additional.
  * @property { string } flavorTemplate The template to use ofr rendering additional information in this roll's chat messages.
+ * @UseCase                                     UC_EdRoll  
  */
 export default class EdRoll extends Roll {
 
