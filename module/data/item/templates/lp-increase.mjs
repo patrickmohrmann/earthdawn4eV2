@@ -10,6 +10,14 @@ import SystemDataModel from "../../abstract.mjs";
 export default class LpIncreaseTemplate extends SystemDataModel {
 
   /**
+   * @description Whether the entity can be increased. This is a shortcut for checking if this is mixed in.
+   * @type {boolean}
+   */
+  get increasable() {
+    return true;
+  }
+
+  /**
    * @description Whether the entity fulfills all requirements to be increased.
    * @type {boolean}
    */

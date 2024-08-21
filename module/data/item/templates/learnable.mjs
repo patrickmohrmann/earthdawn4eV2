@@ -8,6 +8,15 @@ import SystemDataModel from "../../abstract.mjs";
 export default class LearnableTemplate extends SystemDataModel {
 
   /**
+   * @description Whether the entity can be learned. Should always be true if mixed in, as a shortcut for checkin
+   * if this is mixed in.
+   * @type {boolean}
+   */
+  get learnable() {
+    return true;
+  }
+
+  /**
    * @description Whether the entity fulfills all requirements to be learned.
    * @type {boolean}
    */

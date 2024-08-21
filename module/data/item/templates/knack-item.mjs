@@ -46,12 +46,18 @@ export default class KnackTemplate extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  get increasable() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static _cleanData( source, options ) {
     if ( source?.sourceTalentUuid ) {
       source.sourceTalentUuid = fromUuidSync( source.sourceTalentUuid ) ? source.sourceTalentUuid : null;
       if ( options ) options.source = source;
     }
-    // return super.cleanData( source, options );
   }
 
   /* -------------------------------------------- */
