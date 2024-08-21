@@ -3,7 +3,7 @@ import SystemDataModel from "../../abstract.mjs";
 /**
  * Template to be mixed in with data models that have a level that can be increased through spending legend points.
  * @property {boolean} canBeIncreased Whether the entity fulfills all requirements to be increased.
- * @property {object} validationDataForIncrease Data needed to validate the increase of this entity's level.
+ * @property {object} increaseValidationDataForIncrease Data needed to validate the increase of this entity's level.
  * @property {number} requiredLpForIncrease The amount of legend points required to increase the level of the entity.
  * @mixin
  */
@@ -22,7 +22,7 @@ export default class LpIncreaseTemplate extends SystemDataModel {
    * @type {object}
    */
   get increaseData() {
-    throw new Error( "A subclass of the LpIncreaseTemplate must implement the validationDataForIncrease getter." );
+    throw new Error( "A subclass of the LpIncreaseTemplate must implement the increaseValidationDataForIncrease getter." );
   }
 
   /**
@@ -54,7 +54,7 @@ export default class LpIncreaseTemplate extends SystemDataModel {
    * indicating whether the rule is fulfilled. If any of the values is `false`, the increase should not be allowed.
    * @type {Record<string, boolean>}
    */
-  get validationData() {
+  get increaseValidationData() {
     throw new Error( "A subclass of the LpIncreaseTemplate must implement the validation getter." );
   }
 

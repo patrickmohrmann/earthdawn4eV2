@@ -1,6 +1,7 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import KnackTemplate from "./templates/knack-item.mjs";
+import SystemDataModel from "../abstract.mjs";
 
 /**
  * Data model template with information on Knack items.
@@ -17,16 +18,28 @@ export default class KnackAbilityData extends AbilityTemplate.mixin(
   /** @inheritDoc */
   static defineSchema() {
     const fields = foundry.data.fields;
+    const labelKey = SystemDataModel.getLocalizeKey.bind( this, "Item", false );
+    const hintKey = SystemDataModel.getLocalizeKey.bind( this, "Item", true );
     return this.mergeSchema( super.defineSchema(), {
       // TODO @Chris how do we do this
       // restrictions: [], // there will be several options possible see issue #212
       // requirements: [], // there will be several options possible see issue #212 
-      standardEffect: new fields.BooleanField( {
+      isPathKnack: new fields.BooleanField( {
         required: true,
         initial:  false,
-        label:    "ED.Item.Knack.standardEffect"
+        label:    labelKey( "knackAbilityIsPathKnack" ),
+        hint:     hintKey( "knackAbilityIsPathKnack" ),
       } ),
     } );
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onCreate( data, options, user ) {
+    if ( !await super._preCreate( data, options, user ) ) return false;
+
+    // assign the source talent
   }
 
   /* -------------------------------------------- */

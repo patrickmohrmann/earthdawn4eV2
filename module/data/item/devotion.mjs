@@ -36,7 +36,7 @@ export default class DevotionData extends AbilityTemplate.mixin(
   get canBeIncreased() {
     return this.isActorEmbedded
       && Object.values(
-        this.validationData
+        this.increaseValidationData
       ).every( Boolean );
   }
 
@@ -91,7 +91,7 @@ export default class DevotionData extends AbilityTemplate.mixin(
   /**
    * @inheritDoc
    */
-  get validationData() {
+  get increaseValidationData() {
     if ( !this.isActorEmbedded ) return undefined;
 
     const increaseData = this.increaseData;

@@ -30,7 +30,7 @@ export default class SkillData extends AbilityTemplate.mixin(
   get canBeIncreased() {
     return this.isActorEmbedded
       && Object.values(
-        this.validationData
+        this.increaseValidationData
       ).every( Boolean );
   }
 
@@ -72,10 +72,10 @@ export default class SkillData extends AbilityTemplate.mixin(
     const tierModifier = ED4E.lpIndexModForTier[2][this.tier];
 
     return ED4E.legendPointsCost[
-    this.level
+      this.level
     + 1 // new level
     +  tierModifier
-      ];
+    ];
   }
 
   /**
@@ -88,7 +88,7 @@ export default class SkillData extends AbilityTemplate.mixin(
   /**
    * @inheritDoc
    */
-  get validationData() {
+  get increaseValidationData() {
     if ( !this.isActorEmbedded ) return undefined;
 
     const increaseData = this.increaseData;

@@ -309,9 +309,9 @@ class ItemPromptFactory extends PromptFactory {
 
     const content = `
     <p>${ this.document.system.increaseRules }</p>
-    ${ Object.entries( this.document.system.validationData ).map( ( [ key, value ] ) => {
-      return `<div class="flex-row">${ key }: <i class="fa-solid ${ value ? "fa-hexagon-check" : "fa-hexagon-xmark" }"></i></div>`;
-    } ).join( "" ) }
+    ${ Object.entries( this.document.system.increaseValidationData ).map( ( [ key, value ] ) => {
+    return `<div class="flex-row">${ key }: <i class="fa-solid ${ value ? "fa-hexagon-check" : "fa-hexagon-xmark" }"></i></div>`;
+  } ).join( "" ) }
     `;
 
     return DialogClass.wait( {

@@ -361,11 +361,12 @@ export default function registerSystemSettings() {
 
   // Spellcasting / Thread Weaving Types
   game.settings.register( "ed4e", "spellcastingTypes", {
-    name:   "ED.Settings.Mechanics.spellcastingTypes",
-    hint:   "ED.Settings.Mechanics.spellcastingTypesHint",
-    scope:  "world",
-    config: true,
-    type:   new fields.SetField(
+    name:    "ED.Settings.Mechanics.spellcastingTypes",
+    hint:    "ED.Settings.Mechanics.spellcastingTypesHint",
+    scope:   "world",
+    config:  true,
+    default: new Set( Object.values( ED4E.spellcastingTypes ) ),
+    type:    new fields.SetField(
       new fields.StringField( {
         blank: false,
       } ),
