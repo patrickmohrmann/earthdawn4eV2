@@ -42,21 +42,21 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
         label:    "ED.Item.Ability.tier"
       } ),
       source: new fields.SchemaField( {
-          class: new fields.DocumentUUIDField( ClassTemplate, {
-            label: "ED.Item.Class.source",
-            hint:  "X.the uuid of the class this ability is learned through"
-          } ),
-          atLevel: new fields.NumberField( {
-            required: false,
-            nullable: true,
-            min:      0,
-            integer:  true,
-            label:    "ED.Item.Source.atLevel"
-          } ),
-        },
-        {
-          required: false
+        class: new fields.DocumentUUIDField( ClassTemplate, {
+          label: "ED.Item.Class.source",
+          hint:  "X.the uuid of the class this ability is learned through"
         } ),
+        atLevel: new fields.NumberField( {
+          required: false,
+          nullable: true,
+          min:      0,
+          integer:  true,
+          label:    "ED.Item.Source.atLevel"
+        } ),
+      },
+      {
+        required: false
+      } ),
       level: new fields.NumberField( {
         required: true,
         nullable: false,
@@ -151,6 +151,30 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
       );
 
     return this.parent;
+  }
+
+  /** @inheritDoc */
+  async learn( actor, item ) {
+    if ( !this.canBeLearned ) {
+      ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.cannotLearn" ) );
+      return false;
+    }
+
+    let learn = "learn";
+    if ( this.increasable ) {
+      const promptFactory = PromptFactory.fromDocument( this.parent );
+      learn = await promptFactory.getPrompt( "learnAbility" );
+    }
+
+    if ( !learn || learn === "cancel" || learn === "close" ) return false;
+
+    const itemData = item.toObject();
+    itemData.system.level = 0;
+    const learnedItem = ( await actor.createEmbeddedDocuments( "Item", [ itemData ] ) )?.[0];
+
+    if ( learnedItem && learn === "learn" && this.increasable ) await learnedItem.system.increase();
+
+    return learnedItem;
   }
 
   /* -------------------------------------------- */

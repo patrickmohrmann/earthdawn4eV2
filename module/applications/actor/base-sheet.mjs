@@ -1,5 +1,6 @@
 import ED4E from "../../config.mjs";
 
+// noinspection JSClosureCompilerSyntax
 /**
  * Extend the basic ActorSheet with modifications
  * @augments {ActorSheet}
@@ -11,7 +12,7 @@ export default class ActorSheetEd extends ActorSheet {
    */
   static get defaultOptions() {
     return foundry.utils.mergeObject( super.defaultOptions, {
-      classes: [ "earthdawn4e", "sheet", "actor", "character-sheet" ],
+      classes: [ "earthdawn4e", "sheet", "actor", ],
       width:   800,
       height:  800,
       tabs:    [
@@ -157,6 +158,7 @@ export default class ActorSheetEd extends ActorSheet {
     if ( unequip ) return item.system.carry()?.then( _ => this.render() );
     if ( rotate ) return this.actor.rotateItemStatus( item.id, backwards ).then( _ => this.render() );
     if ( deposit ) return item.system.deposit()?.then( _ => this.render() );
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -260,12 +262,12 @@ export default class ActorSheetEd extends ActorSheet {
    * @param {Event} event     The originating click event
    * @private
    */
-    _onTakeStrain( event ) {
-        event.preventDefault();
-        const li = event.currentTarget.closest( ".item-id" );
-        const ability = this.actor.items.get( li.dataset.itemId );
-        this.actor.takeStrain( ability.system.strain );
-    }
+  _onTakeStrain( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    this.actor.takeStrain( ability.system.strain );
+  }
 
   /* -------------------------------------------- */
   /*                Action Button                 */

@@ -1,6 +1,7 @@
 import LpIncreaseTemplate from "../../data/item/templates/lp-increase.mjs";
 import ActorEd from "../../documents/actor.mjs";
 import ItemEd from "../../documents/item.mjs";
+import LearnableTemplate from "../../data/item/templates/learnable.mjs";
 
 const DialogClass = foundry.applications.api.DialogV2;
 const fields = foundry.data.fields;
@@ -299,7 +300,9 @@ class ActorPromptFactory extends PromptFactory {
 class ItemPromptFactory extends PromptFactory {
 
   _promptTypeMapping = {
-    lpIncrease: this._lpIncreasePrompt.bind( this ),
+    lpIncrease:   this._lpIncreasePrompt.bind( this ),
+    learnAbility: this._learnAbilityPrompt.bind( this ),
+
   };
 
   async _lpIncreasePrompt() {
@@ -327,6 +330,46 @@ class ItemPromptFactory extends PromptFactory {
       buttons: [
         this.constructor.freeButton,
         this.constructor.spendLpButton,
+        this.constructor.cancelButton
+      ],
+      rejectClose: false,
+    } );
+  }
+
+  async _learnAbilityPrompt() {
+    if ( !this.document.system.hasMixin( LearnableTemplate ) ) {
+      throw new Error( "Item must be a subclass of LearnableTemplate to use this prompt." );
+    }
+
+    const content = `
+    <p>${ game.i18n.localize( "ED.Dialogs.learnOnZeroOrOne" ) }</p>
+    `;
+
+    return DialogClass.wait( {
+      id:       "learn-ability-prompt",
+      uniqueId: String( ++globalThis._appId ),
+      classes:  [ "earthdawn4e", "learn-ability-prompt" ],
+      window:   {
+        title:       "ED.Dialogs.Title.learnAbility",
+        minimizable: false
+      },
+      modal:   false,
+      content,
+      buttons: [
+        {
+          action:  "add",
+          label:   "ED.Dialogs.Buttons.add",
+          // icon:    "fa-thin fa-turn-up",
+          class:   "free button-add",
+          default: false,
+        },
+        {
+          action:  "learn",
+          label:   "ED.Dialogs.Buttons.learn",
+          icon:    "fa-solid fa-turn-up",
+          class:   "spendLp button-learn",
+          default: false,
+        },
         this.constructor.cancelButton
       ],
       rejectClose: false,

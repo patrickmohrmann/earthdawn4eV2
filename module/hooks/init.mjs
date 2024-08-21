@@ -43,6 +43,9 @@ export default function () {
     // Register sheet application classes
     Actors.unregisterSheet( "core", ActorSheet );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEd, {
+      makeDefault: true
+    } );
+    Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
       types:       [ "character" ],
       makeDefault: true
     } );

@@ -24,6 +24,18 @@ export default class LearnableTemplate extends SystemDataModel {
     throw new Error( "A subclass of the LearnableTemplate must implement the canBeLearned getter." );
   }
 
+  /**
+   * Learn the entity by an actor. This means creating a new item instance onn the actor, either without spending LP on
+   * level 0 for items with a level, or by spending LP.
+   * @param {ActorEd} actor             The actor that is learning the entity.
+   * @param {ItemEd} item               The item that is being learned.
+   * @returns {Promise<ItemEd>|false}   The created Item instance if learned, or false if the entity was not learned.
+   * @abstract
+   */
+  static async learn( actor, item ) {
+    throw new Error( "A subclass of the LearnableTemplate must implement the 'learn' method." );
+  }
+
   /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
