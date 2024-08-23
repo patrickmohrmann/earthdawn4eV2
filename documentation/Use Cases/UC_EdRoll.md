@@ -10,48 +10,159 @@ stateDiagram-v2
     classDef userFunction font-style:italic,font-weight:bold,fill:lightblue
     classDef userFunctionReturn font-style:italic,font-weight:bold,fill:aqua
     classDef dialog font-style:italic,font-weight:bold,fill:orange
+    classDef subUseCase font-style:italic,font-weight:bold,fill:violet
 
     ###################### status #######################
 
-    condition1: CONDITIONNAME1
-    condition2: CONDITIONNAME1
-    condition3: CONDITIONNAME1
+    triggerAction1: UF_Rolls-createRoll
 
-    triggerAction1: TRIGGERACTION1
-    triggerAction2: TRIGGERACTION2
-    triggerAction3: TRIGGERACTION3
+    userFunction1: UF_Rolls-setChatFlavor
+    userFunction2: UF_Rolls-numDice
+    userFunction3: UF_Rolls-totalStrain
+    userFunction4: UF_Rolls-getChatFlavor
+    userFunction5: UF_Rolls-stepsFormula
+    userFunction6: UF_Rolls-explodingDice
+    userFunction7: UF_Rolls-addExtraDice
+    userFunction8: UF_Rolls-addResourceDice
+    userFunction9: UF_Rolls-addExtraSteps
+    userFunction10: UF_Rolls-addSuccessClass
+    userFunction11: UF_Rolls-getTooltipsRollData
+    userFunction12: UF_Rolls-getTooltip
+    userFunction13: UF_Rolls-render
 
-    userFunction1: USERFUNCTION1
-    userFunction2: USERFUNCTION2
-    userFunction3: USERFUNCTION3
+    userFunction14: UF_Rolls-getFlavorTemplateData
+    userFunction15: UF_Rolls-total
+    userFunction16: UF_Rolls-isSuccess
+    userFunction17: UF_Rolls-isFailure
+    userFunction18: UF_Rolls-ruleOfOne
+    userFunction19: UF_Rolls-numSuccesses
+    userFunction20: UF_Rolls-numExtraSuccesses
 
-    state1: STATE1
-    state2: STATE2
-    state3: STATE3
+    userFunction21: UF_Rolls-toMessage
+    
 
-    dialog1: DIALOG1
+    foundryCore1: toMessage
+    foundryCore2: resetFormula
+    foundryCore3: getResultLabel
+    foundryCore4: getResultCSS
 
+    dialog1: Roll Prompt
+
+   
     ####################### Decisions #######################
+  
+    state fork_state1 <<fork>>
+    state fork_state2 <<fork>>
 
-    state DECISION1 <<choice>>
-    state DECISION2 <<choice>>
-    state DECISION3 <<choice>>
+    state join_state1 <<join>>
+    state join_state2 <<join>>
 
     ######################## Colorations ######################
 
     triggerAction1:::fromOutside
-    triggerAction2:::fromOutside
-    triggerAction3:::fromOutside
 
+    userFunction1:::userFunction
     userFunction1:::userFunction
     userFunction2:::userFunction
     userFunction3:::userFunction
+    userFunction4:::userFunction
+    userFunction5:::userFunction
+    userFunction6:::userFunction
+    userFunction7:::userFunction
+    userFunction8:::userFunction
+    userFunction9:::userFunction
+    userFunction10:::userFunction
+    userFunction11:::userFunction
+    userFunction12:::userFunction
+    userFunction13:::userFunction
+    userFunction14:::userFunction
+    userFunction15:::userFunction
+    userFunction16:::userFunction
+    userFunction17:::userFunction
+    userFunction18:::userFunction
+    userFunction19:::userFunction
+    userFunction20:::userFunction
+    userFunction21:::userFunction
+
+
 
     dialog1:::dialog
 
+    foundryCore1:::foundryCore
+    foundryCore2:::foundryCore
+    foundryCore3:::foundryCore
+    foundryCore4:::foundryCore
+
     ##################### StateDiagram ########################
 
-    
+
+[*] --> triggerAction1
+
+triggerAction1 --> dialog1
+dialog1 --> fork_state1
+
+fork_state1 --> userFunction1: sets the predefined chat flavor
+fork_state1 --> userFunction3
+
+fork_state1 --> userFunction6: enhances all dice to be explodable
+fork_state1 --> userFunction7: collects all extra dice (e.g. Karma)
+fork_state1 --> userFunction10: ccs update class for success or failure
+
+fork_state1 --> userFunction13
+
+userFunction7 --> userFunction8
+userFunction7 --> userFunction9
+
+userFunction8 --> foundryCore2
+userFunction9 --> foundryCore2
+
+foundryCore2 --> join_state1
+
+userFunction13 --> userFunction5: Combines all steps as one string
+userFunction5 --> userFunction12
+
+userFunction12 --> userFunction11
+
+userFunction11 --> foundryCore3
+userFunction11 --> foundryCore4
+
+foundryCore3 --> join_state1
+foundryCore4 --> join_state1
+
+userFunction1 --> join_state1
+userFunction3 --> join_state1
+userFunction6 --> join_state1
+userFunction10 --> join_state1
+
+
+userFunction4 --> userFunction14
+userFunction14 --> fork_state2
+
+fork_state2 --> userFunction15
+fork_state2 --> userFunction16
+fork_state2 --> userFunction17
+
+fork_state2 --> userFunction19
+
+
+userFunction15 --> join_state2
+userFunction16 --> join_state2
+userFunction17 --> join_state2
+userFunction18 --> join_state2
+userFunction20 --> join_state2
+
+fork_state2 --> userFunction2
+userFunction2 --> userFunction18
+
+userFunction19 --> userFunction20
+
+join_state1 --> userFunction21
+
+userFunction21 --> userFunction4
+
+join_state2 --> foundryCore1
+
+foundryCore1 --> [*]
 ```
 
 ### Related User Functions
