@@ -15,6 +15,8 @@ stateDiagram-v2
     ###################### status #######################
 
     triggerAction1: UF_Rolls-createRoll
+    triggerAction2: UF_Rolls-triggerRollStep 
+    triggerAction3: UF_Rolls_triggerDiceIconRoll
 
     userFunction1: UF_Rolls-setChatFlavor
     userFunction2: UF_Rolls-numDice
@@ -60,6 +62,8 @@ stateDiagram-v2
     ######################## Colorations ######################
 
     triggerAction1:::fromOutside
+    triggerAction2:::fromOutside
+    triggerAction3:::fromOutside
 
     userFunction1:::userFunction
     userFunction1:::userFunction
@@ -96,7 +100,8 @@ stateDiagram-v2
     ##################### StateDiagram ########################
 
 
-[*] --> triggerAction1
+triggerAction2 --> dialog1
+triggerAction3 --> dialog1
 
 triggerAction1 --> dialog1
 dialog1 --> fork_state1
@@ -219,15 +224,18 @@ are thread weaving und spellcasting different from ability? probably at least sp
 
 | Test Coverage | Related Documentation |
 |---------------|-----------------------|
-| Ability rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| arbitrary Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attribute Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| damage Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| effect Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Half magic Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Initiative Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Spellcasting Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Thread weaving Rolls | [TC_YYYYYY-XXXXX](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| Ability rolls | [[Test] - Ability Rolls](https://github.com/patrickmohrmann/earthdawn4eV2/issues/936) |
+| arbitrary Rolls | [[Test] - Roll from Journal ](https://github.com/patrickmohrmann/earthdawn4eV2/issues/932) |
+| arbitrary Rolls | [[Test] - roll from Chat](https://github.com/patrickmohrmann/earthdawn4eV2/issues/933) |
+| arbitrary Rolls | [[Test] - System Setting Step tables](https://github.com/patrickmohrmann/earthdawn4eV2/issues/386) |
+| Attack rolls | [[Test] - Attack Rolls](https://github.com/patrickmohrmann/earthdawn4eV2/issues/937) |
+| Attribute Rolls | [[Test] - Attribute Roll](https://github.com/patrickmohrmann/earthdawn4eV2/issues/938) |
+| damage Rolls | [[Test] - Damage roll](https://github.com/patrickmohrmann/earthdawn4eV2/issues/939) |
+| effect Rolls | [[Test] - effect roll](https://github.com/patrickmohrmann/earthdawn4eV2/issues/940) |
+| Half magic Rolls | [[Test] - roll half magic](https://github.com/patrickmohrmann/earthdawn4eV2/issues/941) |
+| Initiative Rolls | [[Test] - initiative roll](https://github.com/patrickmohrmann/earthdawn4eV2/issues/942) |
+| Spellcasting Rolls | [[Test] - Spellcasting roll](https://github.com/patrickmohrmann/earthdawn4eV2/issues/943) |
+| Thread weaving Rolls | [[Test] - weave threads](https://github.com/patrickmohrmann/earthdawn4eV2/issues/944) |
+| Basic Rolls (rule of one, success, failure, exploding etc.) | [[Test] - Basic rolls ](https://github.com/patrickmohrmann/earthdawn4eV2/issues/945) |
 
 
