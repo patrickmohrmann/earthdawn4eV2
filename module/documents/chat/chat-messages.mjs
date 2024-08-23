@@ -68,6 +68,8 @@ export default class ChatMessageEd extends ChatMessage {
 
         // Assuming the roll method is `rollAbility` and it returns a promise
         const reactionResult = await character.rollAbility(ability, { event: event }, difficulty, triggeredMessId);
+        if ( !this._evaluated ) await this.evaluate();
+        await this.updateChatMessage(this, reactionResult);
 
 }
 
@@ -81,10 +83,14 @@ async updateChatMessage(options, messageInput) {
         const newResult = options.data[0].rolls[0]._total
         const difficulty = options.data[0].rolls[0].options.target.total
         const successPath = "rolls[0].isSuccess";
-        
         if (newResult >= difficulty) {
             const newMess = await this.updateMessage( newResult, difficulty, message, successPath);
-            console.log("MESSAGE-success", message.rolls[0].isSuccess);
+            if (newMess === true) {
+                // Correctly update the message with the successPath
+                const updateData = {};
+                updateData[successPath] = false;
+                message.update(updateData);
+            }
         }
 
         //socketLib.system.executeAsGM('updateChatMessage', message.id, { content: newContent });
@@ -97,7 +103,9 @@ async updateChatMessage(options, messageInput) {
 
 async updateMessage(newResult, difficulty, message, successPath) {
     if (newResult >= difficulty) {
-        await message.update({ [successPath]: false });
+        return true;
+    } else {
+        return false;
     }
 }
 

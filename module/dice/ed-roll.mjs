@@ -499,7 +499,7 @@ export default class EdRoll extends Roll {
   */
   async toMessage( messageData = {}, options = {} ) {
     if ( !this._evaluated ) await this.evaluate();
-
+    console.log( "ROLLRESULT",this );
     messageData.flavor = await this.chatFlavor;
 
     return super.toMessage( messageData, options );
