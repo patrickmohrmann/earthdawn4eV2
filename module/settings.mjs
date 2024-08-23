@@ -32,6 +32,16 @@ export default function registerSystemSettings() {
     type:    new EdIdField(),
   } );
 
+  // edid for patterncraft
+  game.settings.register( "ed4e", "edidPatterncraft", {
+    name:    "ED.Settings.Edid.patterncraft",
+    hint:    "ED.Settings.Edid.patterncraftHint",
+    scope:   "world",
+    config:  true,
+    default: "patterncraft",
+    type:    new EdIdField(),
+  } );
+
   // edid for speak language
   game.settings.register( "ed4e", "edidLanguageSpeak", {
     name:    "ED.Settings.Edid.languageSpeak",
@@ -229,7 +239,7 @@ export default function registerSystemSettings() {
   } );
   // LP Tracking Option Attributes
   game.settings.register( "ed4e", "lpTrackingAttributes", {
-    name:    "ED.Settings.LpTracking.lpTrackingAttributeOptions",
+    name:    "ED.Settings.LpTracking.attributeOptions",
     hint:    "ED.Settings.LpTracking.hintAttributesOption",
     scope:   "world",
     config:  true,
@@ -243,24 +253,20 @@ export default function registerSystemSettings() {
   } );
 
   // LP Tracking Option Talents
-  game.settings.register( "ed4e", "lpTrackingAllTalents", {
-    name:    "ED.Settings.LpTracking.lpTalentsRequirement",
-    hint:    "ED.Settings.LpTracking.hintTalents",
+  game.settings.register( "ed4e", "lpTrackingCircleTalentRequirements", {
+    name:    "ED.Settings.LpTracking.circleTalentRequirements",
+    hint:    "ED.Settings.LpTracking.hintCircleTalentRequirements",
     scope:   "world",
     config:  true,
     default: "disciplineTalents",
     type:    String,
-    choices: {
-      disciplineTalents:   "ED.Settings.LpTracking.disciplineTalents",
-      allTalents:          "ED.Settings.LpTracking.allTalents",
-      allTalentsHouseRule: "ED.Settings.LpTracking.allTalentsHouseRule"
-    }
+    choices: ED4E.circleTalentRequirements,
   } );
 
   // LP Tracking Option Skill Training
   game.settings.register( "ed4e", "lpTrackingRemoveSilver", {
-    name:    "ED.Settings.LpTracking.lpTrackingRemoveSilverOption",
-    hint:    "ED.Settings.LpTracking.hintAutomaticSilverOption",
+    name:    "ED.Settings.LpTracking.removeSilver",
+    hint:    "ED.Settings.LpTracking.hintRemoveSilver",
     scope:   "world",
     config:  true,
     default: true,
@@ -269,7 +275,7 @@ export default function registerSystemSettings() {
 
   // LP Tracking Max Rank Talent
   game.settings.register( "ed4e", "lpTrackingMaxRankTalent", {
-    name:    "ED.Settings.LpTracking.lpTrackingMaxRankTalent",
+    name:    "ED.Settings.LpTracking.maxRankTalent",
     hint:    "ED.Settings.LpTracking.hintMaxRankTalent",
     scope:   "world",
     config:  true,
@@ -283,7 +289,7 @@ export default function registerSystemSettings() {
 
   // LP Tracking Max Rank Skill
   game.settings.register( "ed4e", "lpTrackingMaxRankSkill", {
-    name:    "ED.Settings.LpTracking.lpTrackingMaxRankSkill",
+    name:    "ED.Settings.LpTracking.maxRankSkill",
     hint:    "ED.Settings.LpTracking.hintMaxRankSkill",
     scope:   "world",
     config:  true,
@@ -297,7 +303,7 @@ export default function registerSystemSettings() {
 
   // LP Tracking Max Rank Devotion
   game.settings.register( "ed4e", "lpTrackingMaxRankDevotion", {
-    name:    "ED.Settings.LpTracking.lpTrackingMaxRankDevotion",
+    name:    "ED.Settings.LpTracking.maxRankDevotion",
     hint:    "ED.Settings.LpTracking.hintMaxRankDevotion",
     scope:   "world",
     config:  true,
@@ -306,6 +312,38 @@ export default function registerSystemSettings() {
       step:    1,
       integer: true,
       initial: 12,
+    } ),
+  } );
+
+  // LP Tracking Spell Cost
+  game.settings.register( "ed4e", "lpTrackingSpellCost", {
+    name:    "ED.Settings.LpTracking.spellCost",
+    hint:    "ED.Settings.LpTracking.hintSpellCost",
+    scope:   "world",
+    config:  true,
+    type:    new fields.StringField( {
+      required: true,
+      nullable: false,
+      blank:    false,
+      initial:  "noviceTalent",
+      choices:  ED4E.lpTrackingSpellCosts,
+      label:    "ED.Settings.LpTracking.spellCost",
+      hint:     "ED.Settings.LpTracking.hintSpellCost",
+    } ),
+  } );
+
+  // LP Tracking Use Patterncraft to Learn Spell
+  game.settings.register( "ed4e", "lpTrackingLearnSpellUsePatterncraft", {
+    name:    "ED.Settings.LpTracking.learnSpellUsePatterncraft",
+    hint:    "ED.Settings.LpTracking.hintLearnSpellUsePatterncraft",
+    scope:   "world",
+    config:  true,
+    type:    new fields.BooleanField( {
+      required: true,
+      nullable: false,
+      initial:  true,
+      label:    "ED.Settings.LpTracking.learnSpellUsePatterncraft",
+      hint:     "ED.Settings.LpTracking.hintLearnSpellUsePatterncraft",
     } ),
   } );
 

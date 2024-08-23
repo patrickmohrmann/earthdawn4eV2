@@ -1,5 +1,4 @@
 import DocumentCreateDialog from "../applications/global/document-creation.mjs";
-import ed4eDropItem from "../applications/global/drop-items.mjs";
 import AdvancementLevelData from "../data/advancement/advancement-level.mjs";
 
 /**
@@ -107,7 +106,7 @@ export default class ItemEd extends Item {
    * @UserFunction                UF_ActorItems-preCreate
    */
   async _preCreate( data, options, user ) {
-    if ( !this.actor || !data ) return;
+    /* if ( !this.actor || !data ) return;
     
     // Set talent identifier for talent type items.
     if ( data.type === "talent" ) {
@@ -131,7 +130,7 @@ export default class ItemEd extends Item {
     } else {
       const dropItemResult = await ed4eDropItem( this.actor, data );
       await this.handleDropItemResult( dropItemResult, data );
-    }
+    } */
 
     return super._preCreate( data, options, user );
   }

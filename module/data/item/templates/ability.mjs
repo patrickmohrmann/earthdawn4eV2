@@ -145,7 +145,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
       },
     );
 
-    if ( isEmpty( updatedActor ) )
+    if ( foundry.utils.isEmpty( updatedActor ) )
       ui.notifications.warn(
         game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
       );

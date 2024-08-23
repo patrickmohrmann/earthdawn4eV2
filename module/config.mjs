@@ -387,6 +387,20 @@ ED4E.availableRanks = {
   readWrite: 1,
 };
 
+ED4E.lpTrackingSpellCosts = {
+  noviceTalent: "ED.Settings.LpTracking.noviceTalent",
+  circleX100:   "ED.Settings.LpTracking.circleX100",
+  free:         "ED.Settings.LpTracking.free",
+};
+preLocalize( "lpTrackingSpellCosts" );
+
+ED4E.circleTalentRequirements = {
+  disciplineTalents:   "ED.Settings.LpTracking.disciplineTalents",
+  allTalents:          "ED.Settings.LpTracking.allTalents",
+  allTalentsHouseRule: "ED.Settings.LpTracking.allTalentsHouseRule"
+};
+preLocalize( "circleTalentRequirements" );
+
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
@@ -587,6 +601,25 @@ preLocalize( "documentData.Item.skill.languageSpeak", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: "value" } );
 preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
+
+
+/* -------------------------------------------- */
+/*           Font Awesome Icons                 */
+/* -------------------------------------------- */
+
+ED4E.icons = {
+  ability:        "fa-bolt",
+  attack:         "fa-crosshairs",
+  attribute:      "fa-dice-d20",
+  damage:         "fa-skull-crossbones",
+  effect:         "fa-biohazard",
+  halfmagic:      "fa-hat-wizard",
+  initiative:     "fa-running",
+  patterncraft:   "fa-thin fa-group-arrows-rotate",
+  recovery:       "fa-heartbeat",
+  spellcasting:   "fa-thin fa-sparkles",
+  threadWeaving:  "fa-thin fa-chart-network",
+};
 
 
 /* -------------------------------------------- */

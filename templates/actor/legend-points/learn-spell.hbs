@@ -1,0 +1,39 @@
+<div>
+  <fieldset>
+    <legend>{{ localize "ED.Dialogs.Legend.learnSpellRequirements" }}</legend>
+    Is in good health: {{ ifThen hasDamage "Nope" "Yes" }}
+    {{ formField fields.lpCost value=source.lpCost rootId=partId readonly=true }}
+    {{ formField fields.learnDifficulty value=source.learnDifficulty rootId=partId readonly=true }}
+  </fieldset>
+
+  <br>
+
+  <fieldset>
+    <legend>{{ localize "ED.Dialogs.Legend.learnSpell" }}</legend>
+    {{ formField fields.teacher value=source.teacher }}
+    {{#if source.teacher}}
+      {{ formField fields.teacherRank value=source.teacherRank }}
+      <button type="button" class="{{ ifThen source.teacherTestSuccessful "roll-success" "" }}" data-action="useTeacherSpellcasting" {{#unless source.teacher}}disabled{{/unless}}>
+        <i class="{{ config.icons.spellcasting }}" inert></i>
+        {{ localize "ED.Dialogs.Button.teacherButtonSpellcasting" }}
+      </button>
+      {{ formField fields.teacherTestSuccessful value=source.teacherTestSuccessful }}
+    {{/if}}
+    <br>
+  </fieldset>
+
+  <br>
+
+  <fieldset>
+    <legend>{{ localize "ED.Dialogs.Legend.learnSpellPatterncraft" }}</legend>
+    {{ formField fields.patterncraft value=source.patterncraft rootId=partId }}
+    {{#if source.patterncraft}}
+      {{ formField fields.useRecoveryTest value=source.useRecoveryTest rootId=partId }}
+      {{ formField actorFields.characteristics.fields.recoveryTestsResource.fields.value value=actor.system.characteristics.recoveryTestsResource.value rootId=partId readonly=true }}
+      <button type="button" class="{{ ifThen source.patterncraftSuccessful "roll-success" "" }}" data-action="patterncraftTest" {{#unless source.patterncraft}}disabled{{/unless}}>
+        <i class="{{ config.icons.patterncraft }}" inert></i>
+        {{ localize "ED.Dialogs.Button.learnSpellPatterncraftTest" }}
+      </button>
+    {{/if}}
+  </fieldset>
+</div>
