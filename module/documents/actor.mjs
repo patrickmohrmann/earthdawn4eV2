@@ -225,10 +225,12 @@ export default class ActorEd extends Actor {
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
-   * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
-   * @param {object} options      Any additional options for the {@link EdRoll}.
+   * @param {string} attributeId            The 3-letter id for the attribute (e.g. "per").
+   * @param {object} edRollOptionsData      Any {@link EdRollOptions} that will be overwritten with the provided values.
+   * @param {object} options                Any additional options for the {@link EdRoll}.
+   * @returns {Promise<EdRoll>}             The processed Roll.
    */
-  async rollAttribute( attributeId, options = {} ) {
+  async rollAttribute( attributeId, edRollOptionsData = {}, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const step = { base: attributeStep };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
@@ -249,22 +251,23 @@ export default class ActorEd extends Actor {
       this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    return this.#processRoll( roll );
   }
 
   /**
-   * @summary                     Ability rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
-   * @description                 Roll an Ability. use {@link RollPrompt} for further input data.
-   * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
-   * @param {object} options      Any additional options for the {@link EdRoll}.
+   * @summary                           Ability rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
+   * @description                       Roll an Ability. use {@link RollPrompt} for further input data.
+   * @param {ItemEd} ability            ability must be of type AbilityTemplate & TargetingTemplate
+   * @param {object} edRollOptionsData  Any {@link EdRollOptions} that will be overwritten with the provided values..
+   * @param {object} options            Any additional options for the {@link EdRoll}.
+   * @returns {Promise<EdRoll>}         The processed Roll.
    */
-  async rollAbility( ability, options = {} ) {
+  async rollAbility( ability, edRollOptionsData = {}, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
     if ( difficulty === undefined || difficulty === null ) {
-      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
-      return;
+      throw new TypeError( "ability is not part of Targeting Template, please call your Administrator!" );
     }
     const difficultyFinal = { base: difficulty };
     const devotionRequired = !!ability.system.devotionRequired;
@@ -275,6 +278,7 @@ export default class ActorEd extends Actor {
       step:        abilityStep
     } );
     const abilityFinalStep = { base: abilityStep };
+
     const edRollOptions = EdRollOptions.fromActor(
       {
         testType:         "action",
@@ -287,8 +291,9 @@ export default class ActorEd extends Actor {
       },
       this
     );
+    edRollOptions.updateSource( edRollOptionsData );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    return this.#processRoll( roll );
   }
 
   /**
@@ -593,8 +598,9 @@ export default class ActorEd extends Actor {
    *     <li>recover from damage</li>
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
+   * @returns {EdRoll}    The processed Roll.
    */
-  #processRoll( roll ) {
+  async #processRoll( roll ) {
     if ( !roll ) {
       // No roll available, do nothing.
       return;
@@ -619,10 +625,12 @@ export default class ActorEd extends Actor {
     const processRollType = rollTypeProcessors[roll.options.rollType];
 
     if ( processRollType ) {
-      processRollType();
+      await processRollType();
     } else {
-      roll.toMessage();
+      await roll.toMessage();
     }
+
+    return roll;
   }
 
   async #processJumpUpResult( roll ) {
@@ -761,9 +769,9 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichmentEmbeddedItems() {
     for ( const item of this.items ) {
       item.system.description.value = futils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
-          async:   true,
-          secrets: this.isOwner
-        } )
+        async:   true,
+        secrets: this.isOwner
+      } )
       );
     }
   }

@@ -230,7 +230,7 @@ export default class ActorSheetEd extends ActorSheet {
   _onRollAttribute( event ) {
     event.preventDefault();
     const attribute = event.currentTarget.dataset.attribute;
-    this.actor.rollAttribute( attribute, { event: event } );
+    this.actor.rollAttribute( attribute, {}, { event: event } );
   }
 
   /**
@@ -242,7 +242,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.rollAbility( ability, { event: event } );
+    this.actor.rollAbility( ability, {}, { event: event } );
   }
 
   /**
@@ -284,7 +284,7 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.rollRecovery( recoveryMode, {event: event} );
   }
 
-  async _onTakeDamage( event ) {
+  async _onTakeDamage( _ ) {
     const takeDamage = await this.actor.getPrompt( "takeDamage" );
     if ( !takeDamage || takeDamage === "close" ) return;
 
