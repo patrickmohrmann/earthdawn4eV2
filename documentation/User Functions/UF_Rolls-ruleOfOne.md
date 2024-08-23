@@ -1,0 +1,1 @@
+if all (at least two dice) dice have rolled a one, the result will be an automatic fail called **Rule of One**.

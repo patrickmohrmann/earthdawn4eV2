@@ -108,7 +108,12 @@ function triggerLPAward(argString) {
 }
 
 /* -------------------------------------------- */
-
+/**
+ * @description             /s triggers a step roll
+ * @param {*} argString     The string of arguments passed to the command
+ * @returns                 
+ * @UserFunction            UF_Rolls-triggerRollStep     
+ */
 function triggerRollStep(argString) {
   const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
   const steps = argString.match(argRegExp);

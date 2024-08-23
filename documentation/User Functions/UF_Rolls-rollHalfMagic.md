@@ -1,0 +1,1 @@
+this function triggers half magic tests.

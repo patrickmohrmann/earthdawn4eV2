@@ -37,6 +37,10 @@ export default class RollPrompt extends FormApplication {
         } );
     }
 
+    /**
+     * @description                 Roll a step prompt.
+     * @UserFunction                UF_Rolls-rollStepPrompt
+     */
     static rollArbitraryPrompt() {
         RollPrompt.waitPrompt(
             new EdRollOptions( {
@@ -125,6 +129,12 @@ export default class RollPrompt extends FormApplication {
         return this.edRollOptions;
     }
 
+    /**
+     * @description                     Create a new roll instance and resolve the dialog.
+     * @param {Event}                   event
+     * @returns {Promise<EdRoll>}
+     * @UserFunction                    UF_Rolls-createRoll
+     */
     async _createRoll( event ) {
         event.preventDefault();
         event.stopPropagation();

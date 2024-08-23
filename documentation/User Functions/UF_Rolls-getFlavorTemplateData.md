@@ -1,0 +1,1 @@
+This function collects all information of the roll to be shown in the chat message later.

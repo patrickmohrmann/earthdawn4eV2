@@ -10,7 +10,9 @@ export default function () {
         /* -------------------------------------------- */
         /*  Dice Icon Roll                              */
         /* -------------------------------------------- */
-
+        /**
+         * @UserFunction                UF_Rolls_triggerDiceIconRoll
+         */
         $( "#chat-controls i.fas.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
 
         /* -------------------------------------------- */
