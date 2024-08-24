@@ -892,46 +892,10 @@ export default class ActorEd extends Actor {
   }
 
 
-  /**
-   * #############################################################
-   * Legend Point Tracking
-   * #############################################################
-   */
+  /* -------------------------------------------- */
+  /*            Legend Point Tracking             */
+  /* -------------------------------------------- */
 
-
-  /**
-   * @param {object} ability  The ability to upgrade
-   * @returns {ActorEd}       The updated actor
-   * @UserFunction            UF_LPTracking-upgradeAbility
-   */
-  async upgradeAbility( ability ) {
-    const abilityOldLevel = ability.system.level;
-    const newIncrease = abilityOldLevel + 1;
-    const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAbility", {
-      previousLevel: abilityOldLevel,
-      newLevel:      newIncrease,
-      abilityName:   ability.name,
-    } );
-
-    const validationData = await validateAbilityUpgrade( ability, this );
-    const validateResult = await this._showOptionsPrompt ( this, ability, validationData );
-
-    if ( validateResult === "cancel" ) return;
-
-    const requiredLp = validateResult === "free" ? 0 : validationData.requiredLp;
-
-    const transactionData = new LpSpendingTransactionData( {
-      entityType:  ability.type,
-      type:        "spendings",
-      amount:      requiredLp,
-      date:        new Date(),
-      itemUuid:    ability.uuid,
-      name:        ability.name,
-      description: description
-    } );
-    await ability.update( { "system.level": newIncrease } );
-    return this.addLpTransaction( "spendings", transactionData );
-  }
 
   /**
    * @param {ItemEd} classItem    The class item to upgrade

@@ -187,7 +187,7 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * @description             This function is used to upgrade attributes
+   * @description             This function is used to upgrade abilities
    * @param {Event} event     The originating click event.
    * @private
    */
@@ -196,7 +196,6 @@ export default class ActorSheetEd extends ActorSheet {
     const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
     if ( typeof ability.system.increase === "function" ) ability.system.increase();
-    // this.actor.upgradeAbility( ability );
   }
 
   /**

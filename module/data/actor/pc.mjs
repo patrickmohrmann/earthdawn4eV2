@@ -149,7 +149,17 @@ export default class PcData extends NamegiverTemplate {
   /*  Legend Building (LP)                        */
   /* -------------------------------------------- */
 
-  async increaseAttribute( attribute, onCircleIncrease = false ) {
+  /**
+   * Increase an attribute value of this actor.
+   * @param {keyof typeof ED4E.attributes} attribute  The attribute to increase in the 3-letter abbreviation form as
+   *                                                  used in {@link ED4E.attributes}.
+   * @param {"free"|"spendLp"} [useLp]                Whether to use legend points for the increase. If `undefined`,
+   *                                                  a prompt will be shown.
+   * @param {boolean} [onCircleIncrease]              Whether this increase is due to a circle increase, i.e.
+   *                                                  the cost is according to the given setting.
+   * @returns {Promise<void>}
+   */
+  async increaseAttribute( attribute, useLp, onCircleIncrease = false ) {
     const actor = this.parent;
     const attributeField = this.attributes[attribute];
     if ( !actor || !attributeField ) throw new Error(
@@ -180,7 +190,8 @@ export default class PcData extends NamegiverTemplate {
   } ).join( "" ) }
     `;
 
-    const spendLp = await DialogV2.wait( {
+    let spendLp = useLp;
+    spendLp ??= await DialogV2.wait( {
       id:          "attribute-increase-prompt",
       uniqueId:    String( ++globalThis._appId ),
       classes:     [ "ed4e", "attribute-increase-prompt" ],
