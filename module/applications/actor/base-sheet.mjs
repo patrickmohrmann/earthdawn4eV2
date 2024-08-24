@@ -183,7 +183,7 @@ export default class ActorSheetEd extends ActorSheet {
   async _onAttributeEnhancement( event ) {
     event.preventDefault();
     const attribute = event.currentTarget.dataset.attribute;
-    await this.actor.upgradeAttribute( attribute );
+    await this.actor.system.increaseAttribute( attribute );
   }
 
   /**

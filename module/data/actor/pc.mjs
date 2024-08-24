@@ -3,6 +3,9 @@ import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, su
 import CharacterGenerationPrompt from "../../applications/actor/character-generation-prompt.mjs";
 import LpTrackingData from "../advancement/lp-tracking.mjs";
 import ActorEd from "../../documents/actor.mjs";
+import ED4E from "../../config.mjs";
+import PromptFactory from "../../applications/global/prompt-factory.mjs";
+const { DialogV2 } = foundry.applications.api;
 
 /**
  * System data definition for PCs.
@@ -45,7 +48,7 @@ export default class PcData extends NamegiverTemplate {
       valueModifier: new fields.NumberField( {
         required: true,
         step:     1,
-        initial:  0,
+        initial:  0
       } ),
       value: new fields.NumberField( {
         required: true,
@@ -64,7 +67,7 @@ export default class PcData extends NamegiverTemplate {
         step:     1,
         initial:  0,
         integer:  true
-      } ),
+      } )
     } );
 
     this.mergeSchema( superSchema, {
@@ -80,10 +83,10 @@ export default class PcData extends NamegiverTemplate {
         LpTrackingData,
         {
           required: true,
-          initial:  new LpTrackingData(),
+          initial:  new LpTrackingData()
         }
 
-      ),
+      )
     } );
     return superSchema;
   }
@@ -112,10 +115,10 @@ export default class PcData extends NamegiverTemplate {
       system: {
         attributes: attributeData,
         karma:      {
-          freeAttributePoints: additionalKarma,
+          freeAttributePoints: additionalKarma
         },
-        languages: generation.languages,
-      },
+        languages: generation.languages
+      }
     } );
 
     const namegiverDocument = await generation.namegiverDocument;
@@ -132,7 +135,7 @@ export default class PcData extends NamegiverTemplate {
       namegiverDocument,
       classDocument,
       ...abilities,
-      ...spellDocuments,
+      ...spellDocuments
     ] );
 
     const actorApp = newActor.sheet.render( true, {focus: true} );
@@ -141,6 +144,88 @@ export default class PcData extends NamegiverTemplate {
 
     return newActor;
   }
+
+  /* -------------------------------------------- */
+  /*  Legend Building (LP)                        */
+  /* -------------------------------------------- */
+
+  async increaseAttribute( attribute, onCircleIncrease = false ) {
+    const actor = this.parent;
+    const attributeField = this.attributes[attribute];
+    if ( !actor || !attributeField ) throw new Error(
+      `ED4E | Cannot increase attribute "${attribute}" for actor "${actor.name}" (${actor.id}).`
+    );
+
+    const currentIncrease = attributeField.timesIncreased;
+    if ( currentIncrease >= 3 ) {
+      ui.notifications.warn(
+        game.i18n.localize( `X.Localize: Cannot increase attribute "${attribute}" for actor "${actor.name}" (${actor.id}). Maximum increase reached.` )
+      );
+      return;
+    }
+
+    const rule = game.settings.get( "ed4e", "lpTrackingAttributes" );
+    const lpCost = onCircleIncrease && rule === "freePerCircle" ? 0 : ED4E.legendPointsCost[currentIncrease + 1 + 4];
+    const increaseValidationData = {
+      requiredLp:  actor.currentLp >= lpCost,
+      maxLevel:    currentIncrease < 3,
+      hasDamage:   !actor.hasDamage( "standard" ),
+      hasWounds:   !actor.hasWounds( "standard" )
+    };
+
+    const content = `
+    <p>${ game.i18n.localize( "ED.Rules.attributeIncreaseShortRequirements" ) }</p>
+    ${ Object.entries( increaseValidationData ).map( ( [ key, value ] ) => {
+    return `<div class="flex-row">${ key }: <i class="fa-solid ${ value ? "fa-hexagon-check" : "fa-hexagon-xmark" }"></i></div>`;
+  } ).join( "" ) }
+    `;
+
+    const spendLp = await DialogV2.wait( {
+      id:          "attribute-increase-prompt",
+      uniqueId:    String( ++globalThis._appId ),
+      classes:     [ "ed4e", "attribute-increase-prompt" ],
+      window:      {
+        title:       "ED.Dialogs.Title.attributeIncrease",
+        minimizable: false
+      },
+      modal:       false,
+      content,
+      buttons: [
+        PromptFactory.freeButton,
+        PromptFactory.spendLpButton,
+        PromptFactory.cancelButton
+      ],
+      rejectClose: false
+    } );
+
+    const attributeUpdate = await actor.update( {
+      [`system.attributes.${attribute}.timesIncreased`]: currentIncrease + 1
+    } );
+    const lpTransaction = actor.addLpTransaction(
+      "spendings",
+      {
+        amount:      spendLp === "spendLp" ? lpCost : 0,
+        description: game.i18n.format( "ED.Actor.LpTracking.Spendings", {} ),
+        entityType:  "attribute",
+        name:        ED4E.attributes[attribute].label,
+        value:       {
+          before: currentIncrease,
+          after:  currentIncrease + 1,
+        },
+      }
+    );
+
+    if ( !attributeUpdate || !lpTransaction ) {
+      // rollback
+      await actor.update( {
+        [`system.attributes.${attribute}.timesIncreased`]: currentIncrease,
+      } );
+      throw new Error(
+        `ED4E | Cannot increase attribute "${ attribute }" for actor "${ actor.name }" (${ actor.id }). Actor update unsuccessful.`
+      );
+    }
+  }
+
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
@@ -294,7 +379,7 @@ export default class PcData extends NamegiverTemplate {
   #prepareDerivedBloodMagic() {
     const bloodDamageItems = this.parent.items.filter(
       ( item ) => ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type !== "path" && item.system.itemStatus === "equipped" ) ||
-            ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type === "path" ),
+            ( item.system.hasOwnProperty( "bloodMagicDamage" ) &&  item.type === "path" )
     );
     // Calculate sum of defense bonuses, defaults to zero if no shields equipped
     const bloodDamage = sumProperty( bloodDamageItems, "system.bloodMagicDamage" );

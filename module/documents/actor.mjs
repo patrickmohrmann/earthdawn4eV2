@@ -900,42 +900,6 @@ export default class ActorEd extends Actor {
 
 
   /**
-   *
-   * @param {object} attribute     The attribute to upgrade
-   * @returns {ActorEd}            The updated actor
-   * @UserFunction                 UF_LPTracking-upgradeAttribute
-   */
-  async upgradeAttribute( attribute ) {
-    const attributeOldIncrease = this.system.attributes[attribute].timesIncreased;
-    // add a system setting to turn the max level increase off #788 - turn off Legendpoint Restrictions with system Settings
-    if ( attributeOldIncrease >= 3 ) {
-      ui.notifications.warn( game.i18n.localize( "ED.Actor.LpTracking.Spendings.maxIncreaseReached" ) );
-      return;
-    }
-    const attributeName = ED4E.attributes[attribute].label;
-    const legendPointsCostConfig = ED4E.legendPointsCost;
-    const requiredLp = legendPointsCostConfig[attributeOldIncrease + 5];
-
-    const description = game.i18n.format( "ED.Actor.LpTracking.Spendings.descriptionAttribute", {
-      previousLevel: attributeOldIncrease,
-      newLevel:      attributeOldIncrease + 1,
-      attributeName: attributeName,
-    } );
-    const transactionData = new LpSpendingTransactionData( {
-      entityType:  "attribute",
-      type:        "spendings",
-      amount:      requiredLp,
-      date:        new Date(),
-      name:        attributeName,
-      description: description
-    } );
-    // add the _showOptionsPrompt function to show the options for the user to choose
-    await this.update( { [`system.attributes.${attribute}.timesIncreased`]: attributeOldIncrease + 1 } );
-    return this.addLpTransaction( "spendings", transactionData );
-  }
-
-
-  /**
    * @param {object} ability  The ability to upgrade
    * @returns {ActorEd}       The updated actor
    * @UserFunction            UF_LPTracking-upgradeAbility

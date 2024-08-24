@@ -237,6 +237,7 @@ export default function registerSystemSettings() {
     default: true,
     type:    Boolean
   } );
+
   // LP Tracking Option Attributes
   game.settings.register( "ed4e", "lpTrackingAttributes", {
     name:    "ED.Settings.LpTracking.attributeOptions",
