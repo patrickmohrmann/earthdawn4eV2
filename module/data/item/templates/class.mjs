@@ -1,14 +1,20 @@
 import { ItemDataModel } from "../../abstract.mjs";
 import AdvancementData from "../../advancement/base-advancement.mjs";
 import LpIncreaseTemplate from "./lp-increase.mjs";
+import LearnableTemplate from "./learnable.mjs";
 
 /**
  * Data model template with information on "class"-like items: paths, disciplines, and questors.
  * @property {number} level         either circle or rank of the class 
  * @property {string} identifier    type of class
+ * @augments {ItemDataModel}
+ * @augments {LearnableTemplate}
+ * @augments {LpIncreaseTemplate}
+ * @mixes LearnableTemplate
  * @mixes LpIncreaseTemplate
  */
 export default class ClassTemplate extends ItemDataModel.mixin(
+  LearnableTemplate,
   LpIncreaseTemplate
 ) {
 
@@ -33,6 +39,37 @@ export default class ClassTemplate extends ItemDataModel.mixin(
       )
     } );
   }
+
+  /* -------------------------------------------- */
+  /*  Legend Building                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get increasable() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get learnable() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get requiredLpForIncrease() {
+    return 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get requiredLpToLearn() {
+    return 0;
+  }
+
 
   /* -------------------------------------------- */
   /*  Migrations                                  */

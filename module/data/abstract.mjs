@@ -19,7 +19,26 @@
  */
 export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
+  /**
+   * A bound version of {@link getLocalizeKey}. Used to automatically get the
+   * localization key of a data field label for this instances document type.
+   * It is bound to call `getLocalizeKey` with the document type as its first
+   * argument and `false` as the second argument.
+   * @see getLocalizeKey
+   * @param {string} name  The name of the field to get the label key for.
+   * @type {Function}
+   */
   static labelKey = getLocalizeKey.bind( this, "General", false );
+
+  /**
+   * A bound version of {@link getLocalizeKey}. Used to automatically get the
+   * localization key of a data field hint for this instances document type.
+   * It is bound to call `getLocalizeKey` with the document type as its first
+   * argument and `true` as the second argument.
+   * @see getLocalizeKey
+   * @param {string} name  The name of the field to get the hint key for.
+   * @type {Function}
+   */
   static hintKey = getLocalizeKey.bind( this, "General", true );
 
   /**
@@ -382,7 +401,10 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
  */
 export class ActorDataModel extends SystemDataModel {
 
+  /** @inheritDoc */
   static labelKey = SystemDataModel.getLocalizeKey.bind( this, "Actor", false );
+
+  /** @inheritDoc */
   static hintKey = SystemDataModel.getLocalizeKey.bind( this, "Actor", true );
 
   /**
@@ -433,7 +455,10 @@ export class ActorDataModel extends SystemDataModel {
  */
 export class ItemDataModel extends SystemDataModel {
 
+  /** @inheritDoc */
   static labelKey = SystemDataModel.getLocalizeKey.bind( this, "Item", false );
+
+  /** @inheritDoc */
   static hintKey = SystemDataModel.getLocalizeKey.bind( this, "Item", true );
 
   /**
@@ -448,10 +473,11 @@ export class ItemDataModel extends SystemDataModel {
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze( foundry.utils.mergeObject( super.metadata, {
     enchantable:    false,
-    threadable:     false,
+    hasLinkedItems: false,
     inventoryItem:  false,
     inventoryOrder: Infinity,
-    singleton:      false
+    singleton:      false,
+    threadable:     false,
   }, {
     inplace: false
   } ) );
@@ -484,6 +510,24 @@ export class ItemDataModel extends SystemDataModel {
       if ( sourceId ) this.parent.actor?.sourcedItems?.set( sourceId, this.parent );
     }
   }
+
+
+  /* -------------------------------------------- */
+  /*  Drop Events                                 */
+  /* -------------------------------------------- */
+
+  drop( event, data ) {
+    const documentData = fromUuidSync( data.uuid );
+    switch ( documentData.type ) {
+      case "devotion":
+        return this._onDropDevotion( event, data );
+      case "knackAbility":
+        return this._onDropKnack( event, data );
+      default:
+        return data;
+    }
+  }
+
 
   /* -------------------------------------------- */
   /*  Helpers                                     */

@@ -10,19 +10,19 @@ import SystemDataModel from "../../abstract.mjs";
 export default class LpIncreaseTemplate extends SystemDataModel {
 
   /**
-   * @description Whether the entity can be increased. This is a shortcut for checking if this is mixed in.
-   * @type {boolean}
-   */
-  get increasable() {
-    return true;
-  }
-
-  /**
    * @description Whether the entity fulfills all requirements to be increased.
    * @type {boolean}
    */
   get canBeIncreased() {
     throw new Error( "A subclass of the LpIncreaseTemplate must implement the canBeIncreased getter." );
+  }
+
+  /**
+   * @description Whether the entity can be increased. This is a shortcut for checking if this is mixed in.
+   * @type {boolean}
+   */
+  get increasable() {
+    return true;
   }
 
   /**
@@ -42,6 +42,15 @@ export default class LpIncreaseTemplate extends SystemDataModel {
   }
 
   /**
+   * The data needed to validate the increase of this entity's level. Each key is a validation rule with the value
+   * indicating whether the rule is fulfilled. If any of the values is `false`, the increase should not be allowed.
+   * @type {Record<string, boolean>}
+   */
+  get increaseValidationData() {
+    throw new Error( "A subclass of the LpIncreaseTemplate must implement the validation getter." );
+  }
+
+  /**
    * @description The amount of legend points required to increase the level of the entity.
    * @type {number}
    */
@@ -55,15 +64,6 @@ export default class LpIncreaseTemplate extends SystemDataModel {
    */
   get requiredMoneyForIncrease() {
     throw new Error( "A subclass of the LpIncreaseTemplate must implement the requiredMoneyForIncrease getter." );
-  }
-
-  /**
-   * The data needed to validate the increase of this entity's level. Each key is a validation rule with the value
-   * indicating whether the rule is fulfilled. If any of the values is `false`, the increase should not be allowed.
-   * @type {Record<string, boolean>}
-   */
-  get increaseValidationData() {
-    throw new Error( "A subclass of the LpIncreaseTemplate must implement the validation getter." );
   }
 
   /**

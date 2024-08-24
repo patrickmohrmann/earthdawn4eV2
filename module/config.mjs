@@ -595,12 +595,28 @@ ED4E.documentData = {
         },
       },
     },
+    devotion: {
+      questor: {
+        name:   "ED.Devotion.Questor",
+        type:   "devotion",
+        system: {
+          description: { value: "ED.Devotion.Questor Description" },
+          // edid needs to be set on creation since settings are not ready on init
+          // edid: game.settings.get( "ed4e", "edidQuestorDevotion" ),
+          attribute:   "cha",
+          action:      "sustained",
+          difficulty:  {fixed: 10},
+        },
+      },
+    },
   },
 };
 preLocalize( "documentData.Item.skill.languageSpeak", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageSpeak.system.description", { key: "value" } );
 preLocalize( "documentData.Item.skill.languageRW", { key: "name" } );
 preLocalize( "documentData.Item.skill.languageRW.system.description", { key: "value" } );
+preLocalize( "documentData.Item.devotion.questor", { key: "name" } );
+preLocalize( "documentData.Item.devotion.questor.system.description", { key: "value" } );
 
 
 /* -------------------------------------------- */

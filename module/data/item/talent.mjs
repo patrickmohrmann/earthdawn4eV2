@@ -127,6 +127,13 @@ export default class TalentData extends AbilityTemplate.mixin(
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static metadata = Object.freeze( foundry.utils.mergeObject( super.metadata, {
+    hasLinkedItems: true,
+  }, {inplace: false} ) );
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static _cleanData( source, options ) {
     if ( source?.knacks?.available ) {
       source.knacks.available = source.knacks.available.filter( knackUuid => !!fromUuidSync( knackUuid ) );
@@ -243,18 +250,6 @@ export default class TalentData extends AbilityTemplate.mixin(
 
   /* -------------------------------------------- */
   /*  Drop Events                                 */
-  /* -------------------------------------------- */
-
-  drop( event, data ) {
-    const documentData = fromUuidSync( data.uuid );
-    switch ( documentData.type ) {
-      case "knackAbility":
-        return this._onDropKnack( event, data );
-      default:
-        return data;
-    }
-  }
-
   /* -------------------------------------------- */
 
   _onDropKnack( event, data ) {
