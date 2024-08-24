@@ -1,7 +1,6 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ED4E from "../../config.mjs";
-import SystemDataModel from "../abstract.mjs";
 import KnackTemplate from "./templates/knack-item.mjs";
 
 /**
@@ -15,8 +14,6 @@ export default class TalentData extends AbilityTemplate.mixin(
   /** @inheritDoc */
   static defineSchema() {
     const fields = foundry.data.fields;
-    const labelKey = SystemDataModel.getLocalizeKey.bind( this, "Item", false );
-    const hintKey = SystemDataModel.getLocalizeKey.bind( this, "Item", true );
     return this.mergeSchema( super.defineSchema(), {
       talentCategory: new fields.StringField( {
         required: true,
@@ -25,23 +22,23 @@ export default class TalentData extends AbilityTemplate.mixin(
         initial:  null,
         trim:     true,
         choices:  ED4E.talentCategory,
-        label:    labelKey( "talentCategory" ),
-        hint:     hintKey( "talentCategory" ),
+        label:    this.labelKey( "talentCategory" ),
+        hint:     this.hintKey( "talentCategory" ),
       } ),
       magic: new fields.SchemaField( {
         threadWeaving: new fields.BooleanField( {
           required: true,
           nullable: false,
           initial:  false,
-          label:    labelKey( "talentThreadWeaving" ),
-          hint:     hintKey( "talentThreadWeaving" ),
+          label:    this.labelKey( "talentThreadWeaving" ),
+          hint:     this.hintKey( "talentThreadWeaving" ),
         } ),
         spellcasting: new fields.BooleanField( {
           required: true,
           nullable: false,
           initial:  false,
-          label:    labelKey( "talentSpellcasting" ),
-          hint:     hintKey( "talentSpellcasting" ),
+          label:    this.labelKey( "talentSpellcasting" ),
+          hint:     this.hintKey( "talentSpellcasting" ),
         } ),
         magicType: new fields.StringField( {
           required: true,
@@ -49,33 +46,33 @@ export default class TalentData extends AbilityTemplate.mixin(
           blank:    true,
           trim:     true,
           choices:  ED4E.spellcastingTypes,
-          label:    labelKey( "talentMagicType" ),
-          hint:     hintKey( "talentMagicType" ),
+          label:    this.labelKey( "talentMagicType" ),
+          hint:     this.hintKey( "talentMagicType" ),
         } ),
       }, {
         required: true,
         nullable: false,
-        label:    labelKey( "talentMagic" ),
-        hint:     hintKey( "talentMagic" ),
+        label:    this.labelKey( "talentMagic" ),
+        hint:     this.hintKey( "talentMagic" ),
       } ),
       sourceClass: new fields.SchemaField( {
         identifier: new fields.StringField( {
           required: true,
           nullable: true,
           blank:    true,
-          label:    labelKey( "talentSourceClassId" ),
-          hint:     hintKey( "talentSourceClassId" ),
+          label:    this.labelKey( "talentSourceClassId" ),
+          hint:     this.hintKey( "talentSourceClassId" ),
         } ),
         levelAdded: new fields.NumberField( {
           required: true,
           nullable: true,
           integer:  true,
-          label:    labelKey( "talentSourceClassLevel" ),
-          hint:     hintKey( "talentSourceClassLevel" ),
+          label:    this.labelKey( "talentSourceClassLevel" ),
+          hint:     this.hintKey( "talentSourceClassLevel" ),
         } ),
       }, {
-        label: labelKey( "talentSourceClass" ),
-        hint:  hintKey( "talentSourceClass" ),
+        label: this.labelKey( "talentSourceClass" ),
+        hint:  this.hintKey( "talentSourceClass" ),
       } ),
       knacks: new fields.SchemaField( {
         available: new fields.SetField(
@@ -87,15 +84,15 @@ export default class TalentData extends AbilityTemplate.mixin(
               return undefined; // undefined means do further validation
             },
             validationError: "must be a knack type",
-            label:           labelKey( "talentAvailableKnack" ),
-            hint:            hintKey( "talentAvailableKnack" ),
+            label:           this.labelKey( "talentAvailableKnack" ),
+            hint:            this.hintKey( "talentAvailableKnack" ),
           } ),
           {
             required: true,
             nullable: false,
             initial:  [],
-            label:    labelKey( "talentKnacksAvailable" ),
-            hint:     hintKey( "talentKnacksAvailable" ),
+            label:    this.labelKey( "talentKnacksAvailable" ),
+            hint:     this.hintKey( "talentKnacksAvailable" ),
           }
         ),
         learned:   new fields.SetField(
@@ -107,22 +104,22 @@ export default class TalentData extends AbilityTemplate.mixin(
               return undefined; // undefined means do further validation
             },
             validationError: "must be a knack type",
-            label:           labelKey( "talentLearnedKnack" ),
-            hint:            hintKey( "talentLearnedKnack" ),
+            label:           this.labelKey( "talentLearnedKnack" ),
+            hint:            this.hintKey( "talentLearnedKnack" ),
           } ),
           {
             required: true,
             nullable: false,
             initial:  [],
-            label:    labelKey( "talentKnacksLearned" ),
-            hint:     hintKey( "talentKnacksLearned" ),
+            label:    this.labelKey( "talentKnacksLearned" ),
+            hint:     this.hintKey( "talentKnacksLearned" ),
           }
         ),
       }, {
         required: false,
         nullable: false,
-        label:    labelKey( "talentKnacks" ),
-        hint:     hintKey( "talentKnacks" ),
+        label:    this.labelKey( "talentKnacks" ),
+        hint:     this.hintKey( "talentKnacks" ),
       } )
     } );
   }
@@ -251,10 +248,10 @@ export default class TalentData extends AbilityTemplate.mixin(
   drop( event, data ) {
     const documentData = fromUuidSync( data.uuid );
     switch ( documentData.type ) {
-    case "knackAbility":
-      return this._onDropKnack( event, data );
-    default:
-      return data;
+      case "knackAbility":
+        return this._onDropKnack( event, data );
+      default:
+        return data;
     }
   }
 

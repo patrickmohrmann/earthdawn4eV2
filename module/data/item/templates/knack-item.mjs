@@ -12,8 +12,6 @@ export default class KnackTemplate extends SystemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     const fields = foundry.data.fields;
-    const labelKey = SystemDataModel.getLocalizeKey.bind( this, "Item", false );
-    const hintKey = SystemDataModel.getLocalizeKey.bind( this, "Item", true );
     return this.mergeSchema( super.defineSchema(), {
       sourceTalentUuid: new fields.DocumentUUIDField( {
         required: false,
@@ -25,8 +23,8 @@ export default class KnackTemplate extends SystemDataModel.mixin(
           return undefined; // undefined means do further validation
         },
         validationError: "must be of type 'talent'",
-        label:           labelKey( "knackSourceTalentUuid" ),
-        hint:            hintKey( "knackSourceTalentUuid" ),
+        label:           this.labelKey( "knackSourceTalentUuid" ),
+        hint:            this.hintKey( "knackSourceTalentUuid" ),
       } ),
       minLevel:      new fields.NumberField( {
         required: false,
@@ -35,8 +33,8 @@ export default class KnackTemplate extends SystemDataModel.mixin(
         integer:  true,
         min:      1,
         initial:  1,
-        label:    labelKey( "knackMinLevel" ),
-        hint:     hintKey( "knackMinLevel" ),
+        label:    this.labelKey( "knackMinLevel" ),
+        hint:     this.hintKey( "knackMinLevel" ),
       } ),
       restrictions: new fields.NumberField(),
       requirements: new fields.NumberField(),

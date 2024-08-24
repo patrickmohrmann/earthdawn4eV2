@@ -19,6 +19,9 @@
  */
 export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
+  static labelKey = getLocalizeKey.bind( this, "General", false );
+  static hintKey = getLocalizeKey.bind( this, "General", true );
+
   /**
    * System type that this system data model represents ( e.g. "character", "npc", "vehicle" ).
    * @type {string}
@@ -379,6 +382,9 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
  */
 export class ActorDataModel extends SystemDataModel {
 
+  static labelKey = SystemDataModel.getLocalizeKey.bind( this, "Actor", false );
+  static hintKey = SystemDataModel.getLocalizeKey.bind( this, "Actor", true );
+
   /**
    * @typedef {SystemDataModelMetadata} ActorDataModelMetadata
    * @property {boolean} supportsAdvancement  Can advancement be performed for this actor type?
@@ -426,6 +432,9 @@ export class ActorDataModel extends SystemDataModel {
  * Variant of the SystemDataModel with support for rich item tooltips.
  */
 export class ItemDataModel extends SystemDataModel {
+
+  static labelKey = SystemDataModel.getLocalizeKey.bind( this, "Item", false );
+  static hintKey = SystemDataModel.getLocalizeKey.bind( this, "Item", true );
 
   /**
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
