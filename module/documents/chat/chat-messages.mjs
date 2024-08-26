@@ -92,6 +92,7 @@ async updateChatMessage(options, messageInput) {
                 message.update(updateData);
             }
         }
+        console.log("Message.isSucess", message.system.isSuccess);
 
         //socketLib.system.executeAsGM('updateChatMessage', message.id, { content: newContent });
 
