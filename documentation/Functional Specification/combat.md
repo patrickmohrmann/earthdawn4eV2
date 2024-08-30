@@ -13,7 +13,9 @@ To attack the user have two general options to do so. the first option is to use
 
 ### Substitude Combat Options
 
-There are two buttons availabel {WHERE} one button is representing unarmed combat, and the third button is using the currently equipped weapon in the main or both hands (melee, missle or thrown weapons). The last button changes the icon depending on the equipped weapon type. all of these buttons use the dexterity step of the actor but trigger the respective workflow. 
+There are two (or three) buttons availabel {WHERE}. One button is representing unarmed combat, the second button is using the currently equipped weapon in the main or both hands (melee, missle or thrown weapons). This button changes the icon depending on the equipped weapon type. all of these buttons use the dexterity step of the actor but trigger the respective workflow. <br>
+if the namegiver has the Tail Attack option, a third button is available, representing the Tail attack option.<br>
+All of these options use Dexterity for the attack attribute, they do not look for a referenced Ability.
 
 ### Using an Attack Ability
 

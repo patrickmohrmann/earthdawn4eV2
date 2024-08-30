@@ -256,6 +256,20 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         label: 'localize: roll sub type',
         hint: 'localize: subtype of this roll, like attackMelee, or threadWeaving',
       } ),
+      success: new fields.BooleanField( {
+        required: true,
+        nullable: false,
+        initial: false,
+        label: 'localize: roll success',
+        hint: 'localize: whether the roll was successful or not',
+      } ),
+      setSuccessClass: new fields.BooleanField( {
+        required: true,
+        nullable: false,
+        initial: false,
+        label: 'localize: set success class',
+        hint: 'localize: whether the success class should be set or not',
+      } ),
     };
   }
 

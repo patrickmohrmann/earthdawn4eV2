@@ -231,7 +231,8 @@ export default class EdRoll extends Roll {
       let reactions = [];
       for ( const target of targetsTokens ) {
 
-        const findActor = canvas.scene.tokens.get(target.id)?.actor
+        const findActor = canvas.scene?.tokens.get(target.id)?.actor
+        if ( !findActor ) return;
         const targetReactions = findActor.items.filter( ( item ) => item.system.reaction?.reactionType === "physical" );
         reactions.push( { actor: findActor.id, name: findActor.name, reactions: targetReactions, img: findActor.img} );
       }
@@ -381,7 +382,7 @@ export default class EdRoll extends Roll {
     const templateData = {};
 
     templateData.roller = game.user.character?.name
-      ?? canvas.tokens.controlled[0]
+      ?? canvas.tokens?.controlled[0]
       ?? game.user.name;
     templateData.customFlavor = this.options.chatFlavor;
     templateData.result = this.total;
@@ -401,18 +402,40 @@ export default class EdRoll extends Roll {
 
   /* -------------------------------------------- */
 
+
+  /* -------------------------------------------- */
+
   /**
    * @description                       Add a success or failure class to the dice total.
    * @param {JQuery} jquery
    * @UserFunction                      UF_Rolls-addSuccessClass
    */
-  addSuccessClass( jquery ) {
-    if ( this.isSuccess || this.isFailure ) {
+  addSuccessClass( jquery, success, setSuccess ) {
+    if ( setSuccess === true ) {
+      if (success === true) {
+        jquery.find( ".dice-total" ).addClass( "roll-success" );
+      } else if ( success === false ) {
+        jquery.find( ".dice-total" ).addClass( "roll-failure" );
+      }
+    } else {
       jquery.find( ".dice-total" ).addClass(
         this.isSuccess ? "roll-success" : "roll-failure"
       );
     }
   }
+
+  /* -------------------------------------------- */
+
+/**
+ * @description                       Check if the roll is a success and set options.isSuccess accordingly.
+ */
+checkAndSetSuccess() {
+  if (this.isSuccess) {
+    this.options.success = true;
+  }
+}
+
+
 
   /* -------------------------------------------- */
 
@@ -501,7 +524,10 @@ export default class EdRoll extends Roll {
     if ( !this._evaluated ) await this.evaluate();
     console.log( "ROLLRESULT",this );
     messageData.flavor = await this.chatFlavor;
-
+    // if ( this.isSuccess === true ){
+    //   messageData.system.isSuccess = true;
+    // }
+    this.checkAndSetSuccess();
     return super.toMessage( messageData, options );
   }
 }

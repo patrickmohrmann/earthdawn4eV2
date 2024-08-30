@@ -337,35 +337,109 @@ export default class ActorEd extends Actor {
       const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
       if ( mainhand?.system.weaponType === ability.system.combatAbility.requiredCombatType ) {
         weapon = mainhand;
-      } else {
-        ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
-      }
+      } 
     } else if ( holdingType === "offHand" ) {
       const offHand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
-      if ( offHand?.system.weaponType === "melee" || offHand?.system.requiredCombatType === "unarmed" ) {
+      if ( offHand?.system.weaponType === "melee" ) {
         weapon = offHand;
-      } else {
-        ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
-      }
+      } 
     } else if ( holdingType === "tail" ) {
       // add code for tail weapon Earthdawn Active Effect here see #909
       const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
-      const offHand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
-      if ( tailWeapon?.system.weaponType === "melee" || offHand?.system.requiredCombatType === "unarmed" ) {
+      if ( tailWeapon?.system.weaponType === "melee" ) {
         weapon = tailWeapon;
         modifier.tailWeapon += -2;
-      } else {
-        ui.notifications.warn( "equipped Weapon does not fit the Weapon Type of the Ability" );
-      }
+      } 
       if ( !weapon ) {
         weapon = "tail";
         modifier.tailWeapon += -2;
       }
+    } else if (holdingType === "unarmed") {
+      const tailWeapon = this.itemTypes.weapon.find(weapon => weapon.system.itemStatus === "tail");
+      if (tailWeapon) {
+        weapon = await new Promise((resolve) => {
+          new Dialog({
+            title: "Choose Weapon",
+            content: "<p>Choose the weapon you want to use</p>",
+            buttons: {
+              tail: {
+                label: "tail",
+                callback: () => resolve(tailWeapon)
+              },
+              unarmed: {
+                label: "unarmed",
+                callback: () => resolve("unarmed")
+              }
+            }
+          }).render(true);
+        });
+      } else {
+        weapon = "unarmed";
+      }
+      if ( weapon !== "unarmed" ) {
+        modifier.tailWeapon += -2;
+      }
     }
-    if ( !weapon ) {
-      ui.notifications.error( "No weapon found in the required item status" );
-      return;
-    };
+    if (!weapon) {
+      const requiredCombatType = ability.system.combatAbility.requiredCombatType;
+      const requiredItemStatus = ability.system.combatAbility.requiredItemStatus;
+      const unequippedWeapons = this.itemTypes.weapon.filter(weapon => weapon.system.weaponType === requiredCombatType);
+      let requiredNextStatus = "";
+      if (requiredItemStatus === "mainHand") {
+        if ( requiredCombatType === "melee" ) {
+          requiredNextStatus = "mainHand";
+        } else if ( requiredCombatType === "missile" ) {
+          requiredNextStatus = "twoHands";
+        }
+      } else if (requiredItemStatus === "offHand") {
+        requiredNextStatus = "offHand";
+      } else if (requiredItemStatus === "tail") {
+        requiredNextStatus = "tail";
+      }
+
+      weapon = await new Promise((resolve) => {
+        const weaponOptions = unequippedWeapons.map((weapon, index) => {
+          return `<option value="${index}">${weapon.name}</option>`;
+        }).join("");
+    
+        new Dialog({
+          title: "Choose Weapon",
+          content: `
+            <p>Choose the weapon you want to use</p>
+            <select id="weapon-choice">${weaponOptions}</select>
+          `,
+          buttons: {
+            choose: {
+              label: "Choose",
+              callback: async (html) => {
+                const selectedIndex = html.find("#weapon-choice").val();
+                const selectedWeapon = unequippedWeapons[selectedIndex];
+      
+                // Function to check if the item status matches the required next status
+                function isItemStatusValid(weapon) {
+                  return weapon.system.itemStatus === requiredNextStatus;
+                }
+      
+                // Loop to rotate item status until it matches the required next status
+                while (!isItemStatusValid(selectedWeapon)) {
+                  await this.rotateItemStatus(selectedWeapon.id);
+                  // Optionally, you can add a delay here to avoid potential infinite loops
+                  // await new Promise(resolve => setTimeout(resolve, 100));
+                }
+      
+                resolve(selectedWeapon);
+              }
+            },
+            cancel: {
+              label: "Cancel",
+              callback: () => resolve(null)
+            }
+          },
+          default: "choose"
+        }).render(true);
+      });
+    }
+
     const targets = Array.from(game.user.targets);
     const targetsArray = await this.getTargets( targets );
     if (targetsArray.length === 0) {
@@ -404,7 +478,7 @@ export default class ActorEd extends Actor {
         let weaponShortRangeMax = 1;
         let weaponLongRangeMin = 1;
         let weaponLongRangeMax = 1;
-        if ( weapon !== "unarmed" ) {      
+        if ( weapon !== "unarmed" && weapon !== "tail" ) {      
         weaponShortRangeMin = weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : 1;
         weaponShortRangeMax = weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1;
         weaponLongRangeMin = weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1;

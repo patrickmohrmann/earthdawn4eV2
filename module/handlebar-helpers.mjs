@@ -20,7 +20,6 @@ export default function registerHandlebarHelpers() {
 
     return false; // If no elements found, return false
   } );
-
   
   //hasTailAttack
   Handlebars.registerHelper( 'hasTailAttack', ( items ) => {

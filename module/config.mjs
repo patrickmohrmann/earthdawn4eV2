@@ -197,6 +197,7 @@ ED4E.requiredItemStatus = {
 	mainHand: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.mainHand",
 	offHand: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.offHand",
 	tail: 					"ED.Config.Item.PhysicalItems.RequiredItemStatus.tail",
+	unarmed: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.unarmed",
 };
 preLocalize( "requiredItemStatus" );
 

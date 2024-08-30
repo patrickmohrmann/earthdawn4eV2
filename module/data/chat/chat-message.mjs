@@ -16,6 +16,12 @@ export default class ChatMessageEdData extends SystemDataModel {
                 initial: false,
                 //validate: value => typeof value === "boolean",
             } ), 
+            setSuccess: new fields.BooleanField( {
+                required: true,
+                nullable: false,
+                initial: false,
+                //validate: value => typeof value === "boolean",
+            } ), 
         } );
     }
 
@@ -28,4 +34,6 @@ export default class ChatMessageEdData extends SystemDataModel {
         super.migrateData( source );
         // specific migration functions
     }
+
+    
 }
