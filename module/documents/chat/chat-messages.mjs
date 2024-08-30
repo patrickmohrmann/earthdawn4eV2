@@ -2,27 +2,7 @@
 
 export default class ChatMessageEd extends ChatMessage {
 
-    // static async create(data, options) {
-
-    //     // SHould be moved to _onCreate instead
-    //     // Call the original create method
-    //     const message = await super.create(data, options);
-
-    //     // Check if rolls[0].options.triggeredMessId is equal to any existing message's id
-    //     if ( message.rolls.length > 0 ) {
-    //     if (message.rolls && message.rolls[0].options.triggeredMessId) {
-    //         const triggeredMessId = message.rolls[0].options.triggeredMessId;
-    //         const existingMessage = game.messages.get(triggeredMessId);
-    //         if (existingMessage) {
-    //             // Call updateChatMessage if the condition is met
-    //             message.updateChatMessage(options, existingMessage);
-    //         }
-    //     }
-    // }
-    //     return message;
-    // }
-
-        static async create(data, options) {
+    static async create(data, options) {
         // Call the original create method
         const message = await super.create(data, options);
     
@@ -44,25 +24,40 @@ export default class ChatMessageEd extends ChatMessage {
         }
     }
 
-    async getHTML() {
-        // trial code for updating the message
-        if ( this.rolls[0] ) {
-        await this.updateFlavor();
-        console.log("this.flavor", this.flavor);
+       async getHTML() {
+        // Update the flavor if rolls are present
+        if (this.rolls[0]) {
+            await this.updateFlavor();
         }
+    
+        // Get the HTML from the superclass
         const html = await super.getHTML();
+    
         // Attach event listeners to buttons
+        this._attachEventListeners(html);
+    
+        return html;
+    }
+    
+    _attachEventListeners(html) {
         html.find('.reaction-button').click(this._onReactionButton.bind(this));
         html.find('.maneuver-button').click(this._onManeuverButton.bind(this));
-        return html;
     }
 
     async updateFlavor() {
-        const flavorTemplate = this.rolls[0].flavorTemplate;
-        const templateData = await this.rolls[0].getFlavorTemplateData();
-        console.log("templateData", templateData);
+        const flavorTemplate = this._getFlavorTemplate();
+        const templateData = await this._getTemplateData();
         templateData.success = this.system.isSuccess;
         this.flavor = await renderTemplate(flavorTemplate, templateData);
+    }
+    
+    _getFlavorTemplate() {
+        return this.rolls[0].flavorTemplate;
+    }
+    
+    async _getTemplateData() {
+        const templateData = await this.rolls[0].getFlavorTemplateData();
+        return templateData;
     }
 
 
@@ -70,126 +65,107 @@ export default class ChatMessageEd extends ChatMessage {
     async _onReactionButton(event) {
         event.preventDefault();
         const buttonId = event.currentTarget.getAttribute('data-button-id');
-
-        // Get the current user
-        const user = game.user;
-        if (!user) {
-            console.error("No user found");
-            return;
-        }
-
-        // Get the user's character
-        let character = user.character;
-        if (!character  && !user.isGM) {
-            console.error("No character found for user");
-            return;
-        } else if (!character && user.isGM) {
-            const selectedTokenid = this.rolls[0].options.targetTokens[0].id
-            character = canvas.scene.tokens.get(selectedTokenid)?.actor
-        }
-
-        // Trigger the ability roll
-        if ( buttonId === "take-the-hit" ) {
+    
+        const user = this._getCurrentUser();
+        if (!user) return;
+    
+        const character = await this._getCharacter(user);
+        if (!character) return;
+    
+        if (buttonId === "take-the-hit") {
             ui.notifications.warn("You take the hit");
             return;
         }
-        const ability = character.items.filter( item => item.id === buttonId)[0];
+    
+        const ability = this._getAbility(character, buttonId);
+        if (!ability) return;
+    
+        const difficulty = this.rolls[0].result;
+        const triggeredMessId = this.id;
+    
+        const reactionResult = await character.rollAbility(ability, { event: event }, difficulty, triggeredMessId);
+        if (!this._evaluated) await this.evaluate();
+        await this.updateChatMessage(this, reactionResult);
+    }
+    
+    _getCurrentUser() {
+        const user = game.user;
+        if (!user) {
+            console.error("No user found");
+        }
+        return user;
+    }
+    
+    async _getCharacter(user) {
+        let character = user.character;
+        if (!character && !user.isGM) {
+            console.error("No character found for user");
+            return null;
+        } else if (!character && user.isGM) {
+            const selectedTokenId = this.rolls[0].options.targetTokens[0].id;
+            character = canvas.scene.tokens.get(selectedTokenId)?.actor;
+            if (!character) {
+                console.error("No character found for selected token");
+                return null;
+            }
+        }
+        return character;
+    }
+    
+    _getAbility(character, buttonId) {
+        const ability = character.items.find(item => item.id === buttonId);
         if (!ability) {
             console.error("No ability found for button ID:", buttonId);
-            return;
         }
-
-        const difficulty = this.rolls[0].result
-        const triggeredMessId = this.id
-
-        // Assuming the roll method is `rollAbility` and it returns a promise
-        const reactionResult = await character.rollAbility(ability, { event: event }, difficulty, triggeredMessId);
-        if ( !this._evaluated ) await this.evaluate();
-        await this.updateChatMessage(this, reactionResult);
-
-}
+        return ability;
+    }
 
 async updateChatMessage(options, messageInput) {
-    // Find the chat message associated with the button
     const message = messageInput;
 
-    if (message) {
-        // Update the message content with the roll result
-        const newResult = options.data[0].rolls[0]._total
-        const difficulty = options.data[0].rolls[0].options.target.total
-        const successPath = "rolls[0].isSuccess";
-        if (newResult >= difficulty) {
-            const newMess = await this.updateMessage( newResult, difficulty, message, successPath);
-            if (newMess === true) {
-                // Correctly update the message with the successPath
-                // const updateData = {};
-                // updateData[successPath] = false;
-                // //updateData[flavorPath] = 
-                // message.update(updateData);
-                await message.update({ "rolls[0].options.success": false, "system.setSuccess": true });
-                console.log("message context failure", message.failure);
-                
-
-                const sourceMessageId = message.id;
-                const sourceMessage = game.messages.get(sourceMessageId);
-
-                const chatMessageElement = document.querySelector(`.chat-message[data-message-id="${sourceMessageId}"]`);
-                if (chatMessageElement) {
-                    const messageContentElement = chatMessageElement.querySelector('.message-content');
-                    if (messageContentElement) {
-                        console.log('Found message-content element:', messageContentElement);
-
-                        // Find the h4 element with class roll-success
-                    const h4Element = messageContentElement.querySelector('h4.roll-success');
-                    if (h4Element) {
-                        // Replace the class roll-success with roll-failure
-                        h4Element.classList.replace('roll-success', 'roll-failure');
-                        console.log('Replaced roll-success with roll-failure:', h4Element);
-                    } else {
-                        console.error('h4 element with class roll-success not found');
-                    }
-                    
-                    // Perform further actions with messageContentElement if needed
-                } else {
-                    console.error('message-content element not found');
-                }
-            } else {
-                console.error('Chat message element not found');
-            }
-
-            }
-             // Re-render the message
-             await message.render();
-        }
-    //     if (message.system.isSuccess === true) {
-    //        const diceTotalElement = document.querySelector('.dice-total');  
-    //        if (diceTotalElement.find(".roll-success").length || diceTotalElement.find(".roll-failure").length) {
-    //         return;
-    //       } else {
-    //       if ( this.isSuccess || this.isFailure ) {
-    //         jquery.find( ".dice-total" ).addClass(
-    //           this.isSuccess ? "roll-success" : "roll-failure"
-    //         );
-    //       }
-    //     }
-    // }
-        console.log("Message.isSucess", message.system.isSuccess);
-
-        //socketLib.system.executeAsGM('updateChatMessage', message.id, { content: newContent });
-
-        //message.update({ content: newContent });
-    } else {
+    if (!message) {
         console.error('Chat message not found for button');
+        return;
+    }
+
+    const newResult = options.data[0].rolls[0]._total;
+    const difficulty = options.data[0].rolls[0].options.target.total;
+    const successPath = "rolls[0].isSuccess";
+
+    if (newResult >= difficulty) {
+            await this._updateMessageSuccess(message);
+            await this._updateChatMessageElement(message.id);
+            await message.render();
+        }
+    }
+
+async _updateMessageSuccess(message) {
+    await message.update({ "rolls[0].options.success": false, "system.setSuccess": true });
+}
+
+async _updateChatMessageElement(messageId) {
+    const chatMessageElement = document.querySelector(`.chat-message[data-message-id="${messageId}"]`);
+    if (!chatMessageElement) {
+        console.error('Chat message element not found');
+        return;
+    }
+
+    const messageContentElement = chatMessageElement.querySelector('.message-content');
+    if (!messageContentElement) {
+        console.error('message-content element not found');
+        return;
+    }
+
+    const h4Element = messageContentElement.querySelector('h4.roll-success');
+    if (h4Element) {
+        h4Element.classList.replace('roll-success', 'roll-failure');
+    } else {
+        console.error('h4 element with class roll-success not found');
     }
 }
 
-async updateMessage(newResult, difficulty, message, successPath) {
-    if (newResult >= difficulty) {
-        return true;
-        
-    } else {
-        return false;
-    }
+async updateMessage(newResult, difficulty) {
+    return newResult >= difficulty;
 }
 
     _onManeuverButton(event) {
