@@ -242,6 +242,29 @@ export default class ActorEd extends Actor {
         },
         this
       );
+    } else if ( rollType === "interaction" || rollType === "spellcasting" )  { 
+
+      const targets = Array.from(game.user.targets);
+      const targetsArray = await this.getTargets( targets );
+      if (targetsArray.length === 0) {
+        ui.notifications.error("No targets selected");
+        return;
+      }
+      edRollOptions = EdRollOptions.fromActor(
+        { 
+          actor: this.id,
+          targetTokens: targetsArray,
+          testType: "action",
+          rollType: rollType,
+          triggeredMessId: triggeredMessId ? triggeredMessId : undefined,
+          strain: strain,
+          target: difficultyFinal,
+          step: abilityFinalStep,
+          devotionRequired: devotionRequired,
+          chatFlavor: chatFlavor
+        },
+        this
+      );
     }
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
     this.#processRoll( roll );

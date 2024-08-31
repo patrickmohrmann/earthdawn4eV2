@@ -310,6 +310,7 @@
                 "effect":                                           "Effect",
                 "halfmagic":                                        "Half Magic",
                 "initiative":                                       "Initiative",
+                "interaction":                                      "Interaction",
                 "recovery":                                         "Recovery",
                 "spellcasting":                                     "Spell Casting",
                 "threadWeaving":                                    "Thread Weaving"

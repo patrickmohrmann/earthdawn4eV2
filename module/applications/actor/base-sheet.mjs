@@ -191,9 +191,10 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * handles attack substitude functions if abilities are missing
-   * @param {Event} event      The originating click event.
+   * @discription               handles attack substitude functions if abilities are missing
+   * @param {Event} event       The originating click event.
    * @private
+   * @UserFunction              UF_Rolls-attackSubstitude
    */
   _onAttackSubstitude( event ) {
     event.preventDefault();

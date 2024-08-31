@@ -309,6 +309,7 @@
                 "effect":                                           "Effekt",
                 "halfmagic":                                        "Halb Magie",
                 "initiative":                                       "Initiative",
+                "interaction":                                      "Interaktion", 
                 "recovery":                                         "Erholung",
                 "spellcasting":                                     "Spruchzauberei",
                 "threadWeaving":                                    "Fadenweben"

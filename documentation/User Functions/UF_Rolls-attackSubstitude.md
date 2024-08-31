@@ -1,0 +1,1 @@
+this function triggers the substitute functions for combat (Weapon Attack, Unarmed Attack and optional Tail Attack). All Attacks are based on dexterity.

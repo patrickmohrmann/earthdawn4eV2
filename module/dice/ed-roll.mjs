@@ -35,7 +35,7 @@ export default class EdRoll extends Roll {
   /*  Constructor and Fields                      */
   /* -------------------------------------------- */
 
-  constructor( formula = undefined, data = {}, edRollOptions = {}, options = {} ) {
+  constructor( formula = undefined, data = {}, edRollOptions = {} ) {
     // us ternary operator to also check for empty strings, nullish coalescing operator (??) only checks null or undefined
     const baseTerm = formula
       ? formula
@@ -45,12 +45,10 @@ export default class EdRoll extends Roll {
       }]`;
     super( baseTerm, data, edRollOptions );
 
-    /// das muss umgebogen werden ich muss hier die rollTypes als subtyes von den test types sehen.
     if( this.options.rollType === "attack") {
       this.flavorTemplate = ED4E.rollTypes.attack.flavorTemplate;
     } else {
-
-    this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
+      this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
     }
     if ( !this.options.extraDiceAdded ) this.#addExtraDice();
     if ( !this.options.configured ) this.#configureModifiers();
@@ -224,22 +222,36 @@ export default class EdRoll extends Roll {
 
   /**
    * Add the target tokens reactions.
+   * @UserFunction                    UF_Rolls-targetReactions
    */
   get targetReactions() {
-    if ( this.options.rollType === "attack" ) {
-      const targetsTokens = this.options.targetTokens; 
-      let reactions = [];
-      for ( const target of targetsTokens ) {
+    const rollTypeToReactionType = {
+        "attack": "physical",
+        "spellcasting": "mystical",
+        "interaction": "social"
+    };
 
-        const findActor = canvas.scene?.tokens.get(target.id)?.actor
-        if ( !findActor ) return;
-        const targetReactions = findActor.items.filter( ( item ) => item.system.reaction?.reactionType === "physical" );
-        reactions.push( { actor: findActor.id, name: findActor.name, reactions: targetReactions, img: findActor.img} );
-      }
-      return reactions
+    const reactionType = rollTypeToReactionType[this.options.rollType];
+    if (!reactionType) return;
+
+    const targetsTokens = this.options.targetTokens;
+    let reactions = [];
+
+    for (const target of targetsTokens) {
+        const findActor = canvas.scene?.tokens.get(target.id)?.actor;
+        if (!findActor) continue;
+
+        const targetReactions = findActor.items.filter(item => item.system.reaction?.reactionType === reactionType);
+        reactions.push({
+            actor: findActor.id,
+            name: findActor.name,
+            reactions: targetReactions,
+            img: findActor.img
+        });
     }
-    
-  }
+
+    return reactions;
+}
 
   /* -------------------------------------------- */
 
@@ -382,7 +394,7 @@ export default class EdRoll extends Roll {
     const templateData = {};
 
     templateData.roller = game.user.character?.name
-      ?? canvas.tokens?.controlled[0]
+      ?? canvas.tokens.controlled[0]
       ?? game.user.name;
     templateData.customFlavor = this.options.chatFlavor;
     templateData.result = this.total;
@@ -423,19 +435,6 @@ export default class EdRoll extends Roll {
       );
     }
   }
-
-  /* -------------------------------------------- */
-
-/**
- * @description                       Check if the roll is a success and set options.isSuccess accordingly.
- */
-checkAndSetSuccess() {
-  if (this.isSuccess) {
-    this.options.success = true;
-  }
-}
-
-
 
   /* -------------------------------------------- */
 
@@ -522,12 +521,8 @@ checkAndSetSuccess() {
   */
   async toMessage( messageData = {}, options = {} ) {
     if ( !this._evaluated ) await this.evaluate();
-    console.log( "ROLLRESULT",this );
     messageData.flavor = await this.chatFlavor;
-    // if ( this.isSuccess === true ){
-    //   messageData.system.isSuccess = true;
-    // }
-    this.checkAndSetSuccess();
+
     return super.toMessage( messageData, options );
   }
 }

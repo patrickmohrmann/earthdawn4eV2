@@ -14,13 +14,11 @@ export default class ChatMessageEdData extends SystemDataModel {
                 required: true,
                 nullable: false,
                 initial: false,
-                //validate: value => typeof value === "boolean",
             } ), 
             setSuccess: new fields.BooleanField( {
                 required: true,
                 nullable: false,
                 initial: false,
-                //validate: value => typeof value === "boolean",
             } ), 
         } );
     }

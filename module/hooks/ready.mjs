@@ -19,7 +19,7 @@ export default function () {
         /*  Debug Documents                             */
         /* -------------------------------------------- */
 
-       //  if ( game.user.isGM ) await _createDebugDocuments();
+        if ( game.user.isGM ) await _createDebugDocuments();
 
 
         /* -------------------------------------------- */

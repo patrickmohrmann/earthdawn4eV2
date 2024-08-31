@@ -58,3 +58,10 @@ The following as well?
 ### Knock down tests
 
 
+## Related System settings
+
+There are some system Settings which are related to combat:
+* [Automatic Ammunition Tracking](???)
+* [Automatic Range Calculation](???)
+
+
