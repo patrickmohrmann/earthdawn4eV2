@@ -48,15 +48,12 @@ export default function () {
     addUserPortrait( msg, html );
 
     // Add class for highlighting success/failure on roll messages
-    let success = false;
-    let setSuccess = false;
-    if ( msg.system.isSuccess === true ) {
-      success = true;
+    const success = msg.system.isSuccess === true;
+    const setSuccess = msg.system.setSuccess === true;
+    
+    if (msg.rolls[0]) {
+        msg.rolls[0].addSuccessClass(html, success, setSuccess);
     }
-    if ( msg.system.setSuccess === true ) {
-      setSuccess = true;
-    }
-    if ( msg.rolls[0] ) msg.rolls[0].addSuccessClass( html, success, setSuccess);
   })
 
   Hooks.once('init', async function() {

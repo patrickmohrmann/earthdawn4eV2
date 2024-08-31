@@ -1,0 +1,1 @@
+This User Function is triggered on a creation of a chat message or, if a refresh triggers the recreation of all chat messages. The recreation due to a refresh will trigger another function [UF_ChatMessage-UpdateChatMessage](../User%20Functions/UF_ChatMessage-UpdateChatMessage.md) to set the chat message to the state it was before the refresh.
