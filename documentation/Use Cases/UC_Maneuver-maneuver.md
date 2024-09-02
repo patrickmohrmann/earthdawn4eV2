@@ -1,8 +1,4 @@
-activating an ability with the roll type set to **attack** triggers the attack roll with the difficulty [getDifficulty](http:...) of the selected target. The equipped item (see [itemStatus](http:...)) defines which weapon is currently hold and can be used for an attack. <br>
-If the equipped weapon is fitting to the distance of the target and the roll ability a roll Prompt appears to roll the ability.<br>
-a chat message appears showing the result and providing the possibility to react to the attack as the defender. (see [UC_Reactions-reaction](../Use%20Cases/UC_Reactions-reaction.md)<br>
-If the Reaction is successful the attack ends. Otherwise the attacker has the option to chose maneuvers based on his extra successes (see [UC_Maneuvers-maneuver](../Use%20Cases/UC_Maneuvers-maneuver.md)) and/or triggers the damage Roll (see [UC_Damage-damage](../Use%20Cases/UC_Damage-damage.md)). the successful attack also provides the option to assign Active Effects.<br>
-the damage result can be assigned to the target as well as active effects which require damage. The damage is lessend by the targets armor.
+tbd
 
 ### Diagram
 ```mermaid
@@ -118,7 +114,8 @@ stateDiagram-v2
 | Test Coverage | Related Documentation |
 |---------------|-----------------------|
 | Attack all Actor types | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack multiple Targets | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| Attack with Reaction | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| Attack with Maneuver | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | Attack with Missile | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | Attack with Throwing Weapon | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
 | Attack unarmed | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |

@@ -67,7 +67,7 @@ export default class ChatMessageEd extends ChatMessage {
     /**
      * @description             Handle the click event on a reaction button
      * @param {*} event         The event that was triggered
-     * @UserFunction            UF_ChatMessage-onReactionButton
+     * @UserFunction            UF_ChatMessage-onReaction
      */
     async _onReactionButton( event ) {
         event.preventDefault(  );
