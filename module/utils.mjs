@@ -198,6 +198,17 @@ export function documentsToSelectChoices( documents ) {
   );
 }
 
+/**
+ * Creates a content link for a given UUID and description in the form:
+ * `@UUID[uuid]{description}`. Can then be enriched by the Foundry API.
+ * @param {string} uuid         The UUID of the linked entity.
+ * @param {string} description  The description that is shown in the link.
+ * @returns {string}            The content link in string representation.
+ */
+export function createContentLink( uuid, description ) {
+  return `@UUID[${uuid}]{${description}}`;
+}
+
 /* -------------------------------------------- */
 /*  View Helper                                 */
 /* -------------------------------------------- */
@@ -367,8 +378,8 @@ export function resolvePath( object, path, defaultValue ){
  * @param {string} uuid  UUID for which to produce the link.
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid( uuid ) {
-  return TextEditor._createContentLink( [ "", "UUID", uuid ] ).outerHTML;
+export async function linkForUuid( uuid ) {
+  return TextEditor._createContentLink( [ "", "UUID", uuid ] );
 }
 
 /* -------------------------------------------- */
@@ -397,24 +408,24 @@ export function validateEdid( value ) {
   // `any` is a reserved word
   if ( value === ED4E.reserved_edid.ANY ) {
     return new foundry.data.validation.DataModelValidationFailure( {
-      unresolved: true,
+      unresolved:   true,
       invalidValue: value,
-      message: "any is a reserved EDID!",
+      message:      "any is a reserved EDID!",
     } );
   }
   // if the value matches the regex we have likely a valid swid
   if ( !value.match( SLUG_REGEX ) ) {
     return new foundry.data.validation.DataModelValidationFailure( {
-      unresolved: true,
+      unresolved:   true,
       invalidValue: value,
-      message: value + " is not a valid EDID",
+      message:      value + " is not a valid EDID",
     } );
   }
 }
 
 export const validators = {
   isValidIdentifier: isValidIdentifier,
-  validateEdid: validateEdid,
+  validateEdid:      validateEdid,
 };
 
 
@@ -476,13 +487,13 @@ function _localizeObject( obj, keys ) {
 
     if ( type !== "object" ) {
       console.error( new Error(
-          `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
+        `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
       ) );
       continue;
     }
     if ( !keys?.length ) {
       console.error( new Error(
-          "Localization keys must be provided for pre-localizing when target is an object."
+        "Localization keys must be provided for pre-localizing when target is an object."
       ) );
       continue;
     }

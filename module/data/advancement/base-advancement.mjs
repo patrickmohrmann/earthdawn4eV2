@@ -19,44 +19,90 @@ export default class AdvancementData extends SparseDataModel {
           {
             required: false,
             nullable: true,
-            label: "ED.advancementLevel",
-            hint: "ED.aLevelInThisAdvancement"
+            label:    "ED.advancementLevel",
+            hint:     "ED.aLevelInThisAdvancement"
           }
         ),
         {
           required: true,
           nullable: true,
-          initial: [],
+          initial:  [],
         } ),
       abilityOptions: new MappingField(
         new fields.SetField(
           new fields.DocumentUUIDField(
             AbilityTemplate,
             {
-              label: "An Ability in this options pool.",
-              hint: "An Ability in this options pool."
+              label: this.labelKey( "classAbilityOption" ),
+              hint:  this.hintKey( "classAbilityOption" ),
             }
           ),
           {
             required: true,
-            empty: true,
-            label: "ED.advancement.abilityPool",
-            hint: "The set of available abilities at the given tier."
+            empty:    true,
+            label:    this.labelKey( "classAbilityOptionsPools" ),
+            hint:     this.hintKey( "classAbilityOptionsPools" ),
           } ),
         {
-          initialKeys: CONFIG.ED4E.tier,
+          initialKeys:     CONFIG.ED4E.tier,
           initialKeysOnly: true,
+          required:        true,
+          nullable:        false,
+          label:           this.labelKey( "classAbilityOptionsByTier" ),
+          hint:            this.hintKey( "classAbilityOptionsByTier" ),
+        } ),
+      learnedOptions: new MappingField(
+        new fields.NumberField( {
           required: true,
           nullable: false,
-          label: "ED.advancement.abilityOptions",
-          hint: ""
+          positive:  true,
+          integer:   true,
+          label:    this.labelKey( "classLearnedOption" ),
+          hint:     this.hintKey( "classLearnedOption" ),
+        } ),
+        {
+          initialKeysOnly: false,
+          required:        true,
+          nullable:        false,
+          empty:           true,
+          label:           this.labelKey( "classLearnedOptions" ),
+          hint:            this.hintKey( "classLearnedOptions" ),
         } ),
     };
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Get the abilities that are not yet learned for each tier.
+   * @type {Record<string,Set<string>>}
+   */
+  get availableAbilityOptions() {
+    const learnedOptions = Object.keys( this.learnedOptions );
+    return Object.fromEntries(
+      Object.entries( this.abilityOptions ).map(
+        ( [ tier, options ] ) => [ tier, options.filter( uuid => !learnedOptions.includes( uuid ) ) ]
+      )
+    );
+  }
+
+  /**
+   * Add abilities to the given type of options pool.
+   * @param {[ItemEd|string]} abilities         An array of ability item or their UUIDs to add.
+   * @param {keyof typeof ED4E.tier} poolType   The type/tier of pool the abilities are added to.
+   */
+  addAbilities( abilities, poolType ) {
+    const propertyKey = `system.advancement.abilityOptions.${poolType}`;
+    const currentAbilities = this.abilityOptions[poolType];
+    const abilityIDs = abilities.map( ability => ability.uuid ?? ability );
+    this.parent.parent.update( {
+      [propertyKey]: currentAbilities.concat( abilityIDs ),
+    } );
+  }
+
   /**
    * Add a new level to this advancement.
-   * @param {object} [data={}]    If provided, will initialize the new level with the given data.
+   * @param {object} [data]    If provided, will initialize the new level with the given data.
    */
   addLevel( data = {} ) {
     this.parent.parent.update( {
@@ -73,7 +119,7 @@ export default class AdvancementData extends SparseDataModel {
 
   /**
    * Remove the last {@link amount} levels added from this advancement.
-   * @param {number} [amount=1]   The number of levels to remove.
+   * @param {number} [amount]   The number of levels to remove.
    */
   deleteLevel( amount = 1 ) {
     this.parent.parent.update( {
@@ -82,19 +128,20 @@ export default class AdvancementData extends SparseDataModel {
   }
 
   /**
-   * Add abilities to the given type of options pool.
-   * @param {[Item]} abilities              An array of ability item IDs to add.
-   * @param {ED4E.tier} poolType    The type of pool the abilities are added to.
+   * Get the level at which the given ability was learned.
+   * @param {ItemEd|string} ability   The ability item or its UUID.
+   * @returns {number|undefined}      The level at which the ability was learned, or undefined if it was not learned.
    */
-  addAbilities( abilities, poolType ) {
-    const propertyKey = `system.advancement.abilityOptions.${poolType}`;
-    const currentAbilities = this.abilityOptions[poolType];
-    const abilityIDs = abilities.map( ability => ability.uuid ?? ability );
-    this.parent.parent.update( {
-      [propertyKey]: currentAbilities.concat( abilityIDs ),
-    } );
+  learnedAtLevel( ability ) {
+    const uuid = ability.uuid ?? ability;
+    return this.learnedOptions[uuid];
   }
 
+  /**
+   * Remove abilities from the given type of pool.
+   * @param {[ItemEd|string]} abilities             An array of ability items or their UUIDs to remove.
+   * @param {keyof typeof ED4E.tier} poolType       The type/tier of pool the abilities are removed from.
+   */
   removeAbilities( abilities, poolType ) {
     const propertyKey = `system.advancement.abilityOptions.${poolType}`;
     const currentAbilities = this.abilityOptions[poolType];

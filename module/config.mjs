@@ -328,11 +328,60 @@ ED4E.tier = {
 };
 preLocalize( "tier" );
 
+ED4E.levelTierMapping = {
+  discipline: {
+    1:  "novice",
+    2:  "novice",
+    3:  "novice",
+    4:  "novice",
+    5:  "journeyman",
+    6:  "journeyman",
+    7:  "journeyman",
+    8:  "journeyman",
+    9:  "warden",
+    10: "warden",
+    11: "warden",
+    12: "warden",
+    13: "master",
+    14: "master",
+    15: "master",
+  },
+  path:       {
+    1:  "journeyman",
+    2:  "journeyman",
+    3:  "journeyman",
+    4:  "journeyman",
+    5:  "warden",
+    6:  "warden",
+    7:  "warden",
+    8:  "warden",
+    9:  "master",
+    10: "master",
+    11: "master",
+    12: "master",
+  },
+  questor:    {
+    1:  "follower",
+    2:  "follower",
+    3:  "follower",
+    4:  "follower",
+    5:  "adherent",
+    6:  "adherent",
+    7:  "adherent",
+    8:  "adherent",
+    9:  "exemplar",
+    10: "exemplar",
+    11: "exemplar",
+    12: "exemplar",
+  },
+};
+
 /**
  * talentCategory
  * @enum {string}
  */
 ED4E.talentCategory = {
+  class:          "ED.Config.talentCategory.class",
   discipline:     "ED.Config.talentCategory.discipline",
   optional:       "ED.Config.talentCategory.optional",
   free:           "ED.Config.talentCategory.free",
@@ -400,6 +449,12 @@ ED4E.circleTalentRequirements = {
   allTalentsHouseRule: "ED.Settings.LpTracking.allTalentsHouseRule"
 };
 preLocalize( "circleTalentRequirements" );
+
+ED4E.validationCategories = {
+  base:               "ED.Legend.Validation.titleBase",
+  talentsRequirement: "ED.Legend.Validation.titleTalentsRequirement",
+  newAbilityLp:       "ED.Legend.Validation.titleNewAbilityLp",
+};
 
 
 /* -------------------------------------------- */
@@ -606,6 +661,7 @@ ED4E.documentData = {
           attribute:   "cha",
           action:      "sustained",
           difficulty:  {fixed: 10},
+          tier:        "journeyman",
         },
       },
     },
@@ -624,17 +680,18 @@ preLocalize( "documentData.Item.devotion.questor.system.description", { key: "va
 /* -------------------------------------------- */
 
 ED4E.icons = {
-  ability:        "fa-bolt",
-  attack:         "fa-crosshairs",
-  attribute:      "fa-dice-d20",
-  damage:         "fa-skull-crossbones",
-  effect:         "fa-biohazard",
-  halfmagic:      "fa-hat-wizard",
-  initiative:     "fa-running",
-  patterncraft:   "fa-thin fa-group-arrows-rotate",
-  recovery:       "fa-heartbeat",
-  spellcasting:   "fa-thin fa-sparkles",
-  threadWeaving:  "fa-thin fa-chart-network",
+  ability:          "fa-bolt",
+  attack:           "fa-crosshairs",
+  attribute:        "fa-dice-d20",
+  classAdvancement: "fa-arrow-trend-up",
+  damage:           "fa-skull-crossbones",
+  effect:           "fa-biohazard",
+  halfmagic:        "fa-hat-wizard",
+  initiative:       "fa-running",
+  patterncraft:     "fa-thin fa-group-arrows-rotate",
+  recovery:         "fa-heartbeat",
+  spellcasting:     "fa-thin fa-sparkles",
+  threadWeaving:    "fa-thin fa-chart-network",
 };
 
 

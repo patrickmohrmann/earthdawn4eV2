@@ -1,6 +1,8 @@
 import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ED4E from "../../config.mjs";
+import { createContentLink } from "../../utils.mjs";
+const { DialogV2 } = foundry.applications.api;
 
 /**
  * Data model template with information on Devotion items.
@@ -105,7 +107,32 @@ export default class DevotionData extends AbilityTemplate.mixin(
    * @inheritDoc
    */
   async increase() {
-    return super.increase();
+    const updatedDevotion = await super.increase();
+    if ( !updatedDevotion || !this.isActorEmbedded ) return undefined;
+
+    // update the corresponding questor item
+    const questorItem = this.parentActor.itemTypes.questor.find(
+      ( item ) => item.system.questorDevotion === this.parent.uuid
+    );
+    if ( !questorItem ) return updatedDevotion;
+
+    const content =  `
+        <p>
+          ${game.i18n.format( "ED.Dialogs.Legend.increaseQuestorPrompt.Do you wanna increase this corresponding questor:" )}
+        </p>
+        <p>
+          ${createContentLink( questorItem.uuid, questorItem.name )}
+        </p>
+      `;
+    const increaseQuestor = await DialogV2.confirm( {
+      rejectClose: false,
+      content:     await TextEditor.enrichHTML( content ),
+    } );
+    if ( increaseQuestor && !(
+      await questorItem.update( { "system.level": updatedDevotion.system.level } )
+    ) ) ui.notifications.warn( "ED.Notifications.Warn.questorItemNotUpdated WithDevotion" );
+
+    return updatedDevotion;
   }
 
   /* -------------------------------------------- */

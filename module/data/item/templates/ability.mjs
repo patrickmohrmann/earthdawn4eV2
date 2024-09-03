@@ -5,6 +5,7 @@ import ED4E from "../../../config.mjs";
 import LpIncreaseTemplate from "./lp-increase.mjs";
 import LearnableTemplate from "./learnable.mjs";
 import PromptFactory from "../../../applications/global/prompt-factory.mjs";
+import LpSpendingTransactionData from "../../advancement/lp-spending-transaction.mjs";
 const isEmpty = foundry.utils.isEmpty;
 
 /**
@@ -98,6 +99,27 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
     } );
   }
 
+  /** @inheritDoc */
+  get canBeLearned() {
+    return true;
+  }
+
+  async adjustLevel( amount ) {
+    const currentLevel = this.level;
+    const updatedItem = await this.parent.update( {
+      "system.level": currentLevel + amount,
+    } );
+
+    if ( isEmpty( updatedItem ) ) {
+      ui.notifications.warn(
+        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
+      );
+      return;
+    }
+
+    return updatedItem;
+  }
+
   /**
    * @inheritDoc
    */
@@ -117,7 +139,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
       "system.level": currentLevel + 1,
     } );
 
-    if ( isEmpty( updatedItem ) ) {
+    if ( foundry.utils.isEmpty( updatedItem ) ) {
       ui.notifications.warn(
         game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
       );
@@ -126,23 +148,11 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
 
     const updatedActor = await this.parent.actor.addLpTransaction(
       "spendings",
-      {
-        amount:      spendLp === "spendLp" ? this.requiredLpForIncrease : 0,
-        description: game.i18n.format(
-          "ED.Actor.LpTracking.Spendings",
-          {
-            previousLevel: currentLevel,
-            newLevel:      currentLevel + 1,
-          },
-        ),
-        entityType:  this.parent.type,
-        name:       this.parent.name,
-        value:      {
-          before: currentLevel,
-          after:  currentLevel + 1,
-        },
-        itemUuid:   this.parent.uuid,
-      },
+      LpSpendingTransactionData.dataFromLevelItem(
+        this.parent,
+        spendLp === "spendLp" ? this.requiredLpForIncrease : 0,
+        this.lpSpendingDescription,
+      ),
     );
 
     if ( foundry.utils.isEmpty( updatedActor ) )
@@ -154,25 +164,28 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
   }
 
   /** @inheritDoc */
-  async learn( actor, item ) {
-    if ( !this.canBeLearned ) {
+  static async learn( actor, item, createData ) {
+    if ( !item.system.canBeLearned ) {
       ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.cannotLearn" ) );
-      return false;
+      return;
     }
 
     let learn = "learn";
-    if ( this.increasable ) {
-      const promptFactory = PromptFactory.fromDocument( this.parent );
+    if ( item.system.increasable ) {
+      const promptFactory = PromptFactory.fromDocument( item );
       learn = await promptFactory.getPrompt( "learnAbility" );
     }
 
-    if ( !learn || learn === "cancel" || learn === "close" ) return false;
+    if ( !learn || learn === "cancel" || learn === "close" ) return;
 
-    const itemData = item.toObject();
-    itemData.system.level = 0;
+    const itemData = foundry.utils.mergeObject(
+      item.toObject(),
+      foundry.utils.expandObject( createData ),
+    );
+    if ( !createData.system.level ) itemData.system.level = 0;
     const learnedItem = ( await actor.createEmbeddedDocuments( "Item", [ itemData ] ) )?.[0];
 
-    if ( learnedItem && learn === "learn" && this.increasable ) await learnedItem.system.increase();
+    if ( learnedItem && learn === "learn" && item.system.increasable ) await learnedItem.system.increase();
 
     return learnedItem;
   }

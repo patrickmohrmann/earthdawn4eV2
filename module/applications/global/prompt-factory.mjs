@@ -70,6 +70,36 @@ export default class PromptFactory {
     };
   }
 
+  static get completeButton() {
+    return {
+      action:  "complete",
+      label:   "ED.Dialogs.Buttons.complete",
+      icon:    "fa-light fa-check",
+      class:   "complete button-complete",
+      default: false,
+    };
+  }
+
+  static get goBackButton() {
+    return {
+      action:   "goBack",
+      label:    "ED.Dialogs.Buttons.goBack",
+      icon:     "fa-light fa-arrow-left",
+      cssClass: "button-go-back",
+      default:  false,
+    };
+  }
+
+  static get continueButton() {
+    return {
+      action:   "continue",
+      label:    "ED.Dialogs.Buttons.continue",
+      icon:     "fa-light fa-arrow-right",
+      cssClass: "button-continue",
+      default:  false,
+    };
+  }
+
   /**
    * A {@link DialogV2Button} object for a button with data action "versatility".
    * @type {DialogV2Button}

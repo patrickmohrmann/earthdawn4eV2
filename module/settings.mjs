@@ -348,6 +348,21 @@ export default function registerSystemSettings() {
     } ),
   } );
 
+  // LP Tracking Learn Spells on Circle Up
+  game.settings.register( "ed4e", "lpTrackingLearnSpellsOnCircleUp", {
+    name:    "ED.Settings.LpTracking.learnSpellsOnCircleUp",
+    hint:    "ED.Settings.LpTracking.hintLearnSpellsOnCircleUp",
+    scope:   "world",
+    config:  true,
+    type:    new fields.BooleanField( {
+      required: true,
+      nullable: false,
+      initial:  true,
+      label:    "ED.Settings.LpTracking.learnSpellsOnCircleUp",
+      hint:     "ED.Settings.LpTracking.hintLearnSpellsOnCircleUp",
+    } ),
+  } );
+
 
   /* -------------------------------------------------------------------------------- */
   /*                                  ENCUMBRANCE                                     */

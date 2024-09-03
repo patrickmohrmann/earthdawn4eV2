@@ -1,7 +1,9 @@
 import ClassTemplate from "./templates/class.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-import { getSingleGlobalItemByEdid } from "../../utils.mjs";
+import { createContentLink, getSingleGlobalItemByEdid } from "../../utils.mjs";
 import ED4E from "../../config.mjs";
+import PromptFactory from "../../applications/global/prompt-factory.mjs";
+import LpSpendingTransactionData from "../advancement/lp-spending-transaction.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -49,10 +51,93 @@ export default class QuestorData extends ClassTemplate.mixin(
   }
 
   /** @inheritDoc */
-  async learn( actor, item ) {
-    if ( !this.canBeLearned ) {
+  get increaseRules() {
+    return game.i18n.localize( "ED.Legend.Rules.questorClassIncreaseShortRequirements" );
+  }
+
+  /** @inheritDoc */
+  get increaseValidationData() {
+    return {
+      [ED4E.validationCategories.base]:               [
+        {
+          name:      "ED.Legend.Validation.availableLp",
+          value:     this.requiredLpForIncrease,
+          fulfilled: this.requiredLpForIncrease <= this.parentActor.currentLp,
+        },
+      ],
+      [ED4E.validationCategories.newAbilityLp]:       [],
+    }; // TODO NEXT
+  }
+
+  get requiredLpForIncrease() {
+    // Questor devotion is treated as a journeyman talent
+    return ED4E.legendPointsCost[ this.level + 1 + ED4E.lpIndexModForTier[1].journeyman ];
+  }
+
+  /** @inheritDoc */
+  async increase() {
+    if ( !this.isActorEmbedded ) return;
+
+    const promptFactory = PromptFactory.fromDocument( this.parent );
+    const spendLp = await promptFactory.getPrompt( "lpIncrease" );
+
+    if ( !spendLp
+      || spendLp === "cancel"
+      || spendLp === "close" ) return;
+
+    const updatedItem = await this.parent.update( {
+      "system.level": this.level + 1,
+    } );
+
+    if ( foundry.utils.isEmpty( updatedItem ) ) {
+      ui.notifications.warn(
+        game.i18n.localize( "ED.Notifications.Warn.classIncreaseProblems" )
+      );
+      return;
+    }
+
+    const updatedActor = await this.parent.actor.addLpTransaction(
+      "spendings",
+      LpSpendingTransactionData.dataFromLevelItem(
+        this.parent,
+        spendLp === "spendLp" ? this.requiredLpForIncrease : 0,
+        this.lpSpendingDescription,
+      ),
+    );
+
+    if ( foundry.utils.isEmpty( updatedActor ) )
+      ui.notifications.warn(
+        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
+      );
+
+    // possibly update the associated devotion
+    const questorDevotion = await fromUuid( this.questorDevotion );
+    if ( !questorDevotion ) return this.parent;
+
+    const content =  `
+        <p>
+          ${game.i18n.format( "ED.Dialogs.Legend.increaseQuestorDevotionPrompt.Do you wanna increase this corresponding questor:" )}
+        </p>
+        <p>
+          ${createContentLink( questorDevotion.uuid, questorDevotion.name )}
+        </p>
+      `;
+    const increaseDevotion = await DialogV2.confirm( {
+      rejectClose: false,
+      content:     await TextEditor.enrichHTML( content ),
+    } );
+    if ( increaseDevotion && !(
+      await questorDevotion.update( { "system.level": updatedItem.system.level } )
+    ) ) ui.notifications.warn( "ED.Notifications.Warn.questorItemNotUpdated WithDevotion" );
+
+    return this.parent;
+  }
+
+  /** @inheritDoc */
+  static async learn( actor, item, createData ) {
+    if ( !item.system.canBeLearned ) {
       ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.cannotLearn" ) );
-      return false;
+      return;
     }
 
     // get the questor devotion
@@ -69,7 +154,7 @@ export default class QuestorData extends ClassTemplate.mixin(
 
     // "Do you want to become a questor of <passion>? This will grant you the following devotion automatically:"
     const questorDevotionLink = questorDevotion
-      ? `@UUID[${questorDevotion.uuid}]{${questorDevotion.name}}`
+      ? createContentLink( questorDevotion.uuid, questorDevotion.name )
       : game.i18n.localize( "ED.Dialogs.Legend.questorDevotionNotFound" );
     const content = ` 
       <p>${game.i18n.format( "ED.Dialogs.Legend.learnQuestorPrompt", {passion: item.name,} ) }</p>
@@ -81,7 +166,7 @@ export default class QuestorData extends ClassTemplate.mixin(
       content:     await TextEditor.enrichHTML( content ),
     } );
 
-    if ( !learn ) return false;
+    if ( !learn ) return;
 
     const questorDevotionData = questorDevotion?.toObject();
     questorDevotionData.name = `${questorDevotion.name} - ${item.name}`;

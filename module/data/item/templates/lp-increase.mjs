@@ -51,6 +51,20 @@ export default class LpIncreaseTemplate extends SystemDataModel {
   }
 
   /**
+   * A description of the transaction that is created when the entity is increased.
+   * @type {string}
+   */
+  get lpSpendingDescription() {
+    return game.i18n.format(
+      "ED.Actor.LpTracking.Spendings.spendingTransactionDescription",
+      {
+        previousLevel: this.level,
+        newLevel:      this.level + 1,
+      },
+    );
+  }
+
+  /**
    * @description The amount of legend points required to increase the level of the entity.
    * @type {number}
    */

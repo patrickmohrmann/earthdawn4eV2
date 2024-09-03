@@ -10,6 +10,7 @@ export default class LearnableTemplate extends SystemDataModel {
   /**
    * @description Whether the entity fulfills all requirements to be learned.
    * @type {boolean}
+   * @abstract
    */
   get canBeLearned() {
     throw new Error( "A subclass of the LearnableTemplate must implement the canBeLearned getter." );
@@ -25,6 +26,24 @@ export default class LearnableTemplate extends SystemDataModel {
   }
 
   /**
+   * A string representation of the rules, conditions and costs for learning this entity.
+   * @type {string}
+   */
+  get learnRules() {
+    throw new Error( "A subclass of the LearnableTemplate must implement the learnRules getter." );
+  }
+
+  /**
+   * A description of the transaction that is created when the entity is increased.
+   * @type {string}
+   */
+  get lpLearningDescription() {
+    return game.i18n.localize(
+      "ED.Actor.LpTracking.Spendings.learningTransactionDescription",
+    );
+  }
+
+  /**
    * @description The amount of legend points required to learn this entity.
    * @type {number}
    */
@@ -35,12 +54,13 @@ export default class LearnableTemplate extends SystemDataModel {
   /**
    * Learn the entity by an actor. This means creating a new item instance onn the actor, either without spending LP on
    * level 0 for items with a level, or by spending LP.
-   * @param {ActorEd} actor             The actor that is learning the entity.
-   * @param {ItemEd} item               The item that is being learned.
-   * @returns {Promise<ItemEd>|false}   The created Item instance if learned, or false if the entity was not learned.
+   * @param {ActorEd} actor                 The actor that is learning the entity.
+   * @param {ItemEd} item                   The item that is being learned.
+   * @param {object} createData             Additional data to create the item with. Keys can be in the period separated format.
+   * @returns {Promise<ItemEd>|undefined}   The created Item instance if learned, or undefined if the entity was not learned.
    * @abstract
    */
-  static async learn( actor, item ) {
+  static async learn( actor, item, createData = {} ) {
     throw new Error( "A subclass of the LearnableTemplate must implement the 'learn' method." );
   }
 

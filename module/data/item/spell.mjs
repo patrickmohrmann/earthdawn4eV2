@@ -44,10 +44,10 @@ export default class SpellData extends MagicTemplate.mixin(
   }
 
   /** @inheritDoc */
-  async learn( actor, item ) {
-    if ( !this.canBeLearned ) {
+  static async learn( actor, item, createData ) {
+    if ( !item.system.canBeLearned ) {
       ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.cannotLearn" ) );
-      return false;
+      return;
     }
 
     const learn = await LearnSpellPrompt.waitPrompt( {
@@ -55,7 +55,7 @@ export default class SpellData extends MagicTemplate.mixin(
       spell: item,
     } );
 
-    if ( !learn || learn === "cancel" || learn === "close" ) return false;
+    if ( !learn || learn === "cancel" || learn === "close" ) return;
 
     const learnedItem = ( await actor.createEmbeddedDocuments(
       "Item", [ item.toObject() ]
@@ -64,13 +64,13 @@ export default class SpellData extends MagicTemplate.mixin(
     const updatedActor = await actor.addLpTransaction(
       "spendings",
       {
-        amount:      learn === "spendLp" ? this.requiredLpToLearn : 0,
+        amount:      learn === "spendLp" ? item.system.requiredLpToLearn : 0,
         description: game.i18n.format(
           "ED.Actor.LpTracking.Spendings",
         ),
-        entityType:  this.parent.type,
-        name:       this.parent.name,
-        itemUuid:   this.parent.uuid,
+        entityType:  learnedItem.type,
+        name:       learnedItem.name,
+        itemUuid:   learnedItem.uuid,
       },
     );
 
@@ -79,7 +79,7 @@ export default class SpellData extends MagicTemplate.mixin(
         game.i18n.localize( "ED.Notifications.Warn.addLpTransactionProblems" )
       );
 
-    return learnedItem ?? false;
+    return learnedItem;
   }
 
   /* -------------------------------------------- */

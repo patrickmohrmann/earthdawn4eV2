@@ -207,13 +207,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
     const classItem = this.actor.items.get( li.dataset.itemId );
-    if ( classItem.type === "discipline" ) {
-      this.actor.upgradeDiscipline( classItem );
-    } else if ( classItem.type === "path" ) {
-      this.actor.upgradePath( classItem );
-    } else if ( classItem.type === "questor" ) {
-      this.actor.upgradeQuestor( classItem );
-    }
+    classItem.system.increase();
   }
 
 

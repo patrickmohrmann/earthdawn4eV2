@@ -1,5 +1,6 @@
 import ClassTemplate from "./templates/class.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ED4E from "../../config.mjs";
 
 /**
  * Data model template with information on discipline items.
@@ -48,6 +49,45 @@ export default class DisciplineData extends ClassTemplate.mixin(
         hint:     "ED.Data.Item.Hints.spellcasting",
       } ),
     } );
+  }
+
+  /* -------------------------------------------- */
+  /*  LP Tracking                                 */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get increaseValidationData() {
+    const nextLevel = this.level + 1;
+    const nextLevelData = this.advancement.levels.find( l => l.level === nextLevel );
+    const nextTalentLpCost = ED4E.legendPointsCost[ nextLevel + ED4E.lpIndexModForTier[ nextLevelData.tier ] ];
+    return {
+      [ED4E.validationCategories.base]:               [
+        {
+          name:      "ED.Legend.Validation.availableLp",
+          value:     this.requiredLpForIncrease,
+          fulfilled: this.requiredLpForIncrease <= this.parentActor.currentLp,
+        },
+      ],
+      [ED4E.validationCategories.talentsRequirement]: [
+        {
+          name:      "ED.Legend.Validation.talentsRequirement",
+          value:     "X Talents on current level",
+          fulfilled: true,
+        },
+      ],
+      [ED4E.validationCategories.newAbilityLp]:       [
+        {
+          name:      "ED.Legend.Validation.talentOptionLp",
+          value:     nextTalentLpCost,
+          fulfilled: nextTalentLpCost <= this.parentActor.currentLp,
+        },
+      ],
+    }; // TODO NEXT
+  }
+
+  /** @inheritDoc */
+  get learnRules() {
+    return game.i18n.localize( "ED.Legend.Rules.disciplineLearnShortRequirements" );
   }
 
   /* -------------------------------------------- */

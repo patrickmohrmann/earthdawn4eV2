@@ -16,7 +16,7 @@ export default class ActorSheetEdCharacter extends ActorSheetEd {
     const item = await Item.implementation.fromDropData( data );
     const isInActor = this.actor.uuid === item.parent?.uuid;
 
-    if ( !isInActor && item.system.learnable ) return item.system.learn( this.actor, item );
+    if ( !isInActor && item.system.learnable ) return item.system.constructor.learn( this.actor, item );
 
     return super._onDropItem( event, data );
   }

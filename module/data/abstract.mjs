@@ -126,7 +126,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /* -------------------------------------------- */
 
   get isActorEmbedded() {
-    return !!this.parent.actor;
+    return !!this.parent?.actor;
   }
 
   /* -------------------------------------------- */
@@ -497,6 +497,10 @@ export class ItemDataModel extends SystemDataModel {
     return game.user.isGM || ( this.identified !== false ) ? "description.value" : "unidentified.description";
   }
 
+  get parentActor() {
+    return this.parent?.actor;
+  }
+
   /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
@@ -616,6 +620,28 @@ export class ItemDataModel extends SystemDataModel {
  * Data Model variant that does not export fields with an `undefined` value during `toObject( true )`.
  */
 export class SparseDataModel extends foundry.abstract.DataModel {
+
+  /**
+   * A bound version of {@link getLocalizeKey}. Used to automatically get the
+   * localization key of a data field label for this instances document type.
+   * It is bound to call `getLocalizeKey` with the document type as its first
+   * argument and `false` as the second argument.
+   * @see getLocalizeKey
+   * @param {string} name  The name of the field to get the label key for.
+   * @type {Function}
+   */
+  static labelKey = getLocalizeKey.bind( this, "Other", false );
+
+  /**
+   * A bound version of {@link getLocalizeKey}. Used to automatically get the
+   * localization key of a data field hint for this instances document type.
+   * It is bound to call `getLocalizeKey` with the document type as its first
+   * argument and `true` as the second argument.
+   * @see getLocalizeKey
+   * @param {string} name  The name of the field to get the hint key for.
+   * @type {Function}
+   */
+  static hintKey = getLocalizeKey.bind( this, "Other", true );
 
   /** @inheritDoc */
   toObject( source = true ) {
