@@ -494,6 +494,162 @@ ED4E.combatTypes = {
 preLocalize( "testTypes", { key: "label" } );
 
 
+/**
+ * The available sub-types of (combatTypes) tests
+ * @enum {string}
+ */
+ED4E.combatTypes = {
+	animalHandling: {
+		attribute: "wil",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.animalHandling",
+		name: "ED.Config.SubstitudeAbility.animalHandling",
+	},
+	avoidBlow: {
+		attribute: "dex",
+		action: "free",
+		strain: 1,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.avoidBlow",
+		name: "ED.Config.SubstitudeAbility.avoidBlow",
+	},
+	awareness: {
+		attribute: "per",
+		action: "simple",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.awareness",
+		name: "ED.Config.SubstitudeAbility.awareness",
+	},
+	bribery: {
+		attribute: "cha",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.bribery",
+		name: "ED.Config.SubstitudeAbility.bribery",
+	},
+	climbing: {
+		attribute: "dex",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.climbing",
+		name: "ED.Config.SubstitudeAbility.climbing",
+	},
+	conversation: {
+		attribute: "cha",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.conversation",
+		name: "ED.Config.SubstitudeAbility.conversation",
+	},
+	distract: {
+		attribute: "cha",
+		action: "simple",
+		strain: 1,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.distract",
+		name: "ED.Config.SubstitudeAbility.distract",
+	},
+	etiquette: {
+		attribute: "cha",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.etiquette",
+		name: "ED.Config.SubstitudeAbility.etiquette",
+	},
+	flirting: {
+		attribute: "cha",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.flirting",
+		name: "ED.Config.SubstitudeAbility.flirting",
+	},
+	haggle: {
+		attribute: "cha",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.haggle",
+		name: "ED.Config.SubstitudeAbility.haggle",
+	},
+	meleeWeapons: {
+		attribute: "dex",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.meleeWeapons",
+		name: "ED.Config.SubstitudeAbility.meleeWeapons",
+	},
+	missileWeapons: {
+		attribute: "dex",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.missileWeapons",
+		name: "ED.Config.SubstitudeAbility.missileWeapons",
+	},
+	research: {
+		attribute: "per",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.research",
+		name: "ED.Config.SubstitudeAbility.research",
+	},
+	resistTaunt: {
+		attribute: "wil",
+		action: "free",
+		strain: 1,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.resistTaunt",
+		name: "ED.Config.SubstitudeAbility.resistTaunt",
+	},
+	seduction: {
+		attribute: "cha",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.seduction",
+		name: "ED.Config.SubstitudeAbility.seduction",
+	},
+	sloughBlame: {
+		attribute: "cha",
+		action: "standard",
+		strain: 1,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.sloughBlame",
+		name: "ED.Config.SubstitudeAbility.sloughBlame",
+	},
+	swimming: {
+		attribute: "str",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.swimming",
+		name: "ED.Config.SubstitudeAbility.swimming",
+	},
+	throwingWeapons: {
+		attribute: "dex",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.throwingWeapons",
+		name: "ED.Config.SubstitudeAbility.throwingWeapons",
+	},
+	tracking: {
+		attribute: "per",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.tracking",
+		name: "ED.Config.SubstitudeAbility.tracking",
+	},
+	unarmedCombat: {
+		attribute: "dex",
+		action: "standard",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.unarmedCombat",
+		name: "ED.Config.SubstitudeAbility.unarmedCombat",
+	},
+	wildernessSurvival: {
+		attribute: "per",
+		action: "sustained",
+		strain: 0,
+		flavor: "ED.Config.SubstitudeAbility.Flavor.wildernessSurvival",
+		name: "ED.Config.SubstitudeAbility.wildernessSurvival",
+	},
+}
+preLocalize( "testTypes", { key: "label" } );
+
+
 
 /* -------------------------------------------- */
 /*  System			                                */
