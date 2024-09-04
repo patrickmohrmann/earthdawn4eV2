@@ -1,4 +1,4 @@
-import socketUpdateChatMessage from "../../hooks/ready.mjs";     
+
 /**
  * @description             This class extends the ChatMessage class and adds additional functionality to it
  */
@@ -72,11 +72,21 @@ export default class ChatMessageEd extends ChatMessage {
     async _onReactionButton( event ) {
         event.preventDefault(  );
         const buttonId = event.currentTarget.getAttribute( 'data-button-id' );
+        const buttonActor = event.currentTarget.getAttribute( 'data-button-actor-id' );
+
+
+        let buttonToken;
+        for ( const token of canvas.scene.tokens ) {
+            if ( token.actor.id === buttonActor ) {
+                buttonToken = token;
+                break;
+            }
+        }
 
         const user = this._getCurrentUser(  );
         if ( !user ) return;
 
-        const character = await this._getCharacter( user );
+        const character = await this._getCharacter( user, buttonToken);
         if ( !character ) return;
 
         const ability = this._getAbility( character, buttonId );
@@ -86,7 +96,6 @@ export default class ChatMessageEd extends ChatMessage {
         const triggeredMessId = this.id;
 
         const reactionResult = await character.rollAbility( ability, { event: event }, difficulty, triggeredMessId );
-        // if ( !this._evaluated ) await this.evaluate(  );
         await this.updateChatMessage( this, reactionResult );
     }
 
@@ -109,14 +118,14 @@ export default class ChatMessageEd extends ChatMessage {
      * @returns                 The character of the user
      * @UserFunction            see UF_ChatMessage-onReactionButton
      */
-    async _getCharacter( user ) {
+    async _getCharacter( user, buttonToken ) {
         let character = user.character;
         if ( !character && !user.isGM ) {
             console.error( "No character found for user" );
             return null;
         } else if ( !character && user.isGM ) {
             const selectedTokenId = this.rolls[0].options.targetTokens[0].id;
-            character = canvas.scene.tokens.get( selectedTokenId )?.actor;
+            character = canvas.scene.tokens.get( buttonToken._id )?.actor;
             if ( !character ) {
                 console.error( "No character found for selected token" );
                 return null;
@@ -161,29 +170,6 @@ export default class ChatMessageEd extends ChatMessage {
             socketlib.system.executeAsGM( "socketUpdateChatMessage", message );
         }
     }
-
-    // /**
-    //  * @description                 Update the chat message to show that the success indicator was set by code after the message was created
-    //  * @param {*} message           The message to update
-    //  * @UserFunction                see UF_ChatMessage-updateChatMessage
-    //  */
-    // async _updateMessageSuccess( message ) {
-    //     await message.update( { "system.setSuccess": true } );
-    // }
-
-    /**
-     * @description                 Update the chat message element to show the success or failure indicator
-     * @param {*} messageId         The ID of the message to update
-     * @UserFunction                see UF_ChatMessage-updateChatMessage
-     */
-    // async _updateChatMessageElement( messageId ) {
-    //     const h4Element = document.querySelector( `.chat-message[data-message-id="${messageId}"] .message-content h4.roll-success` );
-    //     if ( h4Element ) {
-    //         h4Element.classList.replace( 'roll-success', 'roll-failure' );
-    //     } else {
-    //         console.error( 'h4 element with class roll-success not found' );
-    //     }
-    // }
 
     // done later
     _onManeuverButton( event ) {

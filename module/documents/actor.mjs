@@ -494,7 +494,8 @@ export default class ActorEd extends Actor {
         distance -= (attackTokenRadius ) * gridDistance;
       }
 
-      distance = Math.round( distance );
+      // distance = Math.round( distance );
+      distance = Math.max(1, Math.round(distance));
       //let rangeModifier = 0;
       let range;  
         let weaponShortRangeMin = 1;

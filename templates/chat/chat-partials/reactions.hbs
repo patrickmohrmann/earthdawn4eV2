@@ -1,5 +1,7 @@
 <span class="modifier-content">
+  {{log this}}
     {{#each this.reactions}}
-      <button class="reaction-button" data-button-id="{{this.id}}" type="button">{{this.name}}</button>
+      {{log this}}
+      <button class="reaction-button" data-button-id="{{this.id}}" data-button-actor-id="{{this.parent._id}}" type="button">{{this.name}}</button>
     {{/each}}
 </span>
