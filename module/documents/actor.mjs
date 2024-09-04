@@ -480,7 +480,7 @@ export default class ActorEd extends Actor {
       const firstTargetDistance = await this.getDistanceToTarget( firstTargetToken );
       const targetTokenDiameter = firstTargetToken.document.width;
       const attackerTokenDocument = this.getActiveTokens()[0];
-      // const attackerToken = canvas.tokens.get(this.id);
+
       const attackTokenRadius = attackerTokenDocument.document.width / 2;
       const attackerTokenDiameter = attackerTokenDocument.document.width;
       const gridDistance = game.scenes.active.grid.distance;
@@ -494,9 +494,7 @@ export default class ActorEd extends Actor {
         distance -= (attackTokenRadius ) * gridDistance;
       }
 
-      // distance = Math.round( distance );
       distance = Math.max(1, Math.round(distance));
-      //let rangeModifier = 0;
       let range;  
         let weaponShortRangeMin = 1;
         let weaponShortRangeMax = 1;
