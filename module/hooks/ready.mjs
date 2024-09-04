@@ -1,10 +1,20 @@
 import RollPrompt from '../applications/global/roll-prompt.mjs';
 import EdTour from "../tours/ed-tours.mjs";
+import socketUpdateChatMessage from "../documents/chat/chat-messages.mjs";
 
+let socket;
 /**
  * TODO
  */
 export default function () {
+    
+    Hooks.once("ready", () => {
+        socket = socketlib.registerSystem( "ed4e" );
+        socket.register( "damage", assignDamage);
+        socket.register( "effect", assignEffect);
+        socket.register( "socketUpdateChatMessage", updateChatMessage);
+    });
+
     Hooks.once( "ready", async () => {
 
         /* -------------------------------------------- */
@@ -30,13 +40,52 @@ export default function () {
         /* -------------------------------------------- */
         /*  Tour                                        */
         /* -------------------------------------------- */
-        const socket = socketLib.registerSystem( "ed4e" );
-        socket.register( "damage", assignDamage);
-        socket.register( "effect", assignEffect);
-        socket.register( "chatMessage", updateChatMessage);
-
-
+        // socket = socketlib.registerSystem('ed4e');
+        // socket.register( "damage", assignDamage);
+        // socket.register( "effect", assignEffect);
+        // socket.register( "chatMessage", socketUpdateChatMessage);
     } );
+}
+
+/**
+ * socketlib function registration
+ */
+async function updateChatMessage( message ) {
+    const gameMessage = game.messages.get( message._id );
+    await gameMessage.update( { "system.setSuccess": true } );
+    
+    // const messId = gameMessage.id;
+    // const h4Element = document.querySelector( `.chat-message[data-message-id="${messId}"].message-content h4.roll-success` );
+    //     if ( h4Element ) {
+    //         h4Element.classList.replace( 'roll-success', 'roll-failure' );
+    //     } else {
+    //         console.error( 'h4 element with class roll-success not found' );
+    //     }
+    await gameMessage.render( );
+}
+
+function showHelloMessage(userName) {
+	console.log(`User ${userName} says hello!`);
+}
+
+function add(a, b) {
+	console.log("The addition is performed on a GM client.");
+	return a + b;
+}
+
+
+async function assignDamage( data ) {
+    const actor = game.actors.get( data.actorId );
+    const item = actor.items.get( data.itemId );
+    const result = await actor.applyDamage( item, data.damage );
+    return result;
+}
+
+async function assignEffect( data ) {
+    const actor = game.actors.get( data.actorId );
+    const item = actor.items.get( data.itemId );
+    const result = await actor.applyEffect( item, data.effect );
+    return result;
 }
 
 /**

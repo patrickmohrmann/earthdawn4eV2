@@ -1,4 +1,4 @@
-
+import socketUpdateChatMessage from "../../hooks/ready.mjs";     
 /**
  * @description             This class extends the ChatMessage class and adds additional functionality to it
  */
@@ -158,34 +158,32 @@ export default class ChatMessageEd extends ChatMessage {
         const difficulty = options.data[0].rolls[0].options.target.total;
 
         if ( newResult >= difficulty ) {
-            await this._updateMessageSuccess( message );
-            await this._updateChatMessageElement( message.id );
-            await message.render(  );
+            socketlib.system.executeAsGM( "socketUpdateChatMessage", message );
         }
     }
 
-    /**
-     * @description                 Update the chat message to show that the success indicator was set by code after the message was created
-     * @param {*} message           The message to update
-     * @UserFunction                see UF_ChatMessage-updateChatMessage
-     */
-    async _updateMessageSuccess( message ) {
-        await message.update( { "system.setSuccess": true } );
-    }
+    // /**
+    //  * @description                 Update the chat message to show that the success indicator was set by code after the message was created
+    //  * @param {*} message           The message to update
+    //  * @UserFunction                see UF_ChatMessage-updateChatMessage
+    //  */
+    // async _updateMessageSuccess( message ) {
+    //     await message.update( { "system.setSuccess": true } );
+    // }
 
     /**
      * @description                 Update the chat message element to show the success or failure indicator
      * @param {*} messageId         The ID of the message to update
      * @UserFunction                see UF_ChatMessage-updateChatMessage
      */
-    async _updateChatMessageElement( messageId ) {
-        const h4Element = document.querySelector( `.chat-message[data-message-id="${messageId}"] .message-content h4.roll-success` );
-        if ( h4Element ) {
-            h4Element.classList.replace( 'roll-success', 'roll-failure' );
-        } else {
-            console.error( 'h4 element with class roll-success not found' );
-        }
-    }
+    // async _updateChatMessageElement( messageId ) {
+    //     const h4Element = document.querySelector( `.chat-message[data-message-id="${messageId}"] .message-content h4.roll-success` );
+    //     if ( h4Element ) {
+    //         h4Element.classList.replace( 'roll-success', 'roll-failure' );
+    //     } else {
+    //         console.error( 'h4 element with class roll-success not found' );
+    //     }
+    // }
 
     // done later
     _onManeuverButton( event ) {
