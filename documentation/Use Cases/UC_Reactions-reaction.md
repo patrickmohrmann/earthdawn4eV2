@@ -76,19 +76,11 @@ stateDiagram-v2
 
 ### Related User Functions
 
-[UF_Combat-reaction](../User%20Functions/UF_Combat-reaction.md)
+[UC_Combat-attack](../Use%20Cases/UC_Combat-attack.md)
 
-[UF_Combat-maneuver](../User%20Functions/UF_Combat-maneuver.md)
+[UC_Combat-attack](../Use%20Cases/UC_Combat-attack.md)
 
 [UF_Combat-rollAttack](../User%20Functions/UF_Combat-rollAttack.md)
-
-[UF_Combat-assignAttackEffects](../User%20Functions/UF_Combat-assignAttackEffects.md)
-
-[UF_Combat-assignDamageEffects](../User%20Functions/UF_Combat-assignDamageEffects.md)
-
-[UF_Combat-rollDamage](../User%20Functions/UF_Combat-rollDamage.md)
-
-[UF_Combat-assignDamage](../User%20Functions/UF_Combat-assignDamage.md)
 
 [UC_ChatMessage-create](../User%20Functions/UC_ChatMessage-create.md)
 
@@ -99,8 +91,6 @@ stateDiagram-v2
 [UC_ChatMessage-onReaction](../User%20Functions/UC_ChatMessage-onReaction.md)
 
 [UC_ChatMessage-updateChatMessage](../User%20Functions/UC_ChatMessage-updateChatMessage.md)
-
-[UC_Rolls-attackSubstitude](../User%20Functions/UC_Rolls-attackSubstitude.md)
 
 [UC_Rolls-targetReactions](../User%20Functions/UC_Rolls-targetReactions.md)
 

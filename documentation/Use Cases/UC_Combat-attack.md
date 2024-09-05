@@ -74,54 +74,46 @@ stateDiagram-v2
     rollDamage --> AssignDamage
     AssignDamage --> assignDamageEffects
 
+    assignDamageEffects --> [*]
     AssignDamage --> [*]
     ReactionSuccess --> [*]: yes
 ```
+Diagramm Note: assign Attack Effects shall be part of a split/Merge option 
+maneuverUF rename
+add color for subusecases
 
-### Related User Functions
+### Related User Functions & Sub-use cases
 
-[UF_Combat-reaction](../User%20Functions/UF_Combat-reaction.md)
+[UC_Reactions-reactions](../Use%20Cases/UC_Reactions-reactions.md)
 
-[UF_Combat-maneuver](../User%20Functions/UF_Combat-maneuver.md)
+[UC_Maneuver-maneuver](../Use%20Cases/UC_Maneuver-maneuver.md)
 
-[UF_Combat-rollAttack](../User%20Functions/UF_Combat-rollAttack.md)
+[UC_Damage-damage](../Use%20Cases/UC_Damage-damage.md)
 
-[UF_Combat-assignAttackEffects](../User%20Functions/UF_Combat-assignAttackEffects.md)
+[UF_ChatMessage-create](../User%20Functions/UF_ChatMessage-create.md)
 
-[UF_Combat-assignDamageEffects](../User%20Functions/UF_Combat-assignDamageEffects.md)
+[UF_ChatMessage-getHTML](../User%20Functions/UF_ChatMessage-getHTML.md)
 
-[UF_Combat-rollDamage](../User%20Functions/UF_Combat-rollDamage.md)
+[UF_ChatMessage-onCreate](../User%20Functions/UF_ChatMessage-onCreate.md)
 
-[UF_Combat-assignDamage](../User%20Functions/UF_Combat-assignDamage.md)
+[UF_ChatMessage-onReaction](../User%20Functions/UF_ChatMessage-onReaction.md)
 
-[UC_ChatMessage-create](../User%20Functions/UC_ChatMessage-create.md)
+[UF_ChatMessage-updateChatMessage](../User%20Functions/UF_ChatMessage-updateChatMessage.md)
 
-[UC_ChatMessage-getHTML](../User%20Functions/UC_ChatMessage-getHTML.md)
+[UF_Rolls-attackSubstitude](../User%20Functions/UF_Rolls-attackSubstitude.md)
 
-[UC_ChatMessage-onCreate](../User%20Functions/UC_ChatMessage-onCreate.md)
+[UF_Rolls-targetReactions](../User%20Functions/UF_Rolls-targetReactions.md)
 
-[UC_ChatMessage-onReaction](../User%20Functions/UC_ChatMessage-onReaction.md)
-
-[UC_ChatMessage-updateChatMessage](../User%20Functions/UC_ChatMessage-updateChatMessage.md)
-
-[UC_Rolls-attackSubstitude](../User%20Functions/UC_Rolls-attackSubstitude.md)
-
-[UC_Rolls-targetReactions](../User%20Functions/UC_Rolls-targetReactions.md)
-
-[UC_Settings-automaticAmmunitionTracking](../User%20Functions/UF_Settings-automaticAmmunitionTracking.md)
-
-[UC_Settings-automaticRangeCalculation](../User%20Functions/UF_Settings-automaticRangeCalculation.md)
+[UF_Settings-automaticRangeCalculation](../User%20Functions/UF_Settings-automaticRangeCalculation.md)
 
 
 ### Related Test Coverage
 
 | Test Coverage | Related Documentation |
 |---------------|-----------------------|
-| Attack all Actor types | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack multiple Targets | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack with Missile | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack with Throwing Weapon | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack unarmed | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack with substitude | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
-| Attack with Tail | [[Test - XXXXX]](https://github.com/patrickmohrmann/earthdawn4eV2/issues/) |
+| Close Attack | [[Test] - Close Attack all Actor types](https://github.com/patrickmohrmann/earthdawn4eV2/issues/956) |
+| Range Attack | [[Test] - Attack with Ranged Weapon](https://github.com/patrickmohrmann/earthdawn4eV2/issues/929) |
+| Attack with unarmed substitude | [[Test] - Attack with unarmed substitute](https://github.com/patrickmohrmann/earthdawn4eV2/issues/963) |
+| Attack with weapon substitude | [[Test] - Attack with armed substitute](https://github.com/patrickmohrmann/earthdawn4eV2/issues/964) |
+| Attack with Tail | [[Test] - Attack with tail](https://github.com/patrickmohrmann/earthdawn4eV2/issues/966) |
 
