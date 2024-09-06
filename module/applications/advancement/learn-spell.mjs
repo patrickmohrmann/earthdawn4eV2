@@ -209,6 +209,15 @@ export default class LearnSpellPrompt extends HandlebarsApplicationMixin( Applic
 
     context.config = ED4E;
 
+    context.hasPatterncraft = !!this.actor.getSingleItemByEdid(
+      game.settings.get( "ed4e", "edidPatterncraft" ),
+      "talent"
+    );
+    context.hasSpellcasting = !!this.actor.getSingleItemByEdid(
+      game.settings.get( "ed4e", "edidSpellcasting" ),
+      "talent"
+    );
+
     context.buttons = [
       PromptFactory.freeButton,
       PromptFactory.spendLpButton,
