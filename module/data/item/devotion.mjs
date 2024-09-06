@@ -98,8 +98,25 @@ export default class DevotionData extends AbilityTemplate.mixin(
 
     const increaseData = this.increaseData;
     return {
-      requiredLp:    this.parent.actor.currentLp >= increaseData.requiredLp,
-      maxLevel:      increaseData.newLevel <= game.settings.get( "ed4e", "lpTrackingMaxRankSkill" ),
+      [ED4E.validationCategories.base]: [
+        {
+          name:      "ED.Legend.Validation.maxLevel",
+          value:     increaseData.newLevel,
+          fulfilled: increaseData.newLevel <= game.settings.get( "ed4e", "lpTrackingMaxRankSkill" ),
+        },
+      ],
+      [ED4E.validationCategories.resources]: [
+        {
+          name:      "ED.Legend.Validation.availableLp",
+          value:     increaseData.requiredLp,
+          fulfilled: this.parentActor.currentLp >= increaseData.requiredLp,
+        },
+        {
+          name:      "ED.Legend.Validation.availableMoney",
+          value:     this.requiredMoneyForIncrease,
+          fulfilled: this.parentActor.currentSilver >= this.requiredMoneyForIncrease,
+        },
+      ],
     };
   }
 

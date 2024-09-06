@@ -93,11 +93,37 @@ export default class SkillData extends AbilityTemplate.mixin(
 
     const increaseData = this.increaseData;
     return {
-      requiredLp:    this.parent.actor.currentLp >= increaseData.requiredLp,
-      requiredMoney: this.parent.actor.currentSilver >= this.requiredMoneyForIncrease,
-      maxLevel:      increaseData.newLevel <= game.settings.get( "ed4e", "lpTrackingMaxRankSkill" ),
-      hasDamage:     increaseData.hasDamage,
-      hasWounds:     increaseData.hasWounds,
+      [ED4E.validationCategories.base]:      [
+        {
+          name:      "ED.Legend.Validation.maxLevel",
+          value:     increaseData.newLevel,
+          fulfilled: increaseData.newLevel <= game.settings.get( "ed4e", "lpTrackingMaxRankSkill" ),
+        },
+      ],
+      [ED4E.validationCategories.resources]: [
+        {
+          name:      "ED.Legend.Validation.availableLp",
+          value:     this.requiredLpForIncrease,
+          fulfilled: this.requiredLpForIncrease <= this.parent.actor.currentLp,
+        },
+        {
+          name:      "ED.Legend.Validation.availableMoney",
+          value:     this.requiredMoneyForIncrease,
+          fulfilled: this.requiredMoneyForIncrease <= this.parent.actor.currentSilver,
+        },
+      ],
+      [ED4E.validationCategories.health]:    [
+        {
+          name:      "ED.Legend.Validation.hasDamage",
+          value:     increaseData.hasDamage,
+          fulfilled: !increaseData.hasDamage,
+        },
+        {
+          name:      "ED.Legend.Validation.hasWounds",
+          value:     increaseData.hasWounds,
+          fulfilled: !increaseData.hasWounds,
+        },
+      ],
     };
   }
 

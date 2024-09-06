@@ -20,14 +20,6 @@ export default class PromptFactory {
 
   _promptTypeMapping = {};
 
-  /* static get #documentTypeMapping() {
-    return {
-      "npc":    ActorPromptFactory,
-      "pc":     ActorPromptFactory,
-      "talent": ItemPromptFactory,
-    };
-  } */
-
   /**
    * A {@link DialogV2Button} object for a button with data action "cancel".
    * @type {DialogV2Button}
@@ -340,12 +332,15 @@ class ItemPromptFactory extends PromptFactory {
       throw new Error( "Item must be a subclass of LpIncreaseTemplate to use this prompt." );
     }
 
-    const content = `
-    <p>${ this.document.system.increaseRules }</p>
-    ${ Object.entries( this.document.system.increaseValidationData ).map( ( [ key, value ] ) => {
-    return `<div class="flex-row">${ key }: <i class="fa-solid ${ value ? "fa-hexagon-check" : "fa-hexagon-xmark" }"></i></div>`;
-  } ).join( "" ) }
-    `;
+    const validationTemplate = "systems/ed4e/templates/advancement/advancement-requirements.hbs";
+    const content = await renderTemplate(
+      validationTemplate,
+      {
+        render:             { requirements: true },
+        writtenRules:       this.document?.system?.increaseRules,
+        requirementGroups: this.document?.system?.increaseValidationData ?? {},
+      },
+    );
 
     return DialogClass.wait( {
       id:       "lp-increase-prompt",
@@ -389,7 +384,7 @@ class ItemPromptFactory extends PromptFactory {
         {
           action:  "add",
           label:   "ED.Dialogs.Buttons.add",
-          // icon:    "fa-thin fa-turn-up",
+          icon:    "fa-thin fa-plus",
           class:   "free button-add",
           default: false,
         },

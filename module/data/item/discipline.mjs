@@ -57,6 +57,8 @@ export default class DisciplineData extends ClassTemplate.mixin(
 
   /** @inheritDoc */
   get increaseValidationData() {
+    if ( !this.isActorEmbedded ) return undefined;
+
     const nextLevel = this.level + 1;
     const nextLevelData = this.advancement.levels.find( l => l.level === nextLevel );
     const nextTalentLpCost = ED4E.legendPointsCost[ nextLevel + ED4E.lpIndexModForTier[ nextLevelData.tier ] ];

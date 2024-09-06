@@ -57,6 +57,8 @@ export default class QuestorData extends ClassTemplate.mixin(
 
   /** @inheritDoc */
   get increaseValidationData() {
+    if ( !this.isActorEmbedded ) return undefined;
+
     return {
       [ED4E.validationCategories.base]:               [
         {

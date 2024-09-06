@@ -452,10 +452,12 @@ preLocalize( "circleTalentRequirements" );
 
 ED4E.validationCategories = {
   base:               "ED.Legend.Validation.titleBase",
+  health:             "ED.Legend.Validation.titleHealth",
+  resources:          "ED.Legend.Validation.titleResources",
   talentsRequirement: "ED.Legend.Validation.titleTalentsRequirement",
   newAbilityLp:       "ED.Legend.Validation.titleNewAbilityLp",
 };
-
+preLocalize( "validationCategories" );
 
 /* -------------------------------------------- */
 /*  Encumbrance                                 */
