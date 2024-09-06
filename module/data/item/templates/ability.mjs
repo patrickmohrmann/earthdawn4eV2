@@ -182,7 +182,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
       item.toObject(),
       foundry.utils.expandObject( createData ),
     );
-    if ( !createData.system.level ) itemData.system.level = 0;
+    if ( !createData?.system?.level ) itemData.system.level = 0;
     const learnedItem = ( await actor.createEmbeddedDocuments( "Item", [ itemData ] ) )?.[0];
 
     if ( learnedItem && learn === "learn" && item.system.increasable ) await learnedItem.system.increase();

@@ -408,7 +408,7 @@ export default function registerSystemSettings() {
       } ),
       {
         empty:   false,
-        initial: new Set( Object.values( ED4E.languages ) ),
+        initial:  Object.values( ED4E.languages ) ,
       }
     ),
   } );
@@ -419,14 +419,14 @@ export default function registerSystemSettings() {
     hint:    "ED.Settings.Mechanics.spellcastingTypesHint",
     scope:   "world",
     config:  true,
-    default: new Set( Object.values( ED4E.spellcastingTypes ) ),
+    default:  Object.values( ED4E.spellcastingTypes ),
     type:    new fields.SetField(
       new fields.StringField( {
         blank: false,
       } ),
       {
         empty:   false,
-        initial: new Set( Object.values( ED4E.spellcastingTypes ) ),
+        initial:  Object.values( ED4E.spellcastingTypes ),
       }
     )
   } );
