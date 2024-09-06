@@ -46,6 +46,10 @@ export default function () {
             types: ["character"],
             makeDefault: true
         } );
+        Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdNpc, {
+            types: ["npc"],
+            makeDefault: true
+        } );
         Items.unregisterSheet( "core", ItemSheet );
         Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
             makeDefault: true

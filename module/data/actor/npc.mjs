@@ -1,10 +1,13 @@
+import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 
 /**
  * System data definition for NPCs.
  * @mixin
  */
-export default class NpcData extends NamegiverTemplate {
+export default class NpcData extends NamegiverTemplate.mixin(
+    ActorDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static _systemType = "npc";
