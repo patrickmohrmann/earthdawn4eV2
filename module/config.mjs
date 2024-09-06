@@ -274,6 +274,7 @@ preLocalize( "singleBonuses" );
 ED4E.attributePointsCost = [ 0, 1, 2, 3, 5, 7, 9, 12, 15 ];
 ED4E.attributePointsCost[-1] = -1;
 ED4E.attributePointsCost[-2] = -2;
+ED4E.disciplineTeacherCost = [ 0, 100, 200, 300, 500, 800, 1000, 1500, 2000, 2500, 3500, 5000, 7500, 10000, 15000, 20000 ];
 ED4E.legendPointsCost = [ 0, 100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900, 14400, 23300, 37700, 61000, 98700, 159700, 258400, 418100 ];
 
 /**
@@ -436,12 +437,12 @@ ED4E.availableRanks = {
   readWrite: 1,
 };
 
-ED4E.lpTrackingSpellCosts = {
+ED4E.spellCostRules = {
   noviceTalent: "ED.Settings.LpTracking.noviceTalent",
   circleX100:   "ED.Settings.LpTracking.circleX100",
   free:         "ED.Settings.LpTracking.free",
 };
-preLocalize( "lpTrackingSpellCosts" );
+preLocalize( "spellCostRules" );
 
 ED4E.circleTalentRequirements = {
   disciplineTalents:   "ED.Settings.LpTracking.disciplineTalents",

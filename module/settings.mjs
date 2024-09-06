@@ -327,7 +327,7 @@ export default function registerSystemSettings() {
       nullable: false,
       blank:    false,
       initial:  "noviceTalent",
-      choices:  ED4E.lpTrackingSpellCosts,
+      choices:  ED4E.spellCostRules,
       label:    "ED.Settings.LpTracking.spellCost",
       hint:     "ED.Settings.LpTracking.hintSpellCost",
     } ),
