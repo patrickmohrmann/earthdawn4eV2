@@ -33,6 +33,7 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
                         nullable: false,
                         blank: false,
                         initial: "novice",
+                        choices: ED4E.tier,
                         label: "ED.Item.Ability.tier"
                     } ),
                 },

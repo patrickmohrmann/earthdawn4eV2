@@ -4,3 +4,10 @@
 <div>
     {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
 </div>
+{{!-- skill Type --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "X-skillTypes"}}:</label>
+    <select name="system.skillType">
+        {{selectOptions config.skillTypes selected=item.system.skillType localize=true }}
+    </select>
+</div>
