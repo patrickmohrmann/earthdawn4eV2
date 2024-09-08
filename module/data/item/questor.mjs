@@ -62,12 +62,11 @@ export default class QuestorData extends ClassTemplate.mixin(
     return {
       [ED4E.validationCategories.base]:               [
         {
-          name:      "ED.Legend.Validation.availableLp",
+          name:      "ED.Dialogs.Legend.Validation.availableLp",
           value:     this.requiredLpForIncrease,
           fulfilled: this.requiredLpForIncrease <= this.parentActor.currentLp,
         },
       ],
-      [ED4E.validationCategories.newAbilityLp]:       [],
     }; // TODO NEXT
   }
 
@@ -93,7 +92,7 @@ export default class QuestorData extends ClassTemplate.mixin(
 
     if ( foundry.utils.isEmpty( updatedItem ) ) {
       ui.notifications.warn(
-        game.i18n.localize( "ED.Notifications.Warn.classIncreaseProblems" )
+        game.i18n.localize( "ED.Notifications.Warn.Legend.classIncreaseProblems" )
       );
       return;
     }
@@ -109,7 +108,7 @@ export default class QuestorData extends ClassTemplate.mixin(
 
     if ( foundry.utils.isEmpty( updatedActor ) )
       ui.notifications.warn(
-        game.i18n.localize( "ED.Notifications.Warn.abilityIncreaseProblems" )
+        game.i18n.localize( "ED.Notifications.Warn.Legend.abilityIncreaseProblems" )
       );
 
     // possibly update the associated devotion
@@ -118,7 +117,7 @@ export default class QuestorData extends ClassTemplate.mixin(
 
     const content =  `
         <p>
-          ${game.i18n.format( "ED.Dialogs.Legend.increaseQuestorDevotionPrompt.Do you wanna increase this corresponding questor:" )}
+          ${game.i18n.format( "ED.Dialogs.Legend.increaseQuestorDevotionPrompt" )}
         </p>
         <p>
           ${createContentLink( questorDevotion.uuid, questorDevotion.name )}
@@ -130,7 +129,7 @@ export default class QuestorData extends ClassTemplate.mixin(
     } );
     if ( increaseDevotion && !(
       await questorDevotion.update( { "system.level": updatedItem.system.level } )
-    ) ) ui.notifications.warn( "ED.Notifications.Warn.questorItemNotUpdated WithDevotion" );
+    ) ) ui.notifications.warn( "ED.Notifications.Warn.Legend.questorItemNotUpdated" );
 
     return this.parent;
   }
@@ -138,7 +137,9 @@ export default class QuestorData extends ClassTemplate.mixin(
   /** @inheritDoc */
   static async learn( actor, item, createData ) {
     if ( !item.system.canBeLearned ) {
-      ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.cannotLearn" ) );
+      ui.notifications.warn(
+        game.i18n.format( "ED.Notifications.Warn.Legend.cannotLearn", {itemType: item.type} )
+      );
       return;
     }
 
@@ -157,7 +158,7 @@ export default class QuestorData extends ClassTemplate.mixin(
     // "Do you want to become a questor of <passion>? This will grant you the following devotion automatically:"
     const questorDevotionLink = questorDevotion
       ? createContentLink( questorDevotion.uuid, questorDevotion.name )
-      : game.i18n.localize( "ED.Dialogs.Legend.questorDevotionNotFound" );
+      : game.i18n.format( "ED.Dialogs.Legend.questorDevotionNotFound", { edid: edidQuestorDevotion } );
     const content = ` 
       <p>${game.i18n.format( "ED.Dialogs.Legend.learnQuestorPrompt", {passion: item.name,} ) }</p>
       <p>${ questorDevotionLink }</p>
@@ -192,14 +193,6 @@ export default class QuestorData extends ClassTemplate.mixin(
   /* -------------------------------------------- */
 
   _onDropDevotion( event, data ) {
-    // can be ignored since the validation is done in the schema
-    /* fromUuid( data.uuid ).then( devotion => {
-      if ( devotion.system.edid !== game.settings.get( "ed4e", "edidQuestorDevotion" ) ) {
-        ui.notifications.error( "ED.Notifications.Error.dropQuestorEdidOnQuestor" );
-        return data;
-      }
-    } ); */
-
     const questorItem = this.parent;
     questorItem.update( {
       "system.questorDevotion": data.uuid,

@@ -225,31 +225,31 @@ export default class TalentData extends AbilityTemplate.mixin(
     return {
       [ED4E.validationCategories.base]:      [
         {
-          name:      "ED.Legend.Validation.maxLevel",
+          name:      "ED.Dialogs.Legend.Validation.maxLevel",
           value:     increaseData.newLevel,
           fulfilled: increaseData.newLevel <= game.settings.get( "ed4e", "lpTrackingMaxRankTalent" ),
         },
       ],
       [ED4E.validationCategories.resources]: [
         {
-          name:      "ED.Legend.Validation.availableLp",
+          name:      "ED.Dialogs.Legend.Validation.availableLp",
           value:     this.requiredLpForIncrease,
           fulfilled: this.requiredLpForIncrease <= this.parent.actor.currentLp,
         },
         {
-          name:      "ED.Legend.Validation.availableMoney",
+          name:      "ED.Dialogs.Legend.Validation.availableMoney",
           value:     this.requiredMoneyForIncrease,
           fulfilled: this.requiredMoneyForIncrease <= this.parent.actor.currentSilver,
         },
       ],
       [ED4E.validationCategories.health]:    [
         {
-          name:      "ED.Legend.Validation.hasDamage",
+          name:      "ED.Dialogs.Legend.Validation.hasDamage",
           value:     increaseData.hasDamage,
           fulfilled: !increaseData.hasDamage,
         },
         {
-          name:      "ED.Legend.Validation.hasWounds",
+          name:      "ED.Dialogs.Legend.Validation.hasWounds",
           value:     increaseData.hasWounds,
           fulfilled: !increaseData.hasWounds,
         },

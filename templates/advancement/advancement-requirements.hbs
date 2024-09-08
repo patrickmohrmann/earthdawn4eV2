@@ -1,17 +1,17 @@
 <div {{#unless render.requirements}}style="display:none;"{{/unless}}>
   <fieldset>
-    <legend>{{localize "ED.Dialogs.Legend.AdvancementRequirements.WrittenRules"}}</legend>
+    <legend>{{localize "ED.Dialogs.Legend.writtenRules"}}</legend>
     {{{writtenRules}}}
   </fieldset>
 
   {{log "requirementsGroups" requirementGroups}}
   {{#each requirementGroups}}
     <fieldset>
-      <legend>{{@key}}</legend>
+      <legend>{{localize @key}}</legend>
       {{#each this as |requirement|}}
         <div class="flexrow advancement-requirement {{ifThen fulfilled "requirement-fulfilled" ""}}">
           <span class="advancement-requirement-name">
-            {{requirement.name}}
+            {{localize requirement.name}}
           </span>
           <span class="advancement-requirement-value">
             {{requirement.value}}

@@ -413,6 +413,17 @@ ED4E.skillTypes = {
 preLocalize( "skillTypes" );
 
 /**
+ * The rules for increasing attributes.
+ * @enum {string}
+ */
+ED4E.attributeIncreaseRules = {
+  spendLp:          "ED.Settings.LpTracking.spendLp",
+  spendLpPerCircle: "ED.Settings.LpTracking.spendLpPerCircle",
+  freePerCircle:    "ED.Settings.LpTracking.freePerCircle"
+};
+preLocalize( "attributeIncreaseRules" );
+
+/**
  * Lookup table used during character generation based on attribute values.
  * @type {{defenseRating: number[], unconsciousRating: number[], carryingCapacity: number[], armor: number[], deathRating: number[], step: number[], woundThreshold: number[], recovery: number[]}}
  */
@@ -452,11 +463,11 @@ ED4E.circleTalentRequirements = {
 preLocalize( "circleTalentRequirements" );
 
 ED4E.validationCategories = {
-  base:               "ED.Legend.Validation.titleBase",
-  health:             "ED.Legend.Validation.titleHealth",
-  resources:          "ED.Legend.Validation.titleResources",
-  talentsRequirement: "ED.Legend.Validation.titleTalentsRequirement",
-  newAbilityLp:       "ED.Legend.Validation.titleNewAbilityLp",
+  base:               "ED.Config.LpTracking.Validation.titleBase",
+  health:             "ED.Config.LpTracking.Validation.titleHealth",
+  resources:          "ED.Config.LpTracking.Validation.titleResources",
+  talentsRequirement: "ED.Config.LpTracking.Validation.titleTalentsRequirement",
+  newAbilityLp:       "ED.Config.LpTracking.Validation.titleNewAbilityLp",
 };
 preLocalize( "validationCategories" );
 
@@ -633,7 +644,7 @@ ED4E.documentData = {
   Item: {
     skill: {
       languageSpeak: {
-        name:   "ED.SpeakLanguage",
+        name:   "ED.Item.CreateData.nameSpeakLanguage",
         type:   "skill",
         system: {
           description: { value: "ED.SpeakLanguage Skill Description" },
@@ -643,7 +654,7 @@ ED4E.documentData = {
         },
       },
       languageRW: {
-        name:   "ED.ReadWriteLanguage",
+        name:   "ED.Item.CreateData.nameReadWriteLanguage",
         type:   "skill",
         system: {
           description: { value: "ED.ReadWriteLanguage Skill Description" },
@@ -655,7 +666,7 @@ ED4E.documentData = {
     },
     devotion: {
       questor: {
-        name:   "ED.Devotion.Questor",
+        name:   "ED.Item.CreateData.nameQuestorDevotion",
         type:   "devotion",
         system: {
           description: { value: "ED.Devotion.Questor Description" },

@@ -44,10 +44,10 @@ export default class ClassAdvancementDialog extends HandlebarsApplicationMixin( 
     this.nextLevel = this.currentLevel + 1;
     this.learning = this.currentLevel === 0;
 
-    this.abilityUuidsByPoolType = classItem.system.advancement.levels[ this.nextLevel ].abilities;
+    this.abilityUuidsByPoolType = classItem.system.advancement.levels[ this.nextLevel - 1 ].abilities;
     this.selectedOption = "";
     this.selectedSpells = new Set();
-    this.effectsGained = this.classItem.system.advancement.levels[ this.nextLevel ].effects;
+    this.effectsGained = this.classItem.system.advancement.levels[ this.nextLevel - 1 ].effects;
   }
 
   /**
@@ -182,7 +182,7 @@ export default class ClassAdvancementDialog extends HandlebarsApplicationMixin( 
       true,
       "OBSERVER",
       [ "system.magicType" ],
-      x => true // x.system.magicType === this.classItem
+      _ => true // x.system.magicType === this.classItem
     ) ).filter(
       spell => !this.actor.itemTypes.spell.map( s => s.uuid ).includes( spell )
     ) : [];
@@ -191,7 +191,7 @@ export default class ClassAdvancementDialog extends HandlebarsApplicationMixin( 
     context.nextLevel = this.nextLevel;
     context.tier = {
       current: this.classItem.system.advancement.levels[ this.currentLevel ].tier,
-      next:    this.classItem.system.advancement.levels[ this.nextLevel ].tier,
+      next:    this.classItem.system.advancement.levels[ this.nextLevel - 1 ].tier,
     };
     context.tierChanged = context.tier.current !== context.tier.next;
 
@@ -209,7 +209,7 @@ export default class ClassAdvancementDialog extends HandlebarsApplicationMixin( 
 
     context.resourceStep = {
       current: this.classItem.system.advancement.levels[ this.currentLevel ].resourceStep,
-      next:    this.classItem.system.advancement.levels[ this.nextLevel ].resourceStep,
+      next:    this.classItem.system.advancement.levels[ this.nextLevel - 1 ].resourceStep,
     };
     context.resourceStepChanged = context.resourceStep.current !== context.resourceStep.next;
 

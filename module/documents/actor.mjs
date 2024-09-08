@@ -1091,7 +1091,7 @@ export default class ActorEd extends Actor {
    */
   async addItemLpTransaction( item, validationData, bookingResult ) {
 
-    const description = game.i18n.format( "ED.Dialogs.LegendPoints.spendLp", {
+    const description = game.i18n.format( "ED.Dialogs.Legend.spendLp", {
       previousLevel: item.system.level - 1,
       newLevel:      item.system.level,
     } );

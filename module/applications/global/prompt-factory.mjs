@@ -367,7 +367,7 @@ class ItemPromptFactory extends PromptFactory {
     }
 
     const content = `
-    <p>${ game.i18n.localize( "ED.Dialogs.learnOnZeroOrOne" ) }</p>
+    <p>${ game.i18n.localize( "ED.Dialogs.Legend.learnOnZeroOrOne" ) }</p>
     `;
 
     return DialogClass.wait( {
@@ -389,7 +389,7 @@ class ItemPromptFactory extends PromptFactory {
           default: false,
         },
         {
-          action:  "learn",
+          action:  "slearn",
           label:   "ED.Dialogs.Buttons.learn",
           icon:    "fa-solid fa-turn-up",
           class:   "spendLp button-learn",

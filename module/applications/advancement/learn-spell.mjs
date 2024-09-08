@@ -90,7 +90,7 @@ export default class LearnSpellPrompt extends HandlebarsApplicationMixin( Applic
     window:  {
       frame: true,
       icon:  "fa-thin fa-scroll",
-      title: "ED.Dialogs.LearnSpell.title",
+      title: "ED.Dialogs.Title.learnSpell",
     },
     actions: {
       useTeacherSpellcasting: this._spellcastingTest,
@@ -143,8 +143,8 @@ export default class LearnSpellPrompt extends HandlebarsApplicationMixin( Applic
       {
         target:     { base: this.spell.system.learningDifficulty },
         chatFlavor: game.i18n.format(
-          "ED.Dialogs.LearnSpell.chatFlavorLearnSpellTeacherTest : XY is trying to get help from their teacher to learn a spell.",
-          { spell: this.spell.name },
+          "ED.Dialogs.Legend.LearnSpell.chatFlavorTeacherTest",
+          { name: this.actor.name, spell: this.spell.name },
         ),
       }
     );
@@ -159,7 +159,7 @@ export default class LearnSpellPrompt extends HandlebarsApplicationMixin( Applic
 
   static async _patterncraftTest( _ ) {
     const modifiers = {};
-    if ( this.dataModel.teacherTestSuccessful ) modifiers[ game.i18n.localize( "X-Localize: Teacher Bonus Must be without periods" ) ] = this.dataModel.teacherRank;
+    if ( this.dataModel.teacherTestSuccessful ) modifiers[ game.i18n.localize( "ED.Dialogs.Legend.LearnSpell.teacherBonusModifier" ) ] = this.dataModel.teacherRank;
 
     const roll = await this.actor.rollAbility(
       this.actor.getSingleItemByEdid(
@@ -170,8 +170,8 @@ export default class LearnSpellPrompt extends HandlebarsApplicationMixin( Applic
         target:     { base: this.spell.system.learningDifficulty },
         step:       { modifiers },
         chatFlavor: game.i18n.format(
-          "ED.Dialogs.LearnSpell.chatFlavorLearnSpellpatterncraft : XY is trying to learn a new spell.",
-          { spell: this.spell.name },
+          "ED.Dialogs.LearnSpell.chatFlavorPatterncraft",
+          { name: this.actor.name, spell: this.spell.name },
         ),
       }
     );

@@ -68,34 +68,27 @@ export default class DisciplineData extends ClassTemplate.mixin(
     const validationData = {
       [ED4E.validationCategories.resources]:               [
         {
-          name:      "ED.Legend.Validation.availableLp",
+          name:      "ED.Dialogs.Legend.Validation.availableLp",
           value:     this.requiredLpForIncrease,
           fulfilled: this.requiredLpForIncrease <= this.parentActor.currentLp,
         },
         {
-          name:      "ED.Legend.Validation.availableMoney",
+          name:      "ED.Dialogs.Legend.Validation.availableMoney",
           value:     this.requiredMoneyForIncrease,
           fulfilled: this.requiredMoneyForIncrease <= this.parent.actor.currentSilver,
         },
       ],
       [ED4E.validationCategories.talentsRequirement]: [
         {
-          name:      "ED.Legend.Validation.talentsRequirement",
+          name:      "ED.Dialogs.Legend.Validation.talentsRequirement",
           value:     "X Talents on current level",
           fulfilled: true,
-        },
-      ],
-      [ED4E.validationCategories.newAbilityLp]:       [
-        {
-          name:      "ED.Legend.Validation.talentOptionLp",
-          value:     nextTalentLpCost,
-          fulfilled: nextTalentLpCost <= this.parentActor.currentLp,
         },
       ],
     }; // TODO NEXT
     if ( !learn ) validationData[ED4E.validationCategories.newAbilityLp] = [
       {
-        name:      "ED.Legend.Validation.talentOptionLp",
+        name:      "ED.Dialogs.Legend.Validation.talentOptionLp",
         value:     nextTalentLpCost,
         fulfilled: nextTalentLpCost <= this.parentActor.currentLp,
       },
@@ -105,7 +98,7 @@ export default class DisciplineData extends ClassTemplate.mixin(
 
   /** @inheritDoc */
   get learnRules() {
-    return game.i18n.localize( "ED.Legend.Rules.disciplineLearnShortRequirements" );
+    return game.i18n.localize( "ED.Dialogs.Legend.Rules.disciplineLearnShortRequirements" );
   }
 
   /** @inheritDoc */
@@ -116,11 +109,11 @@ export default class DisciplineData extends ClassTemplate.mixin(
   /** @inheritDoc */
   static async learn( actor, item, createData ) {
     if ( !item.system.canBeLearned ) {
-      ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.cannotLearn" ) );
+      ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.Legend.cannotLearn" ) );
       return;
     }
     if ( isEmpty( actor.disciplines ) ) {
-      ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.firstDisciplineViaCharGen" ) );
+      ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.Legend.firstDisciplineViaCharGen" ) );
       return;
     }
 

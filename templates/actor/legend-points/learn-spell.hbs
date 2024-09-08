@@ -1,7 +1,7 @@
 <div>
   <fieldset>
-    <legend>{{ localize "ED.Dialogs.Legend.learnSpellRequirements" }}</legend>
-    Is in good health: {{ ifThen hasDamage "Nope" "Yes" }}
+    <legend>{{ localize "ED.Dialogs.Legend.LearnSpell.legendRequirements" }}</legend>
+    {{localize "ED.Dialogs.Legend.Validation.hasDamage"}} <i class="fas fa-light fa-{{ ifThen hasDamage "hexagon-xmark" "hexagon-check" }}"></i>
     {{ formField fields.lpCost value=source.lpCost rootId=partId readonly=true }}
     {{ formField fields.learnDifficulty value=source.learnDifficulty rootId=partId readonly=true }}
   </fieldset>
@@ -9,7 +9,7 @@
   <br>
 
   <fieldset>
-    <legend>{{ localize "ED.Dialogs.Legend.learnSpell" }}</legend>
+    <legend>{{ localize "ED.Dialogs.Legend.LearnSpell.legendTeacherTest" }}</legend>
     {{#if hasSpellcasting}}
       {{ formField fields.teacher value=source.teacher }}
       {{#if source.teacher}}
@@ -18,12 +18,12 @@
                 data-action="useTeacherSpellcasting" {{#unless source.teacher}}disabled{{/unless}}
         >
           <i class="{{ config.icons.spellcasting }}" inert></i>
-          {{ localize "ED.Dialogs.Button.teacherButtonSpellcasting" }}
+          {{ localize "ED.Dialogs.Button.teacherSpellcasting" }}
         </button>
         {{ formField fields.teacherTestSuccessful value=source.teacherTestSuccessful }}
       {{/if}}
     {{else}}
-      {{localize "ED.Dialogs.Legend.NoSpellcastingTalentFound"}}
+      {{localize "ED.Dialogs.Legend.LearnSpell.noSpellcastingTalentFound"}}
     {{/if}}
     <br>
   </fieldset>
@@ -31,7 +31,7 @@
   <br>
 
   <fieldset>
-    <legend>{{ localize "ED.Dialogs.Legend.learnSpellPatterncraft" }}</legend>
+    <legend>{{ localize "ED.Dialogs.Legend.LearnSpell.legendPatterncraft" }}</legend>
     {{#if hasPatterncraft}}
       {{ formField fields.patterncraft value=source.patterncraft rootId=partId }}
       {{#if source.patterncraft}}
@@ -45,7 +45,7 @@
         </button>
       {{/if}}
     {{else}}
-      {{localize "ED.Dialogs.Legend.NoPatterncraftTalentFound"}}
+      {{localize "ED.Dialogs.Legend.LearnSpell.noPatterncraftTalentFound"}}
     {{/if}}
   </fieldset>
 </div>

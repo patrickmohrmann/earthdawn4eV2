@@ -231,7 +231,7 @@ export default function registerSystemSettings() {
   // LP Tracking On/Off
   game.settings.register( "ed4e", "lpTrackingUsed", {
     name:    "ED.Settings.LpTracking.lpTrackingUsed",
-    hint:    "ED.Settings.LpTracking.hintUsed",
+    hint:    "ED.Settings.LpTracking.hintLpTrackingUsed",
     scope:   "world",
     config:  true,
     default: true,
@@ -241,16 +241,15 @@ export default function registerSystemSettings() {
   // LP Tracking Option Attributes
   game.settings.register( "ed4e", "lpTrackingAttributes", {
     name:    "ED.Settings.LpTracking.attributeOptions",
-    hint:    "ED.Settings.LpTracking.hintAttributesOption",
+    hint:    "ED.Settings.LpTracking.hintAttributeOption",
     scope:   "world",
     config:  true,
-    default: "spendLp",
-    type:    String,
-    choices: {
-      spendLp:          "ED.Settings.LpTracking.spendLp",
-      spendLpPerCircle: "ED.Settings.LpTracking.spendLpPerCircle",
-      freePerCircle:    "ED.Settings.LpTracking.freePerCircle"
-    }
+    type:    new fields.StringField( {
+      initial:  "spendLp",
+      choices:  ED4E.attributeIncreaseRules,
+      label:    "ED.Settings.LpTracking.attributeOptions",
+      hint:     "ED.Settings.LpTracking.hintAttributeOption",
+    } ),
   } );
 
   // LP Tracking Option Talents
