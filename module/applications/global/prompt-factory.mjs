@@ -356,7 +356,7 @@ class ItemPromptFactory extends PromptFactory {
           default: false,
         },
         {
-          action:  "slearn",
+          action:  "learn",
           label:   "ED.Dialogs.Buttons.learn",
           icon:    "fa-solid fa-turn-up",
           class:   "spendLp button-learn",
