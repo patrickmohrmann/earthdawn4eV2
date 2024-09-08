@@ -38,7 +38,7 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Get Data            */
+  /*                  Get Data                    */
   /* -------------------------------------------- */
   async getData() {
     const systemData = super.getData();

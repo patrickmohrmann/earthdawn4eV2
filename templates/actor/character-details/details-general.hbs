@@ -11,6 +11,7 @@
             <div class="attribute-card__grid--item">
                 <label>{{localize "ED.Actor.Attributes.attributeName"}}</label>
             </div>
+            {{#if (eq this.type "pc")}}
             <div class="attribute-card__grid--item">
                 <label>
                     {{localize "ED.Actor.Attributes.attributeValue"}}
@@ -21,13 +22,18 @@
                     {{localize "ED.Actor.Attributes.increase"}}
                 </label>
             </div>
+            {{/if}}
             <div class="attribute-card__grid--item">
                 <label>
                     {{localize "ED.Actor.Attributes.attribueStep"}}
                 </label>
             </div>
         </div>
+        {{#if (eq this.type "pc")}}
         {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
+        {{else}}
+        {{> "systems/ed4e/templates/actor/cards/attributes-none-pc-card.hbs"}}
+        {{/if}}
     </div>
 
     {{!-- Karma --}}
