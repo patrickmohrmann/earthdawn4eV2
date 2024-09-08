@@ -2,6 +2,7 @@ import LpIncreaseTemplate from "../../data/item/templates/lp-increase.mjs";
 import ActorEd from "../../documents/actor.mjs";
 import ItemEd from "../../documents/item.mjs";
 import LearnableTemplate from "../../data/item/templates/learnable.mjs";
+import ED4E from "../../config.mjs";
 
 const DialogClass = foundry.applications.api.DialogV2;
 const fields = foundry.data.fields;
@@ -322,44 +323,10 @@ class ActorPromptFactory extends PromptFactory {
 class ItemPromptFactory extends PromptFactory {
 
   _promptTypeMapping = {
-    lpIncrease:   this._lpIncreasePrompt.bind( this ),
-    learnAbility: this._learnAbilityPrompt.bind( this ),
-
+    lpIncrease:     this._lpIncreasePrompt.bind( this ),
+    learnAbility:   this._learnAbilityPrompt.bind( this ),
+    talentCategory: this._talentCategoryPrompt.bind( this ),
   };
-
-  async _lpIncreasePrompt() {
-    if ( !this.document.system.hasMixin( LpIncreaseTemplate ) ) {
-      throw new Error( "Item must be a subclass of LpIncreaseTemplate to use this prompt." );
-    }
-
-    const validationTemplate = "systems/ed4e/templates/advancement/advancement-requirements.hbs";
-    const content = await renderTemplate(
-      validationTemplate,
-      {
-        render:             { requirements: true },
-        writtenRules:       this.document?.system?.increaseRules,
-        requirementGroups: this.document?.system?.increaseValidationData ?? {},
-      },
-    );
-
-    return DialogClass.wait( {
-      id:       "lp-increase-prompt",
-      uniqueId: String( ++globalThis._appId ),
-      classes:  [ "earthdawn4e", "lp-increase-prompt" ],
-      window:   {
-        title:       "ED.Dialogs.Title.lpIncrease",
-        minimizable: false
-      },
-      modal:   false,
-      content,
-      buttons: [
-        this.constructor.freeButton,
-        this.constructor.spendLpButton,
-        this.constructor.cancelButton
-      ],
-      rejectClose: false,
-    } );
-  }
 
   async _learnAbilityPrompt() {
     if ( !this.document.system.hasMixin( LearnableTemplate ) ) {
@@ -398,6 +365,67 @@ class ItemPromptFactory extends PromptFactory {
         this.constructor.cancelButton
       ],
       rejectClose: false,
+    } );
+  }
+
+  async _lpIncreasePrompt() {
+    if ( !this.document.system.hasMixin( LpIncreaseTemplate ) ) {
+      throw new Error( "Item must be a subclass of LpIncreaseTemplate to use this prompt." );
+    }
+
+    const validationTemplate = "systems/ed4e/templates/advancement/advancement-requirements.hbs";
+    const content = await renderTemplate(
+      validationTemplate,
+      {
+        render:             { requirements: true },
+        writtenRules:       this.document?.system?.increaseRules,
+        requirementGroups: this.document?.system?.increaseValidationData ?? {},
+      },
+    );
+
+    return DialogClass.wait( {
+      id:       "lp-increase-prompt",
+      uniqueId: String( ++globalThis._appId ),
+      classes:  [ "earthdawn4e", "lp-increase-prompt" ],
+      window:   {
+        title:       "ED.Dialogs.Title.lpIncrease",
+        minimizable: false
+      },
+      modal:   false,
+      content,
+      buttons: [
+        this.constructor.freeButton,
+        this.constructor.spendLpButton,
+        this.constructor.cancelButton
+      ],
+      rejectClose: false,
+    } );
+  }
+
+  async _talentCategoryPrompt() {
+    const buttons = Object.entries( ED4E.talentCategory ).map(
+      ( [ key, label ] ) => {
+        return {
+          action:  key,
+          label:   label,
+          icon:    "",
+          class:   `button-${ key }`,
+          default: false
+        };
+      }
+    );
+
+    return DialogClass.wait( {
+      rejectClose: false,
+      id:          "talent-category-prompt",
+      uniqueId:    String( ++globalThis._appId ),
+      classes:     [ "earthdawn4e", "talent-category-prompt", "flexcol" ],
+      window:      {
+        title:       "ED.Dialogs.Title.talentCategory",
+        minimizable: false
+      },
+      modal:   false,
+      buttons,
     } );
   }
 }

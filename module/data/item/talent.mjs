@@ -2,6 +2,7 @@ import AbilityTemplate from "./templates/ability.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ED4E from "../../config.mjs";
 import KnackTemplate from "./templates/knack-item.mjs";
+import PromptFactory from "../../applications/global/prompt-factory.mjs";
 
 /**
  * Data model template with information on talent items.
@@ -262,6 +263,21 @@ export default class TalentData extends AbilityTemplate.mixin(
    */
   async increase() {
     return super.increase();
+  }
+
+  /** @inheritDoc */
+  static async learn( actor, item, createData = {} ) {
+    const learnedItem = await super.learn( actor, item, createData );
+    if ( learnedItem ) {
+      const promptFactory = PromptFactory.fromDocument( learnedItem );
+      let category = await promptFactory.getPrompt( "talentCategory" );
+      while ( !category ) {
+        ui.notifications.warn( "ED.Notifications.Warn.Legend.noTalentCategorySelected" );
+        category = await promptFactory.getPrompt( "talentCategory" );
+      }
+      await learnedItem.update( { "system.talentCategory": category } );
+    }
+    return learnedItem;
   }
 
   /* -------------------------------------------- */
