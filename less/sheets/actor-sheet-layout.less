@@ -117,6 +117,12 @@
                     grid-area: recovery; 
                 }
 
+                .characteristics-max-wounds__grid-item { 
+                    grid-area: maxWounds; 
+                }
+
+                grid-area: empty;
+
                 .image-characteristics__grid-container {
                     display: grid;
                     grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
@@ -132,7 +138,23 @@
                     ;
                 }
 
-                .image-characteristics__grid-container > div {
+                .image-characteristics-mob__grid-container {
+                    display: grid;
+                    grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
+                    grid-column-gap: 4px;
+                    margin-left: 4px;
+                    grid-template-areas: 
+                    'image defensesHeader defensesHeader defensesHeader healthHeader healthHeader healthHeader'
+                    'image defensePhyscial defenseMystical defenseSocial damageWounds maxWounds healthUnconscious'
+                    'image defensePhyscial defenseMystical defenseSocial damageWounds maxWounds healthUnconscious'
+                    'image armorHeader armorHeader movementHeader empty empty empty'
+                    'image armorPhysical armorMystical movement damageDamage healthWound recovery'
+                    'image armorPhysical armorMystical movement damageDamage healthWound recovery'
+                    ;
+                }
+
+                .image-characteristics__grid-container > div,
+                .image-characteristics-mob__grid-container > div {
                     text-align: center;
                   }
 

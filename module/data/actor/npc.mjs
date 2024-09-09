@@ -19,11 +19,20 @@ export default class NpcData extends NamegiverTemplate.mixin(
     static defineSchema() {
         const fields = foundry.data.fields;
         return this.mergeSchema( super.defineSchema(), {
-           mobRules: new fields.BooleanField( {
+            mobRules: new fields.BooleanField( {
                 required: true,
                 initial: false,
                 label: "ED.Actor.Configuration.mobRules"
-              } ),
+            } ),
+            // characteristics: new fields.SchemaField( {
+            //     health: new fields.SchemaField( {
+                    maxWounds: new fields.NumberField( {
+                        required: true,
+                        initial: 0,
+                        label: "ED.Actor.Configuration.maxWounds"
+                    } ),
+            //     } )
+            // } )
         } );
     }
 

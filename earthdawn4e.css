@@ -392,6 +392,9 @@ p {
 .app.window-app.earthdawn4e.sheet .window-content .body .navigator__flex .navigator__tab {
   padding-left: 5px;
 }
+.app.window-app.earthdawn4e.sheet .window-content .body .top {
+  grid-area: empty;
+}
 .app.window-app.earthdawn4e.sheet .window-content .body .top .image__grid-item {
   grid-area: image;
 }
@@ -449,6 +452,9 @@ p {
 .app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-recovery__grid-item {
   grid-area: recovery;
 }
+.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-max-wounds__grid-item {
+  grid-area: maxWounds;
+}
 .app.window-app.earthdawn4e.sheet .window-content .body .top .image-characteristics__grid-container {
   display: grid;
   grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
@@ -456,7 +462,15 @@ p {
   margin-left: 4px;
   grid-template-areas: 'image defensesHeader defensesHeader defensesHeader healthHeader healthHeader healthHeader' 'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath' 'image defensePhyscial defenseMystical defenseSocial healthWound healthUnconscious healthDeath' 'image armorHeader armorHeader movementHeader damageHeader damageHeader recoveryHeader' 'image armorPhysical armorMystical movement damageDamage damageWounds recovery' 'image armorPhysical armorMystical movement damageDamage damageWounds recovery';
 }
-.app.window-app.earthdawn4e.sheet .window-content .body .top .image-characteristics__grid-container > div {
+.app.window-app.earthdawn4e.sheet .window-content .body .top .image-characteristics-mob__grid-container {
+  display: grid;
+  grid-template-columns: 160px 100px 100px 100px 100px 100px 100px;
+  grid-column-gap: 4px;
+  margin-left: 4px;
+  grid-template-areas: 'image defensesHeader defensesHeader defensesHeader healthHeader healthHeader healthHeader' 'image defensePhyscial defenseMystical defenseSocial damageWounds maxWounds healthUnconscious' 'image defensePhyscial defenseMystical defenseSocial damageWounds maxWounds healthUnconscious' 'image armorHeader armorHeader movementHeader empty empty empty' 'image armorPhysical armorMystical movement damageDamage healthWound recovery' 'image armorPhysical armorMystical movement damageDamage healthWound recovery';
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .top .image-characteristics__grid-container > div,
+.app.window-app.earthdawn4e.sheet .window-content .body .top .image-characteristics-mob__grid-container > div {
   text-align: center;
 }
 .app.window-app.earthdawn4e.sheet .window-content .body .top .actor-image {

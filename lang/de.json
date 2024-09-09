@@ -84,6 +84,7 @@
                 "currentRecoveryTestsRecource":                     "Aktuell",
                 "dailyrecoveryTestsResource":                       "Täglich",
                 "deathThesholdShort":                               "Todesschwelle",
+                "maxWounds":                                        "MaxWunden",   
                 "mysticalArmor":                                    "Mystisch",
                 "mysticalDefense":                                  "Mystisch",
                 "physicalArmor":                                    "Körperlich",
@@ -122,10 +123,13 @@
                 "step":                                             "Stufe"   
             },
             "FIELDS": {
-                "mobRules":{
-                    "label":                                        "Mob Regeln",
-                    "hint":                                         "Benutze Wunden anstatt Schaden"
+                "mob": {
+                    "mobRules":{
+                        "label":                                        "Mob Regeln",
+                        "hint":                                         "Benutze Wunden anstatt Schaden"
+                    }
                 }
+               
             },
             "Header": {
                 "action":                                           "Aktion",
