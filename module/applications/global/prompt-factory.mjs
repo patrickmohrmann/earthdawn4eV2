@@ -137,10 +137,11 @@ export default class PromptFactory {
 class ActorPromptFactory extends PromptFactory {
 
   _promptTypeMapping = {
-    recovery:   this._recoveryPrompt.bind( this ),
-    takeDamage: this._takeDamagePrompt.bind( this ),
-    jumpUp:     this._jumpUpPrompt.bind( this ),
-    knockDown:  this._knockDownPrompt.bind( this ),
+    recovery:         this._recoveryPrompt.bind( this ),
+    takeDamage:       this._takeDamagePrompt.bind( this ),
+    jumpUp:           this._jumpUpPrompt.bind( this ),
+    knockDown:        this._knockDownPrompt.bind( this ),
+    chooseDiscipline: this._chooseDisciplinePrompt.bind( this ),
   };
 
   async _recoveryPrompt() {
@@ -263,7 +264,7 @@ class ActorPromptFactory extends PromptFactory {
   }
 
   async _jumpUpPrompt() {
-    const buttons = await this._getAbilityButtons( "jump-up" );
+    const buttons = await this._getItemButtonsByEdid( "jump-up" );
 
     const noAbilityButton = this.constructor.cancelButton();
     noAbilityButton.label = "ED.Dialogs.Buttons.noAbility";
@@ -284,7 +285,7 @@ class ActorPromptFactory extends PromptFactory {
   }
 
   async _knockDownPrompt() {
-    const buttons = await this._getAbilityButtons( "knock-down" );
+    const buttons = await this._getItemButtonsByEdid( "knock-down" );
 
     const noAbilityButton = this.constructor.cancelButton();
     noAbilityButton.label = "ED.Dialogs.Buttons.noAbility";
@@ -304,20 +305,41 @@ class ActorPromptFactory extends PromptFactory {
     } );
   }
 
-  async _getAbilityButtons( edid ) {
+  async _chooseDisciplinePrompt() {
+    const buttons = await this._getItemButtons( this.document.disciplines, "type" );
+
+    return DialogClass.wait( {
+      rejectClose: false,
+      id:          "choose-discipline-prompt",
+      uniqueId:    String( ++globalThis._appId ),
+      classes:     [ "earthdawn4e", "choose-discipline-prompt", "choose-discipline", "flexcol" ],
+      window:      {
+        title:       "ED.Dialogs.Title.chooseDiscipline",
+        minimizable: false
+      },
+      modal:   false,
+      buttons: buttons
+    } );
+  }
+
+  async _getItemButtonsByEdid( edid ) {
     const abilities = this.document.getItemsByEdid( edid );
-    return abilities.map( ( ability ) => {
+    return this._getItemButtons( abilities, "edid" );
+  }
+
+  async _getItemButtons( items, buttonClass ) {
+    return items.map( ( item ) => {
       return {
-        action:  ability.uuid,
-        label:   ability.name,
+        action:  item.uuid,
+        label:   item.name,
         icon:    "",
-        class:   `button-${ edid } ${ ability.name }`,
+        class:   `button-${ item.system[ buttonClass ] } ${ item.name }`,
         default: false
       };
     } );
-    // TODO: adapt CSS to overwrite class "form-footer" with flexcol
   }
 
+  // TODO: adapt CSS to overwrite class "form-footer" with flexcol
 }
 
 class ItemPromptFactory extends PromptFactory {

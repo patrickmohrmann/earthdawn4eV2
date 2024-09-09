@@ -1,5 +1,6 @@
 import ED4E from "./config.mjs";
 import getDice from "./dice/step-tables.mjs";
+import { linkForUuidSync } from "./utils.mjs";
 
 /**
  * @description handlebar helpers
@@ -72,23 +73,7 @@ export default function registerHandlebarHelpers() {
   } );
 
   Handlebars.registerHelper( "ed-linkForUuid", uuid => {
-    const parsedUuid = foundry.utils.parseUuid( uuid );
-    const doc = fromUuidSync( uuid, { strict: false } );
-    const name = doc?.name ?? "";
-    const packId = parsedUuid.collection?.metadata?.id ?? "";
-    return `
-      <a 
-        class="content-link" draggable="true" 
-        data-link="" 
-        data-uuid="${uuid}"
-        data-id="${parsedUuid.id}"
-        data-type="${parsedUuid.type}"
-        data-tooltip="${doc?.type}"
-        data-pack="${packId}"
-      >
-      <i class="fas fa-suitcase"></i>
-      ${name}
-    </a>`;
+    return linkForUuidSync( uuid );
   } );
 
   Handlebars.registerHelper( "ed-diceFormulaForStep", getDice );

@@ -56,25 +56,6 @@ export default class TalentData extends AbilityTemplate.mixin(
         label:    this.labelKey( "talentMagic" ),
         hint:     this.hintKey( "talentMagic" ),
       } ),
-      sourceClass: new fields.SchemaField( {
-        identifier: new fields.StringField( {
-          required: true,
-          nullable: true,
-          blank:    true,
-          label:    this.labelKey( "talentSourceClassId" ),
-          hint:     this.hintKey( "talentSourceClassId" ),
-        } ),
-        levelAdded: new fields.NumberField( {
-          required: true,
-          nullable: true,
-          integer:  true,
-          label:    this.labelKey( "talentSourceClassLevel" ),
-          hint:     this.hintKey( "talentSourceClassLevel" ),
-        } ),
-      }, {
-        label: this.labelKey( "talentSourceClass" ),
-        hint:  this.hintKey( "talentSourceClass" ),
-      } ),
       knacks: new fields.SchemaField( {
         available: new fields.SetField(
           new fields.DocumentUUIDField( {
@@ -269,13 +250,27 @@ export default class TalentData extends AbilityTemplate.mixin(
   static async learn( actor, item, createData = {} ) {
     const learnedItem = await super.learn( actor, item, createData );
     if ( learnedItem ) {
-      const promptFactory = PromptFactory.fromDocument( learnedItem );
-      let category = await promptFactory.getPrompt( "talentCategory" );
-      while ( !category ) {
-        ui.notifications.warn( "ED.Notifications.Warn.Legend.noTalentCategorySelected" );
-        category = await promptFactory.getPrompt( "talentCategory" );
-      }
-      await learnedItem.update( { "system.talentCategory": category } );
+      // assign the talent category
+      const promptFactoryItem = PromptFactory.fromDocument( learnedItem );
+      let category = await promptFactoryItem.getPrompt( "talentCategory" );
+
+      // assign the level at which the talent was learned
+
+      const promptFactoryActor = PromptFactory.fromDocument( actor );
+      const disciplineUuid = await promptFactoryActor.getPrompt( "chooseDiscipline" );
+      const discipline = await fromUuid( disciplineUuid );
+      const learnedAt = discipline.system.level;
+
+      const updateData = {
+        system: {},
+      };
+      if ( category ) updateData.system.talentCategory = category;
+      if ( learnedAt >= 0 ) updateData.system.source = {
+        class:   discipline.uuid,
+        atLevel: learnedAt,
+      };
+
+      await learnedItem.update( updateData );
     }
     return learnedItem;
   }

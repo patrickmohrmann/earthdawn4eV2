@@ -67,7 +67,7 @@ export default class QuestorData extends ClassTemplate.mixin(
           fulfilled: this.requiredLpForIncrease <= this.parentActor.currentLp,
         },
       ],
-    }; // TODO NEXT
+    };
   }
 
   get requiredLpForIncrease() {

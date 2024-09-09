@@ -41,8 +41,12 @@ export default class ClassTemplate extends ItemDataModel.mixin(
     } );
   }
 
+  /**
+   * The tier of the current level. Returns an empty string if no level is found.
+   * @type {string}
+   */
   get currentTier() {
-    return this.advancement.levels[this.level - 1].tier;
+    return this.advancement?.levels[this.level - 1]?.tier ?? "";
   }
 
   /* -------------------------------------------- */
@@ -163,6 +167,7 @@ export default class ClassTemplate extends ItemDataModel.mixin(
 
     await this.parentActor.createEmbeddedDocuments( "Item", [ ...freeAbilityData, ...specialAbilityData ] );
     await this.parentActor.createEmbeddedDocuments( "ActiveEffect", effects );
+    // TODO: activate permanent effects immediately
 
     // increase all abilities of category "free" to new circle, if lower
     const freeAbilities = this.parentActor.items.filter(
@@ -170,6 +175,9 @@ export default class ClassTemplate extends ItemDataModel.mixin(
         && i.system.source?.class === this.parent.uuid
         && i.system.level < nextLevel
     );
+    // TODO: check if there are any free abilities already on this level or higher
+    // if so, add new earnings lp transaction to refund the spent lp to raise
+    // the free talent
 
     for ( const ability of freeAbilities ) {
       await ability.update( { "system.level": nextLevel } );

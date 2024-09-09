@@ -395,11 +395,25 @@
         "Validation": {
           "availableLp": "Genügend Legendenpunkte? Kostet: ",
           "availableMoney": "Genügend Silber? Kostet: ",
+          "enoughTalentsOfTier": "Die Mindestanzahl ({required}) an Talenten sind auf dem erforderlichen Rang ({nextLevel}).",
+          "enoughTalentsOnMinRank": "Die Mindestanzahl ({required}) an Talenten sind auf dem erforderlichen Rang ({nextLevel})",
           "hasDamage": "Aktuell Schaden?",
+          "hasRequiredJourneymanTalents": "Erforderliche Anzahl Gesellen-Talente auf neuem Rang?",
+          "hasRequiredMasterTalents": "Erforderliche Anzahl Meister-Talente auf neuem Rang?",
+          "hasRequiredNoviceTalents": "Erforderliche Anzahl Novizen-Talente auf neuem Rang?",
+          "hasRequiredWardenTalents": "Erforderliche Anzahl Wächter-Talente auf neuem Rang?",
+          "hasTalentFromCurrentCircle": "Talent aus aktuellem Kreis auf erforderlichem Rang?",
+          "hasTalentsOnMinRank": "Alle Talente auf dem erforderlichen Rang?",
           "hasWounds": "Aktuell Wunden?",
           "maxLevel": "Maximaler Rang erreicht? Aktuell: ",
+          "notEnoughTalentsOfTier": "Nicht genügend Talente auf dem erforderlichen Rang ({nextLevel}).<br>Aktuell: {current}<br>Benötigt: {required}",
+          "notEnoughTalentsOnMinRank": "Nicht genügend Talente auf dem erforderlichen Rang ({nextLevel}).<br>Aktuell: {current}<br>Benötigt: {required}",
+          "noTalentFromCurrentCircleOnNewLevel": "Mindestens ein Talent aus dem aktuellen Kreis ist nicht auf dem erforderlichen Rang {nextLevel}.",
+          "talentFromCurrentCircleOnNewLevel": "Mindestens ein Talent aus aktuellem Kreis ist auf erforderlichem Rang. Sehr gut gemacht!",
           "talentOptionLp": "Genügend Legendenpunkte für Talentoption? Kostet: ",
-          "talentsRequirement": "Alle Bedingungen für vorherige Talente erfüllt?"
+          "talentsRequirement": "Alle Bedingungen für vorherige Talente erfüllt?",
+          "talentsRequirementFailed": "Folgende Disziplintalente müssen auf dem erforderlichen Rang ({requiredLevel}) sein:<br>{unfulfilledTalents}",
+          "talentsRequirementFulfilled": "Alle Disziplintalente sind auf dem erforderlichen Rang"
         },
         "increaseQuestorDevotionPrompt": "Soll die zugehörige Questor Weihekraft ebenfalls erhöht werden? (Sie ist die eigentliche Repräsentation des Questor-Rang)",
         "learnOnZeroOrOne": "Auf Rang 0 hinzufügen, oder auf Rang 1 lernen?",
@@ -413,7 +427,8 @@
         "learnAbility":     "Fähigkeit lernen",
         "learnSpell":       "Zauber lernen",
         "recovery":         "Erholungsprobe",
-        "takeDamage":       "Schaden nehmen"
+        "takeDamage":       "Schaden nehmen",
+        "talentCategory":   "Talentkategorie"
       },
       "armor": "Rüstung",
       "armorType": "Rüstungsart",
@@ -554,6 +569,7 @@
           "classIncreaseProblems": "Rang/Kreis konnte nicht aktualisiert werden",
           "cannotLearn" : "Ein Item vom Typ \"{itemType}\" kann nicht erlernt werden.",
           "firstDisciplineViaCharGen": "Erste Disziplin kann nur während der Charaktererstellung erlernt werden",
+          "noTalentCategorySelected": "Du musst eine Talentkategorie auswählen, sonst können wir nichts zuordnen und kuhle LP Sachen machen :(",
           "questorItemNotUpdated": "Questor-Item konnte nicht aktualisiert werden"
         },
         "piecemealArmorSizeExceeded": "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
@@ -609,8 +625,11 @@
         "threadWeavingHint": "Identifiziert die Fähigkeit die für Fadenweben verwendet wird"
       },
       "LpTracking": {
+        "allTalents": "Alle Talente für Kreisaufstieg",
+        "allTalentsHouseRule": "Alle Talente für Kreisaufstieg (Hausregel)",
         "attributeOptions":     "Kosten Attributesteigerung",
         "circleTalentRequirements": "Mindestanforderungen Talente bei Kreisaufstieg",
+        "disciplineTalents": "Disziplintalente auf nächstem Kreis",
         "hintAttributeOptions": "Regeln zum steigern von Attributen",
         "hintCircleTalentRequirements": "Welche Regeln für benötigte Talente und Ränge bei Kreisaufstieg wird verwendet",
         "hintLpTrackingUsed":   "Verwende automatisiertes Tracking und Verwaltung von Legendenpunkten",

@@ -383,6 +383,34 @@ export async function linkForUuid( uuid ) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Creates an HTML document link for the provided UUID.
+ * @param {string} uuid  UUID for which to produce the link.
+ * @returns {string}     Link to the item or empty string if item wasn't found.
+ */
+export function linkForUuidSync( uuid ) {
+  const parsedUuid = foundry.utils.parseUuid( uuid );
+  const doc = fromUuidSync( uuid, { strict: false } );
+  if ( !doc ) return `<a class="content-link broken" data-icon="fas fa-unlink" data-uuid="${uuid} ">${uuid}</a>`;
+  const name = doc?.name ?? "";
+  const packId = parsedUuid.collection?.metadata?.id ?? "";
+  return `
+      <a 
+        class="content-link" draggable="true" 
+        data-link="" 
+        data-uuid="${uuid}"
+        data-id="${parsedUuid.id}"
+        data-type="${parsedUuid.type}"
+        data-tooltip="${doc?.type}"
+        data-pack="${packId}"
+      >
+      <i class="fas fa-suitcase"></i>
+      ${name}
+    </a>`;
+}
+
+/* -------------------------------------------- */
 /*  Validators                                  */
 /* -------------------------------------------- */
 

@@ -909,7 +909,7 @@ export default class ActorEd extends Actor {
     const classNewLevelIndex = classNewLevel - 1;
 
     // validate if the class can be upgraded
-    const currentDisciplineTalents = this.items.filter( item => item.type === "talent" && item.system.talentCategory === "discipline" && item.system.sourceClass.identifier === classItem.uuid );
+    const currentDisciplineTalents = this.items.filter( item => item.type === "talent" && item.system.talentCategory === "discipline" && item.system.source.class === classItem.uuid );
     if ( classOldLevel >= 15 ) {
       ui.notifications.warn( "Klasse hat bereits das maximale Level erreicht" );
       return;
@@ -943,7 +943,7 @@ export default class ActorEd extends Actor {
     const settingOption = game.settings.get( "ed4e", "lpTrackingAllTalents" );
     if ( settingOption === "disciplineTalents" ) {
       ui.notifications.warn( "Basis = Disziplin Talente für den Kreisaufstieg" );
-      const relevantItems = currentDisciplineTalents.filter( item => item.system.sourceClass.identifier === classItem.uuid );
+      const relevantItems = currentDisciplineTalents.filter( item => item.system.source.class === classItem.uuid );
       const allItemsMeetLevelRequirement = relevantItems.every( item => item.system.level >= classNewLevel );
 
 
@@ -1065,7 +1065,7 @@ export default class ActorEd extends Actor {
    */
   async upgradeFreeTalents( classItem, newLevel ) {
     this.items
-      .filter( item => item.type === "talent" && item.system.talentCategory === "free" && item.system.sourceClass.identifier === classItem.uuid )
+      .filter( item => item.type === "talent" && item.system.talentCategory === "free" && item.system.source.class === classItem.uuid )
       .forEach( talent => talent.updateSource( { "system.level": newLevel } ) );
   }
 
