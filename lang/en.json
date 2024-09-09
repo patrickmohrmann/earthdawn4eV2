@@ -82,9 +82,10 @@
             },
             "Characteristics": {
                 "currentDamage":                                    "Damage",
-                "currentrecoveryTestsResource":                             "Current",
-                "dailyrecoveryTestsResource":                               "Daily",
+                "currentrecoveryTestsResource":                     "Current",
+                "dailyrecoveryTestsResource":                       "Daily",
                 "deathThesholdShort":                               "Death Rating",
+                "maxWounds":                                        "Max Wounds",
                 "mysticalArmor":                                    "Mystical",
                 "mysticalDefense":                                  "Mystical",
                 "physicalArmor":                                    "Physical",
@@ -353,6 +354,19 @@
                 "legendPoints":                                     "Legend Points",
                 "description":                                      "Description"
             },
+            "Buttons": {
+                "cancel":                                           "Cancel",
+                "nightRest":                                        "Nightly Rest",
+                "noAbilityDex":                                     "Dexterity",
+                "noAbilityStr":                                     "Strength",
+                "recoverStun":                                      "Stun Damage Recovery",
+                "recovery":                                         "Recovey Test",
+                "takeDamage":                                       "Take Damage"
+            },
+            "damage":                                               "Damage",
+            "damageStandard":                                       "Deadly Damage",
+            "damageStun":                                           "Stun Damage",
+            "damageType":                                           "Damage Type",
             "Errors": {
                 "noLp":                                            "No Legend Points entered!"
             },
@@ -361,6 +375,11 @@
                 "inactiveUser":                                     "Inactive User",
                 "actorsNoUserConfigured":                           "Not Configured, Owned Actors"
             },
+            "ignoreArmor":                                          "Ignore Armor",
+            "jumpUpChoice":                                         "Chose the Ability to jump up",
+            "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
+            "mystical":                                             "Mystical Damage",
+            "physical":                                             "Physical Damage",
             "Navigator":{
                 "baseInput":                                        "Base Options",
                 "options":                                          "Other Options"
@@ -370,26 +389,11 @@
             },
             "Title": {
                 "assignLp":                                         "Assign Legend Points",
+                "jumpUp":                                           "Jump Up",  
                 "rollPrompt":                                       "Roll Options",
                 "recovery":                                         "Recovery Test",
                 "takeDamage":                                       "Take Damage"
-            },
-            "Buttons": {
-                "cancel":                                           "Cancel",
-                "nightRest":                                        "Nightly Rest",
-                "recoverStun":                                      "Stun Damage Recovery",
-                "recovery":                                         "Recovey Test",
-                "takeDamage":                                       "Take Damage"
-                },
-            "damage":                                               "Damage",
-            "damageStandard":                                       "Deadly Damage",
-            "damageStun":                                           "Stun Damage",
-            "damageType":                                           "Damage Type",
-            "ignoreArmor":                                          "Ignore Armor",
-            "jumpUpChoice":                                         "Chose the Ability to jump up",
-            "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
-            "mystical":                                             "Mystical Damage",
-            "physical":                                             "Physical Damage"
+            }
         },
         "Documents":
         {

@@ -84,7 +84,7 @@
                 "currentRecoveryTestsRecource":                     "Aktuell",
                 "dailyrecoveryTestsResource":                       "Täglich",
                 "deathThesholdShort":                               "Todesschwelle",
-                "maxWounds":                                        "MaxWunden",   
+                "maxWounds":                                        "Max Wunden",   
                 "mysticalArmor":                                    "Mystisch",
                 "mysticalDefense":                                  "Mystisch",
                 "physicalArmor":                                    "Körperlich",
@@ -92,7 +92,7 @@
                 "socialDefense":                                    "Sozial",
                 "unconsciousThresholdShort":                        "Bewußtlosigkeit",
                 "walkMovement":                                     "Zu Fuss",
-                "woundsDamage":                                     "Wounden",
+                "woundsDamage":                                     "Wunden",
                 "woundsThreshold":                                  "Wundschwelle"
             },
             "Conditions": {
@@ -356,26 +356,43 @@
                 "legendPoints":                                     "Legendenpunkte",
                 "description":                                      "Beschreibung"
             },
-            "Errors": {
-                "noLp":                                            "Keine Legendenpunkte angegeben!"
-            },
             "Buttons": {
                 "cancel":                                           "Abbrechen",
+                "nightRest":                                        "Vollständige Rast",
+                "noAbilityDex":                                     "Geschicklichkeit",
+                "noAbilityStr":                                     "Stärke",
                 "recoverStun":                                      "Betäubungsschaden Erholungsprobe",
                 "recovery":                                         "Erholungsprobe",
-                "nightRest":                                        "Vollständige Rast",
                 "takeDamage":                                       "Schaden nehmen"
-                },
+            },
             "damage":                                               "Schaden",
             "damageStandard":                                       "Tödlicher Schaden",
             "damageStun":                                           "Betäubungsschaden",
             "damageType":                                           "Schadensart",
+            "Errors": {
+                "noLp":                                            "Keine Legendenpunkte angegeben!"
+            },
+            "Header": {
+                "activeUser":                                       "Aktive Spieler",
+                "inactiveUser":                                     "Inaktive Spieler",
+                "actorsNoUserConfigured":                           "Nicht konfigurierte, zugewiesene Akteure"
+            },
             "ignoreArmor":                                          "Ignoriere Rüstung",
             "jumpUpChoice":                                         "Wähle die Fähigkeit um aufzuspringen",
             "knockDownChoice":                                      "Wähle die Fähigkeit um dem Niederschlag zu widerstehen",
             "mystical":                                             "Mystischer Schaden",
             "physical":                                             "Körperlicher Schaden",
+            "Navigator": {
+                "baseInput":                                        "Standard Optionem",
+                "options":                                          "Andere Optionen"
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
             "Title": {
+                "assignLp":                                         "Legendenpunkte zuweisen",
+                "jumpUp":                                           "Aufspringen",
+                "rollPrompt":                                       "Würfelübersicht",
                 "recovery":                                         "Erholungsprobe",
                 "takeDamage":                                       "Schaden nehmen"
             }
