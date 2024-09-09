@@ -35,32 +35,11 @@
         </div>
 
         <!-- GRID - Health -->
-        <div class="characteristics-health-header__grid-item">
-            <h4 class="header--centered">{{localize "ED.Actor.Header.healthRating"}}</h4>
-        </div>
-        <div class="characteristics-health-wound__grid-item">
-            <label class="">{{localize "ED.Actor.Characteristics.woundsThreshold"}}</label>
-            <div>
-            <input id="characteristic-health-rating-wounds" class="input__circle-input--centered"
-                name="system.characteristics.health.woundThreshold"
-                value="{{actor.system.characteristics.health.woundThreshold}}">
-                </div>
-        </div>
-        <div class="characteristics-health-unconscious__grid-item">
-            <label class="">{{localize "ED.Actor.Characteristics.unconsciousThresholdShort"}}</label>
-            <div>
-            <input id="characteristic-health-rating-unconscious" class="input__circle-input--centered"
-                name="system.characteristics.health.unconscious"
-                value="{{actor.system.characteristics.health.unconscious}}">
-                </div>
-        </div>
-        <div class="characteristics-health-death__grid-item">
-            <label class="">{{localize "ED.Actor.Characteristics.deathThesholdShort"}}</label>
-            <div>
-            <input id="characteristic-health-rating-death" class="input__circle-input--centered"
-                name="system.characteristics.health.death" value="{{actor.system.characteristics.health.death}}">
-                </div>
-        </div>
+        {{#if (eq this.data.type "character")}}
+            {{> "systems/ed4e/templates/actor/cards/health-character-card.hbs"}}
+        {{else}}
+            {{> "systems/ed4e/templates/actor/cards/health-none-character-card.hbs"}}
+        {{/if}}
 
         <!-- GRID - Armor -->
         <div class="characteristics-armor-header__grid-item">
@@ -96,44 +75,19 @@
         </div>
 
         <!-- GRID - Damage -->
-        <div class="characteristics-damage-header__grid-item">
-            <h4 class="header--centered">{{localize "ED.Actor.Header.damage"}}</h4>
-        </div>
-        <div class="characteristics-damage-damage__grid-item">
-            <label class="">{{localize "ED.Actor.Characteristics.currentDamage"}}</label>
-            <div>
-            <input id="characteristic-damage" class="input__circle-input--centered"
-                name="system.characteristics.health.damage.standard"
-                value="{{actor.system.characteristics.health.damage.standard}}"
-                title="{{localize "ED.Actor.Tooltips.damagePhysical"}}" editable>
-
-                <input id="characteristic-damage" class="input__circle-input--centered"
-                name="system.characteristics.health.damage.stun"
-                value="{{actor.system.characteristics.health.damage.stun}}"
-                title="{{localize "ED.Actor.Tooltips.damageSubdual"}}"
-                editable>
-                <input id="characteristic-damage" class="input__circle-input--centered"
-                name="system.characteristics.health.damage.total"
-                value="{{actor.system.characteristics.health.damage.total}}"
-                title="{{localize "ED.Actor.Tooltips.damageSubdual"}}: {{actor.system.characteristics.health.damage.stun}} / {{localize "ED.Actor.Tooltips.damagePhysical"}}: {{actor.system.characteristics.health.damage.total}}" readonly>
-                </div>
-
-        </div>
-        <div class="characteristics-damage-wounds__grid-item">
-            <label class="">{{localize "ED.Actor.Characteristics.woundsDamage"}}</label>
-            <div>
-            <input id="characteristic-wounds" class="input__circle-input--centered"
-                name="system.characteristics.health.wounds" value="{{actor.system.characteristics.health.wounds}}" editable>
-                </div>
-        </div>
+        {{#if (eq this.data.type "character")}}
+            {{> "systems/ed4e/templates/actor/cards/damage-character-card.hbs"}}
+        {{else}}
+            {{> "systems/ed4e/templates/actor/cards/damage-none-character-card.hbs"}}
+        {{/if}}
 
         <!-- GRID - Recovery -->
         <div class="characteristics-recovery-header__grid-item">
             <h4 class="header--centered">{{localize "ED.Actor.Header.recovery"}}</h4>
         </div>
         <div class="characteristics-recovery__grid-item">
-            <label class="">{{localize "ED.Actor.Characteristics.currentRecoveryTests"}}/{{localize
-                "ED.Actor.Characteristics.dailyRecoveryTests"}}</label>
+            <label class="">{{localize "ED.Actor.Characteristics.currentRecoveryTestsRecource"}}/{{localize
+                "ED.Actor.Characteristics.dailyrecoveryTestsResource"}}</label>
             <div>
                 <input id="characteristic-recovery-current" class="input__circle-input--centered"
                     name="system.characteristics.recoveryTestsResource.value"
@@ -272,9 +226,9 @@
                 <a class="fas fa-medkit" title="take a rest"></a>
             </h4>
             <div class="input--centered">
-                <label class="">{{localize "ED.Actor.Characteristics.currentRecoveryTests"}}
+                <label class="">{{localize "ED.Actor.Characteristics.currentRecoveryTestsRecource"}}
                 </label>
-                <label class="">{{localize "ED.Actor.Characteristics.dailyRecoveryTests"}}</label>
+                <label class="">{{localize "ED.Actor.Characteristics.dailyRecoveryTestsRecource"}}</label>
             </div>
             <div class="input--centered ">
                 <input id="characteristic-recovery-current" class="input__circle-input--centered"
@@ -420,9 +374,9 @@
                     <a class="fas fa-medkit" title="take a rest"></a>
                 </h4>
                 <div class="input--centered">
-                    <label class="">{{localize "ED.Actor.Characteristics.currentRecoveryTests"}}
+                    <label class="">{{localize "ED.Actor.Characteristics.currentRecoveryTestsRecource"}}
                     </label>
-                    <label class="">{{localize "ED.Actor.Characteristics.dailyRecoveryTests"}}</label>
+                    <label class="">{{localize "ED.Actor.Characteristics.dailyRecoveryTestsRecource"}}</label>
                 </div>
                 <div class="input--centered ">
                     <input id="characteristic-recovery-current" class="input__circle-input--centered"

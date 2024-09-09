@@ -17,9 +17,17 @@ export default class NpcData extends NamegiverTemplate.mixin(
 
     /** @inheritDoc */
     static defineSchema() {
-        const superSchema = super.defineSchema();
-        return superSchema;
+        const fields = foundry.data.fields;
+        return this.mergeSchema( super.defineSchema(), {
+           mobRules: new fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Actor.Configuration.mobRules"
+              } ),
+        } );
     }
+
+    static LOCALIZATION_PREFIXES = ["ED.Actor"];
 
     /* -------------------------------------------- */
     /*  Data Preparation                            */

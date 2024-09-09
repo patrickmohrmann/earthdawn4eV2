@@ -122,11 +122,18 @@
                 "max":                                              "Max",
                 "step":                                             "Step"   
             },
+            "FIELDS": {
+                "mobRules":{
+                    "label":                                        "Mob Rules",
+                    "hint":                                         "Use Mob rues instead of damage"
+                }
+            },
             "Header": {
                 "action":                                           "Action",
-                "active":                                           "Active",
+                "active":                                           "Active", 
                 "amount":                                           "Amount",
                 "armor":                                            "Armor",
+                "attacks":                                          "Attacks", 
                 "attribute":                                        "Attribute",
                 "attributes":                                       "Attributes",
                 "carryingCapacity":                                 "Carrying Capacity",
@@ -142,6 +149,7 @@
                 "encumbrance":                                      "Encumbrance",
                 "equipment":                                        "Equipment",
                 "equippedStatus":                                   "Equipped",
+                "extraSuccesses":                                   "Extra Successes",
                 "healthRating":                                     "Health Rating",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Penalty",
@@ -151,6 +159,7 @@
                 "legendSpend":                                      "LP Spend",
                 "legendStatus":                                     "Legend Status",
                 "legendTotal":                                      "LP Total",
+                "maneuvers":                                        "Maneuvers",
                 "movement":                                         "Movement",
                 "mysticalArmor":                                    "Mystical Armor",     
                 "mysticalDefense":                                  "Mystical Defense",
@@ -160,6 +169,7 @@
                 "paths":                                            "Path",
                 "physicalArmor":                                    "Physical Armor",
                 "physicalDefense":                                  "Physical Defense", 
+                "powers":                                           "Powers",
                 "questor":                                          "Questor",                    
                 "rank":                                             "Rank", 
                 "recovery":                                         "Recovery",
@@ -183,11 +193,13 @@
             },
             "Navigator": {
                 "classes":                                          "Vocation",
+                "configuration":                                    "Konfiguration",
                 "devotions":                                        "Devotions",
                 "equipment":                                        "Equipment",
                 "general":                                          "General",
                 "information":                                      "Information",
                 "legend":                                           "Legend",
+                "power":                                            "Powers",
                 "reputation":                                       "Reputation",
                 "skills":                                           "skills",
                 "specials":                                         "Specials",
@@ -378,6 +390,19 @@
             "knockDownChoice":                                      "Chose the Ability to withstand the Knock Down",
             "mystical":                                             "Mystical Damage",
             "physical":                                             "Physical Damage"
+        },
+        "Documents":
+        {
+            "ActorSheetEdCharacter":                                "Character-sheet",
+            "ActorSheetEdCreature":                                 "Creature-sheet",
+            "ActorSheetEdDragon":                                   "Dragon-sheet",
+            "ActorSheetEdGroup":                                    "Group-sheet",
+            "ActorSheetEdHorror":                                   "Horror-sheet",
+            "ActorSheetEdLoot":                                     "Loot-sheet",
+            "ActorSheetEdNpc":                                      "NPC-sheet",
+            "ActorSheetEdSpirit":                                   "Spirit-sheet",
+            "ActorSheetEdTrap":                                     "Trap-sheet",
+            "ActorSheetEdVehicle":                                  "Vehicle-sheet"
         },
         "Item": {
             "Ability": {

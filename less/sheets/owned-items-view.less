@@ -26,9 +26,11 @@
 
 .ability-icon,
 .equipment-icon,
+.power-icon,
 .effect-icon, 
 .item__image--visible,
-.equipment-icon__visible {
+.equipment-icon__visible,
+.power-icon__visible {
     width: 25px;
     height: 25px;
     border: none;
@@ -81,15 +83,38 @@
         75px // Attribute
         75px // Control Icons
     ;
-    // highlighting the equiped items.
-//     .equipment-card__grid--item:has(+ div) {
-//         background-color: brown;
-//         :has(div .item__highlighted) {
-//         background-color: aqua;
-//     }
-// }
 
     .equipment-card__grid--item {
+        .roll-icon__hover,
+        .roll-icon__pointer {
+            display: none;
+        }
+
+        
+    }
+
+    .itemControlGroup {
+        float:none;
+    }
+}
+
+.power-card__grid--container {
+    align-items: center;
+    display: grid;
+    height: 30px;
+    grid-template-columns:
+        // 790 px available
+        40px // Icon
+        280px // Name
+        100px // Action
+        100px // powerStep | extraSuccesses
+        75px // damageStep
+        75px // Strain
+        100px // Control Icons
+    ;
+
+    .power-card__grid--item,
+    .maneuver-card__grid--item {
         .roll-icon__hover,
         .roll-icon__pointer {
             display: none;
@@ -128,7 +153,9 @@
 .roll-icon__hover-fixed,
 .roll-icon__pointer,
 .ability-icon,
-.attribute-icon, 
+.attribute-icon,
+.power-icon,
+.power-icon__visible 
 .equipment-icon,
 .equipment-icon__visible {
     border: none;
@@ -138,6 +165,8 @@
 
 .ability-card__grid--item.icons__dice:hover+div,
 .attribute-card__grid--item.icons__dice:hover+div,
+.power-card__grid--item.icons__dice:hover+div,
+.maneuver-card__grid--item.icons__dice:hover+div,
 .equipment-card__grid--item.icons__dice:hover+div {
     cursor: pointer;
     color: #000;
@@ -147,6 +176,7 @@
 
 .ability-card__grid--container:hover,
 .attribute-card__grid--container:hover,
+.power-card__grid--container:hover,
 .equipment-card__grid--container:hover {
     .icons__dice img{
         box-shadow: 0 0 10px red;
@@ -155,6 +185,7 @@
     }
     .roll-icon__hover,
     .attribute-icon,
+    .power-icon,
     .equipment-icon {
         margin-top: -4px;
         display: block;
@@ -181,13 +212,16 @@
     }
 
     .ability-icon,
-    .equipment-icon {
+    .equipment-icon,
+    .power-icon {
         display: none;
     }
 
     .ability-card__grid--item:hover,
     .attribute-card__grid--item:hover,
-    .equipment-card__grid--item:hover {
+    .equipment-card__grid--item:hover,
+    .maneuver-card__grid--item:hover,
+    .power-card__grid--item:hover {
         .roll-icon__pointer {
             display: block;
             margin-top: -4px;
@@ -195,7 +229,8 @@
 
         .attribute-icon,
         .ability-icon,
-        .equipment-icon {
+        .equipment-icon,
+        .power-icon {
             display: none;
         }
 

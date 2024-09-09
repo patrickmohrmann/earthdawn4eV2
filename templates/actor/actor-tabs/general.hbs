@@ -11,7 +11,7 @@
             <div class="attribute-card__grid--item">
                 <label>{{localize "ED.Actor.Attributes.attributeName"}}</label>
             </div>
-            {{#if (eq this.type "pc")}}
+            {{#if (eq this.data.type "character")}}
             <div class="attribute-card__grid--item">
                 <label>
                     {{localize "ED.Actor.Attributes.attributeValue"}}
@@ -29,7 +29,7 @@
                 </label>
             </div>
         </div>
-        {{#if (eq this.type "pc")}}
+        {{#if (eq this.data.type "character")}}
         {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
         {{else}}
         {{> "systems/ed4e/templates/actor/cards/attributes-none-pc-card.hbs"}}

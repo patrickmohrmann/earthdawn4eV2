@@ -44,11 +44,13 @@ export default function () {
         Actors.unregisterSheet( "core", ActorSheet );
         Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
             types: ["character"],
-            makeDefault: true
+            makeDefault: true,
+            label: "ED.Documents.ActorSheetEdCharacter"
         } );
         Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdNpc, {
             types: ["npc"],
-            makeDefault: true
+            makeDefault: true,
+            label: "ED.Documents.ActorSheetEdNpc"
         } );
         Items.unregisterSheet( "core", ItemSheet );
         Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {

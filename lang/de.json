@@ -121,11 +121,18 @@
                 "max":                                              "Max",
                 "step":                                             "Stufe"   
             },
+            "FIELDS": {
+                "mobRules":{
+                    "label":                                        "Mob Regeln",
+                    "hint":                                         "Benutze Wunden anstatt Schaden"
+                }
+            },
             "Header": {
                 "action":                                           "Aktion",
                 "active":                                           "Aktiv",
                 "amount":                                           "Menge",
                 "armor":                                            "Rüstung",
+                "attacks":                                          "Angriffe",
                 "attribute":                                        "Attribut",
                 "attributes":                                       "Attribute",
                 "carryingCapacity":                                 "Tragkraft",
@@ -141,6 +148,7 @@
                 "encumbrance":                                      "Belastung",
                 "equipment":                                        "Ausrüstung",
                 "equippedStatus":                                   "Ausgerüstet",
+                "extraSuccesses":                                   "Zusätzliche Erfolge",
                 "healthRating":                                     "Gesundheit",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Malus",
@@ -150,6 +158,7 @@
                 "legendSpend":                                      "LP Ausgegeben",
                 "legendStatus":                                     "Legenden Status",
                 "legendTotal":                                      "LP Total",
+                "maneuvers":                                        "Manöver",
                 "movement":                                         "Bewegung",
                 "mysticalArmor":                                    "Mystische Rüstung",     
                 "mysticalDefense":                                  "Mystische Verteidigung",   
@@ -159,6 +168,7 @@
                 "paths":                                            "Pfade",
                 "physicalArmor":                                    "Physische Rüstung",
                 "physicalDefense":                                  "Körperliche Verteidigung", 
+                "powers":                                           "Kräfte",
                 "questor":                                          "Questor",
                 "rank":                                             "Rang", 
                 "recovery":                                         "Erholung",
@@ -182,11 +192,13 @@
             },
             "Navigator": {
                 "classes":                                          "Berufung",
+                "configuration":                                    "Konfiguration",
                 "devotions":                                        "Weihekräfte",
                 "equipment":                                        "Ausrüstung",
                 "general":                                          "Allgemein",
                 "information":                                      "Informationen",
                 "legend":                                           "Legende",
+                "power":                                            "Kräfte",
                 "reputation":                                       "Ruf",
                 "skills":                                           "Fertigkeiten",
                 "specials":                                         "Besonders",
@@ -363,6 +375,19 @@
                 "recovery":                                         "Erholungsprobe",
                 "takeDamage":                                       "Schaden nehmen"
             }
+        },
+        "Documents":
+        {
+            "ActorSheetEdCharacter":                                "Charakterbogen",
+            "ActorSheetEdCreature":                                 "Kreaturen-Bogen",
+            "ActorSheetEdDragon":                                   "Drachen-Bogen",
+            "ActorSheetEdGroup":                                    "Gruppen-Bogen",
+            "ActorSheetEdHorror":                                   "Dämonen-Bogen",
+            "ActorSheetEdLoot":                                     "Schatz-Bogen",
+            "ActorSheetEdNpc":                                      "NSC-Bogen",
+            "ActorSheetEdSpirit":                                   "Geister-Bogen",
+            "ActorSheetEdTrap":                                     "Fallen-Bogen",
+            "ActorSheetEdVehicle":                                  "Transportmittel-Bogen"
         },
         "Item": {
             "Ability": {

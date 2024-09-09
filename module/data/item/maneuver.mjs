@@ -1,11 +1,11 @@
-import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import NoneNamegiverPowerData from "./templates/none-namegiver-power.mjs";
 
 /**
  * Data model template with information on Maneuver items.
  * @property {number} extraSuccesses        extra successes to trigger the maneuver
  */
-export default class ManeuverData extends SystemDataModel.mixin(
+export default class ManeuverData extends NoneNamegiverPowerData.mixin(
     ItemDescriptionTemplate
 ) {
 

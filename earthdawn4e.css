@@ -156,9 +156,87 @@ p {
 .chat-message {
   background-image: url('assets/sheet/background.png');
 }
-
-.app.window-app.form.earthdawn4e .roll-prompt header,
-.assign-legend header {
+.chat-message .message-sender {
+  font-size: larger;
+  padding-top: 12px;
+  padding-left: 5px;
+}
+.chat-message .message-metadata {
+  padding-top: 12px;
+}
+.chat-message .message-metadata .message-delete {
+  font-size: larger;
+}
+.chat-message img.avatar {
+  border: none;
+  object-fit: scale-down;
+  max-height: 40px;
+}
+.chat-message .custom-flavor {
+  margin: 0.5em 0;
+  font-size: medium;
+}
+.chat-message .roll-successes {
+  margin: 0.5em 0;
+  text-align: center;
+  font-size: large;
+}
+.chat-message .modifier-lists {
+  margin-bottom: 5px;
+  padding: 0 0.3em;
+  font-size: medium;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+}
+.chat-message .modifier-lists li {
+  text-transform: capitalize;
+}
+.chat-message .dice-formula {
+  word-break: unset;
+}
+.chat-message .dice-total.roll-success {
+  background-color: darkseagreen;
+}
+.chat-message .dice-total.roll-failure {
+  background-color: indianred;
+}
+.chat-message .roll-failure {
+  background-color: indianred;
+  color: black;
+  font-size: large;
+  padding-top: 5px;
+  text-align: center;
+}
+.chat-message .message-buttons {
+  margin: 1em 0;
+}
+.chat-message .message-buttons.flexrow button:first-child {
+  margin-left: 0;
+}
+.chat-message .message-buttons.flexrow button:last-child {
+  margin-right: 0;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .navigator-section {
+  position: relative;
+  z-index: 5;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column label {
+  display: block;
+  height: max-content;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header,
+.app.window-app.form.earthdawn4e.assign-legend header {
   position: relative;
   z-index: 3;
   border: none;
@@ -259,94 +337,6 @@ p {
   content: "\a";
   white-space: pre;
 }
-.body .actor-section__top {
-  height: 158px;
-}
-.chat-message .message-sender {
-  font-size: larger;
-  padding-top: 12px;
-  padding-left: 5px;
-}
-.chat-message .message-metadata {
-  padding-top: 12px;
-}
-.chat-message .message-metadata .message-delete {
-  font-size: larger;
-}
-.chat-message img.avatar {
-  border: none;
-  object-fit: scale-down;
-  max-height: 40px;
-}
-.chat-message .custom-flavor {
-  margin: 0.5em 0;
-  font-size: medium;
-}
-.chat-message .roll-successes {
-  margin: 0.5em 0;
-  text-align: center;
-  font-size: large;
-}
-.chat-message .modifier-lists {
-  margin-bottom: 5px;
-  padding: 0 0.3em;
-  font-size: medium;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-border-light-2);
-  border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
-}
-.chat-message .modifier-lists li {
-  text-transform: capitalize;
-}
-.chat-message .dice-formula {
-  word-break: unset;
-}
-.chat-message .dice-total.roll-success {
-  background-color: darkseagreen;
-}
-.chat-message .dice-total.roll-failure {
-  background-color: indianred;
-}
-.chat-message .roll-failure {
-  background-color: indianred;
-  color: black;
-  font-size: large;
-  padding-top: 5px;
-  text-align: center;
-}
-.chat-message .message-buttons {
-  margin: 1em 0;
-}
-.chat-message .message-buttons.flexrow button:first-child {
-  margin-left: 0;
-}
-.chat-message .message-buttons.flexrow button:last-child {
-  margin-right: 0;
-}
-.action--buttons .buttons--left {
-  margin-left: 45px;
-  margin-right: 25px;
-  float: left;
-  width: 40%;
-}
-.action--buttons .buttons--right {
-  float: right;
-  width: 40%;
-  margin-left: 25px;
-  margin-right: 45px;
-}
-.legend-point__history--earned {
-  height: 26px;
-  line-height: 22px;
-}
-.body .item-section__top {
-  height: 158px;
-}
-.body .item-section__top img {
-  width: 158px;
-  border: none;
-}
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
   background-size: cover;
@@ -420,13 +410,13 @@ p {
 .app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-header__grid-item {
   grid-area: healthHeader;
 }
-.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-wound__grid-item {
+.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-1__grid-item {
   grid-area: healthWound;
 }
-.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-unconscious__grid-item {
+.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-2__grid-item {
   grid-area: healthUnconscious;
 }
-.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-death__grid-item {
+.app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-health-3__grid-item {
   grid-area: healthDeath;
 }
 .app.window-app.earthdawn4e.sheet .window-content .body .top .characteristics-armor-header__grid-item {
@@ -492,6 +482,17 @@ p {
   min-height: 350px;
   max-height: 100%;
 }
+.app.window-app.earthdawn4e.sheet .window-content .body .main .form-group label {
+  float: left;
+  width: 40%;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .main .form-group .form-fields {
+  float: right;
+  width: 60%;
+}
+.app.window-app.earthdawn4e.sheet .window-content .body .main .form-group .hint {
+  font-size: smaller;
+}
 .app.window-app.earthdawn4e.sheet .window-content .footer__frame {
   position: absolute;
   transform: rotate(180deg);
@@ -517,9 +518,11 @@ p {
 }
 .ability-icon,
 .equipment-icon,
+.power-icon,
 .effect-icon,
 .item__image--visible,
-.equipment-icon__visible {
+.equipment-icon__visible,
+.power-icon__visible {
   width: 25px;
   height: 25px;
   border: none;
@@ -555,6 +558,21 @@ p {
 .equipment-card__grid--container .itemControlGroup {
   float: none;
 }
+.power-card__grid--container {
+  align-items: center;
+  display: grid;
+  height: 30px;
+  grid-template-columns: 40px 280px 100px 100px 75px 75px 100px;
+}
+.power-card__grid--container .power-card__grid--item .roll-icon__hover,
+.power-card__grid--container .maneuver-card__grid--item .roll-icon__hover,
+.power-card__grid--container .power-card__grid--item .roll-icon__pointer,
+.power-card__grid--container .maneuver-card__grid--item .roll-icon__pointer {
+  display: none;
+}
+.power-card__grid--container .itemControlGroup {
+  float: none;
+}
 .effect-card__grid--container {
   align-items: center;
   height: 30px;
@@ -570,13 +588,16 @@ p {
 .roll-icon__pointer,
 .ability-icon,
 .attribute-icon,
-.equipment-icon,
+.power-icon,
+.power-icon__visible .equipment-icon,
 .equipment-icon__visible {
   border: none;
   display: block;
 }
 .ability-card__grid--item.icons__dice:hover + div,
 .attribute-card__grid--item.icons__dice:hover + div,
+.power-card__grid--item.icons__dice:hover + div,
+.maneuver-card__grid--item.icons__dice:hover + div,
 .equipment-card__grid--item.icons__dice:hover + div {
   cursor: pointer;
   color: #000;
@@ -584,6 +605,7 @@ p {
 }
 .ability-card__grid--container:hover .icons__dice img,
 .attribute-card__grid--container:hover .icons__dice img,
+.power-card__grid--container:hover .icons__dice img,
 .equipment-card__grid--container:hover .icons__dice img {
   box-shadow: 0 0 10px red;
   border-radius: 50%;
@@ -591,12 +613,19 @@ p {
 }
 .ability-card__grid--container:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .roll-icon__hover,
+.power-card__grid--container:hover .roll-icon__hover,
 .equipment-card__grid--container:hover .roll-icon__hover,
 .ability-card__grid--container:hover .attribute-icon,
 .attribute-card__grid--container:hover .attribute-icon,
+.power-card__grid--container:hover .attribute-icon,
 .equipment-card__grid--container:hover .attribute-icon,
+.ability-card__grid--container:hover .power-icon,
+.attribute-card__grid--container:hover .power-icon,
+.power-card__grid--container:hover .power-icon,
+.equipment-card__grid--container:hover .power-icon,
 .ability-card__grid--container:hover .equipment-icon,
 .attribute-card__grid--container:hover .equipment-icon,
+.power-card__grid--container:hover .equipment-icon,
 .equipment-card__grid--container:hover .equipment-icon {
   margin-top: -4px;
   display: block;
@@ -615,6 +644,7 @@ p {
 }
 .ability-card__grid--container:hover .roll-icon__hover-fixed,
 .attribute-card__grid--container:hover .roll-icon__hover-fixed,
+.power-card__grid--container:hover .roll-icon__hover-fixed,
 .equipment-card__grid--container:hover .roll-icon__hover-fixed {
   margin-top: -4px;
   display: block;
@@ -622,71 +652,163 @@ p {
 }
 .ability-card__grid--container:hover .ability-icon,
 .attribute-card__grid--container:hover .ability-icon,
+.power-card__grid--container:hover .ability-icon,
 .equipment-card__grid--container:hover .ability-icon,
 .ability-card__grid--container:hover .equipment-icon,
 .attribute-card__grid--container:hover .equipment-icon,
-.equipment-card__grid--container:hover .equipment-icon {
+.power-card__grid--container:hover .equipment-icon,
+.equipment-card__grid--container:hover .equipment-icon,
+.ability-card__grid--container:hover .power-icon,
+.attribute-card__grid--container:hover .power-icon,
+.power-card__grid--container:hover .power-icon,
+.equipment-card__grid--container:hover .power-icon {
   display: none;
 }
 .ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer,
+.power-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer,
 .equipment-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__pointer,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer,
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__pointer,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__pointer,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__pointer,
-.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__pointer {
+.power-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__pointer,
+.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__pointer,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__pointer,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__pointer,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__pointer,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__pointer,
+.ability-card__grid--container:hover .power-card__grid--item:hover .roll-icon__pointer,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .roll-icon__pointer,
+.power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__pointer,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .roll-icon__pointer {
   display: block;
   margin-top: -4px;
 }
 .ability-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
+.power-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
 .equipment-card__grid--container:hover .ability-card__grid--item:hover .attribute-icon,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .attribute-icon,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .attribute-icon,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .attribute-icon,
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .attribute-icon,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .attribute-icon,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .attribute-icon,
+.power-card__grid--container:hover .equipment-card__grid--item:hover .attribute-icon,
 .equipment-card__grid--container:hover .equipment-card__grid--item:hover .attribute-icon,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .attribute-icon,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .attribute-icon,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .attribute-icon,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .attribute-icon,
+.ability-card__grid--container:hover .power-card__grid--item:hover .attribute-icon,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .attribute-icon,
+.power-card__grid--container:hover .power-card__grid--item:hover .attribute-icon,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .attribute-icon,
 .ability-card__grid--container:hover .ability-card__grid--item:hover .ability-icon,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .ability-icon,
+.power-card__grid--container:hover .ability-card__grid--item:hover .ability-icon,
 .equipment-card__grid--container:hover .ability-card__grid--item:hover .ability-icon,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .ability-icon,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .ability-icon,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .ability-icon,
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .ability-icon,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .ability-icon,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .ability-icon,
+.power-card__grid--container:hover .equipment-card__grid--item:hover .ability-icon,
 .equipment-card__grid--container:hover .equipment-card__grid--item:hover .ability-icon,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .ability-icon,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .ability-icon,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .ability-icon,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .ability-icon,
+.ability-card__grid--container:hover .power-card__grid--item:hover .ability-icon,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .ability-icon,
+.power-card__grid--container:hover .power-card__grid--item:hover .ability-icon,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .ability-icon,
 .ability-card__grid--container:hover .ability-card__grid--item:hover .equipment-icon,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .equipment-icon,
+.power-card__grid--container:hover .ability-card__grid--item:hover .equipment-icon,
 .equipment-card__grid--container:hover .ability-card__grid--item:hover .equipment-icon,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .equipment-icon,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .equipment-icon,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .equipment-icon,
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .equipment-icon,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .equipment-icon,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .equipment-icon,
-.equipment-card__grid--container:hover .equipment-card__grid--item:hover .equipment-icon {
+.power-card__grid--container:hover .equipment-card__grid--item:hover .equipment-icon,
+.equipment-card__grid--container:hover .equipment-card__grid--item:hover .equipment-icon,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .equipment-icon,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .equipment-icon,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .equipment-icon,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .equipment-icon,
+.ability-card__grid--container:hover .power-card__grid--item:hover .equipment-icon,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .equipment-icon,
+.power-card__grid--container:hover .power-card__grid--item:hover .equipment-icon,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .equipment-icon,
+.ability-card__grid--container:hover .ability-card__grid--item:hover .power-icon,
+.attribute-card__grid--container:hover .ability-card__grid--item:hover .power-icon,
+.power-card__grid--container:hover .ability-card__grid--item:hover .power-icon,
+.equipment-card__grid--container:hover .ability-card__grid--item:hover .power-icon,
+.ability-card__grid--container:hover .attribute-card__grid--item:hover .power-icon,
+.attribute-card__grid--container:hover .attribute-card__grid--item:hover .power-icon,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .power-icon,
+.equipment-card__grid--container:hover .attribute-card__grid--item:hover .power-icon,
+.ability-card__grid--container:hover .equipment-card__grid--item:hover .power-icon,
+.attribute-card__grid--container:hover .equipment-card__grid--item:hover .power-icon,
+.power-card__grid--container:hover .equipment-card__grid--item:hover .power-icon,
+.equipment-card__grid--container:hover .equipment-card__grid--item:hover .power-icon,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .power-icon,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .power-icon,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .power-icon,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .power-icon,
+.ability-card__grid--container:hover .power-card__grid--item:hover .power-icon,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .power-icon,
+.power-card__grid--container:hover .power-card__grid--item:hover .power-icon,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .power-icon {
   display: none;
 }
 .ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
+.power-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
 .equipment-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
+.power-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
 .equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover,
+.ability-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover,
+.power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover,
 .ability-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
 .attribute-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
+.power-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
 .equipment-card__grid--container:hover .ability-card__grid--item:hover .roll-icon__hover-fixed,
 .ability-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
 .attribute-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
+.power-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
 .equipment-card__grid--container:hover .attribute-card__grid--item:hover .roll-icon__hover-fixed,
 .ability-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed,
 .attribute-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed,
-.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed {
+.power-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .equipment-card__grid--item:hover .roll-icon__hover-fixed,
+.ability-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover-fixed,
+.attribute-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover-fixed,
+.power-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .maneuver-card__grid--item:hover .roll-icon__hover-fixed,
+.ability-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover-fixed,
+.attribute-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover-fixed,
+.power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover-fixed,
+.equipment-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hover-fixed {
   display: none;
 }
 .card__description--toggle {
@@ -783,14 +905,15 @@ p {
 }
 .action--buttons .buttons--left {
   margin-left: 45px;
-  margin-right: 50px;
+  margin-right: 25px;
   float: left;
   width: 40%;
 }
 .action--buttons .buttons--right {
-  float: left;
+  float: right;
   width: 40%;
-  margin-right: 50px;
+  margin-left: 25px;
+  margin-right: 45px;
 }
 .legend-point__history--earned {
   height: 26px;
