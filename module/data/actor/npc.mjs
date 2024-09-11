@@ -1,3 +1,4 @@
+import ChallengeFields from "./templates/challenge.mjs";
 import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 
@@ -24,15 +25,16 @@ export default class NpcData extends NamegiverTemplate.mixin(
                 initial: false,
                 label: "ED.Actor.Configuration.mobRules"
             } ),
-            // characteristics: new fields.SchemaField( {
-            //     health: new fields.SchemaField( {
+            characteristics: new fields.SchemaField( {
+                health: new fields.SchemaField( {
                     maxWounds: new fields.NumberField( {
                         required: true,
                         initial: 0,
                         label: "ED.Actor.Configuration.maxWounds"
                     } ),
-            //     } )
-            // } )
+                } )
+            } ),
+            ...ChallengeFields.challenge
         } );
     }
 

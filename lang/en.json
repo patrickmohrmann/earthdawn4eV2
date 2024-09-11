@@ -271,6 +271,23 @@
             }
         },
         "Config": {
+            "Challenge": {
+                "circle1":                                          "Novice (First Circle)",
+                "circle2":                                          "Novice (Second Circle)",
+                "circle3":                                          "Novice (Third Circle)",
+                "circle4":                                          "Novice (Fourth Circle)",
+                "circle5":                                          "Journeyman (Fifth Circle)",
+                "circle6":                                          "Journeyman (Sixth Circle)",
+                "circle7":                                          "Journeyman (Seventh Circle)",
+                "circle8":                                          "Journeyman (Eighth Circle)",
+                "circle9":                                          "Warden (Ninth Circle)",
+                "circle10":                                         "Warden (Tenth Circle)",
+                "circle11":                                         "Warden (Eleventh Circle)",
+                "circle12":                                         "Warden (Twelfth Circle)",
+                "circle13":                                         "Master (Thirteenth Circle)",
+                "circle14":                                         "Master (Fourteenth Circle)",
+                "circle15":                                         "Master (Fifteenth Circle)"
+            },
             "CombatTypes": {
                 "aerial":                                           "Aerial Combat",
                 "close":                                            "Close Combat",
