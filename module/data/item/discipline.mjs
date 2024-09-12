@@ -309,7 +309,8 @@ export default class DisciplineData extends ClassTemplate.mixin(
     }
 
     const disciplineItemData = item.toObject();
-    disciplineItemData.system.level = 1;
+    disciplineItemData.system.level = 0;
+    disciplineItemData.system.order = actor.disciplines.length + 1;
     mergeObject(
       disciplineItemData,
       expandObject( createData ),
