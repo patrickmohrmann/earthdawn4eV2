@@ -320,7 +320,7 @@ export default class DisciplineData extends ClassTemplate.mixin(
 
     const learnedDiscipline = ( await actor.createEmbeddedDocuments( "Item", [ disciplineItemData ] ) )?.[0];
     if ( !learnedDiscipline ) throw new Error(
-      "Error learning questor item. Could not create embedded Items."
+      "Error learning discipline item. Could not create embedded Items."
     );
 
     learnedDiscipline.system.increase();
