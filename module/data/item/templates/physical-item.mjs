@@ -96,6 +96,32 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
                 integer: true,
                 label: "ED.Item.General.bloodMagicDamage"
             } ),
+
+            characterGeneration: new fields.SchemaField( {
+                available: new fields.BooleanField( {
+                    required: false,
+                    initial: false,
+                    label: "CharacterGeneration.available",
+                } ),
+                artisanTool: new fields.BooleanField( {
+                    required: false,
+                    initial: false,
+                    label: "CharacterGeneration.artisanTool"
+                } ),
+                clothSet: new fields.BooleanField( {
+                    required: false,
+                    initial: false,
+                    label: "CharacterGeneration.clothSet"
+                } ),
+                weapon: new fields.BooleanField( {
+                    required: false,
+                    initial: false,
+                    label: "CharacterGeneration.weapon"
+                } ),
+            },
+            {
+                label: "CharacterGeneration.label"
+            } ),
             usableItem: new fields.SchemaField( {
                   usableItemSelector: new fields.BooleanField( {
                       required: true,
@@ -138,6 +164,8 @@ export default class PhysicalItemTemplate extends SystemDataModel.mixin(
             } )
         } );
     }
+
+    static LOCALIZATION_PREFIXES = ["ED.Item.PhysicalItems"];
 
     /* -------------------------------------------- */
     /*  Migrations                                  */

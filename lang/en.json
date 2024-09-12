@@ -408,6 +408,19 @@
                 "details":                                          "Details",
                 "effects":                                          "Effects",
                 "general":                                          "General"
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Enter your description here"
+            },
+            "PhysicalItems": {
+                "characterGenerationItem": {
+                    "label":                                        "Relvant for Character Generation",
+                    "hint":                                         "This item is available for the character generation"
+                }                        
+            },
+            "Title": {
+                "assignLp":                                         "Assign Legend Points",
+                "rollPrompt":                                       "Roll Options"
             }
         },
         "Languages": {

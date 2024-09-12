@@ -63,6 +63,16 @@
       "flags": {}
     },
     {
+      "name": "basic-items",
+      "label": "basic-items",
+      "system": "ed4e",
+      "path": "systems/ed4e/packs/basic-items.db",
+      "type": "Item",
+      "banner": "systems/ed4e/assets/foundry/earthdawn-logo.png",
+      "private": false,
+      "flags": {}
+    },
+    {
       "name": "macros",
       "label": "macros",
       "system": "ed4e",
@@ -82,6 +92,7 @@
         "manual-english",
         "manual-german",
         "tour-items",
+        "basic-items",
         "macros"
       ]
     }

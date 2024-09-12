@@ -3,4 +3,60 @@
   <div>
     übersicht über standard equipment und das wars.
   </div>
+  <H3>Artisan Tools (choose one)</H3>
+  <div>
+    {{#each this.equipmentItems}}
+      {{#if (eq this.system.characterGeneration.artisanTool true)}}
+      <div class="equipment-item">
+        <input type="radio" id="{{this.id}}" name="selectedEquipment" value="{{this.name}}">
+        <label for="{{this.name}}">
+          {{this.name}}
+          {{!-- : {{this.system.description.value}} --}}
+        </label>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+  <H3>Clothes (choose one)</H3>
+  <div>
+    {{#each this.equipmentItems}}
+    {{log this}}
+      {{#if (eq this.system.characterGeneration.clothSet true)}}
+      <div class="equipment-item">
+        <input type="radio" id="{{this.id}}" name="selectedEquipment" value="{{this.name}}">
+        <label for="{{this.name}}">
+          {{this.name}}
+          {{!-- : {{this.system.description.value}} --}}
+        </label>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+  <H3>Weapons (choose one)</H3>
+  <div>
+    {{#each this.weaponItems}}
+      {{#if (eq this.system.characterGeneration.weapon true)}}
+      <div class="equipment-item">
+        <input type="radio" id="{{this.id}}" name="selectedEquipment" value="{{this.name}}">
+        <label for="{{this.name}}">
+          {{this.name}}
+          {{!-- : {{this.system.description.value}} --}}
+        </label>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+  <H3>Rest (choose all you like)</H3>
+  <div>
+    {{#each this.equipmentItems}}
+    {{#if (eq this.system.characterGeneration.clothSet false)}}
+    {{#if (eq this.system.characterGeneration.artisanTool false)}}
+    <div class="equipment-item">
+          <input type="checkbox" id="{{this.name}}" name="selectedEquipment" value="{{this.name}}" checked>
+            {{this.name}}
+            </div>
+    {{/if}}
+    {{/if}}
+    {{/each}}
+  </div>
 </div>

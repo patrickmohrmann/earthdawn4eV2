@@ -375,7 +375,6 @@
                 "rollType":                                         "Aktionstyp",
                 "substitute":                                       "Ersetzt Stärke",
                 "relatedRollType":                                  "gilt für Aktionstyp"
-
             },
             "Header": {
                 "activeUser":                                       "Aktive Spieler",
@@ -400,6 +399,22 @@
             },
             "Placeholder": {
                 "lpDescription":                                    "Trage hier eine Beschreibung ein"
+            },
+            "PhysicalItems": {
+                "CharacterGeneration": {
+                    "available": {
+                        "label":                                    "Relevant für die Charaktergenerierung",
+                        "hint":                                     "Gegenstände die während der Charaktergenerierung zur Verfügung stehen"
+                    },
+                    "artisanTool": {
+                        "label":                                    "Handwerkszeug",
+                        "hint":                                     "Handwerkszeug für die Charaktergenerierung"
+                    },
+                    "clothSet": {
+                        "label":                                    "Kleidung",
+                        "hint":                                     "Kleidung für die Charaktergenerierung"
+                    }
+                }                        
             },
             "Title": {
                 "assignLp":                                         "Legendenpunkte zuweisen",

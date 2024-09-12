@@ -177,6 +177,7 @@ export async function getAllDocuments(
   ).then( p => p.flat() );
 
   const allDocuments = [...documents, ...indices].filter( predicate );
+  console.log( "allDocuments", allDocuments );
 
   return asUuid
     ? allDocuments.map( doc => doc.uuid )

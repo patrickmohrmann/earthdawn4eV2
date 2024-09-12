@@ -30,6 +30,10 @@ export default class CharacterGenerationPrompt extends FormApplication {
     this.questors = documentCollections.questors;
     this.skills = documentCollections.skills;
     this.spells = documentCollections.spells;
+    this.armorItems = documentCollections.armorItems;
+    this.equipmentItems = documentCollections.equipmentItems;
+    this.shieldItems = documentCollections.shieldItems;
+    this.weaponItems = documentCollections.weaponItems;
 
     this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
 
@@ -60,6 +64,38 @@ export default class CharacterGenerationPrompt extends FormApplication {
       namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
       disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
       questors: await getAllDocuments('Item', 'questor', false, 'OBSERVER'),
+      armorItems: await getAllDocuments(
+        'Item', 
+        'armor', 
+        false, 
+        'OBSERVER', 
+        ['system.characterGeneration.available'],
+        ( x ) => x.system.characterGeneration.available === true,
+      ),
+      equipmentItems: await getAllDocuments(
+        'Item', 
+        'equipment', 
+        false, 
+        'OBSERVER', 
+        ['system.characterGeneration.available'],
+        ( x ) => x.system.characterGeneration.available === true,
+      ),
+      shieldItems: await getAllDocuments(
+        'Item', 
+        'shield', 
+        false, 
+        'OBSERVER', 
+        ['system.characterGeneration.available'],
+        ( x ) => x.system.characterGeneration.available === true,
+      ),
+      weaponItems: await getAllDocuments(
+        'Item', 
+        'weapon', 
+        false, 
+        'OBSERVER', 
+        ['system.characterGeneration.available'],
+        ( x ) => x.system.characterGeneration.available === true,
+      ),
       skills: await getAllDocuments(
         'Item',
         'skill',
@@ -228,6 +264,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
       acc[level].push(spellTuple);
       return acc;
     }, {} );
+
+    // physical Items
+    context.armorItems = this.armorItems;
+    context.equipmentItems = this.equipmentItems;
+    context.shieldItems = this.shieldItems;
+    context.weaponItems = this.weaponItems;
+
 
     // Dialog Config
     context.hasNextStep = this._hasNextStep();

@@ -164,6 +164,18 @@ export default class CharacterGenerationData extends SparseDataModel {
       // Spells
       spells: new fields.SetField( new fields.DocumentUUIDField() ),
 
+      // Armor
+      armorItems: new fields.SetField( new fields.DocumentUUIDField() ),
+
+      // equipments
+      equipmentItems: new fields.SetField( new fields.DocumentUUIDField() ),
+
+      // shields
+      shieldItems: new fields.SetField( new fields.DocumentUUIDField() ),
+
+      // weapons
+      weaponItems: new fields.SetField( new fields.DocumentUUIDField() ),
+
       // Languages
       languages: new fields.SchemaField( {
         speak: NamegiverTemplate.getLanguageDataField(),
@@ -218,6 +230,30 @@ export default class CharacterGenerationData extends SparseDataModel {
     const allSpells = this.spells.map( async ( spell ) => await fromUuid( spell ) );
 
     return Promise.all( allSpells );
+  }
+
+  get armorDocuments() {
+    const allArmorItems = this.armorItems.map( async ( armor ) => await fromUuid( armor ) );
+
+    return Promise.all( allArmorItems );
+  }
+
+  get equipmentDocuments() {
+    const allEquipmentItems = this.equipmentItems.map( async ( equipment ) => await fromUuid( equipment ) );
+
+    return Promise.all( allEquipmentItems );
+  }
+
+  get shieldDocuments() {
+    const allShieldItems = this.shieldItems.map( async ( shield ) => await fromUuid( shield ) );
+
+    return Promise.all( allShieldItems );
+  }
+
+  get weaponDocuments() {
+    const allWeaponItems = this.weaponItems.map( async ( weapon ) => await fromUuid( weapon ) );
+
+    return Promise.all( allWeaponItems );
   }
 
   set abilityOption( abilityUuid ) {

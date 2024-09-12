@@ -102,4 +102,12 @@
         <button class="weight-calculation--button button">{{localize "Tailor to Namegiver"}}</button>
     </div>
     {{/if}}
+    {{!-- Character Generation Item --}}
+<div>
+    <label>{{localize "ED.Item.PhysicalItems.CharacterGenerationItem.label"}}:</label>
+    {{formField systemFields.characterGeneration.fields.available name="system.characterGeneration.available" value=item.system.characterGeneration.available required=false}}
+    {{formField systemFields.characterGeneration.fields.artisanTool name="system.characterGeneration.artisanTool" value=item.system.characterGeneration.artisanTool required=false}}
+    {{formField systemFields.characterGeneration.fields.clothSet name="system.characterGeneration.clothSet" value=item.system.characterGeneration.clothSet required=false}}
+</div>
+    
 </div>

@@ -1,4 +1,7 @@
+import { item } from '../applications/_module.mjs';
 import RollPrompt from '../applications/global/roll-prompt.mjs';
+import ED4E from '../config.mjs';
+import ItemEd from '../documents/item.mjs';
 import EdTour from "../tours/ed-tours.mjs";
 
 /**
@@ -26,8 +29,15 @@ export default function () {
         /*  Tour                                        */
         /* -------------------------------------------- */
         EdTour.travelAgency();
+
+
+        /* -------------------------------------------- */
+        /*  Create Items After World is Loaded          */
+        /* -------------------------------------------- */
+        // await createItems();
     } );
 }
+
 
 /**
  * Creation of actors and items for debugging purposes
@@ -198,3 +208,46 @@ async function _createDebugDocuments() {
         await rollMsg.setFlag( "world", "deleteOnStartup", true );
     }
 }
+
+// /* -------------------------------------------- */
+// /*  Create Items After World is Loaded          */
+// /* -------------------------------------------- */
+
+// async function createItems() {
+//     const compendium = game.packs.get("ed4e.basic-items");
+//     if (!compendium) {
+//         console.error("Compendium not found");
+//         return;
+//     }
+
+//     await compendium.getIndex(); // Ensure the index is loaded
+//     const itemCollection = [];
+
+//     const itemData1 = {
+//         name: "Dagger",
+//         type: "weapon",
+//     };
+
+//     const itemData2 = {
+//         name: "Leather Armor",
+//         type: "armor",
+//     };
+//     // Add itemData to itemCollection
+//     itemCollection.push(itemData1,itemData2);
+
+//     for (const item of itemCollection) {
+//         // Check if the item already exists in the compendium
+//         const existingItem = compendium.index.find(i => i.name === item.name);
+//         if (!existingItem) {
+//             // Create the new item
+//             const newItem = await ItemEd.create(item, { inplace: false });
+
+//             // Import the new item into the compendium
+//             await compendium.importDocument(newItem);
+
+//             console.log(`Item '${item.name}' created in compendium.`);
+//         } else {
+//             console.log(`Item '${item.name}' already exists in compendium.`);
+//         }
+//     }
+// }
