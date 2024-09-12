@@ -37,14 +37,6 @@ export default class DisciplineData extends ClassTemplate.mixin(
         label:    "ED.Data.Item.Labels.order",
         hint:     "ED.Data.Item.Hints.order",
       } ),
-      disciplineIndex: new fields.NumberField( {
-        required: true,
-        nullable: false,
-        min:      1,
-        initial:  1,
-        positive: true,
-        integer:  true,
-      } ),
       spellcasting: new fields.BooleanField( {
         required: true,
         initial:  false,
