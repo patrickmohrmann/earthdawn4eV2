@@ -31,7 +31,6 @@
             <li>
               <a data-tab="item-advancement-level-tab-{{this.level}}" data-group="advancement">
                 {{localize "ED.Item.Discipline.circle"}} {{this.level}}
-                {{log this}}
               </a>
             </li>
           {{/each}}
@@ -55,6 +54,7 @@
       </div>
 
       <!-- Level Contents -->
+
       {{#each item.system.advancement.levels}}
         <div id="level-{{this.level}}" class="tab item-id advancement-level" name="system.advancement.level.{{@index}}.id"
              data-tab="item-advancement-level-tab-{{this.level}}" data-group="advancement" value="{{@index}}" data-level-index="{{@index}}"
