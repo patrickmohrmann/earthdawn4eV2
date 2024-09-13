@@ -27,7 +27,7 @@ export default class ClassTemplate extends ItemDataModel.mixin(
         required: true,
         nullable: false,
         min:      0,
-        initial:  1,
+        initial:  0,
         integer:  true
       } ),
       advancement: new fields.EmbeddedDataField(

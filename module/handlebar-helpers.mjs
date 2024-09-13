@@ -7,15 +7,6 @@ import { linkForUuidSync } from "./utils.mjs";
  */
 export default function registerHandlebarHelpers() {
 
-  // General Handlebars
-
-  Handlebars.registerHelper( "getSourceAbility", ( talent, knacks ) => {
-    if ( talent === undefined || knacks === undefined ) {
-      return;
-    }
-    return knacks.filter( ( knack ) => knack.system.source.knackSource === talent.system.talentIdentifier );
-  } );
-
   Handlebars.registerHelper( "hasItems", ( collection ) => {
     return !foundry.utils.isEmpty( collection );
   } );
