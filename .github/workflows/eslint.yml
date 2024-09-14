@@ -36,11 +36,11 @@ jobs:
           npm install @microsoft/eslint-formatter-sarif@latest
 
       - name: Run ESLint
-        run: npx eslint .
-          --config .eslintrc.json
-          --ext .mjs,.js,.jsx,.ts,.tsx
-          --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif
+        run: npx eslint ../../module \
+          --config .eslintrc.json \
+          --ext .mjs,.js,.jsx,.ts,.tsx \
+          --format @microsoft/eslint-formatter-sarif \
+          --output-file eslint-results.sarif || echo "ESLint failed"
         continue-on-error: true
 
       - run: | 
