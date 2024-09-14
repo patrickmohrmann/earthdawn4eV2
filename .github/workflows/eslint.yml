@@ -36,11 +36,11 @@ jobs:
           npm install @microsoft/eslint-formatter-sarif@latest
 
       - name: Run ESLint
-        run: npx eslint ../../module \
-          --config ../../.eslintrc.json \
+        run: npx eslint module \
+          --config .eslintrc.json \
           --ext .mjs,.js,.jsx,.ts,.tsx \
           --format @microsoft/eslint-formatter-sarif \
-          --output-file eslint-results.sarif
+          --output-file .github/workflows/eslint-results.sarif
         continue-on-error: true
 
       - run: | 
@@ -49,5 +49,5 @@ jobs:
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: eslint-results.sarif
+          sarif_file: .github/workflows/eslint-results.sarif
           wait-for-processing: true
