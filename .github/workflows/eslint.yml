@@ -43,7 +43,7 @@ jobs:
         env:
           SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
         run: npx eslint module/
-          --config .eslintrc.js
+          --config .eslintrc.json
           --ext .mjs,.js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
           --output-file eslint-results.sarif
