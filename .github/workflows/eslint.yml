@@ -32,8 +32,12 @@ jobs:
 
       - name: Install ESLint
         run: |
-          npm install eslint@8.10.0
+          npm install eslint@8.40.0
           npm install @microsoft/eslint-formatter-sarif@3.1.0
+          npm install @babel/eslint-parser@7.22.15
+          npm install eslint-plugin-jsdoc@46.8.2
+          npm install @stylistic/eslint-plugin@2.3.0
+          npm install @stylistic/eslint-plugin-migrate@2.3.0
 
       - name: Run ESLint
         env:
