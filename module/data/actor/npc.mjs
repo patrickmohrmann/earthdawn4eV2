@@ -23,7 +23,7 @@ export default class NpcData extends NamegiverTemplate.mixin(
             mobRules: new fields.BooleanField( {
                 required: true,
                 initial: false,
-                label: "ED.Actor.Configuration.mobRules"
+                label: "ED.Data.Item.Labels.edid",
             } ),
             characteristics: new fields.SchemaField( {
                 health: new fields.SchemaField( {
@@ -38,7 +38,7 @@ export default class NpcData extends NamegiverTemplate.mixin(
         } );
     }
 
-    static LOCALIZATION_PREFIXES = ["ED.Actor"];
+    //static LOCALIZATION_PREFIXES = ["ED.Actor"];
 
     /* -------------------------------------------- */
     /*  Data Preparation                            */
