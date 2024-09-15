@@ -4,7 +4,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 /**
  * Data model template with information on equipment items.
  * @property {boolean} consumable check if item will be consumed on usage
- * @property {string} ammoType which type of ammo it is.
+ * @property {string} ammunition which type of ammo it is.
  */
 export default class EquipmentData extends PhysicalItemTemplate.mixin(
     ItemDescriptionTemplate
@@ -25,7 +25,7 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
                     nullable: true,
                     blank: true,
                     initial: "",
-                label: "ED.Item.Weapon.ammunition.type"
+                label: "ED.Item.Weapon.ammunition"
                 } ),
             } ),
             bundleSize: new fields.NumberField( {

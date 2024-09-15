@@ -91,6 +91,7 @@ export default function registerHandlebarHelpers() {
     return rangedWeaponTypes.includes(weaponType);
   })
 
+
   /*************************************************** */
   /*            Handlebars for Item Cards              */
   /*************************************************** */

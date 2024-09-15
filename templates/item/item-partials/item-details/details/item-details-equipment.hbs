@@ -56,10 +56,10 @@
     {{!-- consumable Item --}}
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.Equipment.consumable"}}:</label>
-        <input class="partial__55--right" type="checkbox" name="system.consumable" {{ checked system.consumable }}>
+        <input class="partial__55--right" type="checkbox" name="system.consumable" {{ checked item.system.consumable }}>
     </div>
     <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.ammoType"}}:</label>
+        <label class="partial__40--left">{{localize "ED.Item.Equipment.ammunition"}}:</label>
         <select class="partial__55--right" name="system.ammunition.type">
             {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
         </select>

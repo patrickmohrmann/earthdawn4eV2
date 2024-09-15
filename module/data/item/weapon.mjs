@@ -126,7 +126,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                     nullable: true,
                     blank: true,
                     initial: "",
-                label: "ED.Item.Weapon.ammunition.type"
+                    label: "ED.Item.Weapon.ammunition.type"
             } ),
             } ),
             forgeBonus: new fields.NumberField( {

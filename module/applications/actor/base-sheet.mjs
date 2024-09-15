@@ -48,8 +48,17 @@ export default class ActorSheetEd extends ActorSheet {
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
     systemData.splitTalents = game.settings.get( "ed4e", "talentsSplit" );
+    systemData.embeddedItems = {
+      weapons: {
+        überlegen
+      }
+      is ranged
+      ...d
+    };
     return systemData;
   }
+
+
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
