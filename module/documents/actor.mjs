@@ -338,7 +338,7 @@ export default class ActorEd extends Actor {
   }
 
   /**
-   * 
+   * @description                     The sequence that is rotaded
    * @param {Object}    itemId        Id of the item to rotate the status of
    * @param {Boolean}   backwards     Whether to rotate the status backwards
    * @returns 

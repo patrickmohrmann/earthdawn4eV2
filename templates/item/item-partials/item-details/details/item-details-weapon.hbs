@@ -23,7 +23,7 @@
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.General.action"}}:</label>
         <select class="partial__55--right" name=="system.usableItem.action">
-            {{selectOptions config.action selected=item.system.usableItem.action localize=true }}
+            {{selectOptions config.action selected=item.system.usableItem.action blank="" localize=true }}
         </select>
     </div>
     {{/if}}

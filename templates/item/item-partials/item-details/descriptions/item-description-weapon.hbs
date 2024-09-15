@@ -7,8 +7,7 @@
             {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
         </select>
     </div>
-    {{#isRangedWeapon item.system.weaponType}}
-        {{#if (uneq item.system.weaponType "thrown")}}
+        {{#if (eq item.system.weaponType "bow")}}
             {{!-- ammunition - Type --}}
             <div class="item-data__input--line">
                 <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
@@ -23,7 +22,36 @@
                     value="{{item.system.ammunition.amount}}" data-dtype="Number">  
             </div>
         {{/if}}
-    {{/isRangedWeapon}}
+        {{#if (eq item.system.weaponType "crossbow")}}
+            {{!-- ammunition - Type --}}
+            <div class="item-data__input--line">
+                <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
+                <select class="partial__55--right" name="system.ammunition.type">
+                    {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
+                </select>
+            </div>
+            {{!-- ammunition - Amount --}}
+            <div class="item-data__input--line">
+                <label class="partial__40--left">{{localize "ED.Item.Weapon.ammunition"}}:</label>
+                <input class="partial__55--right" name="system.ammunition.amount" type="text"
+                    value="{{item.system.ammunition.amount}}" data-dtype="Number">  
+            </div>
+        {{/if}}
+        {{#if (eq item.system.weaponType "blowgun")}}
+            {{!-- ammunition - Type --}}
+            <div class="item-data__input--line">
+                <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
+                <select class="partial__55--right" name="system.ammunition.type">
+                    {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
+                </select>
+            </div>
+            {{!-- ammunition - Amount --}}
+            <div class="item-data__input--line">
+                <label class="partial__40--left">{{localize "ED.Item.Weapon.ammunition"}}:</label>
+                <input class="partial__55--right" name="system.ammunition.amount" type="text"
+                    value="{{item.system.ammunition.amount}}" data-dtype="Number">  
+            </div>
+        {{/if}}
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.Weapon.damageAttribute"}}:</label>
