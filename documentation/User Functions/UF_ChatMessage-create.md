@@ -1,0 +1,1 @@
+this is the foundry core function [create](https://foundryvtt.com/api/classes/foundry.documents.BaseChatMessage.html#create)

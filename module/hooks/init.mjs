@@ -27,6 +27,7 @@ export default function () {
         CONFIG.Actor.documentClass = documents.ActorEd;
         CONFIG.Item.documentClass = documents.ItemEd;
         CONFIG.JournalEntry.documentClass = documents.JournalEntryEd;
+        CONFIG.ChatMessage.documentClass = documents.ChatMessageEd;
 
         CONFIG.Token.objectClass = canvas.TokenEd;
 
@@ -39,6 +40,7 @@ export default function () {
         // Hook up system data types
         CONFIG.Actor.dataModels = dataModels.actor.config;
         CONFIG.Item.dataModels = dataModels.item.config;
+        CONFIG.ChatMessage.dataModels = dataModels.chat.config;
 
         // Register sheet application classes
         Actors.unregisterSheet( "core", ActorSheet );

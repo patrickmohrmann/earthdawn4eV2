@@ -7,6 +7,17 @@
             {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
         </select>
     </div>
+    {{#if (eq item.system.weaponType "missile")}}
+    {{!-- Missile Type --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.missleWeaponType"}}:</label>
+        <select name="system.missleWeaponType">
+            {{selectOptions config.missleWeaponType selected=item.system.missleWeaponType blank="" localize=true }}
+        </select>
+    </div>
+    {{/if}}
+
+    {{!-- Damage Type --}}
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.damageAttribute"}}:</label>
@@ -32,25 +43,38 @@
         <input class="input__circle-input" name="system.dexterityMinimum" type="text" value="{{item.system.dexterityMinimum}}"
             data-dtype="Number">
     </div>
-    {{!-- Initiative Penalty --}}
+    {{!-- short Range Min --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeShort"}}:</label>
-        <input class="input__circle-input" name="system.range.short" type="text" value="{{item.system.range.short}}"
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeShortMin"}}:</label>
+        <input class="input__circle-input" name="system.range.shortMin" type="text" value="{{item.system.range.shortMin}}"
             data-dtype="Number">
     </div>
-    {{!-- Initiative Penalty --}}
+    {{!-- short Range Max --}}
     <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeLong"}}:</label>
-        <input class="input__circle-input" name="system.range.long" type="text" value="{{item.system.range.long}}"
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeShortMax"}}:</label>
+        <input class="input__circle-input" name="system.range.shortMax" type="text" value="{{item.system.range.shortMax}}"
             data-dtype="Number">
     </div>
-    {{!-- Initiative Penalty --}}
+    {{!-- Long Range Min --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeLongMin"}}:</label>
+        <input class="input__circle-input" name="system.range.longMin" type="text" value="{{item.system.range.longMin}}"
+            data-dtype="Number">
+    </div>
+    {{!-- Long Range Max --}}
+    <div class="item-data__input--line">
+        <label class="label__left">{{localize "ED.Item.Weapon.Hint.rangeLongMax"}}:</label>
+        <input class="input__circle-input" name="system.range.longMax" type="text" value="{{item.system.range.longMax}}"
+            data-dtype="Number">
+    </div>
+    {{!-- ammunition --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Label.ammunition"}}:</label>
-        <input class="input__circle-input" name="system.ammunition" type="text" value="{{item.system.ammunition}}"
-            data-dtype="Number">
+         <select name="system.ammunition.type">
+                {{selectOptions config.ammunitionType selected=item.system.ammunition.type localize=true }}
+            </select>    
     </div>
-    {{!-- Initiative Penalty --}}
+    {{!-- forgeBonus --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Weapon.Hint.forgeBonus"}}:</label>
         <input class="input__circle-input" name="system.forgeBonus" type="text" value="{{item.system.forgeBonus}}"

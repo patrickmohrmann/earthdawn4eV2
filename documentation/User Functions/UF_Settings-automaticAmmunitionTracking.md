@@ -1,0 +1,1 @@
+This function reduces the amount of Ammunition or Throwing weapons per use.

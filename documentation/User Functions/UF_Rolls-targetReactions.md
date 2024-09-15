@@ -1,0 +1,1 @@
+this function collects all abilities with the right reaction type from the target to create buttons in the chat message

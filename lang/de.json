@@ -228,32 +228,42 @@
                 "applyEffectTitle":                                 "Füge den Effect den ausgewählten Zielen zu!",
                 "rollEffect":                                       "Effektwurf",
                 "rollEffectTitle":                                  "Würfel den Effect",
-                "rollDamage":                                       "Effektwurf",
+                "rollDamage":                                       "Schadenswurf",
                 "rollDamageTitle":                                  "Würfel den Effect",
                 "takeDamage":                                       "Schaden nehmen",
-                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter"
+                "takeDamageTitle":                                  "Nimm den Schaden für deinen Charakter",
+                "takeTheHit":                                       "Nimm den Schaden"
             },
             "Flavor": {
+                "attackSubstitude":                                 "{sourceActor} benutzt Geschicklichkeit mit Stufe {step} um einen {weapon} Angriff auszuführen.",
+                "attackSubstitudeTail":                             "{sourceActor} benutzt Geschicklichkeit mit Stufe {step} um einen {weapon} Angriff mit dem Schwanz auszuführen.",
                 "rollEquipmentWithoutTarget":                       "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep}",
                 "rollEquipmentSingleTarget":                        "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} benutzt {equipment} mit Stufe {arbitraryStep} gegen mehrere Ziele",
-                "rollAbilityWithoutTarget":                         "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep}",
-                "rollAbilitySingleTarget":                          "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen {singleTarget}",
-                "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {Ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
-                "rollAttackWithoutTarget":                          "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep}",
-                "rollAttackSingleTarget":                           "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
-                "rollAbility":                                      "{sourceActor} würfelt {attribute} mit Stufe {step}",
+                "rollAbilityWithoutTarget":                         "{sourceActor} benutzt {ability} mit Stufe {abilityFinalStep}",
+                "rollAbilitySingleTarget":                          "{sourceActor} benutzt {ability} mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} benutzt {ability} mit Stufe {abilityFinalStep} gegen mehrere Ziele",
+                "rollAttackWithoutTarget":                          "{sourceActor} benutzt {ability} ({weapon}) mit Stufe {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} benutzt {ability} ({weapon}) mit Stufe {abilityFinalStep} gegen {singleTarget}",
+                "rollAbility":                                      "{sourceActor} würfelt {ability} mit Stufe {step}",
                 "rollAttribute":                                    "{sourceActor} würfelt {attribute} mit Stufe {step}",
                 "rollEquipment":                                    "{sourceActor} würfelt {equipment} mit Stufe {step}",
                 "rollRecovery":                                     "{sourceActor} erholt sich mit Stufe {step}",
                 "jumpUp":                                           "{sourceActor} springt auf mit Stufe {step}",
                 "knockdownTest":                                    "{sourceActor} versucht dem Niederschlag zu widerstehen {step}",
-                "rollAttackMultipleTargets":                        "{sourceActor} benutzt {Ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
+                "rollAttackMultipleTargets":                        "{sourceActor} benutzt {ability} ({weapon}) mit Stufe {abilityFinalStep} gegen mehrere Ziele"
+            },
+            "FlavorLocalize": {
+                "tail":                                             "Schwanz",
+                "unarmed":                                          "Waffenlosen"    
             },
             "Header": {
                 "actionTest":                                       "Aktions Test",
                 "arbitraryTest":                                    "Willkürlicher Test",
-                "effectTest":                                       "Effect Test"
+                "effectTest":                                       "Effect Test",
+                "maneuver":                                         "Manöver",
+                "reactions":                                        "Reaktionen",
+                "rollDamage":                                       "Würfel Schaden"
             }
         },
         "Config": {
@@ -299,6 +309,7 @@
                 "effect":                                           "Effekt",
                 "halfmagic":                                        "Halb Magie",
                 "initiative":                                       "Initiative",
+                "interaction":                                      "Interaktion", 
                 "recovery":                                         "Erholung",
                 "spellcasting":                                     "Spruchzauberei",
                 "threadWeaving":                                    "Fadenweben"
@@ -398,6 +409,17 @@
                 "effects":                                          "Effekte",
                 "general":                                          "Allgemein"
             },
+            "PhysicalItems": {
+                "requiredItemStatus":                               "Required Item Status",
+                "RequiredItemStatus": {
+                    "carried":                                      "Getragen",
+                    "equipped":                                     "Ausgerüstet",
+                    "mainHand":                                     "Haupthand",
+                    "offHand":                                      "Nebenhand",
+                    "twoHands":                                     "Beidhändig",
+                    "tail":                                         "Schwanz"
+                }
+            },
             "Placeholder": {
                 "lpDescription":                                    "Trage hier eine Beschreibung ein"
             },
@@ -441,7 +463,10 @@
                 "spellcastingRoll":                                 "Spruchzaubereiprobe",
                 "threadWeavingRoll":                                "Fadenwebenprobe"
             },
-
+            "Modifiers": {
+                "longRange":                                        "Lange Reichweite",
+                "tailWeapon":                                       "Schwanzangriff"
+            },
             "rolls":                                                "würfelt",
             "rollResult":                                           "Würfelergebnis",
             "ruleOfOne":                                            "Fehlschlag, Regel der Eins",
@@ -470,6 +495,14 @@
                 "spellCastingHint":                                 "Identifiziert die Fähigkeit die Spruchzauberei verwendet wird",
                 "threadWeaving":                                    "ED-ID für Fadenweben",
                 "threadWeavingHint":                                "Identifiziert die Fähigkeit Fadenweben verwendet wird"
+            },
+            "Hint": {
+                "automaticAmmunitionReduction":                     "Automatische Reduzierung der Munition",
+                "automaticRangeCalculation":                        "Automatische Reichweitenberechnung für Angriffe" 
+            },
+            "Name": {
+                "automaticAmmunitionReduction":                     "Automatische Munitionsreduktion",
+                "automaticRangeCalculation":                        "Automatische Reichweitenberechnung"   
             },
             "SpecificSettingOptions":{
                 "changelog":                                        "Änderungsprotokoll",

@@ -2,3 +2,4 @@
 export {default as ActorEd} from "./actor.mjs";
 export {default as ItemEd} from "./item.mjs";
 export {default as JournalEntryEd} from "./journal.mjs";
+export {default as ChatMessageEd} from "./chat/chat-messages.mjs";

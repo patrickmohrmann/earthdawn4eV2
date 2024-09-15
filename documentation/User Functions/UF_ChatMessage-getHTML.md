@@ -1,0 +1,1 @@
+this is the foundry core function [getHTML](https://foundryvtt.com/api/classes/client.ChatMessage.html#getHTML)

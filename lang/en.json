@@ -232,29 +232,39 @@
                 "rollDamage":                                       "Roll Damage",
                 "rollDamageTitle":                                  "Roll for Damage",
                 "takeDamage":                                       "Take Damage",
-                "takeDamageTitle":                                  "Take the damage for your Actor"
+                "takeDamageTitle":                                  "Take the damage for your Actor",
+                "takeTheHit":                                       "Take the Hit"
             },
             "Flavor": {
+                "attackSubstitude":                                 "{sourceActor} uses Dexterity with step {step} to roll a {weapon} attack.",
+                "attackSubstitudeTail":                             "{sourceActor} uses Dexterity with step {step} to roll a {weapon} attack with the tail.",
                 "rollEquipmentWithoutTarget":                       "{sourceActor} uses {equipment} with step {arbitraryStep}",
                 "rollEquipmentSingleTarget":                        "{sourceActor} uses {equipment} with step {arbitraryStep} against {singleTarget}",
                 "rollEquipmentMultipleTargets":                     "{sourceActor} uses {equipment} with step {arbitraryStep} against many Targets",
-                "rollAbilityWithoutTarget":                         "{sourceActor} uses {Ability} with step {abilityFinalStep}",
+                "rollAbilityWithoutTarget":                         "{sourceActor} uses {ability} with step {abilityFinalStep}",
                 "jumpUp":                                           "{sourceActor} tries to jump up with Step {step}",
                 "knockdownTest":                                    "{sourceActor} tries to avoid being knocked down with Step {step}",
                 "rollAbility":                                      "{sourceActor} rolls {ability} with Step {step}",
                 "rollAttribute":                                    "{sourceActor} rolls {attribute} with Step {step}",
                 "rollEquipment":                                    "{sourceActor} rolls {equipment} with Step {step}",
                 "rollRecovery":                                     "{sourceActor} recovers from Damage with Step {step}",
-                "rollAbilitySingleTarget":                          "{sourceActor} uses {Ability} with step {abilityFinalStep} against {singleTarget}",
-                "rollAbilityMultipleTargets":                       "{sourceActor} uses {Ability} with step {abilityFinalStep} against many Targets",
-                "rollAttackWithoutTarget":                          "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep}",
-                "rollAttackSingleTarget":                           "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against {singleTarget}",
-                "rollAttackMultipleTargets":                        "{sourceActor} uses {Ability} ({weapon}) with step {abilityFinalStep} against many Targets"
+                "rollAbilitySingleTarget":                          "{sourceActor} uses {ability} with step {abilityFinalStep} against {singleTarget}",
+                "rollAbilityMultipleTargets":                       "{sourceActor} uses {ability} with step {abilityFinalStep} against many Targets",
+                "rollAttackWithoutTarget":                          "{sourceActor} uses {ability} ({weapon}) with step {abilityFinalStep}",
+                "rollAttackSingleTarget":                           "{sourceActor} uses {ability} ({weapon}) with step {abilityFinalStep} against {singleTarget}",
+                "rollAttackMultipleTargets":                        "{sourceActor} uses {ability} ({weapon}) with step {abilityFinalStep} against many Targets"
+            },
+            "FlavorLocalize": {
+                "tail":                                             "Tail",
+                "unarmed":                                          "Unarmed"    
             },
             "Header": {
                 "actionTest":                                       "Action Test",
                 "arbitraryTest":                                    "arbitrary Test",
-                "effectTest":                                       "Effect Test"
+                "effectTest":                                       "Effect Test",
+                "maneuver":                                         "Maneuver",
+                "reactions":                                        "Reactions",
+                "rollDamage":                                       "Roll Damage"      
             }
         },
         "Config": {
@@ -300,6 +310,7 @@
                 "effect":                                           "Effect",
                 "halfmagic":                                        "Half Magic",
                 "initiative":                                       "Initiative",
+                "interaction":                                      "Interaction",
                 "recovery":                                         "Recovery",
                 "spellcasting":                                     "Spell Casting",
                 "threadWeaving":                                    "Thread Weaving"
@@ -408,6 +419,24 @@
                 "details":                                          "Details",
                 "effects":                                          "Effects",
                 "general":                                          "General"
+            },
+            "PhysicalItems": {
+                "requiredItemStatus":                               "Required Item Status",
+                "RequiredItemStatus": {
+                    "carried":                                      "Carried",
+                    "equipped":                                     "Equipped",
+                    "mainHand":                                     "Main Hand",
+                    "offHand":                                      "Off Hand",
+                    "twoHands":                                     "Two Hands",
+                    "tail":                                         "Tail"
+                }
+            },
+            "Placeholder": {
+                "lpDescription":                                    "Insert your description here"
+            },
+            "Title": {
+                "assignLp":                                         "Assign Legend Points",
+                "rollPrompt":                                       "Roll Options"
             }
         },
         "Languages": {
@@ -445,7 +474,10 @@
                 "spellcastingRoll":                                 "Spellcasting Test",
                 "threadWeavingRoll":                                "Thread weaving Test"
             },
-            "moreTargets":                                          "and other targets",
+            "Modifiers": {
+                "longRange":                                        "Long Range",
+                "tailWeapon":                                       "Tail Attack"
+            },
             "rolls":                                                "rolls",
             "rollResult":                                           "Roll Result",
             "ruleOfOne":                                            "Failue, Rule of One",
@@ -474,6 +506,14 @@
                 "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
                 "threadWeaving":                                    "ED-ID for Thread Weaving",
                 "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+            },
+            "Hint": {
+                "automaticAmmunitionReduction":                     "Automatically reduce the ammunition",
+                "automaticRangeCalculation":                        "Automatically calculate the range for weapons attacks" 
+            },
+            "Name": {
+                "automaticAmmunitionReduction":                     "Automatic Ammunition Reduction",
+                "automaticRangeCalculation":                        "Automatic Range Calculation"   
             },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",

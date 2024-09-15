@@ -1,6 +1,8 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import PcData from "../data/actor/pc.mjs";
 import LpTransactionData from "../data/advancement/lp-transaction.mjs";
+import { ChatMessageEd } from "../documents/_module.mjs";
+// import chatListeners from "../applications/chat/chat-messages.mjs";
 
 
 const cmdMapping = {
@@ -46,8 +48,17 @@ export default function () {
     addUserPortrait( msg, html );
 
     // Add class for highlighting success/failure on roll messages
-    if ( msg.rolls[0] ) msg.rolls[0].addSuccessClass( html );
+    const success = msg.system.isSuccess === true;
+    const setSuccess = msg.system.setSuccess === true;
+    
+    if (msg.rolls[0]) {
+        msg.rolls[0].addSuccessClass(html, success, setSuccess);
+    }
   })
+
+  Hooks.once('init', async function() {
+    CONFIG.ChatMessage.documentClass = ChatMessageEd;
+});
 }
 
 /* -------------------------------------------- */

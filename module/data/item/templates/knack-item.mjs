@@ -1,13 +1,11 @@
-import SystemDataModel from "../../abstract.mjs";
+import AbilityTemplate from "./ability.mjs";
 import TargetTemplate from "./targeting.mjs";
 
 /**
  * Data model template for Knacks
  * @property {string} knackSource     UUID of Source the knack derives from
  */
-export default class KnackTemplate extends SystemDataModel.mixin( 
-    TargetTemplate 
-) {
+export default class KnackTemplate extends AbilityTemplate {
 
     /** @inheritDoc */
     static defineSchema() {

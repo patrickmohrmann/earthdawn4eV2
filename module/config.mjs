@@ -126,6 +126,18 @@ ED4E.globalBonuses = {
 preLocalize( "globalBonuses", {key: "label"} );
 
 /**
+ * Ammunition types
+ * @enum {string}
+ */
+ED4E.ammunitionType = {
+	arrow: 							"ED.Config.ammunitionType.arrow",
+	bolt: 							"ED.Config.ammunitionType.bolt",
+	needle: 						"ED.Config.ammunitionType.needle",
+	stone: 							"ED.Config.ammunitionType.stone",
+};
+preLocalize( "ammunitionType" );
+
+/**
  * Denomination options
  * @enum {string}
  */
@@ -135,6 +147,19 @@ ED4E.denomination = {
 	gold: 				"ED.Denomination.gold"
 };
 preLocalize( "denomination" );
+
+
+/**
+ * Denomination options
+ * @enum {string}
+ */
+ED4E.reactionType = {
+	mystical: 			"ED.Config.ReactionType.mystical",
+	physical: 			"ED.Config.ReactionType.physical",
+	social: 			"ED.Config.ReactionType.social",
+};
+preLocalize( "reactionType" );
+
 
 /**
  * Availability
@@ -162,6 +187,20 @@ ED4E.action = {
 	sustained: 			"ED.Action.sustained"
 };
 preLocalize( "action" );
+
+
+/**
+ * Required Item Status to use an ability
+ * @enum {string}
+ */
+ED4E.requiredItemStatus = {
+	mainHand: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.mainHand",
+	offHand: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.offHand",
+	tail: 					"ED.Config.Item.PhysicalItems.RequiredItemStatus.tail",
+	unarmed: 				"ED.Config.Item.PhysicalItems.RequiredItemStatus.unarmed",
+};
+preLocalize( "requiredItemStatus" );
+
 
 /**
  * Target Difficulty
@@ -261,13 +300,13 @@ preLocalize( "tier" );
  * @enum {string}
  */
 ED4E.itemStatus = {
-	owned:			"ED.Config.ItemStatus.owned",
-	carried: 		"ED.Config.ItemStatus.carried",
-	equipped: 	"ED.Config.ItemStatus.equipped",
-	mainHand: 	"ED.Config.ItemStatus.mainHand",
-	offHand: 		"ED.Config.ItemStatus.offHand",
-	twoHands: 	"ED.Config.ItemStatus.twoHands",
-	tail: 			"ED.Config.ItemStatus.tail",
+	owned:						"ED.Config.ItemStatus.owned",
+	carried: 					"ED.Config.ItemStatus.carried",
+	equipped: 					"ED.Config.ItemStatus.equipped",
+	mainHand: 					"ED.Config.ItemStatus.mainHand",
+	offHand: 					"ED.Config.ItemStatus.offHand",
+	twoHands: 					"ED.Config.ItemStatus.twoHands",
+	tail: 						"ED.Config.ItemStatus.tail",
 };
 preLocalize( "itemStatus" );
 
@@ -289,12 +328,24 @@ preLocalize( "talentCategory" );
  * @enum {string}
  */
 ED4E.weaponType = {
-	bow: 						"ED.Config.bow",
-	crossbow: 			"ED.Config.crossbow",
-	melee: 					"ED.Config.melee",
-	unarmed: 				"ED.Config.unarmed"
+	melee: 					"ED.Config.weaponType.melee",
+	missile: 				"ED.Config.weaponType.missile",
+	thrown: 				"ED.Config.weaponType.thrown",
+	unarmed: 				"ED.Config.weaponType.unarmed"
 }
-preLocalize( "talentCategory" );
+preLocalize( "weaponType" );
+
+/**
+ * WeaponType
+ * @enum {string}
+ */
+ED4E.missleWeaponType = {
+	blowgun: 				"ED.Config.missleWeaponType.blowgun",
+	bow: 					"ED.Config.missleWeaponType.bow",
+	crossbow: 				"ED.Config.missleWeaponType.crossbow",
+	sling: 					"ED.Config.missleWeaponType.sling",
+}
+preLocalize( "missleWeaponType" );
 
 /**
  * Type of grantable abilities for a class level
@@ -437,6 +488,10 @@ ED4E.rollTypes = {
 	initiative: {
 		label: "ED.Config.rollTypes.initiative",
 		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/initiative-roll-flavor.hbs",
+	},
+	interaction: {
+		label: "ED.Config.rollTypes.interaction",
+		flavorTemplate: "systems/ed4e/templates/chat/chat-flavor/ability-roll-flavor.hbs",
 	},
 	recovery: {
 		label: "ED.Config.rollTypes.recovery",

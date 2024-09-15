@@ -25,6 +25,30 @@
         {{selectOptions config.rollTypes selected=item.system.rollType blank="" localize=true }}
     </select>
 </div>
+
+{{!-- required Holding Item status of Weapons for combat related abilities --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Ability.requiredItemStatus"}}:</label>
+    <select name="system.combatAbility.requiredItemStatus">
+        {{selectOptions config.requiredItemStatus selected=item.system.combatAbility.requiredItemStatus blank="" localize=true }}
+    </select>
+</div>
+
+{{!-- required Combat Type of the Weapons  --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Ability.requiredCombatType"}}:</label>
+    <select name="system.combatAbility.requiredCombatType">
+        {{selectOptions config.weaponType selected=item.system.combatAbility.requiredCombatType blank="" localize=true }}
+    </select>
+</div>
+
+{{!-- reachtion ability? --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Ability.reactionType"}}:</label>
+    <select name="system.reaction.reactionType">
+        {{selectOptions config.reactionType selected=item.system.reaction.reactionType blank="" localize=true }}
+    </select>
+</div>
 {{!-- Damage ability yes / now --}}
 <div class="item-data__input--line">
     <label>{{localize "ED.Item.Ability.damage"}}:</label>

@@ -166,10 +166,11 @@ export default class ActorEd extends Actor {
    * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
-  async rollAbility( ability, options = {} ) {
+  async rollAbility( ability, options = {}, inputDifficulty, triggeredMessId) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
-    const difficulty = await ability.system.getDifficulty();
+    const difficulty = !inputDifficulty ? await ability.system.getDifficulty() : inputDifficulty;
+    const targetActor = 1 
     if ( difficulty === undefined || difficulty === null ) {
       ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
       return;
@@ -182,21 +183,365 @@ export default class ActorEd extends Actor {
       ability: ability.name,
       step: abilityStep
     } );
-    const abilityFinalStep = { base: abilityStep };
+    let abilityFinalStep = { base: abilityStep };
+    const rollType = ability.system.rollType;
+    let edRollOptions;
+    if ( rollType === "ability" )  { 
+      edRollOptions = EdRollOptions.fromActor(
+        {
+          testType: "action",
+          rollType: rollType,
+          triggeredMessId: triggeredMessId ? triggeredMessId : undefined,
+          strain: strain,
+          target: difficultyFinal,
+          step: abilityFinalStep,
+          devotionRequired: devotionRequired,
+          chatFlavor: chatFlavor
+        },
+        this
+      );
+    } else if ( rollType === "attack" ) {
+      const attackData = await this.getAttackData ( ability, false, false, false );
+      if (attackData === undefined ) {
+        return
+      }
+      if ( game.settings.get( "ed4e", "automaticAmmunitionReduction" ) === true ) {
+        if ( attackData.weapon.system.weaponType === "missile" || attackData.weapon.weaponType === "thrown" ) {
+          const ammunitionType = attackData.weapon.system.ammunition.type;
+          const ammunition = this.items.find( ammo => ammo.system.ammunitionType === ammunitionType );
+          if ( !ammunition || ammunition.system.quantity < 1 ) { 
+            ui.notifications.error( "No ammunition found" );
+            return;
+          }
+          const newAmmunition = await this.removeQuantity( attackData.weapon );
+          ammunition.update( { "system.quantity": newAmmunition } );
+        }
+      }
+
+      abilityFinalStep = 
+      { base: abilityStep, 
+        modifiers: {}
+      };
+      if (attackData.modifier.range !== 0) {
+        abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.longRange")] = attackData.modifier.range;
+        }
+        if (attackData.modifier.tailWeapon !== 0) {
+        abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.tailWeapon")] = attackData.modifier.tailWeapon;
+        }
+      edRollOptions = EdRollOptions.fromActor(
+        {
+          actor: this.id,
+          targetTokens: attackData.targetsArray,
+          testType: "action",
+          rollType: rollType,
+          strain: strain,
+          target: difficultyFinal,
+          step: abilityFinalStep,
+          devotionRequired: devotionRequired,
+          chatFlavor: chatFlavor
+        },
+        this
+      );
+    } else if ( rollType === "interaction" || rollType === "spellcasting" )  { 
+
+      const targets = Array.from(game.user.targets);
+      const targetsArray = await this.getTargets( targets );
+      if (targetsArray.length === 0) {
+        ui.notifications.error("No targets selected");
+        return;
+      }
+      edRollOptions = EdRollOptions.fromActor(
+        { 
+          actor: this.id,
+          targetTokens: targetsArray,
+          testType: "action",
+          rollType: rollType,
+          triggeredMessId: triggeredMessId ? triggeredMessId : undefined,
+          strain: strain,
+          target: difficultyFinal,
+          step: abilityFinalStep,
+          devotionRequired: devotionRequired,
+          chatFlavor: chatFlavor
+        },
+        this
+      );
+    }
+    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+    this.#processRoll( roll );
+  }
+
+  async attackSubstitude ( ability, type, options = {} ) {
+    const unarmed = type.itemId === "unarmed-attack" ? true : false
+    const tailAttack = type.itemId === "tail-attack" ? true : false
+    const attackData = await this.getAttackData( undefined, true, unarmed, tailAttack);
+    if (attackData === undefined ) {
+      return
+    }
+    let abilityFinalStep = 
+    { base: ability, 
+      modifiers: {}
+    };
+    if (attackData.modifier.range !== 0) {
+    abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.longRange")] = attackData.modifier.range;
+    }
+    if (attackData.modifier.tailWeapon !== 0) {
+    abilityFinalStep.modifiers[game.i18n.localize("ED.Rolls.Modifiers.tailWeapon")] = attackData.modifier.tailWeapon;
+    }
+    const currentTarget = game.user.targets.first()?.actor;
+    const difficulty = currentTarget.system.characteristics.defenses.physical.value
+    const difficultyFinal = { base: difficulty };
+    let weaponName = attackData.weapon === "unarmed" ? game.i18n.localize("ED.Chat.FlavorLocalize.unarmed") : 
+        attackData.weapon === "tail" ? game.i18n.localize("ED.Chat.FlavorLocalize.tail") : 
+        attackData.weapon.name; 
+    
+    let chatFlavor = game.i18n.format( "ED.Chat.Flavor.attackSubstitude", {
+      sourceActor: this.name,
+      step: ability,
+      weapon: weaponName
+    } );
+    if ( tailAttack === true && attackData.weapon !== "tail" ) {
+      chatFlavor = game.i18n.format( "ED.Chat.Flavor.attackSubstitudeTail", {
+        sourceActor: this.name,
+        step: ability,
+        weapon: weaponName
+      } );
+    }
     const edRollOptions = EdRollOptions.fromActor(
       {
+        actor: this.id,
+        targetTokens: attackData.targetsArray,
         testType: "action",
-        rollType: "ability",
-        strain: strain,
+        rollType: "attack",
+        strain: 0,
         target: difficultyFinal,
         step: abilityFinalStep,
-        devotionRequired: devotionRequired,
+        devotionRequired: false,
         chatFlavor: chatFlavor
       },
       this
-    );
-    const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    );  
+  const roll = await RollPrompt.waitPrompt( edRollOptions, options );
+  this.#processRoll( roll );
+  }
+
+
+  /**
+   * 
+   * @param {Object or Number} ability 
+   * @param {Boolean} substitude 
+   * @param {Boolean} unarmed 
+   * @param {Boolean} tailAttack
+   * @returns 
+   */
+  async getAttackData ( ability, substitude, unarmed, tailAttack ) {
+    let weapon;
+    const holdingType = ability?.system.combatAbility.requiredItemStatus;
+    let modifier = {
+      tailWeapon: 0,
+      range: 0,
+    }
+    if ( substitude === true ) {
+      if ( unarmed === true ) {
+        weapon = "unarmed";
+      } else if ( tailAttack === true ) {
+        const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
+        if ( tailWeapon ) {
+          weapon = tailWeapon;
+          modifier.tailWeapon += -2;
+        } else {
+        weapon = "tail";
+        modifier.tailWeapon += -2;
+        }
+      } else {
+      const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
+        weapon = mainhand;
+      }
+    } else if ( holdingType === "mainHand") {
+      const mainhand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "mainHand" || weapon.system.itemStatus === "twoHands" ); 
+      if ( mainhand?.system.weaponType === ability.system.combatAbility.requiredCombatType ) {
+        weapon = mainhand;
+      } 
+    } else if ( holdingType === "offHand" ) {
+      const offHand = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "offHand" );
+      if ( offHand?.system.weaponType === "melee" ) {
+        weapon = offHand;
+      } 
+    } else if ( holdingType === "tail" ) {
+      // add code for tail weapon Earthdawn Active Effect here see #909
+      const tailWeapon = this.itemTypes.weapon.find( weapon => weapon.system.itemStatus === "tail" );
+      if ( tailWeapon?.system.weaponType === "melee" ) {
+        weapon = tailWeapon;
+        modifier.tailWeapon += -2;
+      } 
+      if ( !weapon ) {
+        weapon = "tail";
+        modifier.tailWeapon += -2;
+      }
+    } else if (holdingType === "unarmed") {
+      const tailWeapon = this.itemTypes.weapon.find(weapon => weapon.system.itemStatus === "tail");
+      if (tailWeapon) {
+        weapon = await new Promise((resolve) => {
+          new Dialog({
+            title: "Choose Weapon",
+            content: "<p>Choose the weapon you want to use</p>",
+            buttons: {
+              tail: {
+                label: "tail",
+                callback: () => resolve(tailWeapon)
+              },
+              unarmed: {
+                label: "unarmed",
+                callback: () => resolve("unarmed")
+              }
+            }
+          }).render(true);
+        });
+      } else {
+        weapon = "unarmed";
+      }
+      if ( weapon !== "unarmed" ) {
+        modifier.tailWeapon += -2;
+      }
+    }
+    if (!weapon) {
+      const requiredCombatType = ability.system.combatAbility.requiredCombatType;
+      const requiredItemStatus = ability.system.combatAbility.requiredItemStatus;
+      const unequippedWeapons = this.itemTypes.weapon.filter(weapon => weapon.system.weaponType === requiredCombatType);
+      let requiredNextStatus = "";
+      if (requiredItemStatus === "mainHand") {
+        if ( requiredCombatType === "melee" ) {
+          requiredNextStatus = "mainHand";
+        } else if ( requiredCombatType === "missile" ) {
+          requiredNextStatus = "twoHands";
+        }
+      } else if (requiredItemStatus === "offHand") {
+        requiredNextStatus = "offHand";
+      } else if (requiredItemStatus === "tail") {
+        requiredNextStatus = "tail";
+      }
+
+      weapon = await new Promise((resolve) => {
+        const weaponOptions = unequippedWeapons.map((weapon, index) => {
+          return `<option value="${index}">${weapon.name}</option>`;
+        }).join("");
+    
+        new Dialog({
+          title: "Choose Weapon",
+          content: `
+            <p>Choose the weapon you want to use</p>
+            <select id="weapon-choice">${weaponOptions}</select>
+          `,
+          buttons: {
+            choose: {
+              label: "Choose",
+              callback: async (html) => {
+                const selectedIndex = html.find("#weapon-choice").val();
+                const selectedWeapon = unequippedWeapons[selectedIndex];
+      
+                // Function to check if the item status matches the required next status
+                function isItemStatusValid(weapon) {
+                  return weapon.system.itemStatus === requiredNextStatus;
+                }
+      
+                // Loop to rotate item status until it matches the required next status
+                while (!isItemStatusValid(selectedWeapon)) {
+                  await this.rotateItemStatus(selectedWeapon.id);
+                  // Optionally, you can add a delay here to avoid potential infinite loops
+                  // await new Promise(resolve => setTimeout(resolve, 100));
+                }
+      
+                resolve(selectedWeapon);
+              }
+            },
+            cancel: {
+              label: "Cancel",
+              callback: () => resolve(null)
+            }
+          },
+          default: "choose"
+        }).render(true);
+      });
+    }
+
+    const targets = Array.from(game.user.targets);
+    const targetsArray = await this.getTargets( targets );
+    if (targetsArray.length === 0) {
+      ui.notifications.error("No targets selected");
+      return;
+    }
+    
+    const automaticRangeCalculation = game.settings.get( "ed4e", "automaticRangeCalculation" );
+    if ( automaticRangeCalculation === false ) {
+      return { weapon, targetsArray, modifier};
+    } else {
+      const firstTarget = targetsArray[0]
+      const firstTargetToken = canvas.tokens.get(firstTarget.id);
+      const firstTargetRadius = firstTargetToken.document.width / 2;
+      const firstTargetDistance = await this.getDistanceToTarget( firstTargetToken );
+      const targetTokenDiameter = firstTargetToken.document.width;
+      const attackerTokenDocument = this.getActiveTokens()[0];
+
+      const attackTokenRadius = attackerTokenDocument.document.width / 2;
+      const attackerTokenDiameter = attackerTokenDocument.document.width;
+      const gridDistance = game.scenes.active.grid.distance;
+      let distance = firstTargetDistance.distance
+
+      if ( targetTokenDiameter > 1 ) {
+        distance -= (firstTargetRadius ) * gridDistance;
+      } 
+
+      if ( attackerTokenDiameter > 1 ) {
+        distance -= (attackTokenRadius ) * gridDistance;
+      }
+
+      distance = Math.max(1, Math.round(distance));
+      let range;  
+        let weaponShortRangeMin = 1;
+        let weaponShortRangeMax = 1;
+        let weaponLongRangeMin = 1;
+        let weaponLongRangeMax = 1;
+        if ( weapon !== "unarmed" && weapon !== "tail" ) {      
+        weaponShortRangeMin = weapon.system.range.shortMin >= 0 ? weapon.system.range.shortMin : 1;
+        weaponShortRangeMax = weapon.system.range.shortMax >= 0 ? weapon.system.range.shortMax : 1;
+        weaponLongRangeMin = weapon.system.range.longMin >= 0 ? weapon.system.range.longMin : 1;
+        weaponLongRangeMax = weapon.system.range.longMax >= 0 ? weapon.system.range.longMax : 1;
+        }
+
+      if (  weaponLongRangeMax < distance ) {
+        ui.notifications.error( "Target is out of range" );
+        return;
+      } else if ( weaponShortRangeMin > distance && weaponShortRangeMin !== 1 ) {
+        ui.notifications.error( "Target is to close" );
+        return;
+      } else if ( weaponShortRangeMax >= distance && weaponShortRangeMin <= distance ) {
+        range = "short";
+        return { weapon, targetsArray, modifier  };
+      } else if ( weaponLongRangeMin <= distance && weaponLongRangeMax >= distance ) {
+        range = "long";
+        modifier.range += -2;
+        return { weapon, targetsArray, modifier };
+      }
+    }
+  }
+
+  async getTargets( targets ) {
+    const targetArray = [];
+    for ( const target of targets ) {
+      targetArray.push( {
+        name: target.name,
+        id: target.id,
+        type: target.actor.type,
+        img: target.actor.img,
+      } );
+    }
+    return targetArray;
+  }
+
+  async getDistanceToTarget( target ) {
+    const actorToken = this.getActiveTokens()[0];
+    const targetToken = canvas.tokens.get(target.id);
+    const distance = canvas.grid.measurePath([actorToken.center, target.center])
+    return distance;
   }
 
   /**
@@ -503,7 +848,7 @@ export default class ActorEd extends Actor {
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
    */
-  #processRoll( roll ) {
+  async #processRoll( roll ) {
     if ( !roll ) {
       // No roll available, do nothing.
       return;
@@ -520,6 +865,7 @@ export default class ActorEd extends Actor {
     }
 
     const rollTypeProcessors = {
+      "attack": () => this.#processAttackResult( roll ),
       "recovery": () => this.#processRecoveryResult( roll ),
       "knockdown": () => this.#processKnockdownResult( roll ),
       "jumpUp": () => this.#processJumpUpResult( roll )
@@ -530,8 +876,13 @@ export default class ActorEd extends Actor {
     if ( processRollType ) {
       processRollType();
     } else {
-      roll.toMessage();
+      await roll.toMessage();
     }
+  }
+
+  async #processAttackResult( roll ) {
+    await roll.evaluate();
+    roll.toMessage();
   }
 
   async #processJumpUpResult( roll ) {
@@ -747,7 +1098,7 @@ export default class ActorEd extends Actor {
           case "twoHands": {
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
             addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
-            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield?.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
           }
           case "mainHand":

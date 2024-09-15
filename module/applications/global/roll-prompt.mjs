@@ -10,7 +10,7 @@ import EdRollOptions from "../../data/other/roll-options.mjs";
  */
 export default class RollPrompt extends FormApplication {
 
-    constructor( edRollOptions = {},  { resolve, rollData = {}, options = {} } = {} ) {
+    constructor( edRollOptions = {}, { resolve, rollData = {}, options = {} } = {} ) {
         if ( !( edRollOptions instanceof EdRollOptions ) ) {
             throw new TypeError( "ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`." );
         }
@@ -142,7 +142,7 @@ export default class RollPrompt extends FormApplication {
 
         await this.submit( {preventRender: true} );
 
-        const roll = new EdRoll( undefined, this.rollData, this.edRollOptions );
+        const roll = new EdRoll( undefined, this.rollData, this.edRollOptions);
         this.resolve?.( roll );
         return this.close();
     }

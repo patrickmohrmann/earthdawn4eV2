@@ -45,8 +45,11 @@ export default class EdRoll extends Roll {
       }]`;
     super( baseTerm, data, edRollOptions );
 
-    this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
-
+    if( this.options.rollType === "attack") {
+      this.flavorTemplate = ED4E.rollTypes.attack.flavorTemplate;
+    } else {
+      this.flavorTemplate = ED4E.testTypes[this.options.testType]?.flavorTemplate ?? ED4E.testTypes.arbitrary.flavorTemplate;
+    }
     if ( !this.options.extraDiceAdded ) this.#addExtraDice();
     if ( !this.options.configured ) this.#configureModifiers();
   }
@@ -201,6 +204,55 @@ export default class EdRoll extends Roll {
     } );
   }
 
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add the actors maneuver.
+   */
+  get actorManeuver() {
+    if ( this.options.rollType === "attack" ) {
+      const actor = game.actors.get(this.options.actor.id);
+      const maneuver = actor.items.filter( ( item ) => item.type === "knackManeuver" );
+      return maneuver;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add the target tokens reactions.
+   * @UserFunction                    UF_Rolls-targetReactions
+   */
+  get targetReactions() {
+    const rollTypeToReactionType = {
+        "attack": "physical",
+        "spellcasting": "mystical",
+        "interaction": "social"
+    };
+
+    const reactionType = rollTypeToReactionType[this.options.rollType];
+    if (!reactionType) return;
+
+    const targetsTokens = this.options.targetTokens;
+    let reactions = [];
+
+    for (const target of targetsTokens) {
+        const findActor = canvas.scene?.tokens.get(target.id)?.actor;
+        if (!findActor) continue;
+
+        const targetReactions = findActor.items.filter(item => item.system.reaction?.reactionType === reactionType);
+        reactions.push({
+            actor: findActor.id,
+            name: findActor.name,
+            reactions: targetReactions,
+            img: findActor.img
+        });
+    }
+
+    return reactions;
+}
+
   /* -------------------------------------------- */
 
   /**
@@ -327,6 +379,8 @@ export default class EdRoll extends Roll {
     }
   }
 
+  
+
   /* -------------------------------------------- */
   /*  Chat Messages                               */
   /* -------------------------------------------- */
@@ -352,9 +406,14 @@ export default class EdRoll extends Roll {
     templateData.failure = this.isFailure;
     templateData.numSuccesses = this.numSuccesses ?? 0;
     templateData.numExtraSuccesses = this.numExtraSuccesses ?? 0;
+    templateData.targetReactions = this.targetReactions;
+    templateData.actorManeuver = this.actorManeuver;
 
     return templateData;
   }
+
+  /* -------------------------------------------- */
+
 
   /* -------------------------------------------- */
 
@@ -363,8 +422,14 @@ export default class EdRoll extends Roll {
    * @param {JQuery} jquery
    * @UserFunction                      UF_Rolls-addSuccessClass
    */
-  addSuccessClass( jquery ) {
-    if ( this.isSuccess || this.isFailure ) {
+  addSuccessClass( jquery, success, setSuccess ) {
+    if ( setSuccess === true ) {
+      if (success === true) {
+        jquery.find( ".dice-total" ).addClass( "roll-success" );
+      } else if ( success === false ) {
+        jquery.find( ".dice-total" ).addClass( "roll-failure" );
+      }
+    } else {
       jquery.find( ".dice-total" ).addClass(
         this.isSuccess ? "roll-success" : "roll-failure"
       );
@@ -456,7 +521,6 @@ export default class EdRoll extends Roll {
   */
   async toMessage( messageData = {}, options = {} ) {
     if ( !this._evaluated ) await this.evaluate();
-
     messageData.flavor = await this.chatFlavor;
 
     return super.toMessage( messageData, options );

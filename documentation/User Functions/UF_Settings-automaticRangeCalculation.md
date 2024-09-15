@@ -1,0 +1,1 @@
+This system setting enables the automatic range calculation between actors. if it is active it will not be possible to attack another actor which is outside of the valid range.

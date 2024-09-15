@@ -1,0 +1,1 @@
+this function is triggered if a chat message triggers another roll. If the triggered roll (usually reactions) is successful, the message will be updated by exchanging the success indicator (red or green color of the result).

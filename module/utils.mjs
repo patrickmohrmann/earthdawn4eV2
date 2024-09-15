@@ -637,6 +637,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs",
     "systems/ed4e/templates/chat/dice-partials/roll-target-modifier.hbs",
 
+    // chat partials
+    "systems/ed4e/templates/chat/chat-partials/reactions.hbs",
+
     // other tabs
     "systems/ed4e/templates/item/item-partials/item-details/other-tabs/discipline-advancement.hbs",
 

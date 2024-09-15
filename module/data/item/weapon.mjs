@@ -5,6 +5,7 @@ import { inRange } from "../../utils.mjs";
 /**
  * Data model template with information on weapon items.
  * @property {string} weaponType            type of weapon
+ * @property {string} missleWeaponType      type of missle weapon
  * @property {object} damage                damage object
  * @property {string} damage.attribute       base attribute used for damage
  * @property {number} damage.baseStep        weapon basic damage step
@@ -32,6 +33,13 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 initial: "",
                 label: "ED.Item.Weapon.Label.weaponType",
                 hint: "ED.Item.Weapon.Hint.weaponType"
+            } ),
+            missleWeaponType: new fields.StringField( {
+                required: true,
+                nullable: true,
+                initial: "",
+                label: "ED.Item.Weapon.Label.missleWeaponType",
+                hint: "ED.Item.Weapon.Hint.missleWeaponType"
             } ),
             damage: new fields.SchemaField( {
                 attribute: new fields.StringField( {
@@ -80,29 +88,54 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 hint: "ED.Item.Weapon.Hint.dexterityMinimum"
             } ),
             range: new fields.SchemaField( {
-                short: new fields.NumberField( {
+                shortMin: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
                     integer: true,
-                    label: "ED.Item.ShipWeapon.rangeShort"
+                    label: "ED.Item.ShipWeapon.rangeShortMin"
                 } ),
-                long: new fields.NumberField( {
+                shortMax: new fields.NumberField( {
                     required: true,
                     nullable: false,
                     min: 0,
                     initial: 0,
                     integer: true,
-                    label: "ED.Item.ShipWeapon.rangeLong"
+                    label: "ED.Item.ShipWeapon.rangeShortMax"
+                } ),
+                longMin: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeLongMin"
+                } ),
+                longMax: new fields.NumberField( {
+                    required: true,
+                    nullable: false,
+                    min: 0,
+                    initial: 0,
+                    integer: true,
+                    label: "ED.Item.ShipWeapon.rangeLongMax"
                 } ),
             } ),
-            ammunition: new fields.NumberField( {
-                required: true,
-                nullable: true,
-                min: 0,
-                integer: true,
-                label: "ED.Item.Weapon.Label.ammunition"
+            ammunition: new fields.SchemaField( {
+                amount: new fields.NumberField( {
+                    required: true,
+                    nullable: true,
+                    min: 0,
+                    integer: true,
+                    label: "ED.Item.Weapon.Label.ammunition"
+                } ),
+                type: new fields.StringField( {
+                    required: true,
+                    nullable: true,
+                    initial: "",
+                    label: "ED.Item.Weapon.Label.ammunitionType",
+                    hint: "ED.Item.Weapon.Hint.ammunitionType"
+                } ),
             } ),
             forgeBonus: new fields.NumberField( {
                 required: true,
@@ -146,7 +179,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
      * @type {boolean}
      */
     get isTwoHandedRanged() {
-        return ["bow", "crossbow"].includes( this.weaponType );
+        return ["bow", "crossbow"].includes( this.missleWeaponType );
     }
 
     /* -------------------------------------------- */

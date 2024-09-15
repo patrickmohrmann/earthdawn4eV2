@@ -1,3 +1,11 @@
 <div>
     <h3>{{localize "ED.Item.General.details"}}</h3>
 </div>
+
+{{!-- abilty action type --}}
+<div class="item-data__input--line">
+    <label class="label__left">{{localize "ED.Item.Ability.rollType"}}:</label>
+    <select name="system.rollType">
+        {{selectOptions config.rollTypes selected=item.system.rollType blank="" localize=true }}
+    </select>
+</div>
