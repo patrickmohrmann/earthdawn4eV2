@@ -59,7 +59,14 @@ export default class NamegiverData extends SystemDataModel.mixin(
             tailAttack: new fields.BooleanField( {
                 required: true,
                 initial: false,
-                label: "X-TailAttack"
+                label: "ED.Item.Namegiver.TailAttack",
+                hint: "ED.Item.Namegiver.TailAttack"
+            } ),
+            livingArmorOnly: new fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Data.Item.Labels.livingArmorOnly",
+                hint: "ED.Data.Item.Hints.livingArmorOnly"
             } ),
             weaponSize: new fields.SchemaField( {
                 oneHanded: new fields.SchemaField( {

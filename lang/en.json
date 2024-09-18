@@ -323,10 +323,14 @@
             },
             "Item": {
                 "Labels": {
-                    "edid":                                         "ED-ID"
+                    "edid":                                         "ED-ID",
+                    "livingArmorOnly":                              "Living Armor Only",
+                    "livingArmor":                                  "Living Armor"
                 },
                 "Hints": {
-                    "edid":                                         "An ID to identify an item without considering its name"
+                    "edid":                                         "An ID to identify an item without considering its name",
+                    "livingArmorOnly":                              "This item is considered as living armor" ,
+                    "livingArmor":                                  "This item counts as living Armor"
                 }
             },
             "Journal": {

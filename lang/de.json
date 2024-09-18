@@ -322,10 +322,14 @@
             },
             "Item": {
                 "Labels": {
-                    "edid":                                         "ED-ID"
+                    "edid":                                         "ED-ID",
+                    "livingArmorOnly":                              "Nur lebende Rüstung",
+                    "livingArmor":                                  "Lebende Rüstung"
                 },
                 "Hints": {
-                    "edid":                                         "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+                    "edid":                                         "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
+                    "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden." ,
+                    "livingArmor":                                  "Dieser Gegenstand gilt als Lebende Rüstung"
                 }
             },
             "Journal": {

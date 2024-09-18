@@ -12,6 +12,10 @@
         <input class="item-data__checkbox--line" type="checkbox" name="system.tailAttack" {{checked
             item.system.tailAttack}}>
     </div>
+    {{!-- living armor only --}}
+    <div class="item-data__input--line">
+        {{formField systemFields.livingArmorOnly name="system.livingArmorOnly" value=item.system.livingArmorOnly localize=true}}
+    </div>
     {{!-- One Handed Weapon Size Minimum--}}
     <div>
         <div class="item-data__input--line">
