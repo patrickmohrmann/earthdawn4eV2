@@ -26,11 +26,11 @@ export default class NamegiverTemplate extends SentientTemplate {
               // for the `formField` Handlebars helper to work correctly and have the name
               // as the value attribute of the option tag
               choices: () => {
-                const languages = game.settings.get("ed4e", "languages");
-                if (!languages || Object.keys(languages).length === 0) {
+                const languages = game.settings.get( "ed4e", "languages" );
+                if ( !languages || Object.keys( languages ).length === 0 ) {
                   return {}; // Skip the function and return an empty object
                 }
-                return Object.fromEntries(languages.map(lang => [lang, lang]));
+                return Object.fromEntries( languages.map( lang => [ lang, lang ] ) );
               }
           } ),
           {
