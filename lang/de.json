@@ -350,9 +350,14 @@
             },
             "Actor": {
                 "Labels": {
+                    "challengeRate":                                "Herausforderungsrate",
+                    "mobRules":                                     "Mob Regeln",
                     "toughness":                                    "bla"
                 },
-                "Hints": {}
+                "Hints": {
+                    "challengeRate":                                "Challenging Rate of the Actor",
+                    "mobRules":                                     "activate if the Actor has not death rate but counts wounds instead"
+                }
             },
             "Item": {
                 "Labels": {

@@ -347,9 +347,14 @@
             },
             "Actor": {
                 "Labels": {
-                    "toughness": "bla"
+                    "challengeRate":                                "Challenge Rate",
+                    "mobRules":                                     "Mob Rules",
+                    "toughness":                                    "bla"
                 },
-                "Hints": {}
+                "Hints": {
+                    "challengeRate":                                "Challenging Rate of the Actor",
+                    "mobRules":                                     "activate if the Actor has not death rate but counts wounds instead"
+                }
             },
             "Item": {
                 "Labels": {

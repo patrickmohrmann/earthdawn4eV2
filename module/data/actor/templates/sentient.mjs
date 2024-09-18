@@ -126,6 +126,11 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.woundThreshold"
                     } ),
+                    maxWounds: new fields.NumberField( {
+                        required: true,
+                        initial: 0,
+                        label: "ED.Actor.Configuration.maxWounds"
+                    } ),
                     bloodMagic: new fields.SchemaField( {
                         damage: new fields.NumberField( {
                             required: true,

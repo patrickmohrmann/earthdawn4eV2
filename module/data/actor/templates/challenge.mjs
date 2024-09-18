@@ -18,7 +18,8 @@ export default class ChallengeFields {
                     nullable: false,
                     initial: "circle1",
                     choices: ED4E.challengeRates,
-                    label: "ED.Actor.Challenge.rate"
+                    label: "ED.Data.Actor.Labels.challengeRate",
+                    hint: "ED.Data.Actor.Hints.challengeRate"
                 } ), 
             } )
         };

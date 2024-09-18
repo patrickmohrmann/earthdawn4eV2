@@ -23,22 +23,12 @@ export default class NpcData extends NamegiverTemplate.mixin(
             mobRules: new fields.BooleanField( {
                 required: true,
                 initial: false,
-                label: "ED.Data.Item.Labels.edid",
-            } ),
-            characteristics: new fields.SchemaField( {
-                health: new fields.SchemaField( {
-                    maxWounds: new fields.NumberField( {
-                        required: true,
-                        initial: 0,
-                        label: "ED.Actor.Configuration.maxWounds"
-                    } ),
-                } )
+                label: "ED.Data.Actor.Labels.mobRules",
+                hint: "ED.Data.Actor.Hints.mobRules"
             } ),
             ...ChallengeFields.challenge
         } );
     }
-
-    //static LOCALIZATION_PREFIXES = ["ED.Actor"];
 
     /* -------------------------------------------- */
     /*  Data Preparation                            */
@@ -61,7 +51,6 @@ export default class NpcData extends NamegiverTemplate.mixin(
             attributeData.baseStep = attributeData.step;
         }
     }
-
 
     /* -------------------------------------------- */
     /*  Migrations                                  */
