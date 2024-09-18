@@ -458,6 +458,7 @@
         "Notifications": {
             "Info": {},
             "Warn": {
+                "livingArmorOnly":                                  "Dieser Namensgeber kann nur lebende Rüstung tragen.",
                 "piecemealArmorSizeExceeded":                       "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
             },
             "Error": {}
