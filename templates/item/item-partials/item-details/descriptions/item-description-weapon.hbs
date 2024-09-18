@@ -7,7 +7,7 @@
             {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
         </select>
     </div>
-        {{#if (eq item.system.weaponType "bow")}}
+        {{#if item.system.isRanged}}
             {{!-- ammunition - Type --}}
             <div class="item-data__input--line">
                 <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
@@ -15,43 +15,8 @@
                     {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
                 </select>
             </div>
-            {{!-- ammunition - Amount --}}
-            <div class="item-data__input--line">
-                <label class="partial__40--left">{{localize "ED.Item.Weapon.ammunition"}}:</label>
-                <input class="partial__55--right" name="system.ammunition.amount" type="text"
-                    value="{{item.system.ammunition.amount}}" data-dtype="Number">  
-            </div>
         {{/if}}
-        {{#if (eq item.system.weaponType "crossbow")}}
-            {{!-- ammunition - Type --}}
-            <div class="item-data__input--line">
-                <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
-                <select class="partial__55--right" name="system.ammunition.type">
-                    {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
-                </select>
-            </div>
-            {{!-- ammunition - Amount --}}
-            <div class="item-data__input--line">
-                <label class="partial__40--left">{{localize "ED.Item.Weapon.ammunition"}}:</label>
-                <input class="partial__55--right" name="system.ammunition.amount" type="text"
-                    value="{{item.system.ammunition.amount}}" data-dtype="Number">  
-            </div>
-        {{/if}}
-        {{#if (eq item.system.weaponType "blowgun")}}
-            {{!-- ammunition - Type --}}
-            <div class="item-data__input--line">
-                <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
-                <select class="partial__55--right" name="system.ammunition.type">
-                    {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
-                </select>
-            </div>
-            {{!-- ammunition - Amount --}}
-            <div class="item-data__input--line">
-                <label class="partial__40--left">{{localize "ED.Item.Weapon.ammunition"}}:</label>
-                <input class="partial__55--right" name="system.ammunition.amount" type="text"
-                    value="{{item.system.ammunition.amount}}" data-dtype="Number">  
-            </div>
-        {{/if}}
+    
     {{!-- Damage Attribute --}}
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.Weapon.damageAttribute"}}:</label>
@@ -83,7 +48,7 @@
         <input class="partial__55--right" name="system.strengthMinimum" type="text"
             value="{{item.system.strengthMinimum}}" data-dtype="Number">
     </div>
-    {{#if (eq isRangedWeapon this.system.weaponType)}}
+    {{#if item.system.isRanged}}
         {{!-- short range Min --}}
         <div class="item-data__input--line">
             <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeShortMin"}}:</label>
