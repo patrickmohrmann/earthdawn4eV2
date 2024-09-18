@@ -689,7 +689,7 @@ export default class ActorEd extends Actor {
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
-    const namegiver = this.items.filter(item => item.type === "namegiver")[0];
+    const namegiver = this.items.filter( item => item.type === "namegiver" )[ 0 ];
     const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };
     const equippedWeapons = this.itemTypes.weapon.filter(
       weapon => [ "mainHand", "offHand", "twoHands" ].includes( weapon.system.itemStatus )
