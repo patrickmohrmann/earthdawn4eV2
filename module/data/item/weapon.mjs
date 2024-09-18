@@ -114,20 +114,13 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
                 } ),
             } ),
             ammunition: new fields.SchemaField( {
-                amount: new fields.NumberField( {
-                    required: true,
-                    nullable: true,
-                    min: 0,
-                    integer: true,
-                    label: "ED.Item.Weapon.Label.ammunition"
-                } ),
                 type: new fields.StringField( {
                     required: true,
                     nullable: true,
                     blank: true,
                     initial: "",
                     label: "ED.Item.Weapon.ammunition.type"
-            } ),
+                } ),
             } ),
             forgeBonus: new fields.NumberField( {
                 required: true,
@@ -172,6 +165,10 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
      */
     get isTwoHandedRanged() {
         return ["bow", "crossbow"].includes( this.weaponType );
+    }
+
+    get isRanged() {
+        return ["thrown", "blowgun", "bow", "crossbow"].includes( this.weaponType );
     }
 
     /* -------------------------------------------- */

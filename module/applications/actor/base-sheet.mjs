@@ -38,6 +38,53 @@ export default class ActorSheetEd extends ActorSheet {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
   }
 
+  async getWeaponDamageTotal() {
+    let totalDamage = 0;
+
+    for (let item of this.actor.items) {
+      if (item.type === "weapon") {
+        const attributeKey = item.system.damage.attribute;
+        const attributeValue = this.actor.system.attributes[attributeKey]?.step || 0;
+        totalDamage += attributeValue + (item.system.damage.baseStep || 0);
+      }
+    }
+    return totalDamage;
+  }
+
+  // Handlebars.registerHelper('sumMatchingEquipment', function(actor, item) {
+  //   // Get the ammunition type of the current item
+  //   const currentAmmunitionType = item.system.ammunition.type;
+  
+  //   // Filter the actor's items to find matching equipment
+  //   const matchingItems = actor.items.filter(i => 
+  //     i.type === 'equipment' && i.system.ammunition.type === currentAmmunitionType
+  //   );
+  
+  //   // Sum up the values after multiplying system.amount with system.bundleSize
+  //   const totalSum = matchingItems.reduce((sum, i) => {
+  //     return sum + (i.system.amount * i.system.bundleSize);
+  //   }, 0);
+  
+  //   // Return the total sum
+  //   return totalSum;
+  // });
+
+//   async getAmmunition() {
+//     let ammunition = 0;
+//     for ( let item of this.actor.items ) {
+//       if ( item.type === "weapon" && item.system.isRanged === true && item.system.weaponType !== "thrown" ) {
+//         const requiredAmmunitionType = item.system.ammunition.type;
+//         const matchingItems = actor.items.filter(i => 
+//           i.type === 'equipment' && i.system.ammunition.type === requiredAmmunitionType
+//         );
+//         const ammunition = matchingItems.reduce((sum, i) => {
+//           return sum + (i.system.amount * i.system.bundleSize);
+//         }, 0);
+//     }
+//   }
+//   return ammunition;
+// }
+
   /* -------------------------------------------- */
   /*  Get Data            */
   /* -------------------------------------------- */
@@ -48,13 +95,10 @@ export default class ActorSheetEd extends ActorSheet {
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
     systemData.splitTalents = game.settings.get( "ed4e", "talentsSplit" );
-    systemData.embeddedItems = {
-      weapons: {
-        überlegen
-      }
-      is ranged
-      ...d
-    };
+    systemData.totalDamage = await this.getWeaponDamageTotal();
+    //systemData.ammunition = await this.getAmmunition();
+    console.log("ACTOR", this.actor);
+    console.log("systemData", systemData);
     return systemData;
   }
 

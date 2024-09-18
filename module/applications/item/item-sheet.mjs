@@ -66,6 +66,8 @@ export default class ItemSheetEd extends ItemSheet {
     return foundry.utils.expandObject( enrichment );
   }
 
+
+
   async getData() {
     const systemData = super.getData();
 
@@ -76,6 +78,7 @@ export default class ItemSheetEd extends ItemSheet {
     systemData.isPlayer = !game.user.isGM;
     systemData.isClass = this.item.system instanceof ClassTemplate;
     systemData.config = ED4E;
+    systemData.weapons = {};
 
     return systemData;
   }
