@@ -47,7 +47,7 @@ export default class ActorSheetEd extends ActorSheet {
   async getItemData( items ) {
     const weapons = items.filter( i => i.type === "weapon" );
     // weapon data enrichment
-    for (let weapon of weapons) {
+    for ( let weapon of weapons ) {
       // weapon damage
       weapon.totalDamage = await this.getWeaponDamageTotal( weapon );
       // ammunition
