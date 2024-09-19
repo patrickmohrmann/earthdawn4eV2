@@ -38,52 +38,53 @@ export default class ActorSheetEd extends ActorSheet {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
   }
 
-  async getWeaponDamageTotal() {
-    let totalDamage = 0;
-
-    for (let item of this.actor.items) {
-      if (item.type === "weapon") {
-        const attributeKey = item.system.damage.attribute;
-        const attributeValue = this.actor.system.attributes[attributeKey]?.step || 0;
-        totalDamage += attributeValue + (item.system.damage.baseStep || 0);
+  /**
+   * @description                     Collection of all items of the actor to enrich them with additional data
+   * @param {Object}    items         The items of the actor
+   * @returns 
+   * @UserFunction                    UF_PhysicalItems-getItemData
+   */
+  async getItemData(items) {
+    const weapons = items.filter(i => i.type === "weapon");
+    // weapon data enrichment
+    for (let weapon of weapons) {
+      // weapon damage
+      weapon.totalDamage = await this.getWeaponDamageTotal(weapon);
+      // ammunition
+      if (weapon.system.isRanged && weapon.system.weaponType !== "thrown") {
+        weapon.ammunition = await this.getAmmunition( weapon );
       }
     }
-    return totalDamage;
+    return items;
   }
 
-  // Handlebars.registerHelper('sumMatchingEquipment', function(actor, item) {
-  //   // Get the ammunition type of the current item
-  //   const currentAmmunitionType = item.system.ammunition.type;
-  
-  //   // Filter the actor's items to find matching equipment
-  //   const matchingItems = actor.items.filter(i => 
-  //     i.type === 'equipment' && i.system.ammunition.type === currentAmmunitionType
-  //   );
-  
-  //   // Sum up the values after multiplying system.amount with system.bundleSize
-  //   const totalSum = matchingItems.reduce((sum, i) => {
-  //     return sum + (i.system.amount * i.system.bundleSize);
-  //   }, 0);
-  
-  //   // Return the total sum
-  //   return totalSum;
-  // });
+  /**
+   * @description                     Collect all items with the fitting ammunition type of the weapon
+   * @param {Object}    weapon        The weapon item
+   * @returns 
+   * @UserFunction                    UF_PhysicalItems-getAmmunition
+   */
+  async getAmmunition( weapon ) {	
+    let ammunition = 0;	
+    for (let item of this.actor.items) {	
+      if (item.type === "equipment" && item.system.ammunition.type === weapon.system.ammunition.type) {	
+        ammunition += item.system.amount * item.system.bundleSize;	
+      }	
+    }	
+    return ammunition;	
+  }
 
-//   async getAmmunition() {
-//     let ammunition = 0;
-//     for ( let item of this.actor.items ) {
-//       if ( item.type === "weapon" && item.system.isRanged === true && item.system.weaponType !== "thrown" ) {
-//         const requiredAmmunitionType = item.system.ammunition.type;
-//         const matchingItems = actor.items.filter(i => 
-//           i.type === 'equipment' && i.system.ammunition.type === requiredAmmunitionType
-//         );
-//         const ammunition = matchingItems.reduce((sum, i) => {
-//           return sum + (i.system.amount * i.system.bundleSize);
-//         }, 0);
-//     }
-//   }
-//   return ammunition;
-// }
+  /**
+   * @description                       Get the total damage of an owned weapon item
+   * @param {object}      weapon        The weapon item
+   * @returns 
+   * @UserFunction                      UF_PhysicalItems-getWeaponDamageTotal
+   */
+  async getWeaponDamageTotal(weapon) {
+    const attributeKey = weapon.system.damage.attribute;
+    const attributeValue = this.actor.system.attributes[attributeKey]?.step || 0;
+    return attributeValue + (weapon.system.damage.baseStep || 0);
+  }
 
   /* -------------------------------------------- */
   /*  Get Data            */
@@ -95,14 +96,10 @@ export default class ActorSheetEd extends ActorSheet {
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
     systemData.splitTalents = game.settings.get( "ed4e", "talentsSplit" );
-    systemData.totalDamage = await this.getWeaponDamageTotal();
-    //systemData.ammunition = await this.getAmmunition();
-    console.log("ACTOR", this.actor);
-    console.log("systemData", systemData);
+    systemData.items = await this.getItemData( this.actor.items );
+
     return systemData;
   }
-
-
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
