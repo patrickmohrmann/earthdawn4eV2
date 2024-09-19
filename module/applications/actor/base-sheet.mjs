@@ -44,14 +44,14 @@ export default class ActorSheetEd extends ActorSheet {
    * @returns 
    * @UserFunction                    UF_PhysicalItems-getItemData
    */
-  async getItemData(items) {
-    const weapons = items.filter(i => i.type === "weapon");
+  async getItemData( items ) {
+    const weapons = items.filter( i => i.type === "weapon" );
     // weapon data enrichment
     for (let weapon of weapons) {
       // weapon damage
-      weapon.totalDamage = await this.getWeaponDamageTotal(weapon);
+      weapon.totalDamage = await this.getWeaponDamageTotal( weapon );
       // ammunition
-      if (weapon.system.isRanged && weapon.system.weaponType !== "thrown") {
+      if ( weapon.system.isRanged && weapon.system.weaponType !== "thrown" ) {
         weapon.ammunition = await this.getAmmunition( weapon );
       }
     }
@@ -66,8 +66,8 @@ export default class ActorSheetEd extends ActorSheet {
    */
   async getAmmunition( weapon ) {	
     let ammunition = 0;	
-    for (let item of this.actor.items) {	
-      if (item.type === "equipment" && item.system.ammunition.type === weapon.system.ammunition.type) {	
+    for ( let item of this.actor.items ) {	
+      if ( item.type === "equipment" && item.system.ammunition.type === weapon.system.ammunition.type ) {	
         ammunition += item.system.amount * item.system.bundleSize;	
       }	
     }	
@@ -80,10 +80,10 @@ export default class ActorSheetEd extends ActorSheet {
    * @returns 
    * @UserFunction                      UF_PhysicalItems-getWeaponDamageTotal
    */
-  async getWeaponDamageTotal(weapon) {
+  async getWeaponDamageTotal( weapon ) {
     const attributeKey = weapon.system.damage.attribute;
     const attributeValue = this.actor.system.attributes[attributeKey]?.step || 0;
-    return attributeValue + (weapon.system.damage.baseStep || 0);
+    return attributeValue + ( weapon.system.damage.baseStep || 0 );
   }
 
   /* -------------------------------------------- */
