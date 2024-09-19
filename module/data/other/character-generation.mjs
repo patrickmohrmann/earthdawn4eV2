@@ -499,6 +499,15 @@ export default class CharacterGenerationData extends SparseDataModel {
     } );
   }
 
+  addEquipmentItems( equipmentUuids ) {
+    if ( !equipmentUuids ) return {};
+
+    return this.updateSource( {
+      equipmentItems: ( new Set( this.equipmentItems ) ).add( equipmentUuids )
+    } )
+  }
+
+
   async addSpell( spellUuid ) {
     if ( !spellUuid ) return {};
 

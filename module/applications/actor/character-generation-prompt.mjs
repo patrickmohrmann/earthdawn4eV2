@@ -101,8 +101,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
         'skill',
         false,
         'OBSERVER',
-        ['system.source.tier'],
-        ( x ) => x.system.source.tier === 'novice',
+        ['system.tier'],
+        ( x ) => x.system.tier === 'novice',
       ),
       spells: await getAllDocuments(
         'Item',
@@ -207,6 +207,18 @@ export default class CharacterGenerationPrompt extends FormApplication {
     );
     $( this.form.querySelectorAll( 'td.spell-name' ) ).on(
       'click', this._onClickSpell.bind( this )
+    );
+    $( this.form.querySelectorAll( 'div.artisan-item' ) ).on(
+      'click', this._onClickEquipment.bind( this )
+    );
+    $( this.form.querySelectorAll( 'div.cloth-item' ) ).on(
+      'click', this._onClickEquipment.bind( this )
+    );
+    $( this.form.querySelectorAll( 'div.weapon-item' ) ).on(
+      'click', this._onClickEquipment.bind( this )
+    );
+    $( this.form.querySelectorAll( 'div.equipment-item' ) ).on(
+      'click', this._onClickEquipment.bind( this )
     );
     $(this.form.querySelectorAll( 'button.reset-points' )).on('click', this._onReset.bind(this));
     $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
@@ -360,6 +372,14 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   _onSelectTalentOption( event ) {
     event.currentTarget.querySelector( 'input[type="radio"]' ).click();
+  }
+
+  _onClickEquipment( event ) {
+    const itemUuid = event.currentTarget.dataset.equipmentUuid;
+    const itemSelected = event.currentTarget.dataset.itemSelected;
+    let result = this.object.addEquipmentItems( itemUuid );
+
+    this.render();
   }
 
   _onClickSpell( event ) {

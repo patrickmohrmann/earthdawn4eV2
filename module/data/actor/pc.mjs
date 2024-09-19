@@ -162,6 +162,8 @@ export default class PcData extends NamegiverTemplate.mixin(
         );
         const spellDocuments = await generation.spellDocuments;
 
+        const equpipmentDocuments = await generation.equipmentDocuments;
+
         await newActor.createEmbeddedDocuments( "Item", [
             namegiverDocument,
             classDocument,

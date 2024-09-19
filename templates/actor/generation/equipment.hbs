@@ -7,8 +7,8 @@
   <div>
     {{#each this.equipmentItems}}
       {{#if (eq this.system.characterGeneration.artisanTool true)}}
-      <div class="equipment-item">
-        <input type="radio" id="{{this.id}}" name="selectedEquipment" value="{{this.name}}">
+      <div class="artisan-item" data-equipment-uuid="{{this.uuid}}">
+        <input type="radio" id="{{this.id}}" data-equipment-uuid="{{this.uuid}}" name="selectedEquipment" value="{{this.name}}">
         <label for="{{this.name}}">
           {{this.name}}
           {{!-- : {{this.system.description.value}} --}}
@@ -22,8 +22,8 @@
     {{#each this.equipmentItems}}
     {{log this}}
       {{#if (eq this.system.characterGeneration.clothSet true)}}
-      <div class="equipment-item">
-        <input type="radio" id="{{this.id}}" name="selectedEquipment" value="{{this.name}}">
+      <div class="cloth-item" data-equipment-uuid="{{this.uuid}}">
+        <input type="radio" id="{{this.id}}" data-equipment-uuid="{{this.uuid}}" name="selectedEquipment" value="{{this.name}}">
         <label for="{{this.name}}">
           {{this.name}}
           {{!-- : {{this.system.description.value}} --}}
@@ -36,8 +36,8 @@
   <div>
     {{#each this.weaponItems}}
       {{#if (eq this.system.characterGeneration.weapon true)}}
-      <div class="equipment-item">
-        <input type="radio" id="{{this.id}}" name="selectedEquipment" value="{{this.name}}">
+      <div class="weapon-item" data-equipment-uuid="{{this.uuid}}">
+        <input type="radio" id="{{this.id}}" data-equipment-uuid="{{this.uuid}}" name="selectedEquipment" value="{{this.name}}">
         <label for="{{this.name}}">
           {{this.name}}
           {{!-- : {{this.system.description.value}} --}}
@@ -51,8 +51,8 @@
     {{#each this.equipmentItems}}
     {{#if (eq this.system.characterGeneration.clothSet false)}}
     {{#if (eq this.system.characterGeneration.artisanTool false)}}
-    <div class="equipment-item">
-          <input type="checkbox" id="{{this.name}}" name="selectedEquipment" value="{{this.name}}" checked>
+    <div class="equipment-item" data-equipment-uuid="{{this.uuid}}">
+          <input type="checkbox" id="{{this.name}}" data-equipment-uuid="{{this.uuid}}" name="selectedEquipment" value="{{this.name}}" checked>
             {{this.name}}
             </div>
     {{/if}}
