@@ -164,11 +164,11 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
      * @type {boolean}
      */
     get isTwoHandedRanged() {
-        return ["bow", "crossbow"].includes( this.weaponType );
+        return [ "bow", "crossbow" ].includes( this.weaponType );
     }
 
     get isRanged() {
-        return ["thrown", "blowgun", "bow", "crossbow"].includes( this.weaponType );
+        return [ "thrown", "blowgun", "bow", "crossbow" ].includes( this.weaponType );
     }
 
     /* -------------------------------------------- */
