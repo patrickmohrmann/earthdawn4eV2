@@ -167,7 +167,7 @@ class ActorPromptFactory extends PromptFactory {
       class:   "nightRest default button-nightRest",
       default: true
     } );
-    buttons.push( this.constructor.cancelButton() );
+    buttons.push( this.constructor.cancelButton );
 
     return DialogClass.wait( {
       id:       "recovery-mode-prompt",
@@ -253,7 +253,7 @@ class ActorPromptFactory extends PromptFactory {
             return formData.object;
           }
         },
-        this.constructor.cancelButton()
+        this.constructor.cancelButton
       ],
       content: await renderTemplate(
         "systems/ed4e/templates/actor/prompts/take-damage-prompt.hbs",
@@ -266,7 +266,7 @@ class ActorPromptFactory extends PromptFactory {
   async _jumpUpPrompt() {
     const buttons = await this._getItemButtonsByEdid( "jump-up" );
 
-    const noAbilityButton = this.constructor.cancelButton();
+    const noAbilityButton = this.constructor.cancelButton;
     noAbilityButton.label = "ED.Dialogs.Buttons.noAbility";
     buttons.push( noAbilityButton );
 
@@ -287,7 +287,7 @@ class ActorPromptFactory extends PromptFactory {
   async _knockDownPrompt() {
     const buttons = await this._getItemButtonsByEdid( "knock-down" );
 
-    const noAbilityButton = this.constructor.cancelButton();
+    const noAbilityButton = this.constructor.cancelButton;
     noAbilityButton.label = "ED.Dialogs.Buttons.noAbility";
     buttons.push( noAbilityButton );
 

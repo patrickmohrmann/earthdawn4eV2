@@ -183,6 +183,7 @@ export default class PcData extends NamegiverTemplate {
       hasWounds:   !actor.hasWounds( "standard" )
     };
 
+    // placeholder, will be localized based on the selected rules for attribute increases
     const content = `
     <p>${ game.i18n.localize( "ED.Rules.attributeIncreaseShortRequirements" ) }</p>
     ${ Object.entries( increaseValidationData ).map( ( [ key, value ] ) => {

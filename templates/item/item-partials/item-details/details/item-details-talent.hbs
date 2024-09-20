@@ -1,38 +1,9 @@
 <div>
     <h3>{{localize "ED.Item.General.details"}}</h3>
 </div>
+
 <div>
     {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
-  {{!-- <h3>{{localize "ED.Item.Header.details"}}</h3>
-</div>
-{{!-- combat ability? --}}
-{{!-- <div class="item-data__input--line">
-    <label class="label__left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>
-    <select name="system.combatAbilityType">
-        {{selectOptions config.combatTypes selected=item.system.combatAbilityType labelAttr="label" blank="" localize=true }}
-    </select>
-</div> --}}
-{{!-- Target Difficulty --}}
-{{!-- <div class="item-data__input--line">
-  <label class="partial__30--left">{{localize "ED.Item.Talent.difficultyFixed"}}:</label>
-  <input class="input__number-input partial__60--right" name="system.difficulty.fixed" type="text"
-         value="{{item.system.difficulty.fixed}}" data-dtype="Number">
-</div> --}}
-{{!-- Target Difficulty --}}
-{{!-- <div class="item-data__input--line">
-  <label class="partial__30--left">{{localize "ED.Item.Talent.difficultyTarget"}}:</label>
-  <select class=" partial__60--right" name="system.difficulty.target">
-    {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
-  </select>
-</div> --}}
-{{!-- Group Difficulty --}}
-{{!-- <div class="item-data__input--line">
-  <label class="partial__30--left">{{localize "ED.Item.Talent.difficultyGroup"}}:</label>
-  <select class=" partial__60--right" name="system.difficulty.group">
-    {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
-  </select>
-</div> --}} 
-
 
 {{!-- TalentIdentifier --}}
     <div class="item-data__input--line">
@@ -48,11 +19,12 @@
             value="{{item.system.source.class}}" data-dtype="String">
     </div>
 
-{{!-- Target Difficulty --}}
+{{!-- Added at Level --}}
  <div class="item-data__input--line">
   <label class="partial__40--left">{{localize "ED.Item.Talent.levelAdded"}}:</label>
   <input class="input__number-input partial__55--right" name="system.source.atLevel" type="text"
          value="{{item.system.source.atLevel}}" data-dtype="Number">
+
 {{! -- Magic Type -- }}
 <div>
   <h3>{{localize "ED.Item.Header.magic"}}</h3>

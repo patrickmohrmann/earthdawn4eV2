@@ -160,12 +160,21 @@ export default class DisciplineData extends ClassTemplate.mixin(
 
   get _talentRequirementsOptional() {
     const nextLevel = this.level + 1;
-    const allCorrespondingTalents = this.talentsFromDiscipline;
-    const hasTalentFromCurrentCircle = allCorrespondingTalents.some(
+    const allCorrespondingTalents = this.talentsFromDiscipline.filter(
+      talent => talent.system.talentCategory !== "free"
+    );
+
+    // check if there is a talent from the current circle on the new level
+    const talentsFromCurrentCircle = allCorrespondingTalents.filter(
       talent => talent.system.source.atLevel === this.level
     );
+    const hasTalentFromCurrentCircle = talentsFromCurrentCircle.some(
+      talent => talent.system.level === nextLevel
+    );
+
+    // check if there are enough talents on the minimum rank
     const talentsOnMinRank = allCorrespondingTalents.filter(
-      talent => talent.system.level === nextLevel <= 11 ? nextLevel : nextLevel - 1
+      talent => talent.system.level >= nextLevel <= 11 ? nextLevel : nextLevel - 1
     );
     const numTalentsOnMinRank = talentsOnMinRank.length;
     const numTalentsRequired = nextLevel + 3;
@@ -208,10 +217,10 @@ export default class DisciplineData extends ClassTemplate.mixin(
       master:     this.getTalentsByTier( "master" ),
     };
     const minTalentsPerTier = {
-      novice:     nextLevel + 4,
-      journeyman: nextLevel >= 6 ? nextLevel - 5 : 0,
-      warden:     nextLevel >= 10 ? nextLevel - 9 : 0,
-      master:     nextLevel >= 14 ? nextLevel - 13 : 0,
+      novice:     Math.min( this.level + 4, 8 ),
+      journeyman: Math.min( this.level >= 6 ? this.level - 5 : 0, 4 ),
+      warden:     Math.min( this.level >= 10 ? this.level - 9 : 0, 4 ),
+      master:     Math.min( this.level >= 14 ? this.level - 13 : 0, 2 ),
     };
 
     const hasRequiredNoviceTalents = tierInfos.novice.length >= minTalentsPerTier.novice;
