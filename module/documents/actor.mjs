@@ -83,6 +83,10 @@ export default class ActorEd extends Actor {
     return DocumentCreateDialog.waitPrompt( data, { documentCls: Actor, parent, pack, options } );
   }
 
+  /**
+   * @inheritDoc
+   * @userFunction            UF_TokenResources-preCreate
+   */
   async _preCreate( data, options, userId ) {
     await super._preCreate( data, options, userId );
 
@@ -309,6 +313,7 @@ export default class ActorEd extends Actor {
 
       return;
     }
+
     const difficultyFinal = { base: difficulty };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
       sourceActor: this.name,

@@ -25,6 +25,7 @@
     "delay": false,
     "Dialog": false,
     "Die": false,
+    "EdRoll": false,
     "Folder": false,
     "FormApplication": false,
     "FormApplicationOptions": false,
@@ -125,9 +126,9 @@
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "init-declarations": "off",
     "jsdoc/check-tag-names": [
-      "error",
+      "warn",
       {
-        "definedTags": ["UserFunction"]
+        "definedTags": ["userFunction"]
       }
     ],
     "jsdoc/require-returns-check": "warn",

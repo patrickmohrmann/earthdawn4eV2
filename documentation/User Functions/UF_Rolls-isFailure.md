@@ -1,0 +1,1 @@
+Action tests roll against a difficulty number. if the rolled result is lower than the difficulty number it is a failure.

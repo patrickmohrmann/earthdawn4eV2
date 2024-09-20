@@ -105,13 +105,10 @@ export default function registerSystemSettings() {
   /*                                  STEP TABLES                                     */
   /* -------------------------------------------------------------------------------- */
 
-  // Step Table settings Header
-  // game.settings.register( "ed4e", "stepTableHeader", {
-  //     name: "ED.Settings.StepTable.stepTableHeader",
-  //     config: true,
-  // } );
-
-  // Step Table used for step to dice conversion
+  /**
+   * @Description                 Step Table used for step to dice conversion
+   * @UserFunction                chooseStepTable
+   */
   game.settings.register( "ed4e", "stepTable", {
     name:    "ED.Settings.StepTable.stepTable",
     hint:    "ED.Settings.StepTable.hint",
@@ -464,7 +461,3 @@ export default function registerSystemSettings() {
     }
   } );
 }
-
-
-
-
