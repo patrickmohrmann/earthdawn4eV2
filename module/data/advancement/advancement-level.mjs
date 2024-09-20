@@ -90,7 +90,7 @@ export default class AdvancementLevelData extends SparseDataModel {
       } ),
     }
   }
-
+  
   /**
    * Add abilities to the given type of pool on this level.
    * @param {[Item]} abilities              An array of ability item IDs to add.

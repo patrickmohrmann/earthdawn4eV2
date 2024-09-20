@@ -1,29 +1,29 @@
 // Pop up 
 new Dialog(
     {
-        title: game.i18n.localize( 'X-LP' ),
+        title: game.i18n.localize( "X-LP" ),
         content: `  
         <form> 
           <div>
-            <label>${game.i18n.localize( 'X-LPAmount' )}</label>
-            <input type='number' id='legendPoints'></input>
+            <label>${game.i18n.localize( "X-LPAmount" )}</label>
+            <input type='number' id='legendPoints'>
           </div>  
           <div>
-            <label>${game.i18n.localize( 'X-Description' )}</label>
-            <input type='string' id='description'></input>
+            <label>${game.i18n.localize( "X-Description" )}</label>
+            <input type='string' id='description'>
           </div> 
         </form>`,
         buttons: {
             yes: {
                 icon: "<i class='fas fa-check'></i>",
-                label: game.i18n.localize( 'X-ok' )
+                label: game.i18n.localize( "X-ok" )
             },
             no: {
                 icon: "<i class='fas fa-times'></i>",
-                label: game.i18n.localize( 'X-cancel' )
+                label: game.i18n.localize( "X-cancel" )
             }
         },
-        default: 'yes',
+        default: "yes",
 
         // Code
         close: async ( html ) => {
@@ -41,11 +41,9 @@ new Dialog(
                 // update the legendpoint total of the actor with the result of the pop up input
                 const transactionData = {
                     amount: Number( resultLp ),
-                    lpBefore: token.actor.system.lp.current,
-                    lpAfter: token.actor.system.lp.current + Number( resultLp ),
                     description: resultDescription,
-                }
-                token.actor.addLpTransaction( "earnings", transactionData )
+                };
+                token.actor.addLpTransaction( "earnings", transactionData );
 
             }
         }

@@ -156,9 +156,87 @@ p {
 .chat-message {
   background-image: url('assets/sheet/background.png');
 }
-
-.app.window-app.form.earthdawn4e .roll-prompt header,
-.assign-legend header {
+.chat-message .message-sender {
+  font-size: larger;
+  padding-top: 12px;
+  padding-left: 5px;
+}
+.chat-message .message-metadata {
+  padding-top: 12px;
+}
+.chat-message .message-metadata .message-delete {
+  font-size: larger;
+}
+.chat-message img.avatar {
+  border: none;
+  object-fit: scale-down;
+  max-height: 40px;
+}
+.chat-message .custom-flavor {
+  margin: 0.5em 0;
+  font-size: medium;
+}
+.chat-message .roll-successes {
+  margin: 0.5em 0;
+  text-align: center;
+  font-size: large;
+}
+.chat-message .modifier-lists {
+  margin-bottom: 5px;
+  padding: 0 0.3em;
+  font-size: medium;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+}
+.chat-message .modifier-lists li {
+  text-transform: capitalize;
+}
+.chat-message .dice-formula {
+  word-break: unset;
+}
+.chat-message .dice-total.roll-success {
+  background-color: darkseagreen;
+}
+.chat-message .dice-total.roll-failure {
+  background-color: indianred;
+}
+.chat-message .roll-failure {
+  background-color: indianred;
+  color: black;
+  font-size: large;
+  padding-top: 5px;
+  text-align: center;
+}
+.chat-message .message-buttons {
+  margin: 1em 0;
+}
+.chat-message .message-buttons.flexrow button:first-child {
+  margin-left: 0;
+}
+.chat-message .message-buttons.flexrow button:last-child {
+  margin-right: 0;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .navigator-section {
+  position: relative;
+  z-index: 5;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt .roll-prompt-body .flex-column label {
+  display: block;
+  height: max-content;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+.app.window-app.form.earthdawn4e.roll-prompt header,
+.app.window-app.form.earthdawn4e.assign-legend header {
   position: relative;
   z-index: 3;
   border: none;
@@ -259,93 +337,48 @@ p {
   content: "\a";
   white-space: pre;
 }
-.body .actor-section__top {
-  height: 158px;
-}
-.chat-message .message-sender {
-  font-size: larger;
-  padding-top: 12px;
-  padding-left: 5px;
-}
-.chat-message .message-metadata {
-  padding-top: 12px;
-}
-.chat-message .message-metadata .message-delete {
-  font-size: larger;
-}
-.chat-message img.avatar {
-  border: none;
-  object-fit: scale-down;
-  max-height: 40px;
-}
-.chat-message .custom-flavor {
-  margin: 0.5em 0;
-  font-size: medium;
-}
-.chat-message .roll-successes {
-  margin: 0.5em 0;
-  text-align: center;
-  font-size: large;
-}
-.chat-message .modifier-lists {
-  margin-bottom: 5px;
-  padding: 0 0.3em;
-  font-size: medium;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-border-light-2);
-  border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
-}
-.chat-message .modifier-lists li {
-  text-transform: capitalize;
-}
-.chat-message .dice-formula {
-  word-break: unset;
-}
-.chat-message .dice-total.roll-success {
-  background-color: darkseagreen;
-}
-.chat-message .dice-total.roll-failure {
-  background-color: indianred;
-}
-.chat-message .roll-failure {
-  background-color: indianred;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content {
+  position: relative;
+  background-image: url('assets/sheet/background.png');
+  background-size: cover;
   color: black;
-  font-size: large;
-  padding-top: 5px;
-  text-align: center;
+  background-repeat: repeat;
 }
-.chat-message .message-buttons {
-  margin: 1em 0;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__earned .legend-point__history--earned-buttons button {
+  height: 35px;
+  align-self: flex-end;
 }
-.chat-message .message-buttons.flexrow button:first-child {
-  margin-left: 0;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__earned .add-earning-icon {
+  top: 5px;
+  /* Adjust as needed */
+  right: 5px;
+  /* Adjust as needed */
+  cursor: pointer;
 }
-.chat-message .message-buttons.flexrow button:last-child {
-  margin-right: 0;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .legend-point__history--spent-buttons button {
+  height: 35px;
+  align-self: flex-end;
 }
-.action--buttons .buttons--left {
-  margin-left: 45px;
-  margin-right: 25px;
-  float: left;
-  width: 40%;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .spendings-details {
+  display: none;
 }
-.action--buttons .buttons--right {
-  float: right;
-  width: 40%;
-  margin-left: 25px;
-  margin-right: 45px;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .spendings-details.is-visible {
+  display: block;
 }
-.legend-point__history--earned {
-  height: 26px;
-  line-height: 22px;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .lp-history__date {
+  width: 20%;
 }
-.body .item-section__top {
-  height: 158px;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .lp-history__type {
+  width: 20%;
 }
-.body .item-section__top img {
-  width: 158px;
-  border: none;
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .lp-history__name {
+  width: 20%;
+}
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .lp-history__description {
+  width: 20%;
+}
+.app.window-app.form.earthdawn4e.legend-point__history .window-content .lp-history__spend .lp-history__amount {
+  width: 20%;
 }
 .app.window-app.earthdawn4e.sheet {
   background-image: url('assets/sheet/background.png');
@@ -783,14 +816,15 @@ p {
 }
 .action--buttons .buttons--left {
   margin-left: 45px;
-  margin-right: 50px;
+  margin-right: 25px;
   float: left;
   width: 40%;
 }
 .action--buttons .buttons--right {
-  float: left;
+  float: right;
   width: 40%;
-  margin-right: 50px;
+  margin-left: 25px;
+  margin-right: 45px;
 }
 .legend-point__history--earned {
   height: 26px;
@@ -802,4 +836,29 @@ p {
 .body .item-section__top img {
   width: 158px;
   border: none;
+}
+.item__left--main {
+  width: 35%;
+  float: left;
+}
+.item__right--main {
+  width: 60%;
+  float: right;
+}
+.item-data__input--line {
+  height: 30px;
+}
+.item-data__input--line label,
+.item-data__input--line input {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+.item-data__input--line .partial__40--left {
+  width: 40%;
+  float: left;
+}
+.item-data__input--line .partial__55--right {
+  width: 55%;
+  float: right;
 }

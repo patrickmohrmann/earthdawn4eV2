@@ -3,7 +3,7 @@ import PcData from "../../data/actor/pc.mjs";
 /**
  * Derivate of Foundry's Item.createDialog() functionality.
  */
-export class DocumentCreateDialog extends FormApplication {
+export default class DocumentCreateDialog extends FormApplication {
   /** @inheritDoc */
   constructor( data = {}, { resolve, documentCls, pack = null, parent = null, options = {} } = {} ) {
     super( data, options );
@@ -34,13 +34,13 @@ export class DocumentCreateDialog extends FormApplication {
     const options = super.defaultOptions;
     return {
       ...options,
-      closeOnSubmit: false,
+      closeOnSubmit:  false,
       submitOnChange: true,
-      submitOnClose: false,
-      height: 900,
-      width: 800,
-      resizable: true,
-      classes: [...options.classes, "earthdawn4e", "create-document"],
+      submitOnClose:  false,
+      height:         900,
+      width:          800,
+      resizable:      true,
+      classes:        [ ...options.classes, "earthdawn4e", "create-document" ],
     };
   }
 
@@ -56,8 +56,8 @@ export class DocumentCreateDialog extends FormApplication {
 
     const types = CONFIG.ED4E.typeGroups[this.documentType];
     const typesRadio = Object.fromEntries(
-      Object.entries( types ).map( ( [k, v], i ) => {
-        return [k, v.reduce( ( a, v ) => ( { ...a, [v]: v } ), {} )];
+      Object.entries( types ).map( ( [ k, v ], i ) => {
+        return [ k, v.reduce( ( a, v ) => ( { ...a, [v]: v } ), {} ) ];
       } ),
     );
 
@@ -66,11 +66,11 @@ export class DocumentCreateDialog extends FormApplication {
     return {
       documentTypeLocalized: this.documentTypeLocalized,
       folders,
-      name: createData.name,
-      defaultName: this.documentCls.implementation.defaultName(),
-      folder: createData.folder,
-      hasFolders: folders.length > 0,
-      currentType: createData.type,
+      name:                  createData.name,
+      defaultName:           this.documentCls.implementation.defaultName(),
+      folder:                createData.folder,
+      hasFolders:            folders.length > 0,
+      currentType:           createData.type,
       types,
       typesRadio,
     };
@@ -108,7 +108,9 @@ export class DocumentCreateDialog extends FormApplication {
   }
 
   /**
-   * @param {Event} event
+   * Create the document.
+   * @param {Event} event The originating click event.
+   * @returns {Promise<Item|null>} Created item or null.
    */
   async _createDocument( event ) {
     event.preventDefault();

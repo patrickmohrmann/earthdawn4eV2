@@ -312,7 +312,7 @@
                 "climb":                                        "Klettern---TOBEREMOVED",
                 "dexterityValue":                               "Geschicklichkeitswert",
                 "fly":                                          "Fliegen---TOBEREMOVED",
-                "karmamodifier":                                "Karmamodifikator",
+                "karmaModifier":                                "Karmamodifikator",
                 "movement":                                     "Bewegung ---TOBEREMOVED",
                 "perceptionValue":                              "Wahrnehmungswert",
                 "strengthValue":                                "Stärkewert",

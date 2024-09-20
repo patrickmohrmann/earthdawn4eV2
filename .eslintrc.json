@@ -37,6 +37,7 @@
     "ItemSheet": false,
     "ItemSheetEd": true,
     "Items": false,
+    "Journal": false,
     "JournalSheet": false,
     "isEmpty": false,
     "Roll": false,
@@ -122,12 +123,22 @@
     "id-denylist": "off",
     "id-length": "off",
     "id-match": "off",
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "init-declarations": "off",
     "jsdoc/check-tag-names": [
       "warn",
       {
-        "definedTags":
-        ["userFunction"]
+        "definedTags": ["userFunction"]
+      }
+    ],
+    "jsdoc/require-returns-check": "warn",
+    "@stylistic/key-spacing": [
+      "error",
+      {
+        "beforeColon": false,
+        "afterColon": true,
+        "mode": "minimum",
+        "align": "value"
       }
     ],
     "line-comment-position": "off",
@@ -200,7 +211,7 @@
     "no-extra-bind": "error",
     "no-extra-boolean-cast": "error",
     "no-extra-label": "off",
-    "no-fallthrough": "error",
+    "no-fallthrough": "off",
     "no-func-assign": "error",
     "no-global-assign": "error",
     "no-implicit-coercion": [
@@ -271,6 +282,7 @@
     "no-shadow": "off",
     "no-shadow-restricted-names": "error",
     "no-sparse-arrays": "error",
+    "@stylistic/no-tabs": "error",
     "no-template-curly-in-string": "error",
     "no-ternary": "off",
     "no-this-before-super": "error",

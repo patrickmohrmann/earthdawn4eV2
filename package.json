@@ -12,7 +12,7 @@
     "eslint-plugin-jsdoc": "^46.8.2",
     "@stylistic/eslint-plugin": "^2.3.0",
     "@stylistic/eslint-plugin-migrate": "^2.3.0",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-eslint-new": "^1.8.3",
     "gulp-if": "^3.0.0",
     "gulp-less": "^5.0.0",

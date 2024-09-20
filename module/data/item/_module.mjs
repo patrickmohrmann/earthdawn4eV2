@@ -11,7 +11,7 @@ import KnackKarmaData from "./knack-karma.mjs";
 import KnackManeuverData from "./knack-maneuver.mjs";
 import ManeuverData from "./maneuver.mjs";
 import MaskData from "./mask.mjs";
-import MatrixData from "./matrices.mjs"
+import MatrixData from "./matrices.mjs";
 import NamegiverData from "./namegiver.mjs";
 import PathData from "./path.mjs";
 import PoisonDiseaseData from "./poison-disease.mjs";
@@ -28,71 +28,73 @@ import ThreadData from "./thread.mjs";
 import WeaponData from "./weapon.mjs";
 
 export {
-    ArmorData,
-    AttackData,
-    BindingSecretData,
-    CurseHorrorMarkData,
-    DevotionData,
-    DisciplineData,
-    EffectData,
-    EquipmentData,
-    KnackAbilityData,
-    KnackKarmaData,
-    KnackManeuverData,
-    ManeuverData,
-    MaskData,
-    MatrixData,
-    NamegiverData,
-    PathData,
-    PoisonDiseaseData,
-    PowerData,
-    QuestorData,
-    ShieldData,
-    ShipWeaponData,
-    SkillData,
-    SpecialAbilityData,
-    SpellKnackData,
-    SpellData,
-    TalentData,
-    ThreadData,
-    WeaponData
+  ArmorData,
+  AttackData,
+  BindingSecretData,
+  CurseHorrorMarkData,
+  DevotionData,
+  DisciplineData,
+  EffectData,
+  EquipmentData,
+  KnackAbilityData,
+  KnackKarmaData,
+  KnackManeuverData,
+  ManeuverData,
+  MaskData,
+  MatrixData,
+  NamegiverData,
+  PathData,
+  PoisonDiseaseData,
+  PowerData,
+  QuestorData,
+  ShieldData,
+  ShipWeaponData,
+  SkillData,
+  SpecialAbilityData,
+  SpellKnackData,
+  SpellData,
+  TalentData,
+  ThreadData,
+  WeaponData
 };
-export {default as ClassTemplate} from "./templates/class.mjs";
-export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
+
 export {default as AbilityTemplate} from "./templates/ability.mjs";
+export {default as ClassTemplate} from "./templates/class.mjs";
 export {default as ItemDescriptionTemplate} from "./templates/item-description.mjs";
-export {default as NoneNamegiverPowerData} from "./templates/none-namegiver-power.mjs";
-export {default as MagicTemplate} from "./templates/sorcery-item.mjs";
 export {default as KnackTemplate} from "./templates/knack-item.mjs";
+export {default as LpIncreaseTemplate} from "./templates/lp-increase.mjs";
+export {default as MagicTemplate} from "./templates/magic-item.mjs";
+export {default as NoneNamegiverPowerData} from "./templates/none-namegiver-power.mjs";
+export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
 export {default as TargetTemplate} from "./templates/targeting.mjs";
 
 export const config = {
-    armor: ArmorData,
-    attack: AttackData,
-    bindingSecret: BindingSecretData,
-    cursemark: CurseHorrorMarkData,
-    devotion: DevotionData,
-    discipline: DisciplineData,
-    effect: EffectData,
-    equipment: EquipmentData,
-    knackAbility: KnackAbilityData,
-    knackKarma: KnackKarmaData,
-    knackManeuver: KnackManeuverData,
-    maneuver: ManeuverData,
-    mask: MaskData,
-    matrix: MatrixData,
-    namegiver: NamegiverData,
-    path: PathData,
-    poisonDisease: PoisonDiseaseData,
-    power: PowerData,
-    questor: QuestorData,
-    shield: ShieldData,
-    shipWeapon: ShipWeaponData,
-    skill: SkillData,
-    specialAbility: SpecialAbilityData,
-    spellKnack: SpellKnackData,
-    spell: SpellData,
-    talent: TalentData,
-    thread: ThreadData,
-    weapon: WeaponData
+  armor:          ArmorData,
+  attack:         AttackData,
+  bindingSecret:  BindingSecretData,
+  cursemark:      CurseHorrorMarkData,
+  devotion:       DevotionData,
+  discipline:     DisciplineData,
+  effect:         EffectData,
+  equipment:      EquipmentData,
+  knackAbility:   KnackAbilityData,
+  knackKarma:     KnackKarmaData,
+  knackManeuver:  KnackManeuverData,
+  maneuver:       ManeuverData,
+  mask:           MaskData,
+  matrix:         MatrixData,
+  namegiver:      NamegiverData,
+  path:           PathData,
+  poisonDisease:  PoisonDiseaseData,
+  power:          PowerData,
+  questor:        QuestorData,
+  shield:         ShieldData,
+  shipWeapon:     ShipWeaponData,
+  skill:          SkillData,
+  specialAbility: SpecialAbilityData,
+  spellKnack:     SpellKnackData,
+  spell:          SpellData,
+  talent:         TalentData,
+  thread:         ThreadData,
+  weapon:         WeaponData
 };

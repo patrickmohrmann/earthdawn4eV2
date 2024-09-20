@@ -1,13 +1,33 @@
 <div>
     <h3>{{localize "ED.Item.General.details"}}</h3>
 </div>
+
 <div>
     {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
-</div>
+
+{{!-- TalentIdentifier --}}
+    <div class="item-data__input--line">
+        <label class="partial__40--left">{{localize "ED.Item.Talent.talentIdentifier"}}:</label>
+        <input class="partial__55--right" name="system.talentIdentifier" type="text"
+            value="{{item.system.talentIdentifier}}" data-dtype="String">
+    </div>
+
+{{!-- class Identifier --}}
+    <div class="item-data__input--line">
+        <label class="partial__40--left">{{localize "ED.Item.Talent.sourceClassIdentifier"}}:</label>
+        <input class="partial__55--right" name="system.source.class" type="text"
+            value="{{item.system.source.class}}" data-dtype="String">
+    </div>
+
+{{!-- Added at Level --}}
+ <div class="item-data__input--line">
+  <label class="partial__40--left">{{localize "ED.Item.Talent.levelAdded"}}:</label>
+  <input class="input__number-input partial__55--right" name="system.source.atLevel" type="text"
+         value="{{item.system.source.atLevel}}" data-dtype="Number">
 
 {{! -- Magic Type -- }}
 <div>
-  <h3>{{localize "ED.Item.General.magic"}}</h3>
+  <h3>{{localize "ED.Item.Header.magic"}}</h3>
 </div>
 
 {{formField systemFields.magic.fields.spellcasting name="system.magic.spellcasting" value=item.system.magic.spellcasting}}

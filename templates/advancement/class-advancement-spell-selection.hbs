@@ -1,0 +1,36 @@
+<div class="class-advancement-spell-selection" {{#unless render.spellSelection}}style="display:none;"{{/unless}}>
+
+  <p>{{localize "ED.Dialogs.Legend.ClassAdvancement.YouCanChooseSpells"}}</p>
+
+  <div>
+    {{#each availableSpells as |uuid|}}
+        {{{ed-linkForUuid uuid}}}
+    {{else}}
+      <p>{{localize "ED.Dialogs.Legend.ClassAdvancement.NoSpellsAvailable"}}</p>
+    {{/each}}
+  </div>
+
+  <hr>
+
+  <div>
+    {{#if (hasItems selectedSpells)}}
+      <p>{{localize "ED.Dialogs.Legend.ClassAdvancement.SelectedSpells"}}</p>
+    {{else}}
+      <p>{{localize "ED.Dialogs.Legend.ClassAdvancement.NoSpellsSelected"}}</p>
+    {{/if}}
+    <document-tags name="selectedSpells" placeholder="{{localize "ED.X-No spells added yet. You can do it by just dragging and dropping them onto this field"}}">
+    {{#each selectedSpells as |uuid|}}
+      <div class="tags input-element-tags">
+            <div class="tag document-tag" data-key="Item.4CtXPK8Jp3WW6wRQ">
+              {{{ed-linkForUuid uuid}}}
+              <a class="remove fa-solid fa-times" data-tooltip="Remove Document" aria-label="Remove Document"></a>
+            </div>
+          </div>
+          <input type="text" placeholder="Enter UUID or Drop Document">
+          <button type="button" class="icon fa-solid fa-file-plus" data-tooltip="Add Document" aria-label="Add Document">
+          </button>
+    {{/each}}
+    </document-tags>
+  </div>
+
+</div>

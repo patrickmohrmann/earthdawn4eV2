@@ -179,7 +179,24 @@
                 "step":                                             "Step"   
             },
             "LpTracking": {
-                "attributeImprovement":                             "Attribute increase"
+                "attributeImprovement":                             "Attribute increase",
+                "Header": {
+                    "advancement":                                  "Advancement",
+                    "date":                                         "Date",
+                    "description":                                  "Description",
+                    "legendPoints":                                 "Legend Points",
+                    "name":                                         "Name",
+                    "type":                                         "Type"
+                },
+                "Spendings": {
+                    "description":                                  "Enhancement from {previousLevel} to {newLevel}",
+                    "descriptionAttribute":                         "Enhanced {attributeName} from {previousLevel} to {newLevel}",
+                    "descriptionAbility":                           "Enhanced {abilityName} from {previousLevel} to {newLevel}",
+                    "descriptionNewlyAdded":                        "Newly added item",
+                    "knackSourceNotFound":                          "The Knack is not referenced in any Talent of the Actor",
+                    "knackSourceNotHighEnough":                     "The Rank of the Talent is not high enough",
+                    "maxIncreaseReached":                           "Maximum increase reached"
+                }
             },
             "Navigator": {
                 "classes":                                          "Vocation",
@@ -258,6 +275,13 @@
             }
         },
         "Config": {
+            "Action": {
+                "free":                                             "Free",
+                "none":                                             "None",
+                "simple":                                           "Simple",   
+                "standard":                                         "Standard",
+                "sustained":                                        "Sustained"
+            },
             "CombatTypes": {
                 "aerial":                                           "Aerial Combat",
                 "close":                                            "Close Combat",
@@ -270,7 +294,7 @@
             },
             "groupDifficulty": {
                 "highestOfGroup":                                   "Highest of Group",
-                "hightestX":                                        "Highest + Targets",
+                "highestX":                                        "Highest + Targets",
                 "lowestOfGroup":                                    "Lowest of Group",
                 "lowestX":                                          "Lowest + Targets"
             },
@@ -308,6 +332,35 @@
                 "mystical":                                         "Mystical",
                 "physical":                                         "Physical",
                 "social":                                           "Social"
+            },
+            "Defenses": {
+                "highestOfGroup":                                   "Highest of Group",
+                "highestX":                                        "Highest of Group + Targets",
+                "lowestOfGroup":                                    "Lowest of Group",
+                "lowestX":                                          "Lowest of Group + Targets",
+                "mystical":                                         "Mystical",
+                "none":                                             "None",
+                "physical":                                         "Physical",
+                "social":                                           "Social"
+            },
+            "spellcastingTypes": {
+                "elementalism":                                     "Elementalist",
+                "illusionism":                                      "Illusionist",
+                "nethermancy":                                      "Nethermancer",
+                "shamanism":                                        "Shaman",
+                "wizardry":                                         "Wizard"
+            },
+            "talentCategory": {
+                "discipline":                                       "Discipline",
+                "free":                                             "Free",
+                "optional":                                         "Optional",
+                "versatility":                                      "Versatility"
+            },
+            "Tier": {
+                "journeyman":                                       "Journeyman",
+                "master":                                           "Master",  
+                "novice":                                           "Novice",
+                "warden":                                           "Warden"
             }
         },
         "Data": {
@@ -364,9 +417,11 @@
             },
             "Buttons": {
                 "cancel":                                           "Cancel",
+                "close":                                            "Close",
                 "nightRest":                                        "Nightly Rest",
                 "recoverStun":                                      "Stun Damage Recovery",
                 "recovery":                                         "Recovey Test",
+                "save":                                             "Save",
                 "takeDamage":                                       "Take Damage"
                 },
             "damage":                                               "Damage",
@@ -391,23 +446,85 @@
                 "substitute":                                       "Replaces Strength",
                 "relatedRollType":                                  "counts for Roll Type"
             },
+            "Discipline": {
+                "optionalAbilities":                                "Optional Abilities",
+                "addLevel":                                         "Add Circle",
+                "circle":                                           "Circle",
+                "deleteLevel":                                      "Delete Circle",
+                "disciplineTalents":                                "Discipline Talents",
+                "durability":                                       "Durability",
+                "talentOptionsForTier":                             "Talent Options for"
+            },
             "Header": {
-                "navigator":                                        "Navigator"                                       
-
+                "activeUser":                                       "Active User",
+                "inactiveUser":                                     "Inactive User",
+                "actorsNoUserConfigured":                           "Not Configured, Owned Actors",
+                "details":                                          "Details",                                     
+                "description":                                      "Description",
+                "effects":                                          "Effects",
+                "general":                                          "General",
+                "navigator":                                        "Navigator",
+                "magic":                                            "Magic",
+                "type":                                             "Type"
+            },
+            "Knack": {
+                "action":                                           "Action",
+                "attribute":                                        "Attribute",
+                "description":                                      "Description",
+                "difficultyFixed":                                  "Fixed Difficulty",
+                "difficultyGroup":                                  "Group Difficulty",
+                "difficultyTarget":                                 "Target Difficulty",
+                "minLevel":                                         "Min. Rank",
+                "lpCost":                                           "LP Cost",
+                "Notification": {
+                    "knackSourceNotFound":                          "The Knack is not referenced in any Talent of the Actor",
+                    "knackSourceNotHighEnough":                     "The Rank of the Talent is not high enough",
+                    "knackSourceMultipleTalents":                   "The Knack is referenced in multiple Talents of the Actor",
+                    "maxKnacksReached":                             "Maximum amount of Knacks reached"
+                },
+                "rank":                                             "Rank",
+                "sourceTalent":                                     "Source Talent",
+                "standardEffect":                                   "Standard Effect",
+                "strain":                                           "Strain"
             },
             "Namegiver":{
+                "burrow":                                           "burrow",
+                "charismaValue":                                    "Charisma Value",
+                "climb":                                            "climb",
+                "dexterityValue":                                   "Dexterity Value",
+                "fly":                                              "fly",
+                "karmaModifier":                                    "Karma Modifier",
+                "perceptionValue":                                  "Perception Value",
+                "strengthValue":                                    "Strength Value",
+                "swim":                                             "swim",
+                "toughnessValue":                                   "Toughness Value",
+                "walk":                                             "walk",
                 "WeaponSize": {
                     "OneHanded.min":                                "Minimal One hand Weapon Size",
                     "OneHanded.max":                                "Maximum One hand Weapon Size",
                     "TwoHanded.min":                                "Minimal two hand Weapon Size",
                     "TwoHanded.max":                                "Maximum two hand Weapon Size"
-                }
+                },
+                "willpowerValue":                                   "Willpower Value"
             },
             "Navigator": {
                 "advancement":                                      "advancement",
                 "details":                                          "Details",
                 "effects":                                          "Effects",
                 "general":                                          "General"
+            },
+            "Talent": {
+                "action":                                           "Action",
+                "attribute":                                        "Attribute",
+                "talentCategory":                                         "Category",
+                "description":                                      "Description",
+                "difficultyFixed":                                  "Fixed Difficulty",
+                "difficultyGroup":                                  "Group Difficulty",
+                "difficultyTarget":                                 "Target Difficulty",
+                "rank":                                             "Rank",
+                "strain":                                           "Strain",
+                "talentIdentifier":                                 "Source Talent Identifier",
+                "tier":                                             "Tier"
             }
         },
         "Languages": {
@@ -456,7 +573,10 @@
             "targetModifiers":                                      "Target Modifier"
         },
         "Notifications": {
-            "Info": {},
+            "Info": {
+                "noMoreItemsOfThisType":                            "This Item cannot be added again to this Actor.",
+                "notAddedforTheActor":                              "This Item is not meant for this Actor."
+            },
             "Warn": {
                 "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
             },
@@ -473,7 +593,9 @@
                 "spellCasting":                                     "ED-ID for Spellcasting",
                 "spellCastingHint":                                 "Identifies a talent that is used for spellcasting",
                 "threadWeaving":                                    "ED-ID for Thread Weaving",
-                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving"
+                "threadWeavingHint":                                "Identifies a talent that is used for thread weaving",
+                "Versatility":                                      "ED-ID for Versatility",
+                "VersatilityHint":                                  "Identifies a talent that is used for versatility"
             },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",

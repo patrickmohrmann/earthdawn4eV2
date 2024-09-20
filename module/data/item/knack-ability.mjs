@@ -9,33 +9,43 @@ import KnackTemplate from "./templates/knack-item.mjs";
  * @property {object} requirements          requirement of the knack
  * @property {boolean} standardEffect       standard effect used
  */
-export default class KnackAbilityData extends KnackTemplate.mixin(
-    AbilityTemplate, 
-    ItemDescriptionTemplate
+export default class KnackAbilityData extends AbilityTemplate.mixin(
+  KnackTemplate,
+  ItemDescriptionTemplate
 )  {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        const fields = foundry.data.fields;
-        return this.mergeSchema( super.defineSchema(), {
-            // TODO @Chris how do we do this
-            // restrictions: [], // there will be several options possible see issue #212
-            // requirements: [], // there will be several options possible see issue #212 
-            standardEffect: new fields.BooleanField( {
-                required: true,
-                initial: false,
-                label: "ED.Item.Knack.standardEffect"
-            } ),
-        } );
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    return this.mergeSchema( super.defineSchema(), {
+      // TODO @Chris how do we do this
+      // restrictions: [], // there will be several options possible see issue #212
+      // requirements: [], // there will be several options possible see issue #212 
+      isPathKnack: new fields.BooleanField( {
+        required: true,
+        initial:  false,
+        label:    this.labelKey( "knackAbilityIsPathKnack" ),
+        hint:     this.hintKey( "knackAbilityIsPathKnack" ),
+      } ),
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritdoc */
+  async _onCreate( data, options, user ) {
+    if ( !await super._preCreate( data, options, user ) ) return false;
+
+    // assign the source talent
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

@@ -2,14 +2,15 @@
 import EdRollOptions from "../data/other/roll-options.mjs";
 import ED4E from "../config.mjs";
 import RollPrompt from "../applications/global/roll-prompt.mjs";
-import { DocumentCreateDialog } from "../applications/global/document-creation.mjs";
+import DocumentCreateDialog from "../applications/global/document-creation.mjs";
 
-import LegendPointHistoryEarnedPrompt from "../applications/global/lp-history.mjs";
+import LegendPointHistory from "../applications/advancement/lp-history.mjs";
 import LpEarningTransactionData from "../data/advancement/lp-earning-transaction.mjs";
 import LpSpendingTransactionData from "../data/advancement/lp-spending-transaction.mjs";
 import LpTrackingData from "../data/advancement/lp-tracking.mjs";
 import { sum } from "../utils.mjs";
 import PromptFactory from "../applications/global/prompt-factory.mjs";
+import ClassTemplate from "../data/item/templates/class.mjs";
 
 const futils = foundry.utils;
 
@@ -19,7 +20,55 @@ const futils = foundry.utils;
  */
 export default class ActorEd extends Actor {
 
-  _promptFactory = new PromptFactory( this );
+  _promptFactory = PromptFactory.fromDocument( this );
+
+  /**
+   * The class items if this actor has any (has to be of type "character" or "npc" for this).
+   * @type {[ItemEd]}
+   */
+  get classes() {
+    return this.items.filter( item => item.system instanceof ClassTemplate );
+  }
+
+  /**
+   * The actor's currently available legend points.
+   * @type {number}
+   */
+  get currentLp() {
+    return this.system.lp.current;
+  }
+
+  /**
+   * The actor's currently available money in silver.
+   * @type {number}
+   */
+  get currentSilver() {
+    return 1000;
+  }
+
+  /**
+   * Returns the discipline items if this actor has any (has to be of type "character" or "npc" for this).
+   * @type {Item[]}
+   */
+  get disciplines() {
+    return this.items.filter( item => item.type === "discipline" );
+  }
+
+  /**
+   * Whether this actor has more than one discipline. Returns `true` if this actor has more than one discipline, `false` otherwise
+   * @type {boolean}
+   */
+  get isMultiDiscipline() {
+    return this.disciplines.length > 1;
+  }
+
+  /**
+   * The lowest circle of all disciplines this actor has.
+   * @type {number}
+   */
+  get minCircle() {
+    return Math.min( ...this.disciplines.map( discipline => discipline.system.level ) );
+  }
 
   /**
    * Returns the namegiver item if this actor has one (has to be of type "character" or "npc" for this).
@@ -44,12 +93,12 @@ export default class ActorEd extends Actor {
     // Configure prototype token settings
     if ( this.type === "character" ) {
       const prototypeToken = {
-        sight: {enabled: true},
-        actorLink: true,
+        sight:       {enabled: true},
+        actorLink:   true,
         disposition: 1,   // Friendly
         displayBars: 50,  // Always Display bar 1 and 2
         displayName: 30,  // Display nameplate on hover
-        bar1: {
+        bar1:        {
           attribute: "healthRate"
         },
         bar2: {
@@ -57,7 +106,7 @@ export default class ActorEd extends Actor {
         }
       };
 
-      this.updateSource( { prototypeToken } )
+      this.updateSource( { prototypeToken } );
     }
   }
 
@@ -108,6 +157,51 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @param {('standard'|'blood'|'any')} [type] The type of wounds that is to be checked.
+   * @returns {boolean} True if there is a positive amount of wounds of the given type marked on this actor, false otherwise.
+   */
+  hasWounds( type = "any" ) {
+    const hasStandardWounds = this.system.characteristics.health.wounds > 0;
+    const hasBloodWounds = this.system.characteristics.health.bloodMagic.wounds > 0;
+    switch ( type ) {
+      case "standard":
+        return hasStandardWounds;
+      case "blood":
+        return hasBloodWounds;
+      case "any":
+        return hasStandardWounds || hasBloodWounds;
+      default:
+        return undefined;
+    }
+  }
+
+  /**
+   * @param {('standard'|'lethal'|'stun'|'blood'|'any')} [type] The type of damage that is to be checked. Standard
+   * damage is any of either lethal or stun damage.
+   * @returns {boolean} True if there is a positive amount of damage of the given type marked on this actor, false otherwise.
+   */
+  hasDamage( type = "any" ) {
+    const hasLethalDamage = this.system.characteristics.health.damage.standard > 0;
+    const hasStunDamage = this.system.characteristics.health.damage.stun > 0;
+    const hasBloodDamage = this.system.characteristics.health.bloodMagic.damage > 0;
+    switch ( type ) {
+      case "standard":
+        return hasLethalDamage || hasStunDamage;
+      case "lethal":
+        return hasLethalDamage;
+      case "stun":
+        return hasStunDamage;
+      case "blood":
+        return hasBloodDamage;
+      case "any":
+        return hasLethalDamage || hasStunDamage || hasBloodDamage;
+      default:
+        return undefined;
+    }
+  }
+
+
+  /**
    * Expand Item Cards by clicking on the name span
    */
   expandItemCards() {
@@ -120,11 +214,12 @@ export default class ActorEd extends Actor {
    * Triggers a prompt for updating the Legend Point (LP) history of the actor.
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
-
+   * @UserFunction            UF_LpTracking-legendPointHistory
+   * @see ../../documentation/User Functions/UF_LpTracking-legendPointHistory.md
    */
-  async legendPointHistoryEarned() {
+  async legendPointHistory() {
     // let history = await getLegendPointHistoryData( actor );
-    const lpUpdateData = await LegendPointHistoryEarnedPrompt.waitPrompt(
+    const lpUpdateData = await LegendPointHistory.waitPrompt(
       new LpTrackingData( this.system.lp.toObject() ),
       { actor: this }
     );
@@ -133,70 +228,75 @@ export default class ActorEd extends Actor {
 
   /**
    * Roll a generic attribute test. Uses {@link RollPrompt} for further input data.
-   * @param {string} attributeId  The 3-letter id for the attribute (e.g. "per").
-   * @param {object} options      Any additional options for the {@link EdRoll}.
+   * @param {string} attributeId            The 3-letter id for the attribute (e.g. "per").
+   * @param {object} edRollOptionsData      Any {@link EdRollOptions} that will be overwritten with the provided values.
+   * @param {object} options                Any additional options for the {@link EdRoll}.
+   * @returns {Promise<EdRoll>}             The processed Roll.
    */
-  async rollAttribute( attributeId, options = {} ) {
+  async rollAttribute( attributeId, edRollOptionsData = {}, options = {} ) {
     const attributeStep = this.system.attributes[attributeId].step;
     const step = { base: attributeStep };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAttribute", {
       sourceActor: this.name,
-      step: attributeStep,
-      attribute: `${ game.i18n.localize( ED4E.attributes[attributeId].label ) }`
+      step:        attributeStep,
+      attribute:   `${ game.i18n.localize( ED4E.attributes[attributeId].label ) }`
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "attribute",
-        strain: 0,
-        target: undefined,
-        step: step,
+        testType:         "action",
+        rollType:         "attribute",
+        strain:           0,
+        target:           undefined,
+        step:             step,
         devotionRequired: false,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    return this.#processRoll( roll );
   }
 
   /**
-   * @summary                     Ability rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
-   * @description                 Roll an Ability. use {@link RollPrompt} for further input data.
-   * @param {ItemEd} ability      ability must be of type AbilityTemplate & TargetingTemplate
-   * @param {object} options      Any additional options for the {@link EdRoll}.
+   * @summary                           Ability rolls are a subset of Action test resembling non-attack actions like Talents, skills etc.
+   * @description                       Roll an Ability. use {@link RollPrompt} for further input data.
+   * @param {ItemEd} ability            ability must be of type AbilityTemplate & TargetingTemplate
+   * @param {object} edRollOptionsData  Any {@link EdRollOptions} that will be overwritten with the provided values..
+   * @param {object} options            Any additional options for the {@link EdRoll}.
+   * @returns {Promise<EdRoll>}         The processed Roll.
    */
-  async rollAbility( ability, options = {} ) {
+  async rollAbility( ability, edRollOptionsData = {}, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
     const difficulty = await ability.system.getDifficulty();
     if ( difficulty === undefined || difficulty === null ) {
-      ui.notifications.error( "ability is not part of Targeting Template, please call your Administrator!" );
-      return;
+      throw new TypeError( "ability is not part of Targeting Template, please call your Administrator!" );
     }
     const difficultyFinal = { base: difficulty };
     const devotionRequired = !!ability.system.devotionRequired;
     const strain = { base: ability.system.strain };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollAbility", {
       sourceActor: this.name,
-      ability: ability.name,
-      step: abilityStep
+      ability:     ability.name,
+      step:        abilityStep
     } );
     const abilityFinalStep = { base: abilityStep };
+
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "ability",
-        strain: strain,
-        target: difficultyFinal,
-        step: abilityFinalStep,
+        testType:         "action",
+        rollType:         "ability",
+        strain:           strain,
+        target:           difficultyFinal,
+        step:             abilityFinalStep,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
+    edRollOptions.updateSource( edRollOptionsData );
     const roll = await RollPrompt.waitPrompt( edRollOptions, options );
-    this.#processRoll( roll );
+    return this.#processRoll( roll );
   }
 
   /**
@@ -206,7 +306,7 @@ export default class ActorEd extends Actor {
    * @param {object} options      Any additional options for the {@link EdRoll}.
    */
   async rollEquipment( equipment, options = {} ) {
-    const arbitraryStep = equipment.system.usableItem.arbitraryStep
+    const arbitraryStep = equipment.system.usableItem.arbitraryStep;
     const difficulty = equipment.system.getDifficulty();
     if ( !difficulty ) {
       ui.notifications.error( game.i18n.localize( "X.ability is not part of Targeting Template, please call your Administrator!" ) );
@@ -217,18 +317,18 @@ export default class ActorEd extends Actor {
     const difficultyFinal = { base: difficulty };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollEquipment", {
       sourceActor: this.name,
-      equipment: equipment.name,
-      step: arbitraryStep
+      equipment:   equipment.name,
+      step:        arbitraryStep
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "equipment",
-        strain: 0,
-        target: difficultyFinal,
-        step: arbitraryStep,
+        testType:         "action",
+        rollType:         "equipment",
+        strain:           0,
+        target:           difficultyFinal,
+        step:             arbitraryStep,
         devotionRequired: false,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -248,7 +348,7 @@ export default class ActorEd extends Actor {
 
     let recoveryStep = attributes.tou.step;
     const recoveryFinalStep = {
-      base: recoveryStep,
+      base:      recoveryStep,
       modifiers: {},
     };
     if ( globalBonuses.allRecoveryEffects.value > 0 ) recoveryFinalStep.modifiers["localize: Global Recovery Bonus"] = globalBonuses.allRecoveryEffects.value;
@@ -308,18 +408,18 @@ export default class ActorEd extends Actor {
 
     let chatFlavor = game.i18n.format( "ED.Chat.Flavor.rollRecovery", {
       sourceActor: this.name,
-      step: recoveryStep
+      step:        recoveryStep
     } );
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "effect",
-        rollType: "recovery",
-        rollSubType: recoveryMode,
-        strain: 0,
-        target: undefined,
-        step: recoveryFinalStep,
+        testType:         "effect",
+        rollType:         "recovery",
+        rollSubType:      recoveryMode,
+        strain:           0,
+        target:           undefined,
+        step:             recoveryFinalStep,
         devotionRequired: false,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -369,7 +469,7 @@ export default class ActorEd extends Actor {
 
     this.update( updates );
     let messageData = {
-      user: game.user._id,
+      user:    game.user._id,
       speaker: ChatMessage.getSpeaker( { actor: this.actor } ),
       content: "THIS WILL BE FIXED LATER see #756"
     };
@@ -408,24 +508,24 @@ export default class ActorEd extends Actor {
     };
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.knockdownTest", {
       sourceActor: this.name,
-      step: knockdownStep
+      step:        knockdownStep
     } );
 
     const knockdownStepFinal = {
-      base: knockdownStep,
+      base:      knockdownStep,
       modifiers: {
         "localize: Global Knockdown Bonus": this.system.singleBonuses.knockdownEffects.value,
       }
     };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "knockdown",
-        strain: strain,
-        target: difficultyFinal,
-        step: knockdownStepFinal,
+        testType:         "action",
+        rollType:         "knockdown",
+        strain:           strain,
+        target:           difficultyFinal,
+        step:             knockdownStepFinal,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -457,20 +557,20 @@ export default class ActorEd extends Actor {
 
     const chatFlavor = game.i18n.format( "ED.Chat.Flavor.jumpUp", {
       sourceActor: this.name,
-      step: jumpUpStep
+      step:        jumpUpStep
     } );
 
     const difficulty = { base: 6 };
     const jumpUpStepFinal = { base: jumpUpStep };
     const edRollOptions = EdRollOptions.fromActor(
       {
-        testType: "action",
-        rollType: "jumpUp",
-        strain: strain,
-        target: difficulty,
-        step: jumpUpStepFinal,
+        testType:         "action",
+        rollType:         "jumpUp",
+        strain:           strain,
+        target:           difficulty,
+        step:             jumpUpStepFinal,
         devotionRequired: devotionRequired,
-        chatFlavor: chatFlavor
+        chatFlavor:       chatFlavor
       },
       this
     );
@@ -502,8 +602,9 @@ export default class ActorEd extends Actor {
    *     <li>recover from damage</li>
    * </ul>
    * @param {EdRoll} roll The prepared Roll.
+   * @returns {EdRoll}    The processed Roll.
    */
-  #processRoll( roll ) {
+  async #processRoll( roll ) {
     if ( !roll ) {
       // No roll available, do nothing.
       return;
@@ -520,18 +621,20 @@ export default class ActorEd extends Actor {
     }
 
     const rollTypeProcessors = {
-      "recovery": () => this.#processRecoveryResult( roll ),
+      "recovery":  () => this.#processRecoveryResult( roll ),
       "knockdown": () => this.#processKnockdownResult( roll ),
-      "jumpUp": () => this.#processJumpUpResult( roll )
+      "jumpUp":    () => this.#processJumpUpResult( roll )
     };
 
     const processRollType = rollTypeProcessors[roll.options.rollType];
 
     if ( processRollType ) {
-      processRollType();
+      await processRollType();
     } else {
-      roll.toMessage();
+      await roll.toMessage();
     }
+
+    return roll;
   }
 
   async #processJumpUpResult( roll ) {
@@ -583,9 +686,9 @@ export default class ActorEd extends Actor {
     const recoveryTestsCurrent = recoveryTestsResource.value;
 
     const updatePaths = {
-      wounds: "system.characteristics.health.wounds",
-      standardDamage: "system.characteristics.health.damage.standard",
-      stunDamage: "system.characteristics.health.damage.stun",
+      wounds:                "system.characteristics.health.wounds",
+      standardDamage:        "system.characteristics.health.damage.standard",
+      stunDamage:            "system.characteristics.health.damage.stun",
       recoveryTestAvailable: "system.characteristics.recoveryTestsResource.value",
       stunRecoveryAvailable: "system.characteristics.recoveryTestsResource.stunRecoveryAvailable"
     };
@@ -661,7 +764,7 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichment() {
     let enrichment = {};
     enrichment["system.description.value"] = await TextEditor.enrichHTML( this.system.description.value, {
-      async: true,
+      async:   true,
       secrets: this.isOwner
     } );
     return futils.expandObject( enrichment );
@@ -670,22 +773,13 @@ export default class ActorEd extends Actor {
   async _enableHTMLEnrichmentEmbeddedItems() {
     for ( const item of this.items ) {
       item.system.description.value = futils.expandObject( await TextEditor.enrichHTML( item.system.description.value, {
-          async: true,
-          secrets: this.isOwner
-        } )
+        async:   true,
+        secrets: this.isOwner
+      } )
       );
     }
   }
 
-  async addLpTransaction( type, transactionData ) {
-    const oldTransactions = this.system.lp[type];
-    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
-    const transaction = new TransactionModel( transactionData );
-
-    return this.update( {
-      [`system.lp.${ type }`]: oldTransactions.concat( [ transaction ] )
-    } );
-  }
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
@@ -799,6 +893,29 @@ export default class ActorEd extends Actor {
    */
   async getPrompt( promptType ) {
     return this._promptFactory.getPrompt( promptType );
+  }
+
+
+  /* -------------------------------------------- */
+  /*            Legend Point Tracking             */
+  /* -------------------------------------------- */
+
+  /**
+   * @description                                 Add a new LP transaction to the actor's system data
+   * @param {('earnings'|'spendings')} type       Type of the transaction
+   * @param {object} transactionData   Data of the transaction
+   * @returns {ActorEd}                           The updated actor data
+   * @UserFunction                                UF_LPTracking-addLpTransaction
+   * @see                             ../../documentation/User Functions/UF_LpTracking-addLpTransaction.md
+   */
+  async addLpTransaction( type, transactionData ) {
+    const oldTransactions = this.system.lp[type];
+    const TransactionModel = type === "earnings" ? LpEarningTransactionData : LpSpendingTransactionData;
+    const transaction = new TransactionModel( transactionData );
+
+    return this.update( {
+      [`system.lp.${type}`]: oldTransactions.concat( [ transaction ] )
+    } );
   }
 
 }

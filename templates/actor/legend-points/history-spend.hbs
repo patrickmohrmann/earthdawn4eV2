@@ -1,112 +1,12 @@
-<div class="tab spend-tab" data-group="primary" data-tab="spend-tab">
-  spend
-  <!-- Body -->
-  <div class="lp-history__spend-body">
-    <table class="input--centered">
-      <thead>
-        <tr>
-          <th>
-            date
-          </th>
-          <th>
-            Type
-          </th>
-          <th>
-            Name
-          </th>
-          <th>
-            Tier
-          </th>
-          <th>
-            Advancement
-          </th>
-          <th>
-            Lp Amount
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            2024-01-01 17:23
-          </td>
-          <td>
-            talent
-          </td>
-          <td>
-            Melee Weapons
-          </td>
-          <td>
-            Novice
-          </td>
-          <td>
-            Rank 2 -> Rank 3
-          </td>
-          <td>
-            300 LP
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2024-02-01 17:23
-          </td>
-          <td>
-            Knack
-          </td>
-          <td>
-            Super Duper Knack
-          </td>
-          <td>
-            Journeyman
-          </td>
-          <td>
-            --
-          </td>
-          <td>
-            500 LP
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2024-03-01 17:23
-          </td>
-          <td>
-            Class
-          </td>
-          <td>
-            Discipline
-          </td>
-          <td>
-            --
-          </td>
-          <td>
-            Circle 4 -> Cirlce 5
-          </td>
-          <td>
-            --
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2024-04-01 17:23
-          </td>
-          <td>
-            Attribute
-          </td>
-          <td>
-            Dexterity
-          </td>
-          <td>
-            --
-          </td>
-          <td>
-            First Incease
-          </td>
-          <td>
-            500 LP
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<section class="tab spend-tab {{tab.cssClass}} lp-history__spend scrollable" data-group="primary" data-tab="spend-tab">
+
+  <div class="form-group">
+    <label>{{localize "ED.Dialogs.Sorting.sortBy"}}</label>
+    <div class="form-fields flexrow">
+      {{radioBoxes "sortBy" SORTING checked=sortBy localize=false}}
+    </div>
   </div>
-</div>
+
+  {{{spendingsHtmlTable}}}
+
+</section>

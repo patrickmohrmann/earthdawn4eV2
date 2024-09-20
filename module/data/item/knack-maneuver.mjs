@@ -5,25 +5,25 @@ import KnackTemplate from "./templates/knack-item.mjs";
 /**
  * Data model template with information on items that are used to represent custom active effects.
  */
-export default class KnackManeuverData extends KnackTemplate.mixin(
-    ItemDescriptionTemplate,
-    ManeuverData
+export default class KnackManeuverData extends ManeuverData.mixin(
+  KnackTemplate,
+  ItemDescriptionTemplate,
 ) {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return this.mergeSchema( super.defineSchema(), {
+  /** @inheritDoc */
+  static defineSchema() {
+    return this.mergeSchema( super.defineSchema(), {
             
-        } );
-    }
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

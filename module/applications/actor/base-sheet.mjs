@@ -1,5 +1,6 @@
 import ED4E from "../../config.mjs";
 
+// noinspection JSClosureCompilerSyntax
 /**
  * Extend the basic ActorSheet with modifications
  * @augments {ActorSheet}
@@ -11,19 +12,19 @@ export default class ActorSheetEd extends ActorSheet {
    */
   static get defaultOptions() {
     return foundry.utils.mergeObject( super.defaultOptions, {
-      classes: [ "earthdawn4e", "sheet", "actor", "character-sheet" ],
-      width: 800,
-      height: 800,
-      tabs: [
+      classes: [ "earthdawn4e", "sheet", "actor", ],
+      width:   800,
+      height:  800,
+      tabs:    [
         {
-          navSelector: ".actor-sheet-tabs",
+          navSelector:     ".actor-sheet-tabs",
           contentSelector: ".actor-sheet-body",
-          initial: "main",
+          initial:         "main",
         },
         {
-          navSelector: ".actor-sheet-spell-tabs",
+          navSelector:     ".actor-sheet-spell-tabs",
           contentSelector: ".actor-sheet-spell-body",
-          initial: "spell-matrix-tab",
+          initial:         "spell-matrix-tab",
         },
       ],
       scrollY: [
@@ -86,11 +87,11 @@ export default class ActorSheetEd extends ActorSheet {
     html.find( ".action-buttons" ).click( event => {
       const action = event.currentTarget.dataset.action;
       const actionMapping = {
-        "recovery": () => this._onRecoveryRoll( event ),
-        "takeDamage": () => this._onTakeDamage( event ),
-        "jumpUp": () => this._onJumpUp( event ),
-        "initiative": () => this._onInitiative( event ),
-        "halfMagic": () => this._onHalfMagic( event ),
+        "recovery":      () => this._onRecoveryRoll( event ),
+        "takeDamage":    () => this._onTakeDamage( event ),
+        "jumpUp":        () => this._onJumpUp( event ),
+        "initiative":    () => this._onInitiative( event ),
+        "halfMagic":     () => this._onHalfMagic( event ),
         "knockdownTest": () => this._onKnockDown( event ),
       };
       // Check if the action exists in the mapping and call it
@@ -110,12 +111,22 @@ export default class ActorSheetEd extends ActorSheet {
     // item card description shown on item click
     html.find( ".card__name" ).click( event => this._onCardExpand( event ) );
 
-    // Legend point History (Earned)
-    html.find( ".legend-point__history--earned" ).click( this._onLegendPointHistoryEarned.bind( this ) );
+    // Legend point Tracking
+    html.find( ".legend-point__history" ).click( this._onLegendPointHistory.bind( this ) );
+
+    html.find( ".item-upgrade__attribute" ).click( this._onAttributeEnhancement.bind( this ) );
+
+    html.find( ".item-upgrade__ability" ).click( this._onAbilityEnhancement.bind( this ) );
+
+    html.find( ".item-upgrade__class" ).click( this._onClassEnhancement.bind( this ) );
   }
 
+  /* -------------------------------------------- */
+  /*              Equipment Toggle                */
+  /* -------------------------------------------- */
+
   /**
-   * Handle changing the holding type of an owned item.
+   * Handle changing the holding type of owned items.
    * @description itemStatus.value =
    * 1: owned,
    * 2: carried,
@@ -124,7 +135,8 @@ export default class ActorSheetEd extends ActorSheet {
    * 5: offHand,
    * 6: twoHanded,
    * 7: tail
-   * @param {Event} event      The originating click event.
+   * @param {Event} event     The originating click event.
+   * @returns {Application}   The rendered item sheet.
    * @private
    */
   // eslint-disable-next-line complexity
@@ -146,18 +158,63 @@ export default class ActorSheetEd extends ActorSheet {
     if ( unequip ) return item.system.carry()?.then( _ => this.render() );
     if ( rotate ) return this.actor.rotateItemStatus( item.id, backwards ).then( _ => this.render() );
     if ( deposit ) return item.system.deposit()?.then( _ => this.render() );
+    return this;
   }
 
+  /* -------------------------------------------- */
+  /*             LP Tracking Trigger              */
+  /* -------------------------------------------- */
 
   /**
-   * Legend Point history earned
-   * @param { Event } event    The originating click event.
+   * @description               Open the Legend Point history of the actor
+   * @param { Event } event     The originating click event.
    * @private
    */
-  _onLegendPointHistoryEarned( event ) {
+  _onLegendPointHistory( event ) {
     event.preventDefault();
-    this.actor.legendPointHistoryEarned( this.actor );
+    this.actor.legendPointHistory( this.actor );
   }
+
+  /**
+   * @description             This function is used to upgrade attributes
+   * @param {Event} event     The originating click event.
+   * @private
+   */
+  async _onAttributeEnhancement( event ) {
+    event.preventDefault();
+    const attribute = event.currentTarget.dataset.attribute;
+    await this.actor.system.increaseAttribute( attribute );
+  }
+
+  /**
+   * @description             This function is used to upgrade abilities
+   * @param {Event} event     The originating click event.
+   * @private
+   */
+  async _onAbilityEnhancement( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    if ( typeof ability.system.increase === "function" ) ability.system.increase();
+  }
+
+  /**
+   * @description             This function is used to upgrade Classes
+   * @param {Event} event     The originating click event.
+   * @private
+   */
+  async _onClassEnhancement( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const classItem = this.actor.items.get( li.dataset.itemId );
+    classItem.system.increase();
+  }
+
+
+  /* -------------------------------------------- */
+  /*                 Roll Trigger                 */
+  /* -------------------------------------------- */
+
   /**
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
@@ -166,7 +223,7 @@ export default class ActorSheetEd extends ActorSheet {
   _onRollAttribute( event ) {
     event.preventDefault();
     const attribute = event.currentTarget.dataset.attribute;
-    this.actor.rollAttribute( attribute, { event: event } );
+    this.actor.rollAttribute( attribute, {}, { event: event } );
   }
 
   /**
@@ -178,7 +235,7 @@ export default class ActorSheetEd extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest( ".item-id" );
     const ability = this.actor.items.get( li.dataset.itemId );
-    this.actor.rollAbility( ability, { event: event } );
+    this.actor.rollAbility( ability, {}, { event: event } );
   }
 
   /**
@@ -194,16 +251,20 @@ export default class ActorSheetEd extends ActorSheet {
   }
 
   /**
-   * @description Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
+   * @description             Take strain is used for non-rollable abilities which requires strain. player can click on the icon to take the strain damage
    * @param {Event} event     The originating click event
    * @private
    */
-    _onTakeStrain( event ) {
-        event.preventDefault();
-        const li = event.currentTarget.closest( ".item-id" );
-        const ability = this.actor.items.get( li.dataset.itemId );
-        this.actor.takeStrain( ability.system.strain );
-    }
+  _onTakeStrain( event ) {
+    event.preventDefault();
+    const li = event.currentTarget.closest( ".item-id" );
+    const ability = this.actor.items.get( li.dataset.itemId );
+    this.actor.takeStrain( ability.system.strain );
+  }
+
+  /* -------------------------------------------- */
+  /*                Action Button                 */
+  /* -------------------------------------------- */
 
   /**
    * Handles Recovery tests
@@ -216,7 +277,7 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.rollRecovery( recoveryMode, {event: event} );
   }
 
-  async _onTakeDamage( event ) {
+  async _onTakeDamage( _ ) {
     const takeDamage = await this.actor.getPrompt( "takeDamage" );
     if ( !takeDamage || takeDamage === "close" ) return;
 
@@ -250,6 +311,14 @@ export default class ActorSheetEd extends ActorSheet {
     this.actor.knockdownTest( damageTaken );
   }
 
+  _onKarmaRefresh() {
+    this.actor.karmaRitual();
+  }
+
+
+  /* -------------------------------------------- */
+  /*                   Effects                    */
+  /* -------------------------------------------- */
 
   /**
    * Handle creating an owned ActiveEffect for the Actor.
@@ -260,10 +329,10 @@ export default class ActorSheetEd extends ActorSheet {
   _onEffectAdd( event ) {
     event.preventDefault();
     return this.actor.createEmbeddedDocuments( "ActiveEffect", [ {
-      label: "New Effect",
-      icon: "icons/svg/item-bag.svg",
+      label:    "New Effect",
+      icon:     "icons/svg/item-bag.svg",
       duration: { rounds: 1 },
-      origin: this.actor.uuid
+      origin:   this.actor.uuid
     } ] );
   }
 
@@ -295,6 +364,10 @@ export default class ActorSheetEd extends ActorSheet {
     return effect.sheet?.render( true );
   }
 
+
+  /* -------------------------------------------- */
+  /*             Owned item Handler               */
+  /* -------------------------------------------- */
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event                 The originating click event.
@@ -322,10 +395,6 @@ export default class ActorSheetEd extends ActorSheet {
     return item.sheet?.render( true );
   }
 
-  _onKarmaRefresh() {
-    this.actor.karmaRitual();
-  }
-
   _onCardExpand( event ) {
     event.preventDefault();
 
@@ -336,5 +405,5 @@ export default class ActorSheetEd extends ActorSheet {
 
     itemDescription.toggleClass( "card__description--toggle" );
   }
-
 }
+

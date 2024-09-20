@@ -1,0 +1,1 @@
+this functionality is used to add legend point interactions to the actor data. No matter if it is an earning or a spending, every interaction with legend point related data or items will create one entry.

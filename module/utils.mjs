@@ -47,17 +47,16 @@ export function getDefenseValue( attributeValue ) {
  * @returns { string }  The sluggified string.
  */
 export function slugify( input ) {
-  const slugged = String( input )
-    .normalize( 'NFKD' ) // split accented characters into their base characters and diacritical marks
-    .replace( /[\u0300-\u036f]/g, '' ) // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+  return String( input )
+    .normalize( "NFKD" ) // split accented characters into their base characters and diacritical marks
+    .replace( /[\u0300-\u036f]/g, "" ) // remove all the accents, which happen to be all in the \u03xx UNICODE block.
     .toLowerCase() // convert to lowercase
-    .replace( /[^a-z0-9 -]/g, '' ) // remove non-alphanumeric characters
-    .replace( /\s+/g, '-' ) // replace spaces with hyphens
-    .replace( /-+/g, '-' ) // remove consecutive hyphens
-    .replace( /^-+/g, '' ) // remove leading hyphens
-    .replace( /-+$/g, '' ) // remove trailing hyphens
-    .trim(); // trim leading or trailing whitespace
-  return slugged;
+    .replace( /[^a-z0-9 -]/g, "" ) // remove non-alphanumeric characters
+    .replace( /\s+/g, "-" ) // replace spaces with hyphens
+    .replace( /-+/g, "-" ) // remove consecutive hyphens
+    .replace( /^-+/g, "" ) // remove leading hyphens
+    .replace( /-+$/g, "" ) // remove trailing hyphens
+    .trim();
 }
 
 /**
@@ -70,13 +69,13 @@ export function slugify( input ) {
  */
 export async function getGlobalItemsByEdid( edid, type ) {
   return getAllDocuments(
-    'Item',
+    "Item",
     type,
     false,
-    'OBSERVER',
-    ['system.edid'],
+    "OBSERVER",
+    [ "system.edid" ],
     ( item ) => item.system.edid === edid,
-  )
+  );
 }
 
 /**
@@ -98,14 +97,13 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  * Example usage:
  * ```
  * await ed4e.utils.getAllDocuments(
- *  "Item",
- *  "spell",
- *  false,
- *  ["system.level", "system.tier"],
- *  x => ( x.system.level > 3 ) && ( x.system.binding === true )
+ * "Item",
+ * "spell",
+ * false,
+ * ["system.level", "system.tier"],
+ * x => ( x.system.level > 3 ) && ( x.system.binding === true )
  * )
  * ```
- *
  * @param {string} documentName           The type of document that is searched
  *                                        for. One of `game.documentTypes` keys.
  * @param {string} documentType           The subtype for the chosen document
@@ -120,7 +118,7 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  * @param {[string]} filterFields         An array of document property keys that
  *                                        are used in the `predicate` function.
  *                                        Must contain all used keys.
- * @param {function} predicate            A function that can be used for
+ * @param {Function} predicate            A function that can be used for
  *                                        pre-filtering the searched documents.
  *                                        Must be a function that takes one
  *                                        parameter, either the document (for
@@ -128,7 +126,7 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  *                                        It must return `true` if the item
  *                                        should be kept, or `false` for it to
  *                                        be discarded.
- * @return {Promise<[Document|string]>}   A promise that resolves to an array of
+ * @returns {Promise<[Document|string]>}   A promise that resolves to an array of
  *                                        either {@link Document}s or UUID
  *                                        strings of the found documents. Empty
  *                                        if no documents are found.
@@ -176,7 +174,7 @@ export async function getAllDocuments(
     } ),
   ).then( p => p.flat() );
 
-  const allDocuments = [...documents, ...indices].filter( predicate );
+  const allDocuments = [ ...documents, ...indices ].filter( predicate );
 
   return asUuid
     ? allDocuments.map( doc => doc.uuid )
@@ -190,7 +188,7 @@ export async function getAllDocuments(
  * UUID, the values it's name, which is rendered as representation in the HTML.
  * @param {foundry.abstract.Document[]} documents An array of documents that should
  * be the choices.
- * @return {{}} An object in the form of the `choices` parameter of the
+ * @returns {{}} An object in the form of the `choices` parameter of the
  * {@link selectOptions} Handlebar helper.
  */
 export function documentsToSelectChoices( documents ) {
@@ -198,6 +196,17 @@ export function documentsToSelectChoices( documents ) {
     ( obj, doc ) => ( { ...obj, [doc.uuid]: doc.name } ),
     {}
   );
+}
+
+/**
+ * Creates a content link for a given UUID and description in the form:
+ * `@UUID[uuid]{description}`. Can then be enriched by the Foundry API.
+ * @param {string} uuid         The UUID of the linked entity.
+ * @param {string} description  The description that is shown in the link.
+ * @returns {string}            The content link in string representation.
+ */
+export function createContentLink( uuid, description ) {
+  return `@UUID[${uuid}]{${description}}`;
 }
 
 /* -------------------------------------------- */
@@ -241,15 +250,27 @@ export function sumProperty( arr, prop ) {
 
 /**
  * Checks if a value is within a specified range.
- *
  * @param {number} value - The value to check.
  * @param {number} min - The lower limit of the range.
  * @param {number} max - The upper limit of the range.
- * @param {boolean} [includeLimits=true] - Whether to include the limits in the range. If true, checks if the value is greater than or equal to min and less than or equal to max. If false, checks if the value is strictly greater or less than the limits.
+ * @param {boolean} [includeLimits] - Whether to include the limits in the range. If true, checks if the value is greater than or equal to min and less than or equal to max. If false, checks if the value is strictly greater or less than the limits.
  * @returns {boolean} Returns true if the value is within the range, and false otherwise.
  */
 export function inRange( value, min, max, includeLimits = true ) {
   return includeLimits ? value >= min && value <= max : value > min && value < max;
+}
+
+/* -------------------------------------------- */
+/*  Formatting                                  */
+/* -------------------------------------------- */
+
+/**
+ * @description Converts a date object or integer to a string that can be used as value in a datetime input field.
+ * @param { Date | integer } date The date to be converted. If integer, it is treated as a timestamp.
+ * @returns { string } The date string in the format "YYYY-MM-DDTHH:MM".
+ */
+export function dateToInputString( date ) {
+  return ( new Date( date ) ).toISOString().substring( 0, 16 );
 }
 
 /* -------------------------------------------- */
@@ -281,13 +302,14 @@ export function sortObjectEntries( obj, sortKey ) {
  *                                                entry should be kept or discarded.
  *                                                Return `true` to keep the entry
  *                                                or `false` to discard it.
+ * @returns {object} A new object with only the entries that satisfy the predicate.
  */
 export function filterObject( obj, predicate ) {
   return Object.fromEntries(
     Object.entries( obj ).filter(
-      ( [key, value] ) => predicate( key, value )
+      ( [ key, value ] ) => predicate( key, value )
     )
-  )
+  );
 }
 
 /* -------------------------------------------- */
@@ -295,19 +317,20 @@ export function filterObject( obj, predicate ) {
 /**
  * Map an object's entries by the given function. Creates a new object with the
  * mapped entries according to the function.
- * @param {object} obj                            The object to filter.
- * @param {function} mappingFunction  A function that takes a key-value pair of
+ * @param {object} obj                The object to filter.
+ * @param {Function} mappingFunction  A function that takes a key-value pair of
  *                                    the object and return the new mapped
  *                                    key-value pair. It takes two parameters
  *                                    `[key, value]` and must return them as
  *                                    `[key, value]`.
+ * @returns {object}                  A new object with the mapped entries.
  */
 export function mapObject( obj, mappingFunction ) {
   return Object.fromEntries(
     Object.entries( obj ).map(
-      ( [key, value] ) => mappingFunction( key, value )
+      ( [ key, value ] ) => mappingFunction( key, value )
     )
-  )
+  );
 }
 
 /* -------------------------------------------- */
@@ -321,7 +344,7 @@ export function renameKeysWithPrefix( obj ) {
   const renamedObj = {};
   for ( let key in obj ) {
     if ( obj.hasOwnProperty( key ) ) {
-      renamedObj['-=' + key] = obj[key];
+      renamedObj["-=" + key] = obj[key];
     }
   }
   return renamedObj;
@@ -345,7 +368,7 @@ export function renameKeysWithPrefix( obj ) {
  * @returns {any}             The value of the given key in the object.
  */
 export function resolvePath( object, path, defaultValue ){
-  return path.split( '.' ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
+  return path.split( "." ).reduce( ( o, p ) => o ? o[p] : defaultValue, object );
 }
 
 /* -------------------------------------------- */
@@ -355,8 +378,36 @@ export function resolvePath( object, path, defaultValue ){
  * @param {string} uuid  UUID for which to produce the link.
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid( uuid ) {
-  return TextEditor._createContentLink( ["", "UUID", uuid] ).outerHTML;
+export async function linkForUuid( uuid ) {
+  return TextEditor._createContentLink( [ "", "UUID", uuid ] );
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Creates an HTML document link for the provided UUID.
+ * @param {string} uuid  UUID for which to produce the link.
+ * @returns {string}     Link to the item or empty string if item wasn't found.
+ */
+export function linkForUuidSync( uuid ) {
+  const parsedUuid = foundry.utils.parseUuid( uuid );
+  const doc = fromUuidSync( uuid, { strict: false } );
+  if ( !doc ) return `<a class="content-link broken" data-icon="fas fa-unlink" data-uuid="${uuid} ">${uuid}</a>`;
+  const name = doc?.name ?? "";
+  const packId = parsedUuid.collection?.metadata?.id ?? "";
+  return `
+      <a 
+        class="content-link" draggable="true" 
+        data-link="" 
+        data-uuid="${uuid}"
+        data-id="${parsedUuid.id}"
+        data-type="${parsedUuid.type}"
+        data-tooltip="${doc?.type}"
+        data-pack="${packId}"
+      >
+      <i class="fas fa-suitcase"></i>
+      ${name}
+    </a>`;
 }
 
 /* -------------------------------------------- */
@@ -369,7 +420,7 @@ export function linkForUuid( uuid ) {
  * @returns {boolean} True, if the input string is a valid Foundry identifier, false otherwise.
  */
 function isValidIdentifier( identifier ){
-  return /^([a-z0-9_-]+)$/i.test( identifier );
+  return /^([A-Za-z0-9_-]+)$/i.test( identifier );
 }
 
 /** Source for regex: {@link https://ihateregex.io/expr/url-slug/} */
@@ -382,28 +433,28 @@ export const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/g;
  * @returns {void|DataModelValidationFailure} A validation failure in case of an invalid value.
  */
 export function validateEdid( value ) {
-  //`any` is a reserved word
+  // `any` is a reserved word
   if ( value === ED4E.reserved_edid.ANY ) {
     return new foundry.data.validation.DataModelValidationFailure( {
-      unresolved: true,
+      unresolved:   true,
       invalidValue: value,
-      message: 'any is a reserved EDID!',
+      message:      "any is a reserved EDID!",
     } );
   }
-  //if the value matches the regex we have likely a valid swid
+  // if the value matches the regex we have likely a valid swid
   if ( !value.match( SLUG_REGEX ) ) {
     return new foundry.data.validation.DataModelValidationFailure( {
-      unresolved: true,
+      unresolved:   true,
       invalidValue: value,
-      message: value + ' is not a valid EDID',
+      message:      value + " is not a valid EDID",
     } );
   }
 }
 
 export const validators = {
   isValidIdentifier: isValidIdentifier,
-  validateEdid: validateEdid,
-}
+  validateEdid:      validateEdid,
+};
 
 
 /* -------------------------------------------- */
@@ -420,12 +471,12 @@ const _preLocalizationRegistrations = {};
 /**
  * Mark the provided config key to be pre-localized during the init stage.
  * @param {string} configKeyPath          Key path within `CONFIG.ED4E` to localize.
- * @param {object} [options={}]
+ * @param {object} [options]              Additional options for pre-localization.
  * @param {string} [options.key]          If each entry in the config enum is an object,
  *                                        localize and sort using this property.
- * @param {string[]} [options.keys=[]]    Array of localization keys. First key listed will be used for sorting
+ * @param {string[]} [options.keys]    Array of localization keys. First key listed will be used for sorting
  *                                        if multiple are provided.
- * @param {boolean} [options.sort=false]  Sort this config enum, using the key if set.
+ * @param {boolean} [options.sort]  Sort this config enum, using the key if set.
  */
 export function preLocalize( configKeyPath, { key, keys=[], sort=false }={} ) {
   if ( key ) keys.unshift( key );
@@ -439,7 +490,7 @@ export function preLocalize( configKeyPath, { key, keys=[], sort=false }={} ) {
  * @param {object} config  The `CONFIG.ED4E` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization( config ) {
-  for ( const [keyPath, settings] of Object.entries( _preLocalizationRegistrations ) ) {
+  for ( const [ keyPath, settings ] of Object.entries( _preLocalizationRegistrations ) ) {
     const target = foundry.utils.getProperty( config, keyPath );
     _localizeObject( target, settings.keys );
     if ( settings.sort ) foundry.utils.setProperty( config, keyPath, sortObjectEntries( target, settings.keys[0] ) );
@@ -455,7 +506,7 @@ export function performPreLocalization( config ) {
  * @private
  */
 function _localizeObject( obj, keys ) {
-  for ( const [k, v] of Object.entries( obj ) ) {
+  for ( const [ k, v ] of Object.entries( obj ) ) {
     const type = typeof v;
     if ( type === "string" ) {
       obj[k] = game.i18n.localize( v );
@@ -464,13 +515,13 @@ function _localizeObject( obj, keys ) {
 
     if ( type !== "object" ) {
       console.error( new Error(
-          `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
+        `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
       ) );
       continue;
     }
     if ( !keys?.length ) {
       console.error( new Error(
-          "Localization keys must be provided for pre-localizing when target is an object."
+        "Localization keys must be provided for pre-localizing when target is an object."
       ) );
       continue;
     }
@@ -499,6 +550,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/global/card-options-effect.hbs",
     "systems/ed4e/templates/global/card-options-enhance.hbs",
     "systems/ed4e/templates/global/effect-card.hbs",
+    "systems/ed4e/templates/global/card-options-class-upgrade.hbs",
 
     // Character Generation
     "systems/ed4e/templates/actor/generation/namegiver-selection.hbs",
