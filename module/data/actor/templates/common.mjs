@@ -1,11 +1,14 @@
 import SystemDataModel from "../../abstract.mjs";
 import { MappingField } from "../../fields.mjs";
+import ActorDescriptionTemplate from "./description.mjs";
 
 /**
  * A template for all actors that share the common template.
  * @mixin
  */
-export default class CommonTemplate extends SystemDataModel {
+export default class CommonTemplate extends SystemDataModel.mixin(
+    ActorDescriptionTemplate
+) {
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,4 +1,3 @@
-import ActorDescriptionTemplate from "./templates/description.mjs";
 import NamegiverTemplate from "./templates/namegiver.mjs";
 import { getArmorFromAttribute, getAttributeStep, getDefenseValue, mapObject, sum, sumProperty } from "../../utils.mjs";
 import LpTransactionData from "../advancement/lp-transaction.mjs";
@@ -14,9 +13,7 @@ import ActorEd from "../../documents/actor.mjs";
  * @property {number} value             value is the one shown. baseValue + modifications
  * @property {number} timesIncreased    attribute increases
  */
-export default class PcData extends NamegiverTemplate.mixin(
-  ActorDescriptionTemplate
-) {
+export default class PcData extends NamegiverTemplate {
 
     /** @inheritDoc */
     static _systemType = "character";
