@@ -65,8 +65,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
         'skill',
         false,
         'OBSERVER',
-        ['system.source.tier'],
-        ( x ) => x.system.source.tier === 'novice',
+        ['system.tier'],
+        ( x ) => x.system.tier === 'novice',
       ),
       spells: await getAllDocuments(
         'Item',
