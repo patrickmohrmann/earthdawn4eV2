@@ -16,10 +16,10 @@ export default class ChallengeFields {
         rate: new fields.StringField( {
           required: true,
           nullable: false,
-          initial: "circle1",
-          choices: ED4E.challengeRates,
-          label: "ED.Data.Actor.Labels.challengeRate",
-          hint: "ED.Data.Actor.Hints.challengeRate"
+          initial:  "circle1",
+          choices:  ED4E.challengeRates,
+          label:    "ED.Data.Actor.Labels.challengeRate",
+          hint:     "ED.Data.Actor.Hints.challengeRate"
         } ), 
       } )
     };
