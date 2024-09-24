@@ -85,6 +85,7 @@
                 "currentrecoveryTestsResource":                             "Current",
                 "dailyrecoveryTestsResource":                               "Daily",
                 "deathThesholdShort":                               "Death Rating",
+                "maxWounds":                                        "Max Wounds",
                 "mysticalArmor":                                    "Mystical",
                 "mysticalDefense":                                  "Mystical",
                 "physicalArmor":                                    "Physical",
@@ -127,6 +128,7 @@
                 "active":                                           "Active",
                 "amount":                                           "Amount",
                 "armor":                                            "Armor",
+                "attacks":                                          "Attacks",
                 "attribute":                                        "Attribute",
                 "attributes":                                       "Attributes",
                 "carryingCapacity":                                 "Carrying Capacity",
@@ -142,6 +144,7 @@
                 "encumbrance":                                      "Encumbrance",
                 "equipment":                                        "Equipment",
                 "equippedStatus":                                   "Equipped",
+                "extraSuccesses":                                   "Extra Successes",
                 "healthRating":                                     "Health Rating",
                 "information":                                      "Informationen",
                 "initiativePenalty":                                "Initiative Penalty",
@@ -151,6 +154,7 @@
                 "legendSpend":                                      "LP Spend",
                 "legendStatus":                                     "Legend Status",
                 "legendTotal":                                      "LP Total",
+                "maneuvers":                                        "Maneuver",
                 "movement":                                         "Movement",
                 "mysticalArmor":                                    "Mystical Armor",     
                 "mysticalDefense":                                  "Mystical Defense",
@@ -160,6 +164,7 @@
                 "paths":                                            "Path",
                 "physicalArmor":                                    "Physical Armor",
                 "physicalDefense":                                  "Physical Defense", 
+                "powers":                                           "Power",
                 "questor":                                          "Questor",                    
                 "rank":                                             "Rank", 
                 "recovery":                                         "Recovery",
@@ -200,12 +205,14 @@
             },
             "Navigator": {
                 "classes":                                          "Vocation",
+                "configuration":                                    "Configuration",
                 "devotions":                                        "Devotions",
                 "equipment":                                        "Equipment",
                 "general":                                          "General",
                 "information":                                      "Information",
                 "legend":                                           "Legend",
                 "reputation":                                       "Reputation",
+                "power":                                            "Powers",
                 "skills":                                           "skills",
                 "specials":                                         "Specials",
                 "spells":                                           "Spells",
@@ -281,6 +288,23 @@
                 "simple":                                           "Simple",   
                 "standard":                                         "Standard",
                 "sustained":                                        "Sustained"
+            },
+            "Challenge": {
+                "circle1":                                          "Novice (First Circle)",
+                "circle2":                                          "Novice (Second Circle)",
+                "circle3":                                          "Novice (Third Circle)",
+                "circle4":                                          "Novice (Fourth Circle)",
+                "circle5":                                          "Journeyman (Fifth Circle)",
+                "circle6":                                          "Journeyman (Sixth Circle)",
+                "circle7":                                          "Journeyman (Seventh Circle)",
+                "circle8":                                          "Journeyman (Eighth Circle)",
+                "circle9":                                          "Warden (Ninth Circle)",
+                "circle10":                                         "Warden (Tenth Circle)",
+                "circle11":                                         "Warden (Eleventh Circle)",
+                "circle12":                                         "Warden (Twelfth Circle)",
+                "circle13":                                         "Master (Thirteenth Circle)",
+                "circle14":                                         "Master (Fourteenth Circle)",
+                "circle15":                                         "Master (Fifteenth Circle)"
             },
             "CombatTypes": {
                 "aerial":                                           "Aerial Combat",
@@ -369,10 +393,14 @@
                 "Hints": {}
             },
             "Actor": {
-                "Labels": {
-                    "toughness": "bla"
+                "Hints": {
+                    "challengeRate":                                "Challenging Rate",
+                    "isMob":                                        "Mob Rules"
                 },
-                "Hints": {}
+                "Labels": {
+                    "challengeRate":                                "Challenging Rate of the Actor",
+                    "isMob":                                        "This Actor uses only Wounds instead of Damage"
+                }
             },
             "Item": {
                 "Labels": {
@@ -419,6 +447,8 @@
                 "cancel":                                           "Cancel",
                 "close":                                            "Close",
                 "nightRest":                                        "Nightly Rest",
+                "noAbilityDex":                                     "Dexterity",
+                "noAbilityStr":                                     "Strength",
                 "recoverStun":                                      "Stun Damage Recovery",
                 "recovery":                                         "Recovey Test",
                 "save":                                             "Save",
@@ -434,6 +464,18 @@
             "mystical":                                             "Mystical Damage",
             "physical":                                             "Physical Damage"
         },
+        "Documents": {
+            "ActorSheetEdCharacter":                                "Character-sheet",
+            "ActorSheetEdCreature":                                 "Creature-sheet",
+            "ActorSheetEdDragon":                                   "Dragon-sheet",
+            "ActorSheetEdGroup":                                    "Group-sheet",
+            "ActorSheetEdHorror":                                   "Horror-sheet",
+            "ActorSheetEdLoot":                                     "Loot-sheet",
+            "ActorSheetEdNpc":                                      "NPC-sheet",
+            "ActorSheetEdSpirit":                                   "Spirit-sheet",
+            "ActorSheetEdTrap":                                     "Trap-sheet",
+            "ActorSheetEdVehicle":                                  "Vehicle-sheet"
+    },
         "Item": {
             "Ability": {
                 "damage":                                           "Damage",

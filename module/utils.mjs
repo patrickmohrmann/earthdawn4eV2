@@ -562,17 +562,19 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/generation/equipment.hbs",
 
     // Character details section partials
-    "systems/ed4e/templates/actor/character-details/details-talents.hbs",
-    "systems/ed4e/templates/actor/character-details/details-skills.hbs",
-    "systems/ed4e/templates/actor/character-details/details-devotions.hbs",
-    "systems/ed4e/templates/actor/character-details/details-spells.hbs",
-    "systems/ed4e/templates/actor/character-details/details-equipment.hbs",
-    "systems/ed4e/templates/actor/character-details/details-notes.hbs",
-    "systems/ed4e/templates/actor/character-details/details-familiars-reputation.hbs",
-    "systems/ed4e/templates/actor/character-details/details-general.hbs",
-    "systems/ed4e/templates/actor/character-details/details-specials.hbs",
-    "systems/ed4e/templates/actor/character-details/details-legend.hbs",
-    "systems/ed4e/templates/actor/character-details/details-class.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/powers.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/talents.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/skills.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/devotions.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/spells.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/equipment.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/notes.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/reputation.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/general.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/specials.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/legend.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/classes.hbs",
+    "systems/ed4e/templates/actor/actor-tabs/configuration.hbs",
 
     // Actor partials
     "systems/ed4e/templates/actor/actor-partials/actor-section-navigator.hbs",
@@ -581,6 +583,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/actor-partials/actor-section-top.hbs",
     "systems/ed4e/templates/actor/actor-partials/actor-section-main.hbs",
 
+
     // Actor cards
     "systems/ed4e/templates/actor/cards/ability-card.hbs",
     "systems/ed4e/templates/actor/cards/equipment-card.hbs",
@@ -588,7 +591,14 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/actor/cards/class-card.hbs",
     "systems/ed4e/templates/actor/cards/legend-point-history-earned.hbs",
     "systems/ed4e/templates/actor/cards/attribute-card.hbs",
+    "systems/ed4e/templates/actor/cards/attributes-none-pc-card.hbs",
     "systems/ed4e/templates/actor/cards/effect-card-link.hbs",
+    "systems/ed4e/templates/actor/cards/power-card.hbs",
+    "systems/ed4e/templates/actor/cards/maneuver-card.hbs",
+    "systems/ed4e/templates/actor/cards/health-character-card.hbs",
+    "systems/ed4e/templates/actor/cards/health-none-character-card.hbs",
+    "systems/ed4e/templates/actor/cards/damage-character-card.hbs",
+    "systems/ed4e/templates/actor/cards/damage-none-character-card.hbs",
 
     // Item partials
     "systems/ed4e/templates/item/item-partials/item-section-name.hbs",

@@ -2,6 +2,7 @@ import CommonTemplate from "./common.mjs";
 import { MappingField } from "../../fields.mjs";
 import MovementFields from "./movement.mjs";
 import ED4E from "../../../config.mjs";
+import ChallengeFields from "./templates/challenge.mjs";
 
 /**
  * A template for all actors that represent sentient beings and have such stats.
@@ -188,6 +189,14 @@ export default class SentientTemplate extends CommonTemplate {
                         integer: true,
                         label: "ED.Actor.Characteristics.wounds"
                     } ),
+                    maxWounds: new fields.NumberField( {
+                        required: true,
+                        nullable: true,
+                        min: 0,
+                        integer: true,
+                        label: "ED.Actor.Data.Label.maxWounds",
+                        hint: "ED.Actor.Data.Hint.maxWounds"
+                    } ),
                 } ),
                 recoveryTestsResource: new fields.SchemaField( {
                     max: new fields.NumberField( {
@@ -216,6 +225,13 @@ export default class SentientTemplate extends CommonTemplate {
                 } ),
                 ...MovementFields.movement
             } ),
+            mobRules: new fields.BooleanField( {
+                required: true,
+                initial: false,
+                label: "ED.Data.Actor.Labels.mobRules",
+                hint: "ED.Data.Actor.Hints.mobRules"
+            } ),
+            ...ChallengeFields.challenge,
             condition: new fields.SchemaField( {
                 aggressiveAttack: new fields.BooleanField( {
                     required: true,

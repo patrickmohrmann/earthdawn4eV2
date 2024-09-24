@@ -1,0 +1,18 @@
+{{#each actor.system.attributes }}
+<div class="attribute-card__grid--container attribute__roll">
+    <div class="attribute-card__grid--item icons__dice">
+        <img class="attribute-icon" src="icons/svg/d20-grey.svg">
+        <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg" data-attribute="{{@key}}">
+    </div>
+    <div class="attribute-card__grid--item attribute__name">
+        <label>
+            {{#with (lookup ../config.attributes @key)}}
+            {{label}}
+            {{/with}}
+        </label>
+    </div>
+    <div class="attribute-card__grid--item">
+        <input class="input__circle-input--centered" name="system.attributes.{{@key}}.step" value="{{this.baseStep}}">
+    </div>
+</div>
+{{/each}}

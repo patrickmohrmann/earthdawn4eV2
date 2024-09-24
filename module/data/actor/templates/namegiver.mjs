@@ -1,5 +1,7 @@
 import SentientTemplate from "./sentient.mjs";
 
+const futils = foundry.utils;
+
 /**
  * A template for all actors that represent namegivers, that is, PCs and NPCs.
  * @mixin
@@ -25,9 +27,11 @@ export default class NamegiverTemplate extends SentientTemplate {
               // choices need to be in the form of an object with the same key and value
               // for the `formField` Handlebars helper to work correctly and have the name
               // as the value attribute of the option tag
-              choices: () => Object.fromEntries(
-                game.settings.get( "ed4e", "languages" ).map( lang => [ lang, lang ] )
-              ),
+              choices: () => {
+                const languages = game.settings.get( "ed4e", "languages" );
+                if ( futils.isEmpty( languages ) ) return {};
+                return Object.fromEntries( languages.map( lang => [ lang, lang ] ) );
+              }
           } ),
           {
               required: true,
