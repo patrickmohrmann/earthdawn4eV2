@@ -59,7 +59,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
                 initial: false,
                 label: "ED.Item.Shield.Label.broken"
             } ),
-            islivingArmor: new fields.BooleanField( {
+            isLivingArmor: new fields.BooleanField( {
                 required: true,
                 initial:  false,
                 label:    "ED.Data.Item.Labels.livingArmor",
