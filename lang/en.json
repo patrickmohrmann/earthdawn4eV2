@@ -376,10 +376,14 @@
             },
             "Item": {
                 "Labels": {
-                    "edid":                                         "ED-ID"
+                    "edid":                                         "ED-ID",
+                    "livingArmorOnly":                              "Living Armor Only",
+                    "livingArmor":                                  "Living Armor"
                 },
                 "Hints": {
-                    "edid":                                         "An ID to identify an item without considering its name"
+                    "edid":                                         "An ID to identify an item without considering its name",
+                    "livingArmorOnly":                              "This item is considered as living armor.",
+                    "livingArmor":                                  "This item counts as living Armor."
                 }
             },
             "Journal": {
@@ -578,6 +582,7 @@
                 "notAddedforTheActor":                              "This Item is not meant for this Actor."
             },
             "Warn": {
+                "livingArmorOnly":                                  "This namegiver can only wear living armor.",
                 "piecemealArmorSizeExceeded":                       "Maximum amount of piecemeal armor reached. Unequip other parts to equip the new piece."
             },
             "Error": {}

@@ -783,6 +783,7 @@ export default class ActorEd extends Actor {
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
+    const namegiver = this.items.filter( item => item.type === "namegiver" )[ 0 ];
     const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };
     const equippedWeapons = this.itemTypes.weapon.filter(
       weapon => [ "mainHand", "offHand", "twoHands" ].includes( weapon.system.itemStatus )
@@ -797,40 +798,45 @@ export default class ActorEd extends Actor {
 
     switch ( itemToUpdate.type ) {
       case "armor":
-
         if ( nextStatus === "equipped" ) {
-          if ( itemToUpdate.system.piecemealArmor?.selector ) {
-            if ( !this.wearsPiecemealArmor ) {
-              addUnequipItemUpdate( "armor", [ "equipped" ] );
-            } else {
-              // A complete set of piecemeal armor can have up to 5 size points. Armor pieces come in three sizes and
-              // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
-              // cannot have more than one size of a particular type.
-              const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
-              const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
-              if ( sameSizePiece ) {
-                updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
+          // check if namegiver item allows only living armor/shields
+          if ( namegiver.system.livingArmorOnly && itemToUpdate.system.livingArmorOnly === false ) {
+            ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
+            break;
+          } else {
+            if ( itemToUpdate.system.piecemealArmor?.selector ) {
+              if ( !this.wearsPiecemealArmor ) {
+                addUnequipItemUpdate( "armor", [ "equipped" ] );
               } else {
-                // Check if the total size of the equipped armor pieces and the size of the item to update exceeds the
-                // maximum allowed size for a piecemeal armor set (5 size points). If it does, break the operation to
-                // prevent equipping the item.
-                // eslint-disable-next-line max-depth
-                if (
-                  sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
-                  + itemToUpdate.system.piecemealArmor.size > 5
-                ) {
-                  ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
-                  break;
+                // A complete set of piecemeal armor can have up to 5 size points. Armor pieces come in three sizes and
+                // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
+                // cannot have more than one size of a particular type.
+                const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
+                const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
+                if ( sameSizePiece ) {
+                  updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
+                } else {
+                  // Check if the total size of the equipped armor pieces and the size of the item to update exceeds the
+                  // maximum allowed size for a piecemeal armor set (5 size points). If it does, break the operation to
+                  // prevent equipping the item.
+                  // eslint-disable-next-line max-depth
+                  if (
+                    sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
+                    + itemToUpdate.system.piecemealArmor.size > 5
+                  ) {
+                    ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
+                    break;
+                  }
+                }
+                const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemealArmor?.selector );
+                if ( equippedNonPiecemealArmor ) {
+                  updates.push( { _id: equippedNonPiecemealArmor.id, "system.itemStatus": "carried" } );
                 }
               }
-              const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemealArmor?.selector );
-              if ( equippedNonPiecemealArmor ) {
-                updates.push( { _id: equippedNonPiecemealArmor.id, "system.itemStatus": "carried" } );
-              }
+            } else {
+              // Unequip other armor
+              if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", [ "equipped" ] );
             }
-          } else {
-            // Unequip other armor
-            if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", [ "equipped" ] );
           }
         }
         updates.push( originalItemUpdate );
@@ -858,20 +864,25 @@ export default class ActorEd extends Actor {
         updates.push( originalItemUpdate );
         break;
       case "shield":
-
-        if ( nextStatus === "equipped" ) {
-          // Unequip other shields
-          addUnequipItemUpdate( "shield", [ "equipped" ] );
-          // If there's a bow and the shield allows it, no need to unequip the weapon
-          const bowAllowed = equippedWeapons[0]?.system.isTwoHandedRanged && itemToUpdate.system.bowUsage;
-          // If there's a two-handed weapon or two one-handed weapons, unequip one
-          const unequipSomeWeapon = equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1;
-          if ( !bowAllowed && unequipSomeWeapon ) {
-            // Prefer to unequip off-hand weapon, if available
-            const weaponToUnequip = equippedWeapons.find( weapon => weapon.system.itemStatus === "offHand" ) || equippedWeapons[0];
-            updates.push( { _id: weaponToUnequip.id, "system.itemStatus": "carried" } );
+          if ( nextStatus === "equipped" ) {
+            // check if namegiver item allows only living armor/shields
+            if ( namegiver.system.livingArmorOnly && itemToUpdate.system.livingArmorOnly === false ) {
+              ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
+              break;
+            } else {
+              // Unequip other shields
+              addUnequipItemUpdate( "shield", [ "equipped" ] );
+              // If there's a bow and the shield allows it, no need to unequip the weapon
+              const bowAllowed = equippedWeapons[0]?.system.isTwoHandedRanged && itemToUpdate.system.bowUsage;
+              // If there's a two-handed weapon or two one-handed weapons, unequip one
+              const unequipSomeWeapon = equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1;
+              if ( !bowAllowed && unequipSomeWeapon ) {
+                // Prefer to unequip off-hand weapon, if available
+                const weaponToUnequip = equippedWeapons.find( weapon => weapon.system.itemStatus === "offHand" ) || equippedWeapons[0];
+                updates.push( { _id: weaponToUnequip.id, "system.itemStatus": "carried" } );
+              }
+            }
           }
-        }
 
         updates.push( originalItemUpdate );
         break;

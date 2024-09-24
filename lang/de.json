@@ -343,10 +343,14 @@
       },
       "Item": {
         "Hints": {
-          "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+          "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
+          "livingArmorOnly":                              "Nur legendige Rüstung",
+          "islivingArmor":                                "Legendige Rüstung"
         },
         "Labels": {
-          "edid": "ED-ID"
+          "edid": "ED-ID",
+          "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden.",
+          "islivingArmor":                                "Dieser Gegenstand gilt als Lebendige Rüstung."
         }
       },
       "Journal": {
@@ -572,6 +576,7 @@
           "noTalentCategorySelected": "Du musst eine Talentkategorie auswählen, sonst können wir nichts zuordnen und kuhle LP Sachen machen :(",
           "questorItemNotUpdated": "Questor-Item konnte nicht aktualisiert werden"
         },
+        "livingArmorOnly":                                  "Es kann nur nur lebendige Rüstung getragen werden.", 
         "piecemealArmorSizeExceeded": "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
       }
     },
