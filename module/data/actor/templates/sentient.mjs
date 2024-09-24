@@ -2,7 +2,7 @@ import CommonTemplate from "./common.mjs";
 import { MappingField } from "../../fields.mjs";
 import MovementFields from "./movement.mjs";
 import ED4E from "../../../config.mjs";
-import ChallengeFields from "./templates/challenge.mjs";
+import ChallengeFields from "./challenge.mjs";
 
 /**
  * A template for all actors that represent sentient beings and have such stats.
