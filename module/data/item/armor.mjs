@@ -72,9 +72,9 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
       } ),
       piecemealArmor: new fields.SchemaField( {
         selector: new fields.BooleanField( {
-        required: true,
-        initial:  false,
-        label:    "ED.Item.Armor.piecemealArmor"
+          required: true,
+          initial:  false,
+          label:    "ED.Item.Armor.piecemealArmor"
         } ),
         size: new fields.NumberField( {
           required: true,
