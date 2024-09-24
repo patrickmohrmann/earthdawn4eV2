@@ -43,25 +43,25 @@ export default function () {
     // Register sheet application classes
     Actors.unregisterSheet( "core", ActorSheet );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEd, {
-      makeDefault: true
+      makeDefault:  true
     } );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
       types: [ "character" ],
-      makeDefault: true,
-        label: "ED.Documents.ActorSheetEdCharacter"
+      makeDefault:  true,
+      label:  "ED.Documents.ActorSheetEdCharacter"
     } );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdNpc, {
-      types: [ "npc" ],
-      makeDefault: true,
-      label: "ED.Documents.ActorSheetEdNpc"
+      types:  [ "npc" ],
+      makeDefault:  true,
+      label:  "ED.Documents.ActorSheetEdNpc"
     } );
     Items.unregisterSheet( "core", ItemSheet );
     Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
-      makeDefault: true
+      makeDefault:  true
     } );
     Journal.unregisterSheet( "core", JournalSheet );
     Journal.registerSheet( "earthdawn4e", applications.journal.JournalSheetEd, {
-      makeDefault: true
+      makeDefault:  true
     } );
 
     // Register Handlebars Helper
