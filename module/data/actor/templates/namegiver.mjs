@@ -11,9 +11,9 @@ export default class NamegiverTemplate extends SentientTemplate {
   /** @inheritDoc */
   static defineSchema() {
     const fields = foundry.data.fields;
-    return this.mergeSchema(super.defineSchema(), {
+    return this.mergeSchema( super.defineSchema(), {
       languages: new fields.SchemaField( {
-        speak: this.getLanguageDataField(),
+        speak:     this.getLanguageDataField(),
         readWrite: this.getLanguageDataField(),
       } ),
     } );
@@ -23,22 +23,22 @@ export default class NamegiverTemplate extends SentientTemplate {
     const fields = foundry.data.fields;
     return new fields.SetField(
       new fields.StringField( {
-        blank: false,
+        blank:   false,
         // choices need to be in the form of an object with the same key and value
         // for the `formField` Handlebars helper to work correctly and have the name
         // as the value attribute of the option tag
         choices: () => {
-        const languages = game.settings.get( "ed4e", "languages" );
-        if ( futils.isEmpty( languages ) ) return {};
-        return Object.fromEntries( languages.map( lang => [ lang, lang ] ) );
+          const languages = game.settings.get( "ed4e", "languages" );
+          if ( futils.isEmpty( languages ) ) return {};
+          return Object.fromEntries( languages.map( lang => [ lang, lang ] ) );
         }
       } ),
       {
         required: true,
         nullable: false,
-        initial: [],
+        initial:  [],
       }
-    )
+    );
   }
 
   /**
