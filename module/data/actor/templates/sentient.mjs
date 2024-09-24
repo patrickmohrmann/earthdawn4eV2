@@ -18,19 +18,19 @@ export default class SentientTemplate extends CommonTemplate {
         baseStep: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 1,
-          step: 1,
-          initial: 1,
-          integer: true,
+          min:      1,
+          step:     1,
+          initial:  1,
+          integer:  true,
           positive: true
         } ),
         step: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 1,
-          step: 1,
-          initial: 1,
-          integer: true,
+          min:      1,
+          step:     1,
+          initial:  1,
+          integer:  true,
           positive: true
         } )
       } ), {
@@ -42,16 +42,16 @@ export default class SentientTemplate extends CommonTemplate {
         value: new fields.NumberField( {
           required: true,
           nullable: false,
-          step: 1,
-          initial: 0,
-          integer: true,
+          step:     1,
+          initial:  0,
+          integer:  true,
         } ),
         max: new fields.NumberField( {
           required: true,
           nullable: false,
-          step: 1,
-          initial: 0,
-          integer: true,
+          step:     1,
+          initial:  0,
+          integer:  true,
         } )
       } ),
       characteristics: new fields.SchemaField( {
@@ -59,40 +59,40 @@ export default class SentientTemplate extends CommonTemplate {
           baseValue: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
           } ),
           value: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
           } ),
         } ), {
-          initialKeys: [ "physical", "mystical", "social" ],
+          initialKeys:     [ "physical", "mystical", "social" ],
           initialKeysOnly: true,
-          label: "ED.Actor.Characteristics.defenses"
+          label:           "ED.Actor.Characteristics.defenses"
         } ),
         armor: new MappingField( new fields.SchemaField( {
           baseValue: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
           } ),
           value: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
           } ) ,
         } ), {
           initialKeys: [ "physical", "mystical" ],
@@ -103,91 +103,91 @@ export default class SentientTemplate extends CommonTemplate {
           death: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
-            label: "ED.Actor.Characteristics.deathRate"
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
+            label:    "ED.Actor.Characteristics.deathRate"
           } ),
           unconscious: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
-            label: "ED.Actor.Characteristics.unconsciousRate"
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
+            label:    "ED.Actor.Characteristics.unconsciousRate"
           } ),
           woundThreshold: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
-            label: "ED.Actor.Characteristics.woundThreshold"
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
+            label:    "ED.Actor.Characteristics.woundThreshold"
           } ),
           bloodMagic: new fields.SchemaField( {
             damage: new fields.NumberField( {
               required: true,
               nullable: false,
-              min: 0,
-              step: 1,
-              initial: 0,
-              integer: true,
-              label: "ED.Actor.Characteristics.unconsciousRate"
+              min:      0,
+              step:     1,
+              initial:  0,
+              integer:  true,
+              label:    "ED.Actor.Characteristics.unconsciousRate"
             } ),
             wounds: new fields.NumberField( {
               required: true,
               nullable: false,
-              min: 0,
-              step: 1,
-              initial: 0,
-              integer: true,
-              label: "ED.Actor.Characteristics.unconsciousRate"
+              min:      0,
+              step:     1,
+              initial:  0,
+              integer:  true,
+              label:    "ED.Actor.Characteristics.unconsciousRate"
             } ),
           } ),
           damage: new fields.SchemaField( {
             standard: new fields.NumberField( {
               required: true,
               nullable: false,
-              min: 0,
-              step: 1,
-              initial: 0,
-              integer: true,
-              label: "ED.Actor.Characteristics.damageLethal"
+              min:      0,
+              step:     1,
+              initial:  0,
+              integer:  true,
+              label:    "ED.Actor.Characteristics.damageLethal"
             } ),
             stun: new fields.NumberField( {
               required: true,
               nullable: false,
-              min: 0,
-              step: 1,
-              initial: 0,
-              integer: true,
-              label: "ED.Actor.Characteristics.damageStun"
+              min:      0,
+              step:     1,
+              initial:  0,
+              integer:  true,
+              label:    "ED.Actor.Characteristics.damageStun"
             } ),
             total: new fields.NumberField( {
               required: true,
               nullable: false,
-              min: 0,
-              step: 1,
-              initial: 0,
-              integer: true,
-              label: "ED.Actor.Characteristics.damage"
+              min:      0,
+              step:     1,
+              initial:  0,
+              integer:  true,
+              label:    "ED.Actor.Characteristics.damage"
             } )
             }, {
             required: true,
             nullable: false,
-            label: "ED.Actor.Characteristics.damage"
+            label:    "ED.Actor.Characteristics.damage"
           } ),
           wounds: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
-            label: "ED.Actor.Characteristics.wounds"
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
+            label:    "ED.Actor.Characteristics.wounds"
           } ),
           maxWounds: new fields.NumberField( {
             required: true,
@@ -202,145 +202,145 @@ export default class SentientTemplate extends CommonTemplate {
           max: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
-            label: "ED.Actor.Characteristics.recoveryTestsDaily"
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
+            label:    "ED.Actor.Characteristics.recoveryTestsDaily"
           } ),
           value: new fields.NumberField( {
             required: true,
             nullable: false,
-            min: 0,
-            step: 1,
-            initial: 0,
-            integer: true,
-            label: "ED.Actor.Characteristics.recoveryTestsCurrent"
+            min:      0,
+            step:     1,
+            initial:  0,
+            integer:  true,
+            label:    "ED.Actor.Characteristics.recoveryTestsCurrent"
           } ),
           stunRecoveryAvailable: new fields.BooleanField( {
             required: true,
-            initial: true,
-            label: "ED.Actor.Characteristics.recoveryTestsStun"
+            initial:  true,
+            label:    "ED.Actor.Characteristics.recoveryTestsStun"
           } ),
         } ),
         ...MovementFields.movement
       } ),
       mobRules: new fields.BooleanField( {
         required: true,
-        initial: false,
-        label: "ED.Data.Actor.Labels.mobRules",
-        hint: "ED.Data.Actor.Hints.mobRules"
+        initial:  false,
+        label:    "ED.Data.Actor.Labels.mobRules",
+        hint:     "ED.Data.Actor.Hints.mobRules"
       } ),
       ...ChallengeFields.challenge,
       condition: new fields.SchemaField( {
         aggressiveAttack: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.aggressiveAttack"
+          initial:  false,
+          label:    "ED.Actor.Condition.aggressiveAttack"
         } ),
         blindsided: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.blindsided"
+          initial:  false,
+          label:    "ED.Actor.Condition.blindsided"
         } ),
         cover: new fields.SchemaField( {
           partial: new fields.BooleanField( {
             required: true,
-            initial: false,
-            label: "ED.Actor.Condition.coverPartial"
+            initial:  false,
+            label:    "ED.Actor.Condition.coverPartial"
           } ),
           full: new fields.BooleanField( {
             required: true,
-            initial: false,
-            label: "ED.Actor.Condition.coverFull"
+            initial:  false,
+            label:    "ED.Actor.Condition.coverFull"
           } ),
         } ),
         darkness: new fields.SchemaField( {
           partial: new fields.BooleanField( {
             required: true,
-            initial: false,
-            label: "ED.Actor.Condition.darknessPartial"
+            initial:  false,
+            label:    "ED.Actor.Condition.darknessPartial"
           } ),
           full: new fields.BooleanField( {
             required: true,
-            initial: false,
-            label: "ED.Actor.Condition.darknessFull"
+            initial:  false,
+            label:    "ED.Actor.Condition.darknessFull"
           } ),
         } ),
         defensiveStance: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.defensiveStance"
+          initial:  false,
+          label:    "ED.Actor.Condition.defensiveStance"
         } ),
         fury: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.fury"
+          initial:  false,
+          label:    "ED.Actor.Condition.fury"
         } ),
         harried: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.harried"
+          initial:  false,
+          label:    "ED.Actor.Condition.harried"
         } ),
         impairedMovement: new fields.SchemaField( {
           partial: new fields.BooleanField( {
             required: true,
-            initial: false,
-            label: "ED.Actor.Condition.impairedMovementPartial"
+            initial:  false,
+            label:    "ED.Actor.Condition.impairedMovementPartial"
           } ),
           full: new fields.BooleanField( {
             required: true,
-            initial: false,
-            label: "ED.Actor.Condition.impairedMovementFull"
+            initial:  false,
+            label:    "ED.Actor.Condition.impairedMovementFull"
           } ),
         } ),
         knockedDown: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.knockedDown"
+          initial:  false,
+          label:    "ED.Actor.Condition.knockedDown"
         } ),
         overwhelmed: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.Actor.Condition.overwhelmed"
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Actor.Condition.overwhelmed"
         } ),
         surprised: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.Actor.Condition.surprised"
+          initial:  false,
+          label:    "ED.Actor.Condition.surprised"
         } )
       } ),
       devotion: new fields.SchemaField( {
         value: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.General.devotion.current"
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.General.devotion.current"
         } ),
         max: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.General.devotion.maximum"
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.General.devotion.maximum"
         } ),
         step: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 3,
-          integer: true,
-          label: "ED.General.devotion.step"
+          min:      0,
+          step:     1,
+          initial:  3,
+          integer:  true,
+          label:    "ED.General.devotion.step"
         } ),
       } ),
       encumbrance: new fields.SchemaField( {
@@ -348,86 +348,86 @@ export default class SentientTemplate extends CommonTemplate {
         value: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          initial: 0,
-          label: "ED.General.carriedLoad"
+          min:      0,
+          initial:  0,
+          label:    "ED.General.carriedLoad"
         } ),
         // maximum carriable weight
         max: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          label: "ED.General.carryingCapacity"
+          min:      0,
+          step:     1,
+          initial:  0,
+          label:    "ED.General.carryingCapacity"
         } ),
         // bonus value to strength value for determining max capacity
         bonus: new fields.NumberField( {
           required: true,
           nullable: false,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.General.carryingCapacityBonus"
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.General.carryingCapacityBonus"
         } ),
         // encumbrance / overload status
         status: new fields.StringField( {
           required: true,
-          blank: false,
+          blank:    false,
           nullable: false,
-          initial: "notEncumbered"
+          initial:  "notEncumbered"
         } )
       } ),
       initiative: new fields.NumberField( {
         required: true,
         nullable: false,
-        min: 0,
-        step: 1,
-        initial: 0,
-        integer: true,
-        label: "ED.General.Initiative"
+        min:      0,
+        step:     1,
+        initial:  0,
+        integer:  true,
+        label:    "ED.General.Initiative"
       } ),
       karma: new fields.SchemaField( {
         useAlways: new fields.BooleanField( {
           required: true,
-          initial: false,
-          label: "ED.General.Karma.karmaAlways"
+          initial:  false,
+          label:    "ED.General.Karma.karmaAlways"
         } ),
         value: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.General.karma.current"
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.General.karma.current"
         } ),
         max: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.General.karma.maximum"
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.General.karma.maximum"
         } ),
         step: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 4,
-          integer: true,
-          label: "ED.General.karma.step"
+          min:      0,
+          step:     1,
+          initial:  4,
+          integer:  true,
+          label:    "ED.General.karma.step"
         } ),
         freeAttributePoints: new fields.NumberField( {
           required: false,
           nullable: false,
-          min: 0,
-          step: 1,
-          initial: 0,
-          integer: true,
-          label: "ED.General.freeAttributePoints"
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.General.freeAttributePoints"
         } ),
       } ),
       relations: new MappingField( new fields.SchemaField( {
@@ -437,24 +437,24 @@ export default class SentientTemplate extends CommonTemplate {
         favors:
           new MappingField( new fields.SchemaField( {
             owingThem: new fields.NumberField( {
-              min: 0,
-              step: 1,
+              min:     0,
+              step:    1,
               integer: true,
               initial: 0
             } ),
             owingMe: new fields.NumberField( {
-              min: 0,
-              step: 1,
+              min:     0,
+              step:    1,
               integer: true,
               initial: 0
             } )
           } ), {
-            initialKeys: [ "small", "large" ],
+            initialKeys:     [ "small", "large" ],
             initialKeysOnly: true
           } )
       } ), {
         initialKeysOnly: false,
-        label: "ED.Relations.relations"
+        label:           "ED.Relations.relations"
       } )
     } );
   }
