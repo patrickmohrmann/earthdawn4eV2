@@ -48,7 +48,7 @@ export default function () {
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
       types: [ "character" ],
       makeDefault: true,
-      label: "ED.Documents.ActorSheetEdCharacter"
+        label: "ED.Documents.ActorSheetEdCharacter"
     } );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdNpc, {
       types: [ "npc" ],
