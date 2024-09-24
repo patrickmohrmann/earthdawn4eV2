@@ -34,9 +34,9 @@ export default class SentientTemplate extends CommonTemplate {
           positive: true
         } )
       } ), {
-        initialKeys: ED4E.attributes,
+        initialKeys:     ED4E.attributes,
         initialKeysOnly: true,
-        label: "ED.Attributes.attributes"
+        label:           "ED.Attributes.attributes"
       } ),
       healthRate: new fields.SchemaField( {
         value: new fields.NumberField( {
@@ -95,10 +95,10 @@ export default class SentientTemplate extends CommonTemplate {
             integer:  true,
           } ) ,
         } ), {
-          initialKeys: [ "physical", "mystical" ],
+          initialKeys:     [ "physical", "mystical" ],
           initialKeysOnly: true,
-          label: "ED.Actor.Characteristics.armor"
-          } ),
+          label:           "ED.Actor.Characteristics.armor"
+        } ),
         health: new fields.SchemaField( {
           death: new fields.NumberField( {
             required: true,
@@ -175,7 +175,7 @@ export default class SentientTemplate extends CommonTemplate {
               integer:  true,
               label:    "ED.Actor.Characteristics.damage"
             } )
-            }, {
+          }, {
             required: true,
             nullable: false,
             label:    "ED.Actor.Characteristics.damage"
@@ -467,7 +467,7 @@ export default class SentientTemplate extends CommonTemplate {
   prepareBaseData() {
     super.prepareBaseData();
     this._prepareDamage();
-    this._healthRating () 
+    this._healthRating (); 
   }
 
   /** @inheritDoc */
@@ -484,7 +484,7 @@ export default class SentientTemplate extends CommonTemplate {
   }
 
   _healthRating () {
-    this.healthRate.max = this.characteristics.health.death
+    this.healthRate.max = this.characteristics.health.death;
     this.healthRate.value = this.characteristics.health.damage.stun + this.characteristics.health.damage.standard;
     }
   /* -------------------------------------------- */
