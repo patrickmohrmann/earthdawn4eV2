@@ -22,12 +22,12 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
     return this.mergeSchema( super.defineSchema(), {
       physical: new fields.SchemaField( {
         armor: new fields.NumberField( {
-        required: true,
-        nullable: false,
-        min:      0,
-        initial:  0,
-        integer:  true,
-        label:    "ED.Item.Armor.physicalArmor"
+          required: true,
+          nullable: false,
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.Armor.physicalArmor"
         } ), 
         forgeBonus: new fields.NumberField( {
           required: true,

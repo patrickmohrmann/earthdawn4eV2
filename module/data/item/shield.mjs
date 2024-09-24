@@ -70,7 +70,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
         initial:  false,
         label:    "ED.Item.Shield.Label.bowUsage"
       } ),
-  } );
+    } );
   }
   /* -------------------------------------------- */
   /*  Migrations                  */
