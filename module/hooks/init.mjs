@@ -47,13 +47,13 @@ export default function () {
     } );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdCharacter, {
       types: [ "character" ],
-        makeDefault: true,
-        label: "ED.Documents.ActorSheetEdCharacter"
+      makeDefault: true,
+      label: "ED.Documents.ActorSheetEdCharacter"
     } );
     Actors.registerSheet( "earthdawn4e", applications.actor.ActorSheetEdNpc, {
-        types: [ "npc" ],
-        makeDefault: true,
-        label: "ED.Documents.ActorSheetEdNpc"
+      types: [ "npc" ],
+      makeDefault: true,
+      label: "ED.Documents.ActorSheetEdNpc"
     } );
     Items.unregisterSheet( "core", ItemSheet );
     Items.registerSheet( "earthdawn4e", applications.item.ItemSheetEd, {
