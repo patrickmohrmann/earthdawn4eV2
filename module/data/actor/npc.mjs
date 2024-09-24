@@ -6,48 +6,48 @@ import NamegiverTemplate from "./templates/namegiver.mjs";
  * @mixin
  */
 export default class NpcData extends NamegiverTemplate.mixin(
-    ActorDescriptionTemplate
+  ActorDescriptionTemplate
 ) {
 
-    /** @inheritDoc */
-    static _systemType = "npc";
+  /** @inheritDoc */
+  static _systemType = "npc";
 
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return this.mergeSchema( super.defineSchema(), {
-        } );
+  /** @inheritDoc */
+  static defineSchema() {
+    return this.mergeSchema( super.defineSchema(), {
+    } );
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    this.#prepareBaseAttributes();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare calculated attribute values and corresponding steps.
+   * @private
+   */
+  #prepareBaseAttributes() {
+    for ( const attributeData of Object.values( this.attributes ) ) {
+      attributeData.baseStep = attributeData.step;
     }
+  }
 
-    /* -------------------------------------------- */
-    /*  Data Preparation                            */
-    /* -------------------------------------------- */
-
-    /** @inheritDoc */
-    prepareBaseData() {
-        super.prepareBaseData();
-        this.#prepareBaseAttributes();
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Prepare calculated attribute values and corresponding steps.
-     * @private
-     */
-    #prepareBaseAttributes() {
-        for ( const attributeData of Object.values( this.attributes ) ) {
-            attributeData.baseStep = attributeData.step;
-        }
-    }
-
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /* -------------------------------------------- */
+  /*  Migrations                  */
+  /* -------------------------------------------- */
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }
