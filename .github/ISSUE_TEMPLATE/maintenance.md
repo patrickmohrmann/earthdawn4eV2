@@ -1,7 +1,7 @@
 ---
 name: Maintenance
 about: System Maintenance
-title: ''
+title: "[MAINTENANCE]-"
 labels: maintenance
 assignees: ''
 
