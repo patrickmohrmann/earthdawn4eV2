@@ -12,7 +12,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { github, context } = require('@actions/github');
             const issueLabel = 'Bug report';  // Replace with the label used in your bug report template
             const projectId = '45';  // Replace with your project ID
             const columnId = 'todo';  // Replace with the ID of the column in the project
