@@ -1,25 +1,23 @@
-name: Assign Bug Report to Project
+name: Bug report to project
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  assign-to-project:
+  add_to_project:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign to Project
+      - name: Assign bug report to project
+        if: github.event.issue.labels.*.name contains 'bug'
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issueLabel = 'Bug report';  // Replace with the label used in your bug report template
-            const projectId = '45';  // Replace with your project ID
-            if (context.payload.issue.labels.some(label => label.name === issueLabel)) {
-              await github.projects.addCard({
-                column_id: projectId,  // Add issue to the project
-                content_id: context.payload.issue.id,
-                content_type: 'Issue'
-              });
-            }
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            const projectId = 45;  // Replace with your project ID
+            const issueId = context.payload.issue.id;
+            await github.projects.createCard({
+              column_id: projectId,
+              content_id: issueId,
+              content_type: 'Issue'
+            });
