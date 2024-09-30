@@ -25,7 +25,7 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
           nullable: true,
           blank:    true,
           initial:  "",
-        label:      "ED.Item.Weapon.ammunition"
+          label:    "ED.Item.Weapon.ammunition"
         } ),
       } ),
       bundleSize: new fields.NumberField( {
