@@ -53,19 +53,19 @@ export default class CharacterGenerationPrompt extends FormApplication {
    * @param {object} [data]           Initial data to pass to the constructor.
    * @param {object} [options]        Options to pass to the constructor.
    */
-  static async waitPrompt(data, options = {}) {
+  static async waitPrompt( data, options = {} ) {
     data ??= new CharacterGenerationData();
 
     const docCollections = {
-      namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
-      disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
-      questors: await getAllDocuments('Item', 'questor', false, 'OBSERVER'),
+      namegivers: await getAllDocuments( 'Item', 'namegiver', false, 'OBSERVER' ),
+      disciplines: await getAllDocuments( 'Item', 'discipline', false, 'OBSERVER' ),
+      questors: await getAllDocuments( 'Item', 'questor', false, 'OBSERVER' ),
       skills: await getAllDocuments(
         'Item',
         'skill',
         false,
         'OBSERVER',
-        ['system.tier'],
+        [ 'system.tier' ],
         ( x ) => x.system.tier === 'novice',
       ),
       spells: await getAllDocuments(

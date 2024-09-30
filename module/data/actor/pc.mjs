@@ -519,15 +519,15 @@ export default class PcData extends NamegiverTemplate {
     }
   }
 
-    /**
-     * Prepare the derived karma values based on namegiver items and free attribute points.
-     * @private
-     */
-    #prepareDerivedKarma() {
-        const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
-        const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmaModifier ?? 0;
+  /**
+   * Prepare the derived karma values based on namegiver items and free attribute points.
+   * @private
+   */
+  #prepareDerivedKarma() {
+    const highestCircle = this.#getHighestClass( "discipline" )?.system.level ?? 0;
+    const karmaModifier = this.parent.items.filter( item => item.type === "namegiver" )[0]?.system.karmaModifier ?? 0;
 
-    this.karma.max = karmaModifier * highestCircle + this.karma.freeAttributePoints;
+  this.karma.max = karmaModifier * highestCircle + this.karma.freeAttributePoints;
   }
 
   /**

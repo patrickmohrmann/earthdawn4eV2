@@ -7,45 +7,45 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} ammunition which type of ammo it is.
  */
 export default class EquipmentData extends PhysicalItemTemplate.mixin(
-    ItemDescriptionTemplate
+  ItemDescriptionTemplate
 ) {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        const fields = foundry.data.fields;
-        return this.mergeSchema( super.defineSchema(), {
-            consumable: new fields.BooleanField( {
-                required: true,
-                label: "ED.Item.Equipment.consumable"
-            } ),
-            // different ammo types are availabel see issue #
-            ammunition: new fields.SchemaField( {
-                type: new fields.StringField( {
-                    required: true,
-                    nullable: true,
-                    blank: true,
-                    initial: "",
-                label: "ED.Item.Weapon.ammunition"
-                } ),
-            } ),
-            bundleSize: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.General.bundleSize"
-            } ),
-        } );
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    return this.mergeSchema( super.defineSchema(), {
+      consumable: new fields.BooleanField( {
+        required: true,
+        label: "ED.Item.Equipment.consumable"
+      } ),
+      // different ammo types are availabel see issue #
+      ammunition: new fields.SchemaField( {
+        type: new fields.StringField( {
+          required: true,
+          nullable: true,
+          blank: true,
+          initial: "",
+        label: "ED.Item.Weapon.ammunition"
+        } ),
+      } ),
+      bundleSize: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min: 0,
+        initial: 0,
+        integer: true,
+        label: "ED.Item.General.bundleSize"
+      } ),
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }
