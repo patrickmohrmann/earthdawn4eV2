@@ -286,7 +286,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
     const hasTailAttack = namegiver?.system.tailAttack;
     const weaponSizeLimits = namegiver?.system.weaponSize;
     const size = this.size;
-    if ( !weaponSizeLimits || size == null || hasTailAttack == null ) return undefined;
+    if ( !weaponSizeLimits || size === null || hasTailAttack === null ) return undefined;
 
     switch ( handlingType ) {
       case "oneHand":
