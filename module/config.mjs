@@ -130,9 +130,9 @@ preLocalize( "globalBonuses", {key: "label"} );
  * @enum {string}
  */
 ED4E.denomination = {
-  copper: 			"ED.Config.Denomination.copper",
-	silver: 			"ED.Config.Denomination.silver",
-	gold: 				"ED.Config.Denomination.gold"
+  copper:       "ED.Config.Denomination.copper",
+  silver:       "ED.Config.Denomination.silver",
+  gold:         "ED.Config.Denomination.gold"
 };
 preLocalize( "denomination" );
 
@@ -141,12 +141,12 @@ preLocalize( "denomination" );
  * @enum {string}
  */
 ED4E.availability = {
-  everyday: 			"ED.Config.Availability.everyday",
-	average: 			  "ED.Config.Availability.average",
-	unusual: 			  "ED.Config.Availability.unusual",
-	rare: 				  "ED.Config.Availability.rare",
-	veryRare: 			"ED.Config.Availability.veryRare",
-	unique: 			  "ED.Config.Availability.unique"
+  everyday:       "ED.Config.Availability.everyday",
+  average:         "ED.Config.Availability.average",
+  unusual:         "ED.Config.Availability.unusual",
+  rare:           "ED.Config.Availability.rare",
+  veryRare:       "ED.Config.Availability.veryRare",
+  unique:         "ED.Config.Availability.unique"
 };
 preLocalize( "availability" );
 
@@ -168,12 +168,12 @@ preLocalize( "action" );
  * @enum {string}
  */
 ED4E.recoveryProperty = {
-	0: 					"ED.Config.RecoveryProperty.noRecovery",
-	1: 					"ED.Config.RecoveryProperty.arbitrary",
-	2: 					"ED.Config.RecoveryProperty.arbitraryAndAttribute",
-	3: 					"ED.Config.RecoveryProperty.arbitraryOptionalAttribute",
-	4: 					"ED.Config.RecoveryProperty.abilityStep",
-	5: 					"ED.Config.RecoveryProperty.noHealing",
+  0:           "ED.Config.RecoveryProperty.noRecovery",
+  1:           "ED.Config.RecoveryProperty.arbitrary",
+  2:           "ED.Config.RecoveryProperty.arbitraryAndAttribute",
+  3:           "ED.Config.RecoveryProperty.arbitraryOptionalAttribute",
+  4:           "ED.Config.RecoveryProperty.abilityStep",
+  5:           "ED.Config.RecoveryProperty.noHealing",
 };
 preLocalize( "recoveryProperty" );
 
@@ -218,7 +218,7 @@ preLocalize( "armor" );
  * @enum {string}
  */
 ED4E.weaponType = {
-  blowgun: 				{
+  blowgun:         {
     label:      "ED.Config.WeaponType.blowgun",
     ranged:     true,
   },
@@ -433,10 +433,10 @@ preLocalize( "talentCategory" );
  * @enum {string}
  */
 ED4E.ammunitionType = {
-	arrow: 					"ED.Config.AmmunitionType.arrow",
-	bolt: 					"ED.Config.AmmunitionType.bolt",
-	needle: 				"ED.Config.AmmunitionType.needle",
-	stone: 					"ED.Config.AmmunitionType.stone",
+  arrow:           "ED.Config.AmmunitionType.arrow",
+  bolt:           "ED.Config.AmmunitionType.bolt",
+  needle:         "ED.Config.AmmunitionType.needle",
+  stone:           "ED.Config.AmmunitionType.stone",
 };
 preLocalize( "ammunitionType" );
 
