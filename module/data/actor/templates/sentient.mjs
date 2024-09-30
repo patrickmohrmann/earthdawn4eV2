@@ -231,7 +231,17 @@ export default class SentientTemplate extends CommonTemplate {
         label:    "ED.Data.Actor.Labels.mobRules",
         hint:     "ED.Data.Actor.Hints.mobRules"
       } ),
-      ...ChallengeFields.challenge,
+      challenge: new fields.SchemaField( {
+        rate: new fields.NumberField( {
+          required: true,
+          nullable: false,
+          min:      0,
+          step:     1,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Data.Actor.Labels.challengeRate"
+        } ),
+      } ),
       condition: new fields.SchemaField( {
         aggressiveAttack: new fields.BooleanField( {
           required: true,

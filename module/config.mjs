@@ -164,30 +164,6 @@ ED4E.action = {
 preLocalize( "action" );
 
 /**
- * challengeRates
- * @enum {string}
- */
-ED4E.challengeRates = {
-  circle1:        "ED.Config.Challenge.circle1",
-  circle2:        "ED.Config.Challenge.circle2",
-  circle3:        "ED.Config.Challenge.circle3",
-  circle4:        "ED.Config.Challenge.circle4",
-  circle5:        "ED.Config.Challenge.circle5",
-  circle6:        "ED.Config.Challenge.circle6",
-  circle7:        "ED.Config.Challenge.circle7",
-  circle8:        "ED.Config.Challenge.circle8",
-  circle9:        "ED.Config.Challenge.circle9",
-  circle10:       "ED.Config.Challenge.circle10",
-  circle11:       "ED.Config.Challenge.circle11",
-  circle12:       "ED.Config.Challenge.circle12",
-  circle13:       "ED.Config.Challenge.circle13",
-  circle14:       "ED.Config.Challenge.circle14",
-  circle15:       "ED.Config.Challenge.circle15",
-};
-preLocalize( "challengeRates" );
-
-
-/**
  * Target Difficulty
  * @enum {string}
  */

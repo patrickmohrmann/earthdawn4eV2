@@ -244,23 +244,6 @@
         "standard": "Standard",
         "sustained": "Anhaltend"
       },
-      "Challenge": {
-        "circle1":                                          "Novize (Erster Kreis)",
-        "circle2":                                          "Novize (Zweiter Kreis)",
-        "circle3":                                          "Novize (Dritter Kreis)",
-        "circle4":                                          "Novize (Vierter Kreis)",
-        "circle5":                                          "Geselle (Fünfter Kreis)",
-        "circle6":                                          "Geselle (Sechster Kreis)",
-        "circle7":                                          "Geselle (Siebter Kreis)",
-        "circle8":                                          "Geselle (Achter Kreis)",
-        "circle9":                                          "Hüter (Neunter Kreis)",
-        "circle10":                                         "Hüter (Zehnter Kreis)",
-        "circle11":                                         "Hüter (Elfter Kreis)",
-        "circle12":                                         "Hüter (Zwölfter Kreis)",
-        "circle13":                                         "Meister (Dreizehnter Kreis)",
-        "circle14":                                         "Meister (Vierzehnter Kreis)",
-        "circle15":                                         "Meister (Fünfzehnter Kreis)"
-      },
       "CombatTypes": {
         "aerial": "Luftkampf",
         "close": "Nahkampf",
@@ -365,7 +348,7 @@
           "challengeRate":                                "Herausforderungsrate"
         },
         "Labels": {
-          "challengeRate":                                "Herausforderungsrate des Acteurs",
+          "challengeRate":                                "Herausforderungsrate des Akteurs",
           "isMob":                                        "Dieser Acteur benutzt ausschließlich Wunden anstatt Schaden"
         }
       },
