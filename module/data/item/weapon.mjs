@@ -1,6 +1,7 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-import { inRange } from "../../utils.mjs";
+import { filterObject, inRange, sum } from "../../utils.mjs";
+import ED4E from "../../config.mjs";
 
 /**
  * Data model template with information on weapon items.
@@ -139,6 +140,26 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
     /* -------------------------------------------- */
 
     /** @override */
+    get ammoAmount() {
+        if ( !this.isRanged ) return null;
+        if ( this.isActorEmbedded ) {
+
+            const ammunitionItems = this.parentActor.getAmmo( this.ammunition.type );
+            return sum( ammunitionItems.map(item => ( item.system.amount ?? 0 ) * ( item.system.bundleSize ?? 0 ) ) );
+        }
+    }
+
+    /** @override */
+    get damageTotal() {
+        if ( this.isActorEmbedded ) {
+            const actor = this.parentActor;
+            const damageAttribute = this.damage.attribute;
+            const actorAttribute = actor.system.attributes[damageAttribute];
+            return this.damage.baseStep + this.forgeBonus + actorAttribute.step;
+        }
+    }
+
+    /** @override */
     get nextItemStatus() {
         const namegiver = this.parent.parent?.namegiver;
         const weaponSizeLimits = namegiver?.system.weaponSize;
@@ -168,7 +189,9 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
     }
 
     get isRanged() {
-        return [ "thrown", "blowgun", "bow", "crossbow" ].includes( this.weaponType );
+        return Object.keys( 
+            filterObject( ED4E.weaponType, ( _, value ) => value.ranged ) 
+        ).includes( this.weaponType );
     }
 
     /* -------------------------------------------- */

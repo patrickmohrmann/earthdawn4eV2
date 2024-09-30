@@ -78,15 +78,14 @@
         </div>
         {{/if}}
         {{#if (eq this.type "weapon")}}
-        <div class="equipment-card__grid--item text__alignment--center">{{this.totalDamage}}</div>
+        <div class="equipment-card__grid--item text__alignment--center">{{this.system.damageTotal}}</div>
         <div class="equipment-card__grid--item text__alignment--center"></div>
-        {{#if this.system.isRanged}}
+        {{#if system.isRanged}}
             <div class="equipment-card__grid--item text__alignment--center">{{system.range.shortMin}}-{{system.range.shortMax}}/{{system.range.longMin}}-{{system.range.longMax}}</div>
-            {{#if (uneq this.system.weaponType "thrown")}}
-            {{!-- <div class="equipment-card__grid--item text__alignment--center">{{sumMatchingEquipment actor this}}</div> --}}
-            <div class="equipment-card__grid--item text__alignment--center">{{this.ammunition}}</div>
-            {{else}}
+            {{#if (eq system.weaponType "thrown")}}
             <div class="equipment-card__grid--item text__alignment--center">{{system.amount}}</div>
+            {{else}}
+            <div class="equipment-card__grid--item text__alignment--center">{{system.ammoAmount}}</div>
             {{/if}}
         {{else}}
             <div class="equipment-card__grid--item text__alignment--center">{{system.range.longMax}}</div>

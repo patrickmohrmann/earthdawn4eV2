@@ -4,7 +4,7 @@
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.Weapon.weaponType"}}:</label>
         <select class="partial__55--right" name="system.weaponType">
-            {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true }}
+            {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true labelAttr="label" }}
         </select>
     </div>
         {{#if item.system.isRanged}}
