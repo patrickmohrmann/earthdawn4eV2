@@ -266,7 +266,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
       delete data.languages.readWrite;
       ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to read / write (your rank in that skill." ) );
     }
-    if (foundry.utils.isEmpty( data.languages ) ) delete data.languages;
+    if ( foundry.utils.isEmpty( data.languages ) ) delete data.languages;
 
     this.object.updateSource( data );
 
