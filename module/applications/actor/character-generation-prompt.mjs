@@ -123,13 +123,13 @@ export default class CharacterGenerationPrompt extends FormApplication {
     const options = super.defaultOptions;
     return {
       ...options,
-      closeOnSubmit: false,
+      closeOnSubmit:  false,
       submitOnChange: true,
-      submitOnClose: false,
-      height: 850,
-      width: 1000,
-      resizable: true,
-      classes: [ ...options.classes, "earthdawn4e", "character-generation" ],
+      submitOnClose:  false,
+      height:         850,
+      width:          1000,
+      resizable:      true,
+      classes:        [ ...options.classes, "earthdawn4e", "character-generation" ],
       tabs: [
         {
           navSelector:     ".prompt-tabs",
@@ -149,7 +149,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   get title() {
-    return game.i18n.localize("X-Character Generation");
+    return game.i18n.localize( "X-Character Generation" );
   }
 
   get template() {
@@ -166,7 +166,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     $( this.form.querySelectorAll( "span.rank-change-icon" ) ).on(
       "click", this._onChangeRank.bind( this )
     );
-    $( this.form.querySelectorAll( "span.attribute-change-icon" )).on(
+    $( this.form.querySelectorAll( "span.attribute-change-icon" ) ).on(
       "click", this._onChangeAttributeModifier.bind( this )
     );
     $( this.form.querySelectorAll( "td.spell-name" ) ).on(
@@ -203,10 +203,10 @@ export default class CharacterGenerationPrompt extends FormApplication {
     const languageSkills = this.skills.filter( skill => [ this.edidLanguageRW, this.edidLanguageSpeak ].includes( skill.system.edid ) );
     const filteredSkills = this.skills.filter( skill => !languageSkills.includes( skill ) );
     context.skills = {
-      general: filteredSkills.filter( skill => skill.system.skillType === "general" ),
-      artisan: filteredSkills.filter( skill => skill.system.skillType === "artisan" ),
-      knowledge: filteredSkills.filter( skill => skill.system.skillType === "knowledge" ),
-      language: languageSkills,
+      general:    filteredSkills.filter( skill => skill.system.skillType === "general" ),
+      artisan:    filteredSkills.filter( skill => skill.system.skillType === "artisan" ),
+      knowledge:  filteredSkills.filter( skill => skill.system.skillType === "knowledge" ),
+      language:   languageSkills,
     };
 
     // Attributes
