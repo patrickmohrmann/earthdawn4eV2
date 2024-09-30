@@ -213,7 +213,6 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
    * It follows the order defined in `_itemStatusOrder`.
    * If the item can be handled with the next status, it returns the next status.
    * If not, it recursively calls itself with the next status index until it finds a valid status.
-   *
    * @param {number} currentStatusIndex - The index of the current status in `_itemStatusOrder`.
    * @returns {string} The next valid status for the item.
    */
