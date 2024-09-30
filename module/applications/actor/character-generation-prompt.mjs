@@ -73,7 +73,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
         "spell",
         false,
         "OBSERVER",
-        ["system.level"],
+        [ "system.level" ],
         ( x ) => x.system.level <= game.settings.get( "ed4e", "charGenMaxSpellCircle" ),
       ),
     };
@@ -129,23 +129,23 @@ export default class CharacterGenerationPrompt extends FormApplication {
       height: 850,
       width: 1000,
       resizable: true,
-      classes: [...options.classes, "earthdawn4e", "character-generation"],
+      classes: [ ...options.classes, "earthdawn4e", "character-generation" ],
       tabs: [
         {
-          navSelector: ".prompt-tabs",
+          navSelector:     ".prompt-tabs",
           contentSelector: ".tab-body",
-          initial: "base-input",
+          initial:         "base-input",
         },
       ],
     };
   }
 
   static errorMessages = {
-    noNamegiver: "X.You didn't choose a namegiver. Pretty difficult to be a person then, don't you think?",
-    noClass: "X.There's no class selected. Don't you wanna be magic?",
-    attributes: "X. This is just reminder: there are still some unspent attribute points. They will be converted to extra karma.",
-    talentRanksLeft: "X.There's still some ranks left for your class abilities. Use them, they're free.",
-    skillRanksLeft: "X.You haven't used all of your skill ranks. Come on, don't be shy.",
+    noNamegiver:      "X.You didn't choose a namegiver. Pretty difficult to be a person then, don't you think?",
+    noClass:          "X.There's no class selected. Don't you wanna be magic?",
+    attributes:       "X. This is just reminder: there are still some unspent attribute points. They will be converted to extra karma.",
+    talentRanksLeft:  "X.There's still some ranks left for your class abilities. Use them, they're free.",
+    skillRanksLeft:   "X.You haven't used all of your skill ranks. Come on, don't be shy.",
   }
 
   get title() {
@@ -160,27 +160,27 @@ export default class CharacterGenerationPrompt extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
 
-    $(this.form.querySelectorAll(".talent-tables .optional-talents-pool td.ability-name")).on(
-      "click", this._onSelectTalentOption.bind(this)
+    $( this.form.querySelectorAll( ".talent-tables .optional-talents-pool td.ability-name" ) ).on(
+      "click", this._onSelectTalentOption.bind( this )
     );
-    $(this.form.querySelectorAll( "span.rank-change-icon" )).on(
-      "click", this._onChangeRank.bind(this)
+    $( this.form.querySelectorAll( "span.rank-change-icon" ) ).on(
+      "click", this._onChangeRank.bind( this )
     );
-    $(this.form.querySelectorAll( "span.attribute-change-icon" )).on(
-      "click", this._onChangeAttributeModifier.bind(this)
+    $( this.form.querySelectorAll( "span.attribute-change-icon" )).on(
+      "click", this._onChangeAttributeModifier.bind( this )
     );
     $( this.form.querySelectorAll( "td.spell-name" ) ).on(
       "click", this._onClickSpell.bind( this )
     );
-    $(this.form.querySelectorAll( "button.reset-points" )).on("click", this._onReset.bind(this));
-    $(this.form.querySelector("button.next")).on("click", this._nextTab.bind(this));
-    $(this.form.querySelector("button.previous")).on("click", this._previousTab.bind(this));
-    $(this.form.querySelector("button.cancel")).on("click", this.close.bind(this));
-    $(this.form.querySelector("button.ok")).on("click", this._finishGeneration.bind(this));
+    $( this.form.querySelectorAll( "button.reset-points" ) ).on( "click", this._onReset.bind( this ) );
+    $( this.form.querySelector( "button.next" ) ).on( "click", this._nextTab.bind( this ) );
+    $( this.form.querySelector( "button.previous" ) ).on( "click", this._previousTab.bind( this ) );
+    $( this.form.querySelector( "button.cancel" ) ).on( "click", this.close.bind( this ) );
+    $( this.form.querySelector( "button.ok" ) ).on( "click", this._finishGeneration.bind( this ) );
   }
 
-  async getData(options = {}) {
-    const context = super.getData(options);
+  async getData( options = {} ) {
+    const context = super.getData( options );
 
     context.config = ED4E;
 
@@ -196,7 +196,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.classDocument = await context.object.classDocument;
 
     // Talents & Devotions
-    context.maxAssignableRanks = game.settings.get("ed4e", "charGenMaxRank" );
+    context.maxAssignableRanks = game.settings.get( "ed4e", "charGenMaxRank" );
 
     // Abilities
     // remove language skills from general skills, otherwise they will be displayed twice
@@ -266,9 +266,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
       delete data.languages.readWrite;
       ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to read / write (your rank in that skill." ) );
     }
-    if (foundry.utils.isEmpty(data.languages)) delete data.languages;
+    if (foundry.utils.isEmpty( data.languages ) ) delete data.languages;
 
-    this.object.updateSource(data);
+    this.object.updateSource( data );
 
     // wait for the update, so we can use the data models method
     this.magicType = await this.object.getMagicType();
@@ -278,12 +278,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   /** @inheritDoc */
-  async close(options = {}) {
-    this.resolve?.(null);
-    return super.close(options);
+  async close( options = {} ) {
+    this.resolve?.( null );
+    return super.close( options );
   }
 
-  async _finishGeneration(event) {
+  async _finishGeneration( event ) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -340,7 +340,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   // first check completeness and then proceed
   _nextTab() {
-    if (!this._hasNextStep()) return;
+    if ( !this._hasNextStep() ) return;
     // if ( !this._validateOnChangeTab() ) return;
     this._currentStep++;
     this.activateTab(this._steps[this._currentStep]);
@@ -348,7 +348,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   _previousTab() {
-    if (!this._hasPreviousStep()) return;
+    if ( !this._hasPreviousStep() ) return;
     // if ( !this._validateOnChangeTab() ) return;
     this._currentStep--;
     this.activateTab(this._steps[this._currentStep]);
