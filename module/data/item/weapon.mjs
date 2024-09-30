@@ -30,107 +30,107 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       weaponType: new fields.StringField( {
         required: true,
         nullable: true,
-        initial: "",
-        label: "ED.Item.Weapon.Label.weaponType",
-        hint: "ED.Item.Weapon.Hint.weaponType"
+        initial:  "",
+        label:    "ED.Item.Weapon.Label.weaponType",
+        hint:     "ED.Item.Weapon.Hint.weaponType"
       } ),
       damage: new fields.SchemaField( {
         attribute: new fields.StringField( {
           required: true,
           nullable: false,
-          initial: "str",
-          label: "ED.Item.Weapon.Label.damageAttribute",
-          hint: "ED.Item.Weapon.Hint.damageAttribute"
+          initial:  "str",
+          label:    "ED.Item.Weapon.Label.damageAttribute",
+          hint:     "ED.Item.Weapon.Hint.damageAttribute"
         } ),
         baseStep: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          initial: 0,
-          integer: true,
-          label: "ED.Item.Weapon.Label.damageBaseStep",
-          hint: "ED.Item.Weapon.Hint.damageBaseStep"
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.Weapon.Label.damageBaseStep",
+          hint:     "ED.Item.Weapon.Hint.damageBaseStep"
         } ),
       } ),
       size: new fields.NumberField( {
         required: true,
         nullable: false,
-        min: 1,
-        max: 7,
-        initial: 1,
-        integer: true,
+        min:      1,
+        max:      7,
+        initial:  1,
+        integer:  true,
         positive: true,
-        label: "ED.Item.Weapon.Label.size",
-        hint: "ED.Item.Weapon.Hint.size"
+        label:    "ED.Item.Weapon.Label.size",
+        hint:     "ED.Item.Weapon.Hint.size"
       } ),
       strengthMinimum: new fields.NumberField( {
         required: true,
         nullable: false,
-        min: 3,
-        initial: 3,
-        integer: true,
-        label: "ED.Item.Weapon.Label.strengthMinimum",
-        hint: "ED.Item.Weapon.Hint.strengthMinimum"
+        min:      3,
+        initial:  3,
+        integer:  true,
+        label:    "ED.Item.Weapon.Label.strengthMinimum",
+        hint:     "ED.Item.Weapon.Hint.strengthMinimum"
       } ),
       dexterityMinimum: new fields.NumberField( {
         required: true,
         nullable: true,
-        min: 0,
-        integer: true,
-        label: "ED.Item.Weapon.Label.dexterityMinimum",
-        hint: "ED.Item.Weapon.Hint.dexterityMinimum"
+        min:      0,
+        integer:  true,
+        label:    "ED.Item.Weapon.Label.dexterityMinimum",
+        hint:     "ED.Item.Weapon.Hint.dexterityMinimum"
       } ),
       range: new fields.SchemaField( {
         shortMin: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          initial: 0,
-          integer: true,
-          label: "ED.Item.Weapon.rangeShort"
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.Weapon.rangeShort"
         } ),
         shortMax: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          initial: 0,
-          integer: true,
-          label: "ED.Item.Weapon.rangeShort"
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.Weapon.rangeShort"
         } ),
         longMin: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 0,
-          initial: 0,
-          integer: true,
-          label: "ED.Item.Weapon.rangeLong"
+          min:      0,
+          initial:  0,
+          integer:  true,
+          label:    "ED.Item.Weapon.rangeLong"
         } ),
         longMax: new fields.NumberField( {
           required: true,
           nullable: false,
-          min: 1,
-          initial: 1,
-          integer: true,
-          label: "ED.Item.Weapon.rangeLong"
+          min:      1,
+          initial:  1,
+          integer:  true,
+          label:    "ED.Item.Weapon.rangeLong"
         } ),
       } ),
       ammunition: new fields.SchemaField( {
         type: new fields.StringField( {
           required: true,
           nullable: true,
-          blank: true,
-          initial: "",
-          label: "ED.Item.Weapon.ammunition.type"
+          blank:    true,
+          initial:  "",
+          label:    "ED.Item.Weapon.ammunition.type"
         } ),
       } ),
       forgeBonus: new fields.NumberField( {
         required: true,
         nullable: false,
-        min: 0,
-        initial: 0,
-        integer: true,
-        label: "ED.Item.Weapon.Label.forgeBonus",
-        hint: "ED.Item.Weapon.Hint.forgeBonus"
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.Weapon.Label.forgeBonus",
+        hint:     "ED.Item.Weapon.Hint.forgeBonus"
       } ),
     } );
   }

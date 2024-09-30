@@ -57,10 +57,10 @@ export default class CharacterGenerationPrompt extends FormApplication {
     data ??= new CharacterGenerationData();
 
     const docCollections = {
-       namegivers: await getAllDocuments( 'Item', 'namegiver', false, 'OBSERVER' ),
-       disciplines: await getAllDocuments( 'Item', 'discipline', false, 'OBSERVER' ),
-       questors: await getAllDocuments( 'Item', 'questor', false, 'OBSERVER' ),
-       skills: await getAllDocuments(
+      namegivers:   await getAllDocuments( 'Item', 'namegiver', false, 'OBSERVER' ),
+      disciplines:  await getAllDocuments( 'Item', 'discipline', false, 'OBSERVER' ),
+      questors:     await getAllDocuments( 'Item', 'questor', false, 'OBSERVER' ),
+      skills:       await getAllDocuments(
         'Item',
         'skill',
         false,

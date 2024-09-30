@@ -16,25 +16,25 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
     return this.mergeSchema( super.defineSchema(), {
       consumable: new fields.BooleanField( {
         required: true,
-        label: "ED.Item.Equipment.consumable"
+        label:    "ED.Item.Equipment.consumable"
       } ),
       // different ammo types are availabel see issue #
       ammunition: new fields.SchemaField( {
         type: new fields.StringField( {
           required: true,
           nullable: true,
-          blank: true,
-          initial: "",
-        label: "ED.Item.Weapon.ammunition"
+          blank:    true,
+          initial:  "",
+        label:      "ED.Item.Weapon.ammunition"
         } ),
       } ),
       bundleSize: new fields.NumberField( {
         required: true,
         nullable: false,
-        min: 0,
-        initial: 0,
-        integer: true,
-        label: "ED.Item.General.bundleSize"
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.General.bundleSize"
       } ),
     } );
   }
