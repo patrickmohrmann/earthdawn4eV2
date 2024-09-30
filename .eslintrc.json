@@ -127,7 +127,6 @@
     "init-declarations": "off",
     "jsdoc/check-tag-names": [
       "warn",
-      "UserFunction",  
       {
         "definedTags": ["UserFunction"]
       }
