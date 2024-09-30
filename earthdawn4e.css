@@ -837,6 +837,31 @@ p {
   width: 158px;
   border: none;
 }
+.body .item__left--main {
+  width: 35%;
+  float: left;
+}
+.body .item__right--main {
+  width: 60%;
+  float: right;
+}
+.body .item-data__input--line {
+  height: 30px;
+}
+.body .item-data__input--line label,
+.body .item-data__input--line input {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+.body .item-data__input--line .partial__40--left {
+  width: 40%;
+  float: left;
+}
+.body .item-data__input--line .partial__55--right {
+  width: 55%;
+  float: right;
+}
 .item__left--main {
   width: 35%;
   float: left;
