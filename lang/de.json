@@ -284,16 +284,6 @@
         "novice": "Novize",
         "warden": "Wächter"
       },
-      "combatTypes": {
-        "Aerial": "Luftkampf",
-        "Close": "Nahkampf",
-        "Mounted": "Berittener Kampf",
-        "melee": "Bewaffneter Nahkampf",
-        "projectile": "Projektil Fernkampf",
-        "ranged": "Fernkampf",
-        "throwing": "Wurfwaffen Fernkampf",
-        "unarmed": "Waffenloser Nahkampf"
-      },
       "groupDifficulty": {
         "highestOfGroup": "Höchster der Gruppe",
         "highestX": "Höchster + Ziele",
@@ -328,6 +318,15 @@
         "mystical": "Mystisch",
         "physical": "Körperlich",
         "social": "Sozial"
+      },
+      "WeaponType": {
+        "blowgun": "Blasrohr",
+        "bow": "Bogen",
+        "crossbow": "Armbrust",
+        "melee": "Nahkampf",
+        "sling": "Schleuder",
+        "thrown": "Wurfwaffe",
+        "unarmed": "Unbewaffnet"
       }
     },
     "Data": {

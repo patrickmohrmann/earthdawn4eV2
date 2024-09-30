@@ -31,6 +31,16 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @description                       Returns all ammunitoin items of the given actor
+   * @param {String} type               The type of ammunition to get
+   * @returns {ItemEd[]}                An array of ammunition items
+   * @UserFunction                      UF_PhysicalItems-getAmmo
+   */
+  getAmmo ( type ) {
+    return this.itemTypes.equipment.filter( item => item.system.ammunition.type === type );
+  }
+
+  /**
    * The actor's currently available legend points.
    * @type {number}
    */

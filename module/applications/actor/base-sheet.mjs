@@ -38,54 +38,6 @@ export default class ActorSheetEd extends ActorSheet {
     return `systems/ed4e/templates/actor/${this.actor.type}-sheet.hbs`;
   }
 
-  /**
-   * @description                     Collection of all items of the actor to enrich them with additional data
-   * @param {Object}    items         The items of the actor
-   * @returns 
-   * @UserFunction                    UF_PhysicalItems-getItemData
-   */
-  async getItemData( items ) {
-    const weapons = items.filter( i => i.type === "weapon" );
-    // weapon data enrichment
-    for ( let weapon of weapons ) {
-      // weapon damage
-      weapon.totalDamage = await this.getWeaponDamageTotal( weapon );
-      // ammunition
-      if ( weapon.system.isRanged && weapon.system.weaponType !== "thrown" ) {
-        weapon.ammunition = await this.getAmmunition( weapon );
-      }
-    }
-    return items;
-  }
-
-  /**
-   * @description                     Collect all items with the fitting ammunition type of the weapon
-   * @param {Object}    weapon        The weapon item
-   * @returns 
-   * @UserFunction                    UF_PhysicalItems-getAmmunition
-   */
-  async getAmmunition( weapon ) {	
-    let ammunition = 0;	
-    for ( let item of this.actor.items ) {	
-      if ( item.type === "equipment" && item.system.ammunition.type === weapon.system.ammunition.type ) {	
-        ammunition += item.system.amount * item.system.bundleSize;	
-      }	
-    }	
-    return ammunition;	
-  }
-
-  /**
-   * @description                       Get the total damage of an owned weapon item
-   * @param {object}      weapon        The weapon item
-   * @returns 
-   * @UserFunction                      UF_PhysicalItems-getWeaponDamageTotal
-   */
-  async getWeaponDamageTotal( weapon ) {
-    const attributeKey = weapon.system.damage.attribute;
-    const attributeValue = this.actor.system.attributes[attributeKey]?.step || 0;
-    return attributeValue + ( weapon.system.damage.baseStep || 0 );
-  }
-
   /* -------------------------------------------- */
   /*  Get Data            */
   /* -------------------------------------------- */
@@ -96,7 +48,6 @@ export default class ActorSheetEd extends ActorSheet {
     await this.actor._enableHTMLEnrichmentEmbeddedItems();
     systemData.config = ED4E;
     systemData.splitTalents = game.settings.get( "ed4e", "talentsSplit" );
-    systemData.items = await this.getItemData( this.actor.items );
 
     return systemData;
   }

@@ -327,16 +327,6 @@
                 "twoHands":                                         "Two Hands",
                 "tail":                                             "Tail"
             },
-            "combatTypes": {
-                "Aerial":                                     "Aerial Combat",
-                "Close":                                      "Close Combat",
-                "melee":                                      "Melee Combat",
-                "Mounted":                                    "Mounted Combat",
-                "projectile":                                 "Projectile Combat",
-                "ranged":                                     "Ranged Combat",
-                "throwing":                                   "Throwing Combat",
-                "unarmed":                                    "Unarmed Combat"
-            },
             "RecoveryProperty": {
                 "abilityStep":                                      "Ability usage cost 1 recovery test",
                 "arbitrary":                                        "Arbitrary Step",
@@ -389,6 +379,15 @@
                 "master":                                           "Master",  
                 "novice":                                           "Novice",
                 "warden":                                           "Warden"
+            },
+            "WeaponType": {
+                "blowgun": "Blowgun",
+                "bow": "Bow",
+                "crossbow": "Crossbow",
+                "melee": "Melee",
+                "sling": "Sling",
+                "thrown": "Thrown",
+                "unarmed": "Unarmed"
             }
         },
         "Data": {
