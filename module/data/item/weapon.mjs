@@ -143,10 +143,9 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
   get ammoAmount() {
     if ( !this.isRanged ) return null;
     if ( this.isActorEmbedded ) {
-
       const ammunitionItems = this.parentActor.getAmmo( this.ammunition.type );
       return sum( ammunitionItems.map(item => ( item.system.amount ?? 0 ) * ( item.system.bundleSize ?? 0 ) ) );
-    }
+    } else return 0;
   }
 
   /** @override */
