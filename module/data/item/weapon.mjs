@@ -144,7 +144,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
     if ( !this.isRanged ) return null;
     if ( this.isActorEmbedded ) {
       const ammunitionItems = this.parentActor.getAmmo( this.ammunition.type );
-      return sum( ammunitionItems.map(item => ( item.system.amount ?? 0 ) * ( item.system.bundleSize ?? 0 ) ) );
+      return sum( ammunitionItems.map( item => ( item.system.amount ?? 0 ) * ( item.system.bundleSize ?? 0 ) ) );
     } else return 0;
   }
 
@@ -155,7 +155,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       const damageAttribute = this.damage.attribute;
       const actorAttribute = actor.system.attributes[damageAttribute];
       return this.damage.baseStep + this.forgeBonus + actorAttribute.step;
-    }
+    } else return this.damage.baseStep + this.forgeBonus;
   }
 
   /** @override */
@@ -200,9 +200,8 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
   /**
    * Rotates the status of the item based on the current status.
    * The rotation follows the order defined in `_itemStatusOrder`.
-   *
    * @param {number} currentStatusIndex - The index of the current status in `_itemStatusOrder`.
-   * @param {boolean} [backwards=false] - If true, rotates the status backwards. If false or not provided, rotates the status forwards.
+   * @param {boolean} backwards - If true, rotates the status backwards. If false or not provided, rotates the status forwards.
    * @returns {string} The next valid status for the item if rotating forwards, or the previous valid status if rotating backwards.
    */
   _rotateValidItemStatus( currentStatusIndex, backwards = false ) {
