@@ -3,14 +3,15 @@
     <div>
         <h3 class="margin__none">
             <label>{{localize "ED.Actor.Header.attributes"}}</label>
-            {{!-- <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
-                ED.Actor.LpTracking.attributeImprovement"}}"></a> --}}
+            <a class="icon__position--right fa-regular fa-circle-up" title="{{localize "
+                ED.Actor.LpTracking.attributeImprovement"}}"></a>
         </h3>
         <div class="attribute-card__grid--container font__bold">
             <div class="attribute-card__grid--item"></div>
             <div class="attribute-card__grid--item">
                 <label>{{localize "ED.Actor.Attributes.attributeName"}}</label>
             </div>
+            {{#if (eq this.data.type "character")}}
             <div class="attribute-card__grid--item">
                 <label>
                     {{localize "ED.Actor.Attributes.attributeValue"}}
@@ -21,13 +22,18 @@
                     {{localize "ED.Actor.Attributes.increase"}}
                 </label>
             </div>
+            {{/if}}
             <div class="attribute-card__grid--item">
                 <label>
                     {{localize "ED.Actor.Attributes.attribueStep"}}
                 </label>
             </div>
         </div>
+        {{#if (eq this.data.type "character")}}
         {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
+        {{else}}
+        {{> "systems/ed4e/templates/actor/cards/attributes-none-pc-card.hbs"}}
+        {{/if}}
     </div>
 
     {{!-- Karma --}}
@@ -55,7 +61,7 @@
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.karma.max"
-                            value="{{actor.system.karma.max}}" readonly>
+                            value="{{actor.system.karma.max}}" {{#if (eq this.data.type "character")}}readonly{{/if}}>
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.karma.step"
@@ -80,7 +86,7 @@
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.devotion.max"
-                            value="{{actor.system.devotion.max}}" readonly>
+                            value="{{actor.system.devotion.max}}" {{#if (eq this.data.type "character")}}readonly{{/if}}>
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.devotion.step"

@@ -1,0 +1,37 @@
+<div class="characteristics-health-header__grid-item">
+    <h4 class="header--centered one-line__vertical-align">{{localize "ED.Actor.Header.healthRating"}}</h4>
+</div>
+{{#if (eq actor.system.mobRules false)}}
+<div class="characteristics-health-1__grid-item">
+    <label class="">{{localize "ED.Actor.Characteristics.woundsThreshold"}}</label>
+    <div>
+        <input id="characteristic-health-rating-wounds" class="input__circle-input--centered"
+            name="system.characteristics.health.woundThreshold"
+            value="{{actor.system.characteristics.health.woundThreshold}}">
+    </div>
+</div>
+<div class="characteristics-health-2__grid-item">
+    <label class="">{{localize "ED.Actor.Characteristics.unconsciousThresholdShort"}}</label>
+    <div>
+        <input id="characteristic-health-rating-unconscious" class="input__circle-input--centered"
+            name="system.characteristics.health.unconscious"
+            value="{{actor.system.characteristics.health.unconscious}}">
+    </div>
+</div>
+<div class="characteristics-health-3__grid-item">
+    <label class="">{{localize "ED.Actor.Characteristics.deathThesholdShort"}}</label>
+    <div>
+        <input id="characteristic-health-rating-death" class="input__circle-input--centered"
+            name="system.characteristics.health.death" value="{{actor.system.characteristics.health.death}}">
+    </div>
+</div>
+{{else}}
+<div class="characteristics-health-2__grid-item">
+    <label class="">{{localize "ED.Actor.Characteristics.woundsThreshold"}}</label>
+    <div>
+        <input id="characteristic-health-rating-wounds" class="input__circle-input--centered"
+            name="system.characteristics.health.woundThreshold"
+            value="{{actor.system.characteristics.health.woundThreshold}}">
+    </div>
+</div>
+{{/if}}
