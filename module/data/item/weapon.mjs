@@ -219,6 +219,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
   _getNextItemStatus( currentStatusIndex ) {
     const statusOrder = this.constructor._itemStatusOrder;
     const namegiver = this.parent.parent?.namegiver;
+    const nextStatusIndex = currentStatusIndex + 1;
 
     switch ( statusOrder[currentStatusIndex] ) {
       case "owned":
@@ -226,15 +227,15 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       case "carried":
         return this.canBeHandledWith( "mainHand", namegiver )
           ? "mainHand"
-          : this._getNextItemStatus( ++currentStatusIndex );
+          : this._getNextItemStatus( nextStatusIndex );
       case "mainHand":
         return this.canBeHandledWith( "offHand", namegiver )
           ? "offHand"
-          : this._getNextItemStatus( ++currentStatusIndex );
+          : this._getNextItemStatus( nextStatusIndex );
       case "offHand":
         return this.canBeHandledWith( "twoHands", namegiver )
           ? "twoHands"
-          : this._getNextItemStatus( ++currentStatusIndex );
+          : this._getNextItemStatus( nextStatusIndex );
       case "twoHands":
         return this.canBeHandledWith( "tail", namegiver ) ? "tail" : "owned";
       case "tail":
@@ -246,6 +247,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
   _getPreviousItemStatus( currentStatusIndex ) {
     const statusOrder = this.constructor._itemStatusOrder;
     const namegiver = this.parent.parent?.namegiver;
+    const previousStatusIndex = currentStatusIndex - 1;
 
     if ( currentStatusIndex < 0 ) currentStatusIndex = statusOrder.length - 1;
 
@@ -253,15 +255,15 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       case "tail":
         return this.canBeHandledWith( "twoHands", namegiver )
           ? "twoHands"
-          : this._getPreviousItemStatus( --currentStatusIndex );
+          : this._getPreviousItemStatus( previousStatusIndex );
       case "twoHands":
         return this.canBeHandledWith( "offHand", namegiver )
           ? "offHand"
-          : this._getPreviousItemStatus( --currentStatusIndex );
+          : this._getPreviousItemStatus( previousStatusIndex );
       case "offHand":
         return this.canBeHandledWith( "mainHand", namegiver )
           ? "mainHand"
-          : this._getPreviousItemStatus( --currentStatusIndex );
+          : this._getPreviousItemStatus( previousStatusIndex );
       case "mainHand":
         return "carried";
       case "carried":
@@ -269,7 +271,7 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       case "owned":
         return this.canBeHandledWith( "tail", namegiver )
           ? "tail"
-          : this._getPreviousItemStatus( --currentStatusIndex );
+          : this._getPreviousItemStatus( previousStatusIndex );
       default:
         return "owned";
     }

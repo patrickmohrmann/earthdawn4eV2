@@ -224,10 +224,10 @@ export default class ItemSheetEd extends ItemSheet {
     const data = TextEditor.getDragEventData( event );
 
     switch ( data.type ) {
-    case "ActiveEffect":
-      return this._onDropActiveEffect( event, data );
-    case "Item":
-      return this._onDropItem( event, data );
+      case "ActiveEffect":
+        return this._onDropActiveEffect( event, data );
+      case "Item":
+        return this._onDropItem( event, data );
     }
   }
 

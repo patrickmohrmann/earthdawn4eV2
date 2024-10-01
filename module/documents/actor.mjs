@@ -32,7 +32,7 @@ export default class ActorEd extends Actor {
 
   /**
    * @description                       Returns all ammunitoin items of the given actor
-   * @param {String} type               The type of ammunition to get
+   * @param {string} type               The type of ammunition to get
    * @returns {ItemEd[]}                An array of ammunition items
    * @UserFunction                      UF_PhysicalItems-getAmmo
    */
@@ -349,8 +349,8 @@ export default class ActorEd extends Actor {
 
   /**
    * @description                     The sequence that is rotaded
-   * @param {Object}    itemId        Id of the item to rotate the status of
-   * @param {Boolean}   backwards     Whether to rotate the status backwards
+   * @param {object}    itemId        Id of the item to rotate the status of
+   * @param {boolean}   backwards     Whether to rotate the status backwards
    * @returns 
    * @UserFunction                    UF_PhysicalItems-rotateItemStatus
    */
@@ -801,8 +801,8 @@ export default class ActorEd extends Actor {
 
   /**
    * 
-   * @param {Object}    itemToUpdate    The item to update
-   * @param {String}    nextStatus      The next status of the item
+   * @param {object}    itemToUpdate    The item to update
+   * @param {string}    nextStatus      The next status of the item
    * @returns 
    * @UserFunction                      UF_PhysicalItems-updateItemStates
    */

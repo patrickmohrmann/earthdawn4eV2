@@ -208,7 +208,6 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
 
   /**
    * Set the item status to "carried".
-   *
    * @returns {Promise} The updated Item instance.
    * @UserFunction            UF_PhysicalItems-carry
    */
@@ -220,7 +219,6 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
 
   /**
    * Set the item status to "owned".
-   *
    * @returns {Promise} The updated Item instance.
    * @UserFunction            UF_PhysicalItems-deposit
    */
