@@ -804,39 +804,39 @@ export default class ActorEd extends Actor {
             ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
             break;
           }
-            if ( itemToUpdate.system.piecemealArmor?.selector ) {
-              if ( !this.wearsPiecemealArmor ) {
-                addUnequipItemUpdate( "armor", [ "equipped" ] );
+          if ( itemToUpdate.system.piecemealArmor?.selector ) {
+            if ( !this.wearsPiecemealArmor ) {
+              addUnequipItemUpdate( "armor", [ "equipped" ] );
+            } else {
+              // A complete set of piecemeal armor can have up to 5 size points. Armor pieces come in three sizes and
+              // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
+              // cannot have more than one size of a particular type.
+              const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
+              const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
+              if ( sameSizePiece ) {
+                updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
               } else {
-                // A complete set of piecemeal armor can have up to 5 size points. Armor pieces come in three sizes and
-                // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
-                // cannot have more than one size of a particular type.
-                const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
-                const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
-                if ( sameSizePiece ) {
-                  updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
-                } else {
-                  // Check if the total size of the equipped armor pieces and the size of the item to update exceeds the
-                  // maximum allowed size for a piecemeal armor set (5 size points). If it does, break the operation to
-                  // prevent equipping the item.
-                  // eslint-disable-next-line max-depth
-                  if (
-                    sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
+                // Check if the total size of the equipped armor pieces and the size of the item to update exceeds the
+                // maximum allowed size for a piecemeal armor set (5 size points). If it does, break the operation to
+                // prevent equipping the item.
+                // eslint-disable-next-line max-depth
+                if (
+                  sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
                     + itemToUpdate.system.piecemealArmor.size > 5
-                  ) {
-                    ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
-                    break;
-                  }
-                }
-                const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemealArmor?.selector );
-                if ( equippedNonPiecemealArmor ) {
-                  updates.push( { _id: equippedNonPiecemealArmor.id, "system.itemStatus": "carried" } );
+                ) {
+                  ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
+                  break;
                 }
               }
-            } else {
-              // Unequip other armor
-              if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", [ "equipped" ] );
+              const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemealArmor?.selector );
+              if ( equippedNonPiecemealArmor ) {
+                updates.push( { _id: equippedNonPiecemealArmor.id, "system.itemStatus": "carried" } );
+              }
             }
+          } else {
+            // Unequip other armor
+            if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", [ "equipped" ] );
+          }
         }
         updates.push( originalItemUpdate );
         break;
