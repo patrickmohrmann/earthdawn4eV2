@@ -151,9 +151,8 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
   /** @override */
   get damageTotal() {
     if ( this.isActorEmbedded ) {
-      const actor = this.parentActor;
       const damageAttribute = this.damage.attribute;
-      const actorAttribute = actor.system.attributes[damageAttribute];
+      const actorAttribute = this.parentActor.system.attributes[damageAttribute];
       return this.damage.baseStep + this.forgeBonus + actorAttribute.step;
     } else return this.damage.baseStep + this.forgeBonus;
   }
