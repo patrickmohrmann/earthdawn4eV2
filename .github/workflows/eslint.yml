@@ -21,6 +21,9 @@ on:
 jobs:
   eslint:
     name: Run eslint scanning
+    env:
+      SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
+      ESLINT_USE_FLAT_CONFIG: "true"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,7 +46,7 @@ jobs:
         env:
           SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
         run: npx eslint module/
-          --config .eslintrc.json
+          --config eslint.config.mjs
           --ext .mjs,.js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
           --output-file eslint-results.sarif
