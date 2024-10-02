@@ -22,7 +22,7 @@ export default [ ...compat.extends( "eslint:recommended", "plugin:jsdoc/recommen
     "@stylistic":         stylistic,
     "@stylistic/migrate": stylisticMigrate,
   },
-
+  files:           [ "**/*.mjs", "**/*.js" ],
   languageOptions: {
     globals: {
       ...globals.browser,
