@@ -5,9 +5,7 @@ import ItemEd from "../../documents/item.mjs";
 
 /**
  * The application responsible for handling character generation
- *
  * @augments {FormApplication}
- *
  * @param {CharacterGenerationData} charGen         The data model which is the
  *      target data structure to be updated by the form.
  * @param {FormApplicationOptions} [options={}]     Additional options which
@@ -19,9 +17,9 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   magicType;
   
-  constructor(charGen, options = {}, documentCollections) {
+  constructor( charGen, options = {}, documentCollections ) {
     charGen ??= new CharacterGenerationData();
-    super(charGen);
+    super( charGen );
 
     this.resolve = options.resolve;
 
@@ -31,19 +29,19 @@ export default class CharacterGenerationPrompt extends FormApplication {
     this.skills = documentCollections.skills;
     this.spells = documentCollections.spells;
 
-    this.availableAttributePoints = game.settings.get( 'ed4e', 'charGenAttributePoints' );
+    this.availableAttributePoints = game.settings.get( "ed4e", "charGenAttributePoints" );
 
     this.edidLanguageSpeak = game.settings.get( "ed4e", "edidLanguageSpeak" );
     this.edidLanguageRW = game.settings.get( "ed4e", "edidLanguageRW" );
 
     this._steps = [
-      'namegiver-tab',
-      'class-tab',
-      'attribute-tab',
-      'spell-tab',
-      'skill-tab',
-      'language-tab',
-      'equipment-tab'
+      "namegiver-tab",
+      "class-tab",
+      "attribute-tab",
+      "spell-tab",
+      "skill-tab",
+      "language-tab",
+      "equipment-tab"
     ];
     this._currentStep = 0;
   }
@@ -53,27 +51,27 @@ export default class CharacterGenerationPrompt extends FormApplication {
    * @param {object} [data]           Initial data to pass to the constructor.
    * @param {object} [options]        Options to pass to the constructor.
    */
-  static async waitPrompt(data, options = {}) {
+  static async waitPrompt( data, options = {} ) {
     data ??= new CharacterGenerationData();
 
     const docCollections = {
-      namegivers: await getAllDocuments('Item', 'namegiver', false, 'OBSERVER'),
-      disciplines: await getAllDocuments('Item', 'discipline', false, 'OBSERVER'),
-      questors: await getAllDocuments('Item', 'questor', false, 'OBSERVER'),
-      skills: await getAllDocuments(
-        'Item',
-        'skill',
+      namegivers:   await getAllDocuments( "Item", "namegiver", false, "OBSERVER" ),
+      disciplines:  await getAllDocuments( "Item", "discipline", false, "OBSERVER" ),
+      questors:     await getAllDocuments( "Item", "questor", false, "OBSERVER" ),
+      skills:       await getAllDocuments(
+        "Item",
+        "skill",
         false,
-        'OBSERVER',
-        ['system.source.tier'],
-        ( x ) => x.system.source.tier === 'novice',
+        "OBSERVER",
+        [ "system.tier" ],
+        ( x ) => x.system.tier === "novice",
       ),
       spells: await getAllDocuments(
-        'Item',
-        'spell',
+        "Item",
+        "spell",
         false,
-        'OBSERVER',
-        ['system.level'],
+        "OBSERVER",
+        [ "system.level" ],
         ( x ) => x.system.level <= game.settings.get( "ed4e", "charGenMaxSpellCircle" ),
       ),
     };
@@ -107,80 +105,80 @@ export default class CharacterGenerationPrompt extends FormApplication {
       abilities: {
         language: {
           [skillLanguageSpeak.uuid]: skillLanguageSpeak.system.level,
-          [skillLanguageRW.uuid]: skillLanguageRW.system.level,
+          [skillLanguageRW.uuid]:    skillLanguageRW.system.level,
         }
       }
     } );
 
     // create the prompt
-    return new Promise((resolve) => {
+    return new Promise( ( resolve ) => {
       options.resolve = resolve;
-      new this(data, options, docCollections).render(true, { focus: true });
-    });
+      new this( data, options, docCollections ).render( true, { focus: true } );
+    } );
   }
 
   static get defaultOptions() {
     const options = super.defaultOptions;
     return {
       ...options,
-      closeOnSubmit: false,
+      closeOnSubmit:  false,
       submitOnChange: true,
-      submitOnClose: false,
-      height: 850,
-      width: 1000,
-      resizable: true,
-      classes: [...options.classes, 'earthdawn4e', 'character-generation'],
-      tabs: [
+      submitOnClose:  false,
+      height:         850,
+      width:          1000,
+      resizable:      true,
+      classes:        [ ...options.classes, "earthdawn4e", "character-generation" ],
+      tabs:           [
         {
-          navSelector: '.prompt-tabs',
-          contentSelector: '.tab-body',
-          initial: 'base-input',
+          navSelector:     ".prompt-tabs",
+          contentSelector: ".tab-body",
+          initial:         "base-input",
         },
       ],
     };
   }
 
   static errorMessages = {
-    noNamegiver: "X.You didn't choose a namegiver. Pretty difficult to be a person then, don't you think?",
-    noClass: "X.There's no class selected. Don't you wanna be magic?",
-    attributes: "X. This is just reminder: there are still some unspent attribute points. They will be converted to extra karma.",
-    talentRanksLeft: "X.There's still some ranks left for your class abilities. Use them, they're free.",
-    skillRanksLeft: "X.You haven't used all of your skill ranks. Come on, don't be shy.",
-  }
+    noNamegiver:      "X.You didn't choose a namegiver. Pretty difficult to be a person then, don't you think?",
+    noClass:          "X.There's no class selected. Don't you wanna be magic?",
+    attributes:       "X. This is just reminder: there are still some unspent attribute points. They will be converted to extra karma.",
+    talentRanksLeft:  "X.There's still some ranks left for your class abilities. Use them, they're free.",
+    skillRanksLeft:   "X.You haven't used all of your skill ranks. Come on, don't be shy.",
+  };
 
   get title() {
-    return game.i18n.localize('X-Character Generation');
+    return game.i18n.localize( "X-Character Generation" );
   }
 
   get template() {
-    return 'systems/ed4e/templates/actor/generation/generation.hbs';
+    return "systems/ed4e/templates/actor/generation/generation.hbs";
   }
 
   /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
+  activateListeners( html ) {
+    super.activateListeners( html );
 
-    $(this.form.querySelectorAll('.talent-tables .optional-talents-pool td.ability-name')).on(
-      'click', this._onSelectTalentOption.bind(this)
+    $( this.form.querySelectorAll( ".talent-tables .optional-talents-pool td.ability-name" ) ).on(
+      "click", this._onSelectTalentOption.bind( this )
     );
-    $(this.form.querySelectorAll( 'span.rank-change-icon' )).on(
-      'click', this._onChangeRank.bind(this)
+    $( this.form.querySelectorAll( "span.rank-change-icon" ) ).on(
+      "click", this._onChangeRank.bind( this )
     );
-    $(this.form.querySelectorAll( 'span.attribute-change-icon' )).on(
-      'click', this._onChangeAttributeModifier.bind(this)
+    $( this.form.querySelectorAll( "span.attribute-change-icon" ) ).on(
+      "click", this._onChangeAttributeModifier.bind( this )
     );
-    $( this.form.querySelectorAll( 'td.spell-name' ) ).on(
-      'click', this._onClickSpell.bind( this )
+    $( this.form.querySelectorAll( "td.spell-name" ) ).on(
+      "click", this._onClickSpell.bind( this )
     );
-    $(this.form.querySelectorAll( 'button.reset-points' )).on('click', this._onReset.bind(this));
-    $(this.form.querySelector('button.next')).on('click', this._nextTab.bind(this));
-    $(this.form.querySelector('button.previous')).on('click', this._previousTab.bind(this));
-    $(this.form.querySelector('button.cancel')).on('click', this.close.bind(this));
-    $(this.form.querySelector('button.ok')).on('click', this._finishGeneration.bind(this));
+    $( this.form.querySelectorAll( "button.reset-points" ) ).on( "click", this._onReset.bind( this ) );
+    $( this.form.querySelector( "button.next" ) ).on( "click", this._nextTab.bind( this ) );
+    $( this.form.querySelector( "button.previous" ) ).on( "click", this._previousTab.bind( this ) );
+    $( this.form.querySelector( "button.cancel" ) ).on( "click", this.close.bind( this ) );
+    $( this.form.querySelector( "button.ok" ) ).on( "click", this._finishGeneration.bind( this ) );
   }
 
-  async getData(options = {}) {
-    const context = super.getData(options);
+  async getData( options = {} ) {
+    const context = super.getData( options );
 
     context.config = ED4E;
 
@@ -196,17 +194,17 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.classDocument = await context.object.classDocument;
 
     // Talents & Devotions
-    context.maxAssignableRanks = game.settings.get("ed4e", "charGenMaxRank" );
+    context.maxAssignableRanks = game.settings.get( "ed4e", "charGenMaxRank" );
 
     // Abilities
     // remove language skills from general skills, otherwise they will be displayed twice
     const languageSkills = this.skills.filter( skill => [ this.edidLanguageRW, this.edidLanguageSpeak ].includes( skill.system.edid ) );
     const filteredSkills = this.skills.filter( skill => !languageSkills.includes( skill ) );
     context.skills = {
-      general: filteredSkills.filter( skill => skill.system.skillType === 'general' ),
-      artisan: filteredSkills.filter( skill => skill.system.skillType === 'artisan' ),
-      knowledge: filteredSkills.filter( skill => skill.system.skillType === 'knowledge' ),
-      language: languageSkills,
+      general:    filteredSkills.filter( skill => skill.system.skillType === "general" ),
+      artisan:    filteredSkills.filter( skill => skill.system.skillType === "artisan" ),
+      knowledge:  filteredSkills.filter( skill => skill.system.skillType === "knowledge" ),
+      language:   languageSkills,
     };
 
     // Attributes
@@ -225,7 +223,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
     context.spellsByCircle = context.spellsBifurcated?.reduce( ( acc, spellTuple ) => {
       const { system: { level } } = spellTuple[0] ?? spellTuple[1];
       acc[level] ??= [];
-      acc[level].push(spellTuple);
+      acc[level].push( spellTuple );
       return acc;
     }, {} );
 
@@ -238,37 +236,37 @@ export default class CharacterGenerationPrompt extends FormApplication {
     return context;
   }
 
-  async _updateObject(event, formData) {
-    const data = foundry.utils.expandObject(formData);
+  async _updateObject( event, formData ) {
+    const data = foundry.utils.expandObject( formData );
 
     data.namegiver ??= null;
 
     // Reset selected class if class type changed
-    if (data.isAdept !== this.object.isAdept) data.selectedClass = null;
+    if ( data.isAdept !== this.object.isAdept ) data.selectedClass = null;
 
     // Set class specifics
-    if (data.selectedClass) {
-      this.object.classAbilities = await fromUuid(data.selectedClass);
+    if ( data.selectedClass ) {
+      this.object.classAbilities = await fromUuid( data.selectedClass );
     }
 
     // process selected class option ability
-    if (data.abilityOption) this.object.abilityOption = data.abilityOption;
+    if ( data.abilityOption ) this.object.abilityOption = data.abilityOption;
 
     // Check the maximum selectable number of languages by comparing the array length
     // of the selected languages with the rank of the corresponding language skill
     // always use the stored ranks, since we never have a rank assignment in `_updateObject`
     const languageSkillRanks = await this.object.getLanguageSkillRanks();
-    if (data.languages.speak.length > languageSkillRanks.speak ) {
+    if ( data.languages.speak.length > languageSkillRanks.speak ) {
       delete data.languages.speak;
       ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to speak (your rank in that skill." ) );
     }
-    if (data.languages.readWrite.length > languageSkillRanks.readWrite ) {
+    if ( data.languages.readWrite.length > languageSkillRanks.readWrite ) {
       delete data.languages.readWrite;
       ui.notifications.warn( game.i18n.format( "X.Can only choose X languages to read / write (your rank in that skill." ) );
     }
-    if (foundry.utils.isEmpty(data.languages)) delete data.languages;
+    if ( foundry.utils.isEmpty( data.languages ) ) delete data.languages;
 
-    this.object.updateSource(data);
+    this.object.updateSource( data );
 
     // wait for the update, so we can use the data models method
     this.magicType = await this.object.getMagicType();
@@ -278,12 +276,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   /** @inheritDoc */
-  async close(options = {}) {
-    this.resolve?.(null);
-    return super.close(options);
+  async close( options = {} ) {
+    this.resolve?.( null );
+    return super.close( options );
   }
 
-  async _finishGeneration(event) {
+  async _finishGeneration( event ) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -316,7 +314,7 @@ export default class CharacterGenerationPrompt extends FormApplication {
   }
 
   _onSelectTalentOption( event ) {
-    event.currentTarget.querySelector( 'input[type="radio"]' ).click();
+    event.currentTarget.querySelector( "input[type=\"radio\"]" ).click();
   }
 
   _onClickSpell( event ) {
@@ -340,18 +338,18 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   // first check completeness and then proceed
   _nextTab() {
-    if (!this._hasNextStep()) return;
+    if ( !this._hasNextStep() ) return;
     // if ( !this._validateOnChangeTab() ) return;
     this._currentStep++;
-    this.activateTab(this._steps[this._currentStep]);
+    this.activateTab( this._steps[this._currentStep] );
     this.render();
   }
 
   _previousTab() {
-    if (!this._hasPreviousStep()) return;
+    if ( !this._hasPreviousStep() ) return;
     // if ( !this._validateOnChangeTab() ) return;
     this._currentStep--;
-    this.activateTab(this._steps[this._currentStep]);
+    this.activateTab( this._steps[this._currentStep] );
     this.render();
   }
 
@@ -367,23 +365,25 @@ export default class CharacterGenerationPrompt extends FormApplication {
     let hasValidationError = false;
     let errorMessage = "";
     switch ( this._steps[this._currentStep] ) {
-      case 'namegiver-tab':
+      case "namegiver-tab":
         hasValidationError = this._validateNamegiver();
         errorMessage = this.constructor.errorMessages["noNamegiver"];
         break;
-      case 'class-tab':
-         hasValidationError = this._validateClass();
-        errorMessage = ``;
+      case "class-tab":
+        hasValidationError = this._validateClass();
+        errorMessage = "";
         break;
-      case 'attribute-tab':
+      case "attribute-tab":
         break;
-      case 'spell-tab':
+      case "spell-tab":
         break;
-      case 'skill-tab':
+      case "skill-tab":
         break;
-      case 'equipment-tab':
+      case "equipment-tab":
         break;
     }
+
+    console.debug( "Validation error: ", hasValidationError, errorMessage );
   }
 
   _validateCompletion() {
@@ -430,12 +430,12 @@ export default class CharacterGenerationPrompt extends FormApplication {
   _validateSkills( errorLevel = "warn", displayNotification = false ) {
     const availableRanks = filterObject(
       this.object.availableRanks,
-      ( [key, _] ) => !["talent", "devotion"].includes( key )
+      ( [ key, _ ] ) => ![ "talent", "devotion" ].includes( key )
     );
-    availableRanks[this.object.isAdept ? "devotion" : "talent"] = 0
+    availableRanks[this.object.isAdept ? "devotion" : "talent"] = 0;
     availableRanks["readWrite"] = 0;
     availableRanks["speak"] = 0;
-    const hasRanks = Object.values( availableRanks ).some( value => value > 0);
+    const hasRanks = Object.values( availableRanks ).some( value => value > 0 );
     if ( displayNotification ) {
       if ( hasRanks ) this._displayValidationError( errorLevel, "skillRanksLeft" );
     }

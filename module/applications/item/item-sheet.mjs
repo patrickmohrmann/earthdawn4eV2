@@ -66,6 +66,8 @@ export default class ItemSheetEd extends ItemSheet {
     return foundry.utils.expandObject( enrichment );
   }
 
+
+
   async getData() {
     const systemData = super.getData();
 
@@ -76,6 +78,7 @@ export default class ItemSheetEd extends ItemSheet {
     systemData.isPlayer = !game.user.isGM;
     systemData.isClass = this.item.system instanceof ClassTemplate;
     systemData.config = ED4E;
+    systemData.weapons = {};
 
     return systemData;
   }
@@ -221,10 +224,10 @@ export default class ItemSheetEd extends ItemSheet {
     const data = TextEditor.getDragEventData( event );
 
     switch ( data.type ) {
-    case "ActiveEffect":
-      return this._onDropActiveEffect( event, data );
-    case "Item":
-      return this._onDropItem( event, data );
+      case "ActiveEffect":
+        return this._onDropActiveEffect( event, data );
+      case "Item":
+        return this._onDropItem( event, data );
     }
   }
 
@@ -241,6 +244,7 @@ export default class ItemSheetEd extends ItemSheet {
 
   /**
    * Handle autorecalculation of physical items for actors, based on the namegiver modifier for weight.
+   * @UserFunction        UF_PhysicalItems-onWeightCalculation
    */
   async _onWeightCalculation() {
     this.item.tailorToNamegiver( this.item.parent.namegiver );

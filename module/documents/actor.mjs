@@ -31,6 +31,16 @@ export default class ActorEd extends Actor {
   }
 
   /**
+   * @description                       Returns all ammunitoin items of the given actor
+   * @param {string} type               The type of ammunition to get
+   * @returns {ItemEd[]}                An array of ammunition items
+   * @UserFunction                      UF_PhysicalItems-getAmmo
+   */
+  getAmmo ( type ) {
+    return this.itemTypes.equipment.filter( item => item.system.ammunition.type === type );
+  }
+
+  /**
    * The actor's currently available legend points.
    * @type {number}
    */
@@ -304,6 +314,7 @@ export default class ActorEd extends Actor {
    * @description                 Roll an Equipment item. use {@link RollPrompt} for further input data.
    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
+   * @UserFunction                UF_PhysicalItems-rollEquipment
    */
   async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep;
@@ -336,6 +347,13 @@ export default class ActorEd extends Actor {
     this.#processRoll( roll );
   }
 
+  /**
+   * @description                     The sequence that is rotaded
+   * @param {object}    itemId        Id of the item to rotate the status of
+   * @param {boolean}   backwards     Whether to rotate the status backwards
+   * @returns 
+   * @UserFunction                    UF_PhysicalItems-rotateItemStatus
+   */
   async rotateItemStatus( itemId, backwards = false ) {
     const item = this.items.get( itemId );
     const nextStatus = backwards ? item.system.previousItemStatus : item.system.nextItemStatus;
@@ -781,6 +799,13 @@ export default class ActorEd extends Actor {
   }
 
 
+  /**
+   * 
+   * @param {object}    itemToUpdate    The item to update
+   * @param {string}    nextStatus      The next status of the item
+   * @returns 
+   * @UserFunction                      UF_PhysicalItems-updateItemStates
+   */
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
     const enforceLivingArmor = game.settings.get( "ed4e", "enforceLivingArmor" );
@@ -846,7 +871,7 @@ export default class ActorEd extends Actor {
           case "twoHands": {
             const equippedShield = this.itemTypes.shield.find( shield => shield.system.itemStatus === "equipped" );
             addUnequipItemUpdate( "weapon", [ "mainHand", "offHand", "twoHands" ] );
-            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield.system.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
+            if ( !( itemToUpdate.system.isTwoHandedRanged && equippedShield?.system?.bowUsage ) ) addUnequipItemUpdate( "shield", [ "equipped" ] );
             break;
           }
           case "mainHand":
