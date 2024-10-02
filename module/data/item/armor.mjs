@@ -64,7 +64,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
         integer:  true,
         label:    "ED.Item.Armor.initiativePenalty"
       } ),
-      isLivingArmor: new fields.BooleanField( {
+      living: new fields.BooleanField( {
         required: true,
         initial:  false,
         label:    "ED.Data.Item.Labels.livingArmor",

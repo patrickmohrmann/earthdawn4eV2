@@ -125,6 +125,23 @@ export default function registerSystemSettings() {
   } );
 
   /* -------------------------------------------------------------------------------- */
+  /*                                  owned Items                                     */
+  /* -------------------------------------------------------------------------------- */
+
+  /**
+   * @Description                 enforce Living Armor Checks on Namegiver
+   * @UserFunction                UF_Settings-enforceLivingArmor
+   */
+  game.settings.register( "ed4e", "enforceLivingArmor", {
+    name:    "ED.Settings.Label.enforceLivingArmor",
+    hint:    "ED.Settings.Hint.enforceLivingArmor",
+    scope:   "world",
+    config:  true,
+    type:    Boolean,
+    default: true,
+  } );
+
+  /* -------------------------------------------------------------------------------- */
   /*                                  DARK MODE                                       */
   /* -------------------------------------------------------------------------------- */
 

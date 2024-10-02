@@ -345,12 +345,12 @@
         "Hints": {
           "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
           "livingArmorOnly":                              "Nur legendige Rüstung",
-          "islivingArmor":                                "Legendige Rüstung"
+          "living":                                "Legendige Rüstung"
         },
         "Labels": {
           "edid": "ED-ID",
           "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden.",
-          "islivingArmor":                                "Dieser Gegenstand gilt als Lebendige Rüstung."
+          "living":                                "Dieser Gegenstand gilt als Lebendige Rüstung."
         }
       },
       "Journal": {
@@ -628,6 +628,12 @@
         "spellCastingHint": "Identifiziert die Fähigkeit die für Spruchzauberei verwendet wird",
         "threadWeaving": "ED-ID für Fadenweben",
         "threadWeavingHint": "Identifiziert die Fähigkeit die für Fadenweben verwendet wird"
+      },
+      "Hint": {
+          "enforceLivingArmor":                               "Prüft ob ausschließlich legendige Rüstung getragen werden kann."
+      },
+      "Label": {
+          "enforceLivingArmor":                               "Lebendig Rüstungs Prüfung"
       },
       "LpTracking": {
         "allTalents": "Alle Talente für Kreisaufstieg",

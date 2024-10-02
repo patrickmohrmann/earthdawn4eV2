@@ -604,6 +604,12 @@
             },
             "talentsSplit":                                         "Sort Talents by Kategory",
             "talentsSplitHint":                                     "Sort Talents",
+            "Label": {
+                "enforceLivingArmor":                               "Enforce Living Armor"
+            },
+            "Hint": {
+                "enforceLivingArmor":                               "Enforce that only living armor can be equipped"
+            },
             "SpecificSettingOptions":{
                 "changelog":                                        "Changelog",
                 "help":                                             "help",

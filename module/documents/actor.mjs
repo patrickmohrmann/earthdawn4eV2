@@ -696,14 +696,14 @@ export default class ActorEd extends Actor {
     const updateData = {};
 
     switch ( roll.options.rollSubType ) {
-      case "recovery":
+      case "recovery": 
         updateData[updatePaths.standardDamage] = newPhysicalDamage;
         updateData[updatePaths.stunDamage] = newStunDamage;
         updateData[updatePaths.stunRecoveryAvailable] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
         break;
       case "nightRest":
-        if ( wounds > 0 && total === 0 ) {
+        if ( wounds > 0 && total === 0 ) { 
           updateData[updatePaths.wounds] = newWounds;
         } else if ( total > 0 ) {
           updateData[updatePaths.standardDamage] = newPhysicalDamage;
@@ -783,7 +783,7 @@ export default class ActorEd extends Actor {
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
-    const namegiver = this.items.filter( item => item.type === "namegiver" )[ 0 ];
+    const enforceLivingArmor = game.settings.get( "ed4e", "enforceLivingArmor" );
     const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };
     const equippedWeapons = this.itemTypes.weapon.filter(
       weapon => [ "mainHand", "offHand", "twoHands" ].includes( weapon.system.itemStatus )
@@ -800,10 +800,10 @@ export default class ActorEd extends Actor {
       case "armor":
         if ( nextStatus === "equipped" ) {
           // check if namegiver item allows only living armor/shields
-          if ( namegiver.system.livingArmorOnly && itemToUpdate.system.isLivingArmor === false ) {
+          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.living === false && enforceLivingArmor === true ) {
             ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
             break;
-          } else {
+          }
             if ( itemToUpdate.system.piecemealArmor?.selector ) {
               if ( !this.wearsPiecemealArmor ) {
                 addUnequipItemUpdate( "armor", [ "equipped" ] );
@@ -837,7 +837,6 @@ export default class ActorEd extends Actor {
               // Unequip other armor
               if ( nextStatus === "equipped" ) addUnequipItemUpdate( "armor", [ "equipped" ] );
             }
-          }
         }
         updates.push( originalItemUpdate );
         break;
@@ -866,21 +865,20 @@ export default class ActorEd extends Actor {
       case "shield":
         if ( nextStatus === "equipped" ) {
           // check if namegiver item allows only living armor/shields
-          if ( namegiver.system.livingArmorOnly && itemToUpdate.system.isLivingArmor === false ) {
+          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.living === false && enforceLivingArmor === true  ) {
             ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
             break;
-          } else {
-            // Unequip other shields
-            addUnequipItemUpdate( "shield", [ "equipped" ] );
-            // If there's a bow and the shield allows it, no need to unequip the weapon
-            const bowAllowed = equippedWeapons[0]?.system.isTwoHandedRanged && itemToUpdate.system.bowUsage;
-            // If there's a two-handed weapon or two one-handed weapons, unequip one
-            const unequipSomeWeapon = equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1;
-            if ( !bowAllowed && unequipSomeWeapon ) {
-              // Prefer to unequip off-hand weapon, if available
-              const weaponToUnequip = equippedWeapons.find( weapon => weapon.system.itemStatus === "offHand" ) || equippedWeapons[0];
-              updates.push( { _id: weaponToUnequip.id, "system.itemStatus": "carried" } );
-            }
+          }
+          // Unequip other shields
+          addUnequipItemUpdate( "shield", [ "equipped" ] );
+          // If there's a bow and the shield allows it, no need to unequip the weapon
+          const bowAllowed = equippedWeapons[0]?.system.isTwoHandedRanged && itemToUpdate.system.bowUsage;
+          // If there's a two-handed weapon or two one-handed weapons, unequip one
+          const unequipSomeWeapon = equippedWeapons.some( weapon => weapon.system.itemStatus === "twoHands" ) || equippedWeapons.length > 1;
+          if ( !bowAllowed && unequipSomeWeapon ) {
+            // Prefer to unequip off-hand weapon, if available
+            const weaponToUnequip = equippedWeapons.find( weapon => weapon.system.itemStatus === "offHand" ) || equippedWeapons[0];
+            updates.push( { _id: weaponToUnequip.id, "system.itemStatus": "carried" } );
           }
         }
 
