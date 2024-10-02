@@ -106,7 +106,7 @@ export default function registerSystemSettings() {
   /* -------------------------------------------------------------------------------- */
 
   /**
-   * @Description                 Step Table used for step to dice conversion
+   * Step Table used for step to dice conversion
    * @UserFunction                chooseStepTable
    */
   game.settings.register( "ed4e", "stepTable", {
@@ -122,6 +122,23 @@ export default function registerSystemSettings() {
       third:   "ED.Settings.StepTable.editionThird",
       fourth:  "ED.Settings.StepTable.editionFourth"
     }
+  } );
+
+  /* -------------------------------------------------------------------------------- */
+  /*                                  owned Items                                     */
+  /* -------------------------------------------------------------------------------- */
+
+  /**
+   * Should Living Armor checked on Namegivers
+   * @UserFunction                UF_Settings-enforceLivingArmor
+   */
+  game.settings.register( "ed4e", "enforceLivingArmor", {
+    name:    "ED.Settings.Label.enforceLivingArmor",
+    hint:    "ED.Settings.Hint.enforceLivingArmor",
+    scope:   "world",
+    config:  true,
+    type:    Boolean,
+    default: true,
   } );
 
   /* -------------------------------------------------------------------------------- */

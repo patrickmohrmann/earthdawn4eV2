@@ -354,10 +354,14 @@
       },
       "Item": {
         "Hints": {
-          "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann"
+          "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
+          "livingArmorOnly":                              "Nur legendige Rüstung",
+          "living":                                "Legendige Rüstung"
         },
         "Labels": {
-          "edid": "ED-ID"
+          "edid": "ED-ID",
+          "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden.",
+          "living":                                "Dieser Gegenstand gilt als Lebendige Rüstung."
         }
       },
       "Journal": {
@@ -597,6 +601,7 @@
           "noTalentCategorySelected": "Du musst eine Talentkategorie auswählen, sonst können wir nichts zuordnen und kuhle LP Sachen machen :(",
           "questorItemNotUpdated": "Questor-Item konnte nicht aktualisiert werden"
         },
+        "livingArmorOnly":                                  "Es kann nur nur lebendige Rüstung getragen werden.", 
         "piecemealArmorSizeExceeded": "Maximale Menge an stückweiser Rüstung erreicht. Leg andere Teile ab um das neue Stück auszurüsten."
       }
     },
@@ -648,6 +653,12 @@
         "spellCastingHint": "Identifiziert die Fähigkeit die für Spruchzauberei verwendet wird",
         "threadWeaving": "ED-ID für Fadenweben",
         "threadWeavingHint": "Identifiziert die Fähigkeit die für Fadenweben verwendet wird"
+      },
+      "Hint": {
+          "enforceLivingArmor":                               "Prüft ob ausschließlich legendige Rüstung getragen werden kann."
+      },
+      "Label": {
+          "enforceLivingArmor":                               "Lebendig Rüstungs Prüfung"
       },
       "LpTracking": {
         "allTalents": "Alle Talente für Kreisaufstieg",

@@ -696,14 +696,14 @@ export default class ActorEd extends Actor {
     const updateData = {};
 
     switch ( roll.options.rollSubType ) {
-      case "recovery":
+      case "recovery": 
         updateData[updatePaths.standardDamage] = newPhysicalDamage;
         updateData[updatePaths.stunDamage] = newStunDamage;
         updateData[updatePaths.stunRecoveryAvailable] = true;
         updateData[updatePaths.recoveryTestAvailable] = recoveryTestsCurrent - 1;
         break;
       case "nightRest":
-        if ( wounds > 0 && total === 0 ) {
+        if ( wounds > 0 && total === 0 ) { 
           updateData[updatePaths.wounds] = newWounds;
         } else if ( total > 0 ) {
           updateData[updatePaths.standardDamage] = newPhysicalDamage;
@@ -783,6 +783,7 @@ export default class ActorEd extends Actor {
 
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
+    const enforceLivingArmor = game.settings.get( "ed4e", "enforceLivingArmor" );
     const originalItemUpdate = { _id: itemToUpdate.id, "system.itemStatus": nextStatus };
     const equippedWeapons = this.itemTypes.weapon.filter(
       weapon => [ "mainHand", "offHand", "twoHands" ].includes( weapon.system.itemStatus )
@@ -797,8 +798,12 @@ export default class ActorEd extends Actor {
 
     switch ( itemToUpdate.type ) {
       case "armor":
-
         if ( nextStatus === "equipped" ) {
+          // check if namegiver item allows only living armor/shields
+          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.living === false && enforceLivingArmor === true ) {
+            ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
+            break;
+          }
           if ( itemToUpdate.system.piecemealArmor?.selector ) {
             if ( !this.wearsPiecemealArmor ) {
               addUnequipItemUpdate( "armor", [ "equipped" ] );
@@ -817,7 +822,7 @@ export default class ActorEd extends Actor {
                 // eslint-disable-next-line max-depth
                 if (
                   sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
-                  + itemToUpdate.system.piecemealArmor.size > 5
+                    + itemToUpdate.system.piecemealArmor.size > 5
                 ) {
                   ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
                   break;
@@ -858,8 +863,12 @@ export default class ActorEd extends Actor {
         updates.push( originalItemUpdate );
         break;
       case "shield":
-
         if ( nextStatus === "equipped" ) {
+          // check if namegiver item allows only living armor/shields
+          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.living === false && enforceLivingArmor === true  ) {
+            ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
+            break;
+          }
           // Unequip other shields
           addUnequipItemUpdate( "shield", [ "equipped" ] );
           // If there's a bow and the shield allows it, no need to unequip the weapon

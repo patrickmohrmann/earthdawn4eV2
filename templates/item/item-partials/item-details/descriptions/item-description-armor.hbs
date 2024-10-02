@@ -30,6 +30,10 @@
         <input class="input__circle-input" name="system.initiativePenalty" type="text" value="{{item.system.initiativePenalty}}"
             data-dtype="Number">
     </div>
+    {{!-- living armor --}}
+    <div class="item-data__input--line">
+        {{formField systemFields.living name="system.living" value=item.system.living localize=true}}
+    </div>
     {{!-- price --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.General.price"}}:</label>

@@ -61,6 +61,12 @@ export default class NamegiverData extends ItemDataModel.mixin(
         initial:  false,
         label:    "X-TailAttack"
       } ),
+      livingArmorOnly: new fields.BooleanField( {
+        required: true,
+        initial:  false,
+        label:    "ED.Data.Item.Labels.livingArmorOnly",
+        hint:     "ED.Data.Item.Hints.livingArmorOnly"
+      } ),
       weaponSize: new fields.SchemaField( {
         oneHanded: new fields.SchemaField( {
           min: new fields.NumberField( {

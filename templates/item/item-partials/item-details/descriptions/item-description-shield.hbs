@@ -12,6 +12,10 @@
         <input class="input__circle-input" name="system.defenseBonus.mystical" type="text" value="{{item.system.defenseBonus.mystical}}"
             data-dtype="Number">
     </div>
+    {{!-- living armor --}}
+    <div class="item-data__input--line">
+        {{formField systemFields.living name="system.living" value=item.system.living localize=true}}
+    </div>
     {{!-- SHatter Threshold --}}
     <div class="item-data__input--line">
         <label class="label__left">{{localize "ED.Item.Shield.Hint.shatterThreshold"}}:</label>
