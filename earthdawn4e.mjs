@@ -9,7 +9,7 @@
  */
 
 // Import configuration
-import ED4E from './module/config.mjs';
+import ED4E from "./module/config.mjs";
 
 // Import submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -28,17 +28,17 @@ import * as utils from "./module/utils.mjs";
 /* -------------------------------------------- */
 
 globalThis.ed4e = {
-    applications,
-    canvas,
-    config: ED4E,
-    dataModels,
-    dice,
-    documents,
-    enrichers,
-    hooks,
-    system,
-    tours,
-    utils
+  applications,
+  canvas,
+  config: ED4E,
+  dataModels,
+  dice,
+  documents,
+  enrichers,
+  hooks,
+  system,
+  tours,
+  utils
 };
 
 /* -------------------------------------------- */
@@ -53,15 +53,15 @@ system.registerHooks();
 /* -------------------------------------------- */
 
 export {
-    applications,
-    canvas,
-    dataModels,
-    dice,
-    documents,
-    enrichers,
-    hooks,
-    // migrations,
-    system,
-    utils,
-    ED4E
+  applications,
+  canvas,
+  dataModels,
+  dice,
+  documents,
+  enrichers,
+  hooks,
+  // migrations,
+  system,
+  utils,
+  ED4E
 };

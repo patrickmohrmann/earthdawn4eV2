@@ -4,15 +4,18 @@ import LpTransactionData from "../data/advancement/lp-transaction.mjs";
 
 
 const cmdMapping = {
-  char: triggerCharGen,
-  coin: triggerCoinAward,
+  char:  triggerCharGen,
+  coin:  triggerCoinAward,
   group: triggerCrCalc,
-  h: triggerHelp,
-  help: triggerHelp,
-  lp: triggerLpAward,
-  s: triggerRollStep,
+  h:     triggerHelp,
+  help:  triggerHelp,
+  lp:    triggerLpAward,
+  s:     triggerRollStep,
 };
 
+/**
+ *
+ */
 export default function () {
   /**
    * Primary use of this hook is to intercept chat commands.
@@ -23,22 +26,22 @@ export default function () {
    * /lp Triggers awarding legend points for players
    * /s Triggers Step roll
    */
-  Hooks.on('chatMessage', (html, content, msg) => {
-    if (!Object.keys(CONFIG.ED4E.chatCommands).some((cmd) => content.startsWith(`/${cmd.toLowerCase()}`))) {
+  Hooks.on( "chatMessage", ( html, content, msg ) => {
+    if ( !Object.keys( CONFIG.ED4E.chatCommands ).some( ( cmd ) => content.startsWith( `/${cmd.toLowerCase()}` ) ) ) {
       // No ED command, continue Foundry workflow
       return true;
     }
 
     // Setup new message's visibility
-    let rollMode = game.settings.get('core', 'rollMode');
-    if (['gmroll', 'blindroll'].includes(rollMode))
-      msg['whisper'] = ChatMessage.getWhisperRecipients('GM').map((u) => u.id);
-    if (rollMode === 'blindroll') msg['blind'] = true;
+    let rollMode = game.settings.get( "core", "rollMode" );
+    if ( [ "gmroll", "blindroll" ].includes( rollMode ) )
+      msg["whisper"] = ChatMessage.getWhisperRecipients( "GM" ).map( ( u ) => u.id );
+    if ( rollMode === "blindroll" ) msg["blind"] = true;
 
     const cmdRegExp = /(?<command>\/\w+)(?<arguments>.*)/;
-    const commandMatches = content.match(cmdRegExp);
+    const commandMatches = content.match( cmdRegExp );
 
-    return cmdMapping[commandMatches.groups.command.substring( 1 )]( commandMatches.groups.arguments.trim());
+    return cmdMapping[commandMatches.groups.command.substring( 1 )]( commandMatches.groups.arguments.trim() );
   } );
 
   Hooks.on( "renderChatMessage", ( msg, html, msgData ) => {
@@ -47,35 +50,55 @@ export default function () {
 
     // Add class for highlighting success/failure on roll messages
     if ( msg.rolls[0] ) msg.rolls[0].addSuccessClass( html );
-  })
+  } );
 }
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */
 /* -------------------------------------------- */
 
-function triggerCharGen(argString) {
+/**
+ * Triggers the character generation process.
+ * @param {string} argString - The argument string from the original chat message passed to the command .
+ * @returns {boolean} Always returns false to prevent further processing.
+ */
+function triggerCharGen( argString ) {
   PcData.characterGeneration();
   return false;
 }
 
 /* -------------------------------------------- */
 
-function triggerCoinAward(argString) {
-  ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
+/**
+ * Trigger the coin award process with /coin.
+ * @param {string} argString - The argument string from the original chat message passed to the command.
+ * @returns {boolean} Always returns false to prevent further processing.
+ */
+function triggerCoinAward( argString ) {
+  ui.notifications.warn( game.i18n.localize( "X.NotImplementedYet" ) );
   return false;
 }
 
 /* -------------------------------------------- */
 
-function triggerCrCalc(argString) {
-  ui.notifications.warn( game.i18n.localize( 'X.NotImplementedYet' ) );
+/**
+ * Trigger the challenge rating calculation process with /group.
+ * @param {string} argString - The argument string from the original chat message passed to the command.
+ * @returns {boolean} Always returns false to prevent further processing.
+ */
+function triggerCrCalc( argString ) {
+  ui.notifications.warn( game.i18n.localize( "X.NotImplementedYet" ) );
   return false;
 }
 
 /* -------------------------------------------- */
 
-function triggerHelp(argString) {
+/**
+ * Trigger the help command to display a list of available chat commands with /help or /h.
+ * @param {string} argString - The argument string from the original chat message passed to the command.
+ * @returns {boolean} Always returns false to prevent further processing.
+ */
+function triggerHelp( argString ) {
   const helpText =
     CONFIG.ED4E.chatCommands[argString.toLowerCase()] ??
     `X.localize<br>
@@ -87,21 +110,21 @@ function triggerHelp(argString) {
     /s Triggers Step roll<br>
     `;
 
-  ChatMessage.create({
+  ChatMessage.create( {
     content: helpText,
-  });
+  } );
 
   return false;
 }
 
 /* -------------------------------------------- */
 /**
- * /char triggers legend point assignment prompt 
- * @param {*} argString 
- * @returns 
- * @UF UF_LpTracking-triggerLpAward
+ * Triggers the legend point award process with /lp.
+ * @param {string} argString - The argument string from the original chat message passed to the command.
+ * @returns {boolean} Always returns false to prevent further processing.
+ * @userFunction UF_LpTracking-triggerLpAward
  */
-function triggerLpAward(argString) {
+function triggerLpAward( argString ) {
   LpTransactionData.assignLpPrompt();
 
   return false;
@@ -109,24 +132,24 @@ function triggerLpAward(argString) {
 
 /* -------------------------------------------- */
 /**
- * @description             /s triggers a step roll
- * @param {*} argString     The string of arguments passed to the command
- * @returns                 
- * @UserFunction            UF_Rolls-triggerRollStep     
+ * Triggers a step roll with /s.
+ * @param {string} argString - The argument string from the original chat message passed to the command.
+ * @returns {boolean} Always returns false to prevent further processing.
+ * @userFunction            UF_Rolls-triggerRollStep
  */
-function triggerRollStep(argString) {
+function triggerRollStep( argString ) {
   const argRegExp = /(\d+)(?=\s*\+?\s*)/g;
-  const steps = argString.match(argRegExp);
+  const steps = argString.match( argRegExp );
 
-  if (!steps) return true;
+  if ( !steps ) return true;
 
-  steps.forEach((currentStep) =>
+  steps.forEach( ( currentStep ) =>
     new ed4e.dice.EdRoll(
       undefined,
       {},
       new EdRollOptions( {
         step: {
-          total: Number(currentStep)
+          total: Number( currentStep )
         }
       } )
     ).toMessage(),
@@ -138,6 +161,11 @@ function triggerRollStep(argString) {
 /*  Message Styling                             */
 /* -------------------------------------------- */
 
+/**
+ * Add the user's avatar to the chat message.
+ * @param {ChatMessage} msg - The chat message object.
+ * @param {jQuery} jquery - The jQuery object for the chat message.
+ */
 function addUserPortrait( msg, jquery ) {
 
   const chatAvatarSetting = game.settings.get( "ed4e", "chatAvatar" );

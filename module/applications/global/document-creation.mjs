@@ -119,9 +119,11 @@ export default class DocumentCreateDialog extends FormApplication {
 
     await this.submit( { preventRender: true } );
 
+    /* eslint-disable new-cap */
     let createData = this._updateCreationData( this.createData );
     createData.name ||= this.documentCls.implementation.defaultName();
     createData = new this.documentCls.implementation( createData ).toObject();
+    /* eslint-enable new-cap */
 
     let promise;
 

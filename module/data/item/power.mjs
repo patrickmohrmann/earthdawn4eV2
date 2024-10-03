@@ -5,23 +5,23 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * Data model template with information on Power items.
  */
 export default class PowerData extends NoneNamegiverPowerData.mixin(
-    ItemDescriptionTemplate
+  ItemDescriptionTemplate
 )  {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return this.mergeSchema( super.defineSchema(), {
+  /** @inheritDoc */
+  static defineSchema() {
+    return this.mergeSchema( super.defineSchema(), {
             
-        } );
-    }
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

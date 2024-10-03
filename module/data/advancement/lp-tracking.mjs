@@ -13,9 +13,9 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
         {
           required: true,
           nullable: false,
-          initial: [],
-          label: "X.Earned Legend Points",
-          hint: "X.All LP this character earned",
+          initial:  [],
+          label:    "X.Earned Legend Points",
+          hint:     "X.All LP this character earned",
 
         } ),
       spendings: new fields.ArrayField(
@@ -23,9 +23,9 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
         {
           required: true,
           nullable: false,
-          initial: [],
-          label: "X.Earned Legend Points",
-          hint: "X.All LP this character earned"
+          initial:  [],
+          label:    "X.Earned Legend Points",
+          hint:     "X.All LP this character earned"
         } ),
     };
   }
@@ -33,7 +33,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
   /**
    * The legendary status of this actor based on their total earned LP.
    * @type {number} A number from 1 through 4 indicating their status.
-   * @UserFunction                  UF_LpTracking-status
+   * @userFunction                  UF_LpTracking-status
    */
   get status() {
     let status = 0;
@@ -95,10 +95,10 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
         </thead>
         <tbody>
           ${
-            this.earnings.map( ( earning, index ) => {
-              return earning.getHtmlRow( index );
-            } ).join( "\n" )
-          }
+  this.earnings.map( ( earning, index ) => {
+    return earning.getHtmlRow( index );
+  } ).join( "\n" )
+}
         </tbody>
       </table>
     `;
@@ -181,7 +181,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
     const newSpendings = newTransactions.filter( transaction => transaction.type === "spendings" );
 
     return {
-      earnings: newEarnings,
+      earnings:  newEarnings,
       spendings: newSpendings,
     };
   }
@@ -221,7 +221,7 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
       this.spendings.map(
         ( spending, index ) => {
           return {
-            category: spending[categoryType],
+            category:    spending[categoryType],
             transaction: spending,
             index,
           };
@@ -241,8 +241,8 @@ export default class LpTrackingData extends foundry.abstract.DataModel {
         </thead>
         <tbody class="group-body ${ sessionStorage.getItem( `ed4e.lpGroup.${category}` ) ?? "hidden" }" data-group="${category}">
           ${ group.map(
-          ( { category, transaction, index } ) => transaction.getHtmlRow( index, [ "group-row" ], category )
-        ).join( "\n" ) }        
+    ( { category, transaction, index } ) => transaction.getHtmlRow( index, [ "group-row" ], category )
+  ).join( "\n" ) }        
         </tbody>
         `;
       }

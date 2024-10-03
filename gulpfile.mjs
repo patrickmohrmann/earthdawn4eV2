@@ -6,8 +6,8 @@ import * as javascript from "./utils/javascript.mjs";
 
 // default export - build CSS and watch for updates
 export default gulp.series(
-    gulp.parallel( css.compile ),
-    css.watchUpdates
+  gulp.parallel( css.compile ),
+  css.watchUpdates
 );
 
 // CSS compiling
@@ -18,5 +18,5 @@ export const lint = gulp.series( javascript.lint );
 
 // build all artifacts
 export const buildAll = gulp.parallel(
-    css.compile
+  css.compile
 );

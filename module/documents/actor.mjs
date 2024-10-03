@@ -34,7 +34,7 @@ export default class ActorEd extends Actor {
    * @description                       Returns all ammunitoin items of the given actor
    * @param {string} type               The type of ammunition to get
    * @returns {ItemEd[]}                An array of ammunition items
-   * @UserFunction                      UF_PhysicalItems-getAmmo
+   * @userFunction                      UF_PhysicalItems-getAmmo
    */
   getAmmo ( type ) {
     return this.itemTypes.equipment.filter( item => item.system.ammunition.type === type );
@@ -224,7 +224,7 @@ export default class ActorEd extends Actor {
    * Triggers a prompt for updating the Legend Point (LP) history of the actor.
    * Updates the LPTrackingData of the actor based on the input from the prompt.
    * @returns {Promise<Actor>} A Promise that resolves to the updated Actor instance.
-   * @UserFunction            UF_LpTracking-legendPointHistory
+   * @userFunction            UF_LpTracking-legendPointHistory
    * @see ../../documentation/User Functions/UF_LpTracking-legendPointHistory.md
    */
   async legendPointHistory() {
@@ -278,7 +278,7 @@ export default class ActorEd extends Actor {
   async rollAbility( ability, edRollOptionsData = {}, options = {} ) {
     const attributeStep = this.system.attributes[ability.system.attribute].step;
     const abilityStep = attributeStep + ability.system.level;
-    const difficulty = await ability.system.getDifficulty();
+    const difficulty = ability.system.getDifficulty();
     if ( difficulty === undefined || difficulty === null ) {
       throw new TypeError( "ability is not part of Targeting Template, please call your Administrator!" );
     }
@@ -314,7 +314,7 @@ export default class ActorEd extends Actor {
    * @description                 Roll an Equipment item. use {@link RollPrompt} for further input data.
    * @param {ItemEd} equipment    Equipment must be of type EquipmentTemplate & TargetingTemplate
    * @param {object} options      Any additional options for the {@link EdRoll}.
-   * @UserFunction                UF_PhysicalItems-rollEquipment
+   * @userFunction                UF_PhysicalItems-rollEquipment
    */
   async rollEquipment( equipment, options = {} ) {
     const arbitraryStep = equipment.system.usableItem.arbitraryStep;
@@ -351,8 +351,8 @@ export default class ActorEd extends Actor {
    * @description                     The sequence that is rotaded
    * @param {object}    itemId        Id of the item to rotate the status of
    * @param {boolean}   backwards     Whether to rotate the status backwards
-   * @returns 
-   * @UserFunction                    UF_PhysicalItems-rotateItemStatus
+   * @returns {Promise<ItemEd[]>}       The updated items
+   * @userFunction                    UF_PhysicalItems-rotateItemStatus
    */
   async rotateItemStatus( itemId, backwards = false ) {
     const item = this.items.get( itemId );
@@ -803,8 +803,8 @@ export default class ActorEd extends Actor {
    * 
    * @param {object}    itemToUpdate    The item to update
    * @param {string}    nextStatus      The next status of the item
-   * @returns 
-   * @UserFunction                      UF_PhysicalItems-updateItemStates
+   * @returns {Promise<ItemEd[]>}       The updated items
+   * @userFunction                      UF_PhysicalItems-updateItemStates
    */
   async _updateItemStates( itemToUpdate, nextStatus ) {
     const updates = [];
@@ -939,7 +939,7 @@ export default class ActorEd extends Actor {
    * @param {('earnings'|'spendings')} type       Type of the transaction
    * @param {object} transactionData   Data of the transaction
    * @returns {ActorEd}                           The updated actor data
-   * @UserFunction                                UF_LPTracking-addLpTransaction
+   * @userFunction                                UF_LPTracking-addLpTransaction
    * @see                             ../../documentation/User Functions/UF_LpTracking-addLpTransaction.md
    */
   async addLpTransaction( type, transactionData ) {

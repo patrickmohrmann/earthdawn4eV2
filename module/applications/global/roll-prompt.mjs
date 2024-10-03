@@ -10,140 +10,140 @@ import EdRollOptions from "../../data/other/roll-options.mjs";
  */
 export default class RollPrompt extends FormApplication {
 
-    constructor( edRollOptions = {},  { resolve, rollData = {}, options = {} } = {} ) {
-        if ( !( edRollOptions instanceof EdRollOptions ) ) {
-            throw new TypeError( "ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`." );
-        }
-        super( edRollOptions, options );
-
-        this.resolve = resolve;
-        this.edRollOptions = edRollOptions;
-        this.rollData = rollData;
-        this._updateObject( undefined, {
-          'step.modifiers.manual': edRollOptions.step.modifiers.manual ?? 0,
-        } );
+  constructor( edRollOptions = {},  { resolve, rollData = {}, options = {} } = {} ) {
+    if ( !( edRollOptions instanceof EdRollOptions ) ) {
+      throw new TypeError( "ED4E | Cannot construct RollPrompt from data. Must be of type `RollOptions`." );
     }
+    super( edRollOptions, options );
 
-    /**
-     * Wait for dialog to be resolved.
-     * @param {object} [data]           Initial data to pass to the constructor.
-     * @param {object} [options]        Options to pass to the constructor.
-     * @returns {Promise<EdRoll|null>}  Created roll instance or `null`.
-     */
-    static waitPrompt( data, options = {} ) {
-        return new Promise( ( resolve ) => {
-            options.resolve = resolve;
-            new this( data, options ).render( true, { focus: true } );
-        } );
-    }
+    this.resolve = resolve;
+    this.edRollOptions = edRollOptions;
+    this.rollData = rollData;
+    this._updateObject( undefined, {
+      "step.modifiers.manual": edRollOptions.step.modifiers.manual ?? 0,
+    } );
+  }
 
-    /**
-     * @description                 Roll a step prompt.
-     * @UserFunction                UF_Rolls-rollStepPrompt
-     */
-    static rollArbitraryPrompt() {
-        RollPrompt.waitPrompt(
-            new EdRollOptions( {
-                testType: "arbitrary",
-                chatFlavor: game.i18n.localize( "ED.Chat.Header.arbitraryTest" ),
-            } )
-        ).then(
-            ( roll ) => roll?.toMessage()
-        );
-    }
+  /**
+   * Wait for dialog to be resolved.
+   * @param {object} [data]           Initial data to pass to the constructor.
+   * @param {object} [options]        Options to pass to the constructor.
+   * @returns {Promise<EdRoll|null>}  Created roll instance or `null`.
+   */
+  static waitPrompt( data, options = {} ) {
+    return new Promise( ( resolve ) => {
+      options.resolve = resolve;
+      new this( data, options ).render( true, { focus: true } );
+    } );
+  }
 
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        return {
-            ...options,
-            closeOnSubmit: false,
-            submitOnChange: true,
-            submitOnClose: false,
-            height: 500,
-            width: 500,
-            resizable: true,
-            classes: [...options.classes, 'earthdawn4e', 'roll-prompt'],
-            tabs: [
-                {
-                    navSelector: '.prompt-tabs',
-                    contentSelector: '.tab-body',
-                    initial: 'base-input',
-                },
-            ],
-        };
-    }
+  /**
+   * @description                 Roll a step prompt.
+   * @userFunction                UF_Rolls-rollStepPrompt
+   */
+  static rollArbitraryPrompt() {
+    RollPrompt.waitPrompt(
+      new EdRollOptions( {
+        testType:   "arbitrary",
+        chatFlavor: game.i18n.localize( "ED.Chat.Header.arbitraryTest" ),
+      } )
+    ).then(
+      ( roll ) => roll?.toMessage()
+    );
+  }
 
-    get title() {
-        return game.i18n.localize( "ED.Dialogs.Title.rollPrompt" );
-    }
+  static get defaultOptions() {
+    const options = super.defaultOptions;
+    return {
+      ...options,
+      closeOnSubmit:  false,
+      submitOnChange: true,
+      submitOnClose:  false,
+      height:         500,
+      width:          500,
+      resizable:      true,
+      classes:        [ ...options.classes, "earthdawn4e", "roll-prompt" ],
+      tabs:           [
+        {
+          navSelector:     ".prompt-tabs",
+          contentSelector: ".tab-body",
+          initial:         "base-input",
+        },
+      ],
+    };
+  }
 
-    get template() {
-        return 'systems/ed4e/templates/prompts/roll-prompt.hbs';
-    }
+  get title() {
+    return game.i18n.localize( "ED.Dialogs.Title.rollPrompt" );
+  }
 
-    /** @type {EdRollOptions} */
-    edRollOptions = {};
+  get template() {
+    return "systems/ed4e/templates/prompts/roll-prompt.hbs";
+  }
 
-    /** @inheritDoc */
-    activateListeners( html ) {
-        super.activateListeners( html );
-        $( this.form.querySelector( "button.cancel" ) ).on( "click" , this.close.bind( this ) );
-        $( this.form.querySelector( "button.ok" ) ).on( "click" , this._createRoll.bind( this ) );
-        $( this.form.querySelectorAll( "#karma-input,#devotion-input" ) ).on(
-            "change", this._validateAvailableRessource.bind( this )
-        );
-    }
+  /** @type {EdRollOptions} */
+  edRollOptions = {};
 
-    /** @inheritDoc */
-    async close( options = {} ) {
-        this.resolve?.( null );
-        return super.close( options );
-    }
+  /** @inheritDoc */
+  activateListeners( html ) {
+    super.activateListeners( html );
+    $( this.form.querySelector( "button.cancel" ) ).on( "click" , this.close.bind( this ) );
+    $( this.form.querySelector( "button.ok" ) ).on( "click" , this._createRoll.bind( this ) );
+    $( this.form.querySelectorAll( "#karma-input,#devotion-input" ) ).on(
+      "change", this._validateAvailableRessource.bind( this )
+    );
+  }
 
-    /** @inheritDoc */
-    getData( options = {} ) {
-        return {
-            ...this.edRollOptions,
-            CONFIG
-        };
-    }
+  /** @inheritDoc */
+  async close( options = {} ) {
+    this.resolve?.( null );
+    return super.close( options );
+  }
 
-    /** @inheritDoc */
-    async _updateObject( event, formData ) {
-      return Promise.resolve( this._updateRollData( formData ) ).then( this.render( true ) );
-    }
+  /** @inheritDoc */
+  getData( options = {} ) {
+    return {
+      ...this.edRollOptions,
+      CONFIG
+    };
+  }
 
-    _validateAvailableRessource( event ) {
-        const newValue = event.currentTarget.value;
-        const resource = event.currentTarget.dataset.resource;
-        if (
-            this.edRollOptions.testType !== CONFIG.ED4E.testTypes.arbitrary
+  /** @inheritDoc */
+  async _updateObject( event, formData ) {
+    return Promise.resolve( this._updateRollData( formData ) ).then( this.render( true ) );
+  }
+
+  _validateAvailableRessource( event ) {
+    const newValue = event.currentTarget.value;
+    const resource = event.currentTarget.dataset.resource;
+    if (
+      this.edRollOptions.testType !== CONFIG.ED4E.testTypes.arbitrary
             && newValue > this.edRollOptions[resource].available
-        ) {
-            ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );
-        }
+    ) {
+      ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );
     }
+  }
 
-    _updateRollData( data = {} ) {
-        this.edRollOptions.updateSource( data );
-        return this.edRollOptions;
-    }
+  _updateRollData( data = {} ) {
+    this.edRollOptions.updateSource( data );
+    return this.edRollOptions;
+  }
 
-    /**
-     * @description                     Create a new roll instance and resolve the dialog.
-     * @param {Event}                   event
-     * @returns {Promise<EdRoll>}
-     * @UserFunction                    UF_Rolls-createRoll
-     */
-    async _createRoll( event ) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+  /**
+   * @description                 Create a new roll instance and resolve the dialog.
+   * @param {Event} event         The triggering event.
+   * @returns {Promise<EdRoll>}   Created roll instance.
+   * @userFunction                UF_Rolls-createRoll
+   */
+  async _createRoll( event ) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
 
-        await this.submit( {preventRender: true} );
+    await this.submit( {preventRender: true} );
 
-        const roll = new EdRoll( undefined, this.rollData, this.edRollOptions );
-        this.resolve?.( roll );
-        return this.close();
-    }
+    const roll = new EdRoll( undefined, this.rollData, this.edRollOptions );
+    this.resolve?.( roll );
+    return this.close();
+  }
 }

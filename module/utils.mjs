@@ -126,6 +126,7 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  *                                        It must return `true` if the item
  *                                        should be kept, or `false` for it to
  *                                        be discarded.
+ * @param predicateFunction
  * @returns {Promise<[Document|string]>}   A promise that resolves to an array of
  *                                        either {@link Document}s or UUID
  *                                        strings of the found documents. Empty
@@ -137,7 +138,7 @@ export async function getAllDocuments(
   asUuid = true,
   minOwnerRole = "OBSERVER",
   filterFields = [],
-  predicate
+  predicateFunction
 ) {
 
   // Input checks
@@ -154,7 +155,7 @@ export async function getAllDocuments(
     return [];
   }
 
-  predicate ??= () => true;  // no filtering, take all items
+  const predicate = predicateFunction ?? ( () => true );  // no filtering, take all items
 
   // Search documents
 
@@ -218,7 +219,9 @@ export function createContentLink( uuid, description ) {
  * @returns {*} miliseconds
  */
 export async function delay( ms ) {
-  return new Promise( resolve => setTimeout( resolve, ms ) );
+  return new Promise( resolve => {
+    setTimeout( resolve, ms );
+  } );
 
 }
 

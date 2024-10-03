@@ -495,7 +495,7 @@ export default class SentientTemplate extends CommonTemplate {
   _healthRating () {
     this.healthRate.max = this.characteristics.health.death;
     this.healthRate.value = this.characteristics.health.damage.stun + this.characteristics.health.damage.standard;
-    }
+  }
   /* -------------------------------------------- */
   /*  Migrations                  */
   /* -------------------------------------------- */

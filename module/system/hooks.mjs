@@ -1,9 +1,12 @@
-import chat from '../hooks/chat.mjs';
-import i18n from '../hooks/i18n.mjs';
-import init from '../hooks/init.mjs';
-import ready from '../hooks/ready.mjs';
-import sidebar from '../hooks/sidebar.mjs';
+import chat from "../hooks/chat.mjs";
+import i18n from "../hooks/i18n.mjs";
+import init from "../hooks/init.mjs";
+import ready from "../hooks/ready.mjs";
+import sidebar from "../hooks/sidebar.mjs";
 
+/**
+ *
+ */
 export default function registerHooks() {
   init();
   ready();

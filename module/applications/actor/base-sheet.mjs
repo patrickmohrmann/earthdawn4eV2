@@ -139,7 +139,7 @@ export default class ActorSheetEd extends ActorSheet {
    * @param {Event} event     The originating click event.
    * @returns {Application}   The rendered item sheet.
    * @private
-   * @UserFunction              UF_PhysicalItems-onChangeItemStatus
+   * @userFunction              UF_PhysicalItems-onChangeItemStatus
    */
   // eslint-disable-next-line complexity
   _onChangeItemStatus( event ) {
@@ -244,7 +244,7 @@ export default class ActorSheetEd extends ActorSheet {
    * Handle rolling an attribute test.
    * @param {Event} event      The originating click event.
    * @private
-   * @UserFunction              UF_PhysicalItems-onRollEquipment
+   * @userFunction              UF_PhysicalItems-onRollEquipment
    */
   _onRollEquipment( event ) {
     event.preventDefault();

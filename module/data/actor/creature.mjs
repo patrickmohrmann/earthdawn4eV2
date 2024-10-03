@@ -6,23 +6,23 @@ import SentientTemplate from "./templates/sentient.mjs";
  */
 export default class CreatureData extends SentientTemplate {
 
-    /** @inheritDoc */
-    static _systemType = "creature";
+  /** @inheritDoc */
+  static _systemType = "creature";
 
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return super.defineSchema();
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    return super.defineSchema();
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }
