@@ -11,11 +11,11 @@ export class EdIdField extends foundry.data.fields.StringField {
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject( super._defaults, {
-      initial: ED4E.reserved_edid.DEFAULT,
-      blank: false,
+      initial:  ED4E.reserved_edid.DEFAULT,
+      blank:    false,
       required: true,
-      label: getLocalizeKey( "Item", false, "edid" ),
-      hints: getLocalizeKey( "Item", true, "edid" ),
+      label:    getLocalizeKey( "Item", false, "edid" ),
+      hints:    getLocalizeKey( "Item", true, "edid" ),
     } );
   }
 
@@ -145,8 +145,8 @@ export class MappingField extends foundry.data.fields.ObjectField {
    */
   static get _defaults() {
     return foundry.utils.mergeObject( super._defaults, {
-      initialKeys: null,
-      initialValue: null,
+      initialKeys:     null,
+      initialValue:    null,
       initialKeysOnly: false,
     } );
   }

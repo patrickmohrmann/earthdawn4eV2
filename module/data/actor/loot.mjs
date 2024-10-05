@@ -5,13 +5,13 @@ import CommonTemplate from "./templates/common.mjs";
  */
 export default class LootData extends CommonTemplate {
 
-    /** @inheritDoc */
-    static _systemType = "loot";
+  /** @inheritDoc */
+  static _systemType = "loot";
 
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return super.defineSchema();
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    return super.defineSchema();
+  }
 }

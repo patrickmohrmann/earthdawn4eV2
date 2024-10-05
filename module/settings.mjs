@@ -107,7 +107,7 @@ export default function registerSystemSettings() {
 
   /**
    * Step Table used for step to dice conversion
-   * @UserFunction                chooseStepTable
+   * @userFunction                chooseStepTable
    */
   game.settings.register( "ed4e", "stepTable", {
     name:    "ED.Settings.StepTable.stepTable",
@@ -130,7 +130,7 @@ export default function registerSystemSettings() {
 
   /**
    * Should Living Armor checked on Namegivers
-   * @UserFunction                UF_Settings-enforceLivingArmor
+   * @userFunction                UF_Settings-enforceLivingArmor
    */
   game.settings.register( "ed4e", "enforceLivingArmor", {
     name:    "ED.Settings.Label.enforceLivingArmor",

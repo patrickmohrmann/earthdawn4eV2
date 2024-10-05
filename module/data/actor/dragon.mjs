@@ -6,23 +6,23 @@ import SentientTemplate from "./templates/sentient.mjs";
  */
 export default class DragonData extends SentientTemplate {
 
-    /** @inheritDoc */
-    static _systemType = "dragon";
+  /** @inheritDoc */
+  static _systemType = "dragon";
 
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return super.defineSchema();
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    return super.defineSchema();
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

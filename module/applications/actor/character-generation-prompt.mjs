@@ -18,8 +18,8 @@ export default class CharacterGenerationPrompt extends FormApplication {
   magicType;
   
   constructor( charGen, options = {}, documentCollections ) {
-    charGen ??= new CharacterGenerationData();
-    super( charGen );
+    const charGenData = charGen ?? new CharacterGenerationData();
+    super( charGenData );
 
     this.resolve = options.resolve;
 
@@ -48,11 +48,11 @@ export default class CharacterGenerationPrompt extends FormApplication {
 
   /**
    * Wait for dialog to be resolved.
-   * @param {object} [data]           Initial data to pass to the constructor.
+   * @param {object} [charGenData]           Initial data to pass to the constructor.
    * @param {object} [options]        Options to pass to the constructor.
    */
-  static async waitPrompt( data, options = {} ) {
-    data ??= new CharacterGenerationData();
+  static async waitPrompt( charGenData, options = {} ) {
+    const data = charGenData ?? new CharacterGenerationData();
 
     const docCollections = {
       namegivers:   await getAllDocuments( "Item", "namegiver", false, "OBSERVER" ),

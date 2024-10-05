@@ -9,39 +9,39 @@ import TargetTemplate from "./targeting.mjs";
  * @property {string} action        action type
  */
 export default class NoneNamegiverPowerData extends ActionTemplate.mixin( 
-    TargetTemplate
+  TargetTemplate
 ) {
 
-    /** @inheritDoc */
-    static defineSchema() {
-        const fields = foundry.data.fields;
-        return this.mergeSchema( super.defineSchema(), {
-            powerStep: new fields.NumberField( {
-                required: true,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Power.powerStep"
-            } ),
-            damageStep: new fields.NumberField( {
-                required: false,
-                nullable: false,
-                min: 0,
-                initial: 0,
-                integer: true,
-                label: "ED.Item.Power.damageStep"
-            } ),
-        } );
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    return this.mergeSchema( super.defineSchema(), {
+      powerStep: new fields.NumberField( {
+        required: true,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.Power.powerStep"
+      } ),
+      damageStep: new fields.NumberField( {
+        required: false,
+        nullable: false,
+        min:      0,
+        initial:  0,
+        integer:  true,
+        label:    "ED.Item.Power.damageStep"
+      } ),
+    } );
+  }
 
-    /* -------------------------------------------- */
-    /*  Migrations                                  */
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static migrateData( source ) {
-        super.migrateData( source );
-        // specific migration functions
-    }
+  /** @inheritDoc */
+  static migrateData( source ) {
+    super.migrateData( source );
+    // specific migration functions
+  }
 }

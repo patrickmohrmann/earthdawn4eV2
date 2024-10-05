@@ -1,1 +1,1 @@
-export { default as registerHooks } from './hooks.mjs';
+export { default as registerHooks } from "./hooks.mjs";

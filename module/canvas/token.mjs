@@ -15,11 +15,11 @@ export default class TokenEd extends Token {
 
   /**
    * @description             Draw a health bar for the Token representing a rate of damage points.
-   * @param {Number} number   Index of the Bar being drawn
-   * @param {Object} bar      PIXI.Graphics instance for the Bar
-   * @param {Object} data     Data object for the Bar
-   * @returns 
-   * @UserFunction             UF_TokenResouces-drawHealthBar
+   * @param {number} number   Index of the Bar being drawn
+   * @param {object} bar      PIXI.Graphics instance for the Bar
+   * @param {object} data     Data object for the Bar
+   * @returns {undefined}     Returns undefined.
+   * @userFunction            UF_TokenResources-drawHealthBar
    */
   _drawHealthBar( number, bar, data ) {
     const value = Number( data.value );
@@ -32,8 +32,8 @@ export default class TokenEd extends Token {
     const strokeWidth = Math.clamp( barHeight / 8, 1, 2 );
 
     // Determine the color to use
-    const noDamageColor = Color.fromString( "#7fff00" ) // green
-    const deathColor = Color.from( "#f90a00" )// red
+    const noDamageColor = Color.fromString( "#7fff00" ); // green
+    const deathColor = Color.from( "#f90a00" );// red
     let color = noDamageColor.mix( deathColor, percentage );
 
     // Set up the bar container
@@ -53,11 +53,11 @@ export default class TokenEd extends Token {
 
   /**
    * @description             Draw a karma bar for the Token representing a rate of karma points.
-   * @param {Number} number   Index of the bar being drawn
-   * @param {Object} bar      PIXI.Graphics instance for the bar 
-   * @param {Object} data     Data object for the Bar
-   * @returns 
-   * @UserFunction             UF_TokenResources-drawKarmaBar
+   * @param {number} number   Index of the bar being drawn
+   * @param {object} bar      PIXI.Graphics instance for the bar 
+   * @param {object} data     Data object for the Bar
+   * @returns {undefined}     Returns undefined.
+   * @userFunction            UF_TokenResources-drawKarmaBar
    */
   _drawKarmaBar( number, bar, data ) {
     const value = Number( data.value );

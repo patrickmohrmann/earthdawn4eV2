@@ -27,7 +27,6 @@ import ED4E from "../config.mjs";
  * @param { object } data TODO
  * @param { EdRollOptions } edRollOptions Collection of data, steps, karma, devotions, target and additional.
  * @property { string } flavorTemplate The template to use ofr rendering additional information in this roll's chat messages.
- * @UseCase                                     UC_EdRoll  
  */
 export default class EdRoll extends Roll {
 
@@ -66,7 +65,7 @@ export default class EdRoll extends Roll {
    * Return the total result of the Roll expression if it has been evaluated. This
    * always evaluates to at least 1.
    * @type {number}
-   * @UserFunction                      UF_Rolls-total
+   * @userFunction                      UF_Rolls-total
    */
   get total() {
     return this.options.hasOwnProperty( "rollType" )
@@ -89,7 +88,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                       Is this roll an automatic fail? True, if at least 2 dice, no effect test, and all dice are 1.
    * @type { boolean|undefined }
-   * @UserFunction                      UF_Rolls-ruleOfOne
+   * @userFunction                      UF_Rolls-ruleOfOne
    */
   get isRuleOfOne() {
     if ( !this.validEdRoll || !this._evaluated ) return undefined;
@@ -103,10 +102,10 @@ export default class EdRoll extends Roll {
   /**
    * @description                       Is this roll a success? True, if at least one success and arbitrary or action test.
    * @type { boolean|undefined }
-   * @UserFunction                      UF_Rolls-isSuccess
+   * @userFunction                      UF_Rolls-isSuccess
    */
   get isSuccess() {
-    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
+    if ( !this.validEdRoll || !this._evaluated || ![ "arbitrary", "action" ].includes( this.options.testType ) ) return undefined;
     if ( this.isRuleOfOne === true ) return false;
     return this.numSuccesses > 0;
   }
@@ -116,11 +115,11 @@ export default class EdRoll extends Roll {
   /**
    * Is this roll a failure? True, if zero successes and arbitrary or action test.
    * @type { boolean|undefined }
-   * @UserFunction                      UF_Rolls-isFailure
+   * @userFunction                      UF_Rolls-isFailure
    */
   get isFailure() {
-    if ( !this.validEdRoll || !this._evaluated || !["arbitrary", "action"].includes( this.options.testType ) ) return undefined;
-    if ( this.isRuleOfOne === true ) return true
+    if ( !this.validEdRoll || !this._evaluated || ![ "arbitrary", "action" ].includes( this.options.testType ) ) return undefined;
+    if ( this.isRuleOfOne === true ) return true;
     return this.numSuccesses <= 0;
   }
 
@@ -129,7 +128,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                    The number of dice in this roll.
    * @type { number }
-   * @UserFunction                    UF_Rolls-numDice
+   * @userFunction                    UF_Rolls-numDice
    */
   get numDice() {
     // must be evaluated since dice can explode and add more dice
@@ -144,11 +143,11 @@ export default class EdRoll extends Roll {
   /**
    * @description                     the number of total strain in this roll
    * @type {number}
-   * @UserFunction                    UF_Rolls-totalStrain
+   * @userFunction                    UF_Rolls-totalStrain
    */
   get totalStrain() {
     if ( !this.validEdRoll ) return undefined;
-    return this.options.strain.total
+    return this.options.strain.total;
   }
 
   /* -------------------------------------------- */
@@ -156,7 +155,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                     The number of successes in this roll. Only available if a target number is specified and the roll is evaluated.
    * @type {number}
-   * @UserFunction                    UF_Rolls-numSuccesses
+   * @userFunction                    UF_Rolls-numSuccesses
    */
   get numSuccesses() {
     if ( !this.validEdRoll || !this._evaluated || !this.options.target || this.options.target.total < 0 ) return undefined;
@@ -170,7 +169,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                     The number of extra successes in this roll. Only available if a target number is specified and the roll is evaluated.
    * @type {number}
-   * @UserFunction                    UF_Rolls-numExtraSuccesses
+   * @userFunction                    UF_Rolls-numExtraSuccesses
    */
   get numExtraSuccesses() {
     if ( !this.validEdRoll || !this._evaluated || !this.options.target || this.options.target.total < 0 ) return undefined;
@@ -182,7 +181,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                     The text that is added to this roll's chat message when calling `toMessage`.
    * @type {Promise<string>}
-   * @UserFunction                    UF_Rolls-getChatFlavor
+   * @userFunction                    UF_Rolls-getChatFlavor
    */
   get chatFlavor() {
     return renderTemplate( this.flavorTemplate, this.getFlavorTemplateData() );
@@ -193,7 +192,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                     Set the text of this roll's chat message.
    * @type {string}
-   * @UserFunction                    UF_Rolls-setChatFlavor
+   * @userFunction                    UF_Rolls-setChatFlavor
    */
   set chatFlavor( flavor ) {
     this.options.updateSource( {
@@ -206,7 +205,7 @@ export default class EdRoll extends Roll {
   /**
    * @description                     Returns the formula string based on strings instead of dice.
    * @type {string}
-   * @UserFunction                    UF_Rolls-stepsFormula
+   * @userFunction                    UF_Rolls-stepsFormula
    */
   get #stepsFormula() {
     const formulaParts = [
@@ -218,7 +217,7 @@ export default class EdRoll extends Roll {
       this.options.karma.pointsUsed
         ? game.i18n.format(
           "ED.Rolls.formulaKarma", {
-            step: this.options.karma.step,
+            step:   this.options.karma.step,
             amount: this.options.karma.pointsUsed
           }
         )
@@ -226,7 +225,7 @@ export default class EdRoll extends Roll {
       this.options.devotion.pointsUsed
         ? game.i18n.format(
           "ED.Rolls.formulaDevotion", {
-            step: this.options.devotion.step,
+            step:   this.options.devotion.step,
             amount: this.options.devotion.pointsUsed
           }
         )
@@ -236,7 +235,7 @@ export default class EdRoll extends Roll {
     formulaParts.push( ...Object.entries(
       this.options.extraDice
     ).map(
-      ( [label, step] ) => game.i18n.format(
+      ( [ label, step ] ) => game.i18n.format(
         "ED.Rolls.formulaExtraStep",
         {
           label,
@@ -255,12 +254,12 @@ export default class EdRoll extends Roll {
   /**
    * @description           Apply modifiers to make all dice explode.
    * @private
-   * @UserFunction          UF_Rolls-explodingDice
+   * @userFunction          UF_Rolls-explodingDice
    */
   #configureModifiers() {
     this.dice.map( ( diceTerm ) => {
       // Explodify all dice terms
-      diceTerm.modifiers.push( 'X' );
+      diceTerm.modifiers.push( "X" );
       return diceTerm;
     } );
 
@@ -272,7 +271,7 @@ export default class EdRoll extends Roll {
 
   /**
    * @description             Add additional dice in groups, like karma, devotion or elemental damage.
-   * @UserFunction            UF_Rolls-addExtraDice
+   * @userFunction            UF_Rolls-addExtraDice
    */
   #addExtraDice() {
     this.#addResourceDice( "karma" );
@@ -287,8 +286,8 @@ export default class EdRoll extends Roll {
 
   /**
    * @description             Add dice from a given resource step. Currently only karma or devotion.
-   * @param {"karma"|"devotion"} type
-   * @UserFunction            UF_Rolls-addResourceDice
+   * @param {"karma"|"devotion"} type The type of resource to add dice for.
+   * @userFunction            UF_Rolls-addResourceDice
    */
   #addResourceDice( type ) {
     const pointsUsed = this.options[type]?.pointsUsed;
@@ -311,11 +310,11 @@ export default class EdRoll extends Roll {
 
   /**
    * @description                   Add the dice from extra steps (like "Flame Weapon" or "Night's Edge").
-   * @UserFunction                  UF_Rolls-addExtraSteps
+   * @userFunction                  UF_Rolls-addExtraSteps
    */
   #addExtraSteps() {
     if ( !foundry.utils.isEmpty( this.options?.extraDice ) ) {
-      Object.entries( this.options.extraDice ).forEach( ( [label, step] ) => {
+      Object.entries( this.options.extraDice ).forEach( ( [ label, step ] ) => {
         const diceTerm = getDice( step );
         const newTerms = Roll.parse(
           `(${diceTerm})[${label}]`,
@@ -333,8 +332,8 @@ export default class EdRoll extends Roll {
 
   /**
    * @description                       Prepare the roll data for rendering the flavor template.
-   * @returns {object}
-   * @UserFunction                      UF_Rolls-getFlavorTemplateData
+   * @returns {object}                  The context data object used to render the flavor template.
+   * @userFunction                      UF_Rolls-getFlavorTemplateData
    */
   getFlavorTemplateData() {
     const templateData = {};
@@ -360,8 +359,8 @@ export default class EdRoll extends Roll {
 
   /**
    * @description                       Add a success or failure class to the dice total.
-   * @param {JQuery} jquery
-   * @UserFunction                      UF_Rolls-addSuccessClass
+   * @param {jQuery} jquery             The HTML element to which the class should be added.
+   * @userFunction                      UF_Rolls-addSuccessClass
    */
   addSuccessClass( jquery ) {
     if ( this.isSuccess || this.isFailure ) {
@@ -377,16 +376,16 @@ export default class EdRoll extends Roll {
    * @description                         Create the `rolls` part of the tooltip for displaying dice icons with results.
    * @param {DiceTerm[]} diceTerms        An array of dice terms with multiple results to be combined
    * @returns {{}[]}                      The desired classes
-   * @UserFunction                        UF_Rolls-getTooltipsRollData
+   * @userFunction                        UF_Rolls-getTooltipsRollData
    */
   #getTooltipsRollData( diceTerms ) {
     const rolls = diceTerms.map( diceTerm => {
       return diceTerm.results.map( r => {
         return {
-          result: diceTerm.getResultLabel( r ),
+          result:  diceTerm.getResultLabel( r ),
           classes: diceTerm.getResultCSS( r ).filterJoin( " " )
-        }
-      } )
+        };
+      } );
     } );
 
     return rolls.flat( Infinity );
@@ -396,7 +395,7 @@ export default class EdRoll extends Roll {
 
   /**
    * @inheritDoc
-   * @UserFunction                    UF_Rolls-getTooltip 
+   * @userFunction                    UF_Rolls-getTooltip 
    */
   async getTooltip() {
     const partsByFlavor = this.dice.reduce( ( acc, diceTerm ) => {
@@ -416,11 +415,11 @@ export default class EdRoll extends Roll {
     const parts = Object.keys( partsByFlavor ).map( part => {
       return {
         formula: partsByFlavor[part].map( d => d.expression ).join( " + " ),
-        total: sum( partsByFlavor[part].map( d => d.total ) ),
-        faces: undefined,
-        flavor: part,
-        rolls: this.#getTooltipsRollData( partsByFlavor[part] )
-      }
+        total:   sum( partsByFlavor[part].map( d => d.total ) ),
+        faces:   undefined,
+        flavor:  part,
+        rolls:   this.#getTooltipsRollData( partsByFlavor[part] )
+      };
     } );
 
     return renderTemplate( this.constructor.TOOLTIP_TEMPLATE, { parts } );
@@ -430,30 +429,31 @@ export default class EdRoll extends Roll {
 
   /**
    * @description                                   Render a Roll instance to HTML
-   * @param {object} [options={}]                   Options which affect how the Roll is rendered
+   * @param {object} [options]                   Options which affect how the Roll is rendered
    * @param {string} [options.flavor]               Flavor text to include
    * @param {string} [options.template]             A custom HTML template path
-   * @param {boolean} [options.isPrivate=false]     Is the Roll displayed privately?
+   * @param {boolean} [options.isPrivate]     Is the Roll displayed privately?
    * @returns {Promise<string>}                     The rendered HTML template as a string
-   * @UserFunction                                  UF_Rolls-render
+   * @userFunction                                  UF_Rolls-render
    */
   async render( {flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={} ) {
     if ( !this._evaluated ) await this.evaluate();
     const chatData = {
       formula: isPrivate ? "???" : this.#stepsFormula,
-      flavor: isPrivate ? null : flavor,
-      user: game.user.id,
+      flavor:  isPrivate ? null : flavor,
+      user:    game.user.id,
       tooltip: isPrivate ? "" : await this.getTooltip(),
-      total: isPrivate ? "?" : Math.round( this.total * 100 ) / 100
+      total:   isPrivate ? "?" : Math.round( this.total * 100 ) / 100
     };
     return renderTemplate( template, chatData );
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc 
-   * @UserFunction                                  UF_Rolls-toMessage
-  */
+  /**
+   * @inheritDoc 
+   * @userFunction                                  UF_Rolls-toMessage
+   */
   async toMessage( messageData = {}, options = {} ) {
     if ( !this._evaluated ) await this.evaluate();
 

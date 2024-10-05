@@ -9,7 +9,7 @@ import getDice from "./dice/step-tables.mjs";
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push(
     {
-      pattern: /@(?<type>roll)\(\s*(?<rollCmd>\/s\s*\d+(?:\s*\+\s*\d+)?)\s*\)(?:\((?<flavor>(?:[\u00C0-\u1FFF\u2C00-\uD7FF\w]+\s?)*)\))?(?:\((?<testType>action|effect|damage)\))?/gi,
+      pattern:  /@(?<type>roll)\(\s*(?<rollCmd>\/s\s*\d+(?:\s*\+\s*\d+)?)\s*\)(?:\((?<flavor>(?:[\u00C0-\u1FFF\u2C00-\uD7FF\w]+\s?)*)\))?(?:\((?<testType>action|effect|damage)\))?/gi,
       enricher: enrichString,
     },
   );
@@ -26,7 +26,7 @@ export function registerCustomEnrichers() {
  * @returns {Promise<HTMLElement|null>}  An HTML element to insert in place of the matched text or null to
  *                                       indicate that no replacement should be made.
  */
-async function enrichString(match, options) {
+async function enrichString( match, options ) {
   switch ( match.groups.type.toLowerCase() ) {
     case "roll": return enrichRoll( match, options );
   }
@@ -37,22 +37,22 @@ async function enrichString(match, options) {
 
 /**
  * Parse the embedded roll and provide the appropriate content.
- * @param match           The regular expression match result.
- * @param options         Options provided to customize text enrichment.
- * @return {HTMLElement|null}   An HTML link if the check could be built, otherwise null.
- * @UserFunction                UF_Journal-enichRoll
+ * @param {RegExpMatchArray} match   The regular expression match result.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}   An HTML link if the check could be built, otherwise null.
+ * @userFunction                UF_Journal-enrichRoll
  */
 async function enrichRoll( match, options ) {
 
   const rollCmd = match.groups.rollCmd;
   const rollFlavor = match.groups.flavor;
-  const testType = match.groups.testType ?? 'arbitrary';
+  const testType = match.groups.testType ?? "arbitrary";
 
   const textRollFormula = rollCmd.replace(
     "/s",
     game.i18n.localize( "ED.General.step"
     ) );
-  const textTestType = (testType === 'arbitrary')
+  const textTestType = ( testType === "arbitrary" )
     ? ""
     : `${ED4E.testTypes[testType].label}:&nbsp;`;
 
@@ -61,7 +61,7 @@ async function enrichRoll( match, options ) {
               data-test-type="${testType}" title="${game.i18n.localize( "X.Click to roll" )}">
               <i class="fas fa-regular fa-dice"></i>
               ${textTestType}${textRollFormula}&nbsp;${rollFlavor}
-            </a>`
+            </a>`;
 
   return $( rollElement )[0];
 }
@@ -71,15 +71,15 @@ async function enrichRoll( match, options ) {
 /**
  * Perform the provided roll action.
  * @param {Event} event     The click event triggering the action.
- * @returns {Promise|void}
+ * @returns {Promise|void} A Promise that resolves to the created ChatMessage, or undefined.
  */
 async function rollAction( event ) {
-  const target = event.target.closest( '.journal--roll' );
+  const target = event.target.closest( ".journal--roll" );
   if ( !target ) return;
   event.stopPropagation();
 
   // replace all whitespace in the roll formula
-  const [step, modifier] = target.dataset.rollCmd.replaceAll( /\s*/g, "" ).replace( "/s", "" ).split( "+" );
+  const [ step, modifier ] = target.dataset.rollCmd.replaceAll( /\s*/g, "" ).replace( "/s", "" ).split( "+" );
   const formula = getDice( step ).trim();
   let roll; 
   
@@ -91,7 +91,7 @@ async function rollAction( event ) {
         base: step,
       },
       chatFlavor: target.dataset.rollFlavor,
-      testType: target.dataset.testType,
+      testType:   target.dataset.testType,
     } )
   );
   

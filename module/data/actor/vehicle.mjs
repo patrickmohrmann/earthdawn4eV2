@@ -5,13 +5,13 @@ import CommonTemplate from "./templates/common.mjs";
  */
 export default class VehicleData extends CommonTemplate {
 
-    /** @inheritDoc */
-    static _systemType = "Vehicle";
+  /** @inheritDoc */
+  static _systemType = "Vehicle";
 
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static defineSchema() {
-        return super.defineSchema();
-    }
+  /** @inheritDoc */
+  static defineSchema() {
+    return super.defineSchema();
+  }
 }

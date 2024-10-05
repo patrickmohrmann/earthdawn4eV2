@@ -246,11 +246,12 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
   _getPreviousItemStatus( currentStatusIndex ) {
     const statusOrder = this.constructor._itemStatusOrder;
     const namegiver = this.parent.parent?.namegiver;
-    const previousStatusIndex = currentStatusIndex - 1;
+    let currentStatusIdx = currentStatusIndex;
+    const previousStatusIndex = currentStatusIdx - 1;
 
-    if ( currentStatusIndex < 0 ) currentStatusIndex = statusOrder.length - 1;
+    if ( currentStatusIdx < 0 ) currentStatusIdx = statusOrder.length - 1;
 
-    switch ( statusOrder[currentStatusIndex] ) {
+    switch ( statusOrder[currentStatusIdx] ) {
       case "tail":
         return this.canBeHandledWith( "twoHands", namegiver )
           ? "twoHands"
