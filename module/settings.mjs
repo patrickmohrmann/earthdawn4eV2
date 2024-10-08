@@ -125,7 +125,7 @@ export default function registerSystemSettings() {
   } );
 
   /* -------------------------------------------------------------------------------- */
-  /*                                  owned Items                                     */
+  /*                                  OWNED ITEMS                                     */
   /* -------------------------------------------------------------------------------- */
 
   /**
@@ -452,6 +452,25 @@ export default function registerSystemSettings() {
     config:  true,
     default: true,
     type:    Boolean
+  } );
+
+  // Minimum difficulty for tests
+  game.settings.register( "ed4e", "minimumDifficulty", {
+    name:    "ED.Settings.GameMechanics.minimumDifficulty",
+    hint:    "ED.Settings.GameMechanics.minimumDifficultyHint",
+    scope:   "world",
+    config:  true,
+    default: 2,
+    type:    new fields.NumberField( {
+      required: true,
+      nullable: false,
+      min:      0,
+      initial:  2,
+      step:     1,
+      integer:  true,
+      label:    "ED.Settings.GameMechanics.minimumDifficulty",
+      hint:     "ED.Settings.GameMechanics.minimumDifficultyHint",
+    } )
   } );
 
   /* -------------------------------------------------------------------------------- */
