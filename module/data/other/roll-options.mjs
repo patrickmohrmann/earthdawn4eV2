@@ -76,7 +76,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           base: new fields.NumberField( {
             required: true,
             nullable: false,
-            initial:  0,
+            initial:  () => game.settings.get( "ed4e", "minimumDifficulty" ),
             label:    "earthdawn.baseDifficulty",
             hint:     "earthdawn.baseDifficultyForTheRoll",
             min:      0,
@@ -207,21 +207,23 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
   }
 
   get totalTarget() {
-    return this.target.base + sum( Object.values( this.target.modifiers ) );
+    return Math.max(
+      this.target.base + sum( Object.values( this.target.modifiers ) ),
+      game.settings.get( "ed4e", "minimumDifficulty" ),
+    );
   }
 
   static fromActor( data, actor, options = {} ) {
-    const devotion = { 
-      pointsUsed: data.devotionRequired ? 1: 0, 
+    data.karma = {
+      pointsUsed: actor.system.karma.useAlways ? 1 : 0,
+      available:  actor.system.karma.value,
+      step:       actor.system.karma.step
+    };
+    data.devotion = {
+      pointsUsed: data.devotionRequired ? 1: 0,
       available:  actor.system.devotion.value,
       step:       actor.system.devotion.step,
     };
-    const karma = { pointsUsed: actor.system.karma.useAlways ? 1 : 0,
-      available:  actor.system.karma.value, 
-      step:       actor.system.karma.step 
-    };
-    data.karma = karma;
-    data.devotion = devotion;
 
     return new EdRollOptions( data, options );
   }

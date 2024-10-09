@@ -30,7 +30,7 @@ export default class TargetTemplate extends SystemDataModel {
           required: true,
           nullable: false,
           min:      0,
-          initial:  0,
+          initial:  () => game.settings.get( "ed4e", "minimumDifficulty" ),
           integer:  true,
           label:    "X.FixedDifficulty"
         } ),
@@ -79,7 +79,7 @@ export default class TargetTemplate extends SystemDataModel {
       difficulty = baseDifficulty + additionalTargetDifficulty;
     }
 
-    return difficulty;
+    return Math.max( difficulty, game.settings.get( "ed4e", "minimumDifficulty" ) );
   }
 
 
