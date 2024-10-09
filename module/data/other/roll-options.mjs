@@ -215,17 +215,16 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
   }
 
   static fromActor( data, actor, options = {} ) {
-    const devotion = { 
-      pointsUsed: data.devotionRequired ? 1: 0, 
-      available:  actor.system.devotion.value,
-      step:       actor.system.devotion.step,
-    };
     data.karma = {
       pointsUsed: actor.system.karma.useAlways ? 1 : 0,
       available:  actor.system.karma.value,
       step:       actor.system.karma.step
     };
-    data.devotion = devotion;
+    data.devotion = {
+      pointsUsed: data.devotionRequired ? 1: 0,
+      available:  actor.system.devotion.value,
+      step:       actor.system.devotion.step,
+    };
 
     return new EdRollOptions( data, options );
   }
