@@ -55,8 +55,8 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
           hint:     "localize: all data about how the step is composed",
         },
       ),
-      karma:     this.#bonusResource,
-      devotion:  this.#bonusResource,
+      karma:     this.#bonusResource( "karma" ),
+      devotion:  this.#bonusResource( "devotion" ),
       extraDice: new MappingField( new fields.NumberField( {
         required: true,
         nullable: false,
@@ -270,8 +270,9 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
    * @type {object}
    * @property {number} something Value of the global bonus
    */
-  static get #bonusResource() {
+  static #bonusResource( resourceType ) {
     const fields = foundry.data.fields;
+    const isDevotion = resourceType === "devotion";
     return new fields.SchemaField(
       {
         pointsUsed: new fields.NumberField( {
@@ -297,7 +298,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         step: new fields.NumberField( {
           required: true,
           nullable: false,
-          initial:  4,
+          initial:  isDevotion ? 3 : 4,
           label:    "earthdawn.karmaStep",
           hint:     "earthdawn.whatIsTheStepForKarmaDice",
           min:      1,
