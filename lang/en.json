@@ -1,48 +1,4 @@
 {
-    "TYPES": {
-        "Actor": {
-            "character":                                            "Character",
-            "creature":                                             "Creature",
-            "dragon":                                               "Dragon",
-            "group":                                                "Group",
-            "horror":                                               "Horror",
-            "loot":                                                 "Loot",
-            "npc":                                                  "NPC",
-            "spirit":                                               "Spirit",
-            "trap":                                                 "Trap",
-            "vehicle":                                              "Vehicle"
-        },
-        "Item": {
-            "armor":                                                "Armor",
-            "attack":                                               "Attack",
-            "bindingSecret":                                        "Binding Secrets",
-            "cursemark":                                            "Curse / Horror Mark",
-            "devotion":                                             "Devptopm",
-            "discipline":                                           "Disciplin",
-            "effect":                                               "Effect",
-            "equipment":                                            "Equipment",
-            "knackAbility":                                         "Knack",
-            "knackKarma":                                           "Karma Knack",
-            "knackManeuver":                                        "Maneuver Knack",
-            "maneuver":                                             "Maneuver",
-            "mask":                                                 "Mask",
-            "matrix":                                               "Matrix",
-            "namegiver":                                            "Namegiver",
-            "path":                                                 "Path",
-            "poisonDisease":                                        "Poison/Disease",
-            "power":                                                "Power",
-            "questor":                                              "Questor",
-            "shield":                                               "Shield",
-            "skill":                                                "Skill",
-            "specialAbility":                                       "Special Abilities",
-            "spell":                                                "Spell",
-            "spellKnack":                                           "Spell Knack",
-            "talent":                                               "Talent",
-            "thread":                                               "Permanent Thread",
-            "weapon":                                               "Weapon",
-            "shipWeapon":                                           "Ship Weapon"
-        }
-    },
     "ED": {
         "Actor": {
             "Abilities": {
@@ -299,6 +255,11 @@
                 "throwing":                                         "Throwing Combat",
                 "unarmed":                                          "unarmed Combat"
             },
+            "Denomination": {
+                "copper":                                           "Copper",
+                "gold":                                             "Gold",
+                "silver":                                           "Silver"
+            },
             "groupDifficulty": {
                 "highestOfGroup":                                   "Highest of Group",
                 "highestX":                                        "Highest + Targets",
@@ -387,14 +348,81 @@
             },
             "Item": {
                 "Labels": {
+                    "Armor": {
+                        "physicalArmor":                                "Physical Armor",
+                        "forgeBonusPhysical":                           "Forge Bonus Physical",
+                        "mysticalArmor":                                "Mystical Armor",
+                        "forgeBonusMystical":                           "Forge Bonus Mystical",
+                        "initiativePenalty":                            "Initiative Penalty",
+                        "living":                                       "Living Armor",
+                        "piecemealArmor":                               "Piecemeal Armor",
+                        "piecemealArmorSize":                           "Piecemeal Armor Size"
+                    },
                     "edid":                                         "ED-ID",
                     "livingArmorOnly":                              "Living Armor Only",
-                    "livingArmor":                                  "Living Armor"
+                    "PhysicalItems": {
+                        "amount":                                       "Amount",
+                        "availability":                                 "Availability",
+                        "bloodMagicDamage":                             "Blood Magic Damage",
+                        "itemStatus":                                   "Status",
+                        "price":                                        "Price",
+                        "Price": {
+                        "value":                                      "Value",
+                        "denomination":                               "Denomination"
+                        },
+                        "usableItem":                                   "Usable Item",
+                        "UsebaleItem": {
+                        "selector":                                   "Usable",
+                        "arbitraryStep":                              "Arbitrary Step",
+                        "action":                                     "Action",
+                        "recoveryPropertyValue":                      "Recovery test relevance"
+                        },
+                        "weight":                                       "Weight",
+                        "Weight": {
+                        "value":                                      "Value",
+                        "calculated":                                 "Calculated",
+                        "multiplier":                                 "Multiplier"
+                        }
+                    }
                 },
+
                 "Hints": {
+                    "Armor": {
+                        "physicalArmor":                                "Physical Armor",
+                        "forgeBonusPhysical":                           "Forge Bonus Physical",
+                        "mysticalArmor":                                "Mystical Armor",
+                        "forgeBonusMystical":                           "Forge Bonus Mystical",
+                        "initiativePenalty":                            "Initiative Penalty",
+                        "living":                                       "This item counts as living Armor.",
+                        "piecemealArmor":                               "Piecemeal Armor",
+                        "piecemealArmorSize":                           "Piecemeal Armor Size"
+                    },
                     "edid":                                         "An ID to identify an item without considering its name",
                     "livingArmorOnly":                              "This item is considered as living armor.",
-                    "livingArmor":                                  "This item counts as living Armor."
+                    "PhysicalItems": {
+                        "amount":                                       "Amount",
+                        "availability":                                 "Availability",
+                        "bloodMagicDamage":                             "Blood Magic Damage",
+                        "itemStatus":                                   "Status",
+                        "price":                                        "Price",
+                        "Price": {
+                        "value":                                      "Value",
+                        "denomination":                               "Denomination"
+                        },
+                        "usableItem":                                   "Usable Item",
+                        "UsebaleItem": {
+                        "selector":                                   "Usable",
+                        "arbitraryStep":                              "Arbitrary Step",
+                        "action":                                     "Action",
+                        "recoveryPropertyValue":                      "Recovery test relevance"
+                        },
+                        "weight":                                       "Weight",
+                        "Weight": {
+                        "value":                                      "Value",
+                        "calculated":                                 "Calculated",
+                        "multiplier":                                 "Multiplier"
+                        }
+                    }
                 }
             },
             "Journal": {
@@ -462,7 +490,7 @@
             "ActorSheetEdSpirit":                                   "Spirit-sheet",
             "ActorSheetEdTrap":                                     "Trap-sheet",
             "ActorSheetEdVehicle":                                  "Vehicle-sheet"
-    },
+        },
         "Item": {
             "Ability": {
                 "damage":                                           "Damage",
@@ -640,6 +668,50 @@
                 "help":                                             "help",
                 "troubleshooting":                                  "troubleshooting"
             }
+        }
+    },
+    "TYPES": {
+        "Actor": {
+            "character":                                            "Character",
+            "creature":                                             "Creature",
+            "dragon":                                               "Dragon",
+            "group":                                                "Group",
+            "horror":                                               "Horror",
+            "loot":                                                 "Loot",
+            "npc":                                                  "NPC",
+            "spirit":                                               "Spirit",
+            "trap":                                                 "Trap",
+            "vehicle":                                              "Vehicle"
+        },
+        "Item": {
+            "armor":                                                "Armor",
+            "attack":                                               "Attack",
+            "bindingSecret":                                        "Binding Secrets",
+            "cursemark":                                            "Curse / Horror Mark",
+            "devotion":                                             "Devptopm",
+            "discipline":                                           "Disciplin",
+            "effect":                                               "Effect",
+            "equipment":                                            "Equipment",
+            "knackAbility":                                         "Knack",
+            "knackKarma":                                           "Karma Knack",
+            "knackManeuver":                                        "Maneuver Knack",
+            "maneuver":                                             "Maneuver",
+            "mask":                                                 "Mask",
+            "matrix":                                               "Matrix",
+            "namegiver":                                            "Namegiver",
+            "path":                                                 "Path",
+            "poisonDisease":                                        "Poison/Disease",
+            "power":                                                "Power",
+            "questor":                                              "Questor",
+            "shield":                                               "Shield",
+            "skill":                                                "Skill",
+            "specialAbility":                                       "Special Abilities",
+            "spell":                                                "Spell",
+            "spellKnack":                                           "Spell Knack",
+            "talent":                                               "Talent",
+            "thread":                                               "Permanent Thread",
+            "weapon":                                               "Weapon",
+            "shipWeapon":                                           "Ship Weapon"
         }
     }
 }

@@ -611,6 +611,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details.hbs",
     "systems/ed4e/templates/item/item-partials/item-section-top.hbs",
 
+
+    "systems/ed4e/templates/item/item-partials/item-details/descriptions/partials/physical-items.hbs",
+
     // Item details
     "systems/ed4e/templates/item/item-partials/item-details/item-effects.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/details/item-details-armor.hbs",

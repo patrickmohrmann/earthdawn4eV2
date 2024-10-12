@@ -984,52 +984,25 @@ power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hove
   border: none;
 }
 .body .item__left--main {
-  width: 35%;
+  width: 38%;
   float: left;
+}
+.body .item__left--main div.form-group label {
+  flex-basis: 60%;
+}
+.body .item__left--main div.form-group input {
+  flex-basis: 40%;
+}
+.body .item__left--main div.form-group select {
+  background-color: aqua;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 40%;
+}
+.body .item__left--main div.form-group .hint {
+  display: none;
 }
 .body .item__right--main {
   width: 60%;
-  float: right;
-}
-.body .item-data__input--line {
-  height: 30px;
-}
-.body .item-data__input--line label,
-.body .item-data__input--line input {
-  height: 28px;
-  display: flex;
-  align-items: center;
-}
-.body .item-data__input--line .partial__40--left {
-  width: 40%;
-  float: left;
-}
-.body .item-data__input--line .partial__55--right {
-  width: 55%;
-  float: right;
-}
-.item__left--main {
-  width: 35%;
-  float: left;
-}
-.item__right--main {
-  width: 60%;
-  float: right;
-}
-.item-data__input--line {
-  height: 30px;
-}
-.item-data__input--line label,
-.item-data__input--line input {
-  height: 28px;
-  display: flex;
-  align-items: center;
-}
-.item-data__input--line .partial__40--left {
-  width: 40%;
-  float: left;
-}
-.item-data__input--line .partial__55--right {
-  width: 55%;
   float: right;
 }

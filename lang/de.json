@@ -264,6 +264,11 @@
         "physical": "Körperlich",
         "social": "Sozial"
       },
+      "Denomination": {
+        "copper":                                               "Kupfer",
+        "gold":                                                 "Gold",
+        "silver":                                               "Silber"
+      },
       "ItemStatus": {
         "carried": "Getragen",
         "equipped": "Ausgerüstet",
@@ -353,14 +358,80 @@
       },
       "Item": {
         "Hints": {
-          "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
-          "livingArmorOnly":                              "Nur legendige Rüstung",
-          "living":                                "Legendige Rüstung"
+          "Armor": {
+            "physicalArmor":                                "Physische Rüstung",
+            "forgeBonusPhysical":                           "Schmiedebonus Körperlich",
+            "mysticalArmor":                                "Mystische Rüstung",
+            "forgeBonusMystical":                           "Schmiedebonus Mystisch",
+            "initiativePenalty":                            "Initiative Malus",
+            "living":                                       "Dieser Gegenstand gilt als Lebendige Rüstung.",
+            "piecemealArmor":                               "Zusammengesetzte Rüstung",
+            "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
+          },
+          "edid":                                           "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
+          "livingArmorOnly":                                "Nur legendige Rüstung",
+          "PhysicalItems": {
+            "amount":                                       "Menge",
+            "availability":                                 "Verfügbarkeit",
+            "bloodMagicDamage":                             "Blutmagie Schaden",
+            "itemStatus":                                   "Status",
+            "price":                                        "Preis",
+            "Price": {
+              "value":                                      "Wert",
+              "denomination":                               "Währung"
+            },
+            "usableItem":                                   "Benutzbarer Gegenstand",
+            "UsebaleItem": {
+              "selector":                                   "Benutzbar",
+              "arbitraryStep":                              "Willkürliche Stufe",
+              "action":                                     "Aktion",
+              "recoveryPropertyValue":                      "Erholungsproben relevanz"
+            },
+            "weight":                                       "Gewicht",
+            "Weight": {
+              "value":                                      "Wert",
+              "calculated":                                 "Berechnet",
+              "multiplier":                                 "Multiplikator"
+            }
+          }
         },
         "Labels": {
-          "edid": "ED-ID",
-          "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden.",
-          "living":                                "Dieser Gegenstand gilt als Lebendige Rüstung."
+          "Armor": {
+            "physicalArmor":                                "Physische Rüstung",
+            "forgeBonusPhysical":                           "Schmiedebonus Körperlich",
+            "mysticalArmor":                                "Mystische Rüstung",
+            "forgeBonusMystical":                           "Schmiedebonus Mystisch",
+            "initiativePenalty":                            "Initiative Malus",
+            "living":                                       "Lebendige Rüstung",
+            "piecemealArmor":                               "Zusammengesetzte Rüstung",
+            "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
+          },
+          "edid":                                           "ED-ID",
+          "livingArmorOnly":                                "Es kann nur nur lebendige Rüstung getragen werden.",
+          "PhysicalItems": {
+            "amount":                                       "Menge",
+            "availability":                                 "Verfügbarkeit",
+            "bloodMagicDamage":                             "Blutmagie Schaden",
+            "itemStatus":                                   "Status",
+            "price":                                        "Preis",
+            "Price": {
+              "value":                                      "Wert",
+              "denomination":                               "Währung"
+            },
+            "usableItem":                                   "Benutzbarer Gegenstand",
+            "UsebaleItem": {
+              "selector":                                   "Benutzbar",
+              "arbitraryStep":                              "Willkürliche Stufe",
+              "action":                                     "Aktion",
+              "recoveryPropertyValue":                      "Erholungsproben relevanz"
+            },
+            "weight":                                       "Gewicht",
+            "Weight": {
+              "value":                                      "Wert",
+              "calculated":                                 "Berechnet",
+              "multiplier":                                 "Multiplikator"
+            }
+          }
         }
       },
       "Journal": {

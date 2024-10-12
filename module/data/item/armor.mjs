@@ -27,7 +27,8 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          label:    "ED.Item.Armor.physicalArmor"
+          label:    "ED.Data.Item.Labels.Armor.physicalArmor",
+          hint:     "ED.Data.Item.Hints.Armor.physicalArmor",
         } ), 
         forgeBonus: new fields.NumberField( {
           required: true,
@@ -35,7 +36,8 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          label:    "ED.Item.Armor.forgeBonusPhysical"
+          label:    "ED.Data.Item.Labels.Armor.forgeBonusPhysical",
+          hint:     "ED.Data.Item.Hints.Armor.forgeBonusPhysical",
         } ),
       } ),
       mystical: new fields.SchemaField( {
@@ -45,7 +47,8 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          label:    "ED.Item.Armor.mysticalArmor"
+          label:    "ED.Data.Item.Labels.Armor.mysticalArmor",
+          hint:     "ED.Data.Item.Hints.Armor.mysticalArmor",
         } ),
         forgeBonus: new fields.NumberField( {
           required: true,
@@ -53,7 +56,8 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          label:    "ED.Item.Armor.forgeBonusMystical"
+          label:    "ED.Data.Item.Labels.Armor.forgeBonusMystical",
+          hint:     "ED.Data.Item.Hints.Armor.forgeBonusMystical",
         } ),
       } ),
       initiativePenalty: new fields.NumberField( {
@@ -62,19 +66,21 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Item.Armor.initiativePenalty"
+        label:    "ED.Data.Item.Labels.Armor.initiativePenalty",
+        hint:     "ED.Data.Item.Hints.Armor.initiativePenalty",
       } ),
       living: new fields.BooleanField( {
         required: true,
         initial:  false,
-        label:    "ED.Data.Item.Labels.livingArmor",
-        hint:     "ED.Data.Item.Hints.livingArmor"
+        label:    "ED.Data.Item.Labels.Armor.living",
+        hint:     "ED.Data.Item.Hints.Armor.living"
       } ),
       piecemealArmor: new fields.SchemaField( {
         selector: new fields.BooleanField( {
           required: true,
           initial:  false,
-          label:    "ED.Item.Armor.piecemealArmor"
+          label:    "ED.Data.Item.Labels.Armor.piecemealArmor",
+          hint:     "ED.Data.Item.Hints.Armor.piecemealArmor",
         } ),
         size: new fields.NumberField( {
           required: true,
@@ -83,13 +89,14 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
           max:      3,
           initial:  0,
           integer:  true,
-          label:    "ED.Item.Armor.piecemealArmorSize"
+          label:    "ED.Data.Item.Labels.Armor.piecemealArmorSize",
+          hint:     "ED.Data.Item.Hints.Armor.piecemealArmorSize",
         } ),
       }, {
         required: true,
         nullable: false,
-        label:    "ED.Data.Item.Labels.piecemealArmor",
-        hint:     "ED.Data.Item.Hints.piecemealArmor",
+        label:    "ED.Data.Item.Labels.Armor.piecemealArmor",
+        hint:     "ED.Data.Item.Hints.Armor.piecemealArmor",
       } ),
     } );
   }
