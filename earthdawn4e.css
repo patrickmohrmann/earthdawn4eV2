@@ -988,21 +988,22 @@ power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hove
   float: left;
 }
 .body .item__left--main div.form-group label {
-  flex-basis: 60%;
-}
-.body .item__left--main div.form-group input {
-  flex-basis: 40%;
-}
-.body .item__left--main div.form-group select {
-  background-color: aqua;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 40%;
+  flex-basis: 50%;
 }
 .body .item__left--main div.form-group .hint {
   display: none;
 }
 .body .item__right--main {
   width: 60%;
+  float: right;
+}
+.denomination__value-currency .denomination__value {
+  width: 75%;
+  float: left;
+}
+.denomination__value-currency .denomination__currency {
+  margin-top: 3px;
+  height: inherit;
+  width: 24%;
   float: right;
 }

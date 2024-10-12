@@ -41,19 +41,7 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           label:    "ED.Data.Item.Labels.PhysicalItems.Price.value",
           hint:     "ED.Data.Item.Hints.PhysicalItems.Price.value"
         } ),
-        // magicType: new fields.StringField( {
-        //   required: true,
-        //   nullable: true,
-        //   blank:    true,
-        //   trim:     true,
-        //   choices:  ED4E.spellcastingTypes,
-        //   label:    this.labelKey( "talentMagicType" ),
-        //   hint:     this.hintKey( "talentMagicType" ),
-        // } ),
         denomination: new fields.StringField( {
-          // required: true,
-          // blank:    false,
-          // initial:  "silver",
           required: true,
           nullable: true,
           blank:    true,
@@ -82,21 +70,24 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           nullable: false,
           min:      1,
           initial:  1,
-          label:    "ED.Data.Item.Labels.PhysicalItems.Weight.Multiplier",
-          hint:     "ED.Data.Item.Hints.PhysicalItems.Weight.Multiplier"
+          label:    "ED.Data.Item.Labels.PhysicalItems.Weight.multiplier",
+          hint:     "ED.Data.Item.Hints.PhysicalItems.Weight.multiplier"
         } ),
         weightCalculated: new fields.BooleanField( {
           required: true,
           initial:  false,
-          label:    "ED.Data.Item.Labels.PhysicalItems.Weight.Calculated",
-          hint:     "ED.Data.Item.Hints.PhysicalItems.Weight.Calculated"
+          label:    "ED.Data.Item.Labels.PhysicalItems.Weight.calculated",
+          hint:     "ED.Data.Item.Hints.PhysicalItems.Weight.calculated"
         } ),
       } ),
       // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
       availability: new fields.StringField( {
         required: true,
-        blank:    false,
+        nullable: true,
+        blank:    true,
+        trim:     true,
         initial:  "average",
+        choices:  ED4E.availability,
         label:    "ED.Data.Item.Labels.PhysicalItems.availability",
         hint:     "ED.Data.Item.Hints.PhysicalItems.availability",
 
@@ -122,8 +113,8 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
       usableItem: new fields.SchemaField( {
         usableItemSelector: new fields.BooleanField( {
           required: true,
-          label:    "ED.Data.Item.Labels.PhysicalItems.usableItem",
-          hint:     "ED.Data.Item.Hints.PhysicalItems.usableItem"
+          label:    "ED.Data.Item.Labels.PhysicalItems.UsableItem.selector",
+          hint:     "ED.Data.Item.Hints.PhysicalItems.UsableItem.selector"
         } ),
         arbitraryStep: new fields.NumberField( {
           required: true,
@@ -131,13 +122,13 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          label:    "ED.Data.Item.Labels.PhysicalItems.arbitraryStep",
-          hint:     "ED.Data.Item.Hints.PhysicalItems.arbitraryStep"
+          label:    "ED.Data.Item.Labels.PhysicalItems.UsableItem.arbitraryStep",
+          hint:     "ED.Data.Item.Hints.PhysicalItems.UsableItem.arbitraryStep"
         } ),
         action: new fields.StringField( {
           initial:  "standard",
-          label:    "ED.Data.Item.Labels.PhysicalItems.action",
-          hint:     "ED.Data.Item.Hints.PhysicalItems.action",
+          label:    "ED.Data.Item.Labels.PhysicalItems.UsableItem.action",
+          hint:     "ED.Data.Item.Hints.PhysicalItems.UsableItem.action",
           choices:  ED4E.action
         } ),
         // recovery property value shall be a drop down menu with several options discribed in #26
@@ -147,9 +138,10 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           min:      0,
           max:      5,
           initial:  0,
+          choices:  ED4E.recoveryProperty,
           integer:  true,
-          label:    "ED.Data.Item.Labels.PhysicalItems.recoveryPropertyValue",
-          hint:     "ED.Data.Item.Hints.PhysicalItems.recoveryPropertyValue"
+          label:    "ED.Data.Item.Labels.PhysicalItems.UsableItem.recoveryPropertyValue",
+          hint:     "ED.Data.Item.Hints.PhysicalItems.UsableItem.recoveryPropertyValue"
         } ),
       },
       {
@@ -165,9 +157,9 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
         nullable: true,
         blank:    false,
         initial:  "owned",
-        choices:  Object.keys( ED4E.itemStatus ),
+        choices:  ED4E.itemStatus,
         label:    "ED.Data.Item.Labels.PhysicalItems.itemStatus",
-        hint:     "ED.Data.Item.Labels.PhysicalItems.itemStatusHint",
+        hint:     "ED.Data.Item.Hints.PhysicalItems.itemStatus"
       } )
     } );
   }

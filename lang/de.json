@@ -244,6 +244,14 @@
         "standard": "Standard",
         "sustained": "Anhaltend"
       },
+      "Availability": {
+        "everyday":                                           "Alltäglich",
+        "average":                                            "Durchschnittlich",
+        "unusual":                                            "Ungewöhnlich",
+        "rare":                                               "Selten",
+        "veryRare":                                           "Sehr selten",
+        "unique":                                             "Einzigartig"
+      },
       "CombatTypes": {
         "aerial": "Luftkampf",
         "close": "Nahkampf",
@@ -313,6 +321,14 @@
         "spellcasting": "Spruchzauberei",
         "threadWeaving": "Fadenweben"
       },
+      "RecoveryProperty": {
+                "noRecovery":                                       "Keine Erholung",
+                "arbitrary":                                        "Willkürlich",
+                "arbitraryAndAttribute":                            "Willkürlich und Attribut",
+                "arbitraryOptionalAttribute":                       "Willkürlich und/oder Attribut",
+                "abilityStep":                                      "Fähigkeitsstufe",
+                "noHealing":                                        "Keine Heilung"
+            },
       "spellcastingTypes": {
         "elementalism": "Elementarist",
         "illusionism": "Illusionist",
@@ -371,28 +387,35 @@
           "edid":                                           "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
           "livingArmorOnly":                                "Nur legendige Rüstung",
           "PhysicalItems": {
+            "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
+            "arbitraryStep":                                "Willkürliche Stufe, die beim benutzen des Gegenstandes verwendet wird.",
             "amount":                                       "Menge",
             "availability":                                 "Verfügbarkeit",
             "bloodMagicDamage":                             "Blutmagie Schaden",
-            "itemStatus":                                   "Status",
+            "itemStatus":                                  "In welchem Ausrüstungszustand befindet sich der Gegenstand?",
             "price":                                        "Preis",
             "Price": {
-              "value":                                      "Wert",
+              "value":                                      "Preis",
               "denomination":                               "Währung"
             },
             "usableItem":                                   "Benutzbarer Gegenstand",
-            "UsebaleItem": {
-              "selector":                                   "Benutzbar",
-              "arbitraryStep":                              "Willkürliche Stufe",
-              "action":                                     "Aktion",
+            "UsableItem": {
+              "selector":                                   "Kann der Gegenstand benutzt werden?",
+              "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
+              "arbitraryStep":                                "Willkürliche Stufe, die beim benutzen des Gegenstandes verwendet wird.",
               "recoveryPropertyValue":                      "Erholungsproben relevanz"
             },
             "weight":                                       "Gewicht",
             "Weight": {
-              "value":                                      "Wert",
-              "calculated":                                 "Berechnet",
-              "multiplier":                                 "Multiplikator"
+              "value":                                      "Gewicht",
+              "calculated":                                 "Wurde dieser Gegenstand bereits mit dem Multipliktor des Namensgebers berechnet?",
+              "multiplier":                                 "Der Multiplikator des Namensgebers"
             }
+          },
+          "Target": {
+            "target":                                       "Widerstandstyp des Ziels",
+            "group":                                        "Gruppen Parameter",
+            "fixed":                                        "Fester Schwierigkeitsgrad"
           }
         },
         "Labels": {
@@ -419,7 +442,7 @@
               "denomination":                               "Währung"
             },
             "usableItem":                                   "Benutzbarer Gegenstand",
-            "UsebaleItem": {
+            "UsableItem": {
               "selector":                                   "Benutzbar",
               "arbitraryStep":                              "Willkürliche Stufe",
               "action":                                     "Aktion",
@@ -427,10 +450,15 @@
             },
             "weight":                                       "Gewicht",
             "Weight": {
-              "value":                                      "Wert",
+              "value":                                      "Gewicht",
               "calculated":                                 "Berechnet",
               "multiplier":                                 "Multiplikator"
             }
+          },
+          "Target": {
+            "target":                                       "Widerstandstyp",
+            "group":                                        "Gruppen Parameter",
+            "fixed":                                        "Fester Schwierigkeitsgrad"
           }
         }
       },

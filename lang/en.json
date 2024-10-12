@@ -245,6 +245,14 @@
                 "standard":                                         "Standard",
                 "sustained":                                        "Sustained"
             },
+            "Availability": {
+                "everyday":                                           "Everyday",
+                "average":                                            "Average",
+                "unusual":                                            "Unusual",
+                "rare":                                               "Rare",
+                "veryRare":                                           "Very Rare",
+                "unique":                                             "Unique"
+            },
             "CombatTypes": {
                 "aerial":                                           "Aerial Combat",
                 "close":                                            "Close Combat",
@@ -311,6 +319,14 @@
                 "physical":                                         "Physical",
                 "social":                                           "Social"
             },
+            "RecoveryProperty": {
+                "noRecovery":                                       "No Recovery",
+                "arbitrary":                                        "Arbitrary",
+                "arbitraryAndAttribute":                            "Arbitrary and Attribute",
+                "arbitraryOptionalAttribute":                       "Arbitrary and/or Attribute",
+                "abilityStep":                                      "Ability Step",
+                "noHealing":                                        "No Recovery"
+            },
             "spellcastingTypes": {
                 "elementalism":                                     "Elementalist",
                 "illusionism":                                      "Illusionist",
@@ -347,45 +363,6 @@
                 }
             },
             "Item": {
-                "Labels": {
-                    "Armor": {
-                        "physicalArmor":                                "Physical Armor",
-                        "forgeBonusPhysical":                           "Forge Bonus Physical",
-                        "mysticalArmor":                                "Mystical Armor",
-                        "forgeBonusMystical":                           "Forge Bonus Mystical",
-                        "initiativePenalty":                            "Initiative Penalty",
-                        "living":                                       "Living Armor",
-                        "piecemealArmor":                               "Piecemeal Armor",
-                        "piecemealArmorSize":                           "Piecemeal Armor Size"
-                    },
-                    "edid":                                         "ED-ID",
-                    "livingArmorOnly":                              "Living Armor Only",
-                    "PhysicalItems": {
-                        "amount":                                       "Amount",
-                        "availability":                                 "Availability",
-                        "bloodMagicDamage":                             "Blood Magic Damage",
-                        "itemStatus":                                   "Status",
-                        "price":                                        "Price",
-                        "Price": {
-                        "value":                                      "Value",
-                        "denomination":                               "Denomination"
-                        },
-                        "usableItem":                                   "Usable Item",
-                        "UsebaleItem": {
-                        "selector":                                   "Usable",
-                        "arbitraryStep":                              "Arbitrary Step",
-                        "action":                                     "Action",
-                        "recoveryPropertyValue":                      "Recovery test relevance"
-                        },
-                        "weight":                                       "Weight",
-                        "Weight": {
-                        "value":                                      "Value",
-                        "calculated":                                 "Calculated",
-                        "multiplier":                                 "Multiplier"
-                        }
-                    }
-                },
-
                 "Hints": {
                     "Armor": {
                         "physicalArmor":                                "Physical Armor",
@@ -422,6 +399,54 @@
                         "calculated":                                 "Calculated",
                         "multiplier":                                 "Multiplier"
                         }
+                    },
+                    "Target": {
+                        "target":                                       "Difficulty",
+                        "group":                                        "Group parameter",
+                        "fixed":                                        "Fixed Difficulty"
+                    }
+                },
+                "Labels": {
+                    "Armor": {
+                        "physicalArmor":                                "Physical Armor",
+                        "forgeBonusPhysical":                           "Forge Bonus Physical",
+                        "mysticalArmor":                                "Mystical Armor",
+                        "forgeBonusMystical":                           "Forge Bonus Mystical",
+                        "initiativePenalty":                            "Initiative Penalty",
+                        "living":                                       "Living Armor",
+                        "piecemealArmor":                               "Piecemeal Armor",
+                        "piecemealArmorSize":                           "Piecemeal Armor Size"
+                    },
+                    "edid":                                         "ED-ID",
+                    "livingArmorOnly":                              "Living Armor Only",
+                    "PhysicalItems": {
+                        "amount":                                       "Amount",
+                        "availability":                                 "Availability",
+                        "bloodMagicDamage":                             "Blood Magic Damage",
+                        "itemStatus":                                   "Status",
+                        "price":                                        "Price",
+                        "Price": {
+                        "value":                                      "Value",
+                        "denomination":                               "Denomination"
+                        },
+                        "usableItem":                                   "Usable Item",
+                        "UsebaleItem": {
+                        "selector":                                   "Usable",
+                        "arbitraryStep":                              "Arbitrary Step",
+                        "action":                                     "Action",
+                        "recoveryPropertyValue":                      "Recovery test relevance"
+                        },
+                        "weight":                                       "Weight",
+                        "Weight": {
+                        "value":                                      "Value",
+                        "calculated":                                 "Calculated",
+                        "multiplier":                                 "Multiplier"
+                        }
+                    },
+                    "Target": {
+                        "target":                                       "Difficulty",
+                        "group":                                        "Group parameter",
+                        "fixed":                                        "Fixed Difficulty"
                     }
                 }
             },

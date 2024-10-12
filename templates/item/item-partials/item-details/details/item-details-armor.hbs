@@ -1,92 +1,38 @@
 <div>
-    <h3>{{localize "ED.Item.General.details"}}</h3>
-    {{!-- Physical Armor --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.Item.Armor.piecemealArmor"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.piecemealArmor.selector" {{checked item.system.piecemealArmor.selector }}>
-        <label>{{localize "ED.General.size"}}:</label>
-        <input class="input__number-input" name="system.piecemealArmor.size" type="text"
-            value="{{item.system.piecemealArmor.size}}" data-dtype="Number">
-    </div>
-    {{!-- bloodMagicDamage --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.Item.General.bloodMagicDamage"}}:</label>
-        <input class="input__number-input" name="system.bloodMagicDamage" type="text"
-            value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
-    </div>
-    {{!-- usable Item --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.Item.General.usableItem"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
-            item.system.usableItem.usableItemSelector}}>
-        {{#if (eq item.system.usableItem.usableItemSelector true)}}
-        <label>{{localize "ED.Item.General.arbitraryStep"}}:</label>
-        <input class="input__number-input" name="system.usableItem.arbitraryStep" type="text" value="{{item.system.usableItem.arbitraryStep}}"
-            data-dtype="Number">
-        <label>{{localize "ED.Item.General.action"}}:</label>
-        <select class="input__select-input" name="system.action" value="{{item.system.usableItem.action}}" {{#select
-            item.system.usableItem.action}}>
-            <option value="none">{{localize "ED.General.none"}}</option>
-            <option value="free">{{localize "ED.Action.free"}}</option>
-            <option value="simple">{{localize "ED.Action.simple"}}</option>
-            <option value="standard">{{localize "ED.Action.standard"}}</option>
-            <option value="sustained">{{localize "ED.Action.sustained"}}</option>
-            {{/select}}
-        </select>
-        <label>{{localize "ED.Item.General.recoveryPropertyValue"}}:</label>
-        <select class="input__select-input" name="system.recoveryPropertyValue" value="{{item.system.usableItem.recoveryPropertyValue}}" {{#select
-            item.system.usableItem.recoveryPropertyValue}}>
-            <option value="0">{{localize "ED.Item.RecoveryPropertyValue.0"}}</option>
-            <option value="1">{{localize "ED.Item.RecoveryPropertyValue.1"}}</option>
-            <option value="2">{{localize "ED.Item.RecoveryPropertyValue.2"}}</option>
-            <option value="3">{{localize "ED.Item.RecoveryPropertyValue.3"}}</option>
-            <option value="4">{{localize "ED.Item.RecoveryPropertyValue.4"}}</option>
-            <option value="5">{{localize "ED.Item.RecoveryPropertyValue.5"}}</option>
-            <option value="6">{{localize "ED.Item.RecoveryPropertyValue.6"}}</option>
-            {{/select}}
-        </select>
-        {{!-- Target Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "X-FixedDifficulty"}}:</label>
-        <input class="input__number-input" name="system.difficulty.fixed" type="text"
-            value="{{item.system.difficulty.fixed}}" data-dtype="Number">
-    </div>
-    {{!-- Target Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "X-TargetDifficulty"}}:</label>
-        <select name="system.difficulty.target">
-            {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
-        </select>
-    </div>
-    {{!-- Group Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "X-GroupDifficulty"}}:</label>
-        <select name="system.difficulty.group">
-            {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
-        </select>
-    </div>
-        {{/if}}
-    </div>
-    {{!-- itemStatus.itemStatus.itemStatus.equipped --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.General.equipped"}}:</label>
-       <select name="system.itemStatus">
-            {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
-        </select>
-    </div>
+    {{!-- Piecemeal Armor --}}
+    {{formField systemFields.piecemealArmor.fields.selector name="system.piecemealArmor.selector" value=item.system.piecemealArmor.selector localize=true}}
+    {{#if (eq item.system.piecemealArmor.selector true)}}
+        {{!-- Piecemeal Armor Size --}}
+        {{formField systemFields.piecemealArmor.fields.size name="system.piecemealArmor.size"  type="number" value=item.system.piecemealArmor.size localize=true}}
+    {{/if}}
+
+    {{!-- Blood Magic Damage --}}
+    {{formField systemFields.bloodMagicDamage name="system.bloodMagicDamage" value=item.system.bloodMagicDamage localize=true}}
+    {{!-- usable Item ?--}}
+    {{formField systemFields.usableItem.fields.usableItemSelector name="system.usableItem.usableItemSelector" value=item.system.usableItem.usableItemSelector localize=true}}
+    {{#if (eq item.system.usableItem.usableItemSelector true)}}
+        {{!-- Arbitrary Step --}}
+        {{formField systemFields.usableItem.fields.arbitraryStep name="system.usableItem.arbitraryStep" value=item.system.usableItem.arbitraryStep localize=true}}
+        {{!-- Action --}}
+        {{formField systemFields.usableItem.fields.action name="system.usableItem.action" value=item.system.usableItem.action localize=true}}
+        {{!-- Recovery Test Reference Value --}}
+        {{formField systemFields.usableItem.fields.recoveryPropertyValue name="system.usableItem.recoveryPropertyValue" type="number" value=item.system.usableItem.recoveryPropertyValue localize=true}}
+        {{!-- Fixed Difficulty --}}
+        {{formField systemFields.difficulty.fields.fixed name="system.difficulty.fixed" value=item.system.difficulty.fixed localize=true}}
+        {{!-- Target Difficulty Parameter --}}
+        {{formField systemFields.difficulty.fields.target name="system.difficulty.target" value=item.system.difficulty.target localize=true}}
+        {{!-- Group Difficulty Parameter --}}
+        {{formField systemFields.difficulty.fields.group name="system.difficulty.group" value=item.system.difficulty.group localize=true}}
+    {{/if}}
+    {{!-- itemStatus --}}
+    {{formField systemFields.itemStatus name="system.itemStatus" value=item.system.itemStatus localize=true}}
     {{#if item.isOwned }}
-    {{!-- automatic Weight Calculation --}}
-    {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
-    --}}
-    <div>
-        {{!-- the weightMultiplyer and the weight Calculated check are only editable by GMs --}}
-        <label>{{localize "Weight-calculation"}}:</label>
-        <input class="input__number-input" name="system.weight.weightMultiplier" type="text"
-            value="{{item.system.weight.weightMultiplier}}" {{disabled isPlayer}} data-dtype="Number"
-            title="{{localize " Only-Editable-as-GM"}}">
-        <input class="item-data__checkbox--line" type="checkbox" name="system.weight.weightCalculated" {{ checked
-            item.system.weight.weightCalculated }} {{disabled isPlayer}} title="{{localize " Only-Editable-as-GM"}}">
+        {{!-- automatic Weight Calculation --}}
+        {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.--}}
+        {{formField systemFields.weight.fields.weightMultiplier name="system.weight.weightMultiplier" value=item.system.weight.weightMultiplier localize=true}}
+        {{!-- Weight Calculated --}}
+        {{formField systemFields.weight.fields.weightCalculated name="system.weight.weightCalculated" value=item.system.weight.weightCalculated localize=true}}
+        {{!-- Button to tailor item to the Namegiver weight --}}
         <button class="weight-calculation--button button">{{localize "Tailor to Namegiver"}}</button>
-    </div>
     {{/if}}
 </div>
