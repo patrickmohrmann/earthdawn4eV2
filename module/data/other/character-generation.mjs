@@ -202,9 +202,11 @@ export default class CharacterGenerationData extends SparseDataModel {
         const itemDocument = ( await fromUuid( uuid ) ).toObject();
         let initialLevel = level;
 
-        if ( Object.keys( ED4E.talentCategory ).includes( category ) ) itemDocument.system.talentCategory = category;
-        if ( initialLevel === 0 && category === "free" ) initialLevel = 1;
-        if ( category !== "special" ) itemDocument.system.level = initialLevel;
+        const abilityCategory = category === "class" ? "discipline" : category;
+
+        if ( Object.keys( ED4E.talentCategory ).includes( abilityCategory ) ) itemDocument.system.talentCategory = abilityCategory;
+        if ( initialLevel === 0 && abilityCategory === "free" ) initialLevel = 1;
+        if ( abilityCategory !== "special" ) itemDocument.system.level = initialLevel;
 
         return itemDocument;
       } );
