@@ -423,6 +423,15 @@
               "multiplier":                                 "Der Multiplikator des Namensgebers"
             }
           },
+          "Shields": {
+            "defenseBonusPhysical":                         "Körperlicher Verteidigungsbonus",
+            "defenseBonusMystical":                         "Mystischer Verteidigungsbonus",
+            "initiativePenalty":                            "Initiative Malus",
+            "shatterThreshold":                             "Schwellenwert für das Zerbrechen des Schildes",
+            "broken":                                       "Ist dieser Schild zerbrochen?",
+            "livingArmor":                                  "Gilt dieser Schild als Lebendige Rüstung?",
+            "bowUsage":                                     "Kann dieser Schild mit einem Bogen benutzt werden?"
+          },
           "Target": {
             "target":                                       "Widerstandstyp des Ziels",
             "group":                                        "Gruppen Parameter",
@@ -470,6 +479,15 @@
               "calculated":                                 "Berechnet",
               "multiplier":                                 "Multiplikator"
             }
+          },
+          "Shields": {
+            "defenseBonusPhysical":                         "Körperlicher Verteidigungsbonus",
+            "defenseBonusMystical":                         "Mystischer Verteidigungsbonus",
+            "initiativePenalty":                            "Initiative Malus",
+            "shatterThreshold":                             "Bruchschwelle",
+            "broken":                                       "Zerbrochen",
+            "livingArmor":                                  "Lebendige Rüstung?",
+            "bowUsage":                                     "Tartsche?"
           },
           "Target": {
             "target":                                       "Widerstandstyp",
