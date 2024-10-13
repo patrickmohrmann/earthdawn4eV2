@@ -1,5 +1,6 @@
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ED4E from "../../config.mjs";
 
 /**
  * Data model template with information on equipment items.
@@ -16,7 +17,8 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
     return this.mergeSchema( super.defineSchema(), {
       consumable: new fields.BooleanField( {
         required: true,
-        label:    "ED.Item.Equipment.consumable"
+        label:    "ED.Data.Item.Labels.Equipment.consumable",
+        hint:     "ED.Data.Item.Hints.Equipment.consumable",
       } ),
       // different ammo types are availabel see issue #
       ammunition: new fields.SchemaField( {
@@ -25,7 +27,9 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
           nullable: true,
           blank:    true,
           initial:  "",
-          label:    "ED.Item.Weapon.ammunition"
+          choices:  ED4E.ammunitionType,
+          label:    "ED.Data.Item.Labels.Equipment.ammunition",
+          hint:     "ED.Data.Item.Hints.Equipment.ammunition"
         } ),
       } ),
       bundleSize: new fields.NumberField( {
@@ -34,7 +38,8 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Item.General.bundleSize"
+        label:    "ED.Data.Item.Labels.Equipment.bundleSize",
+        hint:     "ED.Data.Item.Hints.Equipment.bundleSize"
       } ),
     } );
   }

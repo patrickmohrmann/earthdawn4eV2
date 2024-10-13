@@ -5,34 +5,12 @@
         {{!-- Piecemeal Armor Size --}}
         {{formField systemFields.piecemealArmor.fields.size name="system.piecemealArmor.size"  type="number" value=item.system.piecemealArmor.size localize=true}}
     {{/if}}
-
-    {{!-- Blood Magic Damage --}}
-    {{formField systemFields.bloodMagicDamage name="system.bloodMagicDamage" value=item.system.bloodMagicDamage localize=true}}
     {{!-- usable Item ?--}}
-    {{formField systemFields.usableItem.fields.usableItemSelector name="system.usableItem.usableItemSelector" value=item.system.usableItem.usableItemSelector localize=true}}
-    {{#if (eq item.system.usableItem.usableItemSelector true)}}
-        {{!-- Arbitrary Step --}}
-        {{formField systemFields.usableItem.fields.arbitraryStep name="system.usableItem.arbitraryStep" value=item.system.usableItem.arbitraryStep localize=true}}
-        {{!-- Action --}}
-        {{formField systemFields.usableItem.fields.action name="system.usableItem.action" value=item.system.usableItem.action localize=true}}
-        {{!-- Recovery Test Reference Value --}}
-        {{formField systemFields.usableItem.fields.recoveryPropertyValue name="system.usableItem.recoveryPropertyValue" type="number" value=item.system.usableItem.recoveryPropertyValue localize=true}}
-        {{!-- Fixed Difficulty --}}
-        {{formField systemFields.difficulty.fields.fixed name="system.difficulty.fixed" value=item.system.difficulty.fixed localize=true}}
-        {{!-- Target Difficulty Parameter --}}
-        {{formField systemFields.difficulty.fields.target name="system.difficulty.target" value=item.system.difficulty.target localize=true}}
-        {{!-- Group Difficulty Parameter --}}
-        {{formField systemFields.difficulty.fields.group name="system.difficulty.group" value=item.system.difficulty.group localize=true}}
-    {{/if}}
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/usable-items.hbs"}}
     {{!-- itemStatus --}}
     {{formField systemFields.itemStatus name="system.itemStatus" value=item.system.itemStatus localize=true}}
     {{#if item.isOwned }}
         {{!-- automatic Weight Calculation --}}
-        {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.--}}
-        {{formField systemFields.weight.fields.weightMultiplier name="system.weight.weightMultiplier" value=item.system.weight.weightMultiplier localize=true}}
-        {{!-- Weight Calculated --}}
-        {{formField systemFields.weight.fields.weightCalculated name="system.weight.weightCalculated" value=item.system.weight.weightCalculated localize=true}}
-        {{!-- Button to tailor item to the Namegiver weight --}}
-        <button class="weight-calculation--button button">{{localize "Tailor to Namegiver"}}</button>
+        {{> "systems/ed4e/templates/item/item-partials/item-details/partials/tailor-to-namegiver.hbs"}}
     {{/if}}
 </div>

@@ -244,6 +244,12 @@
         "standard": "Standard",
         "sustained": "Anhaltend"
       },
+      "AmmunitionType": {
+        "arrow":                                              "Pfeil",
+        "bolt":                                               "Bolzen",
+        "needle":                                             "Nadel",
+        "stone":                                              "Stein"
+      },
       "Availability": {
         "everyday":                                           "Alltäglich",
         "average":                                            "Durchschnittlich",
@@ -381,10 +387,15 @@
             "forgeBonusMystical":                           "Schmiedebonus Mystisch",
             "initiativePenalty":                            "Initiative Malus",
             "living":                                       "Dieser Gegenstand gilt als Lebendige Rüstung.",
-            "piecemealArmor":                               "Zusammengesetzte Rüstung",
-            "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
+            "piecemealArmor":                               "Ist diese Rüstung nicht komplett, sondern nur ein Teil?",
+            "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung (Wert zwischen 1 und 3)"
           },
           "edid":                                           "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
+          "Equipment": {
+              "consumable":                               "Wird dieser Gegenstand bei der benutzung verbraucht?",
+              "ammunition":                                "Welcher Munitionstyp ist dieser Gegenstand?",
+              "bundleSize":                               "Wie viele Gegenstände gehören zu einem Bündel?"
+            },
           "livingArmorOnly":                                "Nur legendige Rüstung",
           "PhysicalItems": {
             "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
@@ -430,6 +441,11 @@
             "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
           },
           "edid":                                           "ED-ID",
+          "Equipment": {
+              "consumable":                               "Verbrauchsgegenstand?",
+              "ammunition":                                "Munitionstyp",
+              "bundleSize":                               "Bündelgröße"
+            },
           "livingArmorOnly":                                "Es kann nur nur lebendige Rüstung getragen werden.",
           "PhysicalItems": {
             "amount":                                       "Menge",

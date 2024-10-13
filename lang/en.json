@@ -2,7 +2,6 @@
     "ED": {
         "Actor": {
             "Abilities": {
-
             },
             "Attributes": {
                 "attributeName":                                    "Attribute",
@@ -245,6 +244,12 @@
                 "standard":                                         "Standard",
                 "sustained":                                        "Sustained"
             },
+            "AmmunitionType": {
+                "arrow":                                              "Arrow",
+                "bolt":                                               "Bolt",
+                "needle":                                             "Needle",
+                "stone":                                              "Stone"
+            },
             "Availability": {
                 "everyday":                                           "Everyday",
                 "average":                                            "Average",
@@ -375,6 +380,11 @@
                         "piecemealArmorSize":                           "Piecemeal Armor Size"
                     },
                     "edid":                                         "An ID to identify an item without considering its name",
+                    "Equipment": {
+                        "consumable":                               "The quantity of this item will be reduced by one after each use.",
+                        "ammunition":                                "Which type of ammunition is this item?",
+                        "bundleSize":                               "How many items are in this bundle?"
+                    },
                     "livingArmorOnly":                              "This item is considered as living armor.",
                     "PhysicalItems": {
                         "amount":                                       "Amount",
@@ -418,6 +428,11 @@
                         "piecemealArmorSize":                           "Piecemeal Armor Size"
                     },
                     "edid":                                         "ED-ID",
+                    "Equipment": {
+                        "consumable":                               "Consumable?",
+                        "ammunition":                                "Ammunition type",
+                        "bundleSize":                               "Bundle size"
+                    },
                     "livingArmorOnly":                              "Living Armor Only",
                     "PhysicalItems": {
                         "amount":                                       "Amount",

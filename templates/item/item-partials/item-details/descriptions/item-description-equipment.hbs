@@ -1,36 +1,9 @@
 <div class="item__left--main">
-    <h3>{{localize "ED.Header.general"}}</h3>
-    {{!-- price --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.price"}}:</label>
-        <input class="partial__55--right" name="system.price.value" type="text" value="{{item.system.price.value}}"
-            data-dtype="Number">
-    </div>
-    <div class="item-data__input--line">
-            <label class="partial__40--left">{{localize "ED.Item.Equipment.price"}}:</label>
-            <select class="partial__55--right" name="system.price.denomination">
-                {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
-            </select>
-    </div>
-    {{!-- Weight --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.weight"}}:</label>
-        <input class="partial__55--right" name="system.weight.value" type="text" value="{{item.system.weight.value}}"
-            data-dtype="Number">
-    </div>
+    <h3>{{localize "ED.Item.Header.general"}}</h3>
+    {{!-- Physical Item Parameter --}}
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/physical-items.hbs"}}
     {{!-- Amount --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.amount"}}:</label>
-        <input class="partial__55--right" name="system.amount" type="text" value="{{item.system.amount}}"
-            data-dtype="Number">
-    </div>
-    {{!-- availability --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.availability"}}:</label>
-        <select class="partial__55--right" name="system.availability">
-            {{selectOptions config.availability selected=item.system.availability localize=true }}
-        </select>
-    </div>
+    {{formField systemFields.amount name="system.amount" value=item.system.amount localize=true}}
 </div>
 {{!-- Editor --}}
 <div class="item__right--main sheet__editor">
