@@ -1,74 +1,11 @@
 <div>
-    
-    {{!-- bloodMagicDamage --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.General.bloodMagicDamage"}}:</label>
-        <input class="partial__55--right" name="system.bloodMagicDamage" type="text"
-            value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
-    </div>
-    {{!-- usable Item --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.General.usableItem"}}:</label>
-        <input class="partial__55--right" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
-            item.system.usableItem.usableItemSelector}}>
-    </div>
-    {{#if (eq item.system.usableItem.usableItemSelector true)}}
-    {{!-- arbitrary step of usable item --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.General.arbitraryStep"}}:</label>
-        <input class="partial__55--right" name="system.usableItem.arbitraryStep" type="text"
-            value="{{item.system.usableItem.arbitraryStep}}" data-dtype="Number">
-    </div>
-    {{!-- action of usable item --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.General.action"}}:</label>
-        <select class="partial__55--right" name=="system.usableItem.action">
-            {{selectOptions config.action selected=item.system.usableItem.action blank="" localize=true }}
-        </select>
-    </div>
+    {{!-- usable Item ?--}}
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/usable-items.hbs"}}
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/targeting.hbs"}}
+    {{!-- itemStatus --}}
+    {{formField systemFields.itemStatus name="system.itemStatus" value=item.system.itemStatus localize=true}}
+    {{#if item.isOwned }}
+        {{!-- automatic Weight Calculation --}}
+        {{> "systems/ed4e/templates/item/item-partials/item-details/partials/tailor-to-namegiver.hbs"}}
     {{/if}}
-    {{!-- Target Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "X-FixedDifficulty"}}:</label>
-        <input class="partial__55--right" name="system.difficulty.fixed" type="text"
-            value="{{item.system.difficulty.fixed}}" data-dtype="Number">
-    </div>
-    {{!-- Target Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "X-TargetDifficulty"}}:</label>
-        <select class="partial__55--right" name="system.difficulty.target">
-            {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
-        </select>
-    </div>
-    {{!-- Group Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "X-GroupDifficulty"}}:</label>
-        <select class="partial__55--right" name="system.difficulty.group">
-            {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
-        </select>
-    </div>
-
-</div>
-{{!-- equipped --}}
-<div class="item-data__input--line">
-    <label class="partial__40--left">{{localize "ED.General.equipped"}}:</label>
-    <select class="partial__55--right" name="system.itemStatus">
-        {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
-    </select>
-</div>
-{{#if item.isOwned }}
-{{!-- automatic Weight Calculation --}}
-{{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
---}}
-<div>
-    {{!-- the weightMultiplyer and the weight Calculated check are only editable by GMs --}}
-    <label class="partial__40--left">{{localize "Weight-calculation"}}:</label>
-    <input class="partial__55--right" name="system.weight.weightMultiplier" type="text"
-        value="{{item.system.weight.weightMultiplier}}" {{disabled isPlayer}} data-dtype="Number" title="{{localize "
-        Only-Editable-as-GM"}}">
-    <input class="item-data__checkbox--line" type="checkbox" name="system.weight.weightCalculated" {{ checked
-        item.system.weight.weightCalculated }} {{disabled isPlayer}} title="{{localize " Only-Editable-as-GM"}}">
-    <button class="weight-calculation--button button">{{localize "Tailor to Namegiver"}}</button>
-</div>
-{{/if}}
 </div>

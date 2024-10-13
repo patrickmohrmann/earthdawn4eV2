@@ -423,6 +423,20 @@
                         "target":                                       "Difficulty",
                         "group":                                        "Group parameter",
                         "fixed":                                        "Fixed Difficulty"
+                    },
+                    "Weapons": {
+                        "weaponType":                                   "Weapon Type",
+                        "damageAttribute":                              "Damage Attribute",
+                        "damageBaseStep":                               "Base Damage Step",
+                        "size":                                         "Size",
+                        "strengthMinimum":                              "Strength Minimum",
+                        "dexterityMinimum":                             "Dexterity Minimum",
+                        "rangeShortMin":                                "Range Short Minimum",
+                        "rangeShortMax":                                "Range Short Maximum",
+                        "rangeLongMin":                                 "Range Long Minimum",
+                        "rangeLongMax":                                 "Range Long Maximum",
+                        "ammunitionType":                               "Ammunition Type",
+                        "forgeBonus":                                   "Forge Bonus"
                     }
                 },
                 "Labels": {
@@ -480,6 +494,20 @@
                         "target":                                       "Difficulty",
                         "group":                                        "Group parameter",
                         "fixed":                                        "Fixed Difficulty"
+                    },
+                    "Weapons": {
+                        "weaponType":                                   "Weapon Type",
+                        "damageAttribute":                              "Damage Attribute",
+                        "damageBaseStep":                               "Base Damage Step",
+                        "size":                                         "Size",
+                        "strengthMinimum":                              "Strength Minimum",
+                        "dexterityMinimum":                             "Dexterity Minimum",
+                        "rangeShortMin":                                "Range Short Minimum",
+                        "rangeShortMax":                                "Range Short Maximum",
+                        "rangeLongMin":                                 "Range Long Minimum",
+                        "rangeLongMax":                                 "Range Long Maximum",
+                        "ammunitionType":                               "Ammunition Type",
+                        "forgeBonus":                                   "Forge Bonus"
                     }
                 }
             },

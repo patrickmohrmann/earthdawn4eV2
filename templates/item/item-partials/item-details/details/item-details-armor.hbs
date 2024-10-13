@@ -3,10 +3,13 @@
     {{formField systemFields.piecemealArmor.fields.selector name="system.piecemealArmor.selector" value=item.system.piecemealArmor.selector localize=true}}
     {{#if (eq item.system.piecemealArmor.selector true)}}
         {{!-- Piecemeal Armor Size --}}
-        {{formField systemFields.piecemealArmor.fields.size name="system.piecemealArmor.size"  type="number" value=item.system.piecemealArmor.size localize=true}}
+        {{formField systemFields.piecemealArmor.fields.size name="system.piecemealArmor.size" type="number" value=item.system.piecemealArmor.size localize=true}}
     {{/if}}
     {{!-- usable Item ?--}}
     {{> "systems/ed4e/templates/item/item-partials/item-details/partials/usable-items.hbs"}}
+    {{#if (eq item.system.usableItem.usableItemSelector true)}}
+        {{> "systems/ed4e/templates/item/item-partials/item-details/partials/targeting.hbs"}}
+    {{/if}}
     {{!-- itemStatus --}}
     {{formField systemFields.itemStatus name="system.itemStatus" value=item.system.itemStatus localize=true}}
     {{#if item.isOwned }}

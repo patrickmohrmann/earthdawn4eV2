@@ -1,127 +1,43 @@
 <div class="item__left--main">
     <h3>{{localize "ED.Item.Header.general"}}</h3>
     {{!-- Weapon Type --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.weaponType"}}:</label>
-        <select class="partial__55--right" name="system.weaponType">
-            {{selectOptions config.weaponType selected=item.system.weaponType blank="" localize=true labelAttr="label" }}
-        </select>
-    </div>
-        {{#if item.system.isRanged}}
-            {{!-- ammunition - Type --}}
-            <div class="item-data__input--line">
-                <label for="" class="partial__40--left">{{localize "ED.Item.Weapon.ammunitionType"}}:</label>
-                <select class="partial__55--right" name="system.ammunition.type">
-                    {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
-                </select>
-            </div>
-        {{/if}}
-    
+    {{formField systemFields.weaponType name="system.weaponType" value=item.system.weaponType localize=true}}
+
+    {{#if item.system.isRanged}}
+        {{!-- ammunition - Type --}}
+        {{formField systemFields.ammunitionType name="system.ammunition.type" value=item.system.ammunition.type localize=true}}
+    {{/if}}
     {{!-- Damage Attribute --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.damageAttribute"}}:</label>
-        <select class="partial__55--right" name="system.damage.attribute">
-            {{selectOptions config.attributes selected=item.system.damage.attribute labelAttr="label" localize=true }}
-        </select>
-    </div>
+    {{formField systemFields.damage.fields.attribute name="system.damage.attribute" value=item.system.damage.attribute localize=true}}
     {{!-- Damage base Step --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.damageBaseStep"}}:</label>
-        <input class="partial__55--right" name="system.damage.baseStep" type="text"
-            value="{{item.system.damage.baseStep}}" data-dtype="Number">
-    </div>
+    {{formField systemFields.damage.fields.baseStep name="system.damage.baseStep" value=item.system.damage.baseStep localize=true}}
     {{!-- Weapon Size --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.size"}}:</label>
-        <input class="partial__55--right" name="system.size" type="text" value="{{item.system.size}}"
-            data-dtype="Number">
-    </div>
+    {{formField systemFields.size name="system.size" value=item.system.size  type="number" localize=true}}
     {{!-- Dexterity Minimum --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.dexterityMinimum"}}:</label>
-        <input class="partial__55--right" name="system.dexterityMinimum" type="text"
-            value="{{item.system.dexterityMinimum}}" data-dtype="Number">
-    </div>
+    {{formField systemFields.dexterityMinimum name="system.dexterityMinimum" value=item.system.dexterityMinimum localize=true}}
     {{!-- Strength Minimum --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.strengthMinimum"}}:</label>
-        <input class="partial__55--right" name="system.strengthMinimum" type="text"
-            value="{{item.system.strengthMinimum}}" data-dtype="Number">
-    </div>
+    {{formField systemFields.strengthMinimum name="system.strengthMinimum" value=item.system.strengthMinimum localize=true}}
     {{#if item.system.isRanged}}
         {{!-- short range Min --}}
-        <div class="item-data__input--line">
-            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeShortMin"}}:</label>
-            <input class="partial__55--right" name="system.range.shortMin" type="text" value="{{item.system.range.shortMin}}"
-                data-dtype="Number">
-        </div>
+        {{formField systemFields.range.fields.rangeShortMin name="system.range.rangeShortMin" value=item.system.range.rangeShortMin localize=true}}
         {{!-- short range Max --}}
-        <div class="item-data__input--line">
-            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeShortMax"}}:</label>
-            <input class="partial__55--right" name="system.range.shortMax" type="text" value="{{item.system.range.shortMax}}"
-                data-dtype="Number">
-        </div>
+        {{formField systemFields.range.fields.shortMax name="system.range.shortMax" value=item.system.range.shortMax localize=true}}
         {{!-- long range Min--}}
-        <div class="item-data__input--line">
-            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeLongMin"}}:</label>
-            <input  class="partial__55--right" name="system.range.longMin" type="text" value="{{item.system.range.longMin}}"
-                data-dtype="Number">
-        </div>
+        {{formField systemFields.range.fields.longMin name="system.range.longMin" value=item.system.range.longMin localize=true}}
         {{!-- long range Max--}}
-        <div class="item-data__input--line">
-            <label class="partial__40--left">{{localize "ED.Item.Weapon.rangeLongMax"}}:</label>
-            <input  class="partial__55--right" name="system.range.longMax" type="text" value="{{item.system.range.longMax}}"
-                data-dtype="Number">
-        </div>
+        {{formField systemFields.range.fields.longMax name="system.range.longMax" value=item.system.range.longMax localize=true}}
     {{else}}
         {{!-- Range--}}
-        <div class="item-data__input--line">
-            <label class="partial__40--left">{{localize "ED.Item.Weapon.range"}}:</label>
-            <input  class="partial__55--right" name="system.range.longMax" type="text" value="{{item.system.range.longMax}}"
-                data-dtype="Number">
-        </div>
+        {{formField systemFields.range.fields.longMax name="system.range.longMax" value=item.system.range.longMax localize=true}}
     {{/if}}
-
     {{!-- forgeBonus --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.forgeBonus"}}:</label>
-        <input class="partial__55--right" name="system.forgeBonus" type="text" value="{{item.system.forgeBonus}}"
-            data-dtype="Number">
-    </div>
-    {{!-- price --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.price"}}:</label>
-        <input class="partial__55--right" name="system.price.value" type="text" value="{{item.system.price.value}}"
-            data-dtype="Number">
-    </div>
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.denomination"}}:</label>
-        <select class="partial__55--right" name="system.price.denomination">
-            {{selectOptions config.denomination selected=item.system.price.denomination localize=true }}
-        </select>
-    </div>
-    {{!-- Weight --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.weight"}}:</label>
-        <input class="partial__55--right" name="system.weight.value" type="text" value="{{item.system.weight.value}}"
-            data-dtype="Number">
-    </div>
+    {{formField systemFields.forgeBonus name="system.forgeBonus" value=item.system.forgeBonus localize=true}}
     {{!-- Amount --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.amount"}}:</label>
-        <input class="partial__55--right" name="system.amount" type="text" value="{{item.system.amount}}"
-            data-dtype="Number">
-    </div>
-    {{!-- availability --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Weapon.availability"}}:</label>
-        <select class="partial__55--right" name=="system.availability">
-            {{selectOptions config.availability selected=item.system.availability localize=true }}
-        </select>
-    </div>
+    {{formField systemFields.amount name="system.amount" value=item.system.amount localize=true}}
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/physical-items.hbs"}}
 </div>
-{{!-- Editor --}}
 <div class="item__right--main sheet__editor">
+    {{!-- Description --}}
     <h3>{{localize "ED.Item.Header.description"}}</h3>
     {{> "systems/ed4e/templates/global/editor.hbs"}}
 </div>

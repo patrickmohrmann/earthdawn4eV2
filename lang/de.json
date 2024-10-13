@@ -436,6 +436,20 @@
             "target":                                       "Widerstandstyp des Ziels",
             "group":                                        "Gruppen Parameter",
             "fixed":                                        "Fester Schwierigkeitsgrad"
+          },
+          "Weapons": {
+            "weaponType":                                   "Waffentyp",
+            "damageAttribute":                              "Schaden Attribut",
+            "damageBaseStep":                               "Grundschaden Stufe",
+            "size":                                         "Größe",
+            "strengthMinimum":                              "Stärke Minimum",
+            "dexterityMinimum":                             "Geschicklichkeit Minimum",
+            "rangeShortMin":                                "Reichweite Kurz Minimum",
+            "rangeShortMax":                                "Reichweite Kurz Maximum",
+            "rangeLongMin":                                 "Reichweite Lang Minimum",
+            "rangeLongMax":                                 "Reichweite Lang Maximum",
+            "ammunitionType":                               "Welcher Munitionstyp wird für diese Waffe benötigt?",
+            "forgeBonus":                                   "Schmiedebonus"
           }
         },
         "Labels": {
@@ -493,6 +507,20 @@
             "target":                                       "Widerstandstyp",
             "group":                                        "Gruppen Parameter",
             "fixed":                                        "Fester Schwierigkeitsgrad"
+          },
+          "Weapons": {
+            "weaponType":                                   "Waffentyp",
+            "damageAttribute":                              "Schaden Attribut",
+            "damageBaseStep":                               "Grundschaden Stufe",
+            "size":                                         "Größe",
+            "strengthMinimum":                              "Stärke Minimum",
+            "dexterityMinimum":                             "Geschicklichkeit Minimum",
+            "rangeShortMin":                                "Reichweite Kurz Minimum",
+            "rangeShortMax":                                "Reichweite Kurz Maximum",
+            "rangeLongMin":                                 "Reichweite Lang Minimum",
+            "rangeLongMax":                                 "Reichweite Lang Maximum",
+            "ammunitionType":                               "Munitionstyp",
+            "forgeBonus":                                   "Schmiedebonus"
           }
         }
       },

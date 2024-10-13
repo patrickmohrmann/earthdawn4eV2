@@ -8,6 +8,9 @@
     {{/if}}
     {{!-- usable Item ?--}}
     {{> "systems/ed4e/templates/item/item-partials/item-details/partials/usable-items.hbs"}}
+    {{#if (eq item.system.usableItem.usableItemSelector true)}}
+        {{> "systems/ed4e/templates/item/item-partials/item-details/partials/targeting.hbs"}}
+    {{/if}}
     {{!-- itemStatus --}}
     {{formField systemFields.itemStatus name="system.itemStatus" value=item.system.itemStatus localize=true}}
     {{#if item.isOwned}}
