@@ -2,10 +2,9 @@
     <h3>{{localize "ED.Item.Header.general"}}</h3>
     {{!-- Weapon Type --}}
     {{formField systemFields.weaponType name="system.weaponType" value=item.system.weaponType localize=true}}
-
-    {{#if item.system.isRanged}}
+    {{#if this.item.system.isRanged}}
         {{!-- ammunition - Type --}}
-        {{formField systemFields.ammunitionType name="system.ammunition.type" value=item.system.ammunition.type localize=true}}
+        {{formField systemFields.ammunition.fields.type name="system.ammunition.type" value=item.system.ammunition.type localize=true}}
     {{/if}}
     {{!-- Damage Attribute --}}
     {{formField systemFields.damage.fields.attribute name="system.damage.attribute" value=item.system.damage.attribute localize=true}}
@@ -17,9 +16,9 @@
     {{formField systemFields.dexterityMinimum name="system.dexterityMinimum" value=item.system.dexterityMinimum localize=true}}
     {{!-- Strength Minimum --}}
     {{formField systemFields.strengthMinimum name="system.strengthMinimum" value=item.system.strengthMinimum localize=true}}
-    {{#if item.system.isRanged}}
+    {{#if this.item.system.isRanged}}
         {{!-- short range Min --}}
-        {{formField systemFields.range.fields.rangeShortMin name="system.range.rangeShortMin" value=item.system.range.rangeShortMin localize=true}}
+        {{formField systemFields.range.fields.shortMin name="system.range.shortMin" value=item.system.range.shortMin localize=true}}
         {{!-- short range Max --}}
         {{formField systemFields.range.fields.shortMax name="system.range.shortMax" value=item.system.range.shortMax localize=true}}
         {{!-- long range Min--}}

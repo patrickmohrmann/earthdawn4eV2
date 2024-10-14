@@ -17,8 +17,8 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
     return this.mergeSchema( super.defineSchema(), {
       consumable: new fields.BooleanField( {
         required: true,
-        label:    "ED.Data.Item.Labels.Equipment.consumable",
-        hint:     "ED.Data.Item.Hints.Equipment.consumable",
+        label:    this.labelKey( "Equipment.consumable" ),
+        hint:     this.hintKey( "Equipment.consumable" )
       } ),
       // different ammo types are availabel see issue #
       ammunition: new fields.SchemaField( {
@@ -28,8 +28,8 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
           blank:    true,
           initial:  "",
           choices:  ED4E.ammunitionType,
-          label:    "ED.Data.Item.Labels.Equipment.ammunition",
-          hint:     "ED.Data.Item.Hints.Equipment.ammunition"
+          label:    this.labelKey( "Equipment.ammunition" ),
+          hint:     this.hintKey( "Equipment.ammunition" )
         } ),
       } ),
       bundleSize: new fields.NumberField( {
@@ -38,8 +38,8 @@ export default class EquipmentData extends PhysicalItemTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Data.Item.Labels.Equipment.bundleSize",
-        hint:     "ED.Data.Item.Hints.Equipment.bundleSize"
+        label:    this.labelKey( "Equipment.bundleSize" ),
+        hint:     this.hintKey( "Equipment.bundleSize" )
       } ),
     } );
   }
