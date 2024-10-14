@@ -68,8 +68,8 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       strengthMinimum: new fields.NumberField( {
         required: true,
         nullable: false,
-        min:      3,
-        initial:  3,
+        min:      1,
+        initial:  1,
         integer:  true,
         label:    this.labelKey( "Weapons.strengthMinimum" ),
         hint:     this.hintKey( "Weapons.strengthMinimum" )
@@ -77,8 +77,8 @@ export default class WeaponData extends PhysicalItemTemplate.mixin(
       dexterityMinimum: new fields.NumberField( {
         required: true,
         nullable: false,
-        min:      3,
-        initial:  3,
+        min:      1,
+        initial:  1,
         integer:  true,
         label:    this.labelKey( "Weapons.dexterityMinimum" ),
         hint:     this.hintKey( "Weapons.dexterityMinimum" )
