@@ -22,11 +22,6 @@ export default class RollPrompt extends FormApplication {
     this._updateObject( undefined, {
       "step.modifiers.manual": edRollOptions.step.modifiers.manual ?? 0,
     } );
-    if ( edRollOptions.testType === "arbitrary" ) {
-      this.rollData = {
-        ...this.edRollOptions.devotion.step = 3,  
-      };
-    }
   }
 
   /**
