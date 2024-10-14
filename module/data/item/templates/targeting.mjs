@@ -20,16 +20,16 @@ export default class TargetTemplate extends SystemDataModel {
           blank:    false,
           initial:  "none",
           choices:  ED4E.targetDifficulty,
-          label:    "ED.Data.Item.Labels.Target.target",
-          hint:     "ED.Data.Item.Hints.Target.target",
+          label:    this.labelKey( "Target.target" ),
+          hint:     this.hintKey( "Target.target" )
         } ),
         group: new foundry.data.fields.StringField( {
           nullable: false,
           blank:    false,
           initial:  "none",
           choices:  ED4E.groupDifficulty,
-          label:    "ED.Data.Item.Labels.Target.group",
-          hint:     "ED.Data.Item.Hints.Target.group",
+          label:    this.labelKey( "Target.group" ),
+          hint:     this.hintKey( "Target.group" )
         } ),
         fixed: new foundry.data.fields.NumberField( {
           required: true,
@@ -37,8 +37,8 @@ export default class TargetTemplate extends SystemDataModel {
           min:      0,
           initial:  () => game.settings.get( "ed4e", "minimumDifficulty" ),
           integer:  true,
-          label:    "ED.Data.Item.Labels.Target.fixed",
-          hint:     "ED.Data.Item.Hints.Target.fixed",
+          label:    this.labelKey( "Target.fixed" ),
+          hint:     this.hintKey( "Target.fixed" )
         } ),
       } ),
     } );

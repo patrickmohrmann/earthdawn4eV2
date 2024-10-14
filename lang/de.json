@@ -378,6 +378,22 @@
           "isMob":                                        "Dieser Acteur benutzt ausschließlich Wunden anstatt Schaden"
         }
       },
+      "General": {
+        "Hints": {
+          "Target": {
+            "target":                                       "Widerstandstyp des Ziels",
+            "group":                                        "Gruppen Parameter",
+            "fixed":                                        "Fester Schwierigkeitsgrad"
+          }
+        },
+        "Labels": {
+          "Target": {
+            "target":                                       "Widerstandstyp",
+            "group":                                        "Gruppen Parameter",
+            "fixed":                                        "Fester Schwierigkeitsgrad"
+          }
+        }
+      },
       "Item": {
         "Hints": {
           "Armor": {
@@ -431,11 +447,6 @@
             "broken":                                       "Ist dieser Schild zerbrochen?",
             "livingArmor":                                  "Gilt dieser Schild als Lebendige Rüstung?",
             "bowUsage":                                     "Kann dieser Schild mit einem Bogen benutzt werden?"
-          },
-          "Target": {
-            "target":                                       "Widerstandstyp des Ziels",
-            "group":                                        "Gruppen Parameter",
-            "fixed":                                        "Fester Schwierigkeitsgrad"
           },
           "Weapons": {
             "weaponType":                                   "Waffentyp",
@@ -502,11 +513,6 @@
             "broken":                                       "Zerbrochen",
             "livingArmor":                                  "Lebendige Rüstung?",
             "bowUsage":                                     "Tartsche?"
-          },
-          "Target": {
-            "target":                                       "Widerstandstyp",
-            "group":                                        "Gruppen Parameter",
-            "fixed":                                        "Fester Schwierigkeitsgrad"
           },
           "Weapons": {
             "weaponType":                                   "Waffentyp",

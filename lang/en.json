@@ -367,6 +367,22 @@
                     "isMob":                                        "This Actor uses only Wounds instead of Damage"
                 }
             },
+            "General": {
+                "Hints": {
+                    "Target": {
+                        "target":                                       "Difficulty",
+                        "group":                                        "Group parameter",
+                        "fixed":                                        "Fixed Difficulty"
+                    }    
+                },
+                "Labels": {
+                    "Target": {
+                        "target":                                       "Difficulty",
+                        "group":                                        "Group parameter",
+                        "fixed":                                        "Fixed Difficulty"
+                    }
+                }  
+            },
             "Item": {
                 "Hints": {
                     "Armor": {
@@ -418,11 +434,6 @@
                         "broken":                                       "Broken?",
                         "livingArmor":                                  "Living Armor",
                         "bowUsage":                                     "Bow Usage"
-                    },
-                    "Target": {
-                        "target":                                       "Difficulty",
-                        "group":                                        "Group parameter",
-                        "fixed":                                        "Fixed Difficulty"
                     },
                     "Weapons": {
                         "weaponType":                                   "Weapon Type",
@@ -489,11 +500,6 @@
                         "broken":                                       "Broken?",
                         "livingArmor":                                  "Living Armor",
                         "bowUsage":                                     "Bow Usage"
-                    },
-                    "Target": {
-                        "target":                                       "Difficulty",
-                        "group":                                        "Group parameter",
-                        "fixed":                                        "Fixed Difficulty"
                     },
                     "Weapons": {
                         "weaponType":                                   "Weapon Type",
