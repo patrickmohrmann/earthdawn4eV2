@@ -825,7 +825,7 @@ export default class ActorEd extends Actor {
       case "armor":
         if ( nextStatus === "equipped" ) {
           // check if namegiver item allows only living armor/shields
-          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.living === false && enforceLivingArmor === true ) {
+          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.isLiving === false && enforceLivingArmor === true ) {
             ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
             break;
           }
@@ -890,7 +890,7 @@ export default class ActorEd extends Actor {
       case "shield":
         if ( nextStatus === "equipped" ) {
           // check if namegiver item allows only living armor/shields
-          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.living === false && enforceLivingArmor === true  ) {
+          if ( this.namegiver?.system.livingArmorOnly && itemToUpdate.system.isLiving === false && enforceLivingArmor === true  ) {
             ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
             break;
           }

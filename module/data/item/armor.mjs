@@ -69,7 +69,7 @@ export default class ArmorData extends PhysicalItemTemplate.mixin(
         label:    this.labelKey( "Armor.initiativePenalty" ),
         hint:     this.hintKey( "Armor.initiativePenalty" )
       } ),
-      living: new fields.BooleanField( {
+      isLiving: new fields.BooleanField( {
         required: true,
         initial:  false,
         label:    this.labelKey( "Armor.living" ),
