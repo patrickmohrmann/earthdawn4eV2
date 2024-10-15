@@ -7,7 +7,7 @@ Damage Flavor contains:
 - Target Modifiers 
 --}}
 <div class="custom-flavor">{{ customFlavor }}</div>
-{{#if (eq ruleOfOne true)}}
+{{#if (ed-eq ruleOfOne true)}}
   <div class="roll-failure">{{localize "ED.Rolls.ruleOfOne"}}</div>
 {{else}}
 <div class="flexrow message-buttons damage-roll-buttons" data-roll-total={{ result }}>

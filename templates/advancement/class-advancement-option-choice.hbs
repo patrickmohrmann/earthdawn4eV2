@@ -3,12 +3,12 @@
   <p>{{localize "ED.Dialogs.Legend.ClassAdvancement.YouCanChooseAnAbilityOptionIfYouWant"}}</p>
 
   {{#each abilityOptionsByTier}}
-    {{#if (hasItems this)}}
+    {{#if (ed-hasItems this)}}
       <fieldset>
         <legend>{{lookup ../config.tier @key}}</legend>
         {{#each this as |uuid|}}
           <label class="checkbox">
-            <input type="radio" name="selectedOption" value="{{uuid}}" {{checked (eq uuid selectedOption)}}>
+            <input type="radio" name="selectedOption" value="{{uuid}}" {{checked (ed-eq uuid selectedOption)}}>
             {{{ed-linkForUuid uuid}}}
           </label>
         {{/each}}

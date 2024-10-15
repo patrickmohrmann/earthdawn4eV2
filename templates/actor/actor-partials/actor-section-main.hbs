@@ -36,7 +36,7 @@
         <div class="tab tab__class" data-tab="actor-class-tab">
             {{> "systems/ed4e/templates/actor/actor-tabs/classes.hbs"}}
         </div>
-        {{#if (eq this.data.type "npc")}}
+        {{#if (ed-eq this.data.type "npc")}}
         <div class="tab tab__configuration" data-tab="actor-configuration-tab">
             {{> "systems/ed4e/templates/actor/actor-tabs/configuration.hbs"}}
         </div>

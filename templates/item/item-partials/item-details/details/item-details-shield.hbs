@@ -17,7 +17,7 @@
         <label>{{localize "ED.Item.General.usableItem"}}:</label>
         <input class="item-data__checkbox--line" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
             item.system.usableItem.usableItemSelector}}>
-        {{#if (eq item.system.usableItem.usableItemSelector true)}}
+        {{#if (ed-eq item.system.usableItem.usableItemSelector true)}}
         <label>{{localize "ED.Item.General.arbitraryStep"}}:</label>
         <input class="input__number-input" name="system.usableItem.arbitraryStep" type="text" value="{{item.system.usableItem.arbitraryStep}}"
             data-dtype="Number">

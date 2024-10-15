@@ -34,13 +34,13 @@
               @root.namegiverDocument.system.attributeValues @key}}</td>
             <td class="input--centered attribute-cost">
                       <span class="preview-value attribute-cost-preview attribute-cost-lower">
-                        {{signedNumber ( subtract (lookup @root.config.attributePointsCost (subtract this.change 1)) this.cost )}}
+                        {{ed-signedNumber ( ed-subtract (lookup @root.config.attributePointsCost (ed-subtract this.change 1)) this.cost )}}
                       </span>
               &emsp;
               {{this.cost}}
               &emsp;
               <span class="preview-value attribute-cost-preview attribute-cost-higher">
-                {{signedNumber ( subtract (lookup @root.config.attributePointsCost (add this.change 1)) this.cost )}}
+                {{ed-signedNumber ( ed-subtract (lookup @root.config.attributePointsCost (ed-add this.change 1)) this.cost )}}
               </span>
             </td>
             <td class="flexrow input--centered attribute-change">

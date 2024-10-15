@@ -55,7 +55,7 @@
       <ul class="unlist">
         {{#each object.abilities.class}}
           <li data-ability-uuid="{{@key}}" data-level="{{this}}">
-            {{nameFromUuid @key}}
+            {{ed-nameFromUuid @key}}
             <label>
               {{!--numberInput this name=(concat "abilities.class[" @key "]") step=1 min=0 max=@root.maxAssignableRanks--}}
             </label>
@@ -63,7 +63,7 @@
         {{/each}}
       {{#each object.abilities.optional}}
           <li data-ability-uuid="{{@key}}" data-level="{{this}}">
-            {{nameFromUuid @key}}
+            {{ed-nameFromUuid @key}}
             <label>
               {{!--numberInput this name=(concat "abilities.optional[" @key "]") step=1 min=0 max=@root.maxAssignableRanks--}}
             </label>
@@ -91,7 +91,7 @@
           <td class=" ability-name" data-ability-uuid="{{this}}">
             <label for="char-gen-ability-option-radio">
               <input type="radio" id="char-gen-ability-option-radio" name="abilityOption" value="{{this}}" {{checked (ed-hasOwnProperty @root.object.abilities.optional this)}}>
-              {{nameFromUuid this}}
+              {{ed-nameFromUuid this}}
             </label>
           </td>
           <td class="flexrow rank-change">
@@ -122,15 +122,15 @@
         <th colspan="2">{{localize "X.Class Abilities" classType=classDocument.type}}</th>
       </tr>
       {{#each classDocument.system.advancement.levels.0.abilities}}
-        {{#if (hasItems this)}}
+        {{#if (ed-hasItems this)}}
           <th colspan="2">{{lookup @root.config.abilityPools @key}}</th>
         {{/if}}
         {{#each this}}
           <tr class="flexrow">
             <td class="ability-name" data-ability-uuid="{{this}}">
-              {{nameFromUuid this}}
+              {{ed-nameFromUuid this}}
             </td>
-            {{#if (eq @../key "class")}}
+            {{#if (ed-eq @../key "class")}}
               <td class="flexrow rank-change">
               <span class="decrease-value-button rank-decrease rank-change-icon" title="{{localize 'X.Decrease Rank Value'}}"
                     data-change-type="decrease" data-ability-uuid="{{this}}" data-ability-type="{{@../key}}">

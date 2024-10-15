@@ -3,31 +3,31 @@ import getDice from "./dice/step-tables.mjs";
 import { linkForUuidSync } from "./utils.mjs";
 
 /**
- * @description handlebar helpers
+ * @description Registers custom Handlebars helpers for the application.
  */
 export default function registerHandlebarHelpers() {
 
-  Handlebars.registerHelper( "hasItems", ( collection ) => {
+  Handlebars.registerHelper( "ed-hasItems", ( collection ) => {
     return !foundry.utils.isEmpty( collection );
   } );
 
-  Handlebars.registerHelper( "add", ( value1, value2 ) => {
+  Handlebars.registerHelper( "ed-add", ( value1, value2 ) => {
     return value1 + value2;
   } );
 
-  Handlebars.registerHelper( "subtract", ( value1, value2 ) => {
+  Handlebars.registerHelper( "ed-subtract", ( value1, value2 ) => {
     return value1 - value2;
   } );
 
-  Handlebars.registerHelper( "eq", ( a, b ) => {
+  Handlebars.registerHelper( "ed-eq", ( a, b ) => {
     return a === b;
   } );
 
-  Handlebars.registerHelper( "uneq", ( a, b ) => {
+  Handlebars.registerHelper( "ed-uneq", ( a, b ) => {
     return a !== b;
   } );
 
-  Handlebars.registerHelper( "signedNumber", ( number ) => {
+  Handlebars.registerHelper( "ed-signedNumber", ( number ) => {
     if ( number ) {
       return new Intl.NumberFormat(
         game.i18n.lang, { signDisplay: "exceptZero" }
@@ -49,13 +49,13 @@ export default function registerHandlebarHelpers() {
     return value ? "selected" : "";
   } );
 
-  Handlebars.registerHelper( "getProperty", foundry.utils.getProperty );
+  Handlebars.registerHelper( "ed-getProperty", foundry.utils.getProperty );
 
   Handlebars.registerHelper( "ed-hasOwnProperty", ( obj, prop ) => {
     return obj.hasOwnProperty( prop );
   } );
 
-  Handlebars.registerHelper( "nameFromUuid", ( uuid ) => {
+  Handlebars.registerHelper( "ed-nameFromUuid", ( uuid ) => {
     return fromUuidSync( uuid , {strict: false} )?.name ?? "N/A";
   } );
 
@@ -69,7 +69,7 @@ export default function registerHandlebarHelpers() {
 
   Handlebars.registerHelper( "ed-diceFormulaForStep", getDice );
 
-  Handlebars.registerHelper( "getTalentCategory", ( talents, type ) => {
+  Handlebars.registerHelper( "ed-getTalentCategory", ( talents, type ) => {
     return talents.filter( ( talent ) => talent.system.talentCategory === type );
   } );
 

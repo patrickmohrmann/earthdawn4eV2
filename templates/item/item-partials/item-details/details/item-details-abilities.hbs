@@ -37,7 +37,7 @@
     <input class="input__circle-input partial__55--right" type="checkbox" name="system.damageAbilities.substitute" {{checked
         item.system.damageAbilities.substitute }}>
 </div>
-{{#if (eq item.system.damageAbilities.substitute true)}}
+{{#if (ed-eq item.system.damageAbilities.substitute true)}}
 {{!-- Strength SUbstitute is based on the rolltype --}}
 <div class="item-data__input--line">
     <label class="partial__40--left">{{localize "ED.Item.Ability.relatedRollType"}}:</label>

@@ -12,7 +12,7 @@
         <input class="partial__55--right" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
             item.system.usableItem.usableItemSelector}}>
     </div>
-    {{#if (eq item.system.usableItem.usableItemSelector true)}}
+    {{#if (ed-eq item.system.usableItem.usableItemSelector true)}}
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.Equipment.arbitraryStep"}}:</label>
         <input class="partial__55--right" name="system.usableItem.arbitraryStep" type="text"

@@ -2,12 +2,12 @@
 <div class="card__ability">
     <div class="ability-card__grid--container item-id" data-item-id="{{_id}}">
         <div class="ability-card__grid--item icons__dice">
-            {{#if (uneq this.system.attribute "")}}
+            {{#if (ed-uneq this.system.attribute "")}}
                 <img class="ability-icon" src="{{img}}"/>
                 <img class="roll-icon__hover" src="icons/svg/d20-grey.svg">
                 <img class="roll-icon__pointer rollable" src="icons/svg/d20-black.svg">
             {{else}} 
-            {{#if (uneq this.system.strain 0)}}
+            {{#if (ed-uneq this.system.strain 0)}}
                 <img class="ability-icon" src="{{img}}" data-edit="img" title="{{name}}" height="25" width="25" />
                 <img class="roll-icon__hover-fixed blood" src="icons/svg/blood.svg">
                 <img class="roll-icon__pointer take-strain" src="systems/ed4e/assets/icons/red-blood.svg" data-attribute="{{@key}}">

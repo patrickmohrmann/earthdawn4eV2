@@ -11,7 +11,7 @@
             <div class="attribute-card__grid--item">
                 <label>{{localize "ED.Actor.Attributes.attributeName"}}</label>
             </div>
-            {{#if (eq this.data.type "character")}}
+            {{#if (ed-eq this.data.type "character")}}
             <div class="attribute-card__grid--item">
                 <label>
                     {{localize "ED.Actor.Attributes.attributeValue"}}
@@ -29,7 +29,7 @@
                 </label>
             </div>
         </div>
-        {{#if (eq this.data.type "character")}}
+        {{#if (ed-eq this.data.type "character")}}
         {{> "systems/ed4e/templates/actor/cards/attribute-card.hbs"}}
         {{else}}
         {{> "systems/ed4e/templates/actor/cards/attributes-none-pc-card.hbs"}}
@@ -61,7 +61,7 @@
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.karma.max"
-                            value="{{actor.system.karma.max}}" {{#if (eq this.data.type "character")}}readonly{{/if}}>
+                            value="{{actor.system.karma.max}}" {{#if (ed-eq this.data.type "character")}}readonly{{/if}}>
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.karma.step"
@@ -86,7 +86,7 @@
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.devotion.max"
-                            value="{{actor.system.devotion.max}}" {{#if (eq this.data.type "character")}}readonly{{/if}}>
+                            value="{{actor.system.devotion.max}}" {{#if (ed-eq this.data.type "character")}}readonly{{/if}}>
             </div>
             <div class="karma-devotion__grid--item">
                 <input class="input__circle-input--centered" name="system.devotion.step"
