@@ -15,14 +15,14 @@
         <input class="input__circle-input--centered" name="system.attributes.{{@key}}.value" value="{{value}}">
     </div>
     <div class="attribute-card__grid--item attribute__increases">
-        {{#if (ed-eq timesIncreased 1)}}
+        {{#if (eq timesIncreased 1)}}
         <i class="enhancemente-1 fa fa-star"></i>
         {{/if}}
-        {{#if (ed-eq timesIncreased 2)}}
+        {{#if (eq timesIncreased 2)}}
         <i class="enhancemente-1 fa fa-star"></i>
         <i class="enhancemente-2 fa fa-star"></i>
         {{/if}}
-        {{#if (ed-eq timesIncreased 3)}}
+        {{#if (eq timesIncreased 3)}}
         <i class="enhancemente-1 fa fa-star"></i>
         <i class="enhancemente-2 fa fa-star"></i>
         <i class="enhancemente-3 fa fa-star"></i>

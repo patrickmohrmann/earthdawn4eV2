@@ -1,6 +1,6 @@
 <div class="sheet__editor">
   <h3>{{localize "ED.Actor.Header.information"}}</h3>
-  {{#if (ed-uneq actor.type "character")}}
+  {{#if (ne actor.type "character")}}
   <div>
     {{formField systemFields.challenge.fields.rate value=actor.system.challenge.rate name="system.challenge.rate" localize=true}}
   </div>

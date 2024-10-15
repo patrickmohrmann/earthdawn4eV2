@@ -1,6 +1,6 @@
 <div class="top">
-    {{#if (ed-eq this.data.type "npc")}}
-        {{#if (ed-eq this.data.system.mobRules true)}}
+    {{#if (eq this.data.type "npc")}}
+        {{#if (eq this.data.system.mobRules true)}}
         <div class="image-characteristics-mob__grid-container">
         {{else}}
         <div class="image-characteristics__grid-container">
@@ -43,7 +43,7 @@
         </div>
 
         <!-- GRID - Health -->
-        {{#if (ed-eq this.data.type "character")}}
+        {{#if (eq this.data.type "character")}}
             {{> "systems/ed4e/templates/actor/cards/health-character-card.hbs"}}
         {{else}}
             {{> "systems/ed4e/templates/actor/cards/health-none-character-card.hbs"}}
@@ -83,7 +83,7 @@
         </div>
 
         <!-- GRID - Damage & Recovery -->
-        {{#if (ed-eq this.data.type "character")}}
+        {{#if (eq this.data.type "character")}}
             {{> "systems/ed4e/templates/actor/cards/damage-character-card.hbs"}}
         {{else}}
             {{> "systems/ed4e/templates/actor/cards/damage-none-character-card.hbs"}}

@@ -4,7 +4,7 @@
     <div class="item-data__input--line">
         <label class="partial__40--left">{{localize "ED.Item.Knack.maneuver"}}:</label>
          <input class="input__number-input partial__55--right" type="checkbox" name="system.maneuver" value="{{item.system.maneuver}}">
-        {{#if (ed-eq this.item.system.maneuver true)}}
+        {{#if (eq this.item.system.maneuver true)}}
         {{!-- extraSuccesses --}}
         <label>{{localize "ED.Item.Knack.extraSuccesses"}}:</label>
         <input class="input__number-input" name="system.extraSuccesses" type="text" value="{{item.system.extraSuccesses}}"

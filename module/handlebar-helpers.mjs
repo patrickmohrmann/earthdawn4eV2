@@ -19,14 +19,6 @@ export default function registerHandlebarHelpers() {
     return value1 - value2;
   } );
 
-  Handlebars.registerHelper( "ed-eq", ( a, b ) => {
-    return a === b;
-  } );
-
-  Handlebars.registerHelper( "ed-uneq", ( a, b ) => {
-    return a !== b;
-  } );
-
   Handlebars.registerHelper( "ed-signedNumber", ( number ) => {
     if ( number ) {
       return new Intl.NumberFormat(

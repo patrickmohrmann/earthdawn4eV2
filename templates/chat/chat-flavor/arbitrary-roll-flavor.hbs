@@ -6,10 +6,10 @@ Arbitrary Flavor contains:
 - Optinoal: Assign damage if Damage type is set to true
 --}}
 <div class="custom-flavor">{{ customFlavor }}</div>
-{{#if (ed-eq  ruleOfOne true)}}
+{{#if (eq  ruleOfOne true)}}
   <div class="roll-failure">{{localize "ED.Rolls.ruleOfOne"}}</div>
 {{else}}
-{{#if (ed-uneq target.total 0)}}
+{{#if (ne target.total 0)}}
 {{> "systems/ed4e/templates/chat/dice-partials/roll-successes.hbs"}}
 {{/if}}
 {{/if}}

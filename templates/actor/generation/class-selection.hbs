@@ -130,7 +130,7 @@
             <td class="ability-name" data-ability-uuid="{{this}}">
               {{ed-nameFromUuid this}}
             </td>
-            {{#if (ed-eq @../key "class")}}
+            {{#if (eq @../key "class")}}
               <td class="flexrow rank-change">
               <span class="decrease-value-button rank-decrease rank-change-icon" title="{{localize 'X.Decrease Rank Value'}}"
                     data-change-type="decrease" data-ability-uuid="{{this}}" data-ability-type="{{@../key}}">
