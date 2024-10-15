@@ -1,96 +1,20 @@
 <div>
-    <h3>{{localize "ED.Item.Header.details"}}</h3>
-    {{!-- bloodMagicDamage --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.bloodMagicDamage"}}:</label>
-        <input class="partial__55--right" name="system.bloodMagicDamage" type="text"
-            value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
-    </div>
-    {{!-- usable Item --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.usableItem"}}:</label>
-        <input class="partial__55--right" type="checkbox" name="system.usableItem.usableItemSelector" {{checked
-            item.system.usableItem.usableItemSelector}}>
-    </div>
-    {{#if (eq item.system.usableItem.usableItemSelector true)}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.arbitraryStep"}}:</label>
-        <input class="partial__55--right" name="system.usableItem.arbitraryStep" type="text"
-            value="{{item.system.usableItem.arbitraryStep}}" data-dtype="Number">
-    </div>
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.action"}}:</label>
-        <select class="partial__55--right" name="system.usableItem.action" value="{{item.system.usableItem.action}}" 
-            data-dtype="String">
-            {{selectOptions config.action selected=item.system.usableItem.action localize=true }}
-        </select>
-    </div>
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.recoveryPropertyValue"}}:</label>
-        <select class="partial__55--right" name="system.usableItem.recoveryPropertyValue">
-            {{selectOptions config.recoveryProperty selected=item.system.usableItem.recoveryPropertyValue localize=true }}
-        </select>
-    </div>
-    {{!-- Target Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "X-FixedDifficulty"}}:</label>
-        <input class="partial__55--right" name="system.difficulty.fixed" type="text"
-            value="{{item.system.difficulty.fixed}}" data-dtype="Number">
-    </div>
-    {{!-- Target Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "X-TargetDifficulty"}}:</label>
-        <select class="partial__55--right" name="system.difficulty.target">
-            {{selectOptions config.targetDifficulty selected=item.system.difficulty.target localize=true }}
-        </select>
-    </div>
-    {{!-- Group Difficulty --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "X-GroupDifficulty"}}:</label>
-        <select class="partial__55--right" name="system.difficulty.group">
-            {{selectOptions config.groupDifficulty selected=item.system.difficulty.group localize=true }}
-        </select>
-    </div>
+    {{formField systemFields.consumable name="system.consumable" value=item.system.consumable localize=true}}
+    {{#if (eq item.system.consumable true)}}
+        {{!-- ammunition --}}
+        {{formField systemFields.ammunition.fields.type name="system.ammunition.type" value=item.system.ammunition.type localize=true}}
+        {{!-- bundleSize --}}
+        {{formField systemFields.bundleSize name="system.bundleSize" value=item.system.bundleSize localize=true}}
     {{/if}}
-
-    {{!-- consumable Item --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.consumable"}}:</label>
-        <input class="partial__55--right" type="checkbox" name="system.consumable" {{ checked item.system.consumable }}>
-    </div>
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Equipment.ammunition"}}:</label>
-        <select class="partial__55--right" name="system.ammunition.type">
-            {{selectOptions config.ammunitionType selected=item.system.ammunition.type blank="" localize=true }}
-        </select>
-        </div>
-        <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.General.bundleSize"}}:</label>
-        <input class="partial__55--right" name="system.bundleSize" type="number" value="{{item.system.bundleSize}}">
-    </div>
-    {{!-- equipped --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.General.equipped"}}:</label>
-        <select class="partial__55--right" name="system.itemStatus">
-            {{selectOptions config.itemStatus selected=item.system.itemStatus localize=true }}
-        </select>
-    </div>
-    {{#if item.isOwned }}
-    {{!-- automatic Weight Calculation --}}
-    {{!-- Change Weight button is only available for owned items. World items can be created with the requested weight.
-    --}}
-    <div class="item-data__input--line">
-        {{!-- the weightMultiplyer and the weight Calculated check are only editable by GMs --}}
-        <label class="partial__40--left">{{localize "Weight-calculation"}}:</label>
-        <input class="partial__55--right" name="system.weight.weightMultiplier" type="text"
-            value="{{item.system.weight.weightMultiplier}}" {{disabled isPlayer}} data-dtype="Number"
-            title="{{localize " Only-Editable-as-GM"}}">
-            </div>
-            <div class="item-data__input--line">
-                <button class="partial__40--left weight-calculation--button button">{{localize "Tailor to Namegiver"}}</button>
-        <input class="partial__55--right" type="checkbox" name="system.weight.weightCalculated" {{ checked
-            item.system.weight.weightCalculated }} {{disabled isPlayer}} title="{{localize " Only-Editable-as-GM"}}">
-        
-    </div>
+    {{!-- usable Item ?--}}
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/usable-items.hbs"}}
+    {{#if (eq item.system.usableItem.usableItemSelector true)}}
+        {{> "systems/ed4e/templates/item/item-partials/item-details/partials/targeting.hbs"}}
+    {{/if}}
+    {{!-- itemStatus --}}
+    {{formField systemFields.itemStatus name="system.itemStatus" value=item.system.itemStatus localize=true}}
+    {{#if item.isOwned}}
+        {{!-- automatic Weight Calculation --}}
+        {{> "systems/ed4e/templates/item/item-partials/item-details/partials/tailor-to-namegiver.hbs"}}
     {{/if}}
 </div>

@@ -23,8 +23,8 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          hint:     "ED.Item.Shield.Label.defenseBonusPhysical",
-          label:    "ED.Item.Shield.Hint.defenseBonusPhysical"
+          label:    this.labelKey( "Shields.defenseBonusPhysical" ),
+          hint:     this.hintKey( "Shields.defenseBonusPhysical" )
         } ),
         mystical: new fields.NumberField( {
           required: true,
@@ -32,8 +32,8 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          hint:     "ED.Item.Shield.Label.defenseBonusMystical",
-          label:    "ED.Item.Shield.Hint.defenseBonusMystical"
+          label:    this.labelKey( "Shields.defenseBonusMystical" ),
+          hint:     this.hintKey( "Shields.defenseBonusMystical" )
         } ),
       } ),
       initiativePenalty: new fields.NumberField( {
@@ -42,8 +42,8 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        hint:     "ED.Item.Shield.Label.initiativePenalty",
-        label:    "ED.Item.Shield.Hint.initiativePenalty"
+        label:    this.labelKey( "Shields.initiativePenalty" ),
+        hint:     this.hintKey( "Shields.initiativePenalty" )
       } ),
       shatterThreshold: new fields.NumberField( {
         required: true,
@@ -51,24 +51,26 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        hint:     "ED.Item.Shield.Label.shatterThreshold",
-        label:    "ED.Item.Shield.Hint.shatterThreshold"
+        label:    this.labelKey( "Shields.shatterThreshold" ),
+        hint:     this.hintKey( "Shields.shatterThreshold" )
       } ),
       broken: new fields.BooleanField( {
         required: true,
         initial:  false,
-        label:    "ED.Item.Shield.Label.broken"
+        label:    this.labelKey( "Shields.broken" ),
+        hint:     this.hintKey( "Shields.broken" )
       } ),
       living: new fields.BooleanField( {
         required: true,
         initial:  false,
-        label:    "ED.Data.Item.Labels.livingArmor",
-        hint:     "ED.Data.Item.Hints.livingArmor"
+        label:    this.labelKey( "Shields.livingArmor" ),
+        hint:     this.hintKey( "Shields.livingArmor" )
       } ),
       bowUsage: new fields.BooleanField( {
         required: true,
         initial:  false,
-        label:    "ED.Item.Shield.Label.bowUsage"
+        label:    this.labelKey( "Shields.bowUsage" ),
+        hint:     this.hintKey( "Shields.bowUsage" )
       } ),
     } );
   }

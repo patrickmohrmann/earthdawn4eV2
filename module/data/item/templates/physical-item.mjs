@@ -38,18 +38,25 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           nullable: false,
           min:      0,
           initial:  0,
-          label:    "ED.Item.General.value"
+          // label:    this.labelKey( "PhysicalItems.Price.value",
+          // hint:     this.hintKey( "PhysicalItems.Price.value"
+          label:    this.labelKey( "PhysicalItems.Price.value" ),
+          hint:     this.hintKey( "PhysicalItems.Price.value" )
         } ),
         denomination: new fields.StringField( {
           required: true,
-          blank:    false,
+          nullable: true,
+          blank:    true,
+          trim:     true,
           initial:  "silver",
-          // choices: game.i18n.localize( [ED4E.denomination] ),
-          label:    "ED.Item.General.denomination"
+          choices:  ED4E.denomination,
+          label:    this.labelKey( "PhysicalItems.Price.denomination" ),
+          hint:     this.hintKey( "PhysicalItems.Price.denomination" )
         } )
       },
       {
-        label: "ED.Item.General.price"
+        label: this.labelKey( "PhysicalItems.price" ),
+        hint:  this.hintKey( "PhysicalItems.price" )
       } ),
       weight: new fields.SchemaField( {
         value: new fields.NumberField( {
@@ -57,27 +64,34 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           nullable: false,
           min:      0,
           initial:  0,
-          label:    "ED.Item.General.weight"
+          label:    this.labelKey( "PhysicalItems.Weight.value" ),
+          hint:     this.hintKey( "PhysicalItems.Weight.value" )
         } ),
         weightMultiplier: new fields.NumberField( {
           required: true,
           nullable: false,
           min:      1,
           initial:  1,
-          label:    "ED.Item.General.weightMultiplier"
+          label:    this.labelKey( "PhysicalItems.Weight.multiplier" ),
+          hint:     this.hintKey( "PhysicalItems.Weight.multiplier" )
         } ),
         weightCalculated: new fields.BooleanField( {
           required: true,
           initial:  false,
-          label:    "ED.Item.General.weightCalculated"
+          label:    this.labelKey( "PhysicalItems.Weight.calculated" ),
+          hint:     this.hintKey( "PhysicalItems.Weight.calculated" )
         } ),
       } ),
       // availability types are Everyday, Average, Unusual, Rare, Very Rare, Unique
       availability: new fields.StringField( {
         required: true,
-        blank:    false,
+        nullable: true,
+        blank:    true,
+        trim:     true,
         initial:  "average",
-        label:    "ED.Item.General.availability"
+        choices:  ED4E.availability,
+        label:    this.labelKey( "PhysicalItems.availability" ),
+        hint:     this.hintKey( "PhysicalItems.availability" )
 
       } ),
       amount: new fields.NumberField( {
@@ -86,7 +100,8 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
         min:      0,
         initial:  1,
         integer:  true,
-        label:    "ED.Item.General.amount"
+        label:    this.labelKey( "PhysicalItems.amount" ),
+        hint:     this.hintKey( "PhysicalItems.amount" )
       } ),
       bloodMagicDamage: new fields.NumberField( {
         required: true,
@@ -94,12 +109,14 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Item.General.bloodMagicDamage"
+        label:    this.labelKey( "PhysicalItems.bloodMagicDamage" ),
+        hint:     this.hintKey( "PhysicalItems.bloodMagicDamage" )
       } ),
       usableItem: new fields.SchemaField( {
         usableItemSelector: new fields.BooleanField( {
           required: true,
-          label:    "ED.Item.General.usableItem"
+          label:    this.labelKey( "PhysicalItems.UsableItem.selector" ),
+          hint:     this.hintKey( "PhysicalItems.UsableItem.selector" )
         } ),
         arbitraryStep: new fields.NumberField( {
           required: true,
@@ -107,12 +124,14 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           min:      0,
           initial:  0,
           integer:  true,
-          label:    "ED.Item.General.arbitraryStep"
+          label:    this.labelKey( "PhysicalItems.UsableItem.arbitraryStep" ),
+          hint:     this.hintKey( "PhysicalItems.UsableItem.arbitraryStep" )
         } ),
         action: new fields.StringField( {
           initial:  "standard",
-          label:    "ED.Item.Equipment.action",
-          choices:  ED4E.action
+          choices:  ED4E.action,
+          label:    this.labelKey( "PhysicalItems.UsableItem.action" ),
+          hint:     this.hintKey( "PhysicalItems.UsableItem.action" )
         } ),
         // recovery property value shall be a drop down menu with several options discribed in #26
         recoveryPropertyValue: new fields.NumberField( {
@@ -121,12 +140,15 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           min:      0,
           max:      5,
           initial:  0,
+          choices:  ED4E.recoveryProperty,
           integer:  true,
-          label:    "ED.Item.General.recoveryPropertyValue"
+          label:    this.labelKey( "PhysicalItems.UsableItem.recoveryPropertyValue" ),
+          hint:     this.hintKey( "PhysicalItems.UsableItem.recoveryPropertyValue" )
         } ),
       },
       {
-        label: "ED.Item.General.usableItem"
+        label: this.labelKey( "PhysicalItems.usableItem" ),
+        hint:  this.hintKey( "PhysicalItems.usableItem" )
       } ),
       // item status is for differentiation of the carried status of each item
       // a toggle shall be show either equipped, carried or owned
@@ -137,9 +159,9 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
         nullable: true,
         blank:    false,
         initial:  "owned",
-        choices:  Object.keys( ED4E.itemStatus ),
-        label:    "ED.Item.General.itemStatus",
-        hint:     "ED.Item.General.itemStatusHint",
+        choices:  ED4E.itemStatus,
+        label:    this.labelKey( "PhysicalItems.itemStatus" ),
+        hint:     this.hintKey( "PhysicalItems.itemStatus" )
       } )
     } );
   }

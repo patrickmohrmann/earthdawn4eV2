@@ -244,6 +244,20 @@
         "standard": "Standard",
         "sustained": "Anhaltend"
       },
+      "AmmunitionType": {
+        "arrow":                                              "Pfeil",
+        "bolt":                                               "Bolzen",
+        "needle":                                             "Nadel",
+        "stone":                                              "Stein"
+      },
+      "Availability": {
+        "everyday":                                           "Alltäglich",
+        "average":                                            "Durchschnittlich",
+        "unusual":                                            "Ungewöhnlich",
+        "rare":                                               "Selten",
+        "veryRare":                                           "Sehr selten",
+        "unique":                                             "Einzigartig"
+      },
       "CombatTypes": {
         "aerial": "Luftkampf",
         "close": "Nahkampf",
@@ -263,6 +277,11 @@
         "none": "Keine",
         "physical": "Körperlich",
         "social": "Sozial"
+      },
+      "Denomination": {
+        "copper":                                               "Kupfer",
+        "gold":                                                 "Gold",
+        "silver":                                               "Silber"
       },
       "ItemStatus": {
         "carried": "Getragen",
@@ -308,6 +327,14 @@
         "spellcasting": "Spruchzauberei",
         "threadWeaving": "Fadenweben"
       },
+      "RecoveryProperty": {
+                "noRecovery":                                       "Keine Erholung",
+                "arbitrary":                                        "Willkürlich",
+                "arbitraryAndAttribute":                            "Willkürlich und Attribut",
+                "arbitraryOptionalAttribute":                       "Willkürlich und/oder Attribut",
+                "abilityStep":                                      "Fähigkeitsstufe",
+                "noHealing":                                        "Keine Heilung"
+            },
       "spellcastingTypes": {
         "elementalism": "Elementarist",
         "illusionism": "Illusionist",
@@ -351,16 +378,156 @@
           "isMob":                                        "Dieser Acteur benutzt ausschließlich Wunden anstatt Schaden"
         }
       },
-      "Item": {
+      "General": {
         "Hints": {
-          "edid": "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
-          "livingArmorOnly":                              "Nur legendige Rüstung",
-          "living":                                "Legendige Rüstung"
+          "Target": {
+            "target":                                       "Widerstandstyp des Ziels",
+            "group":                                        "Gruppen Parameter",
+            "fixed":                                        "Fester Schwierigkeitsgrad"
+          }
         },
         "Labels": {
-          "edid": "ED-ID",
-          "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden.",
-          "living":                                "Dieser Gegenstand gilt als Lebendige Rüstung."
+          "Target": {
+            "target":                                       "Widerstandstyp",
+            "group":                                        "Gruppen Parameter",
+            "fixed":                                        "Fester Schwierigkeitsgrad"
+          }
+        }
+      },
+      "Item": {
+        "Hints": {
+          "Armor": {
+            "physicalArmor":                                "Physische Rüstung",
+            "forgeBonusPhysical":                           "Schmiedebonus Körperlich",
+            "mysticalArmor":                                "Mystische Rüstung",
+            "forgeBonusMystical":                           "Schmiedebonus Mystisch",
+            "initiativePenalty":                            "Initiative Malus",
+            "living":                                       "Dieser Gegenstand gilt als Lebendige Rüstung.",
+            "piecemealArmor":                               "Ist diese Rüstung nicht komplett, sondern nur ein Teil?",
+            "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung (Wert zwischen 1 und 3)"
+          },
+          "edid":                                           "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
+          "Equipment": {
+              "consumable":                               "Wird dieser Gegenstand bei der benutzung verbraucht?",
+              "ammunition":                                "Welcher Munitionstyp ist dieser Gegenstand?",
+              "bundleSize":                               "Wie viele Gegenstände gehören zu einem Bündel?"
+            },
+          "livingArmorOnly":                                "Nur legendige Rüstung",
+          "PhysicalItems": {
+            "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
+            "arbitraryStep":                                "Willkürliche Stufe, die beim benutzen des Gegenstandes verwendet wird.",
+            "amount":                                       "Menge",
+            "availability":                                 "Verfügbarkeit",
+            "bloodMagicDamage":                             "Blutmagie Schaden",
+            "itemStatus":                                  "In welchem Ausrüstungszustand befindet sich der Gegenstand?",
+            "price":                                        "Preis",
+            "Price": {
+              "value":                                      "Preis",
+              "denomination":                               "Währung"
+            },
+            "usableItem":                                   "Benutzbarer Gegenstand",
+            "UsableItem": {
+              "selector":                                   "Kann der Gegenstand benutzt werden?",
+              "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
+              "arbitraryStep":                                "Willkürliche Stufe, die beim benutzen des Gegenstandes verwendet wird.",
+              "recoveryPropertyValue":                      "Erholungsproben relevanz"
+            },
+            "weight":                                       "Gewicht",
+            "Weight": {
+              "value":                                      "Gewicht",
+              "calculated":                                 "Wurde dieser Gegenstand bereits mit dem Multipliktor des Namensgebers berechnet?",
+              "multiplier":                                 "Der Multiplikator des Namensgebers"
+            }
+          },
+          "Shields": {
+            "defenseBonusPhysical":                         "Körperlicher Verteidigungsbonus",
+            "defenseBonusMystical":                         "Mystischer Verteidigungsbonus",
+            "initiativePenalty":                            "Initiative Malus",
+            "shatterThreshold":                             "Schwellenwert für das Zerbrechen des Schildes",
+            "broken":                                       "Ist dieser Schild zerbrochen?",
+            "livingArmor":                                  "Gilt dieser Schild als Lebendige Rüstung?",
+            "bowUsage":                                     "Kann dieser Schild mit einem Bogen benutzt werden?"
+          },
+          "Weapons": {
+            "weaponType":                                   "Waffentyp",
+            "damageAttribute":                              "Schaden Attribut",
+            "damageBaseStep":                               "Grundschaden Stufe",
+            "size":                                         "Größe",
+            "strengthMinimum":                              "Stärke Minimum",
+            "dexterityMinimum":                             "Geschicklichkeit Minimum",
+            "rangeShortMin":                                "Reichweite Kurz Minimum",
+            "rangeShortMax":                                "Reichweite Kurz Maximum",
+            "rangeLongMin":                                 "Reichweite Lang Minimum",
+            "rangeLongMax":                                 "Reichweite Lang Maximum",
+            "ammunitionType":                               "Welcher Munitionstyp wird für diese Waffe benötigt?",
+            "forgeBonus":                                   "Schmiedebonus"
+          }
+        },
+        "Labels": {
+          "Armor": {
+            "physicalArmor":                                "Physische Rüstung",
+            "forgeBonusPhysical":                           "Schmiedebonus Körperlich",
+            "mysticalArmor":                                "Mystische Rüstung",
+            "forgeBonusMystical":                           "Schmiedebonus Mystisch",
+            "initiativePenalty":                            "Initiative Malus",
+            "living":                                       "Lebendige Rüstung",
+            "piecemealArmor":                               "Zusammengesetzte Rüstung",
+            "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
+          },
+          "edid":                                           "ED-ID",
+          "Equipment": {
+              "consumable":                               "Verbrauchsgegenstand?",
+              "ammunition":                                "Munitionstyp",
+              "bundleSize":                               "Bündelgröße"
+            },
+          "livingArmorOnly":                                "Es kann nur nur lebendige Rüstung getragen werden.",
+          "PhysicalItems": {
+            "amount":                                       "Menge",
+            "availability":                                 "Verfügbarkeit",
+            "bloodMagicDamage":                             "Blutmagie Schaden",
+            "itemStatus":                                   "Status",
+            "price":                                        "Preis",
+            "Price": {
+              "value":                                      "Wert",
+              "denomination":                               "Währung"
+            },
+            "usableItem":                                   "Benutzbarer Gegenstand",
+            "UsableItem": {
+              "selector":                                   "Benutzbar",
+              "arbitraryStep":                              "Willkürliche Stufe",
+              "action":                                     "Aktion",
+              "recoveryPropertyValue":                      "Erholungsproben relevanz"
+            },
+            "weight":                                       "Gewicht",
+            "Weight": {
+              "value":                                      "Gewicht",
+              "calculated":                                 "Berechnet",
+              "multiplier":                                 "Multiplikator"
+            }
+          },
+          "Shields": {
+            "defenseBonusPhysical":                         "Körperlicher Verteidigungsbonus",
+            "defenseBonusMystical":                         "Mystischer Verteidigungsbonus",
+            "initiativePenalty":                            "Initiative Malus",
+            "shatterThreshold":                             "Bruchschwelle",
+            "broken":                                       "Zerbrochen",
+            "livingArmor":                                  "Lebendige Rüstung?",
+            "bowUsage":                                     "Tartsche?"
+          },
+          "Weapons": {
+            "weaponType":                                   "Waffentyp",
+            "damageAttribute":                              "Schaden Attribut",
+            "damageBaseStep":                               "Grundschaden Stufe",
+            "size":                                         "Größe",
+            "strengthMinimum":                              "Stärke Minimum",
+            "dexterityMinimum":                             "Geschicklichkeit Minimum",
+            "rangeShortMin":                                "Reichweite Kurz Minimum",
+            "rangeShortMax":                                "Reichweite Kurz Maximum",
+            "rangeLongMin":                                 "Reichweite Lang Minimum",
+            "rangeLongMax":                                 "Reichweite Lang Maximum",
+            "ammunitionType":                               "Munitionstyp",
+            "forgeBonus":                                   "Schmiedebonus"
+          }
         }
       },
       "Journal": {

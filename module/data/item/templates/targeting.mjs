@@ -1,4 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
+import ED4E from "../../../config.mjs";
 
 /**
  * Data model template with information on Ability items.
@@ -18,13 +19,17 @@ export default class TargetTemplate extends SystemDataModel {
           nullable: false,
           blank:    false,
           initial:  "none",
-          label:    "X.TargetDifficulty"
+          choices:  ED4E.targetDifficulty,
+          label:    this.labelKey( "Target.target" ),
+          hint:     this.hintKey( "Target.target" )
         } ),
         group: new foundry.data.fields.StringField( {
           nullable: false,
           blank:    false,
           initial:  "none",
-          label:    "X.GroupDifficulty"
+          choices:  ED4E.groupDifficulty,
+          label:    this.labelKey( "Target.group" ),
+          hint:     this.hintKey( "Target.group" )
         } ),
         fixed: new foundry.data.fields.NumberField( {
           required: true,
@@ -32,7 +37,8 @@ export default class TargetTemplate extends SystemDataModel {
           min:      0,
           initial:  () => game.settings.get( "ed4e", "minimumDifficulty" ),
           integer:  true,
-          label:    "X.FixedDifficulty"
+          label:    this.labelKey( "Target.fixed" ),
+          hint:     this.hintKey( "Target.fixed" )
         } ),
       } ),
     } );
