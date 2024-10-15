@@ -651,6 +651,11 @@ ED4E.combatTypes = {
 };
 preLocalize( "testTypes", { key: "label" } );
 
+ED4E.resourceDefaultStep = {
+  karma:    4,
+  devotion: 3,
+};
+
 
 /* -------------------------------------------- */
 /*  System                                      */

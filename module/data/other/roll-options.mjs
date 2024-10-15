@@ -1,6 +1,7 @@
 import { FormulaField, MappingField } from "../fields.mjs";
 import { sum } from "../../utils.mjs";
 import getDice from "../../dice/step-tables.mjs";
+import ED4E from "../../config.mjs";
 
 export default class EdRollOptions extends foundry.abstract.DataModel {
   /** @inheritDoc */
@@ -228,6 +229,11 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
     return new EdRollOptions( data, options );
   }
 
+  static initResourceStep( source ) {
+    const parentField = this?.parent?.name;
+    return ED4E.resourceDefaultStep[parentField] ?? 4;
+  }
+
   static initTotal( source, attribute, defaultValue ){
     const value = source?.[attribute]?.base ?? source.base ?? defaultValue;
     return value + sum( Object.values( source?.[attribute]?.modifiers ?? {} ) );
@@ -267,7 +273,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
   }
 
   /**
-   * @description Bonus resources to be add globally
+   * @description Bonus resources to be added globally
    * @type {object}
    * @property {number} something Value of the global bonus
    */
@@ -298,7 +304,7 @@ export default class EdRollOptions extends foundry.abstract.DataModel {
         step: new fields.NumberField( {
           required: true,
           nullable: false,
-          initial:  4,
+          initial:  this.initResourceStep,
           label:    "earthdawn.karmaStep",
           hint:     "earthdawn.whatIsTheStepForKarmaDice",
           min:      1,
