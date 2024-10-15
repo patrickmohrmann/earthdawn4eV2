@@ -11,7 +11,7 @@ import ED4E from "../../../config.mjs";
  * @property {number} amount                                amount of the item
  * @property {number} bloodMagicDamage                      number of Bloodmagic damage the actor is receiving
  * @property {object} usableItem                            usable item object
- * @property {boolean} usableItem.usableItemSelector        usable item selector
+ * @property {boolean} usableItem.isUsableItem        usable item selector
  * @property {number} usableItem.arbitraryStep              arbitrary step
  * @property {string} usableItem.action                     action type of usable item
  * @property {number} usableItem.recoveryPropertyValue      recovery type value
@@ -113,7 +113,7 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
         hint:     this.hintKey( "PhysicalItems.bloodMagicDamage" )
       } ),
       usableItem: new fields.SchemaField( {
-        usableItemSelector: new fields.BooleanField( {
+        isUsableItem: new fields.BooleanField( {
           required: true,
           label:    this.labelKey( "PhysicalItems.UsableItem.selector" ),
           hint:     this.hintKey( "PhysicalItems.UsableItem.selector" )

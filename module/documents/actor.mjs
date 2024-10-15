@@ -127,7 +127,7 @@ export default class ActorEd extends Actor {
    * @type {boolean}
    */
   get wearsPiecemealArmor() {
-    return this.itemTypes.armor.some( armor => armor.system.piecemealArmor.selector );
+    return this.itemTypes.armor.some( armor => armor.system.piecemeal.isPiecemeal );
   }
 
   /**
@@ -829,7 +829,7 @@ export default class ActorEd extends Actor {
             ui.notifications.warn( game.i18n.localize( "ED.Notifications.Warn.livingArmorOnly" ) );
             break;
           }
-          if ( itemToUpdate.system.piecemealArmor?.selector ) {
+          if ( itemToUpdate.system.piecemeal?.isPiecemeal ) {
             if ( !this.wearsPiecemealArmor ) {
               addUnequipItemUpdate( "armor", [ "equipped" ] );
             } else {
@@ -837,7 +837,7 @@ export default class ActorEd extends Actor {
               // cost a corresponding number of points: large (3), medium (2), and small (1). A set of piecemeal armor
               // cannot have more than one size of a particular type.
               const equippedArmor = this.itemTypes.armor.filter( armor => armor.system.itemStatus === "equipped" );
-              const sameSizePiece = equippedArmor.find( armor => armor.system.piecemealArmor.size === itemToUpdate.system.piecemealArmor.size );
+              const sameSizePiece = equippedArmor.find( armor => armor.system.piecemeal.size === itemToUpdate.system.piecemeal.size );
               if ( sameSizePiece ) {
                 updates.push( { _id: sameSizePiece.id, "system.itemStatus": "carried" } );
               } else {
@@ -846,14 +846,14 @@ export default class ActorEd extends Actor {
                 // prevent equipping the item.
                 // eslint-disable-next-line max-depth
                 if (
-                  sum( equippedArmor.map( armor => armor.system.piecemealArmor.size ) )
-                    + itemToUpdate.system.piecemealArmor.size > 5
+                  sum( equippedArmor.map( armor => armor.system.piecemeal.size ) )
+                    + itemToUpdate.system.piecemeal.size > 5
                 ) {
                   ui.notifications.warn( game.i18n.localize( "ED4E.Notifications.Warn.piecemealArmorSizeExceeded" ) );
                   break;
                 }
               }
-              const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemealArmor?.selector );
+              const equippedNonPiecemealArmor = this.itemTypes.armor.find( armor => armor.system.itemStatus === "equipped" && !armor.system.piecemeal?.isPiecemeal );
               if ( equippedNonPiecemealArmor ) {
                 updates.push( { _id: equippedNonPiecemealArmor.id, "system.itemStatus": "carried" } );
               }
