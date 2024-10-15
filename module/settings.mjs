@@ -142,40 +142,6 @@ export default function registerSystemSettings() {
   } );
 
   /* -------------------------------------------------------------------------------- */
-  /*                                  DARK MODE                                       */
-  /* -------------------------------------------------------------------------------- */
-
-  // Dark Mode settings Header
-  // game.settings.register( "ed4e", "darkModeHeader", {
-  //     name: "ED.Settings.DarkMode.darkModeHeader",
-  //     config: true,
-  // } );
-
-  /**
-   * dark mode. Css adjustements are located in the dark-theme.less file.
-   */
-  game.settings.register( "ed4e", "darkMode", {
-    name:    "ED.Settings.DarkMode.darkMode",
-    hint:    "ED.Settings.DarkMode.hint",
-    scope:   "client",
-    config:  true,
-    default: 1,
-    type:    Number,
-    range:   {
-      min:  1,
-      max:  10,
-      step: 1
-    },
-    onChange: async( val ) => {
-      if ( val > 1 ) {
-        $( ":root" ).addClass( "dark-theme" );
-      } else {
-        $( ":root" ).removeClass( "dark-theme" );
-      }
-    }
-  } );
-
-  /* -------------------------------------------------------------------------------- */
   /*                              CHARACTER GENERATION                                */
   /* -------------------------------------------------------------------------------- */
 
