@@ -5,12 +5,12 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * Data model template with information on "class"-like items: paths, disciplines, and questors.
  * @property {number} physicalArmor                     Physical Armor
  * @property {number} mysticalArmor                     Mystical Armor
- * @property {number} forgeBonusPhysical                  Forge Bonus for Physical Armor
- * @property {number} forgeBonusMystical                  Forge Bonus for Mystical Armor
- * @property {number} initiativePenalty                   Initiative Penalty
+ * @property {number} forgeBonusPhysical                Forge Bonus for Physical Armor
+ * @property {number} forgeBonusMystical                Forge Bonus for Mystical Armor
+ * @property {number} initiativePenalty                 Initiative Penalty
  * @property {object} piecemeal                         piecemeal armor Object
  * @property {boolean} piecemeal.isPiecemeal            selector if armor is piecemeal or not
- * @property {number} piecemeal.piecemealArmorSize      piecemeal Armor size value can be 1, 2 or 3
+ * @property {number} piecemeal.size                    piecemeal Armor size value can be 1, 2 or 3
  */
 export default class ArmorData extends PhysicalItemTemplate.mixin(
   ItemDescriptionTemplate
