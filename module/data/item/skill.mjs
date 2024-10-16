@@ -18,8 +18,8 @@ export default class SkillData extends AbilityTemplate.mixin(
         required: true,
         initial:  "general",
         choices:  ED4E.skillTypes,
-        label:    "ED.Data.Item.Labels.skillType",
-        hint:     "ED.Data.Item.Hints.skillType",
+        label:    this.labelKey( "Ability.skillType" ),
+        hint:     this.hintKey( "Ability.skillType" )
       } ),
     } );
   }

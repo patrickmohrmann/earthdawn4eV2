@@ -1,49 +1,10 @@
 <div id="base-information-devotion-item" class="item__left--main">
     <h3>{{localize "ED.Item.Header.general"}}</h3>
-    {{!-- Rank --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.rank"}}:</label>
-        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
-            data-dtype="Number">
-    </div>
-    {{!-- Strain --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.strainShort"}}:</label>
-        <input class="input__circle-input" name="system.strain" type="text" value="{{item.system.strain}}"
-            data-dtype="Number">
-    </div>
-    {{!-- Attribute --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Attributes.attribute"}}:</label>
-        <select name="system.attribute">
-            {{selectOptions config.attributes selected=item.system.attribute blank="" labelAttr="label" localize=true }}
-        </select>
-    </div>
-    {{!-- Action --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Action.action"}}:</label>
-        <select name="system.action">
-            {{selectOptions config.action selected=item.system.action localize=true }}
-        </select>
-    </div>
-    {{!-- Tier --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Tier.tier"}}:</label>
-        <select name="system.tier">
-            {{selectOptions config.tier selected=item.system.tier localize=true }}
-        </select>
-    </div>
+    {{> "systems/ed4e/templates/item/item-partials/item-details/partials/abilities.hbs"}}
     {{!-- Devotion Required --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.Item.Devotion.devotionRequired"}}:</label>
-        <input class="item-data__checkbox--line" type="checkbox" name="system.devotionRequired" {{checked item.system.devotionRequired}}>
-    </div>
+    {{formField systemFields.devotionRequired name="system.devotionRequired" value=item.system.devotionRequired localize=true}}
     {{!-- durability --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.durability"}}:</label>
-        <input class="input__circle-input" name="system.durability" type="text" value="{{item.system.durability}}"
-            data-dtype="Number">
-    </div>
+    {{formField systemFields.durability name="system.durability" value=item.system.durability localize=true}}
 </div>
 <div class="item__right--main sheet__editor">
     <h3>{{localize "ED.Item.Header.description"}}</h3>

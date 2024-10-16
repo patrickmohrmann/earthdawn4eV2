@@ -23,23 +23,23 @@ export default class TalentData extends AbilityTemplate.mixin(
         initial:  null,
         trim:     true,
         choices:  ED4E.talentCategory,
-        label:    this.labelKey( "talentCategory" ),
-        hint:     this.hintKey( "talentCategory" ),
+        label:    this.labelKey( "Ability.talentCategory" ),
+        hint:     this.hintKey( "Ability.talentCategory" )
       } ),
       magic: new fields.SchemaField( {
         threadWeaving: new fields.BooleanField( {
           required: true,
           nullable: false,
           initial:  false,
-          label:    this.labelKey( "talentThreadWeaving" ),
-          hint:     this.hintKey( "talentThreadWeaving" ),
+          label:    this.labelKey( "Ability.Magic.threadWeaving" ),
+          hint:     this.hintKey( "Ability.Magic.threadWeaving" )
         } ),
         spellcasting: new fields.BooleanField( {
           required: true,
           nullable: false,
           initial:  false,
-          label:    this.labelKey( "talentSpellcasting" ),
-          hint:     this.hintKey( "talentSpellcasting" ),
+          label:    this.labelKey( "Ability.Magic.spellcasting" ),
+          hint:     this.hintKey( "Ability.Magic.spellcasting" )
         } ),
         magicType: new fields.StringField( {
           required: true,
@@ -47,14 +47,14 @@ export default class TalentData extends AbilityTemplate.mixin(
           blank:    true,
           trim:     true,
           choices:  ED4E.spellcastingTypes,
-          label:    this.labelKey( "talentMagicType" ),
-          hint:     this.hintKey( "talentMagicType" ),
+          label:    this.labelKey( "Ability.Magic.magicType" ),
+          hint:     this.hintKey( "Ability.Magic.magicType" )
         } ),
       }, {
         required: true,
         nullable: false,
-        label:    this.labelKey( "talentMagic" ),
-        hint:     this.hintKey( "talentMagic" ),
+        label:    this.labelKey( "Ability.Magic.magic" ),
+        hint:     this.hintKey( "Ability.Magic.magic" )
       } ),
       knacks: new fields.SchemaField( {
         available: new fields.SetField(
@@ -65,16 +65,16 @@ export default class TalentData extends AbilityTemplate.mixin(
               if ( !fromUuidSync( value, {strict: false} )?.system?.hasMixin( KnackTemplate ) ) return false;
               return undefined; // undefined means do further validation
             },
-            validationError: "must be a knack type",
-            label:           this.labelKey( "talentAvailableKnack" ),
-            hint:            this.hintKey( "talentAvailableKnack" ),
+            validationError:  "must be a knack type",
+            label:            this.labelKey( "Ability.talentAvailableKnack" ),
+            hint:             this.hintKey( "Ability.talentAvailableKnack" )
           } ),
           {
             required: true,
             nullable: false,
             initial:  [],
-            label:    this.labelKey( "talentKnacksAvailable" ),
-            hint:     this.hintKey( "talentKnacksAvailable" ),
+            label:    this.labelKey( "Ability.talentKnacksAvailable" ),
+            hint:     this.hintKey( "Ability.talentKnacksAvailable" )
           }
         ),
         learned:   new fields.SetField(
@@ -85,23 +85,23 @@ export default class TalentData extends AbilityTemplate.mixin(
               if ( !fromUuidSync( value, {strict: false} )?.system?.hasMixin( KnackTemplate ) ) return false;
               return undefined; // undefined means do further validation
             },
-            validationError: "must be a knack type",
-            label:           this.labelKey( "talentLearnedKnack" ),
-            hint:            this.hintKey( "talentLearnedKnack" ),
+            validationError:  "must be a knack type",
+            label:            this.labelKey( "Ability.talentLearnedKnack" ),
+            hint:             this.hintKey( "Ability.talentLearnedKnack" )
           } ),
           {
             required: true,
             nullable: false,
             initial:  [],
-            label:    this.labelKey( "talentKnacksLearned" ),
-            hint:     this.hintKey( "talentKnacksLearned" ),
+            label:    this.labelKey( "Ability.talentKnacksLearned" ),
+            hint:     this.hintKey( "Ability.talentKnacksLearned" )
           }
         ),
       }, {
         required: false,
         nullable: false,
-        label:    this.labelKey( "talentKnacks" ),
-        hint:     this.hintKey( "talentKnacks" ),
+        label:    this.labelKey( "Ability.talentKnacks" ),
+        hint:     this.hintKey( "Ability.talentKnacks" )
       } )
     } );
   }

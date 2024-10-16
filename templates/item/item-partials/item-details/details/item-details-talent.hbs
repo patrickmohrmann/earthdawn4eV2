@@ -1,35 +1,15 @@
 <div>
-    
-</div>
-
-<div>
     {{> "systems/ed4e/templates/item/item-partials/item-details/details/item-details-abilities.hbs"}}
-
-{{!-- TalentIdentifier --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Talent.talentIdentifier"}}:</label>
-        <input class="partial__55--right" name="system.talentIdentifier" type="text"
-            value="{{item.system.talentIdentifier}}" data-dtype="String">
-    </div>
-
 {{!-- class Identifier --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Talent.sourceClassIdentifier"}}:</label>
-        <input class="partial__55--right" name="system.source.class" type="text"
-            value="{{item.system.source.class}}" data-dtype="String">
-    </div>
-
+{{formField systemFields.source.fields.class label=(localize "ED.Data.Item.Labels.Ability.Source.class") 
+hint=(localize "ED.Data.Item.Hints.Ability.Source.class") name="system.source.class" value=item.system.source.class localize=true }}
 {{!-- Added at Level --}}
- <div class="item-data__input--line">
-  <label class="partial__40--left">{{localize "ED.Item.Talent.levelAdded"}}:</label>
-  <input class="input__number-input partial__55--right" name="system.source.atLevel" type="text"
-         value="{{item.system.source.atLevel}}" data-dtype="Number">
-
+{{formField systemFields.source.fields.atLevel name="system.source.atLevel" value=item.system.source.atLevel localize=true}}
 {{! -- Magic Type -- }}
 <div>
   <h3>{{localize "ED.Item.Header.magic"}}</h3>
 </div>
 
-{{formField systemFields.magic.fields.spellcasting name="system.magic.spellcasting" value=item.system.magic.spellcasting}}
-{{formField systemFields.magic.fields.threadWeaving name="system.magic.threadWeaving" value=item.system.magic.threadWeaving}}
-{{formField systemFields.magic.fields.magicType name="system.magic.magicType" value=item.system.magic.magicType required=false}}
+{{formField systemFields.magic.fields.spellcasting name="system.magic.spellcasting" value=item.system.magic.spellcasting localize=true}}
+{{formField systemFields.magic.fields.threadWeaving name="system.magic.threadWeaving" value=item.system.magic.threadWeaving localize=true}}
+{{formField systemFields.magic.fields.magicType name="system.magic.magicType" value=item.system.magic.magicType required=false localize=true}}

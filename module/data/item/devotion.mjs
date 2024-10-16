@@ -18,8 +18,8 @@ export default class DevotionData extends AbilityTemplate.mixin(
       devotionRequired: new fields.BooleanField( {
         required: true,
         initial:  false,
-        label:    "ED.Item.Devotion.label.devotionRequired",
-        hint:     "ED.Item.Devotion.hint.devotionRequired"
+        label:    this.labelKey( "Ability.devotionRequired" ),
+        hint:     this.hintKey( "Ability.devotionRequired" )
       } ),
       durability: new fields.NumberField( {
         required: true,
@@ -27,7 +27,8 @@ export default class DevotionData extends AbilityTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Item.Class.durability"
+        label:    this.labelKey( "Ability.durability" ),
+        hint:     this.hintKey( "Ability.durability" )
       } ),
     } );
   }

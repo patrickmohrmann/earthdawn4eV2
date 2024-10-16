@@ -616,6 +616,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/ed4e/templates/item/item-partials/item-details/partials/usable-items.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/partials/tailor-to-namegiver.hbs",
     "systems/ed4e/templates/item/item-partials/item-details/partials/targeting.hbs",
+    "systems/ed4e/templates/item/item-partials/item-details/partials/abilities.hbs",
 
     // Item details
     "systems/ed4e/templates/item/item-partials/item-details/item-effects.hbs",
