@@ -24,7 +24,7 @@
       {{/if}}
 
       {{#each abilitiesGained}}
-        {{#if (hasItems this)}}
+        {{#if (ed-hasItems this)}}
           <label>
             {{localize (concat "ED.Dialogs.Legend.ClassAdvancement." @key "AbilitiesGained")}}
             <div>
@@ -38,7 +38,7 @@
     </div>
   {{/if}}
 
-  {{#if (hasItems effectsGained)}}
+  {{#if (ed-hasItems effectsGained)}}
     <div>
       <label>
         {{localize "ED.Dialogs.Legend.ClassAdvancement.effectsGained"}}
@@ -51,7 +51,7 @@
     </div>
   {{/if}}
 
-  {{#if (hasItems spellsGained)}}
+  {{#if (ed-hasItems spellsGained)}}
     <div>
       <label>
         {{localize "ED.Dialogs.Legend.ClassAdvancement.spellsGained"}}

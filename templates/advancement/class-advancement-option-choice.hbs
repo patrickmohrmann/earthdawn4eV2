@@ -3,7 +3,7 @@
   <p>{{localize "ED.Dialogs.Legend.ClassAdvancement.YouCanChooseAnAbilityOptionIfYouWant"}}</p>
 
   {{#each abilityOptionsByTier}}
-    {{#if (hasItems this)}}
+    {{#if (ed-hasItems this)}}
       <fieldset>
         <legend>{{lookup ../config.tier @key}}</legend>
         {{#each this as |uuid|}}
