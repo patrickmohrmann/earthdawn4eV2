@@ -420,7 +420,6 @@ ED4E.levelTierMapping = {
  * @enum {string}
  */
 ED4E.talentCategory = {
-  class:          "ED.Config.talentCategory.class",
   discipline:     "ED.Config.talentCategory.discipline",
   optional:       "ED.Config.talentCategory.optional",
   free:           "ED.Config.talentCategory.free",
@@ -456,9 +455,9 @@ preLocalize( "abilityPools" );
  * @enum {string}
  */
 ED4E.skillTypes = {
-  general:      "ED.Skills.general",
-  artisan:      "ED.Skills.artisan",
-  knowledge:    "ED.Skills.knowledge",
+  general:      "ED.Config.Skills.general",
+  artisan:      "ED.Config.Skills.artisan",
+  knowledge:    "ED.Config.Skills.knowledge",
 };
 preLocalize( "skillTypes" );
 

@@ -284,25 +284,30 @@
         "silver":                                               "Silber"
       },
       "ItemStatus": {
-        "carried": "Getragen",
-        "equipped": "Ausgerüstet",
-        "mainHand": "Haupthand",
-        "offHand": "Nebenhand",
-        "owned": "Besitz",
-        "tail": "Schwanz",
-        "twoHands": "Beidhändig"
+        "carried":                                              "Getragen",
+        "equipped":                                             "Ausgerüstet",
+        "mainHand":                                             "Haupthand",
+        "offHand":                                              "Nebenhand",
+        "owned":                                                "Besitz",
+        "tail":                                                 "Schwanz",
+        "twoHands":                                             "Beidhändig"
       },
       "LpTracking": {
         "Validation": {
-          "titleBase": "Grundlegendes",
-          "titleHealth": "Gesundheit",
-          "titleNewAbilityLp": "LP für neue Fähigkeit",
-          "titleResources": "Ressourcen",
-          "titleTalentsRequirement": "Erforderliche Talente"
+          "titleBase":                                          "Grundlegendes",
+          "titleHealth":                                        "Gesundheit",
+          "titleNewAbilityLp":                                  "LP für neue Fähigkeit",
+          "titleResources":                                     "Ressourcen",
+          "titleTalentsRequirement":                            "Erforderliche Talente"
         },
-        "spendLp": "Kostet Legendpunkte",
-        "spendLpPerCircle": "Bei Kreisaufstieg (kostet Legendenpunkte)",
-        "freePerCircle": "Bei Kreisaufstieg (kostenlos)"
+        "spendLp":                                              "Kostet Legendpunkte",
+        "spendLpPerCircle":                                     "Bei Kreisaufstieg (kostet Legendenpunkte)",
+        "freePerCircle":                                        "Bei Kreisaufstieg (kostenlos)"
+      },
+      "Skills": {
+        "general":                                              "Allgemein",
+        "artisan":                                              "Kunsthandwerk",
+        "knowledge":                                            "Wissen"
       },
       "Tier": {
         "journeyman": "Geselle",
@@ -381,9 +386,9 @@
       "General": {
         "Hints": {
           "Target": {
-            "target":                                       "Widerstandstyp des Ziels",
-            "group":                                        "Gruppen Parameter",
-            "fixed":                                        "Fester Schwierigkeitsgrad"
+            "target":                                       "Welcher Widerstandstyp des Ziels wird für diese Fähigkeit verwendet?",
+            "group":                                        "Welche Gruppen Parameter werden für mehrere Ziele verwendet?",
+            "fixed":                                        "Unabhängig von ausgewählten Zielen wird dieser Wert als Schwierigkeit verwendet."
           }
         },
         "Labels": {
@@ -396,6 +401,40 @@
       },
       "Item": {
         "Hints": {
+          "Ability": {
+            "attribute":                                    "Welches Attribut wird für diese Fähigkeit verwendet?",
+            "tier":                                         "Welche Stufe hat diese Fähigkeit?",
+            "Source": {
+              "class":                                      "Zu welchem Pfad, Questor oder Disziplin gehört diese Fähigkeit?",
+              "atLevel":                                    "Auf welchem Kreis oder Rang wurde diese Fähigkeit erlernt?"
+            },
+            "rank":                                         "Rang",
+            "skillType":                                    "Skilltyp",
+            "durability":                                   "Unempfindlichkeit",
+            "devotionRequired":                             "Weihepunkt benötigt",
+            "talentCategory":                               "Talent Kategorie",
+            "Magic": {
+              "threadWeaving":                          "Fadenweben",
+              "spellcasting":                           "Spruchzauberei",
+              "magicType":                              "Magie Typ",
+              "magic":                                  "Magie"
+            },                                  
+            "talentAvailableKnacks":                        "Verfügbare Kniffe",
+            "talentKnacksAvailable":                        "Verfügbare Kniffe",
+            "talentLearnedKnacks":                          "Gelernte Kniffe",
+            "talentKnacksLearned":                          "Gelernte Kniffe",
+            "talentKnacks":                                 "Kniffe",
+            "type":                                         "Welche Aktionsart wird für diese Fähigkeit verwendet?",
+            "DamageAbilities": {
+            "damage":                                       "Ist diese Fähigkeit eine Schadensfägigkeit",
+            "substitute":                                   "Ersetzt Schadesattribute",
+            "relatedRollType":                              "gilt für Aktionstyp"
+            }
+          },
+          "Action": {
+            "action":                                       "Aktion",
+            "strain":                                       "Überanstrengung"
+          },
           "Armor": {
             "physicalArmor":                                "Physische Rüstung",
             "forgeBonusPhysical":                           "Schmiedebonus Körperlich",
@@ -464,6 +503,40 @@
           }
         },
         "Labels": {
+          "Ability": {
+            "attribute":                                    "Attribut",
+            "tier":                                         "Tier",
+            "Source": {
+              "class":                                      "Herkunft",
+              "atLevel":                                    "Auf Rank/Kreis"
+            },
+            "rank":                                         "Rang",
+            "skillType":                                    "Skilltyp",
+            "durability":                                   "Unempfindlichkeit",
+            "devotionRequired":                             "Weihepunkt benötigt",
+            "talentCategory":                               "Talent Kategorie",
+              "Magic": {
+              "threadWeaving":                          "Fadenweben",
+              "spellcasting":                           "Spruchzauberei",
+              "magicType":                              "Magie Typ",
+              "magic":                                  "Magie"
+            },
+            "talentAvailableKnacks":                        "Verfügbare Kniffe",
+            "talentKnacksAvailable":                        "Verfügbare Kniffe",
+            "talentLearnedKnacks":                          "Gelernte Kniffe",
+            "talentKnacksLearned":                          "Gelernte Kniffe",
+            "talentKnacks":                                 "Kniffe",
+            "type":                                         "Aktionsart",
+            "DamageAbilities": {
+            "damage":                                       "Schaden",
+            "substitute":                                   "Ersetzt Schadensattribute",
+            "relatedRollType":                              "gilt für Aktionstyp"
+            }
+          },
+          "Action": {
+            "action":                                       "Aktion",
+            "strain":                                       "Überanstrengung"
+          },
           "Armor": {
             "physicalArmor":                                "Physische Rüstung",
             "forgeBonusPhysical":                           "Schmiedebonus Körperlich",

@@ -33,30 +33,36 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
         nullable: true,
         blank:    true,
         initial:  "",
-        label:    "ED.Item.Ability.attribute"
+        choices:  ED4E.attributes,
+        label:    this.labelKey( "Ability.attribute" ),
+        hint:     this.hintKey( "Ability.attribute" )
       } ),
       tier: new fields.StringField( {
         nullable: false,
         blank:    false,
         choices:  ED4E.tier,
         initial:  "novice",
-        label:    "ED.Item.Ability.tier"
+        label:    this.labelKey( "Ability.tier" ),
+        hint:     this.hintKey( "Ability.tier" )
       } ),
       source: new fields.SchemaField( {
         class: new fields.DocumentUUIDField( ClassTemplate, {
-          label: "ED.Item.Class.source",
-          hint:  "X.the uuid of the class this ability is learned through"
+          label:    this.labelKey( "Ability.Source.class" ),
+          hint:     this.hintKey( "Ability.Source.class" )
         } ),
         atLevel: new fields.NumberField( {
           required: false,
           nullable: true,
           min:      0,
           integer:  true,
-          label:    "ED.Item.Source.atLevel"
+          label:    this.labelKey( "Ability.Source.atLevel" ),
+          hint:     this.hintKey( "Ability.Source.atLevel" )
         } ),
       },
       {
-        required: false
+        required: false,
+        label:    this.labelKey( "Ability.Source.class" ),
+        hint:     this.hintKey( "Ability.Source.class" )
       } ),
       level: new fields.NumberField( {
         required: true,
@@ -64,7 +70,8 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Item.Ability.rank"
+        label:    this.labelKey( "Ability.rank" ),
+        hint:     this.hintKey( "Ability.rank" )
       } ),
       rollType: new fields.StringField( {
         required: false,
@@ -72,20 +79,23 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
         blank:    true,
         initial:  "",
         choices:  ED4E.rollTypes,
-        label:    "ED.Item.Ability.type"
+        label:    this.labelKey( "Ability.type" ),
+        hint:     this.hintKey( "Ability.type" )
       } ),
       damageAbilities: new fields.SchemaField( {
         damage: new fields.BooleanField( {
           required: false,
           nullable: false,
           initial:  false,
-          label:    "ED.Item.Ability.damage"
+          label:    this.labelKey( "Ability.DamageAbilities.damage" ),
+          hint:     this.hintKey( "Ability.DamageAbilities.damage" )
         } ),
         substitute: new fields.BooleanField( {
           required: false,
           nullable: false,
           initial:  false,
-          label:    "ED.Item.Ability.substitute"
+          label:    this.labelKey( "Ability.DamageAbilities.substitute" ),
+          hint:     this.hintKey( "Ability.DamageAbilities.substitute" )
         } ),
         relatedRollType: new fields.StringField( {
           required: false,
@@ -93,7 +103,8 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
           blank:    true,
           initial:  "",
           choices:  ED4E.rollTypes,
-          label:    "ED.Item.Ability.relatedRollType"
+          label:    this.labelKey( "Ability.DamageAbilities.relatedRollType" ),
+          hint:     this.hintKey( "Ability.DamageAbilities.relatedRollType" )
         } ),
       } ),
     } );

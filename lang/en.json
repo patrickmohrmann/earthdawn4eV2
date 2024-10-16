@@ -332,6 +332,11 @@
                 "abilityStep":                                      "Ability Step",
                 "noHealing":                                        "No Recovery"
             },
+            "Skills": {
+                "general":                                          "General",
+                "artisan":                                          "Artisan",
+                "knowledge":                                        "Knowledge"
+            },
             "spellcastingTypes": {
                 "elementalism":                                     "Elementalist",
                 "illusionism":                                      "Illusionist",
@@ -385,6 +390,40 @@
             },
             "Item": {
                 "Hints": {
+                    "Ability": {
+                        "attribute":                                    "Attribute",
+                        "tier":                                         "Tier",
+                        "Source": {
+                        "class":                                      "Source",
+                        "atLevel":                                    "At Circle/Rank"
+                        },
+                        "rank":                                         "Rank",
+                        "skillType":                                    "Skill type",
+                        "durability":                                   "Durability",
+                        "devotionRequired":                             "Devotion required",
+                        "talentCategory":                               "Talent Category",
+                        "Magic": {
+                            "talentThreadWeaving":                          "Thread Weaving",
+                            "talentSpellcasting":                           "Spellcasting",
+                            "talentMagicType":                              "Magic Type",
+                            "talentMagic":                                  "Magic"
+                            },
+                        "talentAvailableKnacks":                        "Available Knacks",
+                        "talentKnacksAvailable":                        "Knacks available",
+                        "talentLearnedKnacks":                          "Learned Knacks",
+                        "talentKnacksLearned":                          "Knacks learned",
+                        "talentKnacks":                                 "Knacks",
+                        "type":                                         "Type",
+                        "DamageAbilities": {
+                        "damage":                                       "Damage",
+                        "substitute":                                   "Replaces damage Attribute",
+                        "relatedRollType":                              "related action type"
+                        }
+                    },
+                    "Action": {
+                        "action":                                       "Action",
+                        "strain":                                       "Strain"
+                    },
                     "Armor": {
                         "physicalArmor":                                "Physical Armor",
                         "forgeBonusPhysical":                           "Forge Bonus Physical",
@@ -451,6 +490,40 @@
                     }
                 },
                 "Labels": {
+                    "Ability": {
+                        "attribute":                                    "Attribute",
+                        "tier":                                         "Tier",
+                        "Source": {
+                        "class":                                      "Source",
+                        "atLevel":                                    "At Circle/Rank"
+                        },
+                        "rank":                                         "Rank",
+                        "skillType":                                    "Skill type",
+                        "durability":                                   "Durability",
+                        "devotionRequired":                             "Devotion required",
+                        "talentCategory":                               "Talent Category",
+                        "Magic": {
+                            "talentThreadWeaving":                          "Thread Weaving",
+                            "talentSpellcasting":                           "Spellcasting",
+                            "talentMagicType":                              "Magic Type",
+                            "talentMagic":                                  "Magic"
+                            },
+                        "talentAvailableKnacks":                        "Available Knacks",
+                        "talentKnacksAvailable":                        "Knacks available",
+                        "talentLearnedKnacks":                          "Learned Knacks",
+                        "talentKnacksLearned":                          "Knacks learned",
+                        "talentKnacks":                                 "Knacks",
+                        "type":                                         "Type",
+                        "DamageAbilities": {
+                        "damage":                                       "Damage",
+                        "substitute":                                   "Replaces damage Attribute",
+                        "relatedRollType":                              "related action type"
+                        }
+                    },
+                    "Action": {
+                        "action":                                       "Action",
+                        "strain":                                       "Strain"
+                    },
                     "Armor": {
                         "physicalArmor":                                "Physical Armor",
                         "forgeBonusPhysical":                           "Forge Bonus Physical",

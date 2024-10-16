@@ -17,7 +17,8 @@ export default class ActionTemplate extends ItemDataModel {
         blank:    false,
         choices:  ED4E.action,
         initial:  "standard",
-        label:    "ED.Item.Power.action",
+        label:    this.labelKey( "Action.action" ),
+        hint:     this.hintKey( "Action.action" )
       } ),
       strain: new foundry.data.fields.NumberField( {
         required: true,
@@ -25,7 +26,8 @@ export default class ActionTemplate extends ItemDataModel {
         min:      0,
         initial:  0,
         integer:  true,
-        label:    "ED.Item.Power.strain",
+        label:    this.labelKey( "Action.strain" ),
+        hint:     this.hintKey( "Action.strain" )
       } ),
     } );
   }
