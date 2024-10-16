@@ -60,7 +60,7 @@ export default class ShieldData extends PhysicalItemTemplate.mixin(
         label:    this.labelKey( "Shields.broken" ),
         hint:     this.hintKey( "Shields.broken" )
       } ),
-      living: new fields.BooleanField( {
+      isLiving: new fields.BooleanField( {
         required: true,
         initial:  false,
         label:    this.labelKey( "Shields.livingArmor" ),
