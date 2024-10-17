@@ -445,6 +445,14 @@
             "piecemealArmor":                               "Ist diese Rüstung nicht komplett, sondern nur ein Teil?",
             "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung (Wert zwischen 1 und 3)"
           },
+          "Class": {
+            "level":                                        "Kreis oder Rang der Berufung",
+            "order":                                        "Die wievielte Disziplin ist dies?",
+            "spellcasting":                                 "Kann diese Disciplin Spurchzauberei ausüben?",
+            "durability":                                   "Unempfindlichkeitwert der Disziplin",
+            "bloodMagicDamage":                             "Blutmagie Schaden",
+            "sourceDiscipline":                             "Herkunfts Disziplin"
+          },
           "edid":                                           "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
           "Equipment": {
               "consumable":                               "Wird dieser Gegenstand bei der benutzung verbraucht?",
@@ -546,6 +554,14 @@
             "living":                                       "Lebendige Rüstung",
             "piecemealArmor":                               "Zusammengesetzte Rüstung",
             "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
+          },
+          "Class": {
+            "level":                                        "Kreis/Rang",
+            "order":                                        "Reihenfolge",
+            "spellcasting":                                 "Spruchzauberei",
+            "durability":                                   "Unempfindlichkeit",
+            "bloodMagicDamage":                             "Blutmagie Schaden",
+            "sourceDiscipline":                             "Herkunfts Disziplin"
           },
           "edid":                                           "ED-ID",
           "Equipment": {

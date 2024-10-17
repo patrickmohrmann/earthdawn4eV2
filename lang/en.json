@@ -434,6 +434,14 @@
                         "piecemealArmor":                               "Piecemeal Armor",
                         "piecemealArmorSize":                           "Piecemeal Armor Size"
                     },
+                    "Class": {
+                        "level":                                        "Circle/Rank",
+                        "order":                                        "Order",
+                        "spellcasting":                                 "Spellcasting",
+                        "durability":                                   "Durability",
+                        "bloodMagicDamage":                             "Blood Magic Damage",
+                        "sourceDiscipline":                             "Source Discipline"
+                    },
                     "edid":                                         "An ID to identify an item without considering its name",
                     "Equipment": {
                         "consumable":                               "The quantity of this item will be reduced by one after each use.",
@@ -533,6 +541,14 @@
                         "living":                                       "Living Armor",
                         "piecemealArmor":                               "Piecemeal Armor",
                         "piecemealArmorSize":                           "Piecemeal Armor Size"
+                    },
+                    "Class": {
+                        "level":                                        "Circle/Rank",
+                        "order":                                        "Order",
+                        "spellcasting":                                 "Spellcasting",
+                        "durability":                                   "Durability",
+                        "bloodMagicDamage":                             "Blood Magic Damage",
+                        "sourceDiscipline":                             "Source Discipline"
                     },
                     "edid":                                         "ED-ID",
                     "Equipment": {

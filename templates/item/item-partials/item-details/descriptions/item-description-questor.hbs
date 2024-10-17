@@ -1,11 +1,7 @@
 <div class="item__left--main">
     <h3>{{localize "ED.Item.Header.general"}}</h3>
-    {{!-- Circle / Rank --}}
-    <div class="item-data__input--line">
-        <label class="label__left">{{localize "ED.General.rank"}}:</label>
-        <input class="input__circle-input" name="system.level" type="text" value="{{item.system.level}}"
-            data-dtype="Number">
-    </div>
+    {{!-- Rank --}}
+    {{formField systemFields.level name="system.level" value=item.system.level localize=true}}
 </div>
 <div class="item__right--main sheet__editor">
     <h3>{{localize "ED.Item.Header.description"}}</h3>
