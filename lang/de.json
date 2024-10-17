@@ -826,12 +826,13 @@
       "windling": "Windling"
     },
     "Notifications": {
-      "Error": {},
-      "Info": {
+      "error": {},
+      "info": {
         "noMoreItemsOfThisType": "Diese Item kann kein weiteres Mal hinzugefügt werden.",
         "notAddedforTheActor": "Diese Item ist nicht für diesen Actortyp gedacht."
       },
-      "Warn": {
+      "warn": {
+        "notEnoughResource":                                     "Nicht genügend {options} Ressourcen",
         "Legend": {
           "abilityIncreaseProblems": "Rang konnte nicht aktualisiert werden",
           "classIncreaseProblems": "Rang/Kreis konnte nicht aktualisiert werden",

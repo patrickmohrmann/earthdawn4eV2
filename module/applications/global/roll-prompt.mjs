@@ -1,5 +1,6 @@
 import EdRoll from "../../dice/ed-roll.mjs";
 import EdRollOptions from "../../data/other/roll-options.mjs";
+import { notify } from "../../notification.mjs";
 
 /**
  * The application responsible for handling additional data for rolling dice in Earthdawn.
@@ -120,7 +121,9 @@ export default class RollPrompt extends FormApplication {
       this.edRollOptions.testType !== CONFIG.ED4E.testTypes.arbitrary
             && newValue > this.edRollOptions[resource].available
     ) {
-      ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );
+
+      // ui.notifications.warn( `Localize: Not enough ${resource}. You can use it, but only max available will be deducted from current.` );
+      notify( "notEnoughResource", game.i18n.localize( `ED.Rolls.${resource}` ), "warn" );
     }
   }
 
