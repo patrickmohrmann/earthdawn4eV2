@@ -442,6 +442,12 @@
                         "bloodMagicDamage":                             "Blood Magic Damage",
                         "sourceDiscipline":                             "Source Discipline"
                     },
+                    "Curse": {
+                        "step":                                         "Curse Step",
+                        "curseType":                                    "Curse Type",
+                        "curseActive":                                  "Aktive?",
+                        "curseDetected":                                "Detected?"
+                    },
                     "edid":                                         "An ID to identify an item without considering its name",
                     "Equipment": {
                         "consumable":                               "The quantity of this item will be reduced by one after each use.",
@@ -472,6 +478,12 @@
                         "calculated":                                 "Calculated",
                         "multiplier":                                 "Multiplier"
                         }
+                    },
+                    "Powers": {
+                        "action":                                       "Action",
+                        "strain":                                       "Strain",
+                        "powerStep":                                    "Power Step",
+                        "damageStep":                                   "Damage Step"
                     },
                     "Shields": {
                         "defenseBonusPhysical":                         "Physical Defense Bonus",
@@ -550,6 +562,12 @@
                         "bloodMagicDamage":                             "Blood Magic Damage",
                         "sourceDiscipline":                             "Source Discipline"
                     },
+                    "Curse": {
+                        "step":                                         "Curse Step",
+                        "curseType":                                    "Curse Type",
+                        "curseActive":                                  "Aktive?",
+                        "curseDetected":                                "Detected?"
+                    },
                     "edid":                                         "ED-ID",
                     "Equipment": {
                         "consumable":                               "Consumable?",
@@ -580,6 +598,12 @@
                         "calculated":                                 "Calculated",
                         "multiplier":                                 "Multiplier"
                         }
+                    },
+                    "Powers": {
+                        "action":                                       "Action",
+                        "strain":                                       "Strain",
+                        "powerStep":                                    "Power Step",
+                        "damageStep":                                   "Damage Step"
                     },
                     "Shields": {
                         "defenseBonusPhysical":                         "Physical Defense Bonus",
