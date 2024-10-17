@@ -16,7 +16,8 @@ export default class PathData extends ClassTemplate.mixin(
     return this.mergeSchema( super.defineSchema(), {
       sourceDiscipline: new fields.ForeignDocumentField( DisciplineData, {
         idOnly: true,
-        label:  "ED.Item.Class.sourceDiscipline"
+        label:    this.labelKey( "Class.sourceDiscipline" ),
+        hint:     this.hintKey( "Class.sourceDiscipline" )
       } ),
       bloodMagicDamage: new fields.NumberField( {
         required: true,
@@ -24,7 +25,8 @@ export default class PathData extends ClassTemplate.mixin(
         min:      0,
         initial:  2,
         integer:  true,
-        label:    "ED.Item.Class.bloodMagicDamage"
+        label:    this.labelKey( "Class.bloodMagicDamage" ),
+        hint:     this.hintKey( "Class.bloodMagicDamage" )
       } ),
     } );
   }
