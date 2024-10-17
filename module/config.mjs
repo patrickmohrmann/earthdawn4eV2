@@ -125,6 +125,19 @@ ED4E.globalBonuses = {
 };
 preLocalize( "globalBonuses", {key: "label"} );
 
+
+
+/**
+ * Denomination options
+ * @enum {string}
+ */
+ED4E.curseType = {
+  minor:       "ED.Config.curseType.minor",
+  major:       "ED.Config.curseType.major",
+  horror:      "ED.Config.curseType.horror"
+};
+preLocalize( "curseType" );
+
 /**
  * Denomination options
  * @enum {string}

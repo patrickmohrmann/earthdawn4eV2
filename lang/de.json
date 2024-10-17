@@ -268,6 +268,11 @@
         "throwing": "Wurfwaffen Fernkampf",
         "unarmed": "Unbewaffneter Nahkampf"
       },
+      "curseType": {
+        "minor":                        "Kleiner Fluch",
+        "major":                        "Großer Fluch",
+        "horror":                       "Dämonenfluch"
+      },
       "Defenses": {
         "highestOfGroup": "Höchste der Gruppe",
         "highestX": "Höchste der Gruppe + Ziele",
@@ -445,6 +450,12 @@
             "piecemealArmor":                               "Ist diese Rüstung nicht komplett, sondern nur ein Teil?",
             "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung (Wert zwischen 1 und 3)"
           },
+          "Curse": {
+            "step":                                         "Fluchstufe",
+            "curseType":                                    "Art des Fluches",
+            "curseActive":                                  "ist der Fluch aktiv?",
+            "curseDetected":                                "ist der Fluch erkannt?"
+          },
           "edid":                                           "Eine ID mit der ein Item unabhängig vom Namen identifziert werden kann",
           "Equipment": {
               "consumable":                               "Wird dieser Gegenstand bei der benutzung verbraucht?",
@@ -477,6 +488,12 @@
               "calculated":                                 "Wurde dieser Gegenstand bereits mit dem Multipliktor des Namensgebers berechnet?",
               "multiplier":                                 "Der Multiplikator des Namensgebers"
             }
+          },
+          "Powers": {
+            "action":                                       "Aktionsart",
+            "strain":                                       "Überanstrengung",
+            "powerStep":                                    "Aktionsstufe",
+            "damageStep":                                   "Schadensstufe"
           },
           "Shields": {
             "defenseBonusPhysical":                         "Körperlicher Verteidigungsbonus",
@@ -547,6 +564,12 @@
             "piecemealArmor":                               "Zusammengesetzte Rüstung",
             "piecemealArmorSize":                           "Größe der zusammengesetzten Rüstung"
           },
+          "Curse": {
+            "step":                                         "Fluchstufe",
+            "curseType":                                    "Fluchart",
+            "curseActive":                                  "Aktiv?",
+            "curseDetected":                                "Erkannt?"
+          },
           "edid":                                           "ED-ID",
           "Equipment": {
               "consumable":                               "Verbrauchsgegenstand?",
@@ -577,6 +600,12 @@
               "calculated":                                 "Berechnet",
               "multiplier":                                 "Multiplikator"
             }
+          },
+          "Powers": {
+            "action":                                       "Aktionsart",
+            "strain":                                       "Überanstrengung",
+            "powerStep":                                    "Aktionsstufe",
+            "damageStep":                                   "Schadensstufe"
           },
           "Shields": {
             "defenseBonusPhysical":                         "Körperlicher Verteidigungsbonus",
