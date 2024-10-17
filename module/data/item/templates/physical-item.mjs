@@ -67,15 +67,15 @@ export default class PhysicalItemTemplate extends ItemDataModel.mixin(
           label:    this.labelKey( "PhysicalItems.Weight.value" ),
           hint:     this.hintKey( "PhysicalItems.Weight.value" )
         } ),
-        weightMultiplier: new fields.NumberField( {
+        multiplier: new fields.NumberField( {
           required: true,
           nullable: false,
-          min:      1,
+          min:      0,
           initial:  1,
           label:    this.labelKey( "PhysicalItems.Weight.multiplier" ),
           hint:     this.hintKey( "PhysicalItems.Weight.multiplier" )
         } ),
-        weightCalculated: new fields.BooleanField( {
+        calculated: new fields.BooleanField( {
           required: true,
           initial:  false,
           label:    this.labelKey( "PhysicalItems.Weight.calculated" ),

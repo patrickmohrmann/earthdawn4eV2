@@ -19,16 +19,16 @@ export default class ItemEd extends Item {
    * @returns {Promise<void>}
    */
   async tailorToNamegiver( namegiver ) {
-    if ( this.isOwned && !this.system.weight.weightCalculated && namegiver ) {
+    if ( this.isOwned && !this.system.weight.calculated && namegiver ) {
       const updateData = {
         "name":                           `${this.name} (${namegiver.name})`,
         "system.weight.value":            namegiver.system.weightMultiplier * this.system.weight.value,
-        "system.weight.weightCalculated": true,
-        "system.weight.weightMultiplier": namegiver.system.weightMultiplier,
+        "system.weight.calculated":       true,
+        "system.weight.multiplier":       namegiver.system.weightMultiplier,
       };
       await this.update( updateData );
       this.render( true );
-    } else if ( this.system.weight.weightCalculated ) {
+    } else if ( this.system.weight.calculated ) {
       ui.notifications.warn( game.i18n.localize( "X.cantUpdateItemWeight" ) );
     }
   }
