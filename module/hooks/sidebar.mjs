@@ -1,8 +1,10 @@
+import RollPrompt from "../applications/global/roll-prompt.mjs";
 /**
  *
  */
 export default function () {
   Hooks.on( "renderSidebarTab", ( app, html ) => {
+
     if ( app instanceof Settings ) {
       // Add buttons
       const chlogButton = $( `<button id="ed4eChangelog" class="changelog">
@@ -30,4 +32,16 @@ export default function () {
       } );
     }
   } );
+
+
+
+  Hooks.on( "changeSidebarTab", ( app ) => {
+    /* -------------------------------------------- */
+    /*  Dice Icon Roll                              */
+    /* -------------------------------------------- */
+    /**
+     * @userFunction                UF_Rolls_triggerDiceIconRoll
+     */
+    $( "#chat-controls i.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
+  }  );
 }

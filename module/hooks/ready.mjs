@@ -1,4 +1,4 @@
-import RollPrompt from "../applications/global/roll-prompt.mjs";
+
 import EdTour from "../tours/ed-tours.mjs";
 
 /**
@@ -7,13 +7,6 @@ import EdTour from "../tours/ed-tours.mjs";
 export default function () {
   Hooks.once( "ready", async () => {
 
-    /* -------------------------------------------- */
-    /*  Dice Icon Roll                              */
-    /* -------------------------------------------- */
-    /**
-     * @userFunction                UF_Rolls_triggerDiceIconRoll
-     */
-    $( "#chat-controls i.fa-dice-d20" ).on( "click", RollPrompt.rollArbitraryPrompt.bind( null ) );
 
     /* -------------------------------------------- */
     /*  Debug Documents                             */
