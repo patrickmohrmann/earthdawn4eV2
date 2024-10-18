@@ -687,7 +687,7 @@
             "Discipline": {
                 "optionalAbilities":                                "Optional Abilities",
                 "addLevel":                                         "Add Circle",
-                "circle":                                           "Circle",
+                "circle":                                           "Circle {circle}",
                 "deleteLevel":                                      "Delete Circle",
                 "disciplineTalents":                                "Discipline Talents",
                 "durability":                                       "Durability",
