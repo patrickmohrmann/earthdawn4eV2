@@ -461,7 +461,21 @@
                         "minLevel":                                     "Min. Rank",
                         "lpCost":                                       "LP cost"
                     },
-                    "livingArmorOnly":                              "This item is considered as living armor.",
+                    "Maneuver": {
+                        "extraSuccesses":                               "Extra Successes"
+                    },
+                    "Namegiver":{
+                        "livingArmorOnly":                              "This item is considered as living armor.",
+                        "WeaponSize": {
+                            "twoHandedmax":                                 "TwoHanded max.",
+                            "twoHandedmin":                                 "TwoHanded min.",
+                            "oneHandedmax":                                 "OneHanded max.",
+                            "oneHandedmin":                                 "OneHanded min."
+                        },
+                        "tail":                                         "Tail",
+                        "weightMultiplier":                             "Weight Multiplier",
+                        "karmaModifier":                                "Karma Modifier"
+                    },
                     "PhysicalItems": {
                         "amount":                                       "Amount",
                         "availability":                                 "Availability",
@@ -588,7 +602,21 @@
                         "minLevel":                                     "Min. Rank",
                         "lpCost":                                       "LP cost"  
                     },
-                    "livingArmorOnly":                              "Living Armor Only",
+                    "Maneuver": {
+                        "extraSuccesses":                               "Extra Successes"
+                    },
+                    "Namegiver":{
+                        "livingArmorOnly":                              "Living Armor Only",
+                        "WeaponSize": {
+                            "twoHandedmax":                                 "TwoHanded max.",
+                            "twoHandedmin":                                 "TwoHanded min.",
+                            "oneHandedmax":                                 "OneHanded max.",
+                            "oneHandedmin":                                 "OneHanded min."
+                        },
+                        "tail":                                         "Tail",
+                        "weightMultiplier":                             "Weight Multiplier",
+                        "karmaModifier":                                "Karma Modifier"
+                    },
                     "PhysicalItems": {
                         "amount":                                       "Amount",
                         "availability":                                 "Availability",

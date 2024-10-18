@@ -476,8 +476,22 @@
             "sourceTalentUuid":                             "Von welchem Talent stammt dieser Kniff?",
             "minLevel":                                     "welchen Rang muss das Ursprungstalent mindestens haben?",
             "lpCost":                                       "Hat dieser Kniff abweichende LP Kosten zum Ursprungstalentrang?"  
+          },                             
+          "Maneuver": {
+            "extraSuccesses":                               "Wie viele zusätzliche Erfolge werden benötigt?"
           },
-          "livingArmorOnly":                                "Nur legendige Rüstung",
+          "Namegiver":{
+            "livingArmorOnly":                              "Es kann nur nur lebendige Rüstung getragen werden.",
+            "WeaponSize": {
+              "twoHandedmax":                                 "Maximalgröße für Zweihandwaffen",
+              "twoHandedmin":                                 "Minimalgröße für Zweihandwaffen",
+              "oneHandedmax":                                 "Maximalgröße für Einhandwaffen",
+              "oneHandedmin":                                 "Minimalgröße für Einhandwaffen"
+            },
+            "tail":                                         "Kann dieser Namensgeber Angriffe mit dem Schwanz ausführen",
+            "weightMultiplier":                             "Um wie viel wird das Gewicht eines Gegenstandes für diesen Namensgeber multipliziert?",
+            "karmaModifier":                                "Wie viele Karma Punkte erhält dieser Namensgeber pro Kreis?"
+          },
           "PhysicalItems": {
             "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
             "arbitraryStep":                                "Willkürliche Stufe, die beim benutzen des Gegenstandes verwendet wird.",
@@ -606,7 +620,21 @@
             "minLevel":                                     "Min. Rang",  
             "lpCost":                                       "LP Kosten"
           },
-          "livingArmorOnly":                                "Es kann nur nur lebendige Rüstung getragen werden.",
+          "Maneuver": {
+            "extraSuccesses":                               "Zusätzliche Erfolge"
+          },
+          "Namegiver":{
+            "livingArmorOnly":                              "Nur legendige Rüstung",
+            "WeaponSize":{
+              "twoHandedmax":                                 "Zweihandwaffen max.",
+              "twoHandedmin":                                 "Zweihandwaffen min.",
+              "oneHandedmax":                                 "Einhandwaffen max.",
+              "oneHandedmin":                                 "Einhandwaffen min."
+            },
+            "tail":                                         "Schwanz",
+            "weightMultiplier":                             "Gewichtsmultiplikator",
+            "karmaModifier":                                "Karma Modifikator"
+          },
           "PhysicalItems": {
             "amount":                                       "Menge",
             "availability":                                 "Verfügbarkeit",
