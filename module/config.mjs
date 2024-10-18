@@ -203,6 +203,29 @@ ED4E.targetDifficulty = {
 preLocalize( "targetDifficulty" );
 
 /**
+ * activation Types of Poisons and Diseases
+ * @enum {string}
+ */
+ED4E.activationType = {
+  contact:        "ED.Config.ActivationType.contact",
+  ingested:       "ED.Config.ActivationType.ingested",
+  inhaled:        "ED.Config.ActivationType.inhaled",
+  injury:         "ED.Config.ActivationType.injury",
+  wound:          "ED.Config.ActivationType.wound",
+};
+
+/**
+ * Different types of Illusions
+ * @enum {string}
+ */
+ED4E.illusionType = {
+  "figment":      "ED.Config.IllusionType.figment",
+  "glamour":      "ED.Config.IllusionType.glamour",
+  "phantasm":     "ED.Config.IllusionType.phantasm",
+  "shadow":       "ED.Config.IllusionType.shadow",
+};
+
+/**
  * Group  Difficulty
  * @enum {string}
  */

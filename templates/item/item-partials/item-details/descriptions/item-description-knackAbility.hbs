@@ -5,13 +5,13 @@
     {{formField systemFields.standardEffect name="system.standardEffect" value=item.system.standardEffect localize=true}}
     {{!-- Source --}}
     <div class="knack-ability__source-min-level">
-    <div class="knack-ability__source">
-        {{formField systemFields.sourceTalentUuid name="system.sourceTalentUuid" value=item.system.sourceTalentUuid label=(localize "ED.Data.Item.Labels.Knack.sourceTalentUuid") localize=true}}
+        <div class="knack-ability__source">
+            {{formField systemFields.sourceTalentUuid name="system.sourceTalentUuid" value=item.system.sourceTalentUuid label=(localize "ED.Data.Item.Labels.Knack.sourceTalentUuid") localize=true}}
+        </div>
+        <div class="knack-ability__min-level">
+            {{formInput systemFields.minLevel name="system.minLevel" value=item.system.minLevel}}
+        </div>
     </div>
-    <div class="knack-ability__min-level">
-        {{formInput systemFields.minLevel name="system.minLevel" value=item.system.minLevel}}
-    </div>
-</div>
 </div>
 <div class="item__right--main sheet__editor">
     <h3>{{localize "ED.Item.Header.description"}}</h3>

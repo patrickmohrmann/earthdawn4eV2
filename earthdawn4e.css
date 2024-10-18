@@ -1029,3 +1029,23 @@ power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hove
   width: 30%;
   float: right;
 }
+.spell__duration-unit .spell__duration,
+.spell__range-unit .spell__duration,
+.spell__shape-unit .spell__duration,
+.spell__duration-unit .spell__range,
+.spell__range-unit .spell__range,
+.spell__shape-unit .spell__range,
+.spell__duration-unit .spell__shape,
+.spell__range-unit .spell__shape,
+.spell__shape-unit .spell__shape {
+  width: 75%;
+  float: left;
+}
+.spell__duration-unit .spell__unit,
+.spell__range-unit .spell__unit,
+.spell__shape-unit .spell__unit {
+  margin-top: 3px;
+  height: inherit;
+  width: 24%;
+  float: right;
+}
