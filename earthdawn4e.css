@@ -1017,3 +1017,15 @@ power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hove
   width: 10%;
   float: right;
 }
+.item-data__input--line {
+  height: 26px;
+  margin-bottom: 3px;
+}
+.item-data__input--line .partial__40--left {
+  width: 70%;
+  float: left;
+}
+.item-data__input--line .partial__55--right {
+  width: 30%;
+  float: right;
+}
