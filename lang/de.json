@@ -745,7 +745,7 @@
       },
       "Discipline": {
         "addLevel": "Füge eine Kreis hinzu",
-        "circle": "Kreis",
+        "circle": "Kreis {circle}",
         "deleteLevel": "Lösche Stufe",
         "disciplineTalents": "Disziplin Talente",
         "durability": "Unverwundbarkeit",
