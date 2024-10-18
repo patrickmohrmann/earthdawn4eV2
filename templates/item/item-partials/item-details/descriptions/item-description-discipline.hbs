@@ -1,17 +1,9 @@
 <div id="base-information-discipline-item" class="item__left--main">
     <h3>{{localize "ED.Item.Header.general"}}</h3>
-    {{!-- Circle / Rank --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Discipline.circle"}}:</label>
-        <input class="input__circle-input partial__55--right" name="system.level" type="text" value="{{item.system.level}}"
-            data-dtype="Number">
-    </div>
+    {{!-- Circle --}}
+    {{formField systemFields.level name="system.level" value=item.system.level localize=true}}
     {{!-- durability --}}
-    <div class="item-data__input--line">
-        <label class="partial__40--left">{{localize "ED.Item.Discipline.durability"}}:</label>
-        <input class="input__circle-input partial__55--right" name="system.durability" type="text" value="{{item.system.durability}}"
-            data-dtype="Number">
-    </div>
+    {{formField systemFields.durability name="system.durability" value=item.system.durability localize=true}}
 </div>
 <div id="description-discipline-item" class="item__right--main sheet__editor">
     <h3>{{localize "ED.Item.Header.description"}}</h3>

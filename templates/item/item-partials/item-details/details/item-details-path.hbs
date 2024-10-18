@@ -1,9 +1,2 @@
-<div>
-    
-</div>
 {{!-- bloodMagicDamage --}}
-    <div class="item-data__input--line">
-        <label>{{localize "ED.Item.General.bloodMagicDamage"}}:</label>
-        <input class="input__number-input" name="system.bloodMagicDamage" type="number"
-            value="{{item.system.bloodMagicDamage}}" data-dtype="Number">
-    </div>
+{{formField systemFields.bloodMagicDamage name="system.bloodMagicDamage" value=item.system.bloodMagicDamage localize=true}}
