@@ -244,6 +244,13 @@
         "standard": "Standard",
         "sustained": "Anhaltend"
       },
+      "ActivationType": {
+        "contact":                                                "Kontakt",
+        "ingested":                                               "Einnahme",
+        "inhaled":                                                "Einatmen",
+        "injury":                                                 "Verletzung",
+        "wound":                                                  "Verwundung"
+      },
       "AmmunitionType": {
         "arrow":                                              "Pfeil",
         "bolt":                                               "Bolzen",
@@ -518,6 +525,19 @@
               "multiplier":                                 "Der Multiplikator des Namensgebers"
             }
           },
+          "PoisonDisease": {
+            "damageStep":                                   "Schadensstufe des Giftes/der Krankheit",
+            "paralysisStep":                                "Lähmungsstufe des Giftes/der Krankheit",
+            "debilitationStep":                             "Schwächungsstufe des Giftes/der Krankheit",
+            "effect":                                       "Effekt des Giftes/der Krankheit",
+            "totalEffects":                                 "Gesamteffekte des Giftes/der Krankheit",
+            "timeInBetween":                                "Zeit zwischen den Effekten",
+            "interval":                                     "Intervall zwischen den Effekten",
+            "onsetTime":                                    "Einsetzzeit des Giftes/der Krankheit",
+            "duration":                                     "Dauer des Giftes/der Krankheit",
+            "activation":                                   "Aktivierungsart des Giftes/der Krankheit",
+            "death":                                        "Ist das Gift/die Krankheit tödlich?"
+          },
           "Powers": {
             "action":                                       "Aktionsart",
             "strain":                                       "Überanstrengung",
@@ -532,6 +552,46 @@
             "broken":                                       "Ist dieser Schild zerbrochen?",
             "livingArmor":                                  "Gilt dieser Schild als Lebendige Rüstung?",
             "bowUsage":                                     "Kann dieser Schild mit einem Bogen benutzt werden?"
+          },
+          "ShipWeapon":{
+            "firePowerPoints":                              "Wie viel Feuerkraft Punkte hat diese Waffe?",
+            "crewWeapon":                                   "Wie viele Crewmitglieder werden benötigt um diese Waffe zu bedienen?",
+            "rangeShort":                                   "Reichweite Kurz Minimum",
+            "rangeLong":                                    "Reichweite Lang Minimum",
+            "salvoCost":                                    "Wie viel kostet eine Salve?",
+            "characterDamage":                              "Wie viel Schaden macht die Waffe an Lebewesen?"
+          },
+          "Spell": {  
+            "magicType":                                    "Magie Typ",
+            "circle":                                       "Kreis",
+            "threadsrequired":                              "Benötigte Fäden",
+            "weavingdifficulty":                            "Weben Schwierigkeit",
+            "reattunedifficulty":                           "Neuabstimmen Schwierigkeit",
+            "effect":                                       "Effekt des Giftes/der Krankheit",
+            "concentration":                                "Konzentration",
+            "binding":                                      "Bindung",
+            "spirit":                                       "Geist",
+            "summoning":                                    "Beschwörung",
+            "resist":                                       "Widerstand",
+            "duration": {
+              "value":                                      "Dauer",
+              "uom":                                        "Einheit"
+            },
+            "range": {
+              "value":                                      "Reichweite",
+              "uom":                                        "Einheit"
+            },
+            "spellArea": {
+              "value":                                      "Form",
+              "uom":                                        "Einheit",
+              "shape":                                      "Form"
+            },
+            "illusionType":                                 "Illusionstyp",
+            "sensingDifficulty":                            "Wahrnehmungsschwierigkeit",
+            "spellIllustion":                               "Illusion",
+            "elementType":                                  "Elementtyp",
+            "elementSubtype":                               "Elementuntertyp",
+            "spellElement":                                 "Element"
           },
           "Weapons": {
             "weaponType":                                   "Waffentyp",
@@ -659,6 +719,19 @@
               "multiplier":                                 "Multiplikator"
             }
           },
+          "PoisonDisease": {
+            "damageStep":                                   "Schadensstufe",
+            "paralysisStep":                                "Lähmungsstufe",
+            "debilitationStep":                             "Schwächungsstufe",
+            "effect":                                       "Effekt",
+            "totalEffects":                                 "Gesamteffekte",
+            "timeInBetween":                                "Zeit zwischen den Effekten",
+            "interval":                                     "Intervall",
+            "onsetTime":                                    "Einsetzzeit",
+            "duration":                                     "Dauer",
+            "activation":                                   "Aktivierung",
+            "death":                                        "Tod"
+          },
           "Powers": {
             "action":                                       "Aktionsart",
             "strain":                                       "Überanstrengung",
@@ -673,6 +746,46 @@
             "broken":                                       "Zerbrochen",
             "livingArmor":                                  "Lebendige Rüstung?",
             "bowUsage":                                     "Tartsche?"
+          },
+          "ShipWeapon":{
+            "firePowerPoints":                              "Feuerkraft Punkte",
+            "crewWeapon":                                   "Besatzung",
+            "rangeShort":                                   "Kurze Reichweite",
+            "rangeLong":                                    "Lange Reichweite",
+            "salvoCost":                                    "Salve Kosten",
+            "characterDamage":                              "Charakter Schaden"
+          },
+          "Spell": {  
+            "magicType":                                    "Magie Typ",
+            "circle":                                       "Kreis",
+            "threadsrequired":                              "Benötigte Fäden",
+            "weavingdifficulty":                            "Weben Schwierigkeit",
+            "reattunedifficulty":                           "Neuabstimmen Schwierigkeit",
+            "effect":                                       "Effekt des Giftes/der Krankheit",
+            "concentration":                                "Konzentration",
+            "binding":                                      "Bindung",
+            "spirit":                                       "Geist",
+            "summoning":                                    "Beschwörung",
+            "resist":                                       "Widerstand",
+            "duration": {
+              "value":                                      "Dauer",
+              "uom":                                        "Einheit"
+            },
+            "range": {
+              "value":                                      "Reichweite",
+              "uom":                                        "Einheit"
+            },
+            "spellArea": {
+              "value":                                      "Form",
+              "uom":                                        "Einheit",
+              "shape":                                      "Form"
+            },
+            "illusionType":                                 "Illusionstyp",
+            "sensingDifficulty":                            "Wahrnehmungsschwierigkeit",
+            "spellIllustion":                               "Illusion",
+            "elementType":                                  "Elementtyp",
+            "elementSubtype":                               "Elementuntertyp",
+            "spellElement":                                 "Element"
           },
           "Weapons": {
             "weaponType":                                   "Waffentyp",

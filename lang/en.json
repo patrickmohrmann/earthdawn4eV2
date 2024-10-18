@@ -244,6 +244,13 @@
                 "standard":                                         "Standard",
                 "sustained":                                        "Sustained"
             },
+            "ActivationType": {
+                "contact":                                          "Contact",
+                "ingested":                                         "Ingested",
+                "inhaled":                                          "Inhaled",
+                "injury":                                           "Injury",
+                "wound":                                            "Wound"
+            },
             "AmmunitionType": {
                 "arrow":                                              "Arrow",
                 "bolt":                                               "Bolt",
@@ -500,6 +507,19 @@
                         "multiplier":                                 "Multiplier"
                         }
                     },
+                    "PoisonDisease": {
+                        "damageStep":                                   "Damage Step",
+                        "paralysisStep":                                "Paralysis Step",
+                        "debilitationStep":                             "Debilitation Step",
+                        "effect":                                       "Effect",
+                        "totalEffects":                                 "Total Effects",
+                        "timeInBetween":                                "Time in between",
+                        "interval":                                     "Interval",
+                        "onsetTime":                                    "Onset Time",
+                        "duration":                                     "Duration",
+                        "activation":                                   "Activation",
+                        "death":                                        "Death"
+                    },
                     "Powers": {
                         "action":                                       "Action",
                         "strain":                                       "Strain",
@@ -514,6 +534,46 @@
                         "broken":                                       "Broken?",
                         "livingArmor":                                  "Living Armor",
                         "bowUsage":                                     "Bow Usage"
+                    },
+                    "ShipWeapon":{
+                        "firePowerPoints":                              "Fire Power Points",
+                        "crewWeapon":                                   "Crew",
+                        "rangeShort":                                   "Short Range",
+                        "rangeLong":                                    "Long Range",
+                        "salvoCost":                                    "Salvo Cost",
+                        "characterDamage":                              "Character Damage"
+                    },
+                    "Spell": {  
+                        "magicType":                                    "Magic Type",
+                        "circle":                                       "Circle",
+                        "threadsrequired":                              "Threads required",
+                        "weavingdifficulty":                            "Weaving Difficulty",
+                        "reattunedifficulty":                           "Reattune Difficulty",
+                        "effect":                                       "Effect",
+                        "concentration":                                "Concentration",
+                        "binding":                                      "Binding",
+                        "spirit":                                       "Spirit",
+                        "summoning":                                    "Summoning",
+                        "resist":                                       "Resist",
+                        "duration": {
+                        "value":                                      "Duration",
+                        "uom":                                        "Unit"
+                        },
+                        "range": {
+                        "value":                                      "Range",
+                        "uom":                                        "Unit"
+                        },
+                        "spellArea": {
+                        "value":                                      "Area",
+                        "uom":                                        "Unit",
+                        "shape":                                      "Shape"
+                        },
+                        "illusionType":                                 "Illusion Type",
+                        "sensingDifficulty":                            "Sensing Difficulty",
+                        "spellIllustion":                               "Illusion",
+                        "elementType":                                  "Element Type",
+                        "elementSubtype":                               "Element Subtype",
+                        "spellElement":                                 "Element"
                     },
                     "Weapons": {
                         "weaponType":                                   "Weapon Type",
@@ -641,6 +701,19 @@
                         "multiplier":                                 "Multiplier"
                         }
                     },
+                    "PoisonDisease": {
+                        "damageStep":                                   "Damage Step",
+                        "paralysisStep":                                "Paralysis Step",
+                        "debilitationStep":                             "Debilitation Step",
+                        "effect":                                       "Effect",
+                        "totalEffects":                                 "Total Effects",
+                        "timeInBetween":                                "Time in between",
+                        "interval":                                     "Interval",
+                        "onsetTime":                                    "Onset Time",
+                        "duration":                                     "Duration",
+                        "activation":                                   "Activation",
+                        "death":                                        "Death"
+                    },
                     "Powers": {
                         "action":                                       "Action",
                         "strain":                                       "Strain",
@@ -655,6 +728,46 @@
                         "broken":                                       "Broken?",
                         "livingArmor":                                  "Living Armor",
                         "bowUsage":                                     "Bow Usage"
+                    },
+                    "ShipWeapon":{
+                        "firePowerPoints":                              "Fire Power Points",
+                        "crewWeapon":                                   "Crew",
+                        "rangeShort":                                   "Short Range",
+                        "rangeLong":                                    "Long Range",
+                        "salvoCost":                                    "Salvo Cost",
+                        "characterDamage":                              "Character Damage"
+                    },
+                    "Spell": {  
+                        "magicType":                                    "Magic Type",
+                        "circle":                                       "Circle",
+                        "threadsrequired":                              "Threads required",
+                        "weavingdifficulty":                            "Weaving Difficulty",
+                        "reattunedifficulty":                           "Reattune Difficulty",
+                        "effect":                                       "Effect",
+                        "concentration":                                "Concentration",
+                        "binding":                                      "Binding",
+                        "spirit":                                       "Spirit",
+                        "summoning":                                    "Summoning",
+                        "resist":                                       "Resist",
+                        "duration": {
+                        "value":                                      "Duration",
+                        "uom":                                        "Unit"
+                        },
+                        "range": {
+                        "value":                                      "Range",
+                        "uom":                                        "Unit"
+                        },
+                        "spellArea": {
+                        "value":                                      "Area",
+                        "uom":                                        "Unit",
+                        "shape":                                      "Shape"
+                        },
+                        "illusionType":                                 "Illusion Type",
+                        "sensingDifficulty":                            "Sensing Difficulty",
+                        "spellIllustion":                               "Illusion",
+                        "elementType":                                  "Element Type",
+                        "elementSubtype":                               "Element Subtype",
+                        "spellElement":                                 "Element"
                     },
                     "Weapons": {
                         "weaponType":                                   "Weapon Type",
