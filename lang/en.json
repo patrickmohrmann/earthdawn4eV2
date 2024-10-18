@@ -454,6 +454,13 @@
                         "ammunition":                                "Which type of ammunition is this item?",
                         "bundleSize":                               "How many items are in this bundle?"
                     },
+                    "Knack":{
+                        "isPathKnack":                                  "Path Knack",
+                        "standardEffect":                               "Standard Effect",
+                        "sourceTalentUuid":                             "Source Talent",
+                        "minLevel":                                     "Min. Rank",
+                        "lpCost":                                       "LP cost"
+                    },
                     "livingArmorOnly":                              "This item is considered as living armor.",
                     "PhysicalItems": {
                         "amount":                                       "Amount",
@@ -573,6 +580,13 @@
                         "consumable":                               "Consumable?",
                         "ammunition":                                "Ammunition type",
                         "bundleSize":                               "Bundle size"
+                    },
+                    "Knack":{
+                        "isPathKnack":                                  "Path Knack",
+                        "standardEffect":                               "Standard Effect",
+                        "sourceTalentUuid":                             "Source Talent",
+                        "minLevel":                                     "Min. Rank",
+                        "lpCost":                                       "LP cost"  
                     },
                     "livingArmorOnly":                              "Living Armor Only",
                     "PhysicalItems": {

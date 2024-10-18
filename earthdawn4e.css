@@ -1007,3 +1007,13 @@ power-card__grid--container:hover .power-card__grid--item:hover .roll-icon__hove
   width: 24%;
   float: right;
 }
+.knack-ability__source-min-level .knack-ability__source {
+  width: 90%;
+  float: left;
+}
+.knack-ability__source-min-level .knack-ability__min-level {
+  margin-top: 3px;
+  height: inherit;
+  width: 10%;
+  float: right;
+}

@@ -470,6 +470,13 @@
               "ammunition":                                "Welcher Munitionstyp ist dieser Gegenstand?",
               "bundleSize":                               "Wie viele Gegenstände gehören zu einem Bündel?"
             },
+          "Knack":{
+            "isPathKnack":                                  "Ist dieser Kniff ein Pfadkniff?",
+            "standardEffect":                               "Wird der Effekt des Ursprungtalentes mit ausgelöst?",
+            "sourceTalentUuid":                             "Von welchem Talent stammt dieser Kniff?",
+            "minLevel":                                     "welchen Rang muss das Ursprungstalent mindestens haben?",
+            "lpCost":                                       "Hat dieser Kniff abweichende LP Kosten zum Ursprungstalentrang?"  
+          },
           "livingArmorOnly":                                "Nur legendige Rüstung",
           "PhysicalItems": {
             "action":                                       "Aktionsart, welche für die benutzung des Gegenstandes verwendet wird.",
@@ -592,6 +599,13 @@
               "ammunition":                                "Munitionstyp",
               "bundleSize":                               "Bündelgröße"
             },
+          "Knack":{
+            "isPathKnack":                                  "Pfad Kniff",
+            "standardEffect":                               "Standard Effekt",
+            "sourceTalentUuid":                             "Ursprungstalent",
+            "minLevel":                                     "Min. Rang",  
+            "lpCost":                                       "LP Kosten"
+          },
           "livingArmorOnly":                                "Es kann nur nur lebendige Rüstung getragen werden.",
           "PhysicalItems": {
             "amount":                                       "Menge",
