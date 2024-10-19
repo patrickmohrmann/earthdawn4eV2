@@ -118,7 +118,7 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  * @param {[string]} filterFields         An array of document property keys that
  *                                        are used in the `predicate` function.
  *                                        Must contain all used keys.
- * @param {Function} predicate            A function that can be used for
+ * @param {Function} predicateFunction    A function that can be used for
  *                                        pre-filtering the searched documents.
  *                                        Must be a function that takes one
  *                                        parameter, either the document (for
@@ -126,7 +126,6 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  *                                        It must return `true` if the item
  *                                        should be kept, or `false` for it to
  *                                        be discarded.
- * @param predicateFunction
  * @returns {Promise<[Document|string]>}   A promise that resolves to an array of
  *                                        either {@link Document}s or UUID
  *                                        strings of the found documents. Empty
