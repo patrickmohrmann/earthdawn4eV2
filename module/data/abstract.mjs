@@ -1,3 +1,5 @@
+import { callIfExists } from "../utils.mjs";
+
 /**
  * Taken from DnD5e ( https://github.com/foundryvtt/dnd5e )
  *
@@ -522,14 +524,15 @@ export class ItemDataModel extends SystemDataModel {
 
   drop( event, data ) {
     const documentData = fromUuidSync( data.uuid );
-    switch ( documentData.type ) {
-      case "devotion":
-        return this._onDropDevotion( event, data );
-      case "knackAbility":
-        return this._onDropKnack( event, data );
-      default:
-        return data;
-    }
+    const functionMapping = {
+      devotion: "_onDropDevotion",
+      knack:    "_onDropKnack",
+    };
+
+    return callIfExists(
+      this, functionMapping[documentData.type],
+      event, data
+    ) ?? data;
   }
 
 

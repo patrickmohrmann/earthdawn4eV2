@@ -118,7 +118,7 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  * @param {[string]} filterFields         An array of document property keys that
  *                                        are used in the `predicate` function.
  *                                        Must contain all used keys.
- * @param {Function} predicate            A function that can be used for
+ * @param {Function} predicateFunction    A function that can be used for
  *                                        pre-filtering the searched documents.
  *                                        Must be a function that takes one
  *                                        parameter, either the document (for
@@ -126,7 +126,6 @@ export async function getSingleGlobalItemByEdid( edid, type ) {
  *                                        It must return `true` if the item
  *                                        should be kept, or `false` for it to
  *                                        be discarded.
- * @param predicateFunction
  * @returns {Promise<[Document|string]>}   A promise that resolves to an array of
  *                                        either {@link Document}s or UUID
  *                                        strings of the found documents. Empty
@@ -279,6 +278,20 @@ export function dateToInputString( date ) {
 /* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
+
+/**
+ * Safely call a method if it exists on the object.
+ * @param {object} obj - The object to check.
+ * @param {string} methodName - The name of the method to call.
+ * @param {...*} args - Arguments to pass to the method.
+ * @returns {*} - The result of the method call, or undefined if the method does not exist.
+ */
+export function callIfExists( obj, methodName, ...args ) {
+  if ( typeof obj[methodName] === "function" ) {
+    return obj[methodName]( ...args );
+  }
+  return undefined;
+}
 
 /**
  * Sort the provided object by its values or by an inner sortKey.
