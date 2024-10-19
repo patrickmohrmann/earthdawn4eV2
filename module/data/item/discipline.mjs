@@ -79,6 +79,13 @@ export default class DisciplineData extends ClassTemplate.mixin(
     };
   }
 
+  /**
+   * @inheritDoc
+   */
+  get increaseRules() {
+    return game.i18n.localize( "ED.Rules.disciplineIncreaseShortRequirements" );
+  }
+
   /** @inheritDoc */
   get increaseValidationData() {
     if ( !this.isActorEmbedded ) return undefined;
