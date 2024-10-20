@@ -1,9 +1,9 @@
 <div>
     {{!-- concentration --}}
-    {{formField systemFields.concentration name="system.concentration" value=item.system.concentration}}
+    {{formField systemFields.concentration name="system.concentration" value=item.system.concentration localize=true}}
     {{!-- resist --}}
-    {{formField systemFields.resist name="system.resist" value=item.system.resist}}
+    {{formField systemFields.resist name="system.resist" value=item.system.resist localize=true}}
     {{!-- Spell Illusion --}}
-    {{formField systemFields.spellIllusion.fields.sensingDifficulty name="system.spellIllusion.sensingDifficulty" value=item.system.spellIllusion.sensingDifficulty}}
+    {{formField systemFields.spellIllusion.fields.sensingDifficulty name="system.spellIllusion.sensingDifficulty" value=item.system.spellIllusion.sensingDifficulty localize=true}}
     {{> "systems/ed4e/templates/item/item-partials/item-details/partials/targeting.hbs"}}
 </div>

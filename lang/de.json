@@ -755,8 +755,10 @@
             "salvoCost":                                    "Salve Kosten",
             "characterDamage":                              "Charakter Schaden"
           },
-          "Spell": {  
-            "magicType":                                    "Magie Typ",
+          "Spell": { 
+            "ding": {
+            "magicType":                                    "Magie Typ"
+            }, 
             "circle":                                       "Kreis",
             "threadsrequired":                              "Benötigte Fäden",
             "weavingdifficulty":                            "Weben Schwierigkeit",
