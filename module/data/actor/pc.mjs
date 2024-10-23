@@ -443,13 +443,10 @@ export default class PcData extends NamegiverTemplate {
       }, 0 );
     }
 
-    const maxCircle = Math.max(
-      ...durabilityItems.filter(
-        item => item.type === "discipline"
-      ).map(
-        item => item.system.level
-      )
-    );
+    const maxCircle = durabilityItems
+      .filter( item => item.type === "discipline" )
+      .map( item => item.system.level )
+      .reduce( ( max, level ) => Math.max( max, level ), 0 ); // Default to 0 if no items
 
     const maxDurability = sum( Object.values( durabilityByCircle ) );
 
