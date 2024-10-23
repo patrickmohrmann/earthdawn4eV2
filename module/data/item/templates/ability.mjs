@@ -110,6 +110,20 @@ export default class AbilityTemplate extends ActionTemplate.mixin(
     } );
   }
 
+  /* -------------------------------------------- */
+  /*  Getters                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get rankFinal() {
+    if ( this.isActorEmbedded ) {
+      const abilityAttribute = this.attribute;
+      const actorAttribute = abilityAttribute === "" ? 0 : this.parentActor.system.attributes[abilityAttribute];
+      const actorAtttributeStep = actorAttribute === 0 ? 0 : actorAttribute.step;
+      return actorAtttributeStep + this.level;
+    } else return this.level;
+  }
+
   /** @inheritDoc */
   get canBeLearned() {
     return true;
